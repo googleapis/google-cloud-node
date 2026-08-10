@@ -12,10 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const {dirname, resolve} = require('node:path');
+const {dirname, join, resolve} = require('node:path');
 
-const PROTO_PATH = __dirname + '/../protos/google/datastore/v1/datastore.proto';
-const DATASTORE_PROTOS = __dirname + '/../protos';
+const API_PATH = join(dirname(require.resolve('@google-cloud/datastore-api')), '..');
+const DATASTORE_PROTOS = join(API_PATH, 'protos');
+
+const PROTO_PATH = join(DATASTORE_PROTOS, 'google/datastore/v1/datastore.proto');
 const GAX_PROTOS_DIR = resolve(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

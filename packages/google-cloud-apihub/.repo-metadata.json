@@ -1,17 +1,15 @@
 {
-  "name": "apihub",
-  "name_pretty": "API hub API",
-  "product_documentation": "https://cloud.google.com/apigee/docs/apihub/what-is-api-hub",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apihub/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/apihub",
-  "api_id": "apihub.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "apihub"
+    "api_id": "apihub.googleapis.com",
+    "api_shortname": "apihub",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apihub/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/apihub",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1447560",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "apihub",
+    "name_pretty": "API hub",
+    "product_documentation": "https://cloud.google.com/apigee/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha1 from './v1alpha1';
 import * as v1beta from './v1beta';
+import * as v1alpha1 from './v1alpha1';
 
 const CrossNetworkAutomationServiceClient = v1.CrossNetworkAutomationServiceClient;
 type CrossNetworkAutomationServiceClient = v1.CrossNetworkAutomationServiceClient;
@@ -31,7 +31,7 @@ type InternalRangeServiceClient = v1.InternalRangeServiceClient;
 const PolicyBasedRoutingServiceClient = v1.PolicyBasedRoutingServiceClient;
 type PolicyBasedRoutingServiceClient = v1.PolicyBasedRoutingServiceClient;
 
-export {v1, v1alpha1, v1beta, CrossNetworkAutomationServiceClient, DataTransferServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient};
-export default {v1, v1alpha1, v1beta, CrossNetworkAutomationServiceClient, DataTransferServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient};
+export {v1, v1beta, v1alpha1, CrossNetworkAutomationServiceClient, DataTransferServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient};
+export default {v1, v1beta, v1alpha1, CrossNetworkAutomationServiceClient, DataTransferServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

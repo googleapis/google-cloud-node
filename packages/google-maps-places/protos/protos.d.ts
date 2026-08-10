@@ -3308,6 +3308,9 @@ export namespace google {
 
                     /** Place movedPlaceId */
                     movedPlaceId?: (string|null);
+
+                    /** Place transitStation */
+                    transitStation?: (google.maps.places.v1.ITransitStation|null);
                 }
 
                 /** Represents a Place. */
@@ -3549,6 +3552,9 @@ export namespace google {
 
                     /** Place movedPlaceId. */
                     public movedPlaceId: string;
+
+                    /** Place transitStation. */
+                    public transitStation?: (google.maps.places.v1.ITransitStation|null);
 
                     /**
                      * Creates a new Place instance using the specified properties.
@@ -6029,6 +6035,646 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PriceRange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransitStation. */
+                interface ITransitStation {
+
+                    /** TransitStation displayName */
+                    displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitStation agencies */
+                    agencies?: (google.maps.places.v1.ITransitAgency[]|null);
+
+                    /** TransitStation stops */
+                    stops?: (google.maps.places.v1.ITransitStop[]|null);
+                }
+
+                /** Represents a TransitStation. */
+                class TransitStation implements ITransitStation {
+
+                    /**
+                     * Constructs a new TransitStation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.ITransitStation);
+
+                    /** TransitStation displayName. */
+                    public displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitStation agencies. */
+                    public agencies: google.maps.places.v1.ITransitAgency[];
+
+                    /** TransitStation stops. */
+                    public stops: google.maps.places.v1.ITransitStop[];
+
+                    /**
+                     * Creates a new TransitStation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransitStation instance
+                     */
+                    public static create(properties?: google.maps.places.v1.ITransitStation): google.maps.places.v1.TransitStation;
+
+                    /**
+                     * Encodes the specified TransitStation message. Does not implicitly {@link google.maps.places.v1.TransitStation.verify|verify} messages.
+                     * @param message TransitStation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.ITransitStation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransitStation message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitStation.verify|verify} messages.
+                     * @param message TransitStation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.ITransitStation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransitStation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransitStation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.TransitStation;
+
+                    /**
+                     * Decodes a TransitStation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransitStation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.TransitStation;
+
+                    /**
+                     * Verifies a TransitStation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransitStation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransitStation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.TransitStation;
+
+                    /**
+                     * Creates a plain object from a TransitStation message. Also converts values to other types if specified.
+                     * @param message TransitStation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.TransitStation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransitStation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransitStation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransitAgency. */
+                interface ITransitAgency {
+
+                    /** TransitAgency displayName */
+                    displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitAgency url */
+                    url?: (string|null);
+
+                    /** TransitAgency fareUrl */
+                    fareUrl?: (string|null);
+
+                    /** TransitAgency icon */
+                    icon?: (google.maps.places.v1.ITransitIcon|null);
+
+                    /** TransitAgency lines */
+                    lines?: (google.maps.places.v1.ITransitLine[]|null);
+                }
+
+                /** Represents a TransitAgency. */
+                class TransitAgency implements ITransitAgency {
+
+                    /**
+                     * Constructs a new TransitAgency.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.ITransitAgency);
+
+                    /** TransitAgency displayName. */
+                    public displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitAgency url. */
+                    public url: string;
+
+                    /** TransitAgency fareUrl. */
+                    public fareUrl: string;
+
+                    /** TransitAgency icon. */
+                    public icon?: (google.maps.places.v1.ITransitIcon|null);
+
+                    /** TransitAgency lines. */
+                    public lines: google.maps.places.v1.ITransitLine[];
+
+                    /**
+                     * Creates a new TransitAgency instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransitAgency instance
+                     */
+                    public static create(properties?: google.maps.places.v1.ITransitAgency): google.maps.places.v1.TransitAgency;
+
+                    /**
+                     * Encodes the specified TransitAgency message. Does not implicitly {@link google.maps.places.v1.TransitAgency.verify|verify} messages.
+                     * @param message TransitAgency message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.ITransitAgency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransitAgency message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitAgency.verify|verify} messages.
+                     * @param message TransitAgency message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.ITransitAgency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransitAgency message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransitAgency
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.TransitAgency;
+
+                    /**
+                     * Decodes a TransitAgency message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransitAgency
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.TransitAgency;
+
+                    /**
+                     * Verifies a TransitAgency message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransitAgency message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransitAgency
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.TransitAgency;
+
+                    /**
+                     * Creates a plain object from a TransitAgency message. Also converts values to other types if specified.
+                     * @param message TransitAgency
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.TransitAgency, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransitAgency to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransitAgency
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransitLine. */
+                interface ITransitLine {
+
+                    /** TransitLine id */
+                    id?: (string|null);
+
+                    /** TransitLine vehicleType */
+                    vehicleType?: (google.maps.places.v1.TransitLine.VehicleType|keyof typeof google.maps.places.v1.TransitLine.VehicleType|null);
+
+                    /** TransitLine displayName */
+                    displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitLine shortDisplayName */
+                    shortDisplayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitLine textColor */
+                    textColor?: (string|null);
+
+                    /** TransitLine backgroundColor */
+                    backgroundColor?: (string|null);
+
+                    /** TransitLine url */
+                    url?: (string|null);
+
+                    /** TransitLine icon */
+                    icon?: (google.maps.places.v1.ITransitIcon|null);
+
+                    /** TransitLine vehicleIcon */
+                    vehicleIcon?: (google.maps.places.v1.ITransitIcon|null);
+                }
+
+                /** Represents a TransitLine. */
+                class TransitLine implements ITransitLine {
+
+                    /**
+                     * Constructs a new TransitLine.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.ITransitLine);
+
+                    /** TransitLine id. */
+                    public id: string;
+
+                    /** TransitLine vehicleType. */
+                    public vehicleType: (google.maps.places.v1.TransitLine.VehicleType|keyof typeof google.maps.places.v1.TransitLine.VehicleType);
+
+                    /** TransitLine displayName. */
+                    public displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitLine shortDisplayName. */
+                    public shortDisplayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitLine textColor. */
+                    public textColor: string;
+
+                    /** TransitLine backgroundColor. */
+                    public backgroundColor: string;
+
+                    /** TransitLine url. */
+                    public url: string;
+
+                    /** TransitLine icon. */
+                    public icon?: (google.maps.places.v1.ITransitIcon|null);
+
+                    /** TransitLine vehicleIcon. */
+                    public vehicleIcon?: (google.maps.places.v1.ITransitIcon|null);
+
+                    /**
+                     * Creates a new TransitLine instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransitLine instance
+                     */
+                    public static create(properties?: google.maps.places.v1.ITransitLine): google.maps.places.v1.TransitLine;
+
+                    /**
+                     * Encodes the specified TransitLine message. Does not implicitly {@link google.maps.places.v1.TransitLine.verify|verify} messages.
+                     * @param message TransitLine message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.ITransitLine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransitLine message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitLine.verify|verify} messages.
+                     * @param message TransitLine message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.ITransitLine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransitLine message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransitLine
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.TransitLine;
+
+                    /**
+                     * Decodes a TransitLine message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransitLine
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.TransitLine;
+
+                    /**
+                     * Verifies a TransitLine message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransitLine message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransitLine
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.TransitLine;
+
+                    /**
+                     * Creates a plain object from a TransitLine message. Also converts values to other types if specified.
+                     * @param message TransitLine
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.TransitLine, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransitLine to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransitLine
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TransitLine {
+
+                    /** VehicleType enum. */
+                    enum VehicleType {
+                        VEHICLE_TYPE_UNSPECIFIED = 0,
+                        RAIL = 1,
+                        METRO_RAIL = 2,
+                        SUBWAY = 3,
+                        TRAM = 4,
+                        MONORAIL = 5,
+                        HEAVY_RAIL = 6,
+                        COMMUTER_TRAIN = 7,
+                        HIGH_SPEED_TRAIN = 8,
+                        LONG_DISTANCE_TRAIN = 9,
+                        BUS = 10,
+                        INTERCITY_BUS = 11,
+                        TROLLEYBUS = 12,
+                        SHARE_TAXI = 13,
+                        COACH = 14,
+                        FERRY = 15,
+                        CABLE_CAR = 16,
+                        GONDOLA_LIFT = 17,
+                        FUNICULAR = 18,
+                        SPECIAL = 19,
+                        HORSE_CARRIAGE = 20,
+                        AIRPLANE = 21
+                    }
+                }
+
+                /** Properties of a TransitStop. */
+                interface ITransitStop {
+
+                    /** TransitStop id */
+                    id?: (string|null);
+
+                    /** TransitStop displayName */
+                    displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop platformCode */
+                    platformCode?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop signageText */
+                    signageText?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop stopCode */
+                    stopCode?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop location */
+                    location?: (google.type.ILatLng|null);
+
+                    /** TransitStop wheelchairAccessibleEntrance */
+                    wheelchairAccessibleEntrance?: (boolean|null);
+                }
+
+                /** Represents a TransitStop. */
+                class TransitStop implements ITransitStop {
+
+                    /**
+                     * Constructs a new TransitStop.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.ITransitStop);
+
+                    /** TransitStop id. */
+                    public id: string;
+
+                    /** TransitStop displayName. */
+                    public displayName?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop platformCode. */
+                    public platformCode?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop signageText. */
+                    public signageText?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop stopCode. */
+                    public stopCode?: (google.type.ILocalizedText|null);
+
+                    /** TransitStop location. */
+                    public location?: (google.type.ILatLng|null);
+
+                    /** TransitStop wheelchairAccessibleEntrance. */
+                    public wheelchairAccessibleEntrance?: (boolean|null);
+
+                    /**
+                     * Creates a new TransitStop instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransitStop instance
+                     */
+                    public static create(properties?: google.maps.places.v1.ITransitStop): google.maps.places.v1.TransitStop;
+
+                    /**
+                     * Encodes the specified TransitStop message. Does not implicitly {@link google.maps.places.v1.TransitStop.verify|verify} messages.
+                     * @param message TransitStop message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.ITransitStop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransitStop message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitStop.verify|verify} messages.
+                     * @param message TransitStop message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.ITransitStop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransitStop message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransitStop
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.TransitStop;
+
+                    /**
+                     * Decodes a TransitStop message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransitStop
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.TransitStop;
+
+                    /**
+                     * Verifies a TransitStop message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransitStop message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransitStop
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.TransitStop;
+
+                    /**
+                     * Creates a plain object from a TransitStop message. Also converts values to other types if specified.
+                     * @param message TransitStop
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.TransitStop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransitStop to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransitStop
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransitIcon. */
+                interface ITransitIcon {
+
+                    /** TransitIcon url */
+                    url?: (string|null);
+
+                    /** TransitIcon nameIncluded */
+                    nameIncluded?: (boolean|null);
+                }
+
+                /** Represents a TransitIcon. */
+                class TransitIcon implements ITransitIcon {
+
+                    /**
+                     * Constructs a new TransitIcon.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.ITransitIcon);
+
+                    /** TransitIcon url. */
+                    public url: string;
+
+                    /** TransitIcon nameIncluded. */
+                    public nameIncluded: boolean;
+
+                    /**
+                     * Creates a new TransitIcon instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransitIcon instance
+                     */
+                    public static create(properties?: google.maps.places.v1.ITransitIcon): google.maps.places.v1.TransitIcon;
+
+                    /**
+                     * Encodes the specified TransitIcon message. Does not implicitly {@link google.maps.places.v1.TransitIcon.verify|verify} messages.
+                     * @param message TransitIcon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.ITransitIcon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransitIcon message, length delimited. Does not implicitly {@link google.maps.places.v1.TransitIcon.verify|verify} messages.
+                     * @param message TransitIcon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.ITransitIcon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransitIcon message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransitIcon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.TransitIcon;
+
+                    /**
+                     * Decodes a TransitIcon message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransitIcon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.TransitIcon;
+
+                    /**
+                     * Verifies a TransitIcon message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransitIcon message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransitIcon
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.TransitIcon;
+
+                    /**
+                     * Creates a plain object from a TransitIcon message. Also converts values to other types if specified.
+                     * @param message TransitIcon
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.TransitIcon, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransitIcon to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransitIcon
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10641,6 +11287,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -10654,6 +11303,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -11383,6 +12035,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -11402,6 +12057,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -11721,6 +12379,365 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -11842,6 +12859,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -14213,6 +15232,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -14235,6 +15257,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -15174,6 +16199,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -15208,6 +16236,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -15336,7 +16367,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -15439,6 +16471,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }

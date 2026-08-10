@@ -137,6 +137,10 @@
                 "layerDetails": {
                   "type": "LayerDetails",
                   "id": 2
+                },
+                "lineNumber": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             },
@@ -153,6 +157,10 @@
                 "layerCount": {
                   "type": "int32",
                   "id": 3
+                },
+                "registry": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             },
@@ -1328,6 +1336,38 @@
                 "availabilityImpact": {
                   "type": "Impact",
                   "id": 12
+                },
+                "attackRequirements": {
+                  "type": "AttackRequirements",
+                  "id": 13
+                },
+                "vulnerableSystemConfidentialityImpact": {
+                  "type": "Impact",
+                  "id": 14
+                },
+                "vulnerableSystemIntegrityImpact": {
+                  "type": "Impact",
+                  "id": 15
+                },
+                "vulnerableSystemAvailabilityImpact": {
+                  "type": "Impact",
+                  "id": 16
+                },
+                "subsequentSystemConfidentialityImpact": {
+                  "type": "Impact",
+                  "id": 17
+                },
+                "subsequentSystemIntegrityImpact": {
+                  "type": "Impact",
+                  "id": 18
+                },
+                "subsequentSystemAvailabilityImpact": {
+                  "type": "Impact",
+                  "id": 19
+                },
+                "exploitMaturity": {
+                  "type": "ExploitMaturity",
+                  "id": 20
                 }
               },
               "nested": {
@@ -1368,7 +1408,9 @@
                   "values": {
                     "USER_INTERACTION_UNSPECIFIED": 0,
                     "USER_INTERACTION_NONE": 1,
-                    "USER_INTERACTION_REQUIRED": 2
+                    "USER_INTERACTION_REQUIRED": 2,
+                    "USER_INTERACTION_PASSIVE": 3,
+                    "USER_INTERACTION_ACTIVE": 4
                   }
                 },
                 "Scope": {
@@ -1387,6 +1429,22 @@
                     "IMPACT_PARTIAL": 4,
                     "IMPACT_COMPLETE": 5
                   }
+                },
+                "AttackRequirements": {
+                  "values": {
+                    "ATTACK_REQUIREMENTS_UNSPECIFIED": 0,
+                    "ATTACK_REQUIREMENTS_NONE": 1,
+                    "ATTACK_REQUIREMENTS_PRESENT": 2
+                  }
+                },
+                "ExploitMaturity": {
+                  "values": {
+                    "EXPLOIT_MATURITY_UNSPECIFIED": 0,
+                    "EXPLOIT_MATURITY_NOT_DEFINED": 1,
+                    "EXPLOIT_MATURITY_ATTACKED": 2,
+                    "EXPLOIT_MATURITY_POC": 3,
+                    "EXPLOIT_MATURITY_UNREPORTED": 4
+                  }
                 }
               }
             },
@@ -1394,7 +1452,8 @@
               "values": {
                 "CVSS_VERSION_UNSPECIFIED": 0,
                 "CVSS_VERSION_2": 1,
-                "CVSS_VERSION_3": 2
+                "CVSS_VERSION_3": 2,
+                "CVSS_VERSION_4": 3
               }
             },
             "DeploymentNote": {
@@ -1502,6 +1561,15 @@
                 "vulnerabilityAttestation": {
                   "type": "VulnerabilityAttestation",
                   "id": 10
+                },
+                "files": {
+                  "rule": "repeated",
+                  "type": "File",
+                  "id": 11
+                },
+                "lastVulnerabilityUpdateTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 12
                 }
               },
               "nested": {
@@ -1578,6 +1646,19 @@
                         "SUCCESS": 1,
                         "FAILURE": 2
                       }
+                    }
+                  }
+                },
+                "File": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "digest": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 2
                     }
                   }
                 }
@@ -2215,6 +2296,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 4
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -2228,6 +2313,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -2330,6 +2423,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 4
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -2343,6 +2440,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -2858,6 +2963,14 @@
                   "options": {
                     "(google.api.field_behavior)": "OPTIONAL"
                   }
+                },
+                "data": {
+                  "type": "google.protobuf.Any",
+                  "id": 4
+                },
+                "digest": {
+                  "type": "Digest",
+                  "id": 5
                 }
               }
             },
@@ -2915,7 +3028,27 @@
               "values": {
                 "SECRET_KIND_UNSPECIFIED": 0,
                 "SECRET_KIND_UNKNOWN": 1,
-                "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY": 2
+                "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY": 2,
+                "SECRET_KIND_GCP_API_KEY": 3,
+                "SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS": 4,
+                "SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN": 5,
+                "SECRET_KIND_ANTHROPIC_ADMIN_API_KEY": 6,
+                "SECRET_KIND_ANTHROPIC_API_KEY": 7,
+                "SECRET_KIND_AZURE_ACCESS_TOKEN": 8,
+                "SECRET_KIND_AZURE_IDENTITY_TOKEN": 9,
+                "SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN": 10,
+                "SECRET_KIND_GITHUB_APP_REFRESH_TOKEN": 11,
+                "SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN": 12,
+                "SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN": 13,
+                "SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN": 14,
+                "SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN": 15,
+                "SECRET_KIND_GITHUB_OAUTH_TOKEN": 16,
+                "SECRET_KIND_HUGGINGFACE_API_KEY": 17,
+                "SECRET_KIND_OPENAI_API_KEY": 18,
+                "SECRET_KIND_PERPLEXITY_API_KEY": 19,
+                "SECRET_KIND_STRIPE_SECRET_KEY": 20,
+                "SECRET_KIND_STRIPE_RESTRICTED_KEY": 21,
+                "SECRET_KIND_STRIPE_WEBHOOK_SECRET": 22
               }
             },
             "UpgradeNote": {
@@ -3257,6 +3390,14 @@
                 "cvssV2": {
                   "type": "CVSS",
                   "id": 8
+                },
+                "advisoryPublishTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 9
+                },
+                "cvssV4": {
+                  "type": "CVSS",
+                  "id": 10
                 }
               },
               "nested": {
@@ -3416,6 +3557,14 @@
                 "extraDetails": {
                   "type": "string",
                   "id": 14
+                },
+                "risk": {
+                  "type": "Risk",
+                  "id": 15
+                },
+                "cvssV4": {
+                  "type": "CVSS",
+                  "id": 16
                 }
               },
               "nested": {
@@ -3508,6 +3657,38 @@
                       "id": 7
                     }
                   }
+                }
+              }
+            },
+            "Risk": {
+              "fields": {
+                "cisaKev": {
+                  "type": "CISAKnownExploitedVulnerabilities",
+                  "id": 1
+                },
+                "epss": {
+                  "type": "ExploitPredictionScoringSystem",
+                  "id": 2
+                }
+              }
+            },
+            "CISAKnownExploitedVulnerabilities": {
+              "fields": {
+                "knownRansomwareCampaignUse": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ExploitPredictionScoringSystem": {
+              "fields": {
+                "percentile": {
+                  "type": "double",
+                  "id": 1
+                },
+                "score": {
+                  "type": "double",
+                  "id": 2
                 }
               }
             }
@@ -3640,6 +3821,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -3834,6 +4017,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4050,7 +4237,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -4102,7 +4296,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -4162,7 +4359,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -4204,6 +4403,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4276,6 +4479,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4391,6 +4598,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -4470,6 +4681,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -4489,6 +4704,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4527,6 +4746,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4572,6 +4795,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -4598,6 +4825,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4632,6 +4863,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4773,8 +5008,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -4786,6 +5021,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -4863,7 +5109,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -4882,6 +5129,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -5357,6 +5616,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -5466,6 +5729,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -5520,6 +5787,79 @@
                 "generateOmittedAsInternal": {
                   "type": "bool",
                   "id": 2
+                }
+              }
+            },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
                 }
               }
             },
@@ -5616,7 +5956,6 @@
         },
         "rpc": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
             "java_multiple_files": true,
             "java_outer_classname": "StatusProto",

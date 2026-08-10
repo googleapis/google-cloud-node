@@ -58,16 +58,25 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cancel execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.cancel_execution.js) |
-| create execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.create_execution.js) |
-| get execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.get_execution.js) |
-| list executions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.list_executions.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/snippet_metadata_google.cloud.workflows.executions.v1.json) |
-| cancel execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.cancel_execution.js) |
-| create execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.create_execution.js) |
-| get execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.get_execution.js) |
-| list executions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.list_executions.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/snippet_metadata_google.cloud.workflows.executions.v1beta.json) |
+| cancel execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/executions.cancel_execution.js) |
+| create execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/executions.create_execution.js) |
+| get execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/executions.get_execution.js) |
+| list executions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/executions.list_executions.js) |
+| create workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/workflows.create_workflow.js) |
+| delete workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/workflows.delete_workflow.js) |
+| get workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/workflows.get_workflow.js) |
+| list workflow revisions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/workflows.list_workflow_revisions.js) |
+| list workflows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/workflows.list_workflows.js) |
+| update workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1/workflows.update_workflow.js) |
+| cancel execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/executions.cancel_execution.js) |
+| create execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/executions.create_execution.js) |
+| get execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/executions.get_execution.js) |
+| list executions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/executions.list_executions.js) |
+| create workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/workflows.create_workflow.js) |
+| delete workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/workflows.delete_workflow.js) |
+| get workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/workflows.get_workflow.js) |
+| list workflows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/workflows.list_workflows.js) |
+| update workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows/samples/generated/v1beta/workflows.update_workflow.js) |
 
 
 ## Supported Node.js Versions
@@ -101,7 +110,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -111,7 +120,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

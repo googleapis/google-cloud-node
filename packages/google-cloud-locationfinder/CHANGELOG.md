@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/locationfinder-v0.2.0...locationfinder-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/locationfinder-v0.1.2...locationfinder-v0.2.0) (2026-06-16)
+
+
+### Features
+
+* Update google-cloud-locationfinder API ([#8583](https://github.com/googleapis/google-cloud-node/issues/8583)) ([8882faa](https://github.com/googleapis/google-cloud-node/commit/8882faa7faecb3afab2f3a658d33bcc125b48885))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/locationfinder-v0.1.1...locationfinder-v0.1.2) (2026-05-01)
 
 

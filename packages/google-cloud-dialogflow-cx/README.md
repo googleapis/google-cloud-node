@@ -19,7 +19,7 @@ A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
 * [Dialogflow API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/cx/latest)
-
+* [Dialogflow API Documentation](https://docs.cloud.google.com/dialogflow/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -156,7 +156,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | server streaming detect intent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js) |
 | streaming detect intent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.streaming_detect_intent.js) |
 | submit answer feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.submit_answer_feedback.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/snippet_metadata_google.cloud.dialogflow.cx.v3.json) |
 | batch delete test cases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/test_cases.batch_delete_test_cases.js) |
 | batch run test cases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/test_cases.batch_run_test_cases.js) |
 | calculate coverage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/test_cases.calculate_coverage.js) |
@@ -297,7 +296,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | server streaming detect intent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.server_streaming_detect_intent.js) |
 | streaming detect intent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.streaming_detect_intent.js) |
 | submit answer feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.submit_answer_feedback.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/snippet_metadata_google.cloud.dialogflow.cx.v3beta1.json) |
 | batch delete test cases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/test_cases.batch_delete_test_cases.js) |
 | batch run test cases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/test_cases.batch_run_test_cases.js) |
 | calculate coverage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/test_cases.calculate_coverage.js) |

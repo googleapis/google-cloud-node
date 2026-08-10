@@ -149,6 +149,11 @@
                 "getConnectSettings"
               ]
             },
+            "ResolveConnectSettings": {
+              "methods": [
+                "resolveConnectSettings"
+              ]
+            },
             "GenerateEphemeralCert": {
               "methods": [
                 "generateEphemeralCert"
@@ -162,6 +167,11 @@
             "GetConnectSettings": {
               "methods": [
                 "getConnectSettings"
+              ]
+            },
+            "ResolveConnectSettings": {
+              "methods": [
+                "resolveConnectSettings"
               ]
             },
             "GenerateEphemeralCert": {

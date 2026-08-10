@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +53,7 @@ export class SnoozeServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('monitoring');
@@ -59,9 +66,9 @@ export class SnoozeServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  snoozeServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  snoozeServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SnoozeServiceClient.
@@ -102,21 +109,42 @@ export class SnoozeServiceClient {
    *     const client = new SnoozeServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SnoozeServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'monitoring.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +169,7 @@ export class SnoozeServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,10 +183,7 @@ export class SnoozeServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -180,82 +205,89 @@ export class SnoozeServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       folderAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/alertPolicies/{alert_policy}'
+        'folders/{folder}/alertPolicies/{alert_policy}',
       ),
       folderAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/alertPolicies/{alert_policy}/conditions/{condition}'
+        'folders/{folder}/alertPolicies/{alert_policy}/conditions/{condition}',
       ),
       folderChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/notificationChannelDescriptors/{channel_descriptor}'
+        'folders/{folder}/notificationChannelDescriptors/{channel_descriptor}',
       ),
       folderGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/groups/{group}'
+        'folders/{folder}/groups/{group}',
       ),
       folderNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/notificationChannels/{notification_channel}'
+        'folders/{folder}/notificationChannels/{notification_channel}',
       ),
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}'
+        'folders/{folder}/services/{service}',
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      folderServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}',
+        ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
+        'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}',
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}'
+        'organizations/{organization}/alertPolicies/{alert_policy}',
       ),
-      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-      ),
-      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-      ),
+      organizationAlertPolicyConditionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}',
+        ),
+      organizationChannelDescriptorPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}',
+        ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/groups/{group}'
+        'organizations/{organization}/groups/{group}',
       ),
-      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannels/{notification_channel}'
-      ),
+      organizationNotificationChannelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannels/{notification_channel}',
+        ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}'
+        'organizations/{organization}/services/{service}',
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
-      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-      ),
+      organizationServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}',
+        ),
+      organizationUptimeCheckConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}',
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/alertPolicies/{alert_policy}'
+        'projects/{project}/alertPolicies/{alert_policy}',
       ),
       projectAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}'
+        'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}',
       ),
       projectChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/notificationChannelDescriptors/{channel_descriptor}'
+        'projects/{project}/notificationChannelDescriptors/{channel_descriptor}',
       ),
       projectGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/groups/{group}'
+        'projects/{project}/groups/{group}',
       ),
       projectNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/notificationChannels/{notification_channel}'
+        'projects/{project}/notificationChannels/{notification_channel}',
       ),
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}'
+        'projects/{project}/services/{service}',
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      projectServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}',
+        ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
+        'projects/{project}/uptimeCheckConfigs/{uptime_check_config}',
       ),
       snoozePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/snoozes/{snooze}'
+        'projects/{project}/snoozes/{snooze}',
       ),
     };
 
@@ -263,14 +295,20 @@ export class SnoozeServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSnoozes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'snoozes')
+      listSnoozes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'snoozes',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.monitoring.v3.SnoozeService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.monitoring.v3.SnoozeService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -301,37 +339,45 @@ export class SnoozeServiceClient {
     // Put together the "service stub" for
     // google.monitoring.v3.SnoozeService.
     this.snoozeServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.monitoring.v3.SnoozeService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.monitoring.v3.SnoozeService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.SnoozeService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const snoozeServiceStubMethods =
-        ['createSnooze', 'listSnoozes', 'getSnooze', 'updateSnooze'];
+    const snoozeServiceStubMethods = [
+      'createSnooze',
+      'listSnoozes',
+      'getSnooze',
+      'updateSnooze',
+    ];
     for (const methodName of snoozeServiceStubMethods) {
       const callPromise = this.snoozeServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -346,8 +392,14 @@ export class SnoozeServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'monitoring.googleapis.com';
   }
@@ -358,8 +410,14 @@ export class SnoozeServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'monitoring.googleapis.com';
   }
@@ -393,7 +451,7 @@ export class SnoozeServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.read'
+      'https://www.googleapis.com/auth/monitoring.read',
     ];
   }
 
@@ -403,8 +461,9 @@ export class SnoozeServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -415,426 +474,531 @@ export class SnoozeServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a `Snooze` that will prevent alerts, which match the provided
- * criteria, from being opened. The `Snooze` applies for a specific time
- * interval.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The
- *   [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
- *   a `Snooze` should be created. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- * @param {google.monitoring.v3.Snooze} request.snooze
- *   Required. The `Snooze` to create. Omit the `name` field, as it will be
- *   filled in by the API.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/snooze_service.create_snooze.js</caption>
- * region_tag:monitoring_v3_generated_SnoozeService_CreateSnooze_async
- */
+  /**
+   * Creates a `Snooze` that will prevent alerts, which match the provided
+   * criteria, from being opened. The `Snooze` applies for a specific time
+   * interval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+   *   a `Snooze` should be created. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {google.monitoring.v3.Snooze} request.snooze
+   *   Required. The `Snooze` to create. Omit the `name` field, as it will be
+   *   filled in by the API.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/snooze_service.create_snooze.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_CreateSnooze_async
+   */
   createSnooze(
-      request?: protos.google.monitoring.v3.ICreateSnoozeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.ICreateSnoozeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createSnooze(
-      request: protos.google.monitoring.v3.ICreateSnoozeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.ICreateSnoozeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSnooze(
-      request: protos.google.monitoring.v3.ICreateSnoozeRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.ICreateSnoozeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSnooze(
-      request?: protos.google.monitoring.v3.ICreateSnoozeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.ICreateSnoozeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.ICreateSnoozeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.ICreateSnoozeRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createSnooze request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.ICreateSnoozeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSnooze response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createSnooze(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.ICreateSnoozeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createSnooze response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createSnooze(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSnooze response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves a `Snooze` by `name`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The ID of the `Snooze` to retrieve. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/snooze_service.get_snooze.js</caption>
- * region_tag:monitoring_v3_generated_SnoozeService_GetSnooze_async
- */
+  /**
+   * Retrieves a `Snooze` by `name`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The ID of the `Snooze` to retrieve. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/snooze_service.get_snooze.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_GetSnooze_async
+   */
   getSnooze(
-      request?: protos.google.monitoring.v3.IGetSnoozeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IGetSnoozeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IGetSnoozeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getSnooze(
-      request: protos.google.monitoring.v3.IGetSnoozeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IGetSnoozeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IGetSnoozeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSnooze(
-      request: protos.google.monitoring.v3.IGetSnoozeRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IGetSnoozeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IGetSnoozeRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSnooze(
-      request?: protos.google.monitoring.v3.IGetSnoozeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IGetSnoozeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IGetSnoozeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IGetSnoozeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IGetSnoozeRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSnooze request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IGetSnoozeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSnooze response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSnooze(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IGetSnoozeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSnooze response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSnooze(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSnooze response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a `Snooze`, identified by its `name`, with the parameters in the
- * given `Snooze` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.monitoring.v3.Snooze} request.snooze
- *   Required. The `Snooze` to update. Must have the name field present.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to update.
- *
- *   For each field listed in `update_mask`:
- *
- *     * If the `Snooze` object supplied in the `UpdateSnoozeRequest` has a
- *       value for that field, the value of the field in the existing `Snooze`
- *       will be set to the value of the field in the supplied `Snooze`.
- *     * If the field does not have a value in the supplied `Snooze`, the field
- *       in the existing `Snooze` is set to its default value.
- *
- *   Fields not listed retain their existing value.
- *
- *   The following are the field names that are accepted in `update_mask`:
- *
- *     * `display_name`
- *     * `interval.start_time`
- *     * `interval.end_time`
- *
- *   That said, the start time and end time of the `Snooze` determines which
- *   fields can legally be updated. Before attempting an update, users should
- *   consult the documentation for `UpdateSnoozeRequest`, which talks about
- *   which fields can be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/snooze_service.update_snooze.js</caption>
- * region_tag:monitoring_v3_generated_SnoozeService_UpdateSnooze_async
- */
+  /**
+   * Updates a `Snooze`, identified by its `name`, with the parameters in the
+   * given `Snooze` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.monitoring.v3.Snooze} request.snooze
+   *   Required. The `Snooze` to update. Must have the name field present.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to update.
+   *
+   *   For each field listed in `update_mask`:
+   *
+   *     * If the `Snooze` object supplied in the `UpdateSnoozeRequest` has a
+   *       value for that field, the value of the field in the existing `Snooze`
+   *       will be set to the value of the field in the supplied `Snooze`.
+   *     * If the field does not have a value in the supplied `Snooze`, the field
+   *       in the existing `Snooze` is set to its default value.
+   *
+   *   Fields not listed retain their existing value.
+   *
+   *   The following are the field names that are accepted in `update_mask`:
+   *
+   *     * `display_name`
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   That said, the start time and end time of the `Snooze` determines which
+   *   fields can legally be updated. Before attempting an update, users should
+   *   consult the documentation for `UpdateSnoozeRequest`, which talks about
+   *   which fields can be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/snooze_service.update_snooze.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_UpdateSnooze_async
+   */
   updateSnooze(
-      request?: protos.google.monitoring.v3.IUpdateSnoozeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IUpdateSnoozeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateSnooze(
-      request: protos.google.monitoring.v3.IUpdateSnoozeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IUpdateSnoozeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSnooze(
-      request: protos.google.monitoring.v3.IUpdateSnoozeRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IUpdateSnoozeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSnooze(
-      request?: protos.google.monitoring.v3.IUpdateSnoozeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IUpdateSnoozeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.ISnooze,
-          protos.google.monitoring.v3.IUpdateSnoozeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IUpdateSnoozeRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'snooze.name': request.snooze!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'snooze.name': request.snooze!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateSnooze request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IUpdateSnoozeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSnooze response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSnooze(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.ISnooze,
-        protos.google.monitoring.v3.IUpdateSnoozeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSnooze response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSnooze(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSnooze response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists the `Snooze`s associated with a project. Can optionally pass in
- * `filter`, which specifies predicates to match `Snooze`s.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The
- *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
- *   `Snooze`s should be listed. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- * @param {string} [request.filter]
- *   Optional. Optional filter to restrict results to the given criteria. The
- *   following fields are supported.
- *
- *     * `interval.start_time`
- *     * `interval.end_time`
- *
- *   For example:
- *
- *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
- *           interval.end_time < "2022-03-12T00:00:00-08:00"
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return for a single query. The
- *   server may further constrain the maximum number of results returned in a
- *   single page. The value should be in the range [1, 1000]. If the value given
- *   is outside this range, the server will decide the number of results to be
- *   returned.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous call to
- *   `ListSnoozesRequest` to get the next page of results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.monitoring.v3.Snooze|Snooze}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSnoozesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the `Snooze`s associated with a project. Can optionally pass in
+   * `filter`, which specifies predicates to match `Snooze`s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   `Snooze`s should be listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} [request.filter]
+   *   Optional. Optional filter to restrict results to the given criteria. The
+   *   following fields are supported.
+   *
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   For example:
+   *
+   *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
+   *           interval.end_time < "2022-03-12T00:00:00-08:00"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return for a single query. The
+   *   server may further constrain the maximum number of results returned in a
+   *   single page. The value should be in the range [1, 1000]. If the value given
+   *   is outside this range, the server will decide the number of results to be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous call to
+   *   `ListSnoozesRequest` to get the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSnoozesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSnoozes(
-      request?: protos.google.monitoring.v3.IListSnoozesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze[],
-        protos.google.monitoring.v3.IListSnoozesRequest|null,
-        protos.google.monitoring.v3.IListSnoozesResponse
-      ]>;
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze[],
+      protos.google.monitoring.v3.IListSnoozesRequest | null,
+      protos.google.monitoring.v3.IListSnoozesResponse,
+    ]
+  >;
   listSnoozes(
-      request: protos.google.monitoring.v3.IListSnoozesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.monitoring.v3.IListSnoozesRequest,
-          protos.google.monitoring.v3.IListSnoozesResponse|null|undefined,
-          protos.google.monitoring.v3.ISnooze>): void;
+    request: protos.google.monitoring.v3.IListSnoozesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListSnoozesRequest,
+      protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+      protos.google.monitoring.v3.ISnooze
+    >,
+  ): void;
   listSnoozes(
-      request: protos.google.monitoring.v3.IListSnoozesRequest,
-      callback: PaginationCallback<
-          protos.google.monitoring.v3.IListSnoozesRequest,
-          protos.google.monitoring.v3.IListSnoozesResponse|null|undefined,
-          protos.google.monitoring.v3.ISnooze>): void;
+    request: protos.google.monitoring.v3.IListSnoozesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListSnoozesRequest,
+      protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+      protos.google.monitoring.v3.ISnooze
+    >,
+  ): void;
   listSnoozes(
-      request?: protos.google.monitoring.v3.IListSnoozesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.monitoring.v3.IListSnoozesRequest,
-          protos.google.monitoring.v3.IListSnoozesResponse|null|undefined,
-          protos.google.monitoring.v3.ISnooze>,
-      callback?: PaginationCallback<
-          protos.google.monitoring.v3.IListSnoozesRequest,
-          protos.google.monitoring.v3.IListSnoozesResponse|null|undefined,
-          protos.google.monitoring.v3.ISnooze>):
-      Promise<[
-        protos.google.monitoring.v3.ISnooze[],
-        protos.google.monitoring.v3.IListSnoozesRequest|null,
-        protos.google.monitoring.v3.IListSnoozesResponse
-      ]>|void {
+          protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+          protos.google.monitoring.v3.ISnooze
+        >,
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListSnoozesRequest,
+      protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+      protos.google.monitoring.v3.ISnooze
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze[],
+      protos.google.monitoring.v3.IListSnoozesRequest | null,
+      protos.google.monitoring.v3.IListSnoozesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.monitoring.v3.IListSnoozesRequest,
-      protos.google.monitoring.v3.IListSnoozesResponse|null|undefined,
-      protos.google.monitoring.v3.ISnooze>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListSnoozesRequest,
+          protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+          protos.google.monitoring.v3.ISnooze
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSnoozes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -843,146 +1007,150 @@ export class SnoozeServiceClient {
     this._log.info('listSnoozes request %j', request);
     return this.innerApiCalls
       .listSnoozes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.monitoring.v3.ISnooze[],
-        protos.google.monitoring.v3.IListSnoozesRequest|null,
-        protos.google.monitoring.v3.IListSnoozesResponse
-      ]) => {
-        this._log.info('listSnoozes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.ISnooze[],
+          protos.google.monitoring.v3.IListSnoozesRequest | null,
+          protos.google.monitoring.v3.IListSnoozesResponse,
+        ]) => {
+          this._log.info('listSnoozes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSnoozes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The
- *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
- *   `Snooze`s should be listed. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- * @param {string} [request.filter]
- *   Optional. Optional filter to restrict results to the given criteria. The
- *   following fields are supported.
- *
- *     * `interval.start_time`
- *     * `interval.end_time`
- *
- *   For example:
- *
- *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
- *           interval.end_time < "2022-03-12T00:00:00-08:00"
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return for a single query. The
- *   server may further constrain the maximum number of results returned in a
- *   single page. The value should be in the range [1, 1000]. If the value given
- *   is outside this range, the server will decide the number of results to be
- *   returned.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous call to
- *   `ListSnoozesRequest` to get the next page of results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Snooze|Snooze} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSnoozesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSnoozes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   `Snooze`s should be listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} [request.filter]
+   *   Optional. Optional filter to restrict results to the given criteria. The
+   *   following fields are supported.
+   *
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   For example:
+   *
+   *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
+   *           interval.end_time < "2022-03-12T00:00:00-08:00"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return for a single query. The
+   *   server may further constrain the maximum number of results returned in a
+   *   single page. The value should be in the range [1, 1000]. If the value given
+   *   is outside this range, the server will decide the number of results to be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous call to
+   *   `ListSnoozesRequest` to get the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Snooze|Snooze} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSnoozesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSnoozesStream(
-      request?: protos.google.monitoring.v3.IListSnoozesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSnoozes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSnoozes stream %j', request);
     return this.descriptors.page.listSnoozes.createStream(
       this.innerApiCalls.listSnoozes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSnoozes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The
- *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
- *   `Snooze`s should be listed. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- * @param {string} [request.filter]
- *   Optional. Optional filter to restrict results to the given criteria. The
- *   following fields are supported.
- *
- *     * `interval.start_time`
- *     * `interval.end_time`
- *
- *   For example:
- *
- *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
- *           interval.end_time < "2022-03-12T00:00:00-08:00"
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of results to return for a single query. The
- *   server may further constrain the maximum number of results returned in a
- *   single page. The value should be in the range [1, 1000]. If the value given
- *   is outside this range, the server will decide the number of results to be
- *   returned.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous call to
- *   `ListSnoozesRequest` to get the next page of results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.monitoring.v3.Snooze|Snooze}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/snooze_service.list_snoozes.js</caption>
- * region_tag:monitoring_v3_generated_SnoozeService_ListSnoozes_async
- */
+  /**
+   * Equivalent to `listSnoozes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   `Snooze`s should be listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} [request.filter]
+   *   Optional. Optional filter to restrict results to the given criteria. The
+   *   following fields are supported.
+   *
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   For example:
+   *
+   *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
+   *           interval.end_time < "2022-03-12T00:00:00-08:00"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return for a single query. The
+   *   server may further constrain the maximum number of results returned in a
+   *   single page. The value should be in the range [1, 1000]. If the value given
+   *   is outside this range, the server will decide the number of results to be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous call to
+   *   `ListSnoozesRequest` to get the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.monitoring.v3.Snooze|Snooze}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/snooze_service.list_snoozes.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_ListSnoozes_async
+   */
   listSnoozesAsync(
-      request?: protos.google.monitoring.v3.IListSnoozesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.monitoring.v3.ISnooze>{
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.monitoring.v3.ISnooze> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSnoozes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSnoozes iterate %j', request);
     return this.descriptors.page.listSnoozes.asyncIterate(
       this.innerApiCalls['listSnoozes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.monitoring.v3.ISnooze>;
   }
   // --------------------
@@ -996,7 +1164,7 @@ export class SnoozeServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyPath(folder:string,alertPolicy:string) {
+  folderAlertPolicyPath(folder: string, alertPolicy: string) {
     return this.pathTemplates.folderAlertPolicyPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1011,7 +1179,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).folder;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
+      folderAlertPolicyName,
+    ).folder;
   }
 
   /**
@@ -1022,7 +1192,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).alert_policy;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
+      folderAlertPolicyName,
+    ).alert_policy;
   }
 
   /**
@@ -1033,7 +1205,11 @@ export class SnoozeServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyConditionPath(folder:string,alertPolicy:string,condition:string) {
+  folderAlertPolicyConditionPath(
+    folder: string,
+    alertPolicy: string,
+    condition: string,
+  ) {
     return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1048,8 +1224,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).folder;
+  matchFolderFromFolderAlertPolicyConditionName(
+    folderAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+      folderAlertPolicyConditionName,
+    ).folder;
   }
 
   /**
@@ -1059,8 +1239,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).alert_policy;
+  matchAlertPolicyFromFolderAlertPolicyConditionName(
+    folderAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+      folderAlertPolicyConditionName,
+    ).alert_policy;
   }
 
   /**
@@ -1070,8 +1254,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).condition;
+  matchConditionFromFolderAlertPolicyConditionName(
+    folderAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+      folderAlertPolicyConditionName,
+    ).condition;
   }
 
   /**
@@ -1081,7 +1269,7 @@ export class SnoozeServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  folderChannelDescriptorPath(folder:string,channelDescriptor:string) {
+  folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
     return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
       folder: folder,
       channel_descriptor: channelDescriptor,
@@ -1095,8 +1283,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).folder;
+  matchFolderFromFolderChannelDescriptorName(
+    folderChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
+      folderChannelDescriptorName,
+    ).folder;
   }
 
   /**
@@ -1106,8 +1298,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).channel_descriptor;
+  matchChannelDescriptorFromFolderChannelDescriptorName(
+    folderChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
+      folderChannelDescriptorName,
+    ).channel_descriptor;
   }
 
   /**
@@ -1117,7 +1313,7 @@ export class SnoozeServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  folderGroupPath(folder:string,group:string) {
+  folderGroupPath(folder: string, group: string) {
     return this.pathTemplates.folderGroupPathTemplate.render({
       folder: folder,
       group: group,
@@ -1132,7 +1328,8 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).folder;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+      .folder;
   }
 
   /**
@@ -1143,7 +1340,8 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).group;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+      .group;
   }
 
   /**
@@ -1153,7 +1351,7 @@ export class SnoozeServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  folderNotificationChannelPath(folder:string,notificationChannel:string) {
+  folderNotificationChannelPath(folder: string, notificationChannel: string) {
     return this.pathTemplates.folderNotificationChannelPathTemplate.render({
       folder: folder,
       notification_channel: notificationChannel,
@@ -1167,8 +1365,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderNotificationChannelName(folderNotificationChannelName: string) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).folder;
+  matchFolderFromFolderNotificationChannelName(
+    folderNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
+      folderNotificationChannelName,
+    ).folder;
   }
 
   /**
@@ -1178,8 +1380,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromFolderNotificationChannelName(folderNotificationChannelName: string) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).notification_channel;
+  matchNotificationChannelFromFolderNotificationChannelName(
+    folderNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
+      folderNotificationChannelName,
+    ).notification_channel;
   }
 
   /**
@@ -1189,7 +1395,7 @@ export class SnoozeServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  folderServicePath(folder:string,service:string) {
+  folderServicePath(folder: string, service: string) {
     return this.pathTemplates.folderServicePathTemplate.render({
       folder: folder,
       service: service,
@@ -1204,7 +1410,8 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .folder;
   }
 
   /**
@@ -1215,7 +1422,8 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .service;
   }
 
   /**
@@ -1226,12 +1434,18 @@ export class SnoozeServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  folderServiceServiceLevelObjectivePath(folder:string,service:string,serviceLevelObjective:string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render({
-      folder: folder,
-      service: service,
-      service_level_objective: serviceLevelObjective,
-    });
+  folderServiceServiceLevelObjectivePath(
+    folder: string,
+    service: string,
+    serviceLevelObjective: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
+      {
+        folder: folder,
+        service: service,
+        service_level_objective: serviceLevelObjective,
+      },
+    );
   }
 
   /**
@@ -1241,8 +1455,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).folder;
+  matchFolderFromFolderServiceServiceLevelObjectiveName(
+    folderServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+      folderServiceServiceLevelObjectiveName,
+    ).folder;
   }
 
   /**
@@ -1252,8 +1470,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service;
+  matchServiceFromFolderServiceServiceLevelObjectiveName(
+    folderServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+      folderServiceServiceLevelObjectiveName,
+    ).service;
   }
 
   /**
@@ -1263,8 +1485,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service_level_objective;
+  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
+    folderServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+      folderServiceServiceLevelObjectiveName,
+    ).service_level_objective;
   }
 
   /**
@@ -1274,7 +1500,7 @@ export class SnoozeServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  folderUptimeCheckConfigPath(folder:string,uptimeCheckConfig:string) {
+  folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
     return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
       folder: folder,
       uptime_check_config: uptimeCheckConfig,
@@ -1288,8 +1514,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).folder;
+  matchFolderFromFolderUptimeCheckConfigName(
+    folderUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+      folderUptimeCheckConfigName,
+    ).folder;
   }
 
   /**
@@ -1299,8 +1529,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).uptime_check_config;
+  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
+    folderUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+      folderUptimeCheckConfigName,
+    ).uptime_check_config;
   }
 
   /**
@@ -1310,7 +1544,7 @@ export class SnoozeServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyPath(organization:string,alertPolicy:string) {
+  organizationAlertPolicyPath(organization: string, alertPolicy: string) {
     return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
       organization: organization,
       alert_policy: alertPolicy,
@@ -1324,8 +1558,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).organization;
+  matchOrganizationFromOrganizationAlertPolicyName(
+    organizationAlertPolicyName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
+      organizationAlertPolicyName,
+    ).organization;
   }
 
   /**
@@ -1335,8 +1573,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyName(
+    organizationAlertPolicyName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
+      organizationAlertPolicyName,
+    ).alert_policy;
   }
 
   /**
@@ -1347,12 +1589,18 @@ export class SnoozeServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyConditionPath(organization:string,alertPolicy:string,condition:string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render({
-      organization: organization,
-      alert_policy: alertPolicy,
-      condition: condition,
-    });
+  organizationAlertPolicyConditionPath(
+    organization: string,
+    alertPolicy: string,
+    condition: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
+      {
+        organization: organization,
+        alert_policy: alertPolicy,
+        condition: condition,
+      },
+    );
   }
 
   /**
@@ -1362,8 +1610,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).organization;
+  matchOrganizationFromOrganizationAlertPolicyConditionName(
+    organizationAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+      organizationAlertPolicyConditionName,
+    ).organization;
   }
 
   /**
@@ -1373,8 +1625,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyConditionName(
+    organizationAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+      organizationAlertPolicyConditionName,
+    ).alert_policy;
   }
 
   /**
@@ -1384,8 +1640,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).condition;
+  matchConditionFromOrganizationAlertPolicyConditionName(
+    organizationAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+      organizationAlertPolicyConditionName,
+    ).condition;
   }
 
   /**
@@ -1395,7 +1655,10 @@ export class SnoozeServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  organizationChannelDescriptorPath(organization:string,channelDescriptor:string) {
+  organizationChannelDescriptorPath(
+    organization: string,
+    channelDescriptor: string,
+  ) {
     return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
       organization: organization,
       channel_descriptor: channelDescriptor,
@@ -1409,8 +1672,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).organization;
+  matchOrganizationFromOrganizationChannelDescriptorName(
+    organizationChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
+      organizationChannelDescriptorName,
+    ).organization;
   }
 
   /**
@@ -1420,8 +1687,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).channel_descriptor;
+  matchChannelDescriptorFromOrganizationChannelDescriptorName(
+    organizationChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
+      organizationChannelDescriptorName,
+    ).channel_descriptor;
   }
 
   /**
@@ -1431,7 +1702,7 @@ export class SnoozeServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  organizationGroupPath(organization:string,group:string) {
+  organizationGroupPath(organization: string, group: string) {
     return this.pathTemplates.organizationGroupPathTemplate.render({
       organization: organization,
       group: group,
@@ -1446,7 +1717,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).organization;
+    return this.pathTemplates.organizationGroupPathTemplate.match(
+      organizationGroupName,
+    ).organization;
   }
 
   /**
@@ -1457,7 +1730,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).group;
+    return this.pathTemplates.organizationGroupPathTemplate.match(
+      organizationGroupName,
+    ).group;
   }
 
   /**
@@ -1467,11 +1742,16 @@ export class SnoozeServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  organizationNotificationChannelPath(organization:string,notificationChannel:string) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.render({
-      organization: organization,
-      notification_channel: notificationChannel,
-    });
+  organizationNotificationChannelPath(
+    organization: string,
+    notificationChannel: string,
+  ) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
+      {
+        organization: organization,
+        notification_channel: notificationChannel,
+      },
+    );
   }
 
   /**
@@ -1481,8 +1761,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).organization;
+  matchOrganizationFromOrganizationNotificationChannelName(
+    organizationNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
+      organizationNotificationChannelName,
+    ).organization;
   }
 
   /**
@@ -1492,8 +1776,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).notification_channel;
+  matchNotificationChannelFromOrganizationNotificationChannelName(
+    organizationNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
+      organizationNotificationChannelName,
+    ).notification_channel;
   }
 
   /**
@@ -1503,7 +1791,7 @@ export class SnoozeServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  organizationServicePath(organization:string,service:string) {
+  organizationServicePath(organization: string, service: string) {
     return this.pathTemplates.organizationServicePathTemplate.render({
       organization: organization,
       service: service,
@@ -1517,8 +1805,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_service resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).organization;
+  matchOrganizationFromOrganizationServiceName(
+    organizationServiceName: string,
+  ) {
+    return this.pathTemplates.organizationServicePathTemplate.match(
+      organizationServiceName,
+    ).organization;
   }
 
   /**
@@ -1529,7 +1821,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).service;
+    return this.pathTemplates.organizationServicePathTemplate.match(
+      organizationServiceName,
+    ).service;
   }
 
   /**
@@ -1540,12 +1834,18 @@ export class SnoozeServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  organizationServiceServiceLevelObjectivePath(organization:string,service:string,serviceLevelObjective:string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render({
-      organization: organization,
-      service: service,
-      service_level_objective: serviceLevelObjective,
-    });
+  organizationServiceServiceLevelObjectivePath(
+    organization: string,
+    service: string,
+    serviceLevelObjective: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
+      {
+        organization: organization,
+        service: service,
+        service_level_objective: serviceLevelObjective,
+      },
+    );
   }
 
   /**
@@ -1555,8 +1855,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).organization;
+  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
+    organizationServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+      organizationServiceServiceLevelObjectiveName,
+    ).organization;
   }
 
   /**
@@ -1566,8 +1870,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service;
+  matchServiceFromOrganizationServiceServiceLevelObjectiveName(
+    organizationServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+      organizationServiceServiceLevelObjectiveName,
+    ).service;
   }
 
   /**
@@ -1577,8 +1885,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service_level_objective;
+  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
+    organizationServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+      organizationServiceServiceLevelObjectiveName,
+    ).service_level_objective;
   }
 
   /**
@@ -1588,7 +1900,10 @@ export class SnoozeServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  organizationUptimeCheckConfigPath(organization:string,uptimeCheckConfig:string) {
+  organizationUptimeCheckConfigPath(
+    organization: string,
+    uptimeCheckConfig: string,
+  ) {
     return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
       organization: organization,
       uptime_check_config: uptimeCheckConfig,
@@ -1602,8 +1917,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).organization;
+  matchOrganizationFromOrganizationUptimeCheckConfigName(
+    organizationUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+      organizationUptimeCheckConfigName,
+    ).organization;
   }
 
   /**
@@ -1613,8 +1932,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).uptime_check_config;
+  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
+    organizationUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+      organizationUptimeCheckConfigName,
+    ).uptime_check_config;
   }
 
   /**
@@ -1623,7 +1946,7 @@ export class SnoozeServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1647,7 +1970,7 @@ export class SnoozeServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyPath(project:string,alertPolicy:string) {
+  projectAlertPolicyPath(project: string, alertPolicy: string) {
     return this.pathTemplates.projectAlertPolicyPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -1662,7 +1985,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).project;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
+      projectAlertPolicyName,
+    ).project;
   }
 
   /**
@@ -1673,7 +1998,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).alert_policy;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
+      projectAlertPolicyName,
+    ).alert_policy;
   }
 
   /**
@@ -1684,7 +2011,11 @@ export class SnoozeServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyConditionPath(project:string,alertPolicy:string,condition:string) {
+  projectAlertPolicyConditionPath(
+    project: string,
+    alertPolicy: string,
+    condition: string,
+  ) {
     return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -1699,8 +2030,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).project;
+  matchProjectFromProjectAlertPolicyConditionName(
+    projectAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+      projectAlertPolicyConditionName,
+    ).project;
   }
 
   /**
@@ -1710,8 +2045,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).alert_policy;
+  matchAlertPolicyFromProjectAlertPolicyConditionName(
+    projectAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+      projectAlertPolicyConditionName,
+    ).alert_policy;
   }
 
   /**
@@ -1721,8 +2060,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).condition;
+  matchConditionFromProjectAlertPolicyConditionName(
+    projectAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+      projectAlertPolicyConditionName,
+    ).condition;
   }
 
   /**
@@ -1732,7 +2075,7 @@ export class SnoozeServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  projectChannelDescriptorPath(project:string,channelDescriptor:string) {
+  projectChannelDescriptorPath(project: string, channelDescriptor: string) {
     return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
       project: project,
       channel_descriptor: channelDescriptor,
@@ -1746,8 +2089,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).project;
+  matchProjectFromProjectChannelDescriptorName(
+    projectChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
+      projectChannelDescriptorName,
+    ).project;
   }
 
   /**
@@ -1757,8 +2104,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).channel_descriptor;
+  matchChannelDescriptorFromProjectChannelDescriptorName(
+    projectChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
+      projectChannelDescriptorName,
+    ).channel_descriptor;
   }
 
   /**
@@ -1768,7 +2119,7 @@ export class SnoozeServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  projectGroupPath(project:string,group:string) {
+  projectGroupPath(project: string, group: string) {
     return this.pathTemplates.projectGroupPathTemplate.render({
       project: project,
       group: group,
@@ -1783,7 +2134,8 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).project;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+      .project;
   }
 
   /**
@@ -1794,7 +2146,8 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).group;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+      .group;
   }
 
   /**
@@ -1804,7 +2157,7 @@ export class SnoozeServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  projectNotificationChannelPath(project:string,notificationChannel:string) {
+  projectNotificationChannelPath(project: string, notificationChannel: string) {
     return this.pathTemplates.projectNotificationChannelPathTemplate.render({
       project: project,
       notification_channel: notificationChannel,
@@ -1818,8 +2171,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectNotificationChannelName(projectNotificationChannelName: string) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).project;
+  matchProjectFromProjectNotificationChannelName(
+    projectNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
+      projectNotificationChannelName,
+    ).project;
   }
 
   /**
@@ -1829,8 +2186,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromProjectNotificationChannelName(projectNotificationChannelName: string) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).notification_channel;
+  matchNotificationChannelFromProjectNotificationChannelName(
+    projectNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
+      projectNotificationChannelName,
+    ).notification_channel;
   }
 
   /**
@@ -1840,7 +2201,7 @@ export class SnoozeServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  projectServicePath(project:string,service:string) {
+  projectServicePath(project: string, service: string) {
     return this.pathTemplates.projectServicePathTemplate.render({
       project: project,
       service: service,
@@ -1855,7 +2216,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).project;
+    return this.pathTemplates.projectServicePathTemplate.match(
+      projectServiceName,
+    ).project;
   }
 
   /**
@@ -1866,7 +2229,9 @@ export class SnoozeServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).service;
+    return this.pathTemplates.projectServicePathTemplate.match(
+      projectServiceName,
+    ).service;
   }
 
   /**
@@ -1877,12 +2242,18 @@ export class SnoozeServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  projectServiceServiceLevelObjectivePath(project:string,service:string,serviceLevelObjective:string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render({
-      project: project,
-      service: service,
-      service_level_objective: serviceLevelObjective,
-    });
+  projectServiceServiceLevelObjectivePath(
+    project: string,
+    service: string,
+    serviceLevelObjective: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
+      {
+        project: project,
+        service: service,
+        service_level_objective: serviceLevelObjective,
+      },
+    );
   }
 
   /**
@@ -1892,8 +2263,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).project;
+  matchProjectFromProjectServiceServiceLevelObjectiveName(
+    projectServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+      projectServiceServiceLevelObjectiveName,
+    ).project;
   }
 
   /**
@@ -1903,8 +2278,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service;
+  matchServiceFromProjectServiceServiceLevelObjectiveName(
+    projectServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+      projectServiceServiceLevelObjectiveName,
+    ).service;
   }
 
   /**
@@ -1914,8 +2293,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service_level_objective;
+  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
+    projectServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+      projectServiceServiceLevelObjectiveName,
+    ).service_level_objective;
   }
 
   /**
@@ -1925,7 +2308,7 @@ export class SnoozeServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  projectUptimeCheckConfigPath(project:string,uptimeCheckConfig:string) {
+  projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
     return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
       project: project,
       uptime_check_config: uptimeCheckConfig,
@@ -1939,8 +2322,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).project;
+  matchProjectFromProjectUptimeCheckConfigName(
+    projectUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+      projectUptimeCheckConfigName,
+    ).project;
   }
 
   /**
@@ -1950,8 +2337,12 @@ export class SnoozeServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).uptime_check_config;
+  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
+    projectUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+      projectUptimeCheckConfigName,
+    ).uptime_check_config;
   }
 
   /**
@@ -1961,7 +2352,7 @@ export class SnoozeServiceClient {
    * @param {string} snooze
    * @returns {string} Resource name string.
    */
-  snoozePath(project:string,snooze:string) {
+  snoozePath(project: string, snooze: string) {
     return this.pathTemplates.snoozePathTemplate.render({
       project: project,
       snooze: snooze,
@@ -1998,7 +2389,7 @@ export class SnoozeServiceClient {
    */
   close(): Promise<void> {
     if (this.snoozeServiceStub && !this._terminated) {
-      return this.snoozeServiceStub.then(stub => {
+      return this.snoozeServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

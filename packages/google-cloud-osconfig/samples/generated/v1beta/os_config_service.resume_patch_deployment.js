@@ -35,7 +35,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Osconfig library
-  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
+  const {OsConfigServiceClient} = require('@google-cloud/os-config').v1beta;
 
   // Instantiates a client
   const osconfigClient = new OsConfigServiceClient();

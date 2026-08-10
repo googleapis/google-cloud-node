@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ParameterManagerClient} from './parameter_manager_client';
+export { ParameterManagerClient } from './parameter_manager_client';

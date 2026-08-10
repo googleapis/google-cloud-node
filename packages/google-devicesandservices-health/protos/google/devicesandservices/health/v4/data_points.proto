@@ -133,8 +133,17 @@ service DataPointsService {
 
   // Exports exercise data in TCX format.
   //
+  // **IMPORTANT:** HTTP clients must append `?alt=media` to the
+  // request URL to download the raw TCX file.
   //
-  // Note: While the Authorization section below states that any one of the
+  // Example:
+  // `https://health.googleapis.com/v4/users/me/dataTypes/exercise/dataPoints/EXERCISE_ID:exportExerciseTcx?alt=media`
+  //
+  // Without `alt=media`, the server returns a JSON response
+  // (`ExportExerciseTcxResponse`)
+  // which is intended primarily for gRPC clients.
+  //
+  // **Note:** While the Authorization section below states that any one of the
   // listed scopes is accepted, this specific method requires the user to
   // provide both one of the `activity_and_fitness` scopes (`normal` or
   // `readonly`) AND one of the `location` scopes (`normal` or `readonly`) in
@@ -162,6 +171,9 @@ message DataPoint {
   // These messages represent the data payload for each data type and are
   // embedded within the `DataPoint` resource. They are not standalone resources
   // themselves.
+  // Unless otherwise noted, data types will exclude data points that are
+  // identified as recorded by wearables in intervals when they were not
+  // actually worn.
   oneof data {
     // Optional. Data for points in the `steps` interval data type collection.
     Steps steps = 4 [(google.api.field_behavior) = OPTIONAL];
@@ -248,6 +260,20 @@ message DataPoint {
     // collection.
     DailyVO2Max daily_vo2_max = 28 [(google.api.field_behavior) = OPTIONAL];
 
+    // Optional. Data for points in the `nutrition-log` session data type
+    // collection.
+    NutritionLog nutrition_log = 29 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Data for points in the `irregular-rhythm-notification` session
+    // data type collection.
+    IrregularRhythmNotification irregular_rhythm_notification = 30
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Data for points in the `electrocardiogram` session data type
+    // collection.
+    Electrocardiogram electrocardiogram = 31
+        [(google.api.field_behavior) = OPTIONAL];
+
     // Optional. Data for points in the `daily-heart-rate-zones` daily data type
     // collection.
     DailyHeartRateZones daily_heart_rate_zones = 32
@@ -256,6 +282,9 @@ message DataPoint {
     // Optional. Data for points in the `hydration-log` session data type
     // collection.
     HydrationLog hydration_log = 33 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The food details.
+    Food food = 34 [(google.api.field_behavior) = OPTIONAL];
 
     // Optional. Data for points in the `time-in-heart-rate-zone` interval data
     // type collection.
@@ -288,6 +317,24 @@ message DataPoint {
     // collection.
     BasalEnergyBurned basal_energy_burned = 41
         [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Data for points in the `core-body-temperature` sample data type
+    // collection.
+    CoreBodyTemperature core_body_temperature = 42
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Data for points in the `active-energy-burned` interval data
+    // type collection.
+    ActiveEnergyBurned active_energy_burned = 44
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The food measurement unit details.
+    FoodMeasurementUnit food_measurement_unit = 45
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Data for points in the `blood-glucose` sample data type
+    // collection.
+    BloodGlucose blood_glucose = 46 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Identifier. Data point name, only supported for the subset of identifiable
@@ -323,6 +370,9 @@ message ReconciledDataPoint {
   // These messages represent the data payload for each data type and are
   // embedded within the `DataPoint` resource. They are not standalone resources
   // themselves.
+  // Unless otherwise noted, data types reconciliation algorithm will exclude
+  // data points that are identified as recorded by wearables in intervals
+  // when they were not actually worn.
   oneof data {
     // Data for points in the `steps` interval data type collection.
     Steps steps = 4;
@@ -393,6 +443,9 @@ message ReconciledDataPoint {
     // Data for points in the `daily-vo2-max` daily data type collection.
     DailyVO2Max daily_vo2_max = 28;
 
+    // Data for points in the `nutrition-log` session data type collection.
+    NutritionLog nutrition_log = 29;
+
     // Data for points in the `daily-heart-rate-zones` daily data type
     // collection.
     DailyHeartRateZones daily_heart_rate_zones = 32;
@@ -424,6 +477,17 @@ message ReconciledDataPoint {
     // Data for points in the `basal-energy-burned` interval data type
     // collection.
     BasalEnergyBurned basal_energy_burned = 41;
+
+    // Data for points in the `core-body-temperature` sample data type
+    // collection.
+    CoreBodyTemperature core_body_temperature = 42;
+
+    // Data for points in the `active-energy-burned` interval data type
+    // collection.
+    ActiveEnergyBurned active_energy_burned = 44;
+
+    // Data for points in the `blood-glucose` sample data type collection.
+    BloodGlucose blood_glucose = 46;
   }
 
   // Identifier. Data point name, only supported for the subset of identifiable
@@ -449,7 +513,10 @@ message ReconciledDataPoint {
   string data_point_name = 1 [(google.api.field_behavior) = IDENTIFIER];
 }
 
-// Value of a rollup for a single physical time interval (aggregation window)
+// Value of a rollup for a single physical time interval (aggregation window) of
+// reconciled data points from all data sources, excluding those data points
+// that are identified as recorded by wearables in intervals when they were not
+// actually worn.
 message RollupDataPoint {
   // Outcome of a rollup of the requested data type.
   //
@@ -460,7 +527,11 @@ message RollupDataPoint {
   // `{original_field_name}_{aggregation_function}`. For example:
   // `confidence_min`, `confidence_sum`.
   //
-  // If there were no data points in this interval, the value will not be set.
+  // If there were no manual, on-wrist data points in this interval,
+  // the value will not be set. When the value is set, but the data shows zero,
+  // e.g. `steps.count_sum = 0`, it means that a device was worn but it did not
+  // record any data points for this data type.
+  //
   // These messages represent the aggregated data payload for each data type
   // and are embedded within the `RollupDataPoint`. They are not standalone
   // resources themselves.
@@ -531,6 +602,11 @@ message RollupDataPoint {
     ActivityLevelRollupValue activity_level = 18;
 
     // Returned by default when rolling up data points from the
+    // `nutrition-log` data type, or when requested explicitly using the
+    // `nutrition-log` rollup type identifier.
+    NutritionLogRollupValue nutrition_log = 19;
+
+    // Returned by default when rolling up data points from the
     // `hydration-log` data type, or when requested explicitly using the
     // `hydration-log` rollup type identifier.
     HydrationLogRollupValue hydration_log = 20;
@@ -549,6 +625,19 @@ message RollupDataPoint {
     // `swim-lengths-data` data type, or when requested explicitly using the
     // `swim-lengths-data` rollup type identifier.
     SwimLengthsDataRollupValue swim_lengths_data = 23;
+
+    // Returned by default when rolling up data points from the
+    // `core-body-temperature` data type, or when requested explicitly using
+    // the `core-body-temperature` rollup type identifier.
+    CoreBodyTemperatureRollupValue core_body_temperature = 24;
+
+    // Returned by default when rolling up data points from the
+    // `active-energy-burned` data type.
+    ActiveEnergyBurnedRollupValue active_energy_burned = 25;
+
+    // Returned by default when rolling up data points from the
+    // `blood-glucose` data type.
+    BloodGlucoseRollupValue blood_glucose = 26;
   }
 
   // Start time of the window this value aggregates over
@@ -559,6 +648,9 @@ message RollupDataPoint {
 }
 
 // Value of a daily rollup for a single civil time interval (aggregation window)
+// of reconciled data points from all data sources, excluding those data points
+// that are identified as recorded by wearables in intervals when they were not
+// actually worn.
 message DailyRollupDataPoint {
   // Outcome of a rollup of the requested roll-up type.
   //
@@ -569,7 +661,11 @@ message DailyRollupDataPoint {
   // `{original_field_name}_{aggregation_function}`. For example:
   // `confidence_min`, `confidence_sum`.
   //
-  // If there were no data points in this interval, the value will not be set.
+  // If there were no manual, on-wrist data points in this interval,
+  // the value will not be set. When the value is set, but the data shows zero,
+  // e.g. `steps.count_sum = 0`, it means that a device was worn but it did not
+  // record any data points for this data type.
+  //
   // These messages represent the aggregated data payload for each data type
   // and are embedded within the `DailyRollupDataPoint`. They are not standalone
   // resources themselves.
@@ -654,6 +750,11 @@ message DailyRollupDataPoint {
     ActivityLevelRollupValue activity_level = 20;
 
     // Returned by default when rolling up data points from the
+    // `nutrition-log` data type, or when requested explicitly using the
+    // `nutrition-log` rollup type identifier.
+    NutritionLogRollupValue nutrition_log = 21;
+
+    // Returned by default when rolling up data points from the
     // `hydration-log` data type, or when requested explicitly using the
     // `hydration-log` rollup type identifier.
     HydrationLogRollupValue hydration_log = 22;
@@ -672,6 +773,19 @@ message DailyRollupDataPoint {
     // `swim-lengths-data` data type, or when requested explicitly using the
     // `swim-lengths-data` rollup type identifier.
     SwimLengthsDataRollupValue swim_lengths_data = 25;
+
+    // Returned by default when rolling up data points from the
+    // `core-body-temperature` data type, or when requested explicitly using
+    // the `core-body-temperature` rollup type identifier.
+    CoreBodyTemperatureRollupValue core_body_temperature = 26;
+
+    // Returned by default when rolling up data points from the
+    // `active-energy-burned` data type.
+    ActiveEnergyBurnedRollupValue active_energy_burned = 27;
+
+    // Returned by default when rolling up data points from the
+    // `blood-glucose` data type.
+    BloodGlucoseRollupValue blood_glucose = 28;
   }
 
   // Start time of the window this value aggregates over
@@ -782,11 +896,11 @@ message ListDataPointsRequest {
   //     - Date literal expected in ISO 8601 `YYYY-MM-DD` format
   //     - Supported logical operators: `AND`
   //     - Example:
-  //        - `daily_resting_heart_rate.date >= "2024-08-14"`
   //        - `daily_heart_rate_variability.date < "2024-08-15"`
   //
   //
-  // - Session civil start time (**Excluding Sleep**):
+  //
+  // - Session civil start time (**Excluding Sleep and ECG**):
   //     - Pattern: `{session_data_type}.interval.civil_start_time`
   //     - Supported comparison operators: `>=`, `<`
   //     - Date with optional time literal expected in ISO 8601
@@ -796,6 +910,16 @@ message ListDataPointsRequest {
   //        - `exercise.interval.civil_start_time >= "2023-11-24" AND
   //        exercise.interval.civil_start_time < "2023-11-25"`
   //        - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+  //
+  // - Session start time (**ECG specific**):
+  //     - Pattern: `electrocardiogram.interval.start_time`
+  //     - Supported comparison operators: `>=`
+  //     - Timestamp literal expected in RFC-3339 format
+  //     - Example:
+  //         - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+  //     - Note: Only filtering by start time is supported for ECG. Filtering
+  //       by end time (e.g., `electrocardiogram.interval.end_time`) is not
+  //       supported.
   //
   // - Session end time (**Sleep specific**):
   //     - Pattern: `sleep.interval.end_time`
@@ -1139,5 +1263,9 @@ message ExportExerciseTcxRequest {
 // Represents a Response for exporting exercise data in TCX format.
 message ExportExerciseTcxResponse {
   // Contains the exported TCX data.
+  //
+  // This field is intended for gRPC clients, as media download integration
+  // is not supported for gRPC. HTTP clients should instead use the `alt=media`
+  // query parameter to download the raw binary TCX file.
   string tcx_data = 2;
 }

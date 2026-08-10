@@ -1,11 +1,108 @@
 {
   "bump-minor-pre-major": true,
-  "initial-version": "0.1.0",
-  "separate-pull-requests": false,
   "commit-batch-size": 10,
+  "initial-version": "0.1.0",
   "packages": {
+    "core/common": {
+      "component": "common"
+    },
+    "core/dev-packages/jsdoc-fresh": {
+      "component": "jsdoc-fresh"
+    },
+    "core/dev-packages/jsdoc-region-tag": {
+      "component": "jsdoc-region-tag"
+    },
+    "core/dev-packages/pack-n-play": {
+      "component": "pack-n-play"
+    },
+    "core/generator/gapic-generator-typescript": {
+      "component": "gapic-generator"
+    },
+    "core/packages/gapic-node-processing": {
+      "component": "gapic-node-processing"
+    },
+    "core/packages/gax": {
+      "component": "google-gax"
+    },
+    "core/packages/gaxios": {
+      "component": "gaxios"
+    },
+    "core/packages/gcp-metadata": {
+      "component": "gcp-metadata"
+    },
+    "core/packages/google-auth-library-nodejs": {
+      "component": "google-auth-library"
+    },
+    "core/packages/logging-utils": {
+      "component": "google-logging-utils"
+    },
+    "core/packages/nodejs-googleapis-common": {
+      "component": "googleapis-common"
+    },
+    "core/packages/nodejs-proto-files": {
+      "component": "google-proto-files"
+    },
+    "core/packages/proto3-json-serializer-nodejs": {
+      "component": "proto3-json-serializer"
+    },
+    "core/packages/retry-request": {
+      "component": "retry-request"
+    },
+    "core/packages/teeny-request": {
+      "component": "teeny-request"
+    },
+    "core/packages/tools": {
+      "component": "gapic-tools"
+    },
+    "core/packages/typeless-sample-bot": {
+      "component": "typeless-sample-bot"
+    },
+    "core/paginator": {
+      "component": "paginator"
+    },
+    "core/precise-date": {
+      "component": "precise-date"
+    },
+    "core/projectify": {
+      "component": "projectify"
+    },
+    "core/promisify": {
+      "component": "promisify"
+    },
+    "handwritten/bigquery": {
+      "component": "bigquery"
+    },
+    "handwritten/bigquery-storage": {
+      "component": "bigquery-storage"
+    },
+    "handwritten/bigtable": {
+      "component": "bigtable"
+    },
+    "handwritten/cloud-profiler": {
+      "component": "cloud-profiler"
+    },
+    "handwritten/datastore": {
+      "component": "datastore"
+    },
+    "handwritten/error-reporting": {
+      "component": "error-reporting"
+    },
+    "handwritten/google-cloud-dns": {
+      "component": "dns"
+    },
+    "handwritten/logging": {
+      "component": "logging"
+    },
+    "handwritten/logging-bunyan": {
+      "component": "logging-bunyan"
+    },
+    "handwritten/logging-winston": {
+      "component": "logging-winston"
+    },
+    "handwritten/pubsub": {
+      "component": "pubsub"
+    },
     "packages/google-ads-admanager": {},
-    "packages/google-ads-datamanager": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
@@ -21,6 +118,8 @@
     "packages/google-chat": {},
     "packages/google-cloud-accessapproval": {},
     "packages/google-cloud-advisorynotifications": {},
+    "packages/google-cloud-agentidentity": {},
+    "packages/google-cloud-agentregistry": {},
     "packages/google-cloud-aiplatform": {},
     "packages/google-cloud-alloydb": {},
     "packages/google-cloud-apigateway": {},
@@ -29,8 +128,10 @@
     "packages/google-cloud-apihub": {},
     "packages/google-cloud-apiregistry": {},
     "packages/google-cloud-apphub": {},
+    "packages/google-cloud-appoptimize": {},
     "packages/google-cloud-asset": {},
     "packages/google-cloud-assuredworkloads": {},
+    "packages/google-cloud-auditmanager": {},
     "packages/google-cloud-automl": {},
     "packages/google-cloud-backupdr": {},
     "packages/google-cloud-baremetalsolution": {},
@@ -47,17 +148,25 @@
     "packages/google-cloud-bigquery-datatransfer": {},
     "packages/google-cloud-bigquery-migration": {},
     "packages/google-cloud-bigquery-reservation": {},
+    "packages/google-cloud-bigquery-storage-api": {
+      "component": "google-cloud-bigquery-storage-api"
+    },
+    "packages/google-cloud-bigtable-api": {
+      "component": "google-cloud-bigtable-api"
+    },
     "packages/google-cloud-billing": {},
     "packages/google-cloud-billing-budgets": {},
     "packages/google-cloud-binaryauthorization": {},
     "packages/google-cloud-capacityplanner": {},
     "packages/google-cloud-certificatemanager": {},
+    "packages/google-cloud-ces": {},
     "packages/google-cloud-channel": {},
     "packages/google-cloud-chronicle": {},
     "packages/google-cloud-cloudcontrolspartner": {},
     "packages/google-cloud-clouddms": {},
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-commerce-consumer-procurement": {},
+    "packages/google-cloud-commerceproducer": {},
     "packages/google-cloud-compute": {},
     "packages/google-cloud-confidentialcomputing": {},
     "packages/google-cloud-config": {},
@@ -65,14 +174,19 @@
     "packages/google-cloud-connectors": {},
     "packages/google-cloud-contactcenterinsights": {},
     "packages/google-cloud-contentwarehouse": {},
+    "packages/google-cloud-databasecenter": {},
     "packages/google-cloud-datacatalog": {},
     "packages/google-cloud-datacatalog-lineage": {},
+    "packages/google-cloud-datacatalog-lineage-configmanagement": {},
     "packages/google-cloud-dataform": {},
     "packages/google-cloud-datafusion": {},
     "packages/google-cloud-datalabeling": {},
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
     "packages/google-cloud-dataqna": {},
+    "packages/google-cloud-datastore-api": {
+      "component": "google-cloud-datastore-api"
+    },
     "packages/google-cloud-datastream": {},
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-developerconnect": {},
@@ -89,6 +203,9 @@
     "packages/google-cloud-eventarc-publishing": {},
     "packages/google-cloud-filestore": {},
     "packages/google-cloud-financialservices": {},
+    "packages/google-cloud-firestore-api": {
+      "component": "google-cloud-firestore-api"
+    },
     "packages/google-cloud-functions": {},
     "packages/google-cloud-gdchardwaremanagement": {},
     "packages/google-cloud-geminidataanalytics": {},
@@ -108,6 +225,9 @@
     "packages/google-cloud-licensemanager": {},
     "packages/google-cloud-lifesciences": {},
     "packages/google-cloud-locationfinder": {},
+    "packages/google-cloud-logging-api": {
+      "component": "google-cloud-logging-api"
+    },
     "packages/google-cloud-lustre": {},
     "packages/google-cloud-maintenance-api": {},
     "packages/google-cloud-managedidentities": {},
@@ -139,6 +259,10 @@
     "packages/google-cloud-policytroubleshooter-iam": {},
     "packages/google-cloud-privatecatalog": {},
     "packages/google-cloud-privilegedaccessmanager": {},
+    "packages/google-cloud-productregistry": {},
+    "packages/google-cloud-pubsub-api": {
+      "component": "google-cloud-pubsub-api"
+    },
     "packages/google-cloud-rapidmigrationassessment": {},
     "packages/google-cloud-recaptchaenterprise": {},
     "packages/google-cloud-recommender": {},
@@ -158,6 +282,9 @@
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-servicehealth": {},
     "packages/google-cloud-shell": {},
+    "packages/google-cloud-spanner-api": {
+      "component": "google-cloud-spanner-api"
+    },
     "packages/google-cloud-speech": {},
     "packages/google-cloud-sql": {},
     "packages/google-cloud-storagebatchoperations": {},
@@ -175,14 +302,19 @@
     "packages/google-cloud-video-transcoder": {},
     "packages/google-cloud-videointelligence": {},
     "packages/google-cloud-vision": {},
+    "packages/google-cloud-visionai": {},
     "packages/google-cloud-vmmigration": {},
     "packages/google-cloud-vmwareengine": {},
     "packages/google-cloud-vpcaccess": {},
     "packages/google-cloud-webrisk": {},
     "packages/google-cloud-websecurityscanner": {},
+    "packages/google-cloud-workflows": {},
+    "packages/google-cloud-workloadmanager": {},
     "packages/google-cloud-workstations": {},
     "packages/google-container": {},
     "packages/google-dataflow": {},
+    "packages/google-developer-knowledge": {},
+    "packages/google-devicesandservices-health": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-devtools-cloudbuild": {},
     "packages/google-devtools-cloudprofiler": {},
@@ -194,7 +326,11 @@
     "packages/google-maps-areainsights": {},
     "packages/google-maps-fleetengine": {},
     "packages/google-maps-fleetengine-delivery": {},
+    "packages/google-maps-geocode": {},
+    "packages/google-maps-isochrones": {},
+    "packages/google-maps-mapmanagement": {},
     "packages/google-maps-mapsplatformdatasets": {},
+    "packages/google-maps-navconnect": {},
     "packages/google-maps-places": {},
     "packages/google-maps-routeoptimization": {},
     "packages/google-maps-routing": {},
@@ -219,23 +355,13 @@
     "packages/google-storage-control": {},
     "packages/google-storagetransfer": {},
     "packages/google-streetview-publish": {},
-    "packages/grafeas": {},
-    "packages/google-cloud-workflows": {},
-    "packages/google-cloud-visionai": {},
-    "packages/google-cloud-workloadmanager": {},
-    "packages/google-cloud-ces": {},
-    "packages/google-maps-navconnect": {},
-    "packages/google-cloud-auditmanager": {},
-    "packages/google-maps-geocode": {},
-    "packages/google-cloud-datacatalog-lineage-configmanagement": {},
-    "packages/google-cloud-appoptimize": {},
-    "packages/google-devicesandservices-health": {},
-    "packages/google-cloud-databasecenter": {}
+    "packages/grafeas": {}
   },
   "plugins": [
     {
       "type": "sentence-case"
     }
   ],
-  "release-type": "node"
+  "release-type": "node-librarian",
+  "separate-pull-requests": false
 }

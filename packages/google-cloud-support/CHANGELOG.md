@@ -1,5 +1,44 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.6.0...support-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.5.0...support-v2.6.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.4.0...support-v2.5.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.3.0...support-v2.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.2.2...support-v2.3.0) (2026-06-01)
+
+
+### Features
+
+* [cloudsupport] v2 version for `GetComment` and `GetAttachment` ([#8281](https://github.com/googleapis/google-cloud-node/issues/8281)) ([c83b9a6](https://github.com/googleapis/google-cloud-node/commit/c83b9a659cae7f366e77c43421732f3bdd6b47dd))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/support-v2.2.1...support-v2.2.2) (2026-05-01)
 
 

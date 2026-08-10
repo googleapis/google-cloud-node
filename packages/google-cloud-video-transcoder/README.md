@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-transcoder/samples/generated/v1/snippet_metadata_google.cloud.video.transcoder.v1.json) |
 | create job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-transcoder/samples/generated/v1/transcoder_service.create_job.js) |
 | create job template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-transcoder/samples/generated/v1/transcoder_service.create_job_template.js) |
 | delete job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-transcoder/samples/generated/v1/transcoder_service.delete_job.js) |
@@ -100,7 +99,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-transcoder/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -110,7 +109,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-transcoder/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

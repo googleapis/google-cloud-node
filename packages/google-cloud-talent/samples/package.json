@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": "googleapis/nodejs-talent",
   "private": true,
@@ -17,8 +17,7 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
-    "@google-cloud/talent": "^7.1.2",
-    "uuid": "^11.1.1",
+    "@google-cloud/talent": "^8.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {

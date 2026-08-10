@@ -71,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update project billing info | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_project_billing_info.js) |
 | list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_services.js) |
 | list skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_skus.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/snippet_metadata_google.cloud.billing.v1.json) |
 
 
 ## Supported Node.js Versions

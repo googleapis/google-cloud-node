@@ -45,7 +45,7 @@
 #
 # Here is an example for running this script.
 #   TRAMPOLINE_IMAGE=gcr.io/cloud-devrel-kokoro-resources/node:18-user \
-#     TRAMPOLINE_BUILD_FILE=.kokoro/system-test.sh \
+#     TRAMPOLINE_BUILD_FILE=.kokoro/test.sh \
 #     .kokoro/trampoline_v2.sh
 
 set -euo pipefail
@@ -254,19 +254,29 @@ else
     PROJECT_ROOT="$(repo_root $(pwd))/handwritten/spanner"
 fi
 
+log_yellow "Changing to the project root: ${PROJECT_ROOT}."
+cd "${PROJECT_ROOT}"
+
 # Auto-injected conditional check
 # Check if the package directory has changes. If not, skip tests.
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     # The package path is hardcoded during migration
-    RELATIVE_PKG_PATH="handwritten/spanner"
+    RELATIVE_PKG_PATH="."
     
     echo "Checking for changes in ${RELATIVE_PKG_PATH}..."
     
     # Determine the diff range based on the CI system/event
-    # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
-
-    git fetch --deepen=10 2>/dev/null || true
+    
+    # If we are in a Kokoro Pull Request, diff against the main branch
+    if [[ -n "${KOKORO_GITHUB_PULL_REQUEST_NUMBER:-}" ]]; then
+        git fetch origin main --deepen=300 2>/dev/null || true
+        if git merge-base origin/main HEAD >/dev/null 2>&1; then
+            DIFF_RANGE="origin/main..."
+        fi
+    else
+        git fetch --deepen=10 2>/dev/null || true
+    fi
     if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
         echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
         exit 0
@@ -274,9 +284,6 @@ if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
         echo "Changes detected in ${RELATIVE_PKG_PATH}. Proceeding with tests."
     fi
 fi
-
-log_yellow "Changing to the project root: ${PROJECT_ROOT}."
-cd "${PROJECT_ROOT}"
 
 # To support relative path for `TRAMPOLINE_SERVICE_ACCOUNT`, we need
 # to use this environment variable in `PROJECT_ROOT`.

@@ -29,7 +29,7 @@ import {
 import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {
   getRuntimeTrackingString,
   getModuleFormat,
@@ -339,9 +339,9 @@ export class Upload extends Writable {
   isPartialUpload: boolean;
 
   private currentInvocationId = {
-    checkUploadStatus: uuid.v4(),
-    chunk: uuid.v4(),
-    uri: uuid.v4(),
+    checkUploadStatus: crypto.randomUUID(),
+    chunk: crypto.randomUUID(),
+    uri: crypto.randomUUID(),
   };
   /**
    * A cache of buffers written to this instance, ready for consuming
@@ -862,7 +862,7 @@ export class Upload extends Writable {
         try {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
-          this.currentInvocationId.uri = uuid.v4();
+          this.currentInvocationId.uri = crypto.randomUUID();
           return res.headers.location;
         } catch (err) {
           const e = err as GaxiosError;
@@ -1104,7 +1104,7 @@ export class Upload extends Writable {
     }
 
     // At this point we can safely create a new id for the chunk
-    this.currentInvocationId.chunk = uuid.v4();
+    this.currentInvocationId.chunk = crypto.randomUUID();
 
     const moreDataToUpload = await this.waitForNextChunk();
 
@@ -1234,7 +1234,7 @@ export class Upload extends Writable {
       const resp = await this.makeRequest(opts);
 
       // Successfully got the offset we can now create a new offset invocation id
-      this.currentInvocationId.checkUploadStatus = uuid.v4();
+      this.currentInvocationId.checkUploadStatus = crypto.randomUUID();
 
       return resp;
     } catch (e) {
@@ -1386,9 +1386,7 @@ export class Upload extends Writable {
 
         if (retryDelay <= 0) {
           this.destroy(
-            new Error(
-              `Retry total time limit exceeded - ${JSON.stringify(resp.data)}`,
-            ),
+            buildRetryError('Retry total time limit exceeded', resp),
           );
           return;
         }
@@ -1409,9 +1407,7 @@ export class Upload extends Writable {
       }
       this.numRetries++;
     } else {
-      this.destroy(
-        new Error(`Retry limit exceeded - ${JSON.stringify(resp.data)}`),
-      );
+      this.destroy(buildRetryError('Retry limit exceeded', resp));
     }
   }
 
@@ -1454,6 +1450,69 @@ export class Upload extends Writable {
   public isSuccessfulResponse(status: number): boolean {
     return status >= 200 && status < 300;
   }
+}
+
+function buildRetryError(
+  prefix: string,
+  resp: Pick<GaxiosResponse, 'data' | 'status'>,
+): Error {
+  const parts: string[] = [];
+
+  if (typeof resp.status === 'number' && !isNaN(resp.status)) {
+    parts.push(`status: ${resp.status}`);
+  }
+
+  const err = resp.data;
+  if (err !== undefined && err !== null) {
+    if (typeof err === 'object') {
+      const gaxiosErrLike = err as any;
+      const errParts: string[] = [];
+      if (gaxiosErrLike.message) {
+        errParts.push(String(gaxiosErrLike.message));
+      }
+      const status = gaxiosErrLike.status ?? gaxiosErrLike.response?.status;
+      if (typeof status === 'number' && !isNaN(status) && status !== resp.status) {
+        errParts.push(`status: ${status}`);
+      }
+      const statusText = gaxiosErrLike.response?.statusText;
+      if (statusText) {
+        errParts.push(`statusText: ${statusText}`);
+      }
+      const responseData = gaxiosErrLike.response?.data;
+      if (responseData !== undefined && responseData !== null && responseData !== '') {
+        errParts.push(
+          `response: ${
+            typeof responseData === 'object'
+              ? JSON.stringify(responseData)
+              : responseData
+          }`,
+        );
+      }
+      if (gaxiosErrLike.code) {
+        errParts.push(`code: ${String(gaxiosErrLike.code)}`);
+      }
+
+      if (errParts.length > 0) {
+        parts.push(...errParts);
+      } else if (err instanceof Error) {
+        parts.push(err.toString() || err.name || 'Unknown Error');
+      } else {
+        const stringified = JSON.stringify(err);
+        if (stringified && stringified !== '{}') {
+          parts.push(stringified);
+        }
+      }
+    } else if (typeof err === 'string') {
+      if (err !== '') {
+        parts.push(err);
+      }
+    } else {
+      parts.push(String(err));
+    }
+  }
+
+  const suffix = parts.join(' - ');
+  return new Error(`${prefix} - ${suffix || 'Unknown Error'}`);
 }
 
 export function upload(cfg: UploadConfig) {

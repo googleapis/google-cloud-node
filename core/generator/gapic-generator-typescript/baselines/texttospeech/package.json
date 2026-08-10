@@ -2,8 +2,13 @@
   "name": "@google-cloud/text-to-speech",
   "version": "0.1.0",
   "description": "Texttospeech client for Node.js",
-  "repository": "googleapis/nodejs-texttospeech",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-texttospeech",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-texttospeech",
   "author": "Google LLC",
   "main": "build/src/index.js",
   "files": [
@@ -31,11 +36,11 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^5.1.1-rc.1"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -47,12 +52,13 @@
     "jsdoc": "^4.0.5",
     "jsdoc-fresh": "^5.0.2",
     "jsdoc-region-tag": "^4.0.1",
+    "long": "^5.3.2",
     "mocha": "^11.7.4",
     "pack-n-play": "^4.2.1",
     "typescript": "5.8.3",
     "sinon": "^20.0.0"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=22"
   }
 }

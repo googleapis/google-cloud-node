@@ -23,12 +23,15 @@ const admanager = require('@google-ads/admanager');
 function main() {
   const adBreakServiceClient = new admanager.AdBreakServiceClient();
   const adReviewCenterAdServiceClient = new admanager.AdReviewCenterAdServiceClient();
+  const adRuleServiceClient = new admanager.AdRuleServiceClient();
+  const adSpotServiceClient = new admanager.AdSpotServiceClient();
   const adUnitServiceClient = new admanager.AdUnitServiceClient();
   const applicationServiceClient = new admanager.ApplicationServiceClient();
   const audienceSegmentServiceClient = new admanager.AudienceSegmentServiceClient();
   const bandwidthGroupServiceClient = new admanager.BandwidthGroupServiceClient();
   const browserLanguageServiceClient = new admanager.BrowserLanguageServiceClient();
   const browserServiceClient = new admanager.BrowserServiceClient();
+  const cdnConfigServiceClient = new admanager.CdnConfigServiceClient();
   const cmsMetadataKeyServiceClient = new admanager.CmsMetadataKeyServiceClient();
   const cmsMetadataValueServiceClient = new admanager.CmsMetadataValueServiceClient();
   const companyServiceClient = new admanager.CompanyServiceClient();
@@ -36,6 +39,7 @@ function main() {
   const contentBundleServiceClient = new admanager.ContentBundleServiceClient();
   const contentLabelServiceClient = new admanager.ContentLabelServiceClient();
   const contentServiceClient = new admanager.ContentServiceClient();
+  const creativeSetServiceClient = new admanager.CreativeSetServiceClient();
   const creativeTemplateServiceClient = new admanager.CreativeTemplateServiceClient();
   const customFieldServiceClient = new admanager.CustomFieldServiceClient();
   const customTargetingKeyServiceClient = new admanager.CustomTargetingKeyServiceClient();
@@ -48,6 +52,7 @@ function main() {
   const labelServiceClient = new admanager.LabelServiceClient();
   const lineItemServiceClient = new admanager.LineItemServiceClient();
   const linkedDeviceServiceClient = new admanager.LinkedDeviceServiceClient();
+  const liveStreamServiceClient = new admanager.LiveStreamServiceClient();
   const mcmEarningsServiceClient = new admanager.McmEarningsServiceClient();
   const mobileCarrierServiceClient = new admanager.MobileCarrierServiceClient();
   const mobileDeviceServiceClient = new admanager.MobileDeviceServiceClient();
@@ -64,8 +69,12 @@ function main() {
   const richMediaAdsCompanyServiceClient = new admanager.RichMediaAdsCompanyServiceClient();
   const roleServiceClient = new admanager.RoleServiceClient();
   const siteServiceClient = new admanager.SiteServiceClient();
+  const slateServiceClient = new admanager.SlateServiceClient();
+  const suggestedAdUnitServiceClient = new admanager.SuggestedAdUnitServiceClient();
+  const targetingPresetServiceClient = new admanager.TargetingPresetServiceClient();
   const taxonomyCategoryServiceClient = new admanager.TaxonomyCategoryServiceClient();
   const teamServiceClient = new admanager.TeamServiceClient();
+  const thirdPartyCompanyServiceClient = new admanager.ThirdPartyCompanyServiceClient();
   const userServiceClient = new admanager.UserServiceClient();
 }
 

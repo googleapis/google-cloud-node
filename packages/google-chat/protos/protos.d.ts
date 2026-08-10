@@ -993,10 +993,13 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -1022,6 +1025,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -1071,6 +1077,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -1206,6 +1215,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -1246,6 +1258,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -2094,6 +2109,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -2119,6 +2137,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -3054,6 +3075,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -3111,6 +3135,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -3327,6 +3354,127 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -3570,6 +3718,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -3591,6 +3742,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -4181,6 +4335,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -4209,6 +4372,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -4332,6 +4504,218 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -4451,8 +4835,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -4467,8 +4854,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -4999,6 +5389,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
@@ -14229,6 +14626,969 @@ export namespace google {
                 }
             }
 
+            /** Properties of an Audience. */
+            interface IAudience {
+
+                /** Audience name */
+                name?: (string|null);
+            }
+
+            /** Represents an Audience. */
+            class Audience implements IAudience {
+
+                /**
+                 * Constructs a new Audience.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAudience);
+
+                /** Audience name. */
+                public name: string;
+
+                /**
+                 * Creates a new Audience instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Audience instance
+                 */
+                public static create(properties?: google.chat.v1.IAudience): google.chat.v1.Audience;
+
+                /**
+                 * Encodes the specified Audience message. Does not implicitly {@link google.chat.v1.Audience.verify|verify} messages.
+                 * @param message Audience message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAudience, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Audience message, length delimited. Does not implicitly {@link google.chat.v1.Audience.verify|verify} messages.
+                 * @param message Audience message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAudience, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Audience message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Audience
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Audience;
+
+                /**
+                 * Decodes an Audience message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Audience
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Audience;
+
+                /**
+                 * Verifies an Audience message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Audience message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Audience
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.Audience;
+
+                /**
+                 * Creates a plain object from an Audience message. Also converts values to other types if specified.
+                 * @param message Audience
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.Audience, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Audience to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Audience
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an Availability. */
+            interface IAvailability {
+
+                /** Availability name */
+                name?: (string|null);
+
+                /** Availability state */
+                state?: (google.chat.v1.Availability.State|keyof typeof google.chat.v1.Availability.State|null);
+
+                /** Availability doNotDisturbMetadata */
+                doNotDisturbMetadata?: (google.chat.v1.IDoNotDisturbMetadata|null);
+
+                /** Availability customStatus */
+                customStatus?: (google.chat.v1.ICustomStatus|null);
+            }
+
+            /** Represents an Availability. */
+            class Availability implements IAvailability {
+
+                /**
+                 * Constructs a new Availability.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAvailability);
+
+                /** Availability name. */
+                public name: string;
+
+                /** Availability state. */
+                public state: (google.chat.v1.Availability.State|keyof typeof google.chat.v1.Availability.State);
+
+                /** Availability doNotDisturbMetadata. */
+                public doNotDisturbMetadata?: (google.chat.v1.IDoNotDisturbMetadata|null);
+
+                /** Availability customStatus. */
+                public customStatus?: (google.chat.v1.ICustomStatus|null);
+
+                /** Availability stateMetadata. */
+                public stateMetadata?: "doNotDisturbMetadata";
+
+                /**
+                 * Creates a new Availability instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Availability instance
+                 */
+                public static create(properties?: google.chat.v1.IAvailability): google.chat.v1.Availability;
+
+                /**
+                 * Encodes the specified Availability message. Does not implicitly {@link google.chat.v1.Availability.verify|verify} messages.
+                 * @param message Availability message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAvailability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Availability message, length delimited. Does not implicitly {@link google.chat.v1.Availability.verify|verify} messages.
+                 * @param message Availability message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAvailability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Availability message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Availability
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Availability;
+
+                /**
+                 * Decodes an Availability message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Availability
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Availability;
+
+                /**
+                 * Verifies an Availability message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Availability message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Availability
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.Availability;
+
+                /**
+                 * Creates a plain object from an Availability message. Also converts values to other types if specified.
+                 * @param message Availability
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.Availability, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Availability to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Availability
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Availability {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    IDLE = 2,
+                    AWAY = 3,
+                    DO_NOT_DISTURB = 4
+                }
+            }
+
+            /** Properties of a CustomStatus. */
+            interface ICustomStatus {
+
+                /** CustomStatus text */
+                text?: (string|null);
+
+                /** CustomStatus emoji */
+                emoji?: (google.chat.v1.IEmoji|null);
+
+                /** CustomStatus expireTime */
+                expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** CustomStatus ttl */
+                ttl?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a CustomStatus. */
+            class CustomStatus implements ICustomStatus {
+
+                /**
+                 * Constructs a new CustomStatus.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICustomStatus);
+
+                /** CustomStatus text. */
+                public text: string;
+
+                /** CustomStatus emoji. */
+                public emoji?: (google.chat.v1.IEmoji|null);
+
+                /** CustomStatus expireTime. */
+                public expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** CustomStatus ttl. */
+                public ttl?: (google.protobuf.IDuration|null);
+
+                /** CustomStatus expiration. */
+                public expiration?: ("expireTime"|"ttl");
+
+                /**
+                 * Creates a new CustomStatus instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CustomStatus instance
+                 */
+                public static create(properties?: google.chat.v1.ICustomStatus): google.chat.v1.CustomStatus;
+
+                /**
+                 * Encodes the specified CustomStatus message. Does not implicitly {@link google.chat.v1.CustomStatus.verify|verify} messages.
+                 * @param message CustomStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICustomStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CustomStatus message, length delimited. Does not implicitly {@link google.chat.v1.CustomStatus.verify|verify} messages.
+                 * @param message CustomStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICustomStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CustomStatus message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CustomStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CustomStatus;
+
+                /**
+                 * Decodes a CustomStatus message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CustomStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CustomStatus;
+
+                /**
+                 * Verifies a CustomStatus message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CustomStatus message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CustomStatus
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.CustomStatus;
+
+                /**
+                 * Creates a plain object from a CustomStatus message. Also converts values to other types if specified.
+                 * @param message CustomStatus
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.CustomStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CustomStatus to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CustomStatus
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DoNotDisturbMetadata. */
+            interface IDoNotDisturbMetadata {
+
+                /** DoNotDisturbMetadata expirationTime */
+                expirationTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents a DoNotDisturbMetadata. */
+            class DoNotDisturbMetadata implements IDoNotDisturbMetadata {
+
+                /**
+                 * Constructs a new DoNotDisturbMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IDoNotDisturbMetadata);
+
+                /** DoNotDisturbMetadata expirationTime. */
+                public expirationTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new DoNotDisturbMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DoNotDisturbMetadata instance
+                 */
+                public static create(properties?: google.chat.v1.IDoNotDisturbMetadata): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Encodes the specified DoNotDisturbMetadata message. Does not implicitly {@link google.chat.v1.DoNotDisturbMetadata.verify|verify} messages.
+                 * @param message DoNotDisturbMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IDoNotDisturbMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DoNotDisturbMetadata message, length delimited. Does not implicitly {@link google.chat.v1.DoNotDisturbMetadata.verify|verify} messages.
+                 * @param message DoNotDisturbMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IDoNotDisturbMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DoNotDisturbMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DoNotDisturbMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Decodes a DoNotDisturbMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DoNotDisturbMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Verifies a DoNotDisturbMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DoNotDisturbMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DoNotDisturbMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Creates a plain object from a DoNotDisturbMetadata message. Also converts values to other types if specified.
+                 * @param message DoNotDisturbMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.DoNotDisturbMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DoNotDisturbMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DoNotDisturbMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetAvailabilityRequest. */
+            interface IGetAvailabilityRequest {
+
+                /** GetAvailabilityRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetAvailabilityRequest. */
+            class GetAvailabilityRequest implements IGetAvailabilityRequest {
+
+                /**
+                 * Constructs a new GetAvailabilityRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IGetAvailabilityRequest);
+
+                /** GetAvailabilityRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetAvailabilityRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetAvailabilityRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IGetAvailabilityRequest): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Encodes the specified GetAvailabilityRequest message. Does not implicitly {@link google.chat.v1.GetAvailabilityRequest.verify|verify} messages.
+                 * @param message GetAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IGetAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetAvailabilityRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetAvailabilityRequest.verify|verify} messages.
+                 * @param message GetAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IGetAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetAvailabilityRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Decodes a GetAvailabilityRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Verifies a GetAvailabilityRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetAvailabilityRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetAvailabilityRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Creates a plain object from a GetAvailabilityRequest message. Also converts values to other types if specified.
+                 * @param message GetAvailabilityRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.GetAvailabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetAvailabilityRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetAvailabilityRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateAvailabilityRequest. */
+            interface IUpdateAvailabilityRequest {
+
+                /** UpdateAvailabilityRequest availability */
+                availability?: (google.chat.v1.IAvailability|null);
+
+                /** UpdateAvailabilityRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateAvailabilityRequest. */
+            class UpdateAvailabilityRequest implements IUpdateAvailabilityRequest {
+
+                /**
+                 * Constructs a new UpdateAvailabilityRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IUpdateAvailabilityRequest);
+
+                /** UpdateAvailabilityRequest availability. */
+                public availability?: (google.chat.v1.IAvailability|null);
+
+                /** UpdateAvailabilityRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateAvailabilityRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateAvailabilityRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IUpdateAvailabilityRequest): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Encodes the specified UpdateAvailabilityRequest message. Does not implicitly {@link google.chat.v1.UpdateAvailabilityRequest.verify|verify} messages.
+                 * @param message UpdateAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IUpdateAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateAvailabilityRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateAvailabilityRequest.verify|verify} messages.
+                 * @param message UpdateAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IUpdateAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateAvailabilityRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Decodes an UpdateAvailabilityRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Verifies an UpdateAvailabilityRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateAvailabilityRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateAvailabilityRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Creates a plain object from an UpdateAvailabilityRequest message. Also converts values to other types if specified.
+                 * @param message UpdateAvailabilityRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.UpdateAvailabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateAvailabilityRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateAvailabilityRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MarkAsActiveRequest. */
+            interface IMarkAsActiveRequest {
+
+                /** MarkAsActiveRequest name */
+                name?: (string|null);
+
+                /** MarkAsActiveRequest expireTime */
+                expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsActiveRequest ttl */
+                ttl?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a MarkAsActiveRequest. */
+            class MarkAsActiveRequest implements IMarkAsActiveRequest {
+
+                /**
+                 * Constructs a new MarkAsActiveRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMarkAsActiveRequest);
+
+                /** MarkAsActiveRequest name. */
+                public name: string;
+
+                /** MarkAsActiveRequest expireTime. */
+                public expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsActiveRequest ttl. */
+                public ttl?: (google.protobuf.IDuration|null);
+
+                /** MarkAsActiveRequest expiration. */
+                public expiration?: ("expireTime"|"ttl");
+
+                /**
+                 * Creates a new MarkAsActiveRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MarkAsActiveRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IMarkAsActiveRequest): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Encodes the specified MarkAsActiveRequest message. Does not implicitly {@link google.chat.v1.MarkAsActiveRequest.verify|verify} messages.
+                 * @param message MarkAsActiveRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMarkAsActiveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MarkAsActiveRequest message, length delimited. Does not implicitly {@link google.chat.v1.MarkAsActiveRequest.verify|verify} messages.
+                 * @param message MarkAsActiveRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMarkAsActiveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MarkAsActiveRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MarkAsActiveRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Decodes a MarkAsActiveRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MarkAsActiveRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Verifies a MarkAsActiveRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MarkAsActiveRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MarkAsActiveRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Creates a plain object from a MarkAsActiveRequest message. Also converts values to other types if specified.
+                 * @param message MarkAsActiveRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MarkAsActiveRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MarkAsActiveRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MarkAsActiveRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MarkAsAwayRequest. */
+            interface IMarkAsAwayRequest {
+
+                /** MarkAsAwayRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a MarkAsAwayRequest. */
+            class MarkAsAwayRequest implements IMarkAsAwayRequest {
+
+                /**
+                 * Constructs a new MarkAsAwayRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMarkAsAwayRequest);
+
+                /** MarkAsAwayRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new MarkAsAwayRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MarkAsAwayRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IMarkAsAwayRequest): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Encodes the specified MarkAsAwayRequest message. Does not implicitly {@link google.chat.v1.MarkAsAwayRequest.verify|verify} messages.
+                 * @param message MarkAsAwayRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMarkAsAwayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MarkAsAwayRequest message, length delimited. Does not implicitly {@link google.chat.v1.MarkAsAwayRequest.verify|verify} messages.
+                 * @param message MarkAsAwayRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMarkAsAwayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MarkAsAwayRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MarkAsAwayRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Decodes a MarkAsAwayRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MarkAsAwayRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Verifies a MarkAsAwayRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MarkAsAwayRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MarkAsAwayRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Creates a plain object from a MarkAsAwayRequest message. Also converts values to other types if specified.
+                 * @param message MarkAsAwayRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MarkAsAwayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MarkAsAwayRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MarkAsAwayRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MarkAsDoNotDisturbRequest. */
+            interface IMarkAsDoNotDisturbRequest {
+
+                /** MarkAsDoNotDisturbRequest name */
+                name?: (string|null);
+
+                /** MarkAsDoNotDisturbRequest expireTime */
+                expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsDoNotDisturbRequest ttl */
+                ttl?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a MarkAsDoNotDisturbRequest. */
+            class MarkAsDoNotDisturbRequest implements IMarkAsDoNotDisturbRequest {
+
+                /**
+                 * Constructs a new MarkAsDoNotDisturbRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMarkAsDoNotDisturbRequest);
+
+                /** MarkAsDoNotDisturbRequest name. */
+                public name: string;
+
+                /** MarkAsDoNotDisturbRequest expireTime. */
+                public expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsDoNotDisturbRequest ttl. */
+                public ttl?: (google.protobuf.IDuration|null);
+
+                /** MarkAsDoNotDisturbRequest expiration. */
+                public expiration?: ("expireTime"|"ttl");
+
+                /**
+                 * Creates a new MarkAsDoNotDisturbRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MarkAsDoNotDisturbRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IMarkAsDoNotDisturbRequest): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Encodes the specified MarkAsDoNotDisturbRequest message. Does not implicitly {@link google.chat.v1.MarkAsDoNotDisturbRequest.verify|verify} messages.
+                 * @param message MarkAsDoNotDisturbRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMarkAsDoNotDisturbRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MarkAsDoNotDisturbRequest message, length delimited. Does not implicitly {@link google.chat.v1.MarkAsDoNotDisturbRequest.verify|verify} messages.
+                 * @param message MarkAsDoNotDisturbRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMarkAsDoNotDisturbRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MarkAsDoNotDisturbRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MarkAsDoNotDisturbRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Decodes a MarkAsDoNotDisturbRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MarkAsDoNotDisturbRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Verifies a MarkAsDoNotDisturbRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MarkAsDoNotDisturbRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MarkAsDoNotDisturbRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Creates a plain object from a MarkAsDoNotDisturbRequest message. Also converts values to other types if specified.
+                 * @param message MarkAsDoNotDisturbRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MarkAsDoNotDisturbRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MarkAsDoNotDisturbRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MarkAsDoNotDisturbRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Represents a ChatService */
             class ChatService extends $protobuf.rpc.Service {
 
@@ -14346,6 +15706,20 @@ export namespace google {
                  * @returns Promise
                  */
                 public deleteMessage(request: google.chat.v1.IDeleteMessageRequest): Promise<google.protobuf.Empty>;
+
+                /**
+                 * Calls SearchMessages.
+                 * @param request SearchMessagesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and SearchMessagesResponse
+                 */
+                public searchMessages(request: google.chat.v1.ISearchMessagesRequest, callback: google.chat.v1.ChatService.SearchMessagesCallback): void;
+
+                /**
+                 * Calls SearchMessages.
+                 * @param request SearchMessagesRequest message or plain object
+                 * @returns Promise
+                 */
+                public searchMessages(request: google.chat.v1.ISearchMessagesRequest): Promise<google.chat.v1.SearchMessagesResponse>;
 
                 /**
                  * Calls GetAttachment.
@@ -14698,6 +16072,76 @@ export namespace google {
                 public getThreadReadState(request: google.chat.v1.IGetThreadReadStateRequest): Promise<google.chat.v1.ThreadReadState>;
 
                 /**
+                 * Calls GetAvailability.
+                 * @param request GetAvailabilityRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public getAvailability(request: google.chat.v1.IGetAvailabilityRequest, callback: google.chat.v1.ChatService.GetAvailabilityCallback): void;
+
+                /**
+                 * Calls GetAvailability.
+                 * @param request GetAvailabilityRequest message or plain object
+                 * @returns Promise
+                 */
+                public getAvailability(request: google.chat.v1.IGetAvailabilityRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls MarkAsActive.
+                 * @param request MarkAsActiveRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public markAsActive(request: google.chat.v1.IMarkAsActiveRequest, callback: google.chat.v1.ChatService.MarkAsActiveCallback): void;
+
+                /**
+                 * Calls MarkAsActive.
+                 * @param request MarkAsActiveRequest message or plain object
+                 * @returns Promise
+                 */
+                public markAsActive(request: google.chat.v1.IMarkAsActiveRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls MarkAsAway.
+                 * @param request MarkAsAwayRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public markAsAway(request: google.chat.v1.IMarkAsAwayRequest, callback: google.chat.v1.ChatService.MarkAsAwayCallback): void;
+
+                /**
+                 * Calls MarkAsAway.
+                 * @param request MarkAsAwayRequest message or plain object
+                 * @returns Promise
+                 */
+                public markAsAway(request: google.chat.v1.IMarkAsAwayRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls MarkAsDoNotDisturb.
+                 * @param request MarkAsDoNotDisturbRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public markAsDoNotDisturb(request: google.chat.v1.IMarkAsDoNotDisturbRequest, callback: google.chat.v1.ChatService.MarkAsDoNotDisturbCallback): void;
+
+                /**
+                 * Calls MarkAsDoNotDisturb.
+                 * @param request MarkAsDoNotDisturbRequest message or plain object
+                 * @returns Promise
+                 */
+                public markAsDoNotDisturb(request: google.chat.v1.IMarkAsDoNotDisturbRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls UpdateAvailability.
+                 * @param request UpdateAvailabilityRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public updateAvailability(request: google.chat.v1.IUpdateAvailabilityRequest, callback: google.chat.v1.ChatService.UpdateAvailabilityCallback): void;
+
+                /**
+                 * Calls UpdateAvailability.
+                 * @param request UpdateAvailabilityRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateAvailability(request: google.chat.v1.IUpdateAvailabilityRequest): Promise<google.chat.v1.Availability>;
+
+                /**
                  * Calls GetSpaceEvent.
                  * @param request GetSpaceEventRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and SpaceEvent
@@ -14904,6 +16348,13 @@ export namespace google {
                 type DeleteMessageCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                 /**
+                 * Callback as used by {@link google.chat.v1.ChatService|searchMessages}.
+                 * @param error Error, if any
+                 * @param [response] SearchMessagesResponse
+                 */
+                type SearchMessagesCallback = (error: (Error|null), response?: google.chat.v1.SearchMessagesResponse) => void;
+
+                /**
                  * Callback as used by {@link google.chat.v1.ChatService|getAttachment}.
                  * @param error Error, if any
                  * @param [response] Attachment
@@ -15079,6 +16530,41 @@ export namespace google {
                 type GetThreadReadStateCallback = (error: (Error|null), response?: google.chat.v1.ThreadReadState) => void;
 
                 /**
+                 * Callback as used by {@link google.chat.v1.ChatService|getAvailability}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type GetAvailabilityCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|markAsActive}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type MarkAsActiveCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|markAsAway}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type MarkAsAwayCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|markAsDoNotDisturb}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type MarkAsDoNotDisturbCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|updateAvailability}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type UpdateAvailabilityCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
                  * Callback as used by {@link google.chat.v1.ChatService|getSpaceEvent}.
                  * @param error Error, if any
                  * @param [response] SpaceEvent
@@ -15179,6 +16665,9 @@ export namespace google {
 
                 /** Membership deleteTime */
                 deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Membership affiliation */
+                affiliation?: (google.chat.v1.Membership.Affiliation|keyof typeof google.chat.v1.Membership.Affiliation|null);
             }
 
             /** Represents a Membership. */
@@ -15210,6 +16699,9 @@ export namespace google {
 
                 /** Membership deleteTime. */
                 public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Membership affiliation. */
+                public affiliation: (google.chat.v1.Membership.Affiliation|keyof typeof google.chat.v1.Membership.Affiliation);
 
                 /** Membership memberType. */
                 public memberType?: ("member"|"groupMember");
@@ -15308,6 +16800,14 @@ export namespace google {
                     ROLE_MEMBER = 1,
                     ROLE_MANAGER = 2,
                     ROLE_ASSISTANT_MANAGER = 4
+                }
+
+                /** Affiliation enum. */
+                enum Affiliation {
+                    AFFILIATION_UNSPECIFIED = 0,
+                    INTERNAL = 1,
+                    EXTERNAL = 2,
+                    MANAGED_EXTERNAL = 3
                 }
             }
 
@@ -16544,7 +18044,8 @@ export namespace google {
                 /** QuoteType enum. */
                 enum QuoteType {
                     QUOTE_TYPE_UNSPECIFIED = 0,
-                    REPLY = 1
+                    REPLY = 1,
+                    FORWARD = 2
                 }
             }
 
@@ -18396,6 +19897,355 @@ export namespace google {
 
                 /**
                  * Gets the default type url for CardWithId
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SearchMessagesRequest. */
+            interface ISearchMessagesRequest {
+
+                /** SearchMessagesRequest parent */
+                parent?: (string|null);
+
+                /** SearchMessagesRequest filter */
+                filter?: (string|null);
+
+                /** SearchMessagesRequest pageSize */
+                pageSize?: (number|null);
+
+                /** SearchMessagesRequest pageToken */
+                pageToken?: (string|null);
+
+                /** SearchMessagesRequest orderBy */
+                orderBy?: (string|null);
+
+                /** SearchMessagesRequest view */
+                view?: (google.chat.v1.SearchMessagesRequest.SearchMessagesView|keyof typeof google.chat.v1.SearchMessagesRequest.SearchMessagesView|null);
+            }
+
+            /** Represents a SearchMessagesRequest. */
+            class SearchMessagesRequest implements ISearchMessagesRequest {
+
+                /**
+                 * Constructs a new SearchMessagesRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISearchMessagesRequest);
+
+                /** SearchMessagesRequest parent. */
+                public parent: string;
+
+                /** SearchMessagesRequest filter. */
+                public filter: string;
+
+                /** SearchMessagesRequest pageSize. */
+                public pageSize: number;
+
+                /** SearchMessagesRequest pageToken. */
+                public pageToken: string;
+
+                /** SearchMessagesRequest orderBy. */
+                public orderBy: string;
+
+                /** SearchMessagesRequest view. */
+                public view: (google.chat.v1.SearchMessagesRequest.SearchMessagesView|keyof typeof google.chat.v1.SearchMessagesRequest.SearchMessagesView);
+
+                /**
+                 * Creates a new SearchMessagesRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchMessagesRequest instance
+                 */
+                public static create(properties?: google.chat.v1.ISearchMessagesRequest): google.chat.v1.SearchMessagesRequest;
+
+                /**
+                 * Encodes the specified SearchMessagesRequest message. Does not implicitly {@link google.chat.v1.SearchMessagesRequest.verify|verify} messages.
+                 * @param message SearchMessagesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISearchMessagesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchMessagesRequest message, length delimited. Does not implicitly {@link google.chat.v1.SearchMessagesRequest.verify|verify} messages.
+                 * @param message SearchMessagesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISearchMessagesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchMessagesRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchMessagesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SearchMessagesRequest;
+
+                /**
+                 * Decodes a SearchMessagesRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchMessagesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SearchMessagesRequest;
+
+                /**
+                 * Verifies a SearchMessagesRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchMessagesRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchMessagesRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SearchMessagesRequest;
+
+                /**
+                 * Creates a plain object from a SearchMessagesRequest message. Also converts values to other types if specified.
+                 * @param message SearchMessagesRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SearchMessagesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchMessagesRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchMessagesRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SearchMessagesRequest {
+
+                /** SearchMessagesView enum. */
+                enum SearchMessagesView {
+                    SEARCH_MESSAGES_VIEW_UNSPECIFIED = 0,
+                    SEARCH_MESSAGES_VIEW_BASIC = 1,
+                    SEARCH_MESSAGES_VIEW_FULL = 2
+                }
+            }
+
+            /** Properties of a SearchMessagesResponse. */
+            interface ISearchMessagesResponse {
+
+                /** SearchMessagesResponse results */
+                results?: (google.chat.v1.ISearchMessageResult[]|null);
+
+                /** SearchMessagesResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a SearchMessagesResponse. */
+            class SearchMessagesResponse implements ISearchMessagesResponse {
+
+                /**
+                 * Constructs a new SearchMessagesResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISearchMessagesResponse);
+
+                /** SearchMessagesResponse results. */
+                public results: google.chat.v1.ISearchMessageResult[];
+
+                /** SearchMessagesResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new SearchMessagesResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchMessagesResponse instance
+                 */
+                public static create(properties?: google.chat.v1.ISearchMessagesResponse): google.chat.v1.SearchMessagesResponse;
+
+                /**
+                 * Encodes the specified SearchMessagesResponse message. Does not implicitly {@link google.chat.v1.SearchMessagesResponse.verify|verify} messages.
+                 * @param message SearchMessagesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISearchMessagesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchMessagesResponse message, length delimited. Does not implicitly {@link google.chat.v1.SearchMessagesResponse.verify|verify} messages.
+                 * @param message SearchMessagesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISearchMessagesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchMessagesResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchMessagesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SearchMessagesResponse;
+
+                /**
+                 * Decodes a SearchMessagesResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchMessagesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SearchMessagesResponse;
+
+                /**
+                 * Verifies a SearchMessagesResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchMessagesResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchMessagesResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SearchMessagesResponse;
+
+                /**
+                 * Creates a plain object from a SearchMessagesResponse message. Also converts values to other types if specified.
+                 * @param message SearchMessagesResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SearchMessagesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchMessagesResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchMessagesResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SearchMessageResult. */
+            interface ISearchMessageResult {
+
+                /** SearchMessageResult message */
+                message?: (google.chat.v1.IMessage|null);
+
+                /** SearchMessageResult read */
+                read?: (boolean|null);
+
+                /** SearchMessageResult spaceMuteSetting */
+                spaceMuteSetting?: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting|null);
+            }
+
+            /** Represents a SearchMessageResult. */
+            class SearchMessageResult implements ISearchMessageResult {
+
+                /**
+                 * Constructs a new SearchMessageResult.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISearchMessageResult);
+
+                /** SearchMessageResult message. */
+                public message?: (google.chat.v1.IMessage|null);
+
+                /** SearchMessageResult read. */
+                public read?: (boolean|null);
+
+                /** SearchMessageResult spaceMuteSetting. */
+                public spaceMuteSetting: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting);
+
+                /**
+                 * Creates a new SearchMessageResult instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchMessageResult instance
+                 */
+                public static create(properties?: google.chat.v1.ISearchMessageResult): google.chat.v1.SearchMessageResult;
+
+                /**
+                 * Encodes the specified SearchMessageResult message. Does not implicitly {@link google.chat.v1.SearchMessageResult.verify|verify} messages.
+                 * @param message SearchMessageResult message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISearchMessageResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchMessageResult message, length delimited. Does not implicitly {@link google.chat.v1.SearchMessageResult.verify|verify} messages.
+                 * @param message SearchMessageResult message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISearchMessageResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchMessageResult message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchMessageResult
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SearchMessageResult;
+
+                /**
+                 * Decodes a SearchMessageResult message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchMessageResult
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SearchMessageResult;
+
+                /**
+                 * Verifies a SearchMessageResult message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchMessageResult message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchMessageResult
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SearchMessageResult;
+
+                /**
+                 * Creates a plain object from a SearchMessageResult message. Also converts values to other types if specified.
+                 * @param message SearchMessageResult
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SearchMessageResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchMessageResult to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchMessageResult
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -20956,6 +22806,9 @@ export namespace google {
 
                     /** AccessSettings audience */
                     audience?: (string|null);
+
+                    /** AccessSettings accessPermissionSettings */
+                    accessPermissionSettings?: (google.chat.v1.Space.IAccessPermissionSettings|null);
                 }
 
                 /** Represents an AccessSettings. */
@@ -20972,6 +22825,9 @@ export namespace google {
 
                     /** AccessSettings audience. */
                     public audience: string;
+
+                    /** AccessSettings accessPermissionSettings. */
+                    public accessPermissionSettings?: (google.chat.v1.Space.IAccessPermissionSettings|null);
 
                     /**
                      * Creates a new AccessSettings instance using the specified properties.
@@ -21059,6 +22915,306 @@ export namespace google {
                         PRIVATE = 1,
                         DISCOVERABLE = 2
                     }
+                }
+
+                /** Properties of an AccessPermissionSettings. */
+                interface IAccessPermissionSettings {
+
+                    /** AccessPermissionSettings discoverSpaceSetting */
+                    discoverSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /** AccessPermissionSettings joinSpaceSetting */
+                    joinSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+                }
+
+                /** Represents an AccessPermissionSettings. */
+                class AccessPermissionSettings implements IAccessPermissionSettings {
+
+                    /**
+                     * Constructs a new AccessPermissionSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IAccessPermissionSettings);
+
+                    /** AccessPermissionSettings discoverSpaceSetting. */
+                    public discoverSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /** AccessPermissionSettings joinSpaceSetting. */
+                    public joinSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /**
+                     * Creates a new AccessPermissionSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessPermissionSettings instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IAccessPermissionSettings): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Encodes the specified AccessPermissionSettings message. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSettings.verify|verify} messages.
+                     * @param message AccessPermissionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IAccessPermissionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessPermissionSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSettings.verify|verify} messages.
+                     * @param message AccessPermissionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IAccessPermissionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessPermissionSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessPermissionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Decodes an AccessPermissionSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessPermissionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Verifies an AccessPermissionSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessPermissionSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessPermissionSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Creates a plain object from an AccessPermissionSettings message. Also converts values to other types if specified.
+                     * @param message AccessPermissionSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.AccessPermissionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessPermissionSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessPermissionSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessPermissionSetting. */
+                interface IAccessPermissionSetting {
+
+                    /** AccessPermissionSetting principals */
+                    principals?: (google.chat.v1.Space.IPrincipal[]|null);
+                }
+
+                /** Represents an AccessPermissionSetting. */
+                class AccessPermissionSetting implements IAccessPermissionSetting {
+
+                    /**
+                     * Constructs a new AccessPermissionSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IAccessPermissionSetting);
+
+                    /** AccessPermissionSetting principals. */
+                    public principals: google.chat.v1.Space.IPrincipal[];
+
+                    /**
+                     * Creates a new AccessPermissionSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessPermissionSetting instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IAccessPermissionSetting): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Encodes the specified AccessPermissionSetting message. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSetting.verify|verify} messages.
+                     * @param message AccessPermissionSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IAccessPermissionSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessPermissionSetting message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSetting.verify|verify} messages.
+                     * @param message AccessPermissionSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IAccessPermissionSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessPermissionSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessPermissionSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Decodes an AccessPermissionSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessPermissionSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Verifies an AccessPermissionSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessPermissionSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessPermissionSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Creates a plain object from an AccessPermissionSetting message. Also converts values to other types if specified.
+                     * @param message AccessPermissionSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.AccessPermissionSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessPermissionSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessPermissionSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Principal. */
+                interface IPrincipal {
+
+                    /** Principal audience */
+                    audience?: (google.chat.v1.IAudience|null);
+                }
+
+                /** Represents a Principal. */
+                class Principal implements IPrincipal {
+
+                    /**
+                     * Constructs a new Principal.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IPrincipal);
+
+                    /** Principal audience. */
+                    public audience?: (google.chat.v1.IAudience|null);
+
+                    /** Principal principalType. */
+                    public principalType?: "audience";
+
+                    /**
+                     * Creates a new Principal instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Principal instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IPrincipal): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Encodes the specified Principal message. Does not implicitly {@link google.chat.v1.Space.Principal.verify|verify} messages.
+                     * @param message Principal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IPrincipal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Principal message, length delimited. Does not implicitly {@link google.chat.v1.Space.Principal.verify|verify} messages.
+                     * @param message Principal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IPrincipal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Principal message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Principal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Decodes a Principal message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Principal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Verifies a Principal message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Principal message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Principal
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Creates a plain object from a Principal message. Also converts values to other types if specified.
+                     * @param message Principal
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.Principal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Principal to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Principal
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** PredefinedPermissionSettings enum. */
@@ -22291,6 +24447,9 @@ export namespace google {
 
                 /** SearchSpacesResponse totalSize */
                 totalSize?: (number|null);
+
+                /** SearchSpacesResponse results */
+                results?: (google.chat.v1.SearchSpacesResponse.ISearchSpaceResult[]|null);
             }
 
             /** Represents a SearchSpacesResponse. */
@@ -22310,6 +24469,9 @@ export namespace google {
 
                 /** SearchSpacesResponse totalSize. */
                 public totalSize: number;
+
+                /** SearchSpacesResponse results. */
+                public results: google.chat.v1.SearchSpacesResponse.ISearchSpaceResult[];
 
                 /**
                  * Creates a new SearchSpacesResponse instance using the specified properties.
@@ -22387,6 +24549,106 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SearchSpacesResponse {
+
+                /** Properties of a SearchSpaceResult. */
+                interface ISearchSpaceResult {
+
+                    /** SearchSpaceResult space */
+                    space?: (google.chat.v1.ISpace|null);
+                }
+
+                /** Represents a SearchSpaceResult. */
+                class SearchSpaceResult implements ISearchSpaceResult {
+
+                    /**
+                     * Constructs a new SearchSpaceResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.SearchSpacesResponse.ISearchSpaceResult);
+
+                    /** SearchSpaceResult space. */
+                    public space?: (google.chat.v1.ISpace|null);
+
+                    /**
+                     * Creates a new SearchSpaceResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchSpaceResult instance
+                     */
+                    public static create(properties?: google.chat.v1.SearchSpacesResponse.ISearchSpaceResult): google.chat.v1.SearchSpacesResponse.SearchSpaceResult;
+
+                    /**
+                     * Encodes the specified SearchSpaceResult message. Does not implicitly {@link google.chat.v1.SearchSpacesResponse.SearchSpaceResult.verify|verify} messages.
+                     * @param message SearchSpaceResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.SearchSpacesResponse.ISearchSpaceResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchSpaceResult message, length delimited. Does not implicitly {@link google.chat.v1.SearchSpacesResponse.SearchSpaceResult.verify|verify} messages.
+                     * @param message SearchSpaceResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.SearchSpacesResponse.ISearchSpaceResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchSpaceResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchSpaceResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SearchSpacesResponse.SearchSpaceResult;
+
+                    /**
+                     * Decodes a SearchSpaceResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchSpaceResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SearchSpacesResponse.SearchSpaceResult;
+
+                    /**
+                     * Verifies a SearchSpaceResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchSpaceResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchSpaceResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.SearchSpacesResponse.SearchSpaceResult;
+
+                    /**
+                     * Creates a plain object from a SearchSpaceResult message. Also converts values to other types if specified.
+                     * @param message SearchSpaceResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.SearchSpacesResponse.SearchSpaceResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchSpaceResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchSpaceResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
 
             /** Properties of a DeleteSpaceRequest. */
@@ -22698,6 +24960,334 @@ export namespace google {
                 HISTORY_STATE_UNSPECIFIED = 0,
                 HISTORY_OFF = 1,
                 HISTORY_ON = 2
+            }
+
+            /** Properties of a SpaceNotificationSetting. */
+            interface ISpaceNotificationSetting {
+
+                /** SpaceNotificationSetting name */
+                name?: (string|null);
+
+                /** SpaceNotificationSetting notificationSetting */
+                notificationSetting?: (google.chat.v1.SpaceNotificationSetting.NotificationSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.NotificationSetting|null);
+
+                /** SpaceNotificationSetting muteSetting */
+                muteSetting?: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting|null);
+            }
+
+            /** Represents a SpaceNotificationSetting. */
+            class SpaceNotificationSetting implements ISpaceNotificationSetting {
+
+                /**
+                 * Constructs a new SpaceNotificationSetting.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISpaceNotificationSetting);
+
+                /** SpaceNotificationSetting name. */
+                public name: string;
+
+                /** SpaceNotificationSetting notificationSetting. */
+                public notificationSetting?: (google.chat.v1.SpaceNotificationSetting.NotificationSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.NotificationSetting|null);
+
+                /** SpaceNotificationSetting muteSetting. */
+                public muteSetting?: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting|null);
+
+                /**
+                 * Creates a new SpaceNotificationSetting instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SpaceNotificationSetting instance
+                 */
+                public static create(properties?: google.chat.v1.ISpaceNotificationSetting): google.chat.v1.SpaceNotificationSetting;
+
+                /**
+                 * Encodes the specified SpaceNotificationSetting message. Does not implicitly {@link google.chat.v1.SpaceNotificationSetting.verify|verify} messages.
+                 * @param message SpaceNotificationSetting message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISpaceNotificationSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SpaceNotificationSetting message, length delimited. Does not implicitly {@link google.chat.v1.SpaceNotificationSetting.verify|verify} messages.
+                 * @param message SpaceNotificationSetting message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISpaceNotificationSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SpaceNotificationSetting message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SpaceNotificationSetting
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SpaceNotificationSetting;
+
+                /**
+                 * Decodes a SpaceNotificationSetting message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SpaceNotificationSetting
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SpaceNotificationSetting;
+
+                /**
+                 * Verifies a SpaceNotificationSetting message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SpaceNotificationSetting message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SpaceNotificationSetting
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SpaceNotificationSetting;
+
+                /**
+                 * Creates a plain object from a SpaceNotificationSetting message. Also converts values to other types if specified.
+                 * @param message SpaceNotificationSetting
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SpaceNotificationSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SpaceNotificationSetting to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SpaceNotificationSetting
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SpaceNotificationSetting {
+
+                /** NotificationSetting enum. */
+                enum NotificationSetting {
+                    NOTIFICATION_SETTING_UNSPECIFIED = 0,
+                    ALL = 1,
+                    MAIN_CONVERSATIONS = 2,
+                    FOR_YOU = 3,
+                    OFF = 4
+                }
+
+                /** MuteSetting enum. */
+                enum MuteSetting {
+                    MUTE_SETTING_UNSPECIFIED = 0,
+                    UNMUTED = 1,
+                    MUTED = 2
+                }
+            }
+
+            /** Properties of a GetSpaceNotificationSettingRequest. */
+            interface IGetSpaceNotificationSettingRequest {
+
+                /** GetSpaceNotificationSettingRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetSpaceNotificationSettingRequest. */
+            class GetSpaceNotificationSettingRequest implements IGetSpaceNotificationSettingRequest {
+
+                /**
+                 * Constructs a new GetSpaceNotificationSettingRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IGetSpaceNotificationSettingRequest);
+
+                /** GetSpaceNotificationSettingRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetSpaceNotificationSettingRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetSpaceNotificationSettingRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IGetSpaceNotificationSettingRequest): google.chat.v1.GetSpaceNotificationSettingRequest;
+
+                /**
+                 * Encodes the specified GetSpaceNotificationSettingRequest message. Does not implicitly {@link google.chat.v1.GetSpaceNotificationSettingRequest.verify|verify} messages.
+                 * @param message GetSpaceNotificationSettingRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IGetSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetSpaceNotificationSettingRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceNotificationSettingRequest.verify|verify} messages.
+                 * @param message GetSpaceNotificationSettingRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IGetSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetSpaceNotificationSettingRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetSpaceNotificationSettingRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetSpaceNotificationSettingRequest;
+
+                /**
+                 * Decodes a GetSpaceNotificationSettingRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetSpaceNotificationSettingRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetSpaceNotificationSettingRequest;
+
+                /**
+                 * Verifies a GetSpaceNotificationSettingRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetSpaceNotificationSettingRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetSpaceNotificationSettingRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetSpaceNotificationSettingRequest;
+
+                /**
+                 * Creates a plain object from a GetSpaceNotificationSettingRequest message. Also converts values to other types if specified.
+                 * @param message GetSpaceNotificationSettingRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.GetSpaceNotificationSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetSpaceNotificationSettingRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetSpaceNotificationSettingRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateSpaceNotificationSettingRequest. */
+            interface IUpdateSpaceNotificationSettingRequest {
+
+                /** UpdateSpaceNotificationSettingRequest spaceNotificationSetting */
+                spaceNotificationSetting?: (google.chat.v1.ISpaceNotificationSetting|null);
+
+                /** UpdateSpaceNotificationSettingRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateSpaceNotificationSettingRequest. */
+            class UpdateSpaceNotificationSettingRequest implements IUpdateSpaceNotificationSettingRequest {
+
+                /**
+                 * Constructs a new UpdateSpaceNotificationSettingRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IUpdateSpaceNotificationSettingRequest);
+
+                /** UpdateSpaceNotificationSettingRequest spaceNotificationSetting. */
+                public spaceNotificationSetting?: (google.chat.v1.ISpaceNotificationSetting|null);
+
+                /** UpdateSpaceNotificationSettingRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateSpaceNotificationSettingRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateSpaceNotificationSettingRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IUpdateSpaceNotificationSettingRequest): google.chat.v1.UpdateSpaceNotificationSettingRequest;
+
+                /**
+                 * Encodes the specified UpdateSpaceNotificationSettingRequest message. Does not implicitly {@link google.chat.v1.UpdateSpaceNotificationSettingRequest.verify|verify} messages.
+                 * @param message UpdateSpaceNotificationSettingRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IUpdateSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateSpaceNotificationSettingRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateSpaceNotificationSettingRequest.verify|verify} messages.
+                 * @param message UpdateSpaceNotificationSettingRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IUpdateSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateSpaceNotificationSettingRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateSpaceNotificationSettingRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.UpdateSpaceNotificationSettingRequest;
+
+                /**
+                 * Decodes an UpdateSpaceNotificationSettingRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateSpaceNotificationSettingRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.UpdateSpaceNotificationSettingRequest;
+
+                /**
+                 * Verifies an UpdateSpaceNotificationSettingRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateSpaceNotificationSettingRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateSpaceNotificationSettingRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.UpdateSpaceNotificationSettingRequest;
+
+                /**
+                 * Creates a plain object from an UpdateSpaceNotificationSettingRequest message. Also converts values to other types if specified.
+                 * @param message UpdateSpaceNotificationSettingRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.UpdateSpaceNotificationSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateSpaceNotificationSettingRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateSpaceNotificationSettingRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a Section. */
@@ -26366,334 +28956,6 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a SpaceNotificationSetting. */
-            interface ISpaceNotificationSetting {
-
-                /** SpaceNotificationSetting name */
-                name?: (string|null);
-
-                /** SpaceNotificationSetting notificationSetting */
-                notificationSetting?: (google.chat.v1.SpaceNotificationSetting.NotificationSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.NotificationSetting|null);
-
-                /** SpaceNotificationSetting muteSetting */
-                muteSetting?: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting|null);
-            }
-
-            /** Represents a SpaceNotificationSetting. */
-            class SpaceNotificationSetting implements ISpaceNotificationSetting {
-
-                /**
-                 * Constructs a new SpaceNotificationSetting.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.chat.v1.ISpaceNotificationSetting);
-
-                /** SpaceNotificationSetting name. */
-                public name: string;
-
-                /** SpaceNotificationSetting notificationSetting. */
-                public notificationSetting?: (google.chat.v1.SpaceNotificationSetting.NotificationSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.NotificationSetting|null);
-
-                /** SpaceNotificationSetting muteSetting. */
-                public muteSetting?: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting|null);
-
-                /**
-                 * Creates a new SpaceNotificationSetting instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns SpaceNotificationSetting instance
-                 */
-                public static create(properties?: google.chat.v1.ISpaceNotificationSetting): google.chat.v1.SpaceNotificationSetting;
-
-                /**
-                 * Encodes the specified SpaceNotificationSetting message. Does not implicitly {@link google.chat.v1.SpaceNotificationSetting.verify|verify} messages.
-                 * @param message SpaceNotificationSetting message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.chat.v1.ISpaceNotificationSetting, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified SpaceNotificationSetting message, length delimited. Does not implicitly {@link google.chat.v1.SpaceNotificationSetting.verify|verify} messages.
-                 * @param message SpaceNotificationSetting message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.chat.v1.ISpaceNotificationSetting, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a SpaceNotificationSetting message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns SpaceNotificationSetting
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SpaceNotificationSetting;
-
-                /**
-                 * Decodes a SpaceNotificationSetting message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns SpaceNotificationSetting
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SpaceNotificationSetting;
-
-                /**
-                 * Verifies a SpaceNotificationSetting message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a SpaceNotificationSetting message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns SpaceNotificationSetting
-                 */
-                public static fromObject(object: { [k: string]: any }): google.chat.v1.SpaceNotificationSetting;
-
-                /**
-                 * Creates a plain object from a SpaceNotificationSetting message. Also converts values to other types if specified.
-                 * @param message SpaceNotificationSetting
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.chat.v1.SpaceNotificationSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this SpaceNotificationSetting to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for SpaceNotificationSetting
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace SpaceNotificationSetting {
-
-                /** NotificationSetting enum. */
-                enum NotificationSetting {
-                    NOTIFICATION_SETTING_UNSPECIFIED = 0,
-                    ALL = 1,
-                    MAIN_CONVERSATIONS = 2,
-                    FOR_YOU = 3,
-                    OFF = 4
-                }
-
-                /** MuteSetting enum. */
-                enum MuteSetting {
-                    MUTE_SETTING_UNSPECIFIED = 0,
-                    UNMUTED = 1,
-                    MUTED = 2
-                }
-            }
-
-            /** Properties of a GetSpaceNotificationSettingRequest. */
-            interface IGetSpaceNotificationSettingRequest {
-
-                /** GetSpaceNotificationSettingRequest name */
-                name?: (string|null);
-            }
-
-            /** Represents a GetSpaceNotificationSettingRequest. */
-            class GetSpaceNotificationSettingRequest implements IGetSpaceNotificationSettingRequest {
-
-                /**
-                 * Constructs a new GetSpaceNotificationSettingRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.chat.v1.IGetSpaceNotificationSettingRequest);
-
-                /** GetSpaceNotificationSettingRequest name. */
-                public name: string;
-
-                /**
-                 * Creates a new GetSpaceNotificationSettingRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns GetSpaceNotificationSettingRequest instance
-                 */
-                public static create(properties?: google.chat.v1.IGetSpaceNotificationSettingRequest): google.chat.v1.GetSpaceNotificationSettingRequest;
-
-                /**
-                 * Encodes the specified GetSpaceNotificationSettingRequest message. Does not implicitly {@link google.chat.v1.GetSpaceNotificationSettingRequest.verify|verify} messages.
-                 * @param message GetSpaceNotificationSettingRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.chat.v1.IGetSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified GetSpaceNotificationSettingRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceNotificationSettingRequest.verify|verify} messages.
-                 * @param message GetSpaceNotificationSettingRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.chat.v1.IGetSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a GetSpaceNotificationSettingRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns GetSpaceNotificationSettingRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetSpaceNotificationSettingRequest;
-
-                /**
-                 * Decodes a GetSpaceNotificationSettingRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns GetSpaceNotificationSettingRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetSpaceNotificationSettingRequest;
-
-                /**
-                 * Verifies a GetSpaceNotificationSettingRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a GetSpaceNotificationSettingRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns GetSpaceNotificationSettingRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetSpaceNotificationSettingRequest;
-
-                /**
-                 * Creates a plain object from a GetSpaceNotificationSettingRequest message. Also converts values to other types if specified.
-                 * @param message GetSpaceNotificationSettingRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.chat.v1.GetSpaceNotificationSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this GetSpaceNotificationSettingRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for GetSpaceNotificationSettingRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an UpdateSpaceNotificationSettingRequest. */
-            interface IUpdateSpaceNotificationSettingRequest {
-
-                /** UpdateSpaceNotificationSettingRequest spaceNotificationSetting */
-                spaceNotificationSetting?: (google.chat.v1.ISpaceNotificationSetting|null);
-
-                /** UpdateSpaceNotificationSettingRequest updateMask */
-                updateMask?: (google.protobuf.IFieldMask|null);
-            }
-
-            /** Represents an UpdateSpaceNotificationSettingRequest. */
-            class UpdateSpaceNotificationSettingRequest implements IUpdateSpaceNotificationSettingRequest {
-
-                /**
-                 * Constructs a new UpdateSpaceNotificationSettingRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.chat.v1.IUpdateSpaceNotificationSettingRequest);
-
-                /** UpdateSpaceNotificationSettingRequest spaceNotificationSetting. */
-                public spaceNotificationSetting?: (google.chat.v1.ISpaceNotificationSetting|null);
-
-                /** UpdateSpaceNotificationSettingRequest updateMask. */
-                public updateMask?: (google.protobuf.IFieldMask|null);
-
-                /**
-                 * Creates a new UpdateSpaceNotificationSettingRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns UpdateSpaceNotificationSettingRequest instance
-                 */
-                public static create(properties?: google.chat.v1.IUpdateSpaceNotificationSettingRequest): google.chat.v1.UpdateSpaceNotificationSettingRequest;
-
-                /**
-                 * Encodes the specified UpdateSpaceNotificationSettingRequest message. Does not implicitly {@link google.chat.v1.UpdateSpaceNotificationSettingRequest.verify|verify} messages.
-                 * @param message UpdateSpaceNotificationSettingRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.chat.v1.IUpdateSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified UpdateSpaceNotificationSettingRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateSpaceNotificationSettingRequest.verify|verify} messages.
-                 * @param message UpdateSpaceNotificationSettingRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.chat.v1.IUpdateSpaceNotificationSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an UpdateSpaceNotificationSettingRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns UpdateSpaceNotificationSettingRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.UpdateSpaceNotificationSettingRequest;
-
-                /**
-                 * Decodes an UpdateSpaceNotificationSettingRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns UpdateSpaceNotificationSettingRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.UpdateSpaceNotificationSettingRequest;
-
-                /**
-                 * Verifies an UpdateSpaceNotificationSettingRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an UpdateSpaceNotificationSettingRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns UpdateSpaceNotificationSettingRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.chat.v1.UpdateSpaceNotificationSettingRequest;
-
-                /**
-                 * Creates a plain object from an UpdateSpaceNotificationSettingRequest message. Also converts values to other types if specified.
-                 * @param message UpdateSpaceNotificationSettingRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.chat.v1.UpdateSpaceNotificationSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this UpdateSpaceNotificationSettingRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for UpdateSpaceNotificationSettingRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
             /** Properties of a SpaceReadState. */
             interface ISpaceReadState {
 
@@ -27606,6 +29868,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -27619,6 +29884,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -27708,6 +29976,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Http. */
@@ -28078,6 +30443,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -28094,6 +30462,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -28698,6 +31069,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -28711,6 +31085,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -28795,6 +31172,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -28808,6 +31188,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -28885,6 +31268,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -29213,6 +31708,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -29226,6 +31724,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -29316,6 +31817,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -29335,6 +31839,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -29549,6 +32056,468 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */

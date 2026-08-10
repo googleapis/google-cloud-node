@@ -36,6 +36,13 @@
                 "queryDatabaseResourceGroupsAsync"
               ]
             },
+            "AggregateQueryStats": {
+              "methods": [
+                "aggregateQueryStats",
+                "aggregateQueryStatsStream",
+                "aggregateQueryStatsAsync"
+              ]
+            },
             "QueryIssues": {
               "methods": [
                 "queryIssues",
@@ -72,6 +79,13 @@
                 "queryDatabaseResourceGroups",
                 "queryDatabaseResourceGroupsStream",
                 "queryDatabaseResourceGroupsAsync"
+              ]
+            },
+            "AggregateQueryStats": {
+              "methods": [
+                "aggregateQueryStats",
+                "aggregateQueryStatsStream",
+                "aggregateQueryStatsAsync"
               ]
             },
             "QueryIssues": {

@@ -1,5 +1,6 @@
 {
-  "extends": "./node_modules/gts",
+  "root": true,
+  "extends": "../../node_modules/gts",
   "overrides": [
     {
       "files": ["dev/src/**/*.ts"],

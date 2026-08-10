@@ -16,9 +16,10 @@ import {promisifyAll} from '@google-cloud/promisify';
 import {CallOptions} from 'google-gax';
 import {ServiceError} from 'google-gax';
 
-import {Bigtable} from './';
+import {Bigtable} from '.';
 import {Table} from './table';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 
 export type IColumnFamily = google.bigtable.admin.v2.IColumnFamily;
 export type IGcRule = google.bigtable.admin.v2.IGcRule;

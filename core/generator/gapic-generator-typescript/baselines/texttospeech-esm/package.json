@@ -2,8 +2,13 @@
   "name": "@google-cloud/text-to-speech",
   "version": "0.1.0",
   "description": "Texttospeech client for Node.js",
-  "repository": "googleapis/nodejs-texttospeech",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-texttospeech",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-texttospeech",
   "author": "Google LLC",
   "main": "./build/cjs/src/index.cjs",
   "types": "./build/cjs/src/index.d.ts",
@@ -55,16 +60,14 @@
     "compile-protos": "compileProtos esm/src --esm ",
     "docs": "jsdoc -c .jsdoc.cjs",
     "postpack": "minifyProtoJson build/cjs && minifyProtoJson build/esm",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test:cjs": "c8 mocha build/cjs/system-test",
-    "system-test:esm": "c8 mocha build/esm/system-test",
+    "system-test:cjs": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/cjs/system-test",
+    "system-test:esm": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/esm/system-test",
     "system-test": "npm run system-test:esm && npm run system-test:cjs",
-    "test:cjs": "c8 mocha build/cjs/test",
-    "test:esm": "c8 mocha build/esm/test",
+    "test:cjs": "c8 mocha --config ../../.mocharc.cjs build/cjs/test",
+    "test:esm": "c8 mocha --config ../../.mocharc.cjs build/esm/test",
     "test": "npm run test:cjs && npm run test:esm",
     "compile:esm": "tsc -p ./tsconfig.esm.json && cp -r esm/src/json-helper.cjs build/esm/src/json-helper.cjs",
     "babel": "babel esm --out-dir build/cjs --ignore \"esm/**/*.d.ts\" --extensions \".ts\" --out-file-extension .cjs --copy-files",
@@ -73,7 +76,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test"
   },
   "dependencies": {
-    "google-gax": "^5.1.1-rc.1"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
@@ -100,6 +103,6 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=22"
   }
 }

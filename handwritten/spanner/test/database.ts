@@ -36,8 +36,8 @@ import {
   LEADER_AWARE_ROUTING_HEADER,
   AFE_SERVER_TIMING_HEADER,
 } from '../src/common';
-import {google} from '../protos/protos';
-import {protos} from '../src';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import * as inst from '../src/instance';
 import RequestOptions = google.spanner.v1.RequestOptions;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
@@ -57,7 +57,7 @@ import {
 } from '../src/request_id_header';
 
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Database') {
       return;
@@ -271,6 +271,9 @@ describe('Database', () => {
     formattedName_: 'instance-name',
     databases_: new Map(),
     parent: SPANNER,
+    commonHeaders_: {
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   } as {} as Instance;
 
   const NAME = 'table-name';
@@ -302,13 +305,13 @@ describe('Database', () => {
       },
     }).Database;
     // The following commented out line is the one that will trigger the error.
-    // DatabaseCached = extend({}, Database);
+    // DatabaseCached = Object.assign({}, Database);
     DatabaseCached = Object.assign({}, Database);
   });
 
   beforeEach(() => {
     fakeCodec.encode = util.noop;
-    extend(Database, DatabaseCached);
+    Object.assign(Database, DatabaseCached);
     database = new Database(INSTANCE, NAME, POOL_OPTIONS);
     database.parent = INSTANCE;
     database.databaseRole = 'parent_role';
@@ -382,7 +385,7 @@ describe('Database', () => {
     it('should inherit from ServiceObject', done => {
       const options = {};
 
-      const instanceInstance = extend({}, INSTANCE, {
+      const instanceInstance = Object.assign({}, INSTANCE, {
         createDatabase(name, options_, callback) {
           assert.strictEqual(name, database.formattedName_);
           assert.strictEqual(options_, options);
@@ -588,7 +591,7 @@ describe('Database', () => {
     const METADATA = {
       needsToBeSnakeCased: true,
     } as inst.IDatabase;
-    const ORIGINAL_METADATA = extend({}, METADATA);
+    const ORIGINAL_METADATA = Object.assign({}, METADATA);
 
     it('should make and return the request', () => {
       const requestReturnValue = {};
@@ -599,7 +602,7 @@ describe('Database', () => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'updateDatabase');
 
-        const expectedReqOpts = extend({}, METADATA, {
+        const expectedReqOpts = Object.assign({}, METADATA, {
           name: database.formattedName_,
         });
 
@@ -1645,7 +1648,7 @@ describe('Database', () => {
       database.request = config => {
         assert.deepStrictEqual(
           config.reqOpts,
-          extend({}, CONFIG.reqOpts, {
+          Object.assign({}, CONFIG.reqOpts, {
             session: SESSION.formattedName_,
           }),
         );
@@ -2179,7 +2182,7 @@ describe('Database', () => {
         otherConfiguration: {},
       };
 
-      const expectedReqOpts = extend({}, config, {
+      const expectedReqOpts = Object.assign({}, config, {
         database: database.formattedName_,
       });
 
@@ -2654,7 +2657,7 @@ describe('Database', () => {
         gaxOptions?: {};
       } = {a: 'a', gaxOptions: gaxOpts};
 
-      const expectedReqOpts = extend({}, options, {
+      const expectedReqOpts = Object.assign({}, options, {
         database: database.formattedName_,
       });
 
@@ -2684,7 +2687,7 @@ describe('Database', () => {
         a: string;
         gaxOptions?: {pageSize: number; pageToken: string; timeout: number};
       } = {a: 'a', gaxOptions: gaxOptions};
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         options,
         {
@@ -2724,7 +2727,7 @@ describe('Database', () => {
           gaxOptions,
         },
       );
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         options,
         {
@@ -2809,7 +2812,11 @@ describe('Database', () => {
         filter,
         gaxOptions: {timeout: 1000, autoPaginate: false},
       };
-      const EXPECTEDNEXTQUERY = extend({}, GETSESSIONOPTIONS, NEXTPAGEREQUEST);
+      const EXPECTEDNEXTQUERY = Object.assign(
+        {},
+        GETSESSIONOPTIONS,
+        NEXTPAGEREQUEST,
+      );
       database.request = (config, callback) => {
         callback(...RESPONSE);
       };
@@ -2828,7 +2835,7 @@ describe('Database', () => {
     const returnValue = {} as Duplex;
 
     it('should make and return the correct gax API call', () => {
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         database: database.formattedName_,
       });
       delete expectedReqOpts.gaxOptions;
@@ -2855,7 +2862,7 @@ describe('Database', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = {gaxOptions};
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         {
           database: database.formattedName_,
@@ -2889,7 +2896,7 @@ describe('Database', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       };
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         {
           database: database.formattedName_,
@@ -3498,8 +3505,8 @@ describe('Database', () => {
 
     it('should make the correct request', done => {
       const QUERY = {};
-      const ORIGINAL_QUERY = extend({}, QUERY);
-      const expectedReqOpts = extend({}, QUERY, {
+      const ORIGINAL_QUERY = Object.assign({}, QUERY);
+      const expectedReqOpts = Object.assign({}, QUERY, {
         databaseId: NAME,
         parent: INSTANCE.formattedName_,
         backup: BACKUP_FORMATTED_NAME,
@@ -3523,7 +3530,7 @@ describe('Database', () => {
 
     it('should accept a backup name', done => {
       const QUERY = {};
-      const expectedReqOpts = extend({}, QUERY, {
+      const expectedReqOpts = Object.assign({}, QUERY, {
         databaseId: NAME,
         parent: INSTANCE.formattedName_,
         backup: BACKUP_FORMATTED_NAME,

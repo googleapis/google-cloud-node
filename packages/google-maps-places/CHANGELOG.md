@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.5.0...places-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.4.1...places-v2.5.0) (2026-06-01)
+
+
+### Features
+
+* [places] add transit_station data to Places API (New) ([#8363](https://github.com/googleapis/google-cloud-node/issues/8363)) ([cbc359c](https://github.com/googleapis/google-cloud-node/commit/cbc359cb7468e5338c67762c52ebb1d9c3910a22))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/places-v2.4.0...places-v2.4.1) (2026-05-01)
 
 

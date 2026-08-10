@@ -195,6 +195,11 @@
                 "getFirewallEndpoint"
               ]
             },
+            "GetProjectFirewallEndpoint": {
+              "methods": [
+                "getProjectFirewallEndpoint"
+              ]
+            },
             "GetFirewallEndpointAssociation": {
               "methods": [
                 "getFirewallEndpointAssociation"
@@ -205,14 +210,29 @@
                 "createFirewallEndpoint"
               ]
             },
+            "CreateProjectFirewallEndpoint": {
+              "methods": [
+                "createProjectFirewallEndpoint"
+              ]
+            },
             "DeleteFirewallEndpoint": {
               "methods": [
                 "deleteFirewallEndpoint"
               ]
             },
+            "DeleteProjectFirewallEndpoint": {
+              "methods": [
+                "deleteProjectFirewallEndpoint"
+              ]
+            },
             "UpdateFirewallEndpoint": {
               "methods": [
                 "updateFirewallEndpoint"
+              ]
+            },
+            "UpdateProjectFirewallEndpoint": {
+              "methods": [
+                "updateProjectFirewallEndpoint"
               ]
             },
             "CreateFirewallEndpointAssociation": {
@@ -235,6 +255,13 @@
                 "listFirewallEndpoints",
                 "listFirewallEndpointsStream",
                 "listFirewallEndpointsAsync"
+              ]
+            },
+            "ListProjectFirewallEndpoints": {
+              "methods": [
+                "listProjectFirewallEndpoints",
+                "listProjectFirewallEndpointsStream",
+                "listProjectFirewallEndpointsAsync"
               ]
             },
             "ListFirewallEndpointAssociations": {
@@ -254,6 +281,11 @@
                 "getFirewallEndpoint"
               ]
             },
+            "GetProjectFirewallEndpoint": {
+              "methods": [
+                "getProjectFirewallEndpoint"
+              ]
+            },
             "GetFirewallEndpointAssociation": {
               "methods": [
                 "getFirewallEndpointAssociation"
@@ -264,14 +296,29 @@
                 "createFirewallEndpoint"
               ]
             },
+            "CreateProjectFirewallEndpoint": {
+              "methods": [
+                "createProjectFirewallEndpoint"
+              ]
+            },
             "DeleteFirewallEndpoint": {
               "methods": [
                 "deleteFirewallEndpoint"
               ]
             },
+            "DeleteProjectFirewallEndpoint": {
+              "methods": [
+                "deleteProjectFirewallEndpoint"
+              ]
+            },
             "UpdateFirewallEndpoint": {
               "methods": [
                 "updateFirewallEndpoint"
+              ]
+            },
+            "UpdateProjectFirewallEndpoint": {
+              "methods": [
+                "updateProjectFirewallEndpoint"
               ]
             },
             "CreateFirewallEndpointAssociation": {
@@ -294,6 +341,13 @@
                 "listFirewallEndpoints",
                 "listFirewallEndpointsStream",
                 "listFirewallEndpointsAsync"
+              ]
+            },
+            "ListProjectFirewallEndpoints": {
+              "methods": [
+                "listProjectFirewallEndpoints",
+                "listProjectFirewallEndpointsStream",
+                "listProjectFirewallEndpointsAsync"
               ]
             },
             "ListFirewallEndpointAssociations": {
@@ -1495,6 +1549,230 @@
                 "listSecurityProfiles",
                 "listSecurityProfilesStream",
                 "listSecurityProfilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SecurityProfileGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecurityProfileGroupServiceClient",
+          "rpcs": {
+            "GetSecurityProfileGroup": {
+              "methods": [
+                "getSecurityProfileGroup"
+              ]
+            },
+            "GetSecurityProfile": {
+              "methods": [
+                "getSecurityProfile"
+              ]
+            },
+            "CreateSecurityProfileGroup": {
+              "methods": [
+                "createSecurityProfileGroup"
+              ]
+            },
+            "UpdateSecurityProfileGroup": {
+              "methods": [
+                "updateSecurityProfileGroup"
+              ]
+            },
+            "DeleteSecurityProfileGroup": {
+              "methods": [
+                "deleteSecurityProfileGroup"
+              ]
+            },
+            "CreateSecurityProfile": {
+              "methods": [
+                "createSecurityProfile"
+              ]
+            },
+            "UpdateSecurityProfile": {
+              "methods": [
+                "updateSecurityProfile"
+              ]
+            },
+            "DeleteSecurityProfile": {
+              "methods": [
+                "deleteSecurityProfile"
+              ]
+            },
+            "ListSecurityProfileGroups": {
+              "methods": [
+                "listSecurityProfileGroups",
+                "listSecurityProfileGroupsStream",
+                "listSecurityProfileGroupsAsync"
+              ]
+            },
+            "ListSecurityProfiles": {
+              "methods": [
+                "listSecurityProfiles",
+                "listSecurityProfilesStream",
+                "listSecurityProfilesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecurityProfileGroupServiceClient",
+          "rpcs": {
+            "GetSecurityProfileGroup": {
+              "methods": [
+                "getSecurityProfileGroup"
+              ]
+            },
+            "GetSecurityProfile": {
+              "methods": [
+                "getSecurityProfile"
+              ]
+            },
+            "CreateSecurityProfileGroup": {
+              "methods": [
+                "createSecurityProfileGroup"
+              ]
+            },
+            "UpdateSecurityProfileGroup": {
+              "methods": [
+                "updateSecurityProfileGroup"
+              ]
+            },
+            "DeleteSecurityProfileGroup": {
+              "methods": [
+                "deleteSecurityProfileGroup"
+              ]
+            },
+            "CreateSecurityProfile": {
+              "methods": [
+                "createSecurityProfile"
+              ]
+            },
+            "UpdateSecurityProfile": {
+              "methods": [
+                "updateSecurityProfile"
+              ]
+            },
+            "DeleteSecurityProfile": {
+              "methods": [
+                "deleteSecurityProfile"
+              ]
+            },
+            "ListSecurityProfileGroups": {
+              "methods": [
+                "listSecurityProfileGroups",
+                "listSecurityProfileGroupsStream",
+                "listSecurityProfileGroupsAsync"
+              ]
+            },
+            "ListSecurityProfiles": {
+              "methods": [
+                "listSecurityProfiles",
+                "listSecurityProfilesStream",
+                "listSecurityProfilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SSERealmService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SSERealmServiceClient",
+          "rpcs": {
+            "GetSACRealm": {
+              "methods": [
+                "getSACRealm"
+              ]
+            },
+            "GetSACAttachment": {
+              "methods": [
+                "getSACAttachment"
+              ]
+            },
+            "CreateSACRealm": {
+              "methods": [
+                "createSACRealm"
+              ]
+            },
+            "DeleteSACRealm": {
+              "methods": [
+                "deleteSACRealm"
+              ]
+            },
+            "CreateSACAttachment": {
+              "methods": [
+                "createSACAttachment"
+              ]
+            },
+            "DeleteSACAttachment": {
+              "methods": [
+                "deleteSACAttachment"
+              ]
+            },
+            "ListSACRealms": {
+              "methods": [
+                "listSACRealms",
+                "listSACRealmsStream",
+                "listSACRealmsAsync"
+              ]
+            },
+            "ListSACAttachments": {
+              "methods": [
+                "listSACAttachments",
+                "listSACAttachmentsStream",
+                "listSACAttachmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SSERealmServiceClient",
+          "rpcs": {
+            "GetSACRealm": {
+              "methods": [
+                "getSACRealm"
+              ]
+            },
+            "GetSACAttachment": {
+              "methods": [
+                "getSACAttachment"
+              ]
+            },
+            "CreateSACRealm": {
+              "methods": [
+                "createSACRealm"
+              ]
+            },
+            "DeleteSACRealm": {
+              "methods": [
+                "deleteSACRealm"
+              ]
+            },
+            "CreateSACAttachment": {
+              "methods": [
+                "createSACAttachment"
+              ]
+            },
+            "DeleteSACAttachment": {
+              "methods": [
+                "deleteSACAttachment"
+              ]
+            },
+            "ListSACRealms": {
+              "methods": [
+                "listSACRealms",
+                "listSACRealmsStream",
+                "listSACRealmsAsync"
+              ]
+            },
+            "ListSACAttachments": {
+              "methods": [
+                "listSACAttachments",
+                "listSACAttachmentsStream",
+                "listSACAttachmentsAsync"
               ]
             }
           }

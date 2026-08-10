@@ -219,6 +219,9 @@ export class DataProductServiceClient {
       assetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}',
       ),
+      changeRequestPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/changeRequests/{change_request}',
+      ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}',
       ),
@@ -362,9 +365,6 @@ export class DataProductServiceClient {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
-            },
-            {
               get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
             },
             {
@@ -409,6 +409,9 @@ export class DataProductServiceClient {
             {
               get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataDomains/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -426,10 +429,6 @@ export class DataProductServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -492,6 +491,10 @@ export class DataProductServiceClient {
               post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataDomains/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -509,10 +512,6 @@ export class DataProductServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
               body: '*',
             },
             {
@@ -573,6 +572,10 @@ export class DataProductServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataDomains/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -739,6 +742,7 @@ export class DataProductServiceClient {
       'getDataProduct',
       'listDataProducts',
       'updateDataProduct',
+      'requestDataProductAccess',
       'createDataAsset',
       'updateDataAsset',
       'deleteDataAsset',
@@ -839,7 +843,12 @@ export class DataProductServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/dataplex.read-write',
+      'https://www.googleapis.com/auth/dataplex.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -971,6 +980,158 @@ export class DataProductServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getDataProduct response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Requests access to a data product. This will trigger an access approval
+   * workflow, and the requester will need to wait for the approval to be
+   * granted before they will be able to access the data product assets.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the data product.
+   *   Format:
+   *   projects/{project_number}/locations/{location_id}/dataProducts/{data_product_id}
+   * @param {google.cloud.dataplex.v1.ChangeRequest} request.changeRequest
+   *   Required. The change request for the data product access request.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Validates the request without actually creating the access change
+   *   request. Defaults to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.RequestDataProductAccessResponse|RequestDataProductAccessResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_product_service.request_data_product_access.js</caption>
+   * region_tag:dataplex_v1_generated_DataProductService_RequestDataProductAccess_async
+   */
+  requestDataProductAccess(
+    request?: protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  requestDataProductAccess(
+    request: protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+      | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  requestDataProductAccess(
+    request: protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+      | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  requestDataProductAccess(
+    request?: protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+          | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+      | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('requestDataProductAccess request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+          | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('requestDataProductAccess response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .requestDataProductAccess(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IRequestDataProductAccessResponse,
+          (
+            | protos.google.cloud.dataplex.v1.IRequestDataProductAccessRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('requestDataProductAccess response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3218,6 +3379,58 @@ export class DataProductServiceClient {
    */
   matchAssetFromAssetName(assetName: string) {
     return this.pathTemplates.assetPathTemplate.match(assetName).asset;
+  }
+
+  /**
+   * Return a fully-qualified changeRequest resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} change_request
+   * @returns {string} Resource name string.
+   */
+  changeRequestPath(project: string, location: string, changeRequest: string) {
+    return this.pathTemplates.changeRequestPathTemplate.render({
+      project: project,
+      location: location,
+      change_request: changeRequest,
+    });
+  }
+
+  /**
+   * Parse the project from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .location;
+  }
+
+  /**
+   * Parse the change_request from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the change_request.
+   */
+  matchChangeRequestFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .change_request;
   }
 
   /**

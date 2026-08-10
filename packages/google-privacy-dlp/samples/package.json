@@ -9,14 +9,14 @@
     "*.js"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "mocha test/*.test.js --timeout=600000"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^5.0.0",
-    "@google-cloud/dlp": "^6.6.1",
+    "@google-cloud/dlp": "^7.0.0",
     "mime": "^4.0.0",
     "yargs": "^17.0.0"
   },
@@ -24,7 +24,6 @@
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
     "pixelmatch": "^7.0.0",
-    "pngjs": "^6.0.0",
-    "uuid": "^11.1.1"
+    "pngjs": "^6.0.0"
   }
 }

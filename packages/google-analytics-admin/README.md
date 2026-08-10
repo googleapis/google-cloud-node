@@ -212,7 +212,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update search ads360 link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_search_ads360_link.js) |
 | update subproperty event filter | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_subproperty_event_filter.js) |
 | update subproperty sync config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_subproperty_sync_config.js) |
-| analytics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/snippet_metadata_google.analytics.admin.v1alpha.json) |
 | acknowledge user data collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.acknowledge_user_data_collection.js) |
 | archive custom dimension | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.archive_custom_dimension.js) |
 | archive custom metric | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.archive_custom_metric.js) |
@@ -267,7 +266,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update key event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_key_event.js) |
 | update measurement protocol secret | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_measurement_protocol_secret.js) |
 | update property | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_property.js) |
-| analytics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/snippet_metadata_google.analytics.admin.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -301,7 +299,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -311,7 +309,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

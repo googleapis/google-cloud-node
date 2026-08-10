@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class BackupDrProtectionSummaryClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('backupdr');
@@ -57,11 +68,11 @@ export class BackupDrProtectionSummaryClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  backupDrProtectionSummaryStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  backupDrProtectionSummaryStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of BackupDrProtectionSummaryClient.
@@ -102,21 +113,43 @@ export class BackupDrProtectionSummaryClient {
    *     const client = new BackupDrProtectionSummaryClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof BackupDrProtectionSummaryClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof BackupDrProtectionSummaryClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'backupdr.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +174,7 @@ export class BackupDrProtectionSummaryClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,18 +187,14 @@ export class BackupDrProtectionSummaryClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -187,34 +216,34 @@ export class BackupDrProtectionSummaryClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       backupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}/backups/{backup}'
+        'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}/backups/{backup}',
       ),
       backupPlanPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backupPlans/{backup_plan}'
+        'projects/{project}/locations/{location}/backupPlans/{backup_plan}',
       ),
       backupPlanAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backupPlanAssociations/{backup_plan_association}'
+        'projects/{project}/locations/{location}/backupPlanAssociations/{backup_plan_association}',
       ),
       backupPlanRevisionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision}'
+        'projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision}',
       ),
       backupVaultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backupVaults/{backupvault}'
+        'projects/{project}/locations/{location}/backupVaults/{backupvault}',
       ),
       dataSourcePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}'
+        'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}',
       ),
       dataSourceReferencePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataSourceReferences/{data_source_reference}'
+        'projects/{project}/locations/{location}/dataSourceReferences/{data_source_reference}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       managementServerPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/managementServers/{managementserver}'
+        'projects/{project}/locations/{location}/managementServers/{managementserver}',
       ),
       resourceBackupConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/resourceBackupConfigs/{resource_backup_config}'
+        'projects/{project}/locations/{location}/resourceBackupConfigs/{resource_backup_config}',
       ),
     };
 
@@ -222,14 +251,20 @@ export class BackupDrProtectionSummaryClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listResourceBackupConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceBackupConfigs')
+      listResourceBackupConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resourceBackupConfigs',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.backupdr.v1.BackupDrProtectionSummary', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.backupdr.v1.BackupDrProtectionSummary',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -260,37 +295,41 @@ export class BackupDrProtectionSummaryClient {
     // Put together the "service stub" for
     // google.cloud.backupdr.v1.BackupDrProtectionSummary.
     this.backupDrProtectionSummaryStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.backupdr.v1.BackupDrProtectionSummary') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.backupdr.v1.BackupDrProtectionSummary,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.backupdr.v1.BackupDrProtectionSummary',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.backupdr.v1
+            .BackupDrProtectionSummary,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const backupDrProtectionSummaryStubMethods =
-        ['listResourceBackupConfigs'];
+    const backupDrProtectionSummaryStubMethods = ['listResourceBackupConfigs'];
     for (const methodName of backupDrProtectionSummaryStubMethods) {
       const callPromise = this.backupDrProtectionSummaryStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -305,8 +344,14 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'backupdr.googleapis.com';
   }
@@ -317,8 +362,14 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'backupdr.googleapis.com';
   }
@@ -349,9 +400,7 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -360,8 +409,9 @@ export class BackupDrProtectionSummaryClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -373,96 +423,121 @@ export class BackupDrProtectionSummaryClient {
   // -- Service calls --
   // -------------------
 
- /**
- * Lists ResourceBackupConfigs.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location for which to retrieve resource backup
- *   configs. Format: 'projects/{project_id}/locations/{location}'. In Google
- *   Cloud Backup and DR, locations map to Google Cloud regions, for example
- *   **us-central1**.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will use 100 as default. Maximum value is
- *   500 and values above 500 will be coerced to 500.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.ResourceBackupConfig|ResourceBackupConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listResourceBackupConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists ResourceBackupConfigs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve resource backup
+   *   configs. Format: 'projects/{project_id}/locations/{location}'. In Google
+   *   Cloud Backup and DR, locations map to Google Cloud regions, for example
+   *   **us-central1**.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will use 100 as default. Maximum value is
+   *   500 and values above 500 will be coerced to 500.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.ResourceBackupConfig|ResourceBackupConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listResourceBackupConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listResourceBackupConfigs(
-      request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.backupdr.v1.IResourceBackupConfig[],
-        protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest|null,
-        protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
-      ]>;
+    request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IResourceBackupConfig[],
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest | null,
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse,
+    ]
+  >;
   listResourceBackupConfigs(
-      request: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse|null|undefined,
-          protos.google.cloud.backupdr.v1.IResourceBackupConfig>): void;
+    request: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+      | protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IResourceBackupConfig
+    >,
+  ): void;
   listResourceBackupConfigs(
-      request: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse|null|undefined,
-          protos.google.cloud.backupdr.v1.IResourceBackupConfig>): void;
+    request: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+      | protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IResourceBackupConfig
+    >,
+  ): void;
   listResourceBackupConfigs(
-      request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse|null|undefined,
-          protos.google.cloud.backupdr.v1.IResourceBackupConfig>,
-      callback?: PaginationCallback<
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse|null|undefined,
-          protos.google.cloud.backupdr.v1.IResourceBackupConfig>):
-      Promise<[
-        protos.google.cloud.backupdr.v1.IResourceBackupConfig[],
-        protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest|null,
-        protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
-      ]>|void {
+          | protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IResourceBackupConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+      | protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IResourceBackupConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IResourceBackupConfig[],
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest | null,
+      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse|null|undefined,
-      protos.google.cloud.backupdr.v1.IResourceBackupConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+          | protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IResourceBackupConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listResourceBackupConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -471,151 +546,155 @@ export class BackupDrProtectionSummaryClient {
     this._log.info('listResourceBackupConfigs request %j', request);
     return this.innerApiCalls
       .listResourceBackupConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.backupdr.v1.IResourceBackupConfig[],
-        protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest|null,
-        protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse
-      ]) => {
-        this._log.info('listResourceBackupConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IResourceBackupConfig[],
+          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest | null,
+          protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse,
+        ]) => {
+          this._log.info('listResourceBackupConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listResourceBackupConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location for which to retrieve resource backup
- *   configs. Format: 'projects/{project_id}/locations/{location}'. In Google
- *   Cloud Backup and DR, locations map to Google Cloud regions, for example
- *   **us-central1**.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will use 100 as default. Maximum value is
- *   500 and values above 500 will be coerced to 500.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.ResourceBackupConfig|ResourceBackupConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listResourceBackupConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listResourceBackupConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve resource backup
+   *   configs. Format: 'projects/{project_id}/locations/{location}'. In Google
+   *   Cloud Backup and DR, locations map to Google Cloud regions, for example
+   *   **us-central1**.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will use 100 as default. Maximum value is
+   *   500 and values above 500 will be coerced to 500.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.ResourceBackupConfig|ResourceBackupConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listResourceBackupConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listResourceBackupConfigsStream(
-      request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listResourceBackupConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listResourceBackupConfigs stream %j', request);
     return this.descriptors.page.listResourceBackupConfigs.createStream(
       this.innerApiCalls.listResourceBackupConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listResourceBackupConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location for which to retrieve resource backup
- *   configs. Format: 'projects/{project_id}/locations/{location}'. In Google
- *   Cloud Backup and DR, locations map to Google Cloud regions, for example
- *   **us-central1**.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will use 100 as default. Maximum value is
- *   500 and values above 500 will be coerced to 500.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.backupdr.v1.ResourceBackupConfig|ResourceBackupConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/backup_dr_protection_summary.list_resource_backup_configs.js</caption>
- * region_tag:backupdr_v1_generated_BackupDrProtectionSummary_ListResourceBackupConfigs_async
- */
+  /**
+   * Equivalent to `listResourceBackupConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve resource backup
+   *   configs. Format: 'projects/{project_id}/locations/{location}'. In Google
+   *   Cloud Backup and DR, locations map to Google Cloud regions, for example
+   *   **us-central1**.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will use 100 as default. Maximum value is
+   *   500 and values above 500 will be coerced to 500.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.ResourceBackupConfig|ResourceBackupConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_dr_protection_summary.list_resource_backup_configs.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDrProtectionSummary_ListResourceBackupConfigs_async
+   */
   listResourceBackupConfigsAsync(
-      request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.backupdr.v1.IResourceBackupConfig>{
+    request?: protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IResourceBackupConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listResourceBackupConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listResourceBackupConfigs iterate %j', request);
     return this.descriptors.page.listResourceBackupConfigs.asyncIterate(
       this.innerApiCalls['listResourceBackupConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.backupdr.v1.IResourceBackupConfig>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -629,40 +708,40 @@ export class BackupDrProtectionSummaryClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -676,41 +755,41 @@ export class BackupDrProtectionSummaryClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -724,12 +803,12 @@ export class BackupDrProtectionSummaryClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -764,12 +843,11 @@ export class BackupDrProtectionSummaryClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -802,7 +880,7 @@ export class BackupDrProtectionSummaryClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -821,7 +899,13 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} backup
    * @returns {string} Resource name string.
    */
-  backupPath(project:string,location:string,backupvault:string,datasource:string,backup:string) {
+  backupPath(
+    project: string,
+    location: string,
+    backupvault: string,
+    datasource: string,
+    backup: string,
+  ) {
     return this.pathTemplates.backupPathTemplate.render({
       project: project,
       location: location,
@@ -894,7 +978,7 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} backup_plan
    * @returns {string} Resource name string.
    */
-  backupPlanPath(project:string,location:string,backupPlan:string) {
+  backupPlanPath(project: string, location: string, backupPlan: string) {
     return this.pathTemplates.backupPlanPathTemplate.render({
       project: project,
       location: location,
@@ -910,7 +994,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBackupPlanName(backupPlanName: string) {
-    return this.pathTemplates.backupPlanPathTemplate.match(backupPlanName).project;
+    return this.pathTemplates.backupPlanPathTemplate.match(backupPlanName)
+      .project;
   }
 
   /**
@@ -921,7 +1006,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBackupPlanName(backupPlanName: string) {
-    return this.pathTemplates.backupPlanPathTemplate.match(backupPlanName).location;
+    return this.pathTemplates.backupPlanPathTemplate.match(backupPlanName)
+      .location;
   }
 
   /**
@@ -932,7 +1018,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the backup_plan.
    */
   matchBackupPlanFromBackupPlanName(backupPlanName: string) {
-    return this.pathTemplates.backupPlanPathTemplate.match(backupPlanName).backup_plan;
+    return this.pathTemplates.backupPlanPathTemplate.match(backupPlanName)
+      .backup_plan;
   }
 
   /**
@@ -943,7 +1030,11 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} backup_plan_association
    * @returns {string} Resource name string.
    */
-  backupPlanAssociationPath(project:string,location:string,backupPlanAssociation:string) {
+  backupPlanAssociationPath(
+    project: string,
+    location: string,
+    backupPlanAssociation: string,
+  ) {
     return this.pathTemplates.backupPlanAssociationPathTemplate.render({
       project: project,
       location: location,
@@ -959,7 +1050,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBackupPlanAssociationName(backupPlanAssociationName: string) {
-    return this.pathTemplates.backupPlanAssociationPathTemplate.match(backupPlanAssociationName).project;
+    return this.pathTemplates.backupPlanAssociationPathTemplate.match(
+      backupPlanAssociationName,
+    ).project;
   }
 
   /**
@@ -969,8 +1062,12 @@ export class BackupDrProtectionSummaryClient {
    *   A fully-qualified path representing BackupPlanAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromBackupPlanAssociationName(backupPlanAssociationName: string) {
-    return this.pathTemplates.backupPlanAssociationPathTemplate.match(backupPlanAssociationName).location;
+  matchLocationFromBackupPlanAssociationName(
+    backupPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.backupPlanAssociationPathTemplate.match(
+      backupPlanAssociationName,
+    ).location;
   }
 
   /**
@@ -980,8 +1077,12 @@ export class BackupDrProtectionSummaryClient {
    *   A fully-qualified path representing BackupPlanAssociation resource.
    * @returns {string} A string representing the backup_plan_association.
    */
-  matchBackupPlanAssociationFromBackupPlanAssociationName(backupPlanAssociationName: string) {
-    return this.pathTemplates.backupPlanAssociationPathTemplate.match(backupPlanAssociationName).backup_plan_association;
+  matchBackupPlanAssociationFromBackupPlanAssociationName(
+    backupPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.backupPlanAssociationPathTemplate.match(
+      backupPlanAssociationName,
+    ).backup_plan_association;
   }
 
   /**
@@ -993,7 +1094,12 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} revision
    * @returns {string} Resource name string.
    */
-  backupPlanRevisionPath(project:string,location:string,backupPlan:string,revision:string) {
+  backupPlanRevisionPath(
+    project: string,
+    location: string,
+    backupPlan: string,
+    revision: string,
+  ) {
     return this.pathTemplates.backupPlanRevisionPathTemplate.render({
       project: project,
       location: location,
@@ -1010,7 +1116,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBackupPlanRevisionName(backupPlanRevisionName: string) {
-    return this.pathTemplates.backupPlanRevisionPathTemplate.match(backupPlanRevisionName).project;
+    return this.pathTemplates.backupPlanRevisionPathTemplate.match(
+      backupPlanRevisionName,
+    ).project;
   }
 
   /**
@@ -1021,7 +1129,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBackupPlanRevisionName(backupPlanRevisionName: string) {
-    return this.pathTemplates.backupPlanRevisionPathTemplate.match(backupPlanRevisionName).location;
+    return this.pathTemplates.backupPlanRevisionPathTemplate.match(
+      backupPlanRevisionName,
+    ).location;
   }
 
   /**
@@ -1032,7 +1142,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the backup_plan.
    */
   matchBackupPlanFromBackupPlanRevisionName(backupPlanRevisionName: string) {
-    return this.pathTemplates.backupPlanRevisionPathTemplate.match(backupPlanRevisionName).backup_plan;
+    return this.pathTemplates.backupPlanRevisionPathTemplate.match(
+      backupPlanRevisionName,
+    ).backup_plan;
   }
 
   /**
@@ -1043,7 +1155,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the revision.
    */
   matchRevisionFromBackupPlanRevisionName(backupPlanRevisionName: string) {
-    return this.pathTemplates.backupPlanRevisionPathTemplate.match(backupPlanRevisionName).revision;
+    return this.pathTemplates.backupPlanRevisionPathTemplate.match(
+      backupPlanRevisionName,
+    ).revision;
   }
 
   /**
@@ -1054,7 +1168,7 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} backupvault
    * @returns {string} Resource name string.
    */
-  backupVaultPath(project:string,location:string,backupvault:string) {
+  backupVaultPath(project: string, location: string, backupvault: string) {
     return this.pathTemplates.backupVaultPathTemplate.render({
       project: project,
       location: location,
@@ -1070,7 +1184,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBackupVaultName(backupVaultName: string) {
-    return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName).project;
+    return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName)
+      .project;
   }
 
   /**
@@ -1081,7 +1196,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBackupVaultName(backupVaultName: string) {
-    return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName).location;
+    return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName)
+      .location;
   }
 
   /**
@@ -1092,7 +1208,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the backupvault.
    */
   matchBackupvaultFromBackupVaultName(backupVaultName: string) {
-    return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName).backupvault;
+    return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName)
+      .backupvault;
   }
 
   /**
@@ -1104,7 +1221,12 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} datasource
    * @returns {string} Resource name string.
    */
-  dataSourcePath(project:string,location:string,backupvault:string,datasource:string) {
+  dataSourcePath(
+    project: string,
+    location: string,
+    backupvault: string,
+    datasource: string,
+  ) {
     return this.pathTemplates.dataSourcePathTemplate.render({
       project: project,
       location: location,
@@ -1121,7 +1243,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataSourceName(dataSourceName: string) {
-    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName).project;
+    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName)
+      .project;
   }
 
   /**
@@ -1132,7 +1255,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataSourceName(dataSourceName: string) {
-    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName).location;
+    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName)
+      .location;
   }
 
   /**
@@ -1143,7 +1267,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the backupvault.
    */
   matchBackupvaultFromDataSourceName(dataSourceName: string) {
-    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName).backupvault;
+    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName)
+      .backupvault;
   }
 
   /**
@@ -1154,7 +1279,8 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the datasource.
    */
   matchDatasourceFromDataSourceName(dataSourceName: string) {
-    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName).datasource;
+    return this.pathTemplates.dataSourcePathTemplate.match(dataSourceName)
+      .datasource;
   }
 
   /**
@@ -1165,7 +1291,11 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} data_source_reference
    * @returns {string} Resource name string.
    */
-  dataSourceReferencePath(project:string,location:string,dataSourceReference:string) {
+  dataSourceReferencePath(
+    project: string,
+    location: string,
+    dataSourceReference: string,
+  ) {
     return this.pathTemplates.dataSourceReferencePathTemplate.render({
       project: project,
       location: location,
@@ -1181,7 +1311,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataSourceReferenceName(dataSourceReferenceName: string) {
-    return this.pathTemplates.dataSourceReferencePathTemplate.match(dataSourceReferenceName).project;
+    return this.pathTemplates.dataSourceReferencePathTemplate.match(
+      dataSourceReferenceName,
+    ).project;
   }
 
   /**
@@ -1192,7 +1324,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataSourceReferenceName(dataSourceReferenceName: string) {
-    return this.pathTemplates.dataSourceReferencePathTemplate.match(dataSourceReferenceName).location;
+    return this.pathTemplates.dataSourceReferencePathTemplate.match(
+      dataSourceReferenceName,
+    ).location;
   }
 
   /**
@@ -1202,8 +1336,12 @@ export class BackupDrProtectionSummaryClient {
    *   A fully-qualified path representing DataSourceReference resource.
    * @returns {string} A string representing the data_source_reference.
    */
-  matchDataSourceReferenceFromDataSourceReferenceName(dataSourceReferenceName: string) {
-    return this.pathTemplates.dataSourceReferencePathTemplate.match(dataSourceReferenceName).data_source_reference;
+  matchDataSourceReferenceFromDataSourceReferenceName(
+    dataSourceReferenceName: string,
+  ) {
+    return this.pathTemplates.dataSourceReferencePathTemplate.match(
+      dataSourceReferenceName,
+    ).data_source_reference;
   }
 
   /**
@@ -1213,7 +1351,7 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1250,7 +1388,11 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} managementserver
    * @returns {string} Resource name string.
    */
-  managementServerPath(project:string,location:string,managementserver:string) {
+  managementServerPath(
+    project: string,
+    location: string,
+    managementserver: string,
+  ) {
     return this.pathTemplates.managementServerPathTemplate.render({
       project: project,
       location: location,
@@ -1266,7 +1408,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromManagementServerName(managementServerName: string) {
-    return this.pathTemplates.managementServerPathTemplate.match(managementServerName).project;
+    return this.pathTemplates.managementServerPathTemplate.match(
+      managementServerName,
+    ).project;
   }
 
   /**
@@ -1277,7 +1421,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromManagementServerName(managementServerName: string) {
-    return this.pathTemplates.managementServerPathTemplate.match(managementServerName).location;
+    return this.pathTemplates.managementServerPathTemplate.match(
+      managementServerName,
+    ).location;
   }
 
   /**
@@ -1288,7 +1434,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the managementserver.
    */
   matchManagementserverFromManagementServerName(managementServerName: string) {
-    return this.pathTemplates.managementServerPathTemplate.match(managementServerName).managementserver;
+    return this.pathTemplates.managementServerPathTemplate.match(
+      managementServerName,
+    ).managementserver;
   }
 
   /**
@@ -1299,7 +1447,11 @@ export class BackupDrProtectionSummaryClient {
    * @param {string} resource_backup_config
    * @returns {string} Resource name string.
    */
-  resourceBackupConfigPath(project:string,location:string,resourceBackupConfig:string) {
+  resourceBackupConfigPath(
+    project: string,
+    location: string,
+    resourceBackupConfig: string,
+  ) {
     return this.pathTemplates.resourceBackupConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1315,7 +1467,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromResourceBackupConfigName(resourceBackupConfigName: string) {
-    return this.pathTemplates.resourceBackupConfigPathTemplate.match(resourceBackupConfigName).project;
+    return this.pathTemplates.resourceBackupConfigPathTemplate.match(
+      resourceBackupConfigName,
+    ).project;
   }
 
   /**
@@ -1326,7 +1480,9 @@ export class BackupDrProtectionSummaryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromResourceBackupConfigName(resourceBackupConfigName: string) {
-    return this.pathTemplates.resourceBackupConfigPathTemplate.match(resourceBackupConfigName).location;
+    return this.pathTemplates.resourceBackupConfigPathTemplate.match(
+      resourceBackupConfigName,
+    ).location;
   }
 
   /**
@@ -1336,8 +1492,12 @@ export class BackupDrProtectionSummaryClient {
    *   A fully-qualified path representing ResourceBackupConfig resource.
    * @returns {string} A string representing the resource_backup_config.
    */
-  matchResourceBackupConfigFromResourceBackupConfigName(resourceBackupConfigName: string) {
-    return this.pathTemplates.resourceBackupConfigPathTemplate.match(resourceBackupConfigName).resource_backup_config;
+  matchResourceBackupConfigFromResourceBackupConfigName(
+    resourceBackupConfigName: string,
+  ) {
+    return this.pathTemplates.resourceBackupConfigPathTemplate.match(
+      resourceBackupConfigName,
+    ).resource_backup_config;
   }
 
   /**
@@ -1348,12 +1508,16 @@ export class BackupDrProtectionSummaryClient {
    */
   close(): Promise<void> {
     if (this.backupDrProtectionSummaryStub && !this._terminated) {
-      return this.backupDrProtectionSummaryStub.then(stub => {
+      return this.backupDrProtectionSummaryStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

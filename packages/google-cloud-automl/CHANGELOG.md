@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/automl-v5.1.3...automl-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [5.1.3](https://github.com/googleapis/google-cloud-node/compare/automl-v5.1.2...automl-v5.1.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/automl-v5.1.1...automl-v5.1.2) (2026-05-01)
 
 
