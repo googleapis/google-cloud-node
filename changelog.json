@@ -5,6 +5,34 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "c244311061dc88451ebd9dba868db9e9d0fab2d0",
+          "message": "Update minimum Node version to 22",
+          "issues": [
+            "9103"
+          ],
+          "scope": "firestore",
+          "breakingChangeNote": "update minimum Node version to 22 ([#9103](https://github.com/googleapis/google-cloud-node/issues/9103))"
+        },
+        {
+          "type": "feat",
+          "sha": "9067c54b9373750acf976a4ba5f30ab3d41f6196",
+          "message": "Decouple handwritten sdk wrapper from embedded gapic clients",
+          "issues": [
+            "8928"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "f5063c6e-1c79-4d59-9933-ac051c99c626",
+      "createTime": "2026-08-11T00:02:28.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -89222,5 +89250,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-10T18:31:51.385Z"
+  "updateTime": "2026-08-11T00:02:28.696Z"
 }
