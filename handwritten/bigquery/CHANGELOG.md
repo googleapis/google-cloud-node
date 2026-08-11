@@ -5,7 +5,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
-## [8.3.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.1...bigquery-v8.3.2) (2026-08-04)
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.0...bigquery-v9.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **bigquery:** Remove owlbot configs ([#8936](https://github.com/googleapis/google-cloud-node/issues/8936)) ([7f8e23c](https://github.com/googleapis/google-cloud-node/commit/7f8e23c9652e34869c2fafe54f63cc63ac9acaa8))
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.1...bigquery-v9.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update bigquery to minimum Node version of 22. ([#9040](https://github.com/googleapis/google-cloud-node/issues/9040))
+
+### Features
+
+* Update bigquery to minimum Node version of 22. ([#9040](https://github.com/googleapis/google-cloud-node/issues/9040)) ([a4f28d7](https://github.com/googleapis/google-cloud-node/commit/a4f28d79b9c2ad17504ace417c3bb8300bab6505)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
 
 
 ### Bug Fixes

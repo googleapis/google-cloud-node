@@ -32,7 +32,8 @@ import {
 } from './helper';
 import {Big} from 'big.js';
 import {common as p} from 'protobufjs';
-import {google as spannerClient} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import spannerClient = protos.google;
 import {GoogleError} from 'google-gax';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
