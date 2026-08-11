@@ -1,0 +1,15 @@
+{
+    "api_description": "isochrones.googleapis.com API.",
+    "api_id": "isochrones.googleapis.com",
+    "api_shortname": "isochrones",
+    "default_version": "v1",
+    "distribution_name": "@google-maps/isochrones",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1950715&template=0",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "isochrones",
+    "name_pretty": "Isochrones",
+    "product_documentation": "https://developers.google.com/maps/documentation/isochrones/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
+}

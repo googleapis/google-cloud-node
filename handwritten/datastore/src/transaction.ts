@@ -17,7 +17,7 @@
 import {promisifyAll} from '@google-cloud/promisify';
 import {CallOptions} from 'google-gax';
 
-import {google} from '../protos/protos';
+import {google} from './protos';
 
 import {Datastore, TransactionOptions} from '.';
 import {Entities, Entity, entity} from './entity';

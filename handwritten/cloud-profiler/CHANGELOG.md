@@ -5,6 +5,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v7.0.1...cloud-profiler-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update cloud-profiler to minimum Node version of 22. ([#9043](https://github.com/googleapis/google-cloud-node/issues/9043))
+
+### Features
+
+* Update cloud-profiler to minimum Node version of 22. ([#9043](https://github.com/googleapis/google-cloud-node/issues/9043)) ([e46dbc3](https://github.com/googleapis/google-cloud-node/commit/e46dbc3a95ee2c77b5a32cfe432fb39a1dc0adea)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v7.0.0...cloud-profiler-v7.0.1) (2026-07-22)
 
 
