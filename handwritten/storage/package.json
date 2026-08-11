@@ -70,7 +70,7 @@
     "pretest": "npm run compile -- --sourceMap",
     "system-test:esm": "mkdir -p $HOME/.config && mocha build/esm/system-test --timeout 600000 --exit",
     "system-test": "mkdir -p $HOME/.config && mocha build/cjs/system-test --timeout 600000 --exit",
-    "test": "c8 mocha build/cjs/test"
+    "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" c8 mocha build/cjs/test"
   },
   "dependencies": {
     "@google-cloud/paginator": "^5.0.0",
@@ -123,7 +123,8 @@
     "path-to-regexp": "6.3.0",
     "tmp": "^0.2.0",
     "typescript": "^5.1.6",
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "cross-env": "^7.0.3"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage"
 }
