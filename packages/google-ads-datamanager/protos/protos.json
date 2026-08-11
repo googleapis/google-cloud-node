@@ -117,7 +117,7 @@
                           "type": "DeviceInfo",
                           "id": 8,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "mobileDeviceId": {
@@ -197,7 +197,7 @@
                           "type": "string",
                           "id": 22,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "source": {
@@ -522,6 +522,27 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "addressLine": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "administrativeArea": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -623,7 +644,9 @@
                             "mobileData",
                             "userIdData",
                             "ppidData",
-                            "compositeData"
+                            "compositeData",
+                            "googleUserIdData",
+                            "partnerProvidedIdData"
                           ]
                         }
                       },
@@ -659,6 +682,14 @@
                         "compositeData": {
                           "type": "CompositeData",
                           "id": 8
+                        },
+                        "googleUserIdData": {
+                          "type": "GoogleUserIdData",
+                          "id": 9
+                        },
+                        "partnerProvidedIdData": {
+                          "type": "PartnerProvidedIdData",
+                          "id": 10
                         },
                         "consent": {
                           "type": "Consent",
@@ -757,6 +788,30 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleUserIdData": {
+                      "fields": {
+                        "googleUserIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PartnerProvidedIdData": {
+                      "fields": {
+                        "partnerProvidedIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1349,7 +1404,9 @@
                         "INVALID_CUSTOM_VARIABLE_VALUE": 119,
                         "CUSTOM_VARIABLE_NOT_FOUND": 120,
                         "BASELINE_LOCATION_AUTO_DETECTION_FAILED": 122,
-                        "INSIGHTS_MISSING_FOR_DIMENSION": 123
+                        "INSIGHTS_MISSING_FOR_DIMENSION": 123,
+                        "REQUIRED_PREREQUISITE_LINK_MISSING": 124,
+                        "INVALID_REMOVE_AS_OF_TIME": 125
                       }
                     },
                     "Event": {
@@ -1835,6 +1892,22 @@
                             }
                           ]
                         },
+                        "RemoveAllAudienceMembers": {
+                          "requestType": "RemoveAllAudienceMembersRequest",
+                          "responseType": "RemoveAllAudienceMembersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/audienceMembers:removeAll",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/audienceMembers:removeAll",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "IngestEvents": {
                           "requestType": "IngestEventsRequest",
                           "responseType": "IngestEventsResponse",
@@ -1943,6 +2016,11 @@
                         "requestId": {
                           "type": "string",
                           "id": 1
+                        },
+                        "fieldWarnings": {
+                          "rule": "repeated",
+                          "type": "FieldWarning",
+                          "id": 2
                         }
                       }
                     },
@@ -1988,6 +2066,40 @@
                       }
                     },
                     "RemoveAudienceMembersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RemoveAllAudienceMembersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "removeAsOfTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveAllAudienceMembersResponse": {
                       "fields": {
                         "requestId": {
                           "type": "string",
@@ -2048,6 +2160,11 @@
                         "requestId": {
                           "type": "string",
                           "id": 1
+                        },
+                        "fieldWarnings": {
+                          "rule": "repeated",
+                          "type": "FieldWarning",
+                          "id": 2
                         }
                       }
                     },
@@ -2065,13 +2182,14 @@
                           "type": "EncryptionInfo",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "validateOnly": {
                           "type": "bool",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -2107,13 +2225,154 @@
                         "BASE64": 2
                       }
                     },
+                    "ErrorInfo": {
+                      "fields": {
+                        "errorCounts": {
+                          "rule": "repeated",
+                          "type": "ErrorCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ErrorCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingErrorReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "WarningInfo": {
+                      "fields": {
+                        "warningCounts": {
+                          "rule": "repeated",
+                          "type": "WarningCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "WarningCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingWarningReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProcessingErrorReason": {
+                      "values": {
+                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
+                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
+                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
+                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
+                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
+                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
+                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
+                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
+                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
+                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
+                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
+                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
+                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
+                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
+                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
+                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
+                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
+                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
+                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
+                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
+                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
+                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
+                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26,
+                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28,
+                        "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND": 29,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID": 30,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID": 31,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID": 32,
+                        "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS": 33,
+                        "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT": 34,
+                        "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND": 35,
+                        "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR": 36,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID": 37,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND": 38,
+                        "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK": 39,
+                        "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK": 40,
+                        "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
+                        "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
+                        "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43,
+                        "PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING": 44
+                      }
+                    },
+                    "ProcessingWarningReason": {
+                      "values": {
+                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
+                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
+                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
+                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
+                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
+                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
+                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
+                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
+                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
+                      }
+                    },
+                    "FieldWarning": {
+                      "fields": {
+                        "reason": {
+                          "type": "WarningReason",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "field": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "WarningReason": {
+                      "values": {
+                        "WARNING_REASON_UNSPECIFIED": 0,
+                        "WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 1,
+                        "WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED": 2,
+                        "WARNING_REASON_CART_DATA_NOT_SUPPORTED_WITH_GBRAID_OR_WBRAID": 3,
+                        "WARNING_REASON_CART_DATA_ITEM_MERCHANT_PRODUCT_ID_MISSING": 4,
+                        "WARNING_REASON_CART_DATA_ITEM_UNIT_PRICE_MISSING": 5,
+                        "WARNING_REASON_GENERIC": 6,
+                        "WARNING_REASON_INVALID_CLIENT_ID": 7,
+                        "WARNING_REASON_INVALID_SUBDIVISION_CODE": 8,
+                        "WARNING_REASON_INVALID_REGION_CODE": 9,
+                        "WARNING_REASON_INVALID_SUBCONTINENT_CODE": 10,
+                        "WARNING_REASON_INVALID_CONTINENT_CODE": 11,
+                        "WARNING_REASON_INVALID_DEVICE_CATEGORY": 12,
+                        "WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION": 13,
+                        "WARNING_REASON_INVALID_MERCHANT_ID": 14
+                      }
+                    },
                     "RequestStatusPerDestination": {
                       "oneofs": {
                         "status": {
                           "oneof": [
                             "audienceMembersIngestionStatus",
                             "eventsIngestionStatus",
-                            "audienceMembersRemovalStatus"
+                            "audienceMembersRemovalStatus",
+                            "removeAllAudienceMembersStatus"
                           ]
                         }
                       },
@@ -2145,6 +2404,10 @@
                         "audienceMembersRemovalStatus": {
                           "type": "RemoveAudienceMembersStatus",
                           "id": 6
+                        },
+                        "removeAllAudienceMembersStatus": {
+                          "type": "RemoveAllAudienceMembersStatus",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -2166,7 +2429,9 @@
                                 "pairDataIngestionStatus",
                                 "userIdDataIngestionStatus",
                                 "ppidDataIngestionStatus",
-                                "compositeDataIngestionStatus"
+                                "compositeDataIngestionStatus",
+                                "googleUserIdDataIngestionStatus",
+                                "partnerProvidedIdDataIngestionStatus"
                               ]
                             }
                           },
@@ -2194,6 +2459,14 @@
                             "compositeDataIngestionStatus": {
                               "type": "IngestCompositeDataStatus",
                               "id": 6
+                            },
+                            "googleUserIdDataIngestionStatus": {
+                              "type": "IngestGoogleUserIdDataStatus",
+                              "id": 7
+                            },
+                            "partnerProvidedIdDataIngestionStatus": {
+                              "type": "IngestPartnerProvidedIdDataStatus",
+                              "id": 8
                             }
                           }
                         },
@@ -2206,7 +2479,9 @@
                                 "pairDataRemovalStatus",
                                 "userIdDataRemovalStatus",
                                 "ppidDataRemovalStatus",
-                                "compositeDataRemovalStatus"
+                                "compositeDataRemovalStatus",
+                                "googleUserIdDataRemovalStatus",
+                                "partnerProvidedIdDataRemovalStatus"
                               ]
                             }
                           },
@@ -2234,8 +2509,19 @@
                             "compositeDataRemovalStatus": {
                               "type": "RemoveCompositeDataStatus",
                               "id": 6
+                            },
+                            "googleUserIdDataRemovalStatus": {
+                              "type": "RemoveGoogleUserIdDataStatus",
+                              "id": 7
+                            },
+                            "partnerProvidedIdDataRemovalStatus": {
+                              "type": "RemovePartnerProvidedIdDataStatus",
+                              "id": 8
                             }
                           }
+                        },
+                        "RemoveAllAudienceMembersStatus": {
+                          "fields": {}
                         },
                         "IngestEventsStatus": {
                           "fields": {
@@ -2399,6 +2685,54 @@
                             }
                           }
                         },
+                        "IngestGoogleUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "googleUserIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemoveGoogleUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "googleUserIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestPartnerProvidedIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "partnerProvidedIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemovePartnerProvidedIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "partnerProvidedIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
                         "DataTypeCount": {
                           "fields": {
                             "type": {
@@ -2435,110 +2769,6 @@
                         "MATCH_RATE_RANGE_71_TO_80": 8,
                         "MATCH_RATE_RANGE_81_TO_90": 9,
                         "MATCH_RATE_RANGE_91_TO_100": 10
-                      }
-                    },
-                    "ErrorInfo": {
-                      "fields": {
-                        "errorCounts": {
-                          "rule": "repeated",
-                          "type": "ErrorCount",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ErrorCount": {
-                      "fields": {
-                        "recordCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "ProcessingErrorReason",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "WarningInfo": {
-                      "fields": {
-                        "warningCounts": {
-                          "rule": "repeated",
-                          "type": "WarningCount",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "WarningCount": {
-                      "fields": {
-                        "recordCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "ProcessingWarningReason",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ProcessingErrorReason": {
-                      "values": {
-                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
-                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
-                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
-                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
-                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
-                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
-                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
-                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
-                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
-                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
-                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
-                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
-                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
-                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
-                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
-                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
-                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
-                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
-                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
-                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
-                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
-                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
-                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
-                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
-                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
-                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
-                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
-                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26,
-                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28,
-                        "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND": 29,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID": 30,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID": 31,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID": 32,
-                        "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS": 33,
-                        "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT": 34,
-                        "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND": 35,
-                        "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR": 36,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID": 37,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND": 38,
-                        "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK": 39,
-                        "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK": 40,
-                        "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
-                        "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
-                        "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43
-                      }
-                    },
-                    "ProcessingWarningReason": {
-                      "values": {
-                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
-                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
-                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
-                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
-                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
-                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
-                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
-                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
-                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
-                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
                       }
                     },
                     "TermsOfService": {
@@ -5053,6 +5283,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -5162,6 +5396,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -5219,6 +5457,79 @@
                 }
               }
             },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -5269,6 +5580,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -5463,6 +5776,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5738,7 +6055,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -5798,7 +6118,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -5840,6 +6162,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5912,6 +6238,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6027,6 +6357,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -6106,6 +6440,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -6125,6 +6463,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6163,6 +6505,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6208,6 +6554,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -6234,6 +6584,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6268,6 +6622,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6409,8 +6767,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -6422,6 +6780,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -6499,7 +6868,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -6518,6 +6888,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }

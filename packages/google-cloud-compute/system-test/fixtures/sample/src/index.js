@@ -43,6 +43,7 @@ function main() {
   const globalPublicDelegatedPrefixesClient = new compute.GlobalPublicDelegatedPrefixesClient();
   const globalVmExtensionPoliciesClient = new compute.GlobalVmExtensionPoliciesClient();
   const healthChecksClient = new compute.HealthChecksClient();
+  const hostsClient = new compute.HostsClient();
   const imageFamilyViewsClient = new compute.ImageFamilyViewsClient();
   const imagesClient = new compute.ImagesClient();
   const instanceGroupManagerResizeRequestsClient = new compute.InstanceGroupManagerResizeRequestsClient();
@@ -111,6 +112,7 @@ function main() {
   const regionTargetTcpProxiesClient = new compute.RegionTargetTcpProxiesClient();
   const regionUrlMapsClient = new compute.RegionUrlMapsClient();
   const regionZonesClient = new compute.RegionZonesClient();
+  const reliabilityRisksClient = new compute.ReliabilityRisksClient();
   const reservationBlocksClient = new compute.ReservationBlocksClient();
   const reservationsClient = new compute.ReservationsClient();
   const reservationSlotsClient = new compute.ReservationSlotsClient();

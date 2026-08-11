@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [11.0.0](https://github.com/googleapis/google-cloud-node/compare/datastore-v10.1.1...datastore-v11.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update datastore to minimum Node version of 22. ([#9045](https://github.com/googleapis/google-cloud-node/issues/9045))
+
+### Features
+
+* **datastore:** Split gapic and proto usage from the handwritten library into datastore-api ([#8938](https://github.com/googleapis/google-cloud-node/issues/8938)) ([182bda2](https://github.com/googleapis/google-cloud-node/commit/182bda2c8e92b27c93cd36e586d490d84a793e2d))
+* Update datastore to minimum Node version of 22. ([#9045](https://github.com/googleapis/google-cloud-node/issues/9045)) ([a880b6a](https://github.com/googleapis/google-cloud-node/commit/a880b6a6220a2aa1a450d481892b763eba094dee)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [10.1.1](https://github.com/googleapis/google-cloud-node/compare/datastore-v10.1.0...datastore-v10.1.1) (2026-05-11)
 
 

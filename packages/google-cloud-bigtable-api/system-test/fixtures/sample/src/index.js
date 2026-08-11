@@ -18,11 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const admin = require('@google-cloud/bigtable-api');
+const bigtable = require('@google-cloud/bigtable-api');
 
 function main() {
-  const bigtableInstanceAdminClient = new admin.BigtableInstanceAdminClient();
-  const bigtableTableAdminClient = new admin.BigtableTableAdminClient();
+  const bigtableClient = new bigtable.BigtableClient();
 }
 
 main();

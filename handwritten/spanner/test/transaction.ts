@@ -22,9 +22,9 @@ import {common as p} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 
-import {protos} from '../src';
 import {codec} from '../src/codec';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {
   CLOUD_RESOURCE_HEADER,
   LEADER_AWARE_ROUTING_HEADER,
