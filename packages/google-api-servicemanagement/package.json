@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/service-management",
-  "version": "3.2.2",
+  "version": "4.0.0",
   "description": "Service management client for Node.js",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/vpc-access",
-  "version": "4.2.2",
+  "version": "5.0.0",
   "description": "vpcaccess client for Node.js",
   "repository": {
     "type": "git",

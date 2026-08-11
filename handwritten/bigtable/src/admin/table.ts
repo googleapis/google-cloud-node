@@ -15,9 +15,14 @@
 import {BigtableTableAdminClient} from './v2';
 import {LROperation, CallOptions, ClientOptions} from 'google-gax';
 import type * as gax from 'google-gax';
+import * as fs from 'node:fs';
 
-import {google} from '../../protos/protos';
-import jsonProtos = require('../../protos/protos.json');
+import {protos} from '@google-cloud/bigtable-api';
+import google = protos.google;
+import {getProtoPath} from '../utils/protos';
+
+const JSON_PATH = getProtoPath('protos.json');
+const JSON_PROTOS = JSON.parse(fs.readFileSync(JSON_PATH, 'utf-8'));
 
 /**
  * Service for creating, configuring, and deleting Cloud Bigtable tables.
@@ -39,7 +44,7 @@ export class TableAdminClient extends BigtableTableAdminClient {
   ) {
     super(opts, gaxInstance);
 
-    const protoFilesRoot = this.pGaxModule.protobufFromJSON(jsonProtos);
+    const protoFilesRoot = this.pGaxModule.protobufFromJSON(JSON_PROTOS);
 
     // This one isn't included since it's not a directly callable method on the proto.
     const optimizeRestoredTableResponse = protoFilesRoot.lookup(
@@ -62,7 +67,7 @@ export class TableAdminClient extends BigtableTableAdminClient {
 
   // We want to use the same gax module as the base class, but it's private.
   private get pGaxModule() {
-    return this['_gaxModule'];
+    return this['_gaxModule'] as typeof gax;
   }
 
   // We want to use the same logger as the base class, but it's private.
