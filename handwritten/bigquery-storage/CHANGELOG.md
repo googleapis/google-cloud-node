@@ -1,12 +1,17 @@
 # Changelog
 
 
-## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.2...bigquery-storage-v5.2.0) (2026-08-04)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.2...bigquery-storage-v6.0.0) (2026-08-04)
 
+
+### ⚠ BREAKING CHANGES
+
+* Update bigquery-storage to minimum Node version of 22. ([#9041](https://github.com/googleapis/google-cloud-node/issues/9041))
 
 ### Features
 
 * **bigquery-storage:** Split GAPIC from the bigquery-storage handwritten package ([#8930](https://github.com/googleapis/google-cloud-node/issues/8930)) ([93c7200](https://github.com/googleapis/google-cloud-node/commit/93c7200475f6844cdf5b63437543f680033c1f8b))
+* Update bigquery-storage to minimum Node version of 22. ([#9041](https://github.com/googleapis/google-cloud-node/issues/9041)) ([9d8dbe6](https://github.com/googleapis/google-cloud-node/commit/9d8dbe65d1b4fc212dea931a4c739e1cc7661b85)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
 
 ## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.1...bigquery-storage-v5.1.2) (2026-06-16)
 

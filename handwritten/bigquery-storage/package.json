@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-storage",
-  "version": "5.2.0",
+  "version": "6.0.0",
   "description": "Client for the BigQuery Storage API",
   "repository": {
     "type": "git",
@@ -66,7 +66,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage"
 }

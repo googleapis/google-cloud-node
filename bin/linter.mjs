@@ -26,13 +26,7 @@ const tsconfigCache = new Map();
 // --- Main Runner (Entry Point) ---
 async function run() {
   try {
-    const isStrict = Boolean(process.argv.includes('--strict'));
-    let changedTsFiles;
-    if (isStrict) {
-      changedTsFiles = getChangedFilesStrict();
-    } else {
-      changedTsFiles = getChangedFiles();
-    }
+    const changedTsFiles = getChangedFiles();
 
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
@@ -69,56 +63,16 @@ function runGit(args, options = {}) {
   });
 }
 
-function getChangedFilesStrict() {
-  const gitDiffArg = process.env.GIT_DIFF_ARG;
-
-  if (!gitDiffArg) {
-    throw new Error(
-      'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
-      'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.'
-    );
-  }
-
-  console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
-
-  const args = gitDiffArg.trim().split(/\s+/);
-
-  try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      ...args,
-      '--',
-      '*.ts',
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
-  } catch (err) {
-    if (err.status !== 1) {
-      throw new Error(
-        `Strict mode error: git diff --quiet ${gitDiffArg} failed with exit code ${err.status}.\n` +
-        `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
-        `Details: ${String(err.stderr || err.message || '').trim()}`
-      );
-    }
-  }
-}
-
 /**
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
   const base = process.env.GITHUB_BASE_REF || 'main';
   const refsToTry = [
-    `origin/${base}...HEAD`,
-    `${base}...HEAD`,
-    `upstream/${base}...HEAD`,
-    `origin/${base}`,
     base,
     `upstream/${base}`,
+    `origin/${base}`,
+    'FETCH_HEAD',
     'HEAD~1',
     'HEAD^',
   ];

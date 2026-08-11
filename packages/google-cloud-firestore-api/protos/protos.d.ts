@@ -11421,6 +11421,103 @@ export namespace google {
                 }
             }
 
+            /** Properties of a RequestOptions. */
+            interface IRequestOptions {
+
+                /** RequestOptions requestTags */
+                requestTags?: (string[]|null);
+            }
+
+            /** Represents a RequestOptions. */
+            class RequestOptions implements IRequestOptions {
+
+                /**
+                 * Constructs a new RequestOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.firestore.v1.IRequestOptions);
+
+                /** RequestOptions requestTags. */
+                public requestTags: string[];
+
+                /**
+                 * Creates a new RequestOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RequestOptions instance
+                 */
+                public static create(properties?: google.firestore.v1.IRequestOptions): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Encodes the specified RequestOptions message. Does not implicitly {@link google.firestore.v1.RequestOptions.verify|verify} messages.
+                 * @param message RequestOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.firestore.v1.IRequestOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RequestOptions message, length delimited. Does not implicitly {@link google.firestore.v1.RequestOptions.verify|verify} messages.
+                 * @param message RequestOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.firestore.v1.IRequestOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RequestOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RequestOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Decodes a RequestOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RequestOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Verifies a RequestOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RequestOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RequestOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Creates a plain object from a RequestOptions message. Also converts values to other types if specified.
+                 * @param message RequestOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.firestore.v1.RequestOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RequestOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RequestOptions
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of an ExplainStats. */
             interface IExplainStats {
 
@@ -11913,6 +12010,9 @@ export namespace google {
 
                 /** GetDocumentRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** GetDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a GetDocumentRequest. */
@@ -11935,6 +12035,9 @@ export namespace google {
 
                 /** GetDocumentRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** GetDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** GetDocumentRequest consistencySelector. */
                 public consistencySelector?: ("transaction"|"readTime");
@@ -12046,6 +12149,9 @@ export namespace google {
 
                 /** ListDocumentsRequest showMissing */
                 showMissing?: (boolean|null);
+
+                /** ListDocumentsRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a ListDocumentsRequest. */
@@ -12083,6 +12189,9 @@ export namespace google {
 
                 /** ListDocumentsRequest showMissing. */
                 public showMissing: boolean;
+
+                /** ListDocumentsRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ListDocumentsRequest consistencySelector. */
                 public consistencySelector?: ("transaction"|"readTime");
@@ -12285,6 +12394,9 @@ export namespace google {
 
                 /** CreateDocumentRequest mask */
                 mask?: (google.firestore.v1.IDocumentMask|null);
+
+                /** CreateDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a CreateDocumentRequest. */
@@ -12310,6 +12422,9 @@ export namespace google {
 
                 /** CreateDocumentRequest mask. */
                 public mask?: (google.firestore.v1.IDocumentMask|null);
+
+                /** CreateDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new CreateDocumentRequest instance using the specified properties.
@@ -12403,6 +12518,9 @@ export namespace google {
 
                 /** UpdateDocumentRequest currentDocument */
                 currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** UpdateDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents an UpdateDocumentRequest. */
@@ -12425,6 +12543,9 @@ export namespace google {
 
                 /** UpdateDocumentRequest currentDocument. */
                 public currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** UpdateDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new UpdateDocumentRequest instance using the specified properties.
@@ -12512,6 +12633,9 @@ export namespace google {
 
                 /** DeleteDocumentRequest currentDocument */
                 currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** DeleteDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a DeleteDocumentRequest. */
@@ -12528,6 +12652,9 @@ export namespace google {
 
                 /** DeleteDocumentRequest currentDocument. */
                 public currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** DeleteDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new DeleteDocumentRequest instance using the specified properties.
@@ -12627,6 +12754,9 @@ export namespace google {
 
                 /** BatchGetDocumentsRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** BatchGetDocumentsRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a BatchGetDocumentsRequest. */
@@ -12655,6 +12785,9 @@ export namespace google {
 
                 /** BatchGetDocumentsRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** BatchGetDocumentsRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** BatchGetDocumentsRequest consistencySelector. */
                 public consistencySelector?: ("transaction"|"newTransaction"|"readTime");
@@ -12863,6 +12996,9 @@ export namespace google {
 
                 /** BeginTransactionRequest options */
                 options?: (google.firestore.v1.ITransactionOptions|null);
+
+                /** BeginTransactionRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a BeginTransactionRequest. */
@@ -12879,6 +13015,9 @@ export namespace google {
 
                 /** BeginTransactionRequest options. */
                 public options?: (google.firestore.v1.ITransactionOptions|null);
+
+                /** BeginTransactionRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new BeginTransactionRequest instance using the specified properties.
@@ -13066,6 +13205,9 @@ export namespace google {
 
                 /** CommitRequest transaction */
                 transaction?: (Uint8Array|Buffer|string|null);
+
+                /** CommitRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a CommitRequest. */
@@ -13085,6 +13227,9 @@ export namespace google {
 
                 /** CommitRequest transaction. */
                 public transaction: (Uint8Array|Buffer|string);
+
+                /** CommitRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new CommitRequest instance using the specified properties.
@@ -13275,6 +13420,9 @@ export namespace google {
 
                 /** RollbackRequest transaction */
                 transaction?: (Uint8Array|Buffer|string|null);
+
+                /** RollbackRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a RollbackRequest. */
@@ -13291,6 +13439,9 @@ export namespace google {
 
                 /** RollbackRequest transaction. */
                 public transaction: (Uint8Array|Buffer|string);
+
+                /** RollbackRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new RollbackRequest instance using the specified properties.
@@ -13390,6 +13541,9 @@ export namespace google {
 
                 /** RunQueryRequest explainOptions */
                 explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunQueryRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a RunQueryRequest. */
@@ -13418,6 +13572,9 @@ export namespace google {
 
                 /** RunQueryRequest explainOptions. */
                 public explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunQueryRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** RunQueryRequest queryType. */
                 public queryType?: "structuredQuery";
@@ -13653,6 +13810,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest autoCommitTransaction */
                 autoCommitTransaction?: (boolean|null);
+
+                /** ExecutePipelineRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents an ExecutePipelineRequest. */
@@ -13681,6 +13841,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest autoCommitTransaction. */
                 public autoCommitTransaction: boolean;
+
+                /** ExecutePipelineRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ExecutePipelineRequest pipelineType. */
                 public pipelineType?: "structuredPipeline";
@@ -13901,6 +14064,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest explainOptions */
                 explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunAggregationQueryRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a RunAggregationQueryRequest. */
@@ -13929,6 +14095,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest explainOptions. */
                 public explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunAggregationQueryRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** RunAggregationQueryRequest queryType. */
                 public queryType?: "structuredAggregationQuery";
@@ -14149,6 +14318,9 @@ export namespace google {
 
                 /** PartitionQueryRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** PartitionQueryRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a PartitionQueryRequest. */
@@ -14177,6 +14349,9 @@ export namespace google {
 
                 /** PartitionQueryRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** PartitionQueryRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** PartitionQueryRequest queryType. */
                 public queryType?: "structuredQuery";
@@ -14382,6 +14557,9 @@ export namespace google {
 
                 /** WriteRequest labels */
                 labels?: ({ [k: string]: string }|null);
+
+                /** WriteRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a WriteRequest. */
@@ -14407,6 +14585,9 @@ export namespace google {
 
                 /** WriteRequest labels. */
                 public labels: { [k: string]: string };
+
+                /** WriteRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new WriteRequest instance using the specified properties.
@@ -14615,6 +14796,9 @@ export namespace google {
 
                 /** ListenRequest labels */
                 labels?: ({ [k: string]: string }|null);
+
+                /** ListenRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a ListenRequest. */
@@ -14637,6 +14821,9 @@ export namespace google {
 
                 /** ListenRequest labels. */
                 public labels: { [k: string]: string };
+
+                /** ListenRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ListenRequest targetChange. */
                 public targetChange?: ("addTarget"|"removeTarget");
@@ -15335,6 +15522,9 @@ export namespace google {
 
                 /** ListCollectionIdsRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ListCollectionIdsRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a ListCollectionIdsRequest. */
@@ -15357,6 +15547,9 @@ export namespace google {
 
                 /** ListCollectionIdsRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ListCollectionIdsRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ListCollectionIdsRequest consistencySelector. */
                 public consistencySelector?: "readTime";
@@ -15553,6 +15746,9 @@ export namespace google {
 
                 /** BatchWriteRequest labels */
                 labels?: ({ [k: string]: string }|null);
+
+                /** BatchWriteRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a BatchWriteRequest. */
@@ -15572,6 +15768,9 @@ export namespace google {
 
                 /** BatchWriteRequest labels. */
                 public labels: { [k: string]: string };
+
+                /** BatchWriteRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new BatchWriteRequest instance using the specified properties.
@@ -18976,6820 +19175,6 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
-
-        /** Namespace v1beta1. */
-        namespace v1beta1 {
-
-            /** Properties of a DocumentMask. */
-            interface IDocumentMask {
-
-                /** DocumentMask fieldPaths */
-                fieldPaths?: (string[]|null);
-            }
-
-            /** Represents a DocumentMask. */
-            class DocumentMask implements IDocumentMask {
-
-                /**
-                 * Constructs a new DocumentMask.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDocumentMask);
-
-                /** DocumentMask fieldPaths. */
-                public fieldPaths: string[];
-
-                /**
-                 * Creates a new DocumentMask instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DocumentMask instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDocumentMask): google.firestore.v1beta1.DocumentMask;
-
-                /**
-                 * Encodes the specified DocumentMask message. Does not implicitly {@link google.firestore.v1beta1.DocumentMask.verify|verify} messages.
-                 * @param message DocumentMask message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDocumentMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DocumentMask message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DocumentMask.verify|verify} messages.
-                 * @param message DocumentMask message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDocumentMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DocumentMask message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DocumentMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DocumentMask;
-
-                /**
-                 * Decodes a DocumentMask message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DocumentMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DocumentMask;
-
-                /**
-                 * Verifies a DocumentMask message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DocumentMask message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DocumentMask
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DocumentMask;
-
-                /**
-                 * Creates a plain object from a DocumentMask message. Also converts values to other types if specified.
-                 * @param message DocumentMask
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.DocumentMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DocumentMask to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DocumentMask
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a Precondition. */
-            interface IPrecondition {
-
-                /** Precondition exists */
-                exists?: (boolean|null);
-
-                /** Precondition updateTime */
-                updateTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a Precondition. */
-            class Precondition implements IPrecondition {
-
-                /**
-                 * Constructs a new Precondition.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IPrecondition);
-
-                /** Precondition exists. */
-                public exists?: (boolean|null);
-
-                /** Precondition updateTime. */
-                public updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** Precondition conditionType. */
-                public conditionType?: ("exists"|"updateTime");
-
-                /**
-                 * Creates a new Precondition instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Precondition instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IPrecondition): google.firestore.v1beta1.Precondition;
-
-                /**
-                 * Encodes the specified Precondition message. Does not implicitly {@link google.firestore.v1beta1.Precondition.verify|verify} messages.
-                 * @param message Precondition message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IPrecondition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Precondition message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Precondition.verify|verify} messages.
-                 * @param message Precondition message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IPrecondition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Precondition message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Precondition
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Precondition;
-
-                /**
-                 * Decodes a Precondition message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Precondition
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Precondition;
-
-                /**
-                 * Verifies a Precondition message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Precondition message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Precondition
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Precondition;
-
-                /**
-                 * Creates a plain object from a Precondition message. Also converts values to other types if specified.
-                 * @param message Precondition
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.Precondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Precondition to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Precondition
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a TransactionOptions. */
-            interface ITransactionOptions {
-
-                /** TransactionOptions readOnly */
-                readOnly?: (google.firestore.v1beta1.TransactionOptions.IReadOnly|null);
-
-                /** TransactionOptions readWrite */
-                readWrite?: (google.firestore.v1beta1.TransactionOptions.IReadWrite|null);
-            }
-
-            /** Represents a TransactionOptions. */
-            class TransactionOptions implements ITransactionOptions {
-
-                /**
-                 * Constructs a new TransactionOptions.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ITransactionOptions);
-
-                /** TransactionOptions readOnly. */
-                public readOnly?: (google.firestore.v1beta1.TransactionOptions.IReadOnly|null);
-
-                /** TransactionOptions readWrite. */
-                public readWrite?: (google.firestore.v1beta1.TransactionOptions.IReadWrite|null);
-
-                /** TransactionOptions mode. */
-                public mode?: ("readOnly"|"readWrite");
-
-                /**
-                 * Creates a new TransactionOptions instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns TransactionOptions instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ITransactionOptions): google.firestore.v1beta1.TransactionOptions;
-
-                /**
-                 * Encodes the specified TransactionOptions message. Does not implicitly {@link google.firestore.v1beta1.TransactionOptions.verify|verify} messages.
-                 * @param message TransactionOptions message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ITransactionOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified TransactionOptions message, length delimited. Does not implicitly {@link google.firestore.v1beta1.TransactionOptions.verify|verify} messages.
-                 * @param message TransactionOptions message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ITransactionOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a TransactionOptions message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns TransactionOptions
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.TransactionOptions;
-
-                /**
-                 * Decodes a TransactionOptions message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns TransactionOptions
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.TransactionOptions;
-
-                /**
-                 * Verifies a TransactionOptions message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a TransactionOptions message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns TransactionOptions
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.TransactionOptions;
-
-                /**
-                 * Creates a plain object from a TransactionOptions message. Also converts values to other types if specified.
-                 * @param message TransactionOptions
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.TransactionOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this TransactionOptions to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for TransactionOptions
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace TransactionOptions {
-
-                /** Properties of a ReadWrite. */
-                interface IReadWrite {
-
-                    /** ReadWrite retryTransaction */
-                    retryTransaction?: (Uint8Array|Buffer|string|null);
-                }
-
-                /** Represents a ReadWrite. */
-                class ReadWrite implements IReadWrite {
-
-                    /**
-                     * Constructs a new ReadWrite.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.TransactionOptions.IReadWrite);
-
-                    /** ReadWrite retryTransaction. */
-                    public retryTransaction: (Uint8Array|Buffer|string);
-
-                    /**
-                     * Creates a new ReadWrite instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ReadWrite instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.TransactionOptions.IReadWrite): google.firestore.v1beta1.TransactionOptions.ReadWrite;
-
-                    /**
-                     * Encodes the specified ReadWrite message. Does not implicitly {@link google.firestore.v1beta1.TransactionOptions.ReadWrite.verify|verify} messages.
-                     * @param message ReadWrite message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.TransactionOptions.IReadWrite, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ReadWrite message, length delimited. Does not implicitly {@link google.firestore.v1beta1.TransactionOptions.ReadWrite.verify|verify} messages.
-                     * @param message ReadWrite message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.TransactionOptions.IReadWrite, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ReadWrite message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ReadWrite
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.TransactionOptions.ReadWrite;
-
-                    /**
-                     * Decodes a ReadWrite message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ReadWrite
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.TransactionOptions.ReadWrite;
-
-                    /**
-                     * Verifies a ReadWrite message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ReadWrite message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ReadWrite
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.TransactionOptions.ReadWrite;
-
-                    /**
-                     * Creates a plain object from a ReadWrite message. Also converts values to other types if specified.
-                     * @param message ReadWrite
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.TransactionOptions.ReadWrite, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ReadWrite to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ReadWrite
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ReadOnly. */
-                interface IReadOnly {
-
-                    /** ReadOnly readTime */
-                    readTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a ReadOnly. */
-                class ReadOnly implements IReadOnly {
-
-                    /**
-                     * Constructs a new ReadOnly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.TransactionOptions.IReadOnly);
-
-                    /** ReadOnly readTime. */
-                    public readTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ReadOnly consistencySelector. */
-                    public consistencySelector?: "readTime";
-
-                    /**
-                     * Creates a new ReadOnly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ReadOnly instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.TransactionOptions.IReadOnly): google.firestore.v1beta1.TransactionOptions.ReadOnly;
-
-                    /**
-                     * Encodes the specified ReadOnly message. Does not implicitly {@link google.firestore.v1beta1.TransactionOptions.ReadOnly.verify|verify} messages.
-                     * @param message ReadOnly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.TransactionOptions.IReadOnly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ReadOnly message, length delimited. Does not implicitly {@link google.firestore.v1beta1.TransactionOptions.ReadOnly.verify|verify} messages.
-                     * @param message ReadOnly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.TransactionOptions.IReadOnly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ReadOnly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ReadOnly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.TransactionOptions.ReadOnly;
-
-                    /**
-                     * Decodes a ReadOnly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ReadOnly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.TransactionOptions.ReadOnly;
-
-                    /**
-                     * Verifies a ReadOnly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ReadOnly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ReadOnly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.TransactionOptions.ReadOnly;
-
-                    /**
-                     * Creates a plain object from a ReadOnly message. Also converts values to other types if specified.
-                     * @param message ReadOnly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.TransactionOptions.ReadOnly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ReadOnly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ReadOnly
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-            }
-
-            /** Properties of a Document. */
-            interface IDocument {
-
-                /** Document name */
-                name?: (string|null);
-
-                /** Document fields */
-                fields?: ({ [k: string]: google.firestore.v1beta1.IValue }|null);
-
-                /** Document createTime */
-                createTime?: (google.protobuf.ITimestamp|null);
-
-                /** Document updateTime */
-                updateTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a Document. */
-            class Document implements IDocument {
-
-                /**
-                 * Constructs a new Document.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDocument);
-
-                /** Document name. */
-                public name: string;
-
-                /** Document fields. */
-                public fields: { [k: string]: google.firestore.v1beta1.IValue };
-
-                /** Document createTime. */
-                public createTime?: (google.protobuf.ITimestamp|null);
-
-                /** Document updateTime. */
-                public updateTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new Document instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Document instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDocument): google.firestore.v1beta1.Document;
-
-                /**
-                 * Encodes the specified Document message. Does not implicitly {@link google.firestore.v1beta1.Document.verify|verify} messages.
-                 * @param message Document message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDocument, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Document message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Document.verify|verify} messages.
-                 * @param message Document message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDocument, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Document message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Document
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Document;
-
-                /**
-                 * Decodes a Document message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Document
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Document;
-
-                /**
-                 * Verifies a Document message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Document message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Document
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Document;
-
-                /**
-                 * Creates a plain object from a Document message. Also converts values to other types if specified.
-                 * @param message Document
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.Document, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Document to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Document
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a Value. */
-            interface IValue {
-
-                /** Value nullValue */
-                nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
-
-                /** Value booleanValue */
-                booleanValue?: (boolean|null);
-
-                /** Value integerValue */
-                integerValue?: (number|Long|string|null);
-
-                /** Value doubleValue */
-                doubleValue?: (number|null);
-
-                /** Value timestampValue */
-                timestampValue?: (google.protobuf.ITimestamp|null);
-
-                /** Value stringValue */
-                stringValue?: (string|null);
-
-                /** Value bytesValue */
-                bytesValue?: (Uint8Array|Buffer|string|null);
-
-                /** Value referenceValue */
-                referenceValue?: (string|null);
-
-                /** Value geoPointValue */
-                geoPointValue?: (google.type.ILatLng|null);
-
-                /** Value arrayValue */
-                arrayValue?: (google.firestore.v1beta1.IArrayValue|null);
-
-                /** Value mapValue */
-                mapValue?: (google.firestore.v1beta1.IMapValue|null);
-            }
-
-            /** Represents a Value. */
-            class Value implements IValue {
-
-                /**
-                 * Constructs a new Value.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IValue);
-
-                /** Value nullValue. */
-                public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
-
-                /** Value booleanValue. */
-                public booleanValue?: (boolean|null);
-
-                /** Value integerValue. */
-                public integerValue?: (number|Long|string|null);
-
-                /** Value doubleValue. */
-                public doubleValue?: (number|null);
-
-                /** Value timestampValue. */
-                public timestampValue?: (google.protobuf.ITimestamp|null);
-
-                /** Value stringValue. */
-                public stringValue?: (string|null);
-
-                /** Value bytesValue. */
-                public bytesValue?: (Uint8Array|Buffer|string|null);
-
-                /** Value referenceValue. */
-                public referenceValue?: (string|null);
-
-                /** Value geoPointValue. */
-                public geoPointValue?: (google.type.ILatLng|null);
-
-                /** Value arrayValue. */
-                public arrayValue?: (google.firestore.v1beta1.IArrayValue|null);
-
-                /** Value mapValue. */
-                public mapValue?: (google.firestore.v1beta1.IMapValue|null);
-
-                /** Value valueType. */
-                public valueType?: ("nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"stringValue"|"bytesValue"|"referenceValue"|"geoPointValue"|"arrayValue"|"mapValue");
-
-                /**
-                 * Creates a new Value instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Value instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IValue): google.firestore.v1beta1.Value;
-
-                /**
-                 * Encodes the specified Value message. Does not implicitly {@link google.firestore.v1beta1.Value.verify|verify} messages.
-                 * @param message Value message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Value.verify|verify} messages.
-                 * @param message Value message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Value message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Value
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Value;
-
-                /**
-                 * Decodes a Value message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Value
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Value;
-
-                /**
-                 * Verifies a Value message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Value
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Value;
-
-                /**
-                 * Creates a plain object from a Value message. Also converts values to other types if specified.
-                 * @param message Value
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Value to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Value
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an ArrayValue. */
-            interface IArrayValue {
-
-                /** ArrayValue values */
-                values?: (google.firestore.v1beta1.IValue[]|null);
-            }
-
-            /** Represents an ArrayValue. */
-            class ArrayValue implements IArrayValue {
-
-                /**
-                 * Constructs a new ArrayValue.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IArrayValue);
-
-                /** ArrayValue values. */
-                public values: google.firestore.v1beta1.IValue[];
-
-                /**
-                 * Creates a new ArrayValue instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ArrayValue instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IArrayValue): google.firestore.v1beta1.ArrayValue;
-
-                /**
-                 * Encodes the specified ArrayValue message. Does not implicitly {@link google.firestore.v1beta1.ArrayValue.verify|verify} messages.
-                 * @param message ArrayValue message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IArrayValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ArrayValue message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ArrayValue.verify|verify} messages.
-                 * @param message ArrayValue message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IArrayValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ArrayValue message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ArrayValue
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ArrayValue;
-
-                /**
-                 * Decodes an ArrayValue message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ArrayValue
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ArrayValue;
-
-                /**
-                 * Verifies an ArrayValue message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ArrayValue message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ArrayValue
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ArrayValue;
-
-                /**
-                 * Creates a plain object from an ArrayValue message. Also converts values to other types if specified.
-                 * @param message ArrayValue
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ArrayValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ArrayValue to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ArrayValue
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a MapValue. */
-            interface IMapValue {
-
-                /** MapValue fields */
-                fields?: ({ [k: string]: google.firestore.v1beta1.IValue }|null);
-            }
-
-            /** Represents a MapValue. */
-            class MapValue implements IMapValue {
-
-                /**
-                 * Constructs a new MapValue.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IMapValue);
-
-                /** MapValue fields. */
-                public fields: { [k: string]: google.firestore.v1beta1.IValue };
-
-                /**
-                 * Creates a new MapValue instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns MapValue instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IMapValue): google.firestore.v1beta1.MapValue;
-
-                /**
-                 * Encodes the specified MapValue message. Does not implicitly {@link google.firestore.v1beta1.MapValue.verify|verify} messages.
-                 * @param message MapValue message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IMapValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified MapValue message, length delimited. Does not implicitly {@link google.firestore.v1beta1.MapValue.verify|verify} messages.
-                 * @param message MapValue message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IMapValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a MapValue message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns MapValue
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.MapValue;
-
-                /**
-                 * Decodes a MapValue message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns MapValue
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.MapValue;
-
-                /**
-                 * Verifies a MapValue message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a MapValue message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns MapValue
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.MapValue;
-
-                /**
-                 * Creates a plain object from a MapValue message. Also converts values to other types if specified.
-                 * @param message MapValue
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.MapValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this MapValue to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for MapValue
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Represents a Firestore */
-            class Firestore extends $protobuf.rpc.Service {
-
-                /**
-                 * Constructs a new Firestore service.
-                 * @param rpcImpl RPC implementation
-                 * @param [requestDelimited=false] Whether requests are length-delimited
-                 * @param [responseDelimited=false] Whether responses are length-delimited
-                 */
-                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                /**
-                 * Creates new Firestore service using the specified rpc implementation.
-                 * @param rpcImpl RPC implementation
-                 * @param [requestDelimited=false] Whether requests are length-delimited
-                 * @param [responseDelimited=false] Whether responses are length-delimited
-                 * @returns RPC service. Useful where requests and/or responses are streamed.
-                 */
-                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Firestore;
-
-                /**
-                 * Calls GetDocument.
-                 * @param request GetDocumentRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Document
-                 */
-                public getDocument(request: google.firestore.v1beta1.IGetDocumentRequest, callback: google.firestore.v1beta1.Firestore.GetDocumentCallback): void;
-
-                /**
-                 * Calls GetDocument.
-                 * @param request GetDocumentRequest message or plain object
-                 * @returns Promise
-                 */
-                public getDocument(request: google.firestore.v1beta1.IGetDocumentRequest): Promise<google.firestore.v1beta1.Document>;
-
-                /**
-                 * Calls ListDocuments.
-                 * @param request ListDocumentsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListDocumentsResponse
-                 */
-                public listDocuments(request: google.firestore.v1beta1.IListDocumentsRequest, callback: google.firestore.v1beta1.Firestore.ListDocumentsCallback): void;
-
-                /**
-                 * Calls ListDocuments.
-                 * @param request ListDocumentsRequest message or plain object
-                 * @returns Promise
-                 */
-                public listDocuments(request: google.firestore.v1beta1.IListDocumentsRequest): Promise<google.firestore.v1beta1.ListDocumentsResponse>;
-
-                /**
-                 * Calls UpdateDocument.
-                 * @param request UpdateDocumentRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Document
-                 */
-                public updateDocument(request: google.firestore.v1beta1.IUpdateDocumentRequest, callback: google.firestore.v1beta1.Firestore.UpdateDocumentCallback): void;
-
-                /**
-                 * Calls UpdateDocument.
-                 * @param request UpdateDocumentRequest message or plain object
-                 * @returns Promise
-                 */
-                public updateDocument(request: google.firestore.v1beta1.IUpdateDocumentRequest): Promise<google.firestore.v1beta1.Document>;
-
-                /**
-                 * Calls DeleteDocument.
-                 * @param request DeleteDocumentRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Empty
-                 */
-                public deleteDocument(request: google.firestore.v1beta1.IDeleteDocumentRequest, callback: google.firestore.v1beta1.Firestore.DeleteDocumentCallback): void;
-
-                /**
-                 * Calls DeleteDocument.
-                 * @param request DeleteDocumentRequest message or plain object
-                 * @returns Promise
-                 */
-                public deleteDocument(request: google.firestore.v1beta1.IDeleteDocumentRequest): Promise<google.protobuf.Empty>;
-
-                /**
-                 * Calls BatchGetDocuments.
-                 * @param request BatchGetDocumentsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and BatchGetDocumentsResponse
-                 */
-                public batchGetDocuments(request: google.firestore.v1beta1.IBatchGetDocumentsRequest, callback: google.firestore.v1beta1.Firestore.BatchGetDocumentsCallback): void;
-
-                /**
-                 * Calls BatchGetDocuments.
-                 * @param request BatchGetDocumentsRequest message or plain object
-                 * @returns Promise
-                 */
-                public batchGetDocuments(request: google.firestore.v1beta1.IBatchGetDocumentsRequest): Promise<google.firestore.v1beta1.BatchGetDocumentsResponse>;
-
-                /**
-                 * Calls BeginTransaction.
-                 * @param request BeginTransactionRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and BeginTransactionResponse
-                 */
-                public beginTransaction(request: google.firestore.v1beta1.IBeginTransactionRequest, callback: google.firestore.v1beta1.Firestore.BeginTransactionCallback): void;
-
-                /**
-                 * Calls BeginTransaction.
-                 * @param request BeginTransactionRequest message or plain object
-                 * @returns Promise
-                 */
-                public beginTransaction(request: google.firestore.v1beta1.IBeginTransactionRequest): Promise<google.firestore.v1beta1.BeginTransactionResponse>;
-
-                /**
-                 * Calls Commit.
-                 * @param request CommitRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and CommitResponse
-                 */
-                public commit(request: google.firestore.v1beta1.ICommitRequest, callback: google.firestore.v1beta1.Firestore.CommitCallback): void;
-
-                /**
-                 * Calls Commit.
-                 * @param request CommitRequest message or plain object
-                 * @returns Promise
-                 */
-                public commit(request: google.firestore.v1beta1.ICommitRequest): Promise<google.firestore.v1beta1.CommitResponse>;
-
-                /**
-                 * Calls Rollback.
-                 * @param request RollbackRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Empty
-                 */
-                public rollback(request: google.firestore.v1beta1.IRollbackRequest, callback: google.firestore.v1beta1.Firestore.RollbackCallback): void;
-
-                /**
-                 * Calls Rollback.
-                 * @param request RollbackRequest message or plain object
-                 * @returns Promise
-                 */
-                public rollback(request: google.firestore.v1beta1.IRollbackRequest): Promise<google.protobuf.Empty>;
-
-                /**
-                 * Calls RunQuery.
-                 * @param request RunQueryRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and RunQueryResponse
-                 */
-                public runQuery(request: google.firestore.v1beta1.IRunQueryRequest, callback: google.firestore.v1beta1.Firestore.RunQueryCallback): void;
-
-                /**
-                 * Calls RunQuery.
-                 * @param request RunQueryRequest message or plain object
-                 * @returns Promise
-                 */
-                public runQuery(request: google.firestore.v1beta1.IRunQueryRequest): Promise<google.firestore.v1beta1.RunQueryResponse>;
-
-                /**
-                 * Calls PartitionQuery.
-                 * @param request PartitionQueryRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and PartitionQueryResponse
-                 */
-                public partitionQuery(request: google.firestore.v1beta1.IPartitionQueryRequest, callback: google.firestore.v1beta1.Firestore.PartitionQueryCallback): void;
-
-                /**
-                 * Calls PartitionQuery.
-                 * @param request PartitionQueryRequest message or plain object
-                 * @returns Promise
-                 */
-                public partitionQuery(request: google.firestore.v1beta1.IPartitionQueryRequest): Promise<google.firestore.v1beta1.PartitionQueryResponse>;
-
-                /**
-                 * Calls Write.
-                 * @param request WriteRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and WriteResponse
-                 */
-                public write(request: google.firestore.v1beta1.IWriteRequest, callback: google.firestore.v1beta1.Firestore.WriteCallback): void;
-
-                /**
-                 * Calls Write.
-                 * @param request WriteRequest message or plain object
-                 * @returns Promise
-                 */
-                public write(request: google.firestore.v1beta1.IWriteRequest): Promise<google.firestore.v1beta1.WriteResponse>;
-
-                /**
-                 * Calls Listen.
-                 * @param request ListenRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListenResponse
-                 */
-                public listen(request: google.firestore.v1beta1.IListenRequest, callback: google.firestore.v1beta1.Firestore.ListenCallback): void;
-
-                /**
-                 * Calls Listen.
-                 * @param request ListenRequest message or plain object
-                 * @returns Promise
-                 */
-                public listen(request: google.firestore.v1beta1.IListenRequest): Promise<google.firestore.v1beta1.ListenResponse>;
-
-                /**
-                 * Calls ListCollectionIds.
-                 * @param request ListCollectionIdsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListCollectionIdsResponse
-                 */
-                public listCollectionIds(request: google.firestore.v1beta1.IListCollectionIdsRequest, callback: google.firestore.v1beta1.Firestore.ListCollectionIdsCallback): void;
-
-                /**
-                 * Calls ListCollectionIds.
-                 * @param request ListCollectionIdsRequest message or plain object
-                 * @returns Promise
-                 */
-                public listCollectionIds(request: google.firestore.v1beta1.IListCollectionIdsRequest): Promise<google.firestore.v1beta1.ListCollectionIdsResponse>;
-
-                /**
-                 * Calls BatchWrite.
-                 * @param request BatchWriteRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and BatchWriteResponse
-                 */
-                public batchWrite(request: google.firestore.v1beta1.IBatchWriteRequest, callback: google.firestore.v1beta1.Firestore.BatchWriteCallback): void;
-
-                /**
-                 * Calls BatchWrite.
-                 * @param request BatchWriteRequest message or plain object
-                 * @returns Promise
-                 */
-                public batchWrite(request: google.firestore.v1beta1.IBatchWriteRequest): Promise<google.firestore.v1beta1.BatchWriteResponse>;
-
-                /**
-                 * Calls CreateDocument.
-                 * @param request CreateDocumentRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Document
-                 */
-                public createDocument(request: google.firestore.v1beta1.ICreateDocumentRequest, callback: google.firestore.v1beta1.Firestore.CreateDocumentCallback): void;
-
-                /**
-                 * Calls CreateDocument.
-                 * @param request CreateDocumentRequest message or plain object
-                 * @returns Promise
-                 */
-                public createDocument(request: google.firestore.v1beta1.ICreateDocumentRequest): Promise<google.firestore.v1beta1.Document>;
-            }
-
-            namespace Firestore {
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|getDocument}.
-                 * @param error Error, if any
-                 * @param [response] Document
-                 */
-                type GetDocumentCallback = (error: (Error|null), response?: google.firestore.v1beta1.Document) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|listDocuments}.
-                 * @param error Error, if any
-                 * @param [response] ListDocumentsResponse
-                 */
-                type ListDocumentsCallback = (error: (Error|null), response?: google.firestore.v1beta1.ListDocumentsResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|updateDocument}.
-                 * @param error Error, if any
-                 * @param [response] Document
-                 */
-                type UpdateDocumentCallback = (error: (Error|null), response?: google.firestore.v1beta1.Document) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|deleteDocument}.
-                 * @param error Error, if any
-                 * @param [response] Empty
-                 */
-                type DeleteDocumentCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|batchGetDocuments}.
-                 * @param error Error, if any
-                 * @param [response] BatchGetDocumentsResponse
-                 */
-                type BatchGetDocumentsCallback = (error: (Error|null), response?: google.firestore.v1beta1.BatchGetDocumentsResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|beginTransaction}.
-                 * @param error Error, if any
-                 * @param [response] BeginTransactionResponse
-                 */
-                type BeginTransactionCallback = (error: (Error|null), response?: google.firestore.v1beta1.BeginTransactionResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|commit}.
-                 * @param error Error, if any
-                 * @param [response] CommitResponse
-                 */
-                type CommitCallback = (error: (Error|null), response?: google.firestore.v1beta1.CommitResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|rollback}.
-                 * @param error Error, if any
-                 * @param [response] Empty
-                 */
-                type RollbackCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|runQuery}.
-                 * @param error Error, if any
-                 * @param [response] RunQueryResponse
-                 */
-                type RunQueryCallback = (error: (Error|null), response?: google.firestore.v1beta1.RunQueryResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|partitionQuery}.
-                 * @param error Error, if any
-                 * @param [response] PartitionQueryResponse
-                 */
-                type PartitionQueryCallback = (error: (Error|null), response?: google.firestore.v1beta1.PartitionQueryResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|write}.
-                 * @param error Error, if any
-                 * @param [response] WriteResponse
-                 */
-                type WriteCallback = (error: (Error|null), response?: google.firestore.v1beta1.WriteResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|listen}.
-                 * @param error Error, if any
-                 * @param [response] ListenResponse
-                 */
-                type ListenCallback = (error: (Error|null), response?: google.firestore.v1beta1.ListenResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|listCollectionIds}.
-                 * @param error Error, if any
-                 * @param [response] ListCollectionIdsResponse
-                 */
-                type ListCollectionIdsCallback = (error: (Error|null), response?: google.firestore.v1beta1.ListCollectionIdsResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|batchWrite}.
-                 * @param error Error, if any
-                 * @param [response] BatchWriteResponse
-                 */
-                type BatchWriteCallback = (error: (Error|null), response?: google.firestore.v1beta1.BatchWriteResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.firestore.v1beta1.Firestore|createDocument}.
-                 * @param error Error, if any
-                 * @param [response] Document
-                 */
-                type CreateDocumentCallback = (error: (Error|null), response?: google.firestore.v1beta1.Document) => void;
-            }
-
-            /** Properties of a GetDocumentRequest. */
-            interface IGetDocumentRequest {
-
-                /** GetDocumentRequest name */
-                name?: (string|null);
-
-                /** GetDocumentRequest mask */
-                mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** GetDocumentRequest transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-
-                /** GetDocumentRequest readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a GetDocumentRequest. */
-            class GetDocumentRequest implements IGetDocumentRequest {
-
-                /**
-                 * Constructs a new GetDocumentRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IGetDocumentRequest);
-
-                /** GetDocumentRequest name. */
-                public name: string;
-
-                /** GetDocumentRequest mask. */
-                public mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** GetDocumentRequest transaction. */
-                public transaction?: (Uint8Array|Buffer|string|null);
-
-                /** GetDocumentRequest readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** GetDocumentRequest consistencySelector. */
-                public consistencySelector?: ("transaction"|"readTime");
-
-                /**
-                 * Creates a new GetDocumentRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns GetDocumentRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IGetDocumentRequest): google.firestore.v1beta1.GetDocumentRequest;
-
-                /**
-                 * Encodes the specified GetDocumentRequest message. Does not implicitly {@link google.firestore.v1beta1.GetDocumentRequest.verify|verify} messages.
-                 * @param message GetDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified GetDocumentRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.GetDocumentRequest.verify|verify} messages.
-                 * @param message GetDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a GetDocumentRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns GetDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.GetDocumentRequest;
-
-                /**
-                 * Decodes a GetDocumentRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns GetDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.GetDocumentRequest;
-
-                /**
-                 * Verifies a GetDocumentRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a GetDocumentRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns GetDocumentRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.GetDocumentRequest;
-
-                /**
-                 * Creates a plain object from a GetDocumentRequest message. Also converts values to other types if specified.
-                 * @param message GetDocumentRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.GetDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this GetDocumentRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for GetDocumentRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListDocumentsRequest. */
-            interface IListDocumentsRequest {
-
-                /** ListDocumentsRequest parent */
-                parent?: (string|null);
-
-                /** ListDocumentsRequest collectionId */
-                collectionId?: (string|null);
-
-                /** ListDocumentsRequest pageSize */
-                pageSize?: (number|null);
-
-                /** ListDocumentsRequest pageToken */
-                pageToken?: (string|null);
-
-                /** ListDocumentsRequest orderBy */
-                orderBy?: (string|null);
-
-                /** ListDocumentsRequest mask */
-                mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** ListDocumentsRequest transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-
-                /** ListDocumentsRequest readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-
-                /** ListDocumentsRequest showMissing */
-                showMissing?: (boolean|null);
-            }
-
-            /** Represents a ListDocumentsRequest. */
-            class ListDocumentsRequest implements IListDocumentsRequest {
-
-                /**
-                 * Constructs a new ListDocumentsRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IListDocumentsRequest);
-
-                /** ListDocumentsRequest parent. */
-                public parent: string;
-
-                /** ListDocumentsRequest collectionId. */
-                public collectionId: string;
-
-                /** ListDocumentsRequest pageSize. */
-                public pageSize: number;
-
-                /** ListDocumentsRequest pageToken. */
-                public pageToken: string;
-
-                /** ListDocumentsRequest orderBy. */
-                public orderBy: string;
-
-                /** ListDocumentsRequest mask. */
-                public mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** ListDocumentsRequest transaction. */
-                public transaction?: (Uint8Array|Buffer|string|null);
-
-                /** ListDocumentsRequest readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** ListDocumentsRequest showMissing. */
-                public showMissing: boolean;
-
-                /** ListDocumentsRequest consistencySelector. */
-                public consistencySelector?: ("transaction"|"readTime");
-
-                /**
-                 * Creates a new ListDocumentsRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListDocumentsRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IListDocumentsRequest): google.firestore.v1beta1.ListDocumentsRequest;
-
-                /**
-                 * Encodes the specified ListDocumentsRequest message. Does not implicitly {@link google.firestore.v1beta1.ListDocumentsRequest.verify|verify} messages.
-                 * @param message ListDocumentsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IListDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListDocumentsRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ListDocumentsRequest.verify|verify} messages.
-                 * @param message ListDocumentsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IListDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListDocumentsRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListDocumentsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ListDocumentsRequest;
-
-                /**
-                 * Decodes a ListDocumentsRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListDocumentsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ListDocumentsRequest;
-
-                /**
-                 * Verifies a ListDocumentsRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListDocumentsRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListDocumentsRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ListDocumentsRequest;
-
-                /**
-                 * Creates a plain object from a ListDocumentsRequest message. Also converts values to other types if specified.
-                 * @param message ListDocumentsRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ListDocumentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListDocumentsRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListDocumentsRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListDocumentsResponse. */
-            interface IListDocumentsResponse {
-
-                /** ListDocumentsResponse documents */
-                documents?: (google.firestore.v1beta1.IDocument[]|null);
-
-                /** ListDocumentsResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a ListDocumentsResponse. */
-            class ListDocumentsResponse implements IListDocumentsResponse {
-
-                /**
-                 * Constructs a new ListDocumentsResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IListDocumentsResponse);
-
-                /** ListDocumentsResponse documents. */
-                public documents: google.firestore.v1beta1.IDocument[];
-
-                /** ListDocumentsResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new ListDocumentsResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListDocumentsResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IListDocumentsResponse): google.firestore.v1beta1.ListDocumentsResponse;
-
-                /**
-                 * Encodes the specified ListDocumentsResponse message. Does not implicitly {@link google.firestore.v1beta1.ListDocumentsResponse.verify|verify} messages.
-                 * @param message ListDocumentsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IListDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListDocumentsResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ListDocumentsResponse.verify|verify} messages.
-                 * @param message ListDocumentsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IListDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListDocumentsResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListDocumentsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ListDocumentsResponse;
-
-                /**
-                 * Decodes a ListDocumentsResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListDocumentsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ListDocumentsResponse;
-
-                /**
-                 * Verifies a ListDocumentsResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListDocumentsResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListDocumentsResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ListDocumentsResponse;
-
-                /**
-                 * Creates a plain object from a ListDocumentsResponse message. Also converts values to other types if specified.
-                 * @param message ListDocumentsResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ListDocumentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListDocumentsResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListDocumentsResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a CreateDocumentRequest. */
-            interface ICreateDocumentRequest {
-
-                /** CreateDocumentRequest parent */
-                parent?: (string|null);
-
-                /** CreateDocumentRequest collectionId */
-                collectionId?: (string|null);
-
-                /** CreateDocumentRequest documentId */
-                documentId?: (string|null);
-
-                /** CreateDocumentRequest document */
-                document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** CreateDocumentRequest mask */
-                mask?: (google.firestore.v1beta1.IDocumentMask|null);
-            }
-
-            /** Represents a CreateDocumentRequest. */
-            class CreateDocumentRequest implements ICreateDocumentRequest {
-
-                /**
-                 * Constructs a new CreateDocumentRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ICreateDocumentRequest);
-
-                /** CreateDocumentRequest parent. */
-                public parent: string;
-
-                /** CreateDocumentRequest collectionId. */
-                public collectionId: string;
-
-                /** CreateDocumentRequest documentId. */
-                public documentId: string;
-
-                /** CreateDocumentRequest document. */
-                public document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** CreateDocumentRequest mask. */
-                public mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /**
-                 * Creates a new CreateDocumentRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns CreateDocumentRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ICreateDocumentRequest): google.firestore.v1beta1.CreateDocumentRequest;
-
-                /**
-                 * Encodes the specified CreateDocumentRequest message. Does not implicitly {@link google.firestore.v1beta1.CreateDocumentRequest.verify|verify} messages.
-                 * @param message CreateDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ICreateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified CreateDocumentRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.CreateDocumentRequest.verify|verify} messages.
-                 * @param message CreateDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ICreateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a CreateDocumentRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns CreateDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.CreateDocumentRequest;
-
-                /**
-                 * Decodes a CreateDocumentRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns CreateDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.CreateDocumentRequest;
-
-                /**
-                 * Verifies a CreateDocumentRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a CreateDocumentRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns CreateDocumentRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.CreateDocumentRequest;
-
-                /**
-                 * Creates a plain object from a CreateDocumentRequest message. Also converts values to other types if specified.
-                 * @param message CreateDocumentRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.CreateDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this CreateDocumentRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for CreateDocumentRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an UpdateDocumentRequest. */
-            interface IUpdateDocumentRequest {
-
-                /** UpdateDocumentRequest document */
-                document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** UpdateDocumentRequest updateMask */
-                updateMask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** UpdateDocumentRequest mask */
-                mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** UpdateDocumentRequest currentDocument */
-                currentDocument?: (google.firestore.v1beta1.IPrecondition|null);
-            }
-
-            /** Represents an UpdateDocumentRequest. */
-            class UpdateDocumentRequest implements IUpdateDocumentRequest {
-
-                /**
-                 * Constructs a new UpdateDocumentRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IUpdateDocumentRequest);
-
-                /** UpdateDocumentRequest document. */
-                public document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** UpdateDocumentRequest updateMask. */
-                public updateMask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** UpdateDocumentRequest mask. */
-                public mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** UpdateDocumentRequest currentDocument. */
-                public currentDocument?: (google.firestore.v1beta1.IPrecondition|null);
-
-                /**
-                 * Creates a new UpdateDocumentRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns UpdateDocumentRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IUpdateDocumentRequest): google.firestore.v1beta1.UpdateDocumentRequest;
-
-                /**
-                 * Encodes the specified UpdateDocumentRequest message. Does not implicitly {@link google.firestore.v1beta1.UpdateDocumentRequest.verify|verify} messages.
-                 * @param message UpdateDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IUpdateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified UpdateDocumentRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.UpdateDocumentRequest.verify|verify} messages.
-                 * @param message UpdateDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IUpdateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an UpdateDocumentRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns UpdateDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.UpdateDocumentRequest;
-
-                /**
-                 * Decodes an UpdateDocumentRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns UpdateDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.UpdateDocumentRequest;
-
-                /**
-                 * Verifies an UpdateDocumentRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an UpdateDocumentRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns UpdateDocumentRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.UpdateDocumentRequest;
-
-                /**
-                 * Creates a plain object from an UpdateDocumentRequest message. Also converts values to other types if specified.
-                 * @param message UpdateDocumentRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.UpdateDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this UpdateDocumentRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for UpdateDocumentRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a DeleteDocumentRequest. */
-            interface IDeleteDocumentRequest {
-
-                /** DeleteDocumentRequest name */
-                name?: (string|null);
-
-                /** DeleteDocumentRequest currentDocument */
-                currentDocument?: (google.firestore.v1beta1.IPrecondition|null);
-            }
-
-            /** Represents a DeleteDocumentRequest. */
-            class DeleteDocumentRequest implements IDeleteDocumentRequest {
-
-                /**
-                 * Constructs a new DeleteDocumentRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDeleteDocumentRequest);
-
-                /** DeleteDocumentRequest name. */
-                public name: string;
-
-                /** DeleteDocumentRequest currentDocument. */
-                public currentDocument?: (google.firestore.v1beta1.IPrecondition|null);
-
-                /**
-                 * Creates a new DeleteDocumentRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DeleteDocumentRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDeleteDocumentRequest): google.firestore.v1beta1.DeleteDocumentRequest;
-
-                /**
-                 * Encodes the specified DeleteDocumentRequest message. Does not implicitly {@link google.firestore.v1beta1.DeleteDocumentRequest.verify|verify} messages.
-                 * @param message DeleteDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDeleteDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DeleteDocumentRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DeleteDocumentRequest.verify|verify} messages.
-                 * @param message DeleteDocumentRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDeleteDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DeleteDocumentRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DeleteDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DeleteDocumentRequest;
-
-                /**
-                 * Decodes a DeleteDocumentRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DeleteDocumentRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DeleteDocumentRequest;
-
-                /**
-                 * Verifies a DeleteDocumentRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DeleteDocumentRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DeleteDocumentRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DeleteDocumentRequest;
-
-                /**
-                 * Creates a plain object from a DeleteDocumentRequest message. Also converts values to other types if specified.
-                 * @param message DeleteDocumentRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.DeleteDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DeleteDocumentRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DeleteDocumentRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a BatchGetDocumentsRequest. */
-            interface IBatchGetDocumentsRequest {
-
-                /** BatchGetDocumentsRequest database */
-                database?: (string|null);
-
-                /** BatchGetDocumentsRequest documents */
-                documents?: (string[]|null);
-
-                /** BatchGetDocumentsRequest mask */
-                mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** BatchGetDocumentsRequest transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-
-                /** BatchGetDocumentsRequest newTransaction */
-                newTransaction?: (google.firestore.v1beta1.ITransactionOptions|null);
-
-                /** BatchGetDocumentsRequest readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a BatchGetDocumentsRequest. */
-            class BatchGetDocumentsRequest implements IBatchGetDocumentsRequest {
-
-                /**
-                 * Constructs a new BatchGetDocumentsRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IBatchGetDocumentsRequest);
-
-                /** BatchGetDocumentsRequest database. */
-                public database: string;
-
-                /** BatchGetDocumentsRequest documents. */
-                public documents: string[];
-
-                /** BatchGetDocumentsRequest mask. */
-                public mask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** BatchGetDocumentsRequest transaction. */
-                public transaction?: (Uint8Array|Buffer|string|null);
-
-                /** BatchGetDocumentsRequest newTransaction. */
-                public newTransaction?: (google.firestore.v1beta1.ITransactionOptions|null);
-
-                /** BatchGetDocumentsRequest readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** BatchGetDocumentsRequest consistencySelector. */
-                public consistencySelector?: ("transaction"|"newTransaction"|"readTime");
-
-                /**
-                 * Creates a new BatchGetDocumentsRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BatchGetDocumentsRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IBatchGetDocumentsRequest): google.firestore.v1beta1.BatchGetDocumentsRequest;
-
-                /**
-                 * Encodes the specified BatchGetDocumentsRequest message. Does not implicitly {@link google.firestore.v1beta1.BatchGetDocumentsRequest.verify|verify} messages.
-                 * @param message BatchGetDocumentsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IBatchGetDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BatchGetDocumentsRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.BatchGetDocumentsRequest.verify|verify} messages.
-                 * @param message BatchGetDocumentsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IBatchGetDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BatchGetDocumentsRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BatchGetDocumentsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.BatchGetDocumentsRequest;
-
-                /**
-                 * Decodes a BatchGetDocumentsRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BatchGetDocumentsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.BatchGetDocumentsRequest;
-
-                /**
-                 * Verifies a BatchGetDocumentsRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BatchGetDocumentsRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BatchGetDocumentsRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.BatchGetDocumentsRequest;
-
-                /**
-                 * Creates a plain object from a BatchGetDocumentsRequest message. Also converts values to other types if specified.
-                 * @param message BatchGetDocumentsRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.BatchGetDocumentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BatchGetDocumentsRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for BatchGetDocumentsRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a BatchGetDocumentsResponse. */
-            interface IBatchGetDocumentsResponse {
-
-                /** BatchGetDocumentsResponse found */
-                found?: (google.firestore.v1beta1.IDocument|null);
-
-                /** BatchGetDocumentsResponse missing */
-                missing?: (string|null);
-
-                /** BatchGetDocumentsResponse transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-
-                /** BatchGetDocumentsResponse readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a BatchGetDocumentsResponse. */
-            class BatchGetDocumentsResponse implements IBatchGetDocumentsResponse {
-
-                /**
-                 * Constructs a new BatchGetDocumentsResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IBatchGetDocumentsResponse);
-
-                /** BatchGetDocumentsResponse found. */
-                public found?: (google.firestore.v1beta1.IDocument|null);
-
-                /** BatchGetDocumentsResponse missing. */
-                public missing?: (string|null);
-
-                /** BatchGetDocumentsResponse transaction. */
-                public transaction: (Uint8Array|Buffer|string);
-
-                /** BatchGetDocumentsResponse readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** BatchGetDocumentsResponse result. */
-                public result?: ("found"|"missing");
-
-                /**
-                 * Creates a new BatchGetDocumentsResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BatchGetDocumentsResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IBatchGetDocumentsResponse): google.firestore.v1beta1.BatchGetDocumentsResponse;
-
-                /**
-                 * Encodes the specified BatchGetDocumentsResponse message. Does not implicitly {@link google.firestore.v1beta1.BatchGetDocumentsResponse.verify|verify} messages.
-                 * @param message BatchGetDocumentsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IBatchGetDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BatchGetDocumentsResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.BatchGetDocumentsResponse.verify|verify} messages.
-                 * @param message BatchGetDocumentsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IBatchGetDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BatchGetDocumentsResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BatchGetDocumentsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.BatchGetDocumentsResponse;
-
-                /**
-                 * Decodes a BatchGetDocumentsResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BatchGetDocumentsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.BatchGetDocumentsResponse;
-
-                /**
-                 * Verifies a BatchGetDocumentsResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BatchGetDocumentsResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BatchGetDocumentsResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.BatchGetDocumentsResponse;
-
-                /**
-                 * Creates a plain object from a BatchGetDocumentsResponse message. Also converts values to other types if specified.
-                 * @param message BatchGetDocumentsResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.BatchGetDocumentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BatchGetDocumentsResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for BatchGetDocumentsResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a BeginTransactionRequest. */
-            interface IBeginTransactionRequest {
-
-                /** BeginTransactionRequest database */
-                database?: (string|null);
-
-                /** BeginTransactionRequest options */
-                options?: (google.firestore.v1beta1.ITransactionOptions|null);
-            }
-
-            /** Represents a BeginTransactionRequest. */
-            class BeginTransactionRequest implements IBeginTransactionRequest {
-
-                /**
-                 * Constructs a new BeginTransactionRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IBeginTransactionRequest);
-
-                /** BeginTransactionRequest database. */
-                public database: string;
-
-                /** BeginTransactionRequest options. */
-                public options?: (google.firestore.v1beta1.ITransactionOptions|null);
-
-                /**
-                 * Creates a new BeginTransactionRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BeginTransactionRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IBeginTransactionRequest): google.firestore.v1beta1.BeginTransactionRequest;
-
-                /**
-                 * Encodes the specified BeginTransactionRequest message. Does not implicitly {@link google.firestore.v1beta1.BeginTransactionRequest.verify|verify} messages.
-                 * @param message BeginTransactionRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IBeginTransactionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BeginTransactionRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.BeginTransactionRequest.verify|verify} messages.
-                 * @param message BeginTransactionRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IBeginTransactionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BeginTransactionRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BeginTransactionRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.BeginTransactionRequest;
-
-                /**
-                 * Decodes a BeginTransactionRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BeginTransactionRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.BeginTransactionRequest;
-
-                /**
-                 * Verifies a BeginTransactionRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BeginTransactionRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BeginTransactionRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.BeginTransactionRequest;
-
-                /**
-                 * Creates a plain object from a BeginTransactionRequest message. Also converts values to other types if specified.
-                 * @param message BeginTransactionRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.BeginTransactionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BeginTransactionRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for BeginTransactionRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a BeginTransactionResponse. */
-            interface IBeginTransactionResponse {
-
-                /** BeginTransactionResponse transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-            }
-
-            /** Represents a BeginTransactionResponse. */
-            class BeginTransactionResponse implements IBeginTransactionResponse {
-
-                /**
-                 * Constructs a new BeginTransactionResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IBeginTransactionResponse);
-
-                /** BeginTransactionResponse transaction. */
-                public transaction: (Uint8Array|Buffer|string);
-
-                /**
-                 * Creates a new BeginTransactionResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BeginTransactionResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IBeginTransactionResponse): google.firestore.v1beta1.BeginTransactionResponse;
-
-                /**
-                 * Encodes the specified BeginTransactionResponse message. Does not implicitly {@link google.firestore.v1beta1.BeginTransactionResponse.verify|verify} messages.
-                 * @param message BeginTransactionResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IBeginTransactionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BeginTransactionResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.BeginTransactionResponse.verify|verify} messages.
-                 * @param message BeginTransactionResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IBeginTransactionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BeginTransactionResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BeginTransactionResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.BeginTransactionResponse;
-
-                /**
-                 * Decodes a BeginTransactionResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BeginTransactionResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.BeginTransactionResponse;
-
-                /**
-                 * Verifies a BeginTransactionResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BeginTransactionResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BeginTransactionResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.BeginTransactionResponse;
-
-                /**
-                 * Creates a plain object from a BeginTransactionResponse message. Also converts values to other types if specified.
-                 * @param message BeginTransactionResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.BeginTransactionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BeginTransactionResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for BeginTransactionResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a CommitRequest. */
-            interface ICommitRequest {
-
-                /** CommitRequest database */
-                database?: (string|null);
-
-                /** CommitRequest writes */
-                writes?: (google.firestore.v1beta1.IWrite[]|null);
-
-                /** CommitRequest transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-            }
-
-            /** Represents a CommitRequest. */
-            class CommitRequest implements ICommitRequest {
-
-                /**
-                 * Constructs a new CommitRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ICommitRequest);
-
-                /** CommitRequest database. */
-                public database: string;
-
-                /** CommitRequest writes. */
-                public writes: google.firestore.v1beta1.IWrite[];
-
-                /** CommitRequest transaction. */
-                public transaction: (Uint8Array|Buffer|string);
-
-                /**
-                 * Creates a new CommitRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns CommitRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ICommitRequest): google.firestore.v1beta1.CommitRequest;
-
-                /**
-                 * Encodes the specified CommitRequest message. Does not implicitly {@link google.firestore.v1beta1.CommitRequest.verify|verify} messages.
-                 * @param message CommitRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ICommitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified CommitRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.CommitRequest.verify|verify} messages.
-                 * @param message CommitRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ICommitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a CommitRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns CommitRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.CommitRequest;
-
-                /**
-                 * Decodes a CommitRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns CommitRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.CommitRequest;
-
-                /**
-                 * Verifies a CommitRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a CommitRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns CommitRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.CommitRequest;
-
-                /**
-                 * Creates a plain object from a CommitRequest message. Also converts values to other types if specified.
-                 * @param message CommitRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.CommitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this CommitRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for CommitRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a CommitResponse. */
-            interface ICommitResponse {
-
-                /** CommitResponse writeResults */
-                writeResults?: (google.firestore.v1beta1.IWriteResult[]|null);
-
-                /** CommitResponse commitTime */
-                commitTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a CommitResponse. */
-            class CommitResponse implements ICommitResponse {
-
-                /**
-                 * Constructs a new CommitResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ICommitResponse);
-
-                /** CommitResponse writeResults. */
-                public writeResults: google.firestore.v1beta1.IWriteResult[];
-
-                /** CommitResponse commitTime. */
-                public commitTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new CommitResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns CommitResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ICommitResponse): google.firestore.v1beta1.CommitResponse;
-
-                /**
-                 * Encodes the specified CommitResponse message. Does not implicitly {@link google.firestore.v1beta1.CommitResponse.verify|verify} messages.
-                 * @param message CommitResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ICommitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified CommitResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.CommitResponse.verify|verify} messages.
-                 * @param message CommitResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ICommitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a CommitResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns CommitResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.CommitResponse;
-
-                /**
-                 * Decodes a CommitResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns CommitResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.CommitResponse;
-
-                /**
-                 * Verifies a CommitResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a CommitResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns CommitResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.CommitResponse;
-
-                /**
-                 * Creates a plain object from a CommitResponse message. Also converts values to other types if specified.
-                 * @param message CommitResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.CommitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this CommitResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for CommitResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a RollbackRequest. */
-            interface IRollbackRequest {
-
-                /** RollbackRequest database */
-                database?: (string|null);
-
-                /** RollbackRequest transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-            }
-
-            /** Represents a RollbackRequest. */
-            class RollbackRequest implements IRollbackRequest {
-
-                /**
-                 * Constructs a new RollbackRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IRollbackRequest);
-
-                /** RollbackRequest database. */
-                public database: string;
-
-                /** RollbackRequest transaction. */
-                public transaction: (Uint8Array|Buffer|string);
-
-                /**
-                 * Creates a new RollbackRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns RollbackRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IRollbackRequest): google.firestore.v1beta1.RollbackRequest;
-
-                /**
-                 * Encodes the specified RollbackRequest message. Does not implicitly {@link google.firestore.v1beta1.RollbackRequest.verify|verify} messages.
-                 * @param message RollbackRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IRollbackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified RollbackRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.RollbackRequest.verify|verify} messages.
-                 * @param message RollbackRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IRollbackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a RollbackRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns RollbackRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.RollbackRequest;
-
-                /**
-                 * Decodes a RollbackRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns RollbackRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.RollbackRequest;
-
-                /**
-                 * Verifies a RollbackRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a RollbackRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns RollbackRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.RollbackRequest;
-
-                /**
-                 * Creates a plain object from a RollbackRequest message. Also converts values to other types if specified.
-                 * @param message RollbackRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.RollbackRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this RollbackRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for RollbackRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a RunQueryRequest. */
-            interface IRunQueryRequest {
-
-                /** RunQueryRequest parent */
-                parent?: (string|null);
-
-                /** RunQueryRequest structuredQuery */
-                structuredQuery?: (google.firestore.v1beta1.IStructuredQuery|null);
-
-                /** RunQueryRequest transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-
-                /** RunQueryRequest newTransaction */
-                newTransaction?: (google.firestore.v1beta1.ITransactionOptions|null);
-
-                /** RunQueryRequest readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a RunQueryRequest. */
-            class RunQueryRequest implements IRunQueryRequest {
-
-                /**
-                 * Constructs a new RunQueryRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IRunQueryRequest);
-
-                /** RunQueryRequest parent. */
-                public parent: string;
-
-                /** RunQueryRequest structuredQuery. */
-                public structuredQuery?: (google.firestore.v1beta1.IStructuredQuery|null);
-
-                /** RunQueryRequest transaction. */
-                public transaction?: (Uint8Array|Buffer|string|null);
-
-                /** RunQueryRequest newTransaction. */
-                public newTransaction?: (google.firestore.v1beta1.ITransactionOptions|null);
-
-                /** RunQueryRequest readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** RunQueryRequest queryType. */
-                public queryType?: "structuredQuery";
-
-                /** RunQueryRequest consistencySelector. */
-                public consistencySelector?: ("transaction"|"newTransaction"|"readTime");
-
-                /**
-                 * Creates a new RunQueryRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns RunQueryRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IRunQueryRequest): google.firestore.v1beta1.RunQueryRequest;
-
-                /**
-                 * Encodes the specified RunQueryRequest message. Does not implicitly {@link google.firestore.v1beta1.RunQueryRequest.verify|verify} messages.
-                 * @param message RunQueryRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IRunQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified RunQueryRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.RunQueryRequest.verify|verify} messages.
-                 * @param message RunQueryRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IRunQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a RunQueryRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns RunQueryRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.RunQueryRequest;
-
-                /**
-                 * Decodes a RunQueryRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns RunQueryRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.RunQueryRequest;
-
-                /**
-                 * Verifies a RunQueryRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a RunQueryRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns RunQueryRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.RunQueryRequest;
-
-                /**
-                 * Creates a plain object from a RunQueryRequest message. Also converts values to other types if specified.
-                 * @param message RunQueryRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.RunQueryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this RunQueryRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for RunQueryRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a RunQueryResponse. */
-            interface IRunQueryResponse {
-
-                /** RunQueryResponse transaction */
-                transaction?: (Uint8Array|Buffer|string|null);
-
-                /** RunQueryResponse document */
-                document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** RunQueryResponse readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-
-                /** RunQueryResponse skippedResults */
-                skippedResults?: (number|null);
-            }
-
-            /** Represents a RunQueryResponse. */
-            class RunQueryResponse implements IRunQueryResponse {
-
-                /**
-                 * Constructs a new RunQueryResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IRunQueryResponse);
-
-                /** RunQueryResponse transaction. */
-                public transaction: (Uint8Array|Buffer|string);
-
-                /** RunQueryResponse document. */
-                public document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** RunQueryResponse readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** RunQueryResponse skippedResults. */
-                public skippedResults: number;
-
-                /**
-                 * Creates a new RunQueryResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns RunQueryResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IRunQueryResponse): google.firestore.v1beta1.RunQueryResponse;
-
-                /**
-                 * Encodes the specified RunQueryResponse message. Does not implicitly {@link google.firestore.v1beta1.RunQueryResponse.verify|verify} messages.
-                 * @param message RunQueryResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IRunQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified RunQueryResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.RunQueryResponse.verify|verify} messages.
-                 * @param message RunQueryResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IRunQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a RunQueryResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns RunQueryResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.RunQueryResponse;
-
-                /**
-                 * Decodes a RunQueryResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns RunQueryResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.RunQueryResponse;
-
-                /**
-                 * Verifies a RunQueryResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a RunQueryResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns RunQueryResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.RunQueryResponse;
-
-                /**
-                 * Creates a plain object from a RunQueryResponse message. Also converts values to other types if specified.
-                 * @param message RunQueryResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.RunQueryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this RunQueryResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for RunQueryResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a PartitionQueryRequest. */
-            interface IPartitionQueryRequest {
-
-                /** PartitionQueryRequest parent */
-                parent?: (string|null);
-
-                /** PartitionQueryRequest structuredQuery */
-                structuredQuery?: (google.firestore.v1beta1.IStructuredQuery|null);
-
-                /** PartitionQueryRequest partitionCount */
-                partitionCount?: (number|Long|string|null);
-
-                /** PartitionQueryRequest pageToken */
-                pageToken?: (string|null);
-
-                /** PartitionQueryRequest pageSize */
-                pageSize?: (number|null);
-            }
-
-            /** Represents a PartitionQueryRequest. */
-            class PartitionQueryRequest implements IPartitionQueryRequest {
-
-                /**
-                 * Constructs a new PartitionQueryRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IPartitionQueryRequest);
-
-                /** PartitionQueryRequest parent. */
-                public parent: string;
-
-                /** PartitionQueryRequest structuredQuery. */
-                public structuredQuery?: (google.firestore.v1beta1.IStructuredQuery|null);
-
-                /** PartitionQueryRequest partitionCount. */
-                public partitionCount: (number|Long|string);
-
-                /** PartitionQueryRequest pageToken. */
-                public pageToken: string;
-
-                /** PartitionQueryRequest pageSize. */
-                public pageSize: number;
-
-                /** PartitionQueryRequest queryType. */
-                public queryType?: "structuredQuery";
-
-                /**
-                 * Creates a new PartitionQueryRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns PartitionQueryRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IPartitionQueryRequest): google.firestore.v1beta1.PartitionQueryRequest;
-
-                /**
-                 * Encodes the specified PartitionQueryRequest message. Does not implicitly {@link google.firestore.v1beta1.PartitionQueryRequest.verify|verify} messages.
-                 * @param message PartitionQueryRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IPartitionQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified PartitionQueryRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.PartitionQueryRequest.verify|verify} messages.
-                 * @param message PartitionQueryRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IPartitionQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a PartitionQueryRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns PartitionQueryRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.PartitionQueryRequest;
-
-                /**
-                 * Decodes a PartitionQueryRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns PartitionQueryRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.PartitionQueryRequest;
-
-                /**
-                 * Verifies a PartitionQueryRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a PartitionQueryRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns PartitionQueryRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.PartitionQueryRequest;
-
-                /**
-                 * Creates a plain object from a PartitionQueryRequest message. Also converts values to other types if specified.
-                 * @param message PartitionQueryRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.PartitionQueryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this PartitionQueryRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for PartitionQueryRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a PartitionQueryResponse. */
-            interface IPartitionQueryResponse {
-
-                /** PartitionQueryResponse partitions */
-                partitions?: (google.firestore.v1beta1.ICursor[]|null);
-
-                /** PartitionQueryResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a PartitionQueryResponse. */
-            class PartitionQueryResponse implements IPartitionQueryResponse {
-
-                /**
-                 * Constructs a new PartitionQueryResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IPartitionQueryResponse);
-
-                /** PartitionQueryResponse partitions. */
-                public partitions: google.firestore.v1beta1.ICursor[];
-
-                /** PartitionQueryResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new PartitionQueryResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns PartitionQueryResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IPartitionQueryResponse): google.firestore.v1beta1.PartitionQueryResponse;
-
-                /**
-                 * Encodes the specified PartitionQueryResponse message. Does not implicitly {@link google.firestore.v1beta1.PartitionQueryResponse.verify|verify} messages.
-                 * @param message PartitionQueryResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IPartitionQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified PartitionQueryResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.PartitionQueryResponse.verify|verify} messages.
-                 * @param message PartitionQueryResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IPartitionQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a PartitionQueryResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns PartitionQueryResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.PartitionQueryResponse;
-
-                /**
-                 * Decodes a PartitionQueryResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns PartitionQueryResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.PartitionQueryResponse;
-
-                /**
-                 * Verifies a PartitionQueryResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a PartitionQueryResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns PartitionQueryResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.PartitionQueryResponse;
-
-                /**
-                 * Creates a plain object from a PartitionQueryResponse message. Also converts values to other types if specified.
-                 * @param message PartitionQueryResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.PartitionQueryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this PartitionQueryResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for PartitionQueryResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a WriteRequest. */
-            interface IWriteRequest {
-
-                /** WriteRequest database */
-                database?: (string|null);
-
-                /** WriteRequest streamId */
-                streamId?: (string|null);
-
-                /** WriteRequest writes */
-                writes?: (google.firestore.v1beta1.IWrite[]|null);
-
-                /** WriteRequest streamToken */
-                streamToken?: (Uint8Array|Buffer|string|null);
-
-                /** WriteRequest labels */
-                labels?: ({ [k: string]: string }|null);
-            }
-
-            /** Represents a WriteRequest. */
-            class WriteRequest implements IWriteRequest {
-
-                /**
-                 * Constructs a new WriteRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IWriteRequest);
-
-                /** WriteRequest database. */
-                public database: string;
-
-                /** WriteRequest streamId. */
-                public streamId: string;
-
-                /** WriteRequest writes. */
-                public writes: google.firestore.v1beta1.IWrite[];
-
-                /** WriteRequest streamToken. */
-                public streamToken: (Uint8Array|Buffer|string);
-
-                /** WriteRequest labels. */
-                public labels: { [k: string]: string };
-
-                /**
-                 * Creates a new WriteRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns WriteRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IWriteRequest): google.firestore.v1beta1.WriteRequest;
-
-                /**
-                 * Encodes the specified WriteRequest message. Does not implicitly {@link google.firestore.v1beta1.WriteRequest.verify|verify} messages.
-                 * @param message WriteRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified WriteRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.WriteRequest.verify|verify} messages.
-                 * @param message WriteRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a WriteRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns WriteRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.WriteRequest;
-
-                /**
-                 * Decodes a WriteRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns WriteRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.WriteRequest;
-
-                /**
-                 * Verifies a WriteRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a WriteRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns WriteRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.WriteRequest;
-
-                /**
-                 * Creates a plain object from a WriteRequest message. Also converts values to other types if specified.
-                 * @param message WriteRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.WriteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this WriteRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for WriteRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a WriteResponse. */
-            interface IWriteResponse {
-
-                /** WriteResponse streamId */
-                streamId?: (string|null);
-
-                /** WriteResponse streamToken */
-                streamToken?: (Uint8Array|Buffer|string|null);
-
-                /** WriteResponse writeResults */
-                writeResults?: (google.firestore.v1beta1.IWriteResult[]|null);
-
-                /** WriteResponse commitTime */
-                commitTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a WriteResponse. */
-            class WriteResponse implements IWriteResponse {
-
-                /**
-                 * Constructs a new WriteResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IWriteResponse);
-
-                /** WriteResponse streamId. */
-                public streamId: string;
-
-                /** WriteResponse streamToken. */
-                public streamToken: (Uint8Array|Buffer|string);
-
-                /** WriteResponse writeResults. */
-                public writeResults: google.firestore.v1beta1.IWriteResult[];
-
-                /** WriteResponse commitTime. */
-                public commitTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new WriteResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns WriteResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IWriteResponse): google.firestore.v1beta1.WriteResponse;
-
-                /**
-                 * Encodes the specified WriteResponse message. Does not implicitly {@link google.firestore.v1beta1.WriteResponse.verify|verify} messages.
-                 * @param message WriteResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified WriteResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.WriteResponse.verify|verify} messages.
-                 * @param message WriteResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a WriteResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns WriteResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.WriteResponse;
-
-                /**
-                 * Decodes a WriteResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns WriteResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.WriteResponse;
-
-                /**
-                 * Verifies a WriteResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a WriteResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns WriteResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.WriteResponse;
-
-                /**
-                 * Creates a plain object from a WriteResponse message. Also converts values to other types if specified.
-                 * @param message WriteResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.WriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this WriteResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for WriteResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListenRequest. */
-            interface IListenRequest {
-
-                /** ListenRequest database */
-                database?: (string|null);
-
-                /** ListenRequest addTarget */
-                addTarget?: (google.firestore.v1beta1.ITarget|null);
-
-                /** ListenRequest removeTarget */
-                removeTarget?: (number|null);
-
-                /** ListenRequest labels */
-                labels?: ({ [k: string]: string }|null);
-            }
-
-            /** Represents a ListenRequest. */
-            class ListenRequest implements IListenRequest {
-
-                /**
-                 * Constructs a new ListenRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IListenRequest);
-
-                /** ListenRequest database. */
-                public database: string;
-
-                /** ListenRequest addTarget. */
-                public addTarget?: (google.firestore.v1beta1.ITarget|null);
-
-                /** ListenRequest removeTarget. */
-                public removeTarget?: (number|null);
-
-                /** ListenRequest labels. */
-                public labels: { [k: string]: string };
-
-                /** ListenRequest targetChange. */
-                public targetChange?: ("addTarget"|"removeTarget");
-
-                /**
-                 * Creates a new ListenRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListenRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IListenRequest): google.firestore.v1beta1.ListenRequest;
-
-                /**
-                 * Encodes the specified ListenRequest message. Does not implicitly {@link google.firestore.v1beta1.ListenRequest.verify|verify} messages.
-                 * @param message ListenRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IListenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListenRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ListenRequest.verify|verify} messages.
-                 * @param message ListenRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IListenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListenRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListenRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ListenRequest;
-
-                /**
-                 * Decodes a ListenRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListenRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ListenRequest;
-
-                /**
-                 * Verifies a ListenRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListenRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListenRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ListenRequest;
-
-                /**
-                 * Creates a plain object from a ListenRequest message. Also converts values to other types if specified.
-                 * @param message ListenRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ListenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListenRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListenRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListenResponse. */
-            interface IListenResponse {
-
-                /** ListenResponse targetChange */
-                targetChange?: (google.firestore.v1beta1.ITargetChange|null);
-
-                /** ListenResponse documentChange */
-                documentChange?: (google.firestore.v1beta1.IDocumentChange|null);
-
-                /** ListenResponse documentDelete */
-                documentDelete?: (google.firestore.v1beta1.IDocumentDelete|null);
-
-                /** ListenResponse documentRemove */
-                documentRemove?: (google.firestore.v1beta1.IDocumentRemove|null);
-
-                /** ListenResponse filter */
-                filter?: (google.firestore.v1beta1.IExistenceFilter|null);
-            }
-
-            /** Represents a ListenResponse. */
-            class ListenResponse implements IListenResponse {
-
-                /**
-                 * Constructs a new ListenResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IListenResponse);
-
-                /** ListenResponse targetChange. */
-                public targetChange?: (google.firestore.v1beta1.ITargetChange|null);
-
-                /** ListenResponse documentChange. */
-                public documentChange?: (google.firestore.v1beta1.IDocumentChange|null);
-
-                /** ListenResponse documentDelete. */
-                public documentDelete?: (google.firestore.v1beta1.IDocumentDelete|null);
-
-                /** ListenResponse documentRemove. */
-                public documentRemove?: (google.firestore.v1beta1.IDocumentRemove|null);
-
-                /** ListenResponse filter. */
-                public filter?: (google.firestore.v1beta1.IExistenceFilter|null);
-
-                /** ListenResponse responseType. */
-                public responseType?: ("targetChange"|"documentChange"|"documentDelete"|"documentRemove"|"filter");
-
-                /**
-                 * Creates a new ListenResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListenResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IListenResponse): google.firestore.v1beta1.ListenResponse;
-
-                /**
-                 * Encodes the specified ListenResponse message. Does not implicitly {@link google.firestore.v1beta1.ListenResponse.verify|verify} messages.
-                 * @param message ListenResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IListenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListenResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ListenResponse.verify|verify} messages.
-                 * @param message ListenResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IListenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListenResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListenResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ListenResponse;
-
-                /**
-                 * Decodes a ListenResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListenResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ListenResponse;
-
-                /**
-                 * Verifies a ListenResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListenResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListenResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ListenResponse;
-
-                /**
-                 * Creates a plain object from a ListenResponse message. Also converts values to other types if specified.
-                 * @param message ListenResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ListenResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListenResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListenResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a Target. */
-            interface ITarget {
-
-                /** Target query */
-                query?: (google.firestore.v1beta1.Target.IQueryTarget|null);
-
-                /** Target documents */
-                documents?: (google.firestore.v1beta1.Target.IDocumentsTarget|null);
-
-                /** Target resumeToken */
-                resumeToken?: (Uint8Array|Buffer|string|null);
-
-                /** Target readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-
-                /** Target targetId */
-                targetId?: (number|null);
-
-                /** Target once */
-                once?: (boolean|null);
-            }
-
-            /** Represents a Target. */
-            class Target implements ITarget {
-
-                /**
-                 * Constructs a new Target.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ITarget);
-
-                /** Target query. */
-                public query?: (google.firestore.v1beta1.Target.IQueryTarget|null);
-
-                /** Target documents. */
-                public documents?: (google.firestore.v1beta1.Target.IDocumentsTarget|null);
-
-                /** Target resumeToken. */
-                public resumeToken?: (Uint8Array|Buffer|string|null);
-
-                /** Target readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /** Target targetId. */
-                public targetId: number;
-
-                /** Target once. */
-                public once: boolean;
-
-                /** Target targetType. */
-                public targetType?: ("query"|"documents");
-
-                /** Target resumeType. */
-                public resumeType?: ("resumeToken"|"readTime");
-
-                /**
-                 * Creates a new Target instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Target instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ITarget): google.firestore.v1beta1.Target;
-
-                /**
-                 * Encodes the specified Target message. Does not implicitly {@link google.firestore.v1beta1.Target.verify|verify} messages.
-                 * @param message Target message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Target message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Target.verify|verify} messages.
-                 * @param message Target message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Target message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Target
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Target;
-
-                /**
-                 * Decodes a Target message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Target
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Target;
-
-                /**
-                 * Verifies a Target message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Target message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Target
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Target;
-
-                /**
-                 * Creates a plain object from a Target message. Also converts values to other types if specified.
-                 * @param message Target
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.Target, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Target to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Target
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace Target {
-
-                /** Properties of a DocumentsTarget. */
-                interface IDocumentsTarget {
-
-                    /** DocumentsTarget documents */
-                    documents?: (string[]|null);
-                }
-
-                /** Represents a DocumentsTarget. */
-                class DocumentsTarget implements IDocumentsTarget {
-
-                    /**
-                     * Constructs a new DocumentsTarget.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.Target.IDocumentsTarget);
-
-                    /** DocumentsTarget documents. */
-                    public documents: string[];
-
-                    /**
-                     * Creates a new DocumentsTarget instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DocumentsTarget instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.Target.IDocumentsTarget): google.firestore.v1beta1.Target.DocumentsTarget;
-
-                    /**
-                     * Encodes the specified DocumentsTarget message. Does not implicitly {@link google.firestore.v1beta1.Target.DocumentsTarget.verify|verify} messages.
-                     * @param message DocumentsTarget message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.Target.IDocumentsTarget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DocumentsTarget message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Target.DocumentsTarget.verify|verify} messages.
-                     * @param message DocumentsTarget message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.Target.IDocumentsTarget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DocumentsTarget message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DocumentsTarget
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Target.DocumentsTarget;
-
-                    /**
-                     * Decodes a DocumentsTarget message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DocumentsTarget
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Target.DocumentsTarget;
-
-                    /**
-                     * Verifies a DocumentsTarget message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DocumentsTarget message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DocumentsTarget
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Target.DocumentsTarget;
-
-                    /**
-                     * Creates a plain object from a DocumentsTarget message. Also converts values to other types if specified.
-                     * @param message DocumentsTarget
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.Target.DocumentsTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DocumentsTarget to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DocumentsTarget
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a QueryTarget. */
-                interface IQueryTarget {
-
-                    /** QueryTarget parent */
-                    parent?: (string|null);
-
-                    /** QueryTarget structuredQuery */
-                    structuredQuery?: (google.firestore.v1beta1.IStructuredQuery|null);
-                }
-
-                /** Represents a QueryTarget. */
-                class QueryTarget implements IQueryTarget {
-
-                    /**
-                     * Constructs a new QueryTarget.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.Target.IQueryTarget);
-
-                    /** QueryTarget parent. */
-                    public parent: string;
-
-                    /** QueryTarget structuredQuery. */
-                    public structuredQuery?: (google.firestore.v1beta1.IStructuredQuery|null);
-
-                    /** QueryTarget queryType. */
-                    public queryType?: "structuredQuery";
-
-                    /**
-                     * Creates a new QueryTarget instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns QueryTarget instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.Target.IQueryTarget): google.firestore.v1beta1.Target.QueryTarget;
-
-                    /**
-                     * Encodes the specified QueryTarget message. Does not implicitly {@link google.firestore.v1beta1.Target.QueryTarget.verify|verify} messages.
-                     * @param message QueryTarget message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.Target.IQueryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified QueryTarget message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Target.QueryTarget.verify|verify} messages.
-                     * @param message QueryTarget message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.Target.IQueryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a QueryTarget message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns QueryTarget
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Target.QueryTarget;
-
-                    /**
-                     * Decodes a QueryTarget message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns QueryTarget
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Target.QueryTarget;
-
-                    /**
-                     * Verifies a QueryTarget message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a QueryTarget message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns QueryTarget
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Target.QueryTarget;
-
-                    /**
-                     * Creates a plain object from a QueryTarget message. Also converts values to other types if specified.
-                     * @param message QueryTarget
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.Target.QueryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this QueryTarget to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for QueryTarget
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-            }
-
-            /** Properties of a TargetChange. */
-            interface ITargetChange {
-
-                /** TargetChange targetChangeType */
-                targetChangeType?: (google.firestore.v1beta1.TargetChange.TargetChangeType|keyof typeof google.firestore.v1beta1.TargetChange.TargetChangeType|null);
-
-                /** TargetChange targetIds */
-                targetIds?: (number[]|null);
-
-                /** TargetChange cause */
-                cause?: (google.rpc.IStatus|null);
-
-                /** TargetChange resumeToken */
-                resumeToken?: (Uint8Array|Buffer|string|null);
-
-                /** TargetChange readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a TargetChange. */
-            class TargetChange implements ITargetChange {
-
-                /**
-                 * Constructs a new TargetChange.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ITargetChange);
-
-                /** TargetChange targetChangeType. */
-                public targetChangeType: (google.firestore.v1beta1.TargetChange.TargetChangeType|keyof typeof google.firestore.v1beta1.TargetChange.TargetChangeType);
-
-                /** TargetChange targetIds. */
-                public targetIds: number[];
-
-                /** TargetChange cause. */
-                public cause?: (google.rpc.IStatus|null);
-
-                /** TargetChange resumeToken. */
-                public resumeToken: (Uint8Array|Buffer|string);
-
-                /** TargetChange readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new TargetChange instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns TargetChange instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ITargetChange): google.firestore.v1beta1.TargetChange;
-
-                /**
-                 * Encodes the specified TargetChange message. Does not implicitly {@link google.firestore.v1beta1.TargetChange.verify|verify} messages.
-                 * @param message TargetChange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ITargetChange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified TargetChange message, length delimited. Does not implicitly {@link google.firestore.v1beta1.TargetChange.verify|verify} messages.
-                 * @param message TargetChange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ITargetChange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a TargetChange message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns TargetChange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.TargetChange;
-
-                /**
-                 * Decodes a TargetChange message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns TargetChange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.TargetChange;
-
-                /**
-                 * Verifies a TargetChange message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a TargetChange message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns TargetChange
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.TargetChange;
-
-                /**
-                 * Creates a plain object from a TargetChange message. Also converts values to other types if specified.
-                 * @param message TargetChange
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.TargetChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this TargetChange to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for TargetChange
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace TargetChange {
-
-                /** TargetChangeType enum. */
-                enum TargetChangeType {
-                    NO_CHANGE = 0,
-                    ADD = 1,
-                    REMOVE = 2,
-                    CURRENT = 3,
-                    RESET = 4
-                }
-            }
-
-            /** Properties of a ListCollectionIdsRequest. */
-            interface IListCollectionIdsRequest {
-
-                /** ListCollectionIdsRequest parent */
-                parent?: (string|null);
-
-                /** ListCollectionIdsRequest pageSize */
-                pageSize?: (number|null);
-
-                /** ListCollectionIdsRequest pageToken */
-                pageToken?: (string|null);
-            }
-
-            /** Represents a ListCollectionIdsRequest. */
-            class ListCollectionIdsRequest implements IListCollectionIdsRequest {
-
-                /**
-                 * Constructs a new ListCollectionIdsRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IListCollectionIdsRequest);
-
-                /** ListCollectionIdsRequest parent. */
-                public parent: string;
-
-                /** ListCollectionIdsRequest pageSize. */
-                public pageSize: number;
-
-                /** ListCollectionIdsRequest pageToken. */
-                public pageToken: string;
-
-                /**
-                 * Creates a new ListCollectionIdsRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListCollectionIdsRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IListCollectionIdsRequest): google.firestore.v1beta1.ListCollectionIdsRequest;
-
-                /**
-                 * Encodes the specified ListCollectionIdsRequest message. Does not implicitly {@link google.firestore.v1beta1.ListCollectionIdsRequest.verify|verify} messages.
-                 * @param message ListCollectionIdsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IListCollectionIdsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListCollectionIdsRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ListCollectionIdsRequest.verify|verify} messages.
-                 * @param message ListCollectionIdsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IListCollectionIdsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListCollectionIdsRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListCollectionIdsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ListCollectionIdsRequest;
-
-                /**
-                 * Decodes a ListCollectionIdsRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListCollectionIdsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ListCollectionIdsRequest;
-
-                /**
-                 * Verifies a ListCollectionIdsRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListCollectionIdsRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListCollectionIdsRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ListCollectionIdsRequest;
-
-                /**
-                 * Creates a plain object from a ListCollectionIdsRequest message. Also converts values to other types if specified.
-                 * @param message ListCollectionIdsRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ListCollectionIdsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListCollectionIdsRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListCollectionIdsRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListCollectionIdsResponse. */
-            interface IListCollectionIdsResponse {
-
-                /** ListCollectionIdsResponse collectionIds */
-                collectionIds?: (string[]|null);
-
-                /** ListCollectionIdsResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a ListCollectionIdsResponse. */
-            class ListCollectionIdsResponse implements IListCollectionIdsResponse {
-
-                /**
-                 * Constructs a new ListCollectionIdsResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IListCollectionIdsResponse);
-
-                /** ListCollectionIdsResponse collectionIds. */
-                public collectionIds: string[];
-
-                /** ListCollectionIdsResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new ListCollectionIdsResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListCollectionIdsResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IListCollectionIdsResponse): google.firestore.v1beta1.ListCollectionIdsResponse;
-
-                /**
-                 * Encodes the specified ListCollectionIdsResponse message. Does not implicitly {@link google.firestore.v1beta1.ListCollectionIdsResponse.verify|verify} messages.
-                 * @param message ListCollectionIdsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IListCollectionIdsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListCollectionIdsResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ListCollectionIdsResponse.verify|verify} messages.
-                 * @param message ListCollectionIdsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IListCollectionIdsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListCollectionIdsResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListCollectionIdsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ListCollectionIdsResponse;
-
-                /**
-                 * Decodes a ListCollectionIdsResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListCollectionIdsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ListCollectionIdsResponse;
-
-                /**
-                 * Verifies a ListCollectionIdsResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListCollectionIdsResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListCollectionIdsResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ListCollectionIdsResponse;
-
-                /**
-                 * Creates a plain object from a ListCollectionIdsResponse message. Also converts values to other types if specified.
-                 * @param message ListCollectionIdsResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ListCollectionIdsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListCollectionIdsResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListCollectionIdsResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a BatchWriteRequest. */
-            interface IBatchWriteRequest {
-
-                /** BatchWriteRequest database */
-                database?: (string|null);
-
-                /** BatchWriteRequest writes */
-                writes?: (google.firestore.v1beta1.IWrite[]|null);
-
-                /** BatchWriteRequest labels */
-                labels?: ({ [k: string]: string }|null);
-            }
-
-            /** Represents a BatchWriteRequest. */
-            class BatchWriteRequest implements IBatchWriteRequest {
-
-                /**
-                 * Constructs a new BatchWriteRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IBatchWriteRequest);
-
-                /** BatchWriteRequest database. */
-                public database: string;
-
-                /** BatchWriteRequest writes. */
-                public writes: google.firestore.v1beta1.IWrite[];
-
-                /** BatchWriteRequest labels. */
-                public labels: { [k: string]: string };
-
-                /**
-                 * Creates a new BatchWriteRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BatchWriteRequest instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IBatchWriteRequest): google.firestore.v1beta1.BatchWriteRequest;
-
-                /**
-                 * Encodes the specified BatchWriteRequest message. Does not implicitly {@link google.firestore.v1beta1.BatchWriteRequest.verify|verify} messages.
-                 * @param message BatchWriteRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IBatchWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BatchWriteRequest message, length delimited. Does not implicitly {@link google.firestore.v1beta1.BatchWriteRequest.verify|verify} messages.
-                 * @param message BatchWriteRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IBatchWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BatchWriteRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BatchWriteRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.BatchWriteRequest;
-
-                /**
-                 * Decodes a BatchWriteRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BatchWriteRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.BatchWriteRequest;
-
-                /**
-                 * Verifies a BatchWriteRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BatchWriteRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BatchWriteRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.BatchWriteRequest;
-
-                /**
-                 * Creates a plain object from a BatchWriteRequest message. Also converts values to other types if specified.
-                 * @param message BatchWriteRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.BatchWriteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BatchWriteRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for BatchWriteRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a BatchWriteResponse. */
-            interface IBatchWriteResponse {
-
-                /** BatchWriteResponse writeResults */
-                writeResults?: (google.firestore.v1beta1.IWriteResult[]|null);
-
-                /** BatchWriteResponse status */
-                status?: (google.rpc.IStatus[]|null);
-            }
-
-            /** Represents a BatchWriteResponse. */
-            class BatchWriteResponse implements IBatchWriteResponse {
-
-                /**
-                 * Constructs a new BatchWriteResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IBatchWriteResponse);
-
-                /** BatchWriteResponse writeResults. */
-                public writeResults: google.firestore.v1beta1.IWriteResult[];
-
-                /** BatchWriteResponse status. */
-                public status: google.rpc.IStatus[];
-
-                /**
-                 * Creates a new BatchWriteResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BatchWriteResponse instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IBatchWriteResponse): google.firestore.v1beta1.BatchWriteResponse;
-
-                /**
-                 * Encodes the specified BatchWriteResponse message. Does not implicitly {@link google.firestore.v1beta1.BatchWriteResponse.verify|verify} messages.
-                 * @param message BatchWriteResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IBatchWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BatchWriteResponse message, length delimited. Does not implicitly {@link google.firestore.v1beta1.BatchWriteResponse.verify|verify} messages.
-                 * @param message BatchWriteResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IBatchWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BatchWriteResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BatchWriteResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.BatchWriteResponse;
-
-                /**
-                 * Decodes a BatchWriteResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BatchWriteResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.BatchWriteResponse;
-
-                /**
-                 * Verifies a BatchWriteResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BatchWriteResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BatchWriteResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.BatchWriteResponse;
-
-                /**
-                 * Creates a plain object from a BatchWriteResponse message. Also converts values to other types if specified.
-                 * @param message BatchWriteResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.BatchWriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BatchWriteResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for BatchWriteResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a StructuredQuery. */
-            interface IStructuredQuery {
-
-                /** StructuredQuery select */
-                select?: (google.firestore.v1beta1.StructuredQuery.IProjection|null);
-
-                /** StructuredQuery from */
-                from?: (google.firestore.v1beta1.StructuredQuery.ICollectionSelector[]|null);
-
-                /** StructuredQuery where */
-                where?: (google.firestore.v1beta1.StructuredQuery.IFilter|null);
-
-                /** StructuredQuery orderBy */
-                orderBy?: (google.firestore.v1beta1.StructuredQuery.IOrder[]|null);
-
-                /** StructuredQuery startAt */
-                startAt?: (google.firestore.v1beta1.ICursor|null);
-
-                /** StructuredQuery endAt */
-                endAt?: (google.firestore.v1beta1.ICursor|null);
-
-                /** StructuredQuery offset */
-                offset?: (number|null);
-
-                /** StructuredQuery limit */
-                limit?: (google.protobuf.IInt32Value|null);
-            }
-
-            /** Represents a StructuredQuery. */
-            class StructuredQuery implements IStructuredQuery {
-
-                /**
-                 * Constructs a new StructuredQuery.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IStructuredQuery);
-
-                /** StructuredQuery select. */
-                public select?: (google.firestore.v1beta1.StructuredQuery.IProjection|null);
-
-                /** StructuredQuery from. */
-                public from: google.firestore.v1beta1.StructuredQuery.ICollectionSelector[];
-
-                /** StructuredQuery where. */
-                public where?: (google.firestore.v1beta1.StructuredQuery.IFilter|null);
-
-                /** StructuredQuery orderBy. */
-                public orderBy: google.firestore.v1beta1.StructuredQuery.IOrder[];
-
-                /** StructuredQuery startAt. */
-                public startAt?: (google.firestore.v1beta1.ICursor|null);
-
-                /** StructuredQuery endAt. */
-                public endAt?: (google.firestore.v1beta1.ICursor|null);
-
-                /** StructuredQuery offset. */
-                public offset: number;
-
-                /** StructuredQuery limit. */
-                public limit?: (google.protobuf.IInt32Value|null);
-
-                /**
-                 * Creates a new StructuredQuery instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns StructuredQuery instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IStructuredQuery): google.firestore.v1beta1.StructuredQuery;
-
-                /**
-                 * Encodes the specified StructuredQuery message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.verify|verify} messages.
-                 * @param message StructuredQuery message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IStructuredQuery, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified StructuredQuery message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.verify|verify} messages.
-                 * @param message StructuredQuery message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IStructuredQuery, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a StructuredQuery message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns StructuredQuery
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery;
-
-                /**
-                 * Decodes a StructuredQuery message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns StructuredQuery
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery;
-
-                /**
-                 * Verifies a StructuredQuery message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a StructuredQuery message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns StructuredQuery
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery;
-
-                /**
-                 * Creates a plain object from a StructuredQuery message. Also converts values to other types if specified.
-                 * @param message StructuredQuery
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.StructuredQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this StructuredQuery to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for StructuredQuery
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace StructuredQuery {
-
-                /** Properties of a CollectionSelector. */
-                interface ICollectionSelector {
-
-                    /** CollectionSelector collectionId */
-                    collectionId?: (string|null);
-
-                    /** CollectionSelector allDescendants */
-                    allDescendants?: (boolean|null);
-                }
-
-                /** Represents a CollectionSelector. */
-                class CollectionSelector implements ICollectionSelector {
-
-                    /**
-                     * Constructs a new CollectionSelector.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.ICollectionSelector);
-
-                    /** CollectionSelector collectionId. */
-                    public collectionId: string;
-
-                    /** CollectionSelector allDescendants. */
-                    public allDescendants: boolean;
-
-                    /**
-                     * Creates a new CollectionSelector instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CollectionSelector instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.ICollectionSelector): google.firestore.v1beta1.StructuredQuery.CollectionSelector;
-
-                    /**
-                     * Encodes the specified CollectionSelector message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.CollectionSelector.verify|verify} messages.
-                     * @param message CollectionSelector message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.ICollectionSelector, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CollectionSelector message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.CollectionSelector.verify|verify} messages.
-                     * @param message CollectionSelector message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.ICollectionSelector, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CollectionSelector message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CollectionSelector
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.CollectionSelector;
-
-                    /**
-                     * Decodes a CollectionSelector message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CollectionSelector
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.CollectionSelector;
-
-                    /**
-                     * Verifies a CollectionSelector message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CollectionSelector message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CollectionSelector
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.CollectionSelector;
-
-                    /**
-                     * Creates a plain object from a CollectionSelector message. Also converts values to other types if specified.
-                     * @param message CollectionSelector
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.CollectionSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CollectionSelector to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CollectionSelector
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Filter. */
-                interface IFilter {
-
-                    /** Filter compositeFilter */
-                    compositeFilter?: (google.firestore.v1beta1.StructuredQuery.ICompositeFilter|null);
-
-                    /** Filter fieldFilter */
-                    fieldFilter?: (google.firestore.v1beta1.StructuredQuery.IFieldFilter|null);
-
-                    /** Filter unaryFilter */
-                    unaryFilter?: (google.firestore.v1beta1.StructuredQuery.IUnaryFilter|null);
-                }
-
-                /** Represents a Filter. */
-                class Filter implements IFilter {
-
-                    /**
-                     * Constructs a new Filter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.IFilter);
-
-                    /** Filter compositeFilter. */
-                    public compositeFilter?: (google.firestore.v1beta1.StructuredQuery.ICompositeFilter|null);
-
-                    /** Filter fieldFilter. */
-                    public fieldFilter?: (google.firestore.v1beta1.StructuredQuery.IFieldFilter|null);
-
-                    /** Filter unaryFilter. */
-                    public unaryFilter?: (google.firestore.v1beta1.StructuredQuery.IUnaryFilter|null);
-
-                    /** Filter filterType. */
-                    public filterType?: ("compositeFilter"|"fieldFilter"|"unaryFilter");
-
-                    /**
-                     * Creates a new Filter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Filter instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.IFilter): google.firestore.v1beta1.StructuredQuery.Filter;
-
-                    /**
-                     * Encodes the specified Filter message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.Filter.verify|verify} messages.
-                     * @param message Filter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.Filter.verify|verify} messages.
-                     * @param message Filter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Filter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Filter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.Filter;
-
-                    /**
-                     * Decodes a Filter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Filter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.Filter;
-
-                    /**
-                     * Verifies a Filter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Filter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Filter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.Filter;
-
-                    /**
-                     * Creates a plain object from a Filter message. Also converts values to other types if specified.
-                     * @param message Filter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.Filter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Filter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Filter
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CompositeFilter. */
-                interface ICompositeFilter {
-
-                    /** CompositeFilter op */
-                    op?: (google.firestore.v1beta1.StructuredQuery.CompositeFilter.Operator|keyof typeof google.firestore.v1beta1.StructuredQuery.CompositeFilter.Operator|null);
-
-                    /** CompositeFilter filters */
-                    filters?: (google.firestore.v1beta1.StructuredQuery.IFilter[]|null);
-                }
-
-                /** Represents a CompositeFilter. */
-                class CompositeFilter implements ICompositeFilter {
-
-                    /**
-                     * Constructs a new CompositeFilter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.ICompositeFilter);
-
-                    /** CompositeFilter op. */
-                    public op: (google.firestore.v1beta1.StructuredQuery.CompositeFilter.Operator|keyof typeof google.firestore.v1beta1.StructuredQuery.CompositeFilter.Operator);
-
-                    /** CompositeFilter filters. */
-                    public filters: google.firestore.v1beta1.StructuredQuery.IFilter[];
-
-                    /**
-                     * Creates a new CompositeFilter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CompositeFilter instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.ICompositeFilter): google.firestore.v1beta1.StructuredQuery.CompositeFilter;
-
-                    /**
-                     * Encodes the specified CompositeFilter message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.CompositeFilter.verify|verify} messages.
-                     * @param message CompositeFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.ICompositeFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CompositeFilter message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.CompositeFilter.verify|verify} messages.
-                     * @param message CompositeFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.ICompositeFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CompositeFilter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CompositeFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.CompositeFilter;
-
-                    /**
-                     * Decodes a CompositeFilter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CompositeFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.CompositeFilter;
-
-                    /**
-                     * Verifies a CompositeFilter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CompositeFilter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CompositeFilter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.CompositeFilter;
-
-                    /**
-                     * Creates a plain object from a CompositeFilter message. Also converts values to other types if specified.
-                     * @param message CompositeFilter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.CompositeFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CompositeFilter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CompositeFilter
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace CompositeFilter {
-
-                    /** Operator enum. */
-                    enum Operator {
-                        OPERATOR_UNSPECIFIED = 0,
-                        AND = 1
-                    }
-                }
-
-                /** Properties of a FieldFilter. */
-                interface IFieldFilter {
-
-                    /** FieldFilter field */
-                    field?: (google.firestore.v1beta1.StructuredQuery.IFieldReference|null);
-
-                    /** FieldFilter op */
-                    op?: (google.firestore.v1beta1.StructuredQuery.FieldFilter.Operator|keyof typeof google.firestore.v1beta1.StructuredQuery.FieldFilter.Operator|null);
-
-                    /** FieldFilter value */
-                    value?: (google.firestore.v1beta1.IValue|null);
-                }
-
-                /** Represents a FieldFilter. */
-                class FieldFilter implements IFieldFilter {
-
-                    /**
-                     * Constructs a new FieldFilter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.IFieldFilter);
-
-                    /** FieldFilter field. */
-                    public field?: (google.firestore.v1beta1.StructuredQuery.IFieldReference|null);
-
-                    /** FieldFilter op. */
-                    public op: (google.firestore.v1beta1.StructuredQuery.FieldFilter.Operator|keyof typeof google.firestore.v1beta1.StructuredQuery.FieldFilter.Operator);
-
-                    /** FieldFilter value. */
-                    public value?: (google.firestore.v1beta1.IValue|null);
-
-                    /**
-                     * Creates a new FieldFilter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FieldFilter instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.IFieldFilter): google.firestore.v1beta1.StructuredQuery.FieldFilter;
-
-                    /**
-                     * Encodes the specified FieldFilter message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.FieldFilter.verify|verify} messages.
-                     * @param message FieldFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.FieldFilter.verify|verify} messages.
-                     * @param message FieldFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FieldFilter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FieldFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.FieldFilter;
-
-                    /**
-                     * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FieldFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.FieldFilter;
-
-                    /**
-                     * Verifies a FieldFilter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FieldFilter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.FieldFilter;
-
-                    /**
-                     * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
-                     * @param message FieldFilter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.FieldFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FieldFilter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FieldFilter
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace FieldFilter {
-
-                    /** Operator enum. */
-                    enum Operator {
-                        OPERATOR_UNSPECIFIED = 0,
-                        LESS_THAN = 1,
-                        LESS_THAN_OR_EQUAL = 2,
-                        GREATER_THAN = 3,
-                        GREATER_THAN_OR_EQUAL = 4,
-                        EQUAL = 5,
-                        NOT_EQUAL = 6,
-                        ARRAY_CONTAINS = 7,
-                        IN = 8,
-                        ARRAY_CONTAINS_ANY = 9,
-                        NOT_IN = 10
-                    }
-                }
-
-                /** Properties of an UnaryFilter. */
-                interface IUnaryFilter {
-
-                    /** UnaryFilter op */
-                    op?: (google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator|keyof typeof google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator|null);
-
-                    /** UnaryFilter field */
-                    field?: (google.firestore.v1beta1.StructuredQuery.IFieldReference|null);
-                }
-
-                /** Represents an UnaryFilter. */
-                class UnaryFilter implements IUnaryFilter {
-
-                    /**
-                     * Constructs a new UnaryFilter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.IUnaryFilter);
-
-                    /** UnaryFilter op. */
-                    public op: (google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator|keyof typeof google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator);
-
-                    /** UnaryFilter field. */
-                    public field?: (google.firestore.v1beta1.StructuredQuery.IFieldReference|null);
-
-                    /** UnaryFilter operandType. */
-                    public operandType?: "field";
-
-                    /**
-                     * Creates a new UnaryFilter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UnaryFilter instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.IUnaryFilter): google.firestore.v1beta1.StructuredQuery.UnaryFilter;
-
-                    /**
-                     * Encodes the specified UnaryFilter message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.UnaryFilter.verify|verify} messages.
-                     * @param message UnaryFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.IUnaryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UnaryFilter message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.UnaryFilter.verify|verify} messages.
-                     * @param message UnaryFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.IUnaryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UnaryFilter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UnaryFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.UnaryFilter;
-
-                    /**
-                     * Decodes an UnaryFilter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UnaryFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.UnaryFilter;
-
-                    /**
-                     * Verifies an UnaryFilter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UnaryFilter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UnaryFilter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.UnaryFilter;
-
-                    /**
-                     * Creates a plain object from an UnaryFilter message. Also converts values to other types if specified.
-                     * @param message UnaryFilter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.UnaryFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UnaryFilter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for UnaryFilter
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace UnaryFilter {
-
-                    /** Operator enum. */
-                    enum Operator {
-                        OPERATOR_UNSPECIFIED = 0,
-                        IS_NAN = 2,
-                        IS_NULL = 3,
-                        IS_NOT_NAN = 4,
-                        IS_NOT_NULL = 5
-                    }
-                }
-
-                /** Properties of a FieldReference. */
-                interface IFieldReference {
-
-                    /** FieldReference fieldPath */
-                    fieldPath?: (string|null);
-                }
-
-                /** Represents a FieldReference. */
-                class FieldReference implements IFieldReference {
-
-                    /**
-                     * Constructs a new FieldReference.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.IFieldReference);
-
-                    /** FieldReference fieldPath. */
-                    public fieldPath: string;
-
-                    /**
-                     * Creates a new FieldReference instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FieldReference instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.IFieldReference): google.firestore.v1beta1.StructuredQuery.FieldReference;
-
-                    /**
-                     * Encodes the specified FieldReference message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.FieldReference.verify|verify} messages.
-                     * @param message FieldReference message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.IFieldReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FieldReference message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.FieldReference.verify|verify} messages.
-                     * @param message FieldReference message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.IFieldReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FieldReference message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FieldReference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.FieldReference;
-
-                    /**
-                     * Decodes a FieldReference message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FieldReference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.FieldReference;
-
-                    /**
-                     * Verifies a FieldReference message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FieldReference message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FieldReference
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.FieldReference;
-
-                    /**
-                     * Creates a plain object from a FieldReference message. Also converts values to other types if specified.
-                     * @param message FieldReference
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.FieldReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FieldReference to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FieldReference
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an Order. */
-                interface IOrder {
-
-                    /** Order field */
-                    field?: (google.firestore.v1beta1.StructuredQuery.IFieldReference|null);
-
-                    /** Order direction */
-                    direction?: (google.firestore.v1beta1.StructuredQuery.Direction|keyof typeof google.firestore.v1beta1.StructuredQuery.Direction|null);
-                }
-
-                /** Represents an Order. */
-                class Order implements IOrder {
-
-                    /**
-                     * Constructs a new Order.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.IOrder);
-
-                    /** Order field. */
-                    public field?: (google.firestore.v1beta1.StructuredQuery.IFieldReference|null);
-
-                    /** Order direction. */
-                    public direction: (google.firestore.v1beta1.StructuredQuery.Direction|keyof typeof google.firestore.v1beta1.StructuredQuery.Direction);
-
-                    /**
-                     * Creates a new Order instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Order instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.IOrder): google.firestore.v1beta1.StructuredQuery.Order;
-
-                    /**
-                     * Encodes the specified Order message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.Order.verify|verify} messages.
-                     * @param message Order message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.IOrder, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Order message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.Order.verify|verify} messages.
-                     * @param message Order message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.IOrder, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Order message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Order
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.Order;
-
-                    /**
-                     * Decodes an Order message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Order
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.Order;
-
-                    /**
-                     * Verifies an Order message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Order message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Order
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.Order;
-
-                    /**
-                     * Creates a plain object from an Order message. Also converts values to other types if specified.
-                     * @param message Order
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.Order, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Order to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Order
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Projection. */
-                interface IProjection {
-
-                    /** Projection fields */
-                    fields?: (google.firestore.v1beta1.StructuredQuery.IFieldReference[]|null);
-                }
-
-                /** Represents a Projection. */
-                class Projection implements IProjection {
-
-                    /**
-                     * Constructs a new Projection.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.StructuredQuery.IProjection);
-
-                    /** Projection fields. */
-                    public fields: google.firestore.v1beta1.StructuredQuery.IFieldReference[];
-
-                    /**
-                     * Creates a new Projection instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Projection instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.StructuredQuery.IProjection): google.firestore.v1beta1.StructuredQuery.Projection;
-
-                    /**
-                     * Encodes the specified Projection message. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.Projection.verify|verify} messages.
-                     * @param message Projection message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.StructuredQuery.IProjection, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Projection message, length delimited. Does not implicitly {@link google.firestore.v1beta1.StructuredQuery.Projection.verify|verify} messages.
-                     * @param message Projection message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.StructuredQuery.IProjection, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Projection message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Projection
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.StructuredQuery.Projection;
-
-                    /**
-                     * Decodes a Projection message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Projection
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.StructuredQuery.Projection;
-
-                    /**
-                     * Verifies a Projection message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Projection message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Projection
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.StructuredQuery.Projection;
-
-                    /**
-                     * Creates a plain object from a Projection message. Also converts values to other types if specified.
-                     * @param message Projection
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.StructuredQuery.Projection, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Projection to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Projection
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Direction enum. */
-                enum Direction {
-                    DIRECTION_UNSPECIFIED = 0,
-                    ASCENDING = 1,
-                    DESCENDING = 2
-                }
-            }
-
-            /** Properties of a Cursor. */
-            interface ICursor {
-
-                /** Cursor values */
-                values?: (google.firestore.v1beta1.IValue[]|null);
-
-                /** Cursor before */
-                before?: (boolean|null);
-            }
-
-            /** Represents a Cursor. */
-            class Cursor implements ICursor {
-
-                /**
-                 * Constructs a new Cursor.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.ICursor);
-
-                /** Cursor values. */
-                public values: google.firestore.v1beta1.IValue[];
-
-                /** Cursor before. */
-                public before: boolean;
-
-                /**
-                 * Creates a new Cursor instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Cursor instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.ICursor): google.firestore.v1beta1.Cursor;
-
-                /**
-                 * Encodes the specified Cursor message. Does not implicitly {@link google.firestore.v1beta1.Cursor.verify|verify} messages.
-                 * @param message Cursor message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.ICursor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Cursor message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Cursor.verify|verify} messages.
-                 * @param message Cursor message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.ICursor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Cursor message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Cursor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Cursor;
-
-                /**
-                 * Decodes a Cursor message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Cursor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Cursor;
-
-                /**
-                 * Verifies a Cursor message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Cursor message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Cursor
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Cursor;
-
-                /**
-                 * Creates a plain object from a Cursor message. Also converts values to other types if specified.
-                 * @param message Cursor
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.Cursor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Cursor to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Cursor
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a Write. */
-            interface IWrite {
-
-                /** Write update */
-                update?: (google.firestore.v1beta1.IDocument|null);
-
-                /** Write delete */
-                "delete"?: (string|null);
-
-                /** Write transform */
-                transform?: (google.firestore.v1beta1.IDocumentTransform|null);
-
-                /** Write updateMask */
-                updateMask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** Write updateTransforms */
-                updateTransforms?: (google.firestore.v1beta1.DocumentTransform.IFieldTransform[]|null);
-
-                /** Write currentDocument */
-                currentDocument?: (google.firestore.v1beta1.IPrecondition|null);
-            }
-
-            /** Represents a Write. */
-            class Write implements IWrite {
-
-                /**
-                 * Constructs a new Write.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IWrite);
-
-                /** Write update. */
-                public update?: (google.firestore.v1beta1.IDocument|null);
-
-                /** Write delete. */
-                public delete?: (string|null);
-
-                /** Write transform. */
-                public transform?: (google.firestore.v1beta1.IDocumentTransform|null);
-
-                /** Write updateMask. */
-                public updateMask?: (google.firestore.v1beta1.IDocumentMask|null);
-
-                /** Write updateTransforms. */
-                public updateTransforms: google.firestore.v1beta1.DocumentTransform.IFieldTransform[];
-
-                /** Write currentDocument. */
-                public currentDocument?: (google.firestore.v1beta1.IPrecondition|null);
-
-                /** Write operation. */
-                public operation?: ("update"|"delete"|"transform");
-
-                /**
-                 * Creates a new Write instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Write instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IWrite): google.firestore.v1beta1.Write;
-
-                /**
-                 * Encodes the specified Write message. Does not implicitly {@link google.firestore.v1beta1.Write.verify|verify} messages.
-                 * @param message Write message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IWrite, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Write message, length delimited. Does not implicitly {@link google.firestore.v1beta1.Write.verify|verify} messages.
-                 * @param message Write message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IWrite, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Write message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Write
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.Write;
-
-                /**
-                 * Decodes a Write message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Write
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.Write;
-
-                /**
-                 * Verifies a Write message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Write message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Write
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.Write;
-
-                /**
-                 * Creates a plain object from a Write message. Also converts values to other types if specified.
-                 * @param message Write
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.Write, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Write to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Write
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a DocumentTransform. */
-            interface IDocumentTransform {
-
-                /** DocumentTransform document */
-                document?: (string|null);
-
-                /** DocumentTransform fieldTransforms */
-                fieldTransforms?: (google.firestore.v1beta1.DocumentTransform.IFieldTransform[]|null);
-            }
-
-            /** Represents a DocumentTransform. */
-            class DocumentTransform implements IDocumentTransform {
-
-                /**
-                 * Constructs a new DocumentTransform.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDocumentTransform);
-
-                /** DocumentTransform document. */
-                public document: string;
-
-                /** DocumentTransform fieldTransforms. */
-                public fieldTransforms: google.firestore.v1beta1.DocumentTransform.IFieldTransform[];
-
-                /**
-                 * Creates a new DocumentTransform instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DocumentTransform instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDocumentTransform): google.firestore.v1beta1.DocumentTransform;
-
-                /**
-                 * Encodes the specified DocumentTransform message. Does not implicitly {@link google.firestore.v1beta1.DocumentTransform.verify|verify} messages.
-                 * @param message DocumentTransform message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDocumentTransform, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DocumentTransform message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DocumentTransform.verify|verify} messages.
-                 * @param message DocumentTransform message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDocumentTransform, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DocumentTransform message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DocumentTransform
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DocumentTransform;
-
-                /**
-                 * Decodes a DocumentTransform message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DocumentTransform
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DocumentTransform;
-
-                /**
-                 * Verifies a DocumentTransform message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DocumentTransform message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DocumentTransform
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DocumentTransform;
-
-                /**
-                 * Creates a plain object from a DocumentTransform message. Also converts values to other types if specified.
-                 * @param message DocumentTransform
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.DocumentTransform, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DocumentTransform to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DocumentTransform
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace DocumentTransform {
-
-                /** Properties of a FieldTransform. */
-                interface IFieldTransform {
-
-                    /** FieldTransform fieldPath */
-                    fieldPath?: (string|null);
-
-                    /** FieldTransform setToServerValue */
-                    setToServerValue?: (google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue|keyof typeof google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue|null);
-
-                    /** FieldTransform increment */
-                    increment?: (google.firestore.v1beta1.IValue|null);
-
-                    /** FieldTransform maximum */
-                    maximum?: (google.firestore.v1beta1.IValue|null);
-
-                    /** FieldTransform minimum */
-                    minimum?: (google.firestore.v1beta1.IValue|null);
-
-                    /** FieldTransform appendMissingElements */
-                    appendMissingElements?: (google.firestore.v1beta1.IArrayValue|null);
-
-                    /** FieldTransform removeAllFromArray */
-                    removeAllFromArray?: (google.firestore.v1beta1.IArrayValue|null);
-                }
-
-                /** Represents a FieldTransform. */
-                class FieldTransform implements IFieldTransform {
-
-                    /**
-                     * Constructs a new FieldTransform.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.firestore.v1beta1.DocumentTransform.IFieldTransform);
-
-                    /** FieldTransform fieldPath. */
-                    public fieldPath: string;
-
-                    /** FieldTransform setToServerValue. */
-                    public setToServerValue?: (google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue|keyof typeof google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue|null);
-
-                    /** FieldTransform increment. */
-                    public increment?: (google.firestore.v1beta1.IValue|null);
-
-                    /** FieldTransform maximum. */
-                    public maximum?: (google.firestore.v1beta1.IValue|null);
-
-                    /** FieldTransform minimum. */
-                    public minimum?: (google.firestore.v1beta1.IValue|null);
-
-                    /** FieldTransform appendMissingElements. */
-                    public appendMissingElements?: (google.firestore.v1beta1.IArrayValue|null);
-
-                    /** FieldTransform removeAllFromArray. */
-                    public removeAllFromArray?: (google.firestore.v1beta1.IArrayValue|null);
-
-                    /** FieldTransform transformType. */
-                    public transformType?: ("setToServerValue"|"increment"|"maximum"|"minimum"|"appendMissingElements"|"removeAllFromArray");
-
-                    /**
-                     * Creates a new FieldTransform instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FieldTransform instance
-                     */
-                    public static create(properties?: google.firestore.v1beta1.DocumentTransform.IFieldTransform): google.firestore.v1beta1.DocumentTransform.FieldTransform;
-
-                    /**
-                     * Encodes the specified FieldTransform message. Does not implicitly {@link google.firestore.v1beta1.DocumentTransform.FieldTransform.verify|verify} messages.
-                     * @param message FieldTransform message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.firestore.v1beta1.DocumentTransform.IFieldTransform, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FieldTransform message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DocumentTransform.FieldTransform.verify|verify} messages.
-                     * @param message FieldTransform message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.firestore.v1beta1.DocumentTransform.IFieldTransform, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FieldTransform message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FieldTransform
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DocumentTransform.FieldTransform;
-
-                    /**
-                     * Decodes a FieldTransform message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FieldTransform
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DocumentTransform.FieldTransform;
-
-                    /**
-                     * Verifies a FieldTransform message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FieldTransform message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FieldTransform
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DocumentTransform.FieldTransform;
-
-                    /**
-                     * Creates a plain object from a FieldTransform message. Also converts values to other types if specified.
-                     * @param message FieldTransform
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.firestore.v1beta1.DocumentTransform.FieldTransform, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FieldTransform to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FieldTransform
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace FieldTransform {
-
-                    /** ServerValue enum. */
-                    enum ServerValue {
-                        SERVER_VALUE_UNSPECIFIED = 0,
-                        REQUEST_TIME = 1
-                    }
-                }
-            }
-
-            /** Properties of a WriteResult. */
-            interface IWriteResult {
-
-                /** WriteResult updateTime */
-                updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** WriteResult transformResults */
-                transformResults?: (google.firestore.v1beta1.IValue[]|null);
-            }
-
-            /** Represents a WriteResult. */
-            class WriteResult implements IWriteResult {
-
-                /**
-                 * Constructs a new WriteResult.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IWriteResult);
-
-                /** WriteResult updateTime. */
-                public updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** WriteResult transformResults. */
-                public transformResults: google.firestore.v1beta1.IValue[];
-
-                /**
-                 * Creates a new WriteResult instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns WriteResult instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IWriteResult): google.firestore.v1beta1.WriteResult;
-
-                /**
-                 * Encodes the specified WriteResult message. Does not implicitly {@link google.firestore.v1beta1.WriteResult.verify|verify} messages.
-                 * @param message WriteResult message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IWriteResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified WriteResult message, length delimited. Does not implicitly {@link google.firestore.v1beta1.WriteResult.verify|verify} messages.
-                 * @param message WriteResult message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IWriteResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a WriteResult message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns WriteResult
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.WriteResult;
-
-                /**
-                 * Decodes a WriteResult message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns WriteResult
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.WriteResult;
-
-                /**
-                 * Verifies a WriteResult message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a WriteResult message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns WriteResult
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.WriteResult;
-
-                /**
-                 * Creates a plain object from a WriteResult message. Also converts values to other types if specified.
-                 * @param message WriteResult
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.WriteResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this WriteResult to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for WriteResult
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a DocumentChange. */
-            interface IDocumentChange {
-
-                /** DocumentChange document */
-                document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** DocumentChange targetIds */
-                targetIds?: (number[]|null);
-
-                /** DocumentChange removedTargetIds */
-                removedTargetIds?: (number[]|null);
-            }
-
-            /** Represents a DocumentChange. */
-            class DocumentChange implements IDocumentChange {
-
-                /**
-                 * Constructs a new DocumentChange.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDocumentChange);
-
-                /** DocumentChange document. */
-                public document?: (google.firestore.v1beta1.IDocument|null);
-
-                /** DocumentChange targetIds. */
-                public targetIds: number[];
-
-                /** DocumentChange removedTargetIds. */
-                public removedTargetIds: number[];
-
-                /**
-                 * Creates a new DocumentChange instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DocumentChange instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDocumentChange): google.firestore.v1beta1.DocumentChange;
-
-                /**
-                 * Encodes the specified DocumentChange message. Does not implicitly {@link google.firestore.v1beta1.DocumentChange.verify|verify} messages.
-                 * @param message DocumentChange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDocumentChange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DocumentChange message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DocumentChange.verify|verify} messages.
-                 * @param message DocumentChange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDocumentChange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DocumentChange message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DocumentChange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DocumentChange;
-
-                /**
-                 * Decodes a DocumentChange message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DocumentChange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DocumentChange;
-
-                /**
-                 * Verifies a DocumentChange message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DocumentChange message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DocumentChange
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DocumentChange;
-
-                /**
-                 * Creates a plain object from a DocumentChange message. Also converts values to other types if specified.
-                 * @param message DocumentChange
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.DocumentChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DocumentChange to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DocumentChange
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a DocumentDelete. */
-            interface IDocumentDelete {
-
-                /** DocumentDelete document */
-                document?: (string|null);
-
-                /** DocumentDelete removedTargetIds */
-                removedTargetIds?: (number[]|null);
-
-                /** DocumentDelete readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a DocumentDelete. */
-            class DocumentDelete implements IDocumentDelete {
-
-                /**
-                 * Constructs a new DocumentDelete.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDocumentDelete);
-
-                /** DocumentDelete document. */
-                public document: string;
-
-                /** DocumentDelete removedTargetIds. */
-                public removedTargetIds: number[];
-
-                /** DocumentDelete readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new DocumentDelete instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DocumentDelete instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDocumentDelete): google.firestore.v1beta1.DocumentDelete;
-
-                /**
-                 * Encodes the specified DocumentDelete message. Does not implicitly {@link google.firestore.v1beta1.DocumentDelete.verify|verify} messages.
-                 * @param message DocumentDelete message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDocumentDelete, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DocumentDelete message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DocumentDelete.verify|verify} messages.
-                 * @param message DocumentDelete message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDocumentDelete, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DocumentDelete message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DocumentDelete
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DocumentDelete;
-
-                /**
-                 * Decodes a DocumentDelete message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DocumentDelete
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DocumentDelete;
-
-                /**
-                 * Verifies a DocumentDelete message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DocumentDelete message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DocumentDelete
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DocumentDelete;
-
-                /**
-                 * Creates a plain object from a DocumentDelete message. Also converts values to other types if specified.
-                 * @param message DocumentDelete
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.DocumentDelete, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DocumentDelete to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DocumentDelete
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a DocumentRemove. */
-            interface IDocumentRemove {
-
-                /** DocumentRemove document */
-                document?: (string|null);
-
-                /** DocumentRemove removedTargetIds */
-                removedTargetIds?: (number[]|null);
-
-                /** DocumentRemove readTime */
-                readTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a DocumentRemove. */
-            class DocumentRemove implements IDocumentRemove {
-
-                /**
-                 * Constructs a new DocumentRemove.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IDocumentRemove);
-
-                /** DocumentRemove document. */
-                public document: string;
-
-                /** DocumentRemove removedTargetIds. */
-                public removedTargetIds: number[];
-
-                /** DocumentRemove readTime. */
-                public readTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new DocumentRemove instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DocumentRemove instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IDocumentRemove): google.firestore.v1beta1.DocumentRemove;
-
-                /**
-                 * Encodes the specified DocumentRemove message. Does not implicitly {@link google.firestore.v1beta1.DocumentRemove.verify|verify} messages.
-                 * @param message DocumentRemove message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IDocumentRemove, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DocumentRemove message, length delimited. Does not implicitly {@link google.firestore.v1beta1.DocumentRemove.verify|verify} messages.
-                 * @param message DocumentRemove message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IDocumentRemove, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DocumentRemove message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DocumentRemove
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.DocumentRemove;
-
-                /**
-                 * Decodes a DocumentRemove message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DocumentRemove
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.DocumentRemove;
-
-                /**
-                 * Verifies a DocumentRemove message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DocumentRemove message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DocumentRemove
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.DocumentRemove;
-
-                /**
-                 * Creates a plain object from a DocumentRemove message. Also converts values to other types if specified.
-                 * @param message DocumentRemove
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.DocumentRemove, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DocumentRemove to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DocumentRemove
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an ExistenceFilter. */
-            interface IExistenceFilter {
-
-                /** ExistenceFilter targetId */
-                targetId?: (number|null);
-
-                /** ExistenceFilter count */
-                count?: (number|null);
-            }
-
-            /** Represents an ExistenceFilter. */
-            class ExistenceFilter implements IExistenceFilter {
-
-                /**
-                 * Constructs a new ExistenceFilter.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IExistenceFilter);
-
-                /** ExistenceFilter targetId. */
-                public targetId: number;
-
-                /** ExistenceFilter count. */
-                public count: number;
-
-                /**
-                 * Creates a new ExistenceFilter instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ExistenceFilter instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IExistenceFilter): google.firestore.v1beta1.ExistenceFilter;
-
-                /**
-                 * Encodes the specified ExistenceFilter message. Does not implicitly {@link google.firestore.v1beta1.ExistenceFilter.verify|verify} messages.
-                 * @param message ExistenceFilter message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IExistenceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ExistenceFilter message, length delimited. Does not implicitly {@link google.firestore.v1beta1.ExistenceFilter.verify|verify} messages.
-                 * @param message ExistenceFilter message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IExistenceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ExistenceFilter message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ExistenceFilter
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.ExistenceFilter;
-
-                /**
-                 * Decodes an ExistenceFilter message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ExistenceFilter
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.ExistenceFilter;
-
-                /**
-                 * Verifies an ExistenceFilter message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ExistenceFilter message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ExistenceFilter
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.ExistenceFilter;
-
-                /**
-                 * Creates a plain object from an ExistenceFilter message. Also converts values to other types if specified.
-                 * @param message ExistenceFilter
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.ExistenceFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ExistenceFilter to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ExistenceFilter
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an UndeliverableFirstGenEvent. */
-            interface IUndeliverableFirstGenEvent {
-
-                /** UndeliverableFirstGenEvent message */
-                message?: (string|null);
-
-                /** UndeliverableFirstGenEvent reason */
-                reason?: (google.firestore.v1beta1.UndeliverableFirstGenEvent.Reason|keyof typeof google.firestore.v1beta1.UndeliverableFirstGenEvent.Reason|null);
-
-                /** UndeliverableFirstGenEvent documentName */
-                documentName?: (string|null);
-
-                /** UndeliverableFirstGenEvent documentChangeType */
-                documentChangeType?: (google.firestore.v1beta1.UndeliverableFirstGenEvent.DocumentChangeType|keyof typeof google.firestore.v1beta1.UndeliverableFirstGenEvent.DocumentChangeType|null);
-
-                /** UndeliverableFirstGenEvent functionName */
-                functionName?: (string[]|null);
-
-                /** UndeliverableFirstGenEvent triggeredTime */
-                triggeredTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents an UndeliverableFirstGenEvent. */
-            class UndeliverableFirstGenEvent implements IUndeliverableFirstGenEvent {
-
-                /**
-                 * Constructs a new UndeliverableFirstGenEvent.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.firestore.v1beta1.IUndeliverableFirstGenEvent);
-
-                /** UndeliverableFirstGenEvent message. */
-                public message: string;
-
-                /** UndeliverableFirstGenEvent reason. */
-                public reason: (google.firestore.v1beta1.UndeliverableFirstGenEvent.Reason|keyof typeof google.firestore.v1beta1.UndeliverableFirstGenEvent.Reason);
-
-                /** UndeliverableFirstGenEvent documentName. */
-                public documentName: string;
-
-                /** UndeliverableFirstGenEvent documentChangeType. */
-                public documentChangeType: (google.firestore.v1beta1.UndeliverableFirstGenEvent.DocumentChangeType|keyof typeof google.firestore.v1beta1.UndeliverableFirstGenEvent.DocumentChangeType);
-
-                /** UndeliverableFirstGenEvent functionName. */
-                public functionName: string[];
-
-                /** UndeliverableFirstGenEvent triggeredTime. */
-                public triggeredTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new UndeliverableFirstGenEvent instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns UndeliverableFirstGenEvent instance
-                 */
-                public static create(properties?: google.firestore.v1beta1.IUndeliverableFirstGenEvent): google.firestore.v1beta1.UndeliverableFirstGenEvent;
-
-                /**
-                 * Encodes the specified UndeliverableFirstGenEvent message. Does not implicitly {@link google.firestore.v1beta1.UndeliverableFirstGenEvent.verify|verify} messages.
-                 * @param message UndeliverableFirstGenEvent message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.firestore.v1beta1.IUndeliverableFirstGenEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified UndeliverableFirstGenEvent message, length delimited. Does not implicitly {@link google.firestore.v1beta1.UndeliverableFirstGenEvent.verify|verify} messages.
-                 * @param message UndeliverableFirstGenEvent message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.firestore.v1beta1.IUndeliverableFirstGenEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an UndeliverableFirstGenEvent message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns UndeliverableFirstGenEvent
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1beta1.UndeliverableFirstGenEvent;
-
-                /**
-                 * Decodes an UndeliverableFirstGenEvent message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns UndeliverableFirstGenEvent
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1beta1.UndeliverableFirstGenEvent;
-
-                /**
-                 * Verifies an UndeliverableFirstGenEvent message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an UndeliverableFirstGenEvent message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns UndeliverableFirstGenEvent
-                 */
-                public static fromObject(object: { [k: string]: any }): google.firestore.v1beta1.UndeliverableFirstGenEvent;
-
-                /**
-                 * Creates a plain object from an UndeliverableFirstGenEvent message. Also converts values to other types if specified.
-                 * @param message UndeliverableFirstGenEvent
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.firestore.v1beta1.UndeliverableFirstGenEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this UndeliverableFirstGenEvent to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for UndeliverableFirstGenEvent
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace UndeliverableFirstGenEvent {
-
-                /** Reason enum. */
-                enum Reason {
-                    REASON_UNSPECIFIED = 0,
-                    EXCEEDING_SIZE_LIMIT = 1
-                }
-
-                /** DocumentChangeType enum. */
-                enum DocumentChangeType {
-                    DOCUMENT_CHANGE_TYPE_UNSPECIFIED = 0,
-                    CREATE = 1,
-                    DELETE = 2,
-                    UPDATE = 3
-                }
-            }
-        }
     }
 
     /** Namespace api. */
@@ -27054,6 +20439,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -27067,6 +20455,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -27796,6 +21187,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -27815,6 +21209,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -28128,6 +21525,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -28455,6 +22211,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -30826,6 +24584,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -30848,6 +24609,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -31793,6 +25557,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -31827,6 +25594,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -31955,7 +25725,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -32058,6 +25829,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -34928,6 +28800,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -34950,6 +28825,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -35037,6 +28915,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -35053,6 +28934,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.
