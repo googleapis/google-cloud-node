@@ -18,7 +18,7 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0
   prettier:
-    specifier: ^3.2.5
+    specifier: ^3.3.3
     version: 3.9.6
   proto3-json-serializer:
     specifier: ^4.0.0
