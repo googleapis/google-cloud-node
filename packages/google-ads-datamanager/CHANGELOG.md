@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v0.6.0...google-ads-datamanager-v1.0.0) (2026-08-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* [datamanager] add encrypted_user_id.proto and the EncryptedUserId resource ([#8378](https://github.com/googleapis/google-cloud-node/issues/8378)) ([f5b12cf](https://github.com/googleapis/google-cloud-node/commit/f5b12cf10d9974c87e651e1182a5804030af8cdc))
+* [datamanager] add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics ([#8300](https://github.com/googleapis/google-cloud-node/issues/8300)) ([ecec52d](https://github.com/googleapis/google-cloud-node/commit/ecec52d9fa7e5a8557596f42407412b714c8bd3d))
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.5.0...datamanager-v0.6.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.4.0...datamanager-v0.5.0) (2026-06-25)
 
 

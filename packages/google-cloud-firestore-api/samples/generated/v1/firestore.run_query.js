@@ -65,6 +65,10 @@ function main(parent) {
    *  statistics will be returned. If not, only query results will be returned.
    */
   // const explainOptions = {}
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore-api').v1;

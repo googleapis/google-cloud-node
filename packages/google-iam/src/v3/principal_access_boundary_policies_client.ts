@@ -214,6 +214,10 @@ export class PrincipalAccessBoundaryPoliciesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      folderLocationAccessPoliciesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/accessPolicies/{access_policy}',
+        ),
       folderLocationPolicyBindingsPathTemplate:
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/policyBindings/{policy_binding}',
@@ -224,6 +228,10 @@ export class PrincipalAccessBoundaryPoliciesClient {
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}',
       ),
+      organizationLocationAccessPoliciesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/accessPolicies/{access_policy}',
+        ),
       organizationLocationPolicyBindingsPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/policyBindings/{policy_binding}',
@@ -231,6 +239,10 @@ export class PrincipalAccessBoundaryPoliciesClient {
       principalAccessBoundaryPolicyPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}',
+        ),
+      projectLocationAccessPoliciesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/accessPolicies/{access_policy}',
         ),
       projectLocationPolicyBindingsPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -2074,6 +2086,71 @@ export class PrincipalAccessBoundaryPoliciesClient {
   // --------------------
 
   /**
+   * Return a fully-qualified folderLocationAccessPolicies resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  folderLocationAccessPoliciesPath(
+    folder: string,
+    location: string,
+    accessPolicy: string,
+  ) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.render({
+      folder: folder,
+      location: location,
+      access_policy: accessPolicy,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationAccessPolicies resource.
+   *
+   * @param {string} folderLocationAccessPoliciesName
+   *   A fully-qualified path representing folder_location_accessPolicies resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationAccessPoliciesName(
+    folderLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.match(
+      folderLocationAccessPoliciesName,
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationAccessPolicies resource.
+   *
+   * @param {string} folderLocationAccessPoliciesName
+   *   A fully-qualified path representing folder_location_accessPolicies resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationAccessPoliciesName(
+    folderLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.match(
+      folderLocationAccessPoliciesName,
+    ).location;
+  }
+
+  /**
+   * Parse the access_policy from FolderLocationAccessPolicies resource.
+   *
+   * @param {string} folderLocationAccessPoliciesName
+   *   A fully-qualified path representing folder_location_accessPolicies resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromFolderLocationAccessPoliciesName(
+    folderLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.match(
+      folderLocationAccessPoliciesName,
+    ).access_policy;
+  }
+
+  /**
    * Return a fully-qualified folderLocationPolicyBindings resource name string.
    *
    * @param {string} folder
@@ -2202,6 +2279,73 @@ export class PrincipalAccessBoundaryPoliciesClient {
     return this.pathTemplates.organizationLocationPathTemplate.match(
       organizationLocationName,
     ).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationAccessPolicies resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAccessPoliciesPath(
+    organization: string,
+    location: string,
+    accessPolicy: string,
+  ) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        access_policy: accessPolicy,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAccessPolicies resource.
+   *
+   * @param {string} organizationLocationAccessPoliciesName
+   *   A fully-qualified path representing organization_location_accessPolicies resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAccessPoliciesName(
+    organizationLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match(
+      organizationLocationAccessPoliciesName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAccessPolicies resource.
+   *
+   * @param {string} organizationLocationAccessPoliciesName
+   *   A fully-qualified path representing organization_location_accessPolicies resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAccessPoliciesName(
+    organizationLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match(
+      organizationLocationAccessPoliciesName,
+    ).location;
+  }
+
+  /**
+   * Parse the access_policy from OrganizationLocationAccessPolicies resource.
+   *
+   * @param {string} organizationLocationAccessPoliciesName
+   *   A fully-qualified path representing organization_location_accessPolicies resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromOrganizationLocationAccessPoliciesName(
+    organizationLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match(
+      organizationLocationAccessPoliciesName,
+    ).access_policy;
   }
 
   /**
@@ -2334,6 +2478,71 @@ export class PrincipalAccessBoundaryPoliciesClient {
     return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
       principalAccessBoundaryPolicyName,
     ).principal_access_boundary_policy;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAccessPolicies resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  projectLocationAccessPoliciesPath(
+    project: string,
+    location: string,
+    accessPolicy: string,
+  ) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.render({
+      project: project,
+      location: location,
+      access_policy: accessPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAccessPolicies resource.
+   *
+   * @param {string} projectLocationAccessPoliciesName
+   *   A fully-qualified path representing project_location_accessPolicies resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAccessPoliciesName(
+    projectLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.match(
+      projectLocationAccessPoliciesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAccessPolicies resource.
+   *
+   * @param {string} projectLocationAccessPoliciesName
+   *   A fully-qualified path representing project_location_accessPolicies resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAccessPoliciesName(
+    projectLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.match(
+      projectLocationAccessPoliciesName,
+    ).location;
+  }
+
+  /**
+   * Parse the access_policy from ProjectLocationAccessPolicies resource.
+   *
+   * @param {string} projectLocationAccessPoliciesName
+   *   A fully-qualified path representing project_location_accessPolicies resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromProjectLocationAccessPoliciesName(
+    projectLocationAccessPoliciesName: string,
+  ) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.match(
+      projectLocationAccessPoliciesName,
+    ).access_policy;
   }
 
   /**

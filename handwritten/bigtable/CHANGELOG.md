@@ -5,7 +5,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
-## [6.5.2](https://github.com/googleapis/google-cloud-node/compare/bigtable-v6.5.1...bigtable-v6.5.2) (2026-08-04)
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.0.0...bigtable-v7.1.0) (2026-08-05)
+
+
+### Features
+
+* **bigtable:** Split gapic and proto usage from the handwritten library into bigtable-api ([#8934](https://github.com/googleapis/google-cloud-node/issues/8934)) ([f63f914](https://github.com/googleapis/google-cloud-node/commit/f63f914e69106f581448837f5ee212ab71f85775))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v6.5.1...bigtable-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update bigtable to minimum Node version of 22. ([#9042](https://github.com/googleapis/google-cloud-node/issues/9042))
+
+### Features
+
+* Update bigtable to minimum Node version of 22. ([#9042](https://github.com/googleapis/google-cloud-node/issues/9042)) ([86406b7](https://github.com/googleapis/google-cloud-node/commit/86406b733caaf63439d0007996898920302c7aad)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
 
 
 ### Bug Fixes

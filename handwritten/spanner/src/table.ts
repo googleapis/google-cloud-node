@@ -28,7 +28,8 @@ import {
   ReadCallback,
   CommitCallback,
 } from './transaction';
-import {google as databaseAdmin} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import databaseAdmin = protos.google;
 import {Schema, LongRunningCallback} from './common';
 import IRequestOptions = databaseAdmin.spanner.v1.IRequestOptions;
 import {
@@ -37,7 +38,7 @@ import {
   setSpanError,
   traceConfig,
 } from './instrument';
-import {google} from '../protos/protos';
+import google = protos.google;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {Int, SpannerDate, Numeric, Float32, Float} from './codec';

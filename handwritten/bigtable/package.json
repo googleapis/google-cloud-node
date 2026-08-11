@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigtable",
-  "version": "6.5.2",
+  "version": "7.1.0",
   "description": "Cloud Bigtable Client Library for Node.js",
   "keywords": [
     "bigtable",
@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "compile": "tsc -p . && cp -r proto* build/ && cp -r testproxy/proto* build/testproxy/",
-    "compile-protos": "compileProtos src && sh testproxy/compile-protos.sh",
+    "compile-protos": "sh testproxy/compile-protos.sh",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
@@ -49,6 +49,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
+    "@google-cloud/bigtable-api": "^0.2.0",
     "@google-cloud/monitoring": "^5.0.1",
     "@google-cloud/opentelemetry-cloud-monitoring-exporter": "^0.20.0",
     "@google-cloud/opentelemetry-resource-util": "^2.4.0",
@@ -111,7 +112,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigtable"
 }

@@ -25,7 +25,8 @@ import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
 
 import {codec, JSONOptions, Json, Field, Value} from './codec';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
 

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/iam-credentials",
-  "version": "4.2.2",
+  "version": "5.0.0",
   "description": "Credentials client for Node.js",
   "repository": {
     "type": "git",

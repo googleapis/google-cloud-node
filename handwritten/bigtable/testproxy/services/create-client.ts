@@ -19,6 +19,13 @@ import * as grpc from '@grpc/grpc-js';
 import {Bigtable} from '../../src';
 import {createBigtableClient} from './utils/bigtable-client';
 import {log} from './utils/log';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
+
+const BIGTABLE_API_DIR = path.join(
+  path.dirname(require.resolve('@google-cloud/bigtable-api')),
+  '..',
+);
 
 function durationToMilliseconds(
   duration: google.protobuf.Duration | google.protobuf.IDuration,
@@ -48,9 +55,8 @@ export const createClient: ClientImplMaker<
   normalizeCallback(async rawRequest => {
     // TODO: Handle refresh periods
     const {request} = rawRequest;
-    const clientConfig = JSON.parse(
-      JSON.stringify(require('../../src/v2/bigtable_client_config.json')),
-    );
+    const jsonString = fs.readFileSync(path.join(BIGTABLE_API_DIR, 'src/v2/bigtable_client_config.json')).toString();
+    const clientConfig = JSON.parse(jsonString);
     const {
       callCredential,
       clientId,

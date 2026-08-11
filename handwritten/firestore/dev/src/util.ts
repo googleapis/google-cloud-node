@@ -19,7 +19,7 @@ import {DocumentData} from '@google-cloud/firestore';
 import {randomBytes} from 'crypto';
 import type {CallSettings, ClientConfig, GoogleError} from 'google-gax';
 import type {BackoffSettings} from 'google-gax/build/src/gax';
-import * as gapicConfig from './v1/firestore_client_config.json';
+import * as gapicConfig from '@google-cloud/firestore-api/build/src/v1/firestore_client_config.json';
 import Dict = NodeJS.Dict;
 
 /**
