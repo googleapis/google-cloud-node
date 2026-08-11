@@ -31,6 +31,11 @@ fi
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
 
+if [[ "$(node -v)" == v22* ]]; then
+  export NODE_OPTIONS="${NODE_OPTIONS} --no-warnings=DEP0040"
+  export NODE_OPTIONS="${NODE_OPTIONS} --no-experimental-require-module"
+fi
+
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
     # common commit in origin/main.

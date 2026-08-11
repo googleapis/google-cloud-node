@@ -2,345 +2,169 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.firestore.admin.v1",
+  "protoPackage": "google.firestore.v1",
   "libraryPackage": "@google-cloud/firestore-api",
   "services": {
-    "FirestoreAdmin": {
+    "Firestore": {
       "clients": {
         "grpc": {
-          "libraryClient": "FirestoreAdminClient",
+          "libraryClient": "FirestoreClient",
           "rpcs": {
-            "GetIndex": {
+            "GetDocument": {
               "methods": [
-                "getIndex"
+                "getDocument"
               ]
             },
-            "DeleteIndex": {
+            "UpdateDocument": {
               "methods": [
-                "deleteIndex"
+                "updateDocument"
               ]
             },
-            "GetField": {
+            "DeleteDocument": {
               "methods": [
-                "getField"
+                "deleteDocument"
               ]
             },
-            "GetDatabase": {
+            "BeginTransaction": {
               "methods": [
-                "getDatabase"
+                "beginTransaction"
               ]
             },
-            "ListDatabases": {
+            "Commit": {
               "methods": [
-                "listDatabases"
+                "commit"
               ]
             },
-            "CreateUserCreds": {
+            "Rollback": {
               "methods": [
-                "createUserCreds"
+                "rollback"
               ]
             },
-            "GetUserCreds": {
+            "BatchWrite": {
               "methods": [
-                "getUserCreds"
+                "batchWrite"
               ]
             },
-            "ListUserCreds": {
+            "CreateDocument": {
               "methods": [
-                "listUserCreds"
+                "createDocument"
               ]
             },
-            "EnableUserCreds": {
+            "BatchGetDocuments": {
               "methods": [
-                "enableUserCreds"
+                "batchGetDocuments"
               ]
             },
-            "DisableUserCreds": {
+            "RunQuery": {
               "methods": [
-                "disableUserCreds"
+                "runQuery"
               ]
             },
-            "ResetUserPassword": {
+            "ExecutePipeline": {
               "methods": [
-                "resetUserPassword"
+                "executePipeline"
               ]
             },
-            "DeleteUserCreds": {
+            "RunAggregationQuery": {
               "methods": [
-                "deleteUserCreds"
+                "runAggregationQuery"
               ]
             },
-            "GetBackup": {
+            "Write": {
               "methods": [
-                "getBackup"
+                "write"
               ]
             },
-            "ListBackups": {
+            "Listen": {
               "methods": [
-                "listBackups"
+                "listen"
               ]
             },
-            "DeleteBackup": {
+            "ListDocuments": {
               "methods": [
-                "deleteBackup"
+                "listDocuments",
+                "listDocumentsStream",
+                "listDocumentsAsync"
               ]
             },
-            "CreateBackupSchedule": {
+            "PartitionQuery": {
               "methods": [
-                "createBackupSchedule"
+                "partitionQuery",
+                "partitionQueryStream",
+                "partitionQueryAsync"
               ]
             },
-            "GetBackupSchedule": {
+            "ListCollectionIds": {
               "methods": [
-                "getBackupSchedule"
-              ]
-            },
-            "ListBackupSchedules": {
-              "methods": [
-                "listBackupSchedules"
-              ]
-            },
-            "UpdateBackupSchedule": {
-              "methods": [
-                "updateBackupSchedule"
-              ]
-            },
-            "DeleteBackupSchedule": {
-              "methods": [
-                "deleteBackupSchedule"
-              ]
-            },
-            "CreateIndex": {
-              "methods": [
-                "createIndex"
-              ]
-            },
-            "UpdateField": {
-              "methods": [
-                "updateField"
-              ]
-            },
-            "ExportDocuments": {
-              "methods": [
-                "exportDocuments"
-              ]
-            },
-            "ImportDocuments": {
-              "methods": [
-                "importDocuments"
-              ]
-            },
-            "BulkDeleteDocuments": {
-              "methods": [
-                "bulkDeleteDocuments"
-              ]
-            },
-            "CreateDatabase": {
-              "methods": [
-                "createDatabase"
-              ]
-            },
-            "UpdateDatabase": {
-              "methods": [
-                "updateDatabase"
-              ]
-            },
-            "DeleteDatabase": {
-              "methods": [
-                "deleteDatabase"
-              ]
-            },
-            "RestoreDatabase": {
-              "methods": [
-                "restoreDatabase"
-              ]
-            },
-            "CloneDatabase": {
-              "methods": [
-                "cloneDatabase"
-              ]
-            },
-            "ListIndexes": {
-              "methods": [
-                "listIndexes",
-                "listIndexesStream",
-                "listIndexesAsync"
-              ]
-            },
-            "ListFields": {
-              "methods": [
-                "listFields",
-                "listFieldsStream",
-                "listFieldsAsync"
+                "listCollectionIds",
+                "listCollectionIdsStream",
+                "listCollectionIdsAsync"
               ]
             }
           }
         },
         "grpc-fallback": {
-          "libraryClient": "FirestoreAdminClient",
+          "libraryClient": "FirestoreClient",
           "rpcs": {
-            "GetIndex": {
+            "GetDocument": {
               "methods": [
-                "getIndex"
+                "getDocument"
               ]
             },
-            "DeleteIndex": {
+            "UpdateDocument": {
               "methods": [
-                "deleteIndex"
+                "updateDocument"
               ]
             },
-            "GetField": {
+            "DeleteDocument": {
               "methods": [
-                "getField"
+                "deleteDocument"
               ]
             },
-            "GetDatabase": {
+            "BeginTransaction": {
               "methods": [
-                "getDatabase"
+                "beginTransaction"
               ]
             },
-            "ListDatabases": {
+            "Commit": {
               "methods": [
-                "listDatabases"
+                "commit"
               ]
             },
-            "CreateUserCreds": {
+            "Rollback": {
               "methods": [
-                "createUserCreds"
+                "rollback"
               ]
             },
-            "GetUserCreds": {
+            "BatchWrite": {
               "methods": [
-                "getUserCreds"
+                "batchWrite"
               ]
             },
-            "ListUserCreds": {
+            "CreateDocument": {
               "methods": [
-                "listUserCreds"
+                "createDocument"
               ]
             },
-            "EnableUserCreds": {
+            "ListDocuments": {
               "methods": [
-                "enableUserCreds"
+                "listDocuments",
+                "listDocumentsStream",
+                "listDocumentsAsync"
               ]
             },
-            "DisableUserCreds": {
+            "PartitionQuery": {
               "methods": [
-                "disableUserCreds"
+                "partitionQuery",
+                "partitionQueryStream",
+                "partitionQueryAsync"
               ]
             },
-            "ResetUserPassword": {
+            "ListCollectionIds": {
               "methods": [
-                "resetUserPassword"
-              ]
-            },
-            "DeleteUserCreds": {
-              "methods": [
-                "deleteUserCreds"
-              ]
-            },
-            "GetBackup": {
-              "methods": [
-                "getBackup"
-              ]
-            },
-            "ListBackups": {
-              "methods": [
-                "listBackups"
-              ]
-            },
-            "DeleteBackup": {
-              "methods": [
-                "deleteBackup"
-              ]
-            },
-            "CreateBackupSchedule": {
-              "methods": [
-                "createBackupSchedule"
-              ]
-            },
-            "GetBackupSchedule": {
-              "methods": [
-                "getBackupSchedule"
-              ]
-            },
-            "ListBackupSchedules": {
-              "methods": [
-                "listBackupSchedules"
-              ]
-            },
-            "UpdateBackupSchedule": {
-              "methods": [
-                "updateBackupSchedule"
-              ]
-            },
-            "DeleteBackupSchedule": {
-              "methods": [
-                "deleteBackupSchedule"
-              ]
-            },
-            "CreateIndex": {
-              "methods": [
-                "createIndex"
-              ]
-            },
-            "UpdateField": {
-              "methods": [
-                "updateField"
-              ]
-            },
-            "ExportDocuments": {
-              "methods": [
-                "exportDocuments"
-              ]
-            },
-            "ImportDocuments": {
-              "methods": [
-                "importDocuments"
-              ]
-            },
-            "BulkDeleteDocuments": {
-              "methods": [
-                "bulkDeleteDocuments"
-              ]
-            },
-            "CreateDatabase": {
-              "methods": [
-                "createDatabase"
-              ]
-            },
-            "UpdateDatabase": {
-              "methods": [
-                "updateDatabase"
-              ]
-            },
-            "DeleteDatabase": {
-              "methods": [
-                "deleteDatabase"
-              ]
-            },
-            "RestoreDatabase": {
-              "methods": [
-                "restoreDatabase"
-              ]
-            },
-            "CloneDatabase": {
-              "methods": [
-                "cloneDatabase"
-              ]
-            },
-            "ListIndexes": {
-              "methods": [
-                "listIndexes",
-                "listIndexesStream",
-                "listIndexesAsync"
-              ]
-            },
-            "ListFields": {
-              "methods": [
-                "listFields",
-                "listFieldsStream",
-                "listFieldsAsync"
+                "listCollectionIds",
+                "listCollectionIdsStream",
+                "listCollectionIdsAsync"
               ]
             }
           }

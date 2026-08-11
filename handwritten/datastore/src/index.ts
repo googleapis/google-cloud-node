@@ -72,7 +72,7 @@ import {
 } from './request';
 import {Transaction} from './transaction';
 import {promisifyAll} from '@google-cloud/promisify';
-import {google} from '../protos/protos';
+import {google} from './protos';
 import {AggregateQuery} from './aggregate';
 import {SaveEntity} from './interfaces/save';
 import {extendExcludeFromIndexes} from './utils/entity/extendExcludeFromIndexes';

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/streetview-publish-v0.4.2...streetview-publish-v0.5.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [0.4.2](https://github.com/googleapis/google-cloud-node/compare/streetview-publish-v0.4.1...streetview-publish-v0.4.2) (2026-05-01)
 
 
