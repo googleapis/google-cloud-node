@@ -16850,6 +16850,9 @@ export namespace google {
                     /** Tool parallelAiSearch */
                     parallelAiSearch?: (google.cloud.aiplatform.v1.Tool.IParallelAiSearch|null);
 
+                    /** Tool exaAiSearch */
+                    exaAiSearch?: (google.cloud.aiplatform.v1.Tool.IExaAiSearch|null);
+
                     /** Tool codeExecution */
                     codeExecution?: (google.cloud.aiplatform.v1.Tool.ICodeExecution|null);
 
@@ -16889,6 +16892,9 @@ export namespace google {
 
                     /** Tool parallelAiSearch. */
                     public parallelAiSearch?: (google.cloud.aiplatform.v1.Tool.IParallelAiSearch|null);
+
+                    /** Tool exaAiSearch. */
+                    public exaAiSearch?: (google.cloud.aiplatform.v1.Tool.IExaAiSearch|null);
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.cloud.aiplatform.v1.Tool.ICodeExecution|null);
@@ -17190,6 +17196,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ParallelAiSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExaAiSearch. */
+                    interface IExaAiSearch {
+
+                        /** ExaAiSearch apiKey */
+                        apiKey?: (string|null);
+
+                        /** ExaAiSearch customConfigs */
+                        customConfigs?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents an ExaAiSearch. */
+                    class ExaAiSearch implements IExaAiSearch {
+
+                        /**
+                         * Constructs a new ExaAiSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.Tool.IExaAiSearch);
+
+                        /** ExaAiSearch apiKey. */
+                        public apiKey: string;
+
+                        /** ExaAiSearch customConfigs. */
+                        public customConfigs?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ExaAiSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExaAiSearch instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.Tool.IExaAiSearch): google.cloud.aiplatform.v1.Tool.ExaAiSearch;
+
+                        /**
+                         * Encodes the specified ExaAiSearch message. Does not implicitly {@link google.cloud.aiplatform.v1.Tool.ExaAiSearch.verify|verify} messages.
+                         * @param message ExaAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.Tool.IExaAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExaAiSearch message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.Tool.ExaAiSearch.verify|verify} messages.
+                         * @param message ExaAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.Tool.IExaAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExaAiSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExaAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.Tool.ExaAiSearch;
+
+                        /**
+                         * Decodes an ExaAiSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExaAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.Tool.ExaAiSearch;
+
+                        /**
+                         * Verifies an ExaAiSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExaAiSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExaAiSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.Tool.ExaAiSearch;
+
+                        /**
+                         * Creates a plain object from an ExaAiSearch message. Also converts values to other types if specified.
+                         * @param message ExaAiSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.Tool.ExaAiSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExaAiSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExaAiSearch
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -169944,6 +170053,9 @@ export namespace google {
                     /** Tool parallelAiSearch */
                     parallelAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch|null);
 
+                    /** Tool exaAiSearch */
+                    exaAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IExaAiSearch|null);
+
                     /** Tool codeExecution */
                     codeExecution?: (google.cloud.aiplatform.v1beta1.Tool.ICodeExecution|null);
 
@@ -169983,6 +170095,9 @@ export namespace google {
 
                     /** Tool parallelAiSearch. */
                     public parallelAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch|null);
+
+                    /** Tool exaAiSearch. */
+                    public exaAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IExaAiSearch|null);
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.cloud.aiplatform.v1beta1.Tool.ICodeExecution|null);
@@ -170284,6 +170399,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ParallelAiSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExaAiSearch. */
+                    interface IExaAiSearch {
+
+                        /** ExaAiSearch apiKey */
+                        apiKey?: (string|null);
+
+                        /** ExaAiSearch customConfigs */
+                        customConfigs?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents an ExaAiSearch. */
+                    class ExaAiSearch implements IExaAiSearch {
+
+                        /**
+                         * Constructs a new ExaAiSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.Tool.IExaAiSearch);
+
+                        /** ExaAiSearch apiKey. */
+                        public apiKey: string;
+
+                        /** ExaAiSearch customConfigs. */
+                        public customConfigs?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ExaAiSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExaAiSearch instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.Tool.IExaAiSearch): google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch;
+
+                        /**
+                         * Encodes the specified ExaAiSearch message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch.verify|verify} messages.
+                         * @param message ExaAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.Tool.IExaAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExaAiSearch message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch.verify|verify} messages.
+                         * @param message ExaAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.Tool.IExaAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExaAiSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExaAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch;
+
+                        /**
+                         * Decodes an ExaAiSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExaAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch;
+
+                        /**
+                         * Verifies an ExaAiSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExaAiSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExaAiSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch;
+
+                        /**
+                         * Creates a plain object from an ExaAiSearch message. Also converts values to other types if specified.
+                         * @param message ExaAiSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.Tool.ExaAiSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExaAiSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExaAiSearch
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

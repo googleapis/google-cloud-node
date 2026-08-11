@@ -24,7 +24,6 @@ export type QueryCallback<T> = (err: Error | null, result?: T) => void;
 
 /**
  * Query class representing a SQL statement execution.
- * Compatible with node-postgres (`pg.Query`) interface.
  *
  * Extends `EventEmitter` to support streaming row events (`.on('row', cb)`, `.on('end', cb)`),
  * while implementing the Thenable interface (`then`, `catch`, `finally`) to support `async`/`await`.

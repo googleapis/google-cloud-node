@@ -117,7 +117,7 @@
                           "type": "DeviceInfo",
                           "id": 8,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "mobileDeviceId": {
@@ -197,7 +197,7 @@
                           "type": "string",
                           "id": 22,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "source": {
@@ -522,6 +522,27 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "addressLine": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "administrativeArea": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -623,7 +644,9 @@
                             "mobileData",
                             "userIdData",
                             "ppidData",
-                            "compositeData"
+                            "compositeData",
+                            "googleUserIdData",
+                            "partnerProvidedIdData"
                           ]
                         }
                       },
@@ -659,6 +682,14 @@
                         "compositeData": {
                           "type": "CompositeData",
                           "id": 8
+                        },
+                        "googleUserIdData": {
+                          "type": "GoogleUserIdData",
+                          "id": 9
+                        },
+                        "partnerProvidedIdData": {
+                          "type": "PartnerProvidedIdData",
+                          "id": 10
                         },
                         "consent": {
                           "type": "Consent",
@@ -757,6 +788,30 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleUserIdData": {
+                      "fields": {
+                        "googleUserIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PartnerProvidedIdData": {
+                      "fields": {
+                        "partnerProvidedIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1349,7 +1404,9 @@
                         "INVALID_CUSTOM_VARIABLE_VALUE": 119,
                         "CUSTOM_VARIABLE_NOT_FOUND": 120,
                         "BASELINE_LOCATION_AUTO_DETECTION_FAILED": 122,
-                        "INSIGHTS_MISSING_FOR_DIMENSION": 123
+                        "INSIGHTS_MISSING_FOR_DIMENSION": 123,
+                        "REQUIRED_PREREQUISITE_LINK_MISSING": 124,
+                        "INVALID_REMOVE_AS_OF_TIME": 125
                       }
                     },
                     "Event": {
@@ -1835,6 +1892,22 @@
                             }
                           ]
                         },
+                        "RemoveAllAudienceMembers": {
+                          "requestType": "RemoveAllAudienceMembersRequest",
+                          "responseType": "RemoveAllAudienceMembersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/audienceMembers:removeAll",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/audienceMembers:removeAll",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "IngestEvents": {
                           "requestType": "IngestEventsRequest",
                           "responseType": "IngestEventsResponse",
@@ -1943,6 +2016,11 @@
                         "requestId": {
                           "type": "string",
                           "id": 1
+                        },
+                        "fieldWarnings": {
+                          "rule": "repeated",
+                          "type": "FieldWarning",
+                          "id": 2
                         }
                       }
                     },
@@ -1988,6 +2066,40 @@
                       }
                     },
                     "RemoveAudienceMembersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RemoveAllAudienceMembersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "removeAsOfTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveAllAudienceMembersResponse": {
                       "fields": {
                         "requestId": {
                           "type": "string",
@@ -2048,6 +2160,11 @@
                         "requestId": {
                           "type": "string",
                           "id": 1
+                        },
+                        "fieldWarnings": {
+                          "rule": "repeated",
+                          "type": "FieldWarning",
+                          "id": 2
                         }
                       }
                     },
@@ -2065,13 +2182,14 @@
                           "type": "EncryptionInfo",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "validateOnly": {
                           "type": "bool",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -2107,13 +2225,154 @@
                         "BASE64": 2
                       }
                     },
+                    "ErrorInfo": {
+                      "fields": {
+                        "errorCounts": {
+                          "rule": "repeated",
+                          "type": "ErrorCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ErrorCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingErrorReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "WarningInfo": {
+                      "fields": {
+                        "warningCounts": {
+                          "rule": "repeated",
+                          "type": "WarningCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "WarningCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingWarningReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProcessingErrorReason": {
+                      "values": {
+                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
+                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
+                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
+                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
+                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
+                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
+                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
+                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
+                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
+                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
+                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
+                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
+                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
+                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
+                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
+                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
+                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
+                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
+                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
+                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
+                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
+                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
+                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26,
+                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28,
+                        "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND": 29,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID": 30,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID": 31,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID": 32,
+                        "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS": 33,
+                        "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT": 34,
+                        "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND": 35,
+                        "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR": 36,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID": 37,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND": 38,
+                        "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK": 39,
+                        "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK": 40,
+                        "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
+                        "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
+                        "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43,
+                        "PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING": 44
+                      }
+                    },
+                    "ProcessingWarningReason": {
+                      "values": {
+                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
+                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
+                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
+                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
+                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
+                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
+                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
+                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
+                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
+                      }
+                    },
+                    "FieldWarning": {
+                      "fields": {
+                        "reason": {
+                          "type": "WarningReason",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "field": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "WarningReason": {
+                      "values": {
+                        "WARNING_REASON_UNSPECIFIED": 0,
+                        "WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 1,
+                        "WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED": 2,
+                        "WARNING_REASON_CART_DATA_NOT_SUPPORTED_WITH_GBRAID_OR_WBRAID": 3,
+                        "WARNING_REASON_CART_DATA_ITEM_MERCHANT_PRODUCT_ID_MISSING": 4,
+                        "WARNING_REASON_CART_DATA_ITEM_UNIT_PRICE_MISSING": 5,
+                        "WARNING_REASON_GENERIC": 6,
+                        "WARNING_REASON_INVALID_CLIENT_ID": 7,
+                        "WARNING_REASON_INVALID_SUBDIVISION_CODE": 8,
+                        "WARNING_REASON_INVALID_REGION_CODE": 9,
+                        "WARNING_REASON_INVALID_SUBCONTINENT_CODE": 10,
+                        "WARNING_REASON_INVALID_CONTINENT_CODE": 11,
+                        "WARNING_REASON_INVALID_DEVICE_CATEGORY": 12,
+                        "WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION": 13,
+                        "WARNING_REASON_INVALID_MERCHANT_ID": 14
+                      }
+                    },
                     "RequestStatusPerDestination": {
                       "oneofs": {
                         "status": {
                           "oneof": [
                             "audienceMembersIngestionStatus",
                             "eventsIngestionStatus",
-                            "audienceMembersRemovalStatus"
+                            "audienceMembersRemovalStatus",
+                            "removeAllAudienceMembersStatus"
                           ]
                         }
                       },
@@ -2145,6 +2404,10 @@
                         "audienceMembersRemovalStatus": {
                           "type": "RemoveAudienceMembersStatus",
                           "id": 6
+                        },
+                        "removeAllAudienceMembersStatus": {
+                          "type": "RemoveAllAudienceMembersStatus",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -2166,7 +2429,9 @@
                                 "pairDataIngestionStatus",
                                 "userIdDataIngestionStatus",
                                 "ppidDataIngestionStatus",
-                                "compositeDataIngestionStatus"
+                                "compositeDataIngestionStatus",
+                                "googleUserIdDataIngestionStatus",
+                                "partnerProvidedIdDataIngestionStatus"
                               ]
                             }
                           },
@@ -2194,6 +2459,14 @@
                             "compositeDataIngestionStatus": {
                               "type": "IngestCompositeDataStatus",
                               "id": 6
+                            },
+                            "googleUserIdDataIngestionStatus": {
+                              "type": "IngestGoogleUserIdDataStatus",
+                              "id": 7
+                            },
+                            "partnerProvidedIdDataIngestionStatus": {
+                              "type": "IngestPartnerProvidedIdDataStatus",
+                              "id": 8
                             }
                           }
                         },
@@ -2206,7 +2479,9 @@
                                 "pairDataRemovalStatus",
                                 "userIdDataRemovalStatus",
                                 "ppidDataRemovalStatus",
-                                "compositeDataRemovalStatus"
+                                "compositeDataRemovalStatus",
+                                "googleUserIdDataRemovalStatus",
+                                "partnerProvidedIdDataRemovalStatus"
                               ]
                             }
                           },
@@ -2234,8 +2509,19 @@
                             "compositeDataRemovalStatus": {
                               "type": "RemoveCompositeDataStatus",
                               "id": 6
+                            },
+                            "googleUserIdDataRemovalStatus": {
+                              "type": "RemoveGoogleUserIdDataStatus",
+                              "id": 7
+                            },
+                            "partnerProvidedIdDataRemovalStatus": {
+                              "type": "RemovePartnerProvidedIdDataStatus",
+                              "id": 8
                             }
                           }
+                        },
+                        "RemoveAllAudienceMembersStatus": {
+                          "fields": {}
                         },
                         "IngestEventsStatus": {
                           "fields": {
@@ -2399,6 +2685,54 @@
                             }
                           }
                         },
+                        "IngestGoogleUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "googleUserIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemoveGoogleUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "googleUserIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestPartnerProvidedIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "partnerProvidedIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemovePartnerProvidedIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "partnerProvidedIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
                         "DataTypeCount": {
                           "fields": {
                             "type": {
@@ -2435,110 +2769,6 @@
                         "MATCH_RATE_RANGE_71_TO_80": 8,
                         "MATCH_RATE_RANGE_81_TO_90": 9,
                         "MATCH_RATE_RANGE_91_TO_100": 10
-                      }
-                    },
-                    "ErrorInfo": {
-                      "fields": {
-                        "errorCounts": {
-                          "rule": "repeated",
-                          "type": "ErrorCount",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ErrorCount": {
-                      "fields": {
-                        "recordCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "ProcessingErrorReason",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "WarningInfo": {
-                      "fields": {
-                        "warningCounts": {
-                          "rule": "repeated",
-                          "type": "WarningCount",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "WarningCount": {
-                      "fields": {
-                        "recordCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "ProcessingWarningReason",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ProcessingErrorReason": {
-                      "values": {
-                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
-                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
-                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
-                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
-                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
-                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
-                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
-                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
-                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
-                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
-                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
-                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
-                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
-                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
-                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
-                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
-                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
-                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
-                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
-                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
-                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
-                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
-                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
-                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
-                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
-                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
-                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
-                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26,
-                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28,
-                        "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND": 29,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID": 30,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID": 31,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID": 32,
-                        "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS": 33,
-                        "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT": 34,
-                        "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND": 35,
-                        "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR": 36,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID": 37,
-                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND": 38,
-                        "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK": 39,
-                        "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK": 40,
-                        "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
-                        "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
-                        "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43
-                      }
-                    },
-                    "ProcessingWarningReason": {
-                      "values": {
-                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
-                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
-                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
-                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
-                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
-                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
-                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
-                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
-                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
-                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
                       }
                     },
                     "TermsOfService": {
