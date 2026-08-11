@@ -24,6 +24,7 @@ const BigtableInstanceAdminClient = v2.BigtableInstanceAdminClient;
 type BigtableInstanceAdminClient = v2.BigtableInstanceAdminClient;
 const BigtableTableAdminClient = v2.BigtableTableAdminClient;
 type BigtableTableAdminClient = v2.BigtableTableAdminClient;
+
 export {v2, BigtableClient, BigtableInstanceAdminClient, BigtableTableAdminClient};
 export default {v2, BigtableClient, BigtableInstanceAdminClient, BigtableTableAdminClient};
 import * as protos from '../protos/protos';

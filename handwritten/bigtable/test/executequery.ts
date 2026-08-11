@@ -19,7 +19,8 @@ import * as proxyquire from 'proxyquire';
 import {grpc} from 'google-gax';
 import * as inst from '../src/instance';
 import {Bigtable} from '../src';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/bigtable-api';
+import google = protos.google;
 import * as SqlTypes from '../src/execute-query/types';
 import * as pumpify from 'pumpify';
 import {

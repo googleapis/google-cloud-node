@@ -39,6 +39,7 @@ function main() {
   const contentBundleServiceClient = new admanager.ContentBundleServiceClient();
   const contentLabelServiceClient = new admanager.ContentLabelServiceClient();
   const contentServiceClient = new admanager.ContentServiceClient();
+  const creativeSetServiceClient = new admanager.CreativeSetServiceClient();
   const creativeTemplateServiceClient = new admanager.CreativeTemplateServiceClient();
   const customFieldServiceClient = new admanager.CustomFieldServiceClient();
   const customTargetingKeyServiceClient = new admanager.CustomTargetingKeyServiceClient();
@@ -68,6 +69,7 @@ function main() {
   const richMediaAdsCompanyServiceClient = new admanager.RichMediaAdsCompanyServiceClient();
   const roleServiceClient = new admanager.RoleServiceClient();
   const siteServiceClient = new admanager.SiteServiceClient();
+  const slateServiceClient = new admanager.SlateServiceClient();
   const suggestedAdUnitServiceClient = new admanager.SuggestedAdUnitServiceClient();
   const targetingPresetServiceClient = new admanager.TargetingPresetServiceClient();
   const taxonomyCategoryServiceClient = new admanager.TaxonomyCategoryServiceClient();
