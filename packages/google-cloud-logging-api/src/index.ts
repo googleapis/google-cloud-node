@@ -24,6 +24,7 @@ const LoggingServiceV2Client = v2.LoggingServiceV2Client;
 type LoggingServiceV2Client = v2.LoggingServiceV2Client;
 const MetricsServiceV2Client = v2.MetricsServiceV2Client;
 type MetricsServiceV2Client = v2.MetricsServiceV2Client;
+
 export {v2, ConfigServiceV2Client, LoggingServiceV2Client, MetricsServiceV2Client};
 export default {v2, ConfigServiceV2Client, LoggingServiceV2Client, MetricsServiceV2Client};
 import * as protos from '../protos/protos';

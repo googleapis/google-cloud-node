@@ -1,0 +1,118 @@
+{
+  "interfaces": {
+    "google.cloud.agentidentity.v1.AuthProviderService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "ce5b960a6ed052e690863808e4f0deff3dc7d49f": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 10000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListAuthProviders": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UndeleteAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "QueryAuthProviders": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "QueryWorkloads": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAuthorizations": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetAuthorization": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DeleteAuthorization": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAccessSummaries": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetAccessSummary": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "RevokeAuthorization": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "EnableAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "DisableAuthProvider": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        }
+      }
+    }
+  }
+}

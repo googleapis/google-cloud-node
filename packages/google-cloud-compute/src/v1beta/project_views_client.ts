@@ -147,9 +147,6 @@ export class ProjectViewsClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
-
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -368,6 +365,12 @@ export class ProjectViewsClient {
   /**
    * Returns the specified global ProjectViews resource, with a regional
    * context.
+   * This regional API endpoint reads resource metadata from regional
+   * read-only replicas. Because changes are copied to these regional replicas
+   * asynchronously, for real-time resource reads or any write operations
+   * (creating, updating, or deleting resources), use the global
+   * [projects.get](https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
+   * endpoint.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -15,8 +15,9 @@
  */
 
 import {grpc, CallOptions, Operation as GaxOperation} from 'google-gax';
-import {google as instanceAdmin} from '../protos/protos';
-import {google as databaseAdmin} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import instanceAdmin = protos.google;
+import databaseAdmin = protos.google;
 import {Spanner} from '.';
 
 export type IOperation = instanceAdmin.longrunning.IOperation;

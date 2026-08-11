@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [11.0.1](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v11.0.0...teeny-request-v11.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [11.0.0](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v10.1.4...teeny-request-v11.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update teeny-request to minimum Node version of 22. ([#9003](https://github.com/googleapis/google-cloud-node/issues/9003))
+
+### Features
+
+* Update teeny-request to minimum Node version of 22. ([#9003](https://github.com/googleapis/google-cloud-node/issues/9003)) ([7288bb9](https://github.com/googleapis/google-cloud-node/commit/7288bb91c6a6402d93ada7542d7c1e1c5b5f9614)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [10.1.4](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v10.1.3...teeny-request-v10.1.4) (2026-07-23)
 
 
