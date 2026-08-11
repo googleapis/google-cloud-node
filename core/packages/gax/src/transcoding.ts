@@ -149,6 +149,9 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
+// encodeWithSlashes implements the security rules for double-asterisk ("**") pattern matches.
+// We split the path into segments and strictly reject any segment that is exactly "." or "..".
+// This prevents path traversal attacks across any variable directory subpaths.
 export function encodeWithSlashes(
   str: string,
   propertyName = 'resource ID',
@@ -159,12 +162,16 @@ export function encodeWithSlashes(
       `Value for ${propertyName} must not contain segments that are exactly . or .. .`,
     );
   }
+  // Percent-encode any character that is not in the unreserved set, preserving slashes.
   return str
     .split('')
     .map(c => (c.match(/[-_.~/0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
     .join('');
 }
 
+// encodeWithoutSlashes implements the security rules for single-asterisk ("*") pattern matches.
+// We throw a validation error if the matched value is exactly "." or "..",
+// preventing resource ID level traversal attacks.
 export function encodeWithoutSlashes(
   str: string,
   propertyName = 'resource ID',
@@ -172,6 +179,7 @@ export function encodeWithoutSlashes(
   if (str === '.' || str === '..') {
     throw new Error(`Invalid value ${str} for ${propertyName}`);
   }
+  // Percent-encode any character that is not in the unreserved set, encoding slashes too.
   return str
     .split('')
     .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
@@ -182,6 +190,9 @@ function escapeRegExp(str: string) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// applyPattern extracts the wildcards from a path template pattern, uses regex to capture
+// the actual parts corresponding to each wildcard (* or **), and validates them using the
+// appropriate encodeWithoutSlashes / encodeWithSlashes security logic to avoid path traversal.
 export function applyPattern(
   pattern: string,
   fieldValue: string,
@@ -209,7 +220,7 @@ export function applyPattern(
     return undefined;
   }
 
-  // Extract and validate wildcards in the pattern
+  // Extract and validate wildcards in the pattern (* or **)
   const wildcardRegex = /\*\*|\*/g;
   let wcMatch;
   const wildcards: string[] = [];
@@ -217,16 +228,19 @@ export function applyPattern(
     wildcards.push(wcMatch[0]);
   }
 
+  // Map each captured group to its respective wildcard type and validate
   const capturedGroups = match.slice(1);
   for (let i = 0; i < capturedGroups.length; i++) {
     const groupVal = capturedGroups[i];
     const wcType = wildcards[i];
     const propName = propertyName || 'resource ID';
     if (wcType === '*') {
+      // Single-asterisk wildcard validation: cannot be dot or two-dots
       if (groupVal === '.' || groupVal === '..') {
         throw new Error(`Invalid value ${fieldValue} for ${propName}`);
       }
     } else if (wcType === '**') {
+      // Double-asterisk wildcard validation: no segments can be dot or two-dots
       const segments = groupVal.split('/');
       if (segments.some(seg => seg === '.' || seg === '..')) {
         throw new Error(

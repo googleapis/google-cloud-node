@@ -384,7 +384,9 @@ describe('gRPC to HTTP transcoding', () => {
     );
   });
 
+  // Tests added as part of the security guidelines to prevent path traversal and parameter injection
   describe('REST fallback security guidelines tests', () => {
+    // 1. Verify single-asterisk ("*") validation correctly rejects exact dot and two-dot values
     it('throws error for invalid single asterisk values ("." and "..")', () => {
       assert.throws(() => {
         encodeWithoutSlashes('.', 'mySingleParam');
@@ -400,6 +402,7 @@ describe('gRPC to HTTP transcoding', () => {
       }, /Invalid value \. for resource ID/);
     });
 
+    // 2. Verify double-asterisk ("**") validation strictly rejects segments that are exactly dot or two-dots
     it('throws error for unsafe double asterisk path traversals', () => {
       assert.throws(() => {
         encodeWithSlashes('a/b/../..', 'myDoubleParam');
@@ -418,11 +421,13 @@ describe('gRPC to HTTP transcoding', () => {
       }, /Value for myDoubleParam must not contain segments that are exactly \. or \.\. \./);
     });
 
+    // 3. Verify parameter injection characters are safely percent-encoded, neutralizing attacks like $httpMethod=DELETE
     it('correctly percent-encodes unsafe URL characters', () => {
       assert.strictEqual(encodeWithoutSlashes('foo$bar?baz#qux'), 'foo%24bar%3Fbaz%23qux');
       assert.strictEqual(encodeWithSlashes('foo$bar?baz#qux'), 'foo%24bar%3Fbaz%23qux');
     });
 
+    // 4. Verify transcoding matches correctly apply security restrictions on patterns with wildcards
     it('validates single asterisk and double asterisk path templates within match/transcode', () => {
       // test with single asterisk templates matching dot/two-dots in applyPattern
       assert.throws(() => {
