@@ -4,6 +4,601 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "77dab53bf6d8a4b911f04e49eef444057d817619",
+          "message": "Destroy local read stream on upload write failure to prevent resource leaks",
+          "issues": [
+            "8752",
+            "7325"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "b001807a82616521680baf5429fec6af639aeb58",
+          "message": "Pass signingEndpoint to URLSigner in file.getSignedUrl",
+          "issues": [
+            "8982"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "292c68864ddc46f5a89319a9b756599749275e91",
+          "message": "Set application/json Content-Type for impersonated ADC requests",
+          "issues": [
+            "8419"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "43abc45c45fe8538694e9794a12ca700e0ae2d90",
+          "message": "Add deleteSourceObjects option to combine/compose method",
+          "issues": [
+            "8444"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "512ba79126605b416868db7c5f607d3083934eca",
+          "message": "Resolve Node compatibility crashes, security vulnerability, and stream hangs",
+          "issues": [
+            "8622"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "7.22.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "3f404813-1223-4bf1-b283-434eec63748c",
+      "createTime": "2026-08-11T00:02:28.769Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "8a33313f-7f21-49ad-b2fc-f0d125fc704e",
+      "createTime": "2026-08-10T18:31:51.385Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4ac404d73721e787bee054d64358063ae23ce8e4",
+          "message": "Add explicit ./protos/protos package subpath export",
+          "issues": [
+            "9105"
+          ],
+          "scope": "firestore-api"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore-api",
+      "id": "a8291df6-6236-4673-81c7-462900506884",
+      "createTime": "2026-08-10T18:31:51.348Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "91a1d9d8-00d9-4ee0-9ab3-5495edd6195d",
+      "createTime": "2026-08-10T18:31:51.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "c091bf3c-8bc3-44da-bc74-b3af06f6e6f5",
+      "createTime": "2026-08-10T18:31:51.272Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/commerceproducer",
+      "id": "6acab640-b1a3-4e37-b0d1-ae3e29f4124b",
+      "createTime": "2026-08-10T18:31:51.237Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "acca1f8d-d713-48ee-8155-772cc091a8ee",
+      "createTime": "2026-08-10T18:31:51.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        }
+      ],
+      "version": "0.29.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "2766d8a4-1eee-4630-9bab-b3ec4b3597ed",
+      "createTime": "2026-08-10T18:31:51.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "20f90007-a1ef-41e7-b932-13ba3ff8cdbd",
+      "createTime": "2026-08-10T18:31:51.075Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "090cee3f-458e-4401-ae8b-cbcc162cc458",
+      "createTime": "2026-08-10T18:31:51.036Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "73bc71f6-ed0f-4599-a833-80d907246891",
+      "createTime": "2026-08-10T18:31:50.997Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "6d7a3965-a94c-4b5c-a0e5-4262d3a020ac",
+      "createTime": "2026-08-10T18:31:50.948Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "11.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "teeny-request",
+      "id": "97a8fe73-9f98-4d55-ac59-f6a24644a6e0",
+      "createTime": "2026-08-10T18:31:50.899Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "retry-request",
+      "id": "5db941e5-8de1-4b61-a3b6-8f70af36281e",
+      "createTime": "2026-08-10T18:31:50.852Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "proto3-json-serializer",
+      "id": "6cf7a840-b4c7-4d42-8e91-4ff5e7eabb46",
+      "createTime": "2026-08-10T18:31:50.806Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-proto-files",
+      "id": "58b64cc7-f856-42b5-985b-0038f206879d",
+      "createTime": "2026-08-10T18:31:50.760Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "9.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "6c1d7bee-6711-448a-ada7-7e47afa06fb5",
+      "createTime": "2026-08-10T18:31:50.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "25a4b72f-d510-46f9-9192-6916f0c0b42c",
+      "createTime": "2026-08-10T18:31:50.678Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "11.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "501551d3-719b-47e1-b231-8c41200197ab",
+      "createTime": "2026-08-10T18:31:50.634Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "9.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "100eb2af-97f4-4c55-bf26-e075250f8633",
+      "createTime": "2026-08-10T18:31:50.599Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "4304d76e-f504-4966-b28f-a8affc759932",
+      "createTime": "2026-08-10T18:31:50.551Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "911514f5-5a4a-46e7-a5df-a82c9d295f52",
+      "createTime": "2026-08-10T18:31:50.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "af8074c0281f4f8dc40570f580f4cdebf1d72cde",
+          "message": "Upgrade all node core library dependencies to their latest node 22 version",
+          "issues": [
+            "9084"
+          ]
+        }
+      ],
+      "version": "8.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "528cf7f2-29d3-43fa-8d05-abe5770ff3c7",
+      "createTime": "2026-08-10T18:31:50.476Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1ed703f36743d61fb302b42a6cee53c07034b2fe",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9026"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))"
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f5b12cf10d9974c87e651e1182a5804030af8cdc",
+          "message": "[datamanager] add encrypted_user_id.proto and the EncryptedUserId resource",
+          "issues": [
+            "8378"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ecec52d9fa7e5a8557596f42407412b714c8bd3d",
+          "message": "[datamanager] add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics",
+          "issues": [
+            "8300"
+          ]
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "8165672b-c417-4d69-8c58-0513f4f07015",
+      "createTime": "2026-08-07T23:06:25.949Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "23aee114a947a29f31977aab8de9c1c7ecd62188",
+          "message": "Upgrade types sinon for databasecenter",
+          "issues": [
+            "9098"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "c0b55b44-2b73-457b-9e25-8d86ece8b512",
+      "createTime": "2026-08-05T21:09:31.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f63f914e69106f581448837f5ee212ab71f85775",
+          "message": "Split gapic and proto usage from the handwritten library into bigtable-api",
+          "issues": [
+            "8934"
+          ],
+          "scope": "bigtable"
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "dc784ab8-295a-4e02-8261-f7935abb2788",
+      "createTime": "2026-08-05T21:09:31.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7f8e23c9652e34869c2fafe54f63cc63ac9acaa8",
+          "message": "Remove owlbot configs",
+          "issues": [
+            "8936"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "de1dae99-d138-451f-a0db-e716e0003958",
+      "createTime": "2026-08-05T21:09:31.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "340364f8fab67adaf4e684fb3241de499394bf6b",
+          "message": "Discovery url handling, error code review helper, and pack-n-play test timeouts",
+          "issues": [
+            "9061"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "2d37b8dd-1417-4f37-ae57-18b166ea395a",
+      "createTime": "2026-08-05T21:09:31.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "340364f8fab67adaf4e684fb3241de499394bf6b",
+          "message": "Discovery url handling, error code review helper, and pack-n-play test timeouts",
+          "issues": [
+            "9061"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "9eda0e2d-73dd-410e-a223-df0621e697d6",
+      "createTime": "2026-08-05T21:09:31.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "340364f8fab67adaf4e684fb3241de499394bf6b",
+          "message": "Discovery url handling, error code review helper, and pack-n-play test timeouts",
+          "issues": [
+            "9061"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "pack-n-play",
+      "id": "80b6e996-31bf-482f-8d5c-02220564552f",
+      "createTime": "2026-08-05T21:09:31.200Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "1ed703f36743d61fb302b42a6cee53c07034b2fe",
           "message": "Upgrade minimum Node.js version to 22",
@@ -88682,5 +89277,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-04T23:49:33.509Z"
+  "updateTime": "2026-08-11T00:02:28.769Z"
 }

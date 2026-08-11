@@ -2952,6 +2952,18 @@
                     }
                   }
                 },
+                "RequestOptions": {
+                  "fields": {
+                    "requestTags": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
                 "ExplainStats": {
                   "fields": {
                     "data": {
@@ -3338,6 +3350,13 @@
                     "readTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 5
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3404,6 +3423,13 @@
                     "showMissing": {
                       "type": "bool",
                       "id": 12
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3450,6 +3476,13 @@
                     "mask": {
                       "type": "DocumentMask",
                       "id": 5
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3473,6 +3506,13 @@
                     "currentDocument": {
                       "type": "Precondition",
                       "id": 4
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3488,6 +3528,13 @@
                     "currentDocument": {
                       "type": "Precondition",
                       "id": 2
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3529,6 +3576,13 @@
                     "readTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 7
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3572,6 +3626,13 @@
                     "options": {
                       "type": "TransactionOptions",
                       "id": 2
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3600,6 +3661,13 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 3
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3630,6 +3698,13 @@
                       "id": 2,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }
@@ -3676,6 +3751,13 @@
                     "explainOptions": {
                       "type": "ExplainOptions",
                       "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 11,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
@@ -3762,6 +3844,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3831,6 +3920,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3894,6 +3990,13 @@
                     "readTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 6
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3936,6 +4039,13 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 5
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3989,6 +4099,13 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 4
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -4166,6 +4283,13 @@
                     "readTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 4
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -4200,6 +4324,13 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 3
+                    },
+                    "requestOptions": {
+                      "type": "RequestOptions",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },

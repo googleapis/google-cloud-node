@@ -20,7 +20,7 @@ import {
   ReadRowsServiceParameters,
   ReadRowsWritableStream,
 } from '../../test/utils/readRowsServiceParameters';
-import {google} from '../../protos/protos';
+import google = protos.google;
 import IRowRange = google.bigtable.v2.IRowRange;
 
 // Generate documentation for this function
