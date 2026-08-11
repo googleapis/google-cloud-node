@@ -47,9 +47,10 @@ import {
   CopyBackupResponse,
   CopyBackupOptions,
 } from './backup';
-import {google as instanceAdmin} from '../protos/protos';
-import {google as databaseAdmin} from '../protos/protos';
-import {google as spannerClient} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import databaseAdmin = protos.google;
+import instanceAdmin = protos.google;
+import spannerClient = protos.google;
 import {CreateInstanceRequest} from './index';
 import {ObservabilityOptions} from './instrument';
 
