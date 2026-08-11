@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.22.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.21.0...storage-v7.22.0) (2026-08-11)
+
+
+### Features
+
+* **storage:** Add deleteSourceObjects option to combine/compose method ([#8444](https://github.com/googleapis/google-cloud-node/issues/8444)) ([43abc45](https://github.com/googleapis/google-cloud-node/commit/43abc45c45fe8538694e9794a12ca700e0ae2d90))
+
+
+### Bug Fixes
+
+* **storage:** Destroy local read stream on upload write failure to prevent resource leaks ([#8752](https://github.com/googleapis/google-cloud-node/issues/8752)) ([77dab53](https://github.com/googleapis/google-cloud-node/commit/77dab53bf6d8a4b911f04e49eef444057d817619)), refs [#7325](https://github.com/googleapis/google-cloud-node/issues/7325)
+* **storage:** Pass signingEndpoint to URLSigner in file.getSignedUrl ([#8982](https://github.com/googleapis/google-cloud-node/issues/8982)) ([b001807](https://github.com/googleapis/google-cloud-node/commit/b001807a82616521680baf5429fec6af639aeb58))
+* **storage:** Resolve Node compatibility crashes, security vulnerability, and stream hangs ([#8622](https://github.com/googleapis/google-cloud-node/issues/8622)) ([512ba79](https://github.com/googleapis/google-cloud-node/commit/512ba79126605b416868db7c5f607d3083934eca))
+* **storage:** Set application/json Content-Type for impersonated ADC requests ([#8419](https://github.com/googleapis/google-cloud-node/issues/8419)) ([292c688](https://github.com/googleapis/google-cloud-node/commit/292c68864ddc46f5a89319a9b756599749275e91))
+
 ## [7.21.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.20.0...storage-v7.21.0) (2026-06-03)
 
 
