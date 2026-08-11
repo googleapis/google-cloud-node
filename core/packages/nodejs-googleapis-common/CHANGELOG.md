@@ -5,6 +5,31 @@
 
 [1]: https://www.npmjs.com/package/nodejs-googleapis-common?activeTab=versions
 
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.0.1...googleapis-common-v9.0.2) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.0.0...googleapis-common-v9.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **core:** Discovery url handling, error code review helper, and pack-n-play test timeouts ([#9061](https://github.com/googleapis/google-cloud-node/issues/9061)) ([340364f](https://github.com/googleapis/google-cloud-node/commit/340364f8fab67adaf4e684fb3241de499394bf6b))
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v8.0.3...googleapis-common-v9.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update nodejs-googleapis-common to minimum Node version of 22. ([#8997](https://github.com/googleapis/google-cloud-node/issues/8997))
+
+### Features
+
+* Update nodejs-googleapis-common to minimum Node version of 22. ([#8997](https://github.com/googleapis/google-cloud-node/issues/8997)) ([5f9dfeb](https://github.com/googleapis/google-cloud-node/commit/5f9dfeb5767c115975e5a9a67c2e7cade199022c)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [8.0.3](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v8.0.2...googleapis-common-v8.0.3) (2026-07-23)
 
 

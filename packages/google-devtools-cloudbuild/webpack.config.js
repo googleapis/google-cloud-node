@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CloudBuild',
-    filename: './cloud-build.js',
+    library: 'RepositoryManager',
+    filename: './repository-manager.js',
   },
   node: {
     child_process: 'empty',

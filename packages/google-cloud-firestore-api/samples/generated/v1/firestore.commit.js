@@ -42,6 +42,10 @@ function main(database) {
    *  If set, applies all writes in this transaction, and commits it.
    */
   // const transaction = Buffer.from('string')
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore-api').v1;
