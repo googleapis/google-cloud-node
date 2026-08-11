@@ -52,7 +52,7 @@ jobs:
       - run: npm run lint
         name: Run monorepo linter
 
-  # Dummy jobs to satisfy branch protection requirements for each node version
+  # Consolidate shards into jobs representing aggregate status to simplify branch protection requirements
   units-status:
     name: units (${{ matrix.node-version }})
     needs: units
