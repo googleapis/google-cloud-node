@@ -1,6 +1,6 @@
 {
   "name": "gcp-metadata",
-  "version": "8.1.4",
+  "version": "9.0.2",
   "description": "Get the metadata from a Google Cloud Platform environment",
   "repository": {
     "type": "git",
@@ -40,8 +40,8 @@
   "author": "Google LLC",
   "license": "Apache-2.0",
   "dependencies": {
-    "gaxios": "7.1.3",
-    "google-logging-utils": "1.1.3",
+    "gaxios": "^7.1.3",
+    "google-logging-utils": "^2.0.0",
     "json-bigint": "^1.0.0"
   },
   "devDependencies": {
@@ -58,8 +58,8 @@
     "gcbuild": "^1.3.39",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^5.0.0",
-    "jsdoc-region-tag": "^4.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "mocha": "^11.1.0",
     "ncp": "^2.0.0",
     "nock": "^14.0.5",
@@ -68,7 +68,7 @@
     "typescript": "5.8.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gcp-metadata"
 }

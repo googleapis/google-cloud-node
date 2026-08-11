@@ -54,6 +54,10 @@ function main(parent, collectionId, document) {
    *  will not be returned in the response.
    */
   // const mask = {}
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore-api').v1;

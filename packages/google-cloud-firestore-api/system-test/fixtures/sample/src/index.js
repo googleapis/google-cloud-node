@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const admin = require('@google-cloud/firestore-api');
+const firestore = require('@google-cloud/firestore-api');
 
 function main() {
-  const firestoreAdminClient = new admin.FirestoreAdminClient();
+  const firestoreClient = new firestore.FirestoreClient();
 }
 
 main();
