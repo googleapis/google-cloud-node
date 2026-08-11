@@ -14,8 +14,7 @@
 
 import * as assert from 'assert';
 import {describe} from 'mocha';
-import {DatastoreClient} from '../../src';
-import * as protos from '../../protos/protos';
+import * as protos from '../../src/protos';
 import {getInitializedDatastoreClient} from './get-initialized-datastore-client';
 
 describe('Run Query', () => {

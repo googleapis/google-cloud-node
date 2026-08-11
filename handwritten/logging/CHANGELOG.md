@@ -6,6 +6,24 @@
 [1]: https://www.npmjs.com/package/nodejs-logging?activeTab=versions
 
 
+## [12.0.0](https://github.com/googleapis/google-cloud-node/compare/logging-v11.4.0...logging-v12.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update logging to minimum Node version of 22. ([#9048](https://github.com/googleapis/google-cloud-node/issues/9048))
+
+### Features
+
+* Update logging to minimum Node version of 22. ([#9048](https://github.com/googleapis/google-cloud-node/issues/9048)) ([afb70ac](https://github.com/googleapis/google-cloud-node/commit/afb70ac9616da30227c81ede0bdca6440d560a64)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [11.4.0](https://github.com/googleapis/google-cloud-node/compare/logging-v11.3.0...logging-v11.4.0) (2026-08-04)
+
+
+### Features
+
+* **logging:** Split GAPIC from the logging handwritten package ([#8929](https://github.com/googleapis/google-cloud-node/issues/8929)) ([ee21766](https://github.com/googleapis/google-cloud-node/commit/ee217669702485cde6d292740f8bb04a82d62600))
+
 ## [11.3.0](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.3...logging-v11.3.0) (2026-07-10)
 
 

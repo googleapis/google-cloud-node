@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v5.0.0...pack-n-play-v5.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **core:** Discovery url handling, error code review helper, and pack-n-play test timeouts ([#9061](https://github.com/googleapis/google-cloud-node/issues/9061)) ([340364f](https://github.com/googleapis/google-cloud-node/commit/340364f8fab67adaf4e684fb3241de499394bf6b))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v4.2.3...pack-n-play-v5.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update pack-n-play to minimum Node version of 22. ([#8987](https://github.com/googleapis/google-cloud-node/issues/8987))
+
+### Features
+
+* Update pack-n-play to minimum Node version of 22. ([#8987](https://github.com/googleapis/google-cloud-node/issues/8987)) ([b61e3d7](https://github.com/googleapis/google-cloud-node/commit/b61e3d79df79220a9b41a47d550f2a274877e387)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [4.2.3](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v4.2.2...pack-n-play-v4.2.3) (2026-07-23)
 
 

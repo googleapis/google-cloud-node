@@ -227,6 +227,11 @@
                 "undeleteSupportEventSubscription"
               ]
             },
+            "ExpungeSupportEventSubscription": {
+              "methods": [
+                "expungeSupportEventSubscription"
+              ]
+            },
             "ListSupportEventSubscriptions": {
               "methods": [
                 "listSupportEventSubscriptions",
@@ -262,6 +267,11 @@
             "UndeleteSupportEventSubscription": {
               "methods": [
                 "undeleteSupportEventSubscription"
+              ]
+            },
+            "ExpungeSupportEventSubscription": {
+              "methods": [
+                "expungeSupportEventSubscription"
               ]
             },
             "ListSupportEventSubscriptions": {

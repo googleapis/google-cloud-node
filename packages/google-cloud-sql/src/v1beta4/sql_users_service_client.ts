@@ -937,6 +937,14 @@ export class SqlUsersServiceClient {
    *   Optional. Specifies whether to revoke existing roles that are not present
    *   in the `database_roles` field. If `false` or unset, the database roles
    *   specified in `database_roles` are added to the user's existing roles.
+   * @param {string[]} [request.serverRoles]
+   *   Optional. The server roles to grant to the SQL Server login. Existing
+   *   server roles will not be revoked if revoke_existing_roles is false.
+   *   body.server_roles will be ignored for update request.
+   * @param {boolean} [request.revokeExistingServerRoles]
+   *   Optional. Specifies whether to revoke existing roles that are not present
+   *   in the `server_roles` field. If `false` or unset, the server roles
+   *   specified in `server_roles` are added to the user's existing server roles.
    * @param {google.cloud.sql.v1beta4.User} request.body
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
