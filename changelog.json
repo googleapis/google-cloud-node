@@ -4,6 +4,61 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "77dab53bf6d8a4b911f04e49eef444057d817619",
+          "message": "Destroy local read stream on upload write failure to prevent resource leaks",
+          "issues": [
+            "8752",
+            "7325"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "b001807a82616521680baf5429fec6af639aeb58",
+          "message": "Pass signingEndpoint to URLSigner in file.getSignedUrl",
+          "issues": [
+            "8982"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "292c68864ddc46f5a89319a9b756599749275e91",
+          "message": "Set application/json Content-Type for impersonated ADC requests",
+          "issues": [
+            "8419"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "43abc45c45fe8538694e9794a12ca700e0ae2d90",
+          "message": "Add deleteSourceObjects option to combine/compose method",
+          "issues": [
+            "8444"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "512ba79126605b416868db7c5f607d3083934eca",
+          "message": "Resolve Node compatibility crashes, security vulnerability, and stream hangs",
+          "issues": [
+            "8622"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "7.22.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "3f404813-1223-4bf1-b283-434eec63748c",
+      "createTime": "2026-08-11T00:02:28.769Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
           "message": "Update API sources and regenerate",
@@ -89222,5 +89277,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-10T18:31:51.385Z"
+  "updateTime": "2026-08-11T00:02:28.769Z"
 }
