@@ -19,7 +19,8 @@ import {Cluster} from './cluster';
 import {Bigtable} from '.';
 import {Instance} from './instance';
 import {CallOptions} from 'google-gax';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {ServiceError} from 'google-gax';
 
 export interface AppProfileOptions {

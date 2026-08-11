@@ -1479,5 +1479,187 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
         );
       });
     });
+
+    describe('projectLocationSecretSecretVersion', async () => {
+      const fakePath = '/rendered/path/projectLocationSecretSecretVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        secret: 'secretValue',
+        secret_version: 'secretVersionValue',
+      };
+      const client =
+        new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationSecretSecretVersionPath', () => {
+        const result = client.projectLocationSecretSecretVersionPath(
+          'projectValue',
+          'locationValue',
+          'secretValue',
+          'secretVersionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecretSecretVersionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecretSecretVersionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecretFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretFromProjectLocationSecretSecretVersionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecretVersionFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretVersionFromProjectLocationSecretSecretVersionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'secretVersionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectSecretSecretVersion', async () => {
+      const fakePath = '/rendered/path/projectSecretSecretVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        secret: 'secretValue',
+        secret_version: 'secretVersionValue',
+      };
+      const client =
+        new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectSecretSecretVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectSecretSecretVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectSecretSecretVersionPath', () => {
+        const result = client.projectSecretSecretVersionPath(
+          'projectValue',
+          'secretValue',
+          'secretVersionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchProjectFromProjectSecretSecretVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecretFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretFromProjectSecretSecretVersionName(fakePath);
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSecretVersionFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
+        assert.strictEqual(result, 'secretVersionValue');
+        assert(
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
   });
 });

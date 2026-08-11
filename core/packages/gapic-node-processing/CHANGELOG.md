@@ -1,5 +1,37 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.0...gapic-node-processing-v0.2.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.11...gapic-node-processing-v0.2.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990))
+
+### Features
+
+* Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990)) ([ec833e1](https://github.com/googleapis/google-cloud-node/commit/ec833e18a70397baef6c52e82c4237a275ba8ce6)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [0.1.11](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.10...gapic-node-processing-v0.1.11) (2026-07-24)
+
+
+### Bug Fixes
+
+* **gapic-node-processing:** Move typescript to dependencies for AST runtime execution ([#8962](https://github.com/googleapis/google-cloud-node/issues/8962)) ([c2f5136](https://github.com/googleapis/google-cloud-node/commit/c2f51364b47c40e6793c55d3020329e1fa4a9f74))
+
+## [0.1.10](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.9...gapic-node-processing-v0.1.10) (2026-07-23)
+
+
+### Bug Fixes
+
+* **gapic-node-processing:** Preserve index.ts exports and merge clients across multi-api staging subdirectories ([#8953](https://github.com/googleapis/google-cloud-node/issues/8953)) ([fee5a15](https://github.com/googleapis/google-cloud-node/commit/fee5a15dc99d8055f7b316c4b7630d044821f235))
+
 ## [0.1.9](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.8...gapic-node-processing-v0.1.9) (2026-06-18)
 
 

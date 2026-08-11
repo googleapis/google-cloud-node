@@ -480,6 +480,292 @@ describe('v1.ContentBundleServiceClient', () => {
     });
   });
 
+  describe('batchActivateContentBundles', () => {
+    it('invokes batchActivateContentBundles without error', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateContentBundlesResponse(),
+      );
+      client.innerApiCalls.batchActivateContentBundles =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchActivateContentBundles(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchActivateContentBundles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchActivateContentBundles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateContentBundles without error using callback', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateContentBundlesResponse(),
+      );
+      client.innerApiCalls.batchActivateContentBundles =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchActivateContentBundles(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchActivateContentBundles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchActivateContentBundles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateContentBundles with error', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchActivateContentBundles = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchActivateContentBundles(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchActivateContentBundles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchActivateContentBundles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateContentBundles with closed client', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchActivateContentBundles(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchDeactivateContentBundles', () => {
+    it('invokes batchDeactivateContentBundles without error', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateContentBundlesResponse(),
+      );
+      client.innerApiCalls.batchDeactivateContentBundles =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchDeactivateContentBundles(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeactivateContentBundles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeactivateContentBundles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateContentBundles without error using callback', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateContentBundlesResponse(),
+      );
+      client.innerApiCalls.batchDeactivateContentBundles =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeactivateContentBundles(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeactivateContentBundles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeactivateContentBundles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateContentBundles with error', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeactivateContentBundles = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchDeactivateContentBundles(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchDeactivateContentBundles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeactivateContentBundles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateContentBundles with closed client', async () => {
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateContentBundlesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchDeactivateContentBundles(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listContentBundles', () => {
     it('invokes listContentBundles without error', async () => {
       const client =
@@ -1834,6 +2120,109 @@ describe('v1.ContentBundleServiceClient', () => {
         assert.strictEqual(result, 'contentLabelValue');
         assert(
           (client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creative', async () => {
+      const fakePath = '/rendered/path/creative';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative: 'creativeValue',
+      };
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativePath', () => {
+        const result = client.creativePath('networkCodeValue', 'creativeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeName', () => {
+        const result = client.matchNetworkCodeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromCreativeName', () => {
+        const result = client.matchCreativeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeSet', async () => {
+      const fakePath = '/rendered/path/creativeSet';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_set: 'creativeSetValue',
+      };
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativeSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeSetPath', () => {
+        const result = client.creativeSetPath(
+          'networkCodeValue',
+          'creativeSetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeSetName', () => {
+        const result = client.matchNetworkCodeFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeSetFromCreativeSetName', () => {
+        const result = client.matchCreativeSetFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'creativeSetValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3460,6 +3849,56 @@ describe('v1.ContentBundleServiceClient', () => {
         assert.strictEqual(result, 'siteValue');
         assert(
           (client.pathTemplates.sitePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('slate', async () => {
+      const fakePath = '/rendered/path/slate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        slate: 'slateValue',
+      };
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.slatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.slatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('slatePath', () => {
+        const result = client.slatePath('networkCodeValue', 'slateValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.slatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSlateName', () => {
+        const result = client.matchNetworkCodeFromSlateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSlateFromSlateName', () => {
+        const result = client.matchSlateFromSlateName(fakePath);
+        assert.strictEqual(result, 'slateValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

@@ -26,6 +26,7 @@ const SpannerClient = v1.SpannerClient;
 type SpannerClient = v1.SpannerClient;
 const SpannerExecutorProxyClient = v1.SpannerExecutorProxyClient;
 type SpannerExecutorProxyClient = v1.SpannerExecutorProxyClient;
+
 export {v1, DatabaseAdminClient, InstanceAdminClient, SpannerClient, SpannerExecutorProxyClient};
 export default {v1, DatabaseAdminClient, InstanceAdminClient, SpannerClient, SpannerExecutorProxyClient};
 import * as protos from '../protos/protos';

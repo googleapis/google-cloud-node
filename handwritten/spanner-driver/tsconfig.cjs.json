@@ -1,0 +1,14 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build/cjs",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["node", "mocha"]
+  },
+  "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"]
+}

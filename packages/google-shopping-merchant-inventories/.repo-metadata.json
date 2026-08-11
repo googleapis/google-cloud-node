@@ -9,7 +9,7 @@
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "merchantapi",
-    "name_pretty": "Merchant",
+    "name_pretty": "Shopping Merchant Inventories",
     "product_documentation": "https://developers.google.com/merchant/api",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node"

@@ -5779,6 +5779,307 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('searchMessages', () => {
+    it('invokes searchMessages without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+      ];
+      client.innerApiCalls.searchMessages = stubSimpleCall(expectedResponse);
+      const [response] = await client.searchMessages(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchMessages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchMessages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchMessages without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+      ];
+      client.innerApiCalls.searchMessages =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchMessages(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ISearchMessageResult[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchMessages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchMessages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchMessages with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchMessages = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.searchMessages(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.searchMessages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchMessages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchMessagesStream without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+      ];
+      client.descriptors.page.searchMessages.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchMessagesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.SearchMessageResult[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.chat.v1.SearchMessageResult) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.searchMessages.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchMessages, request),
+      );
+      assert(
+        (client.descriptors.page.searchMessages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes searchMessagesStream with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchMessages.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.searchMessagesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.SearchMessageResult[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.chat.v1.SearchMessageResult) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.searchMessages.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchMessages, request),
+      );
+      assert(
+        (client.descriptors.page.searchMessages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with searchMessages without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+        generateSampleMessage(new protos.google.chat.v1.SearchMessageResult()),
+      ];
+      client.descriptors.page.searchMessages.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.chat.v1.ISearchMessageResult[] = [];
+      const iterable = client.searchMessagesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchMessages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.searchMessages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with searchMessages with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchMessagesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.SearchMessagesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchMessages.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.searchMessagesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.chat.v1.ISearchMessageResult[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchMessages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.searchMessages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
   describe('listSpaces', () => {
     it('invokes listSpaces without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
