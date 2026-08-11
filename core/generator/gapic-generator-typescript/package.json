@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.3.0",
     "long": "^5.3.2",
     "object-hash": "^3.0.0",
     "proto3-json-serializer": "^4.0.0",

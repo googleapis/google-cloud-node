@@ -188,7 +188,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.28.0
+    version: 0.29.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -226,7 +226,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.0.0
+    version: 7.1.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -664,12 +664,12 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.0.0
+    version: 7.1.0
     apis:
       - path: google/cloud/compute/v1
       - path: google/cloud/compute/v1beta
@@ -782,7 +782,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -971,7 +971,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
@@ -1955,7 +1955,7 @@ libraries:
           path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/iam/v3
       - path: google/iam/v2
