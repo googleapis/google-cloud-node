@@ -791,7 +791,7 @@ export class Transaction implements firestore.Transaction {
         // macrotask boundary. Node then reports an unhandled rejection, which
         // terminates the process under the default `--unhandled-rejections=throw`.
         // Observe the rejection here; awaiters still see it.
-        this._transactionIdPromise.catch(() => {});
+        void this._transactionIdPromise.catch(() => {});
 
         return resultPromise.then(r => r.result);
       }
