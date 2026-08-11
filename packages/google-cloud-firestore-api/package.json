@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/firestore-api",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Cloud Firestore API client for Node.js",
   "repository": {
     "type": "git",
@@ -30,6 +30,10 @@
       "default": "./build/src/v1/firestore_admin_client.js"
     },
     "./protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
+    "./protos/protos": {
       "types": "./build/protos/protos.d.ts",
       "default": "./build/protos/protos.js"
     },

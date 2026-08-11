@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.4.0...google-cloud-firestore-api-v0.5.0) (2026-08-10)
+
+
+### Features
+
+* **firestore-api:** Add explicit ./protos/protos package subpath export ([#9105](https://github.com/googleapis/google-cloud-node/issues/9105)) ([4ac404d](https://github.com/googleapis/google-cloud-node/commit/4ac404d73721e787bee054d64358063ae23ce8e4))
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.3.0...google-cloud-firestore-api-v0.4.0) (2026-08-04)
 
 

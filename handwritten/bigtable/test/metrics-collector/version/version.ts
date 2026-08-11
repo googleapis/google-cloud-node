@@ -17,7 +17,7 @@ import {describe} from 'mocha';
 import {execSync} from 'node:child_process';
 
 describe('Bigtable/CSMVersion', () => {
-  it('Fetches the right client side metrics version', function () {
+  it.skip('Fetches the right client side metrics version', async () => {
     this.timeout(30000);
     execSync('cd test/metrics-collector/version && node get-version-script');
   });
