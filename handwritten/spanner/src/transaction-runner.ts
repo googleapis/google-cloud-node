@@ -16,7 +16,6 @@
 
 import {promisify} from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
-import {Root} from 'protobufjs';
 import * as through from 'through2';
 
 import {Session} from './session';
@@ -24,19 +23,18 @@ import {Transaction} from './transaction';
 import {NormalCallback} from './common';
 import {isSessionNotFoundError} from './session-pool';
 import {Database} from './database';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
+import {getRetryInfo} from './protos';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const jsonProtos = require('../protos/protos.json');
 const RETRY_INFO = 'google.rpc.retryinfo-bin';
 
 const RETRYABLE: grpc.status[] = [grpc.status.ABORTED];
 
-// tslint:disable-next-line variable-name
-const RetryInfo = Root.fromJSON(jsonProtos).lookup('google.rpc.RetryInfo');
+const RetryInfo = getRetryInfo();
 
 /**
  * @typedef {object} RunTransactionOptions
