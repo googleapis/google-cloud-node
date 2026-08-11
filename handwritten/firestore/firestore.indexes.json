@@ -1,0 +1,164 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "foo",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "embedding",
+          "vectorConfig": {
+            "dimension": 2,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "foo",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "embedding",
+          "vectorConfig": {
+            "dimension": 2,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "foo",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "embedding",
+          "vectorConfig": {
+            "dimension": 2048,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nested.embedding",
+          "vectorConfig": {
+            "dimension": 2,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "embedding",
+          "vectorConfig": {
+            "dimension": 2,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "embedding",
+          "vectorConfig": {
+            "dimension": 2048,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "foo",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "embedding",
+          "vectorConfig": {
+            "dimension": 2,
+            "flat": {}
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "foo",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "index-test-collection",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "expireAt",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

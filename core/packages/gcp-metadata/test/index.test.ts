@@ -493,6 +493,45 @@ describe('unit test', () => {
     });
   });
 
+  it('should fail on isAvailable if ENOTFOUND is wrapped in error.cause', async () => {
+    const secondary = secondaryHostRequest(500, 'ENOTFOUND');
+    const innerErr = Object.assign(new Error('ENOTFOUND'), {code: 'ENOTFOUND'});
+    const wrapperErr = Object.assign(new Error('Wrapper error'), {
+      cause: innerErr,
+    });
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(wrapperErr);
+    const isGCE = await gcp.isAvailable();
+    await secondary;
+    primary.done();
+    assert.strictEqual(false, isGCE);
+  });
+
+  it('should fail on isAvailable if ENOTFOUND is wrapped inside an AggregateError or nested cause', async () => {
+    const secondary = secondaryHostRequest(500, 'ENOTFOUND');
+    const innerErr1 = Object.assign(new Error('ENOTFOUND'), {
+      code: 'ENOTFOUND',
+    });
+    const innerErr2 = Object.assign(new Error('EHOSTUNREACH'), {
+      code: 'EHOSTUNREACH',
+    });
+    const wrapperErr = Object.assign(new Error('Wrapper error'), {
+      cause: innerErr1,
+    });
+    const aggregateErr = new AggregateError(
+      [wrapperErr, innerErr2],
+      'Aggregate error',
+    );
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(aggregateErr);
+    const isGCE = await gcp.isAvailable();
+    await secondary;
+    primary.done();
+    assert.strictEqual(false, isGCE);
+  });
+
   it('should return first successful response', async () => {
     const secondary = secondaryHostRequest(500);
     const primary = nock(HOST).get(`${PATH}/${TYPE}`).reply(404);

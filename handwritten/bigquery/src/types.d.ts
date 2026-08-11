@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260328
+ * Discovery Revision: 20260707
  */
 
 /**
@@ -75,7 +75,12 @@ declare namespace bigquery {
     /**
      * Optional. Defaults to FIXED_TYPE.
      */
-    argumentKind?: 'ARGUMENT_KIND_UNSPECIFIED' | 'FIXED_TYPE' | 'ANY_TYPE';
+    argumentKind?:
+      | 'ARGUMENT_KIND_UNSPECIFIED'
+      | 'FIXED_TYPE'
+      | 'ANY_TYPE'
+      | 'FIXED_TABLE'
+      | 'ANY_TABLE';
     /**
      * Set if argument_kind == FIXED_TYPE.
      */
@@ -92,6 +97,10 @@ declare namespace bigquery {
      * Optional. The name of this argument. Can be absent for function return argument.
      */
     name?: string;
+    /**
+     * Optional. Set if argument_kind == FIXED_TABLE.
+     */
+    tableType?: IStandardSqlTableType;
   };
 
   /**
@@ -317,6 +326,44 @@ declare namespace bigquery {
   };
 
   /**
+   * Arrow RecordBatch. This feature is not yet available.
+   */
+  type IArrowRecordBatch = {
+    /**
+     * IPC-serialized Arrow RecordBatch.
+     */
+    serializedRecordBatch?: string;
+  };
+
+  /**
+   * Arrow schema as specified in https://arrow.apache.org/docs/python/api/datatypes.html and serialized to bytes using IPC: https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc See code samples on how this message can be deserialized. This feature is not yet available.
+   */
+  type IArrowSchema = {
+    /**
+     * IPC serialized Arrow schema.
+     */
+    serializedSchema?: string;
+  };
+
+  /**
+   * Contains options specific to Arrow Serialization. This feature is not yet available.
+   */
+  type IArrowSerializationOptions = {
+    /**
+     * The compression codec to use for Arrow buffers in serialized record batches.
+     */
+    bufferCompression?: 'COMPRESSION_UNSPECIFIED' | 'LZ4_FRAME' | 'ZSTD';
+    /**
+     * Optional. Set timestamp precision option. If not set, the default precision is microseconds.
+     */
+    picosTimestampPrecision?:
+      | 'PICOS_TIMESTAMP_PRECISION_UNSPECIFIED'
+      | 'TIMESTAMP_PRECISION_MICROS'
+      | 'TIMESTAMP_PRECISION_NANOS'
+      | 'TIMESTAMP_PRECISION_PICOS';
+  };
+
+  /**
    * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices", "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE" }, { "log_type": "ADMIN_READ" } ] }, { "service": "sampleservice.googleapis.com", "audit_log_configs": [ { "log_type": "DATA_READ" }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:aliya@example.com" ] } ] } ] } For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts `jose@example.com` from DATA_READ logging, and `aliya@example.com` from DATA_WRITE logging.
    */
   type IAuditConfig = {
@@ -342,10 +389,7 @@ declare namespace bigquery {
      * The log type that this config enables.
      */
     logType?:
-      | 'LOG_TYPE_UNSPECIFIED'
-      | 'ADMIN_READ'
-      | 'DATA_WRITE'
-      | 'DATA_READ';
+      'LOG_TYPE_UNSPECIFIED' | 'ADMIN_READ' | 'DATA_WRITE' | 'DATA_READ';
   };
 
   /**
@@ -410,10 +454,7 @@ declare namespace bigquery {
      * Output only. Specifies which mode of BI Engine acceleration was performed (if any).
      */
     biEngineMode?:
-      | 'ACCELERATION_MODE_UNSPECIFIED'
-      | 'DISABLED'
-      | 'PARTIAL'
-      | 'FULL';
+      'ACCELERATION_MODE_UNSPECIFIED' | 'DISABLED' | 'PARTIAL' | 'FULL';
     /**
      * In case of DISABLED or PARTIAL bi_engine_mode, these contain the explanatory reasons as to why BI Engine could not accelerate. In case the full query was accelerated, this field is not populated.
      */
@@ -892,6 +933,16 @@ declare namespace bigquery {
   };
 
   /**
+   * A list of data policy options. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
+   */
+  type IDataPolicyList = {
+    /**
+     * Contains a list of data policy options. At most 9 data policies are allowed per field.
+     */
+    dataPolicies?: Array<IDataPolicyOption>;
+  };
+
+  /**
    * Data policy option. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
    */
   type IDataPolicyOption = {
@@ -1083,9 +1134,7 @@ declare namespace bigquery {
      * Optional. Updates storage_billing_model for the dataset.
      */
     storageBillingModel?:
-      | 'STORAGE_BILLING_MODEL_UNSPECIFIED'
-      | 'LOGICAL'
-      | 'PHYSICAL';
+      'STORAGE_BILLING_MODEL_UNSPECIFIED' | 'LOGICAL' | 'PHYSICAL';
     /**
      * Output only. Tags for the dataset. To provide tags as inputs, use the `resourceTags` field.
      */
@@ -1278,9 +1327,7 @@ declare namespace bigquery {
      * Output only. DML mode used.
      */
     dmlMode?:
-      | 'DML_MODE_UNSPECIFIED'
-      | 'COARSE_GRAINED_DML'
-      | 'FINE_GRAINED_DML';
+      'DML_MODE_UNSPECIFIED' | 'COARSE_GRAINED_DML' | 'FINE_GRAINED_DML';
     /**
      * Output only. Reason for disabling fine-grained DML if applicable.
      */
@@ -1716,9 +1763,7 @@ declare namespace bigquery {
      * Optional. Metadata Cache Mode for the table. Set this to enable caching of metadata from external data source.
      */
     metadataCacheMode?:
-      | 'METADATA_CACHE_MODE_UNSPECIFIED'
-      | 'AUTOMATIC'
-      | 'MANUAL';
+      'METADATA_CACHE_MODE_UNSPECIFIED' | 'AUTOMATIC' | 'MANUAL';
     /**
      * Optional. ObjectMetadata is used to create Object Tables. Object Tables contain a listing of objects (with their metadata) found at the source_uris. If ObjectMetadata is set, source_format should be omitted. Currently SIMPLE is the only supported Object Metadata type.
      */
@@ -1756,7 +1801,7 @@ declare namespace bigquery {
      */
     timestampFormat?: string;
     /**
-     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, and AVRO. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
+     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, AVRO, and Iceberg External Table. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
      */
     timestampTargetPrecision?: Array<number>;
   };
@@ -1787,6 +1832,10 @@ declare namespace bigquery {
      * Optional. Amount of memory provisioned for a Python UDF container instance. Format: {number}{unit} where unit is one of "M", "G", "Mi" and "Gi" (e.g. 1G, 512Mi). If not specified, the default value is 512Mi. For more information, see [Configure container limits for Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits)
      */
     containerMemory?: string;
+    /**
+     * Optional. Maximum number of requests that a Python UDF instance can handle concurrently. If absent or if `0`, the default concurrency value is used. For more information, see [Configure container limits for Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits).
+     */
+    containerRequestConcurrency?: string;
     /**
      * Optional. Maximum number of rows in each batch sent to the external runtime. If absent or if 0, BigQuery dynamically decides the number of rows in a batch.
      */
@@ -1884,6 +1933,16 @@ declare namespace bigquery {
   };
 
   /**
+   * Provides cache statistics for a GenAi function call.
+   */
+  type IGenAiFunctionCacheStats = {
+    /**
+     * Number of rows served from cache.
+     */
+    numCacheHitRows?: string;
+  };
+
+  /**
    * Provides cost optimization statistics for a GenAi function call.
    */
   type IGenAiFunctionCostOptimizationStats = {
@@ -1915,6 +1974,10 @@ declare namespace bigquery {
    * Provides statistics for each Ai function call within a query.
    */
   type IGenAiFunctionStats = {
+    /**
+     * Cache stats for the function.
+     */
+    cacheStats?: IGenAiFunctionCacheStats;
     /**
      * Cost optimization stats if applied on the rows processed by the function.
      */
@@ -1977,7 +2040,7 @@ declare namespace bigquery {
      */
     asynchronous?: boolean;
     /**
-     * Optional. The generation expression (e.g. AI.EMBED(...)) used to generated the field.
+     * Optional. The generation expression (e.g. AI.EMBED(...)) used to generate the field.
      */
     generationExpression?: string;
     /**
@@ -2301,9 +2364,7 @@ declare namespace bigquery {
      * Output only. Reason why incremental query results are/were not written by the query.
      */
     disabledReason?:
-      | 'DISABLED_REASON_UNSPECIFIED'
-      | 'OTHER'
-      | 'UNSUPPORTED_OPERATOR';
+      'DISABLED_REASON_UNSPECIFIED' | 'OTHER' | 'UNSUPPORTED_OPERATOR';
     /**
      * Output only. Additional human-readable clarification, if available, for DisabledReason.
      */
@@ -2601,7 +2662,7 @@ declare namespace bigquery {
      */
     query?: IJobConfigurationQuery;
     /**
-     * Optional. The reservation that job would use. User can specify a reservation to execute the job. If reservation is not set, reservation is determined based on the rules defined by the reservation assignments. The expected format is `projects/{project}/locations/{location}/reservations/{reservation}`.
+     * Optional. The reservation that job would use. User can specify a reservation to execute the job. If reservation is not set, reservation is determined based on the rules defined by the reservation assignments. The expected format is `projects/{project}/locations/{location}/reservations/{reservation}`. Forces the query to use on-demand billing when set to `none`, which requires the project or organization to have `reservation_override_mode` set to `ALLOW_ANY_OVERRIDE`.
      */
     reservation?: string;
   };
@@ -2676,10 +2737,7 @@ declare namespace bigquery {
      * Optional. Character map supported for column names in CSV/Parquet loads. Defaults to STRICT and can be overridden by Project Config Service. Using this option with unsupporting load formats will result in an error.
      */
     columnNameCharacterMap?:
-      | 'COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED'
-      | 'STRICT'
-      | 'V1'
-      | 'V2';
+      'COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED' | 'STRICT' | 'V1' | 'V2';
     /**
      * Optional. Connection properties which can modify the load job behavior. Currently, only the 'session_id' connection property is supported, and is used to resolve _SESSION appearing as the dataset id.
      */
@@ -2833,7 +2891,7 @@ declare namespace bigquery {
      */
     timestampFormat?: string;
     /**
-     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, and AVRO. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
+     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, AVRO, and Iceberg External Table. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
      */
     timestampTargetPrecision?: Array<number>;
     /**
@@ -2988,11 +3046,7 @@ declare namespace bigquery {
      * Optional. Supported operation types in table copy job.
      */
     operationType?:
-      | 'OPERATION_TYPE_UNSPECIFIED'
-      | 'COPY'
-      | 'SNAPSHOT'
-      | 'RESTORE'
-      | 'CLONE';
+      'OPERATION_TYPE_UNSPECIFIED' | 'COPY' | 'SNAPSHOT' | 'RESTORE' | 'CLONE';
     /**
      * [Pick one] Source table to copy.
      */
@@ -3148,6 +3202,10 @@ declare namespace bigquery {
      */
     finalExecutionDurationMs?: string;
     /**
+     * Output only. Regions where the global query accesses data.
+     */
+    globalQueryRemoteRegions?: Array<string>;
+    /**
      * Output only. Statistics for a load job.
      */
     load?: IJobStatistics3;
@@ -3155,6 +3213,10 @@ declare namespace bigquery {
      * Output only. Number of child jobs executed.
      */
     numChildJobs?: string;
+    /**
+     * Output only. The global query that created this job.
+     */
+    parentGlobalQueryJob?: IJobReference;
     /**
      * Output only. If this is a child job, specifies the job ID of the parent.
      */
@@ -3331,6 +3393,10 @@ declare namespace bigquery {
      */
     numDmlAffectedRows?: string;
     /**
+     * Output only. Storage and caching statistics per cloud provider for queries over object storage.
+     */
+    objectStorageStats?: Array<IObjectStorageStats>;
+    /**
      * Output only. Performance insights.
      */
     performanceInsights?: IPerformanceInsights;
@@ -3412,7 +3478,7 @@ declare namespace bigquery {
      */
     totalSlotMs?: string;
     /**
-     * Output only. Total bytes transferred for cross-cloud queries such as Cross Cloud Transfer and CREATE TABLE AS SELECT (CTAS).
+     * Output only. Total bytes transferred for BigQuery Omni queries from the remote cloud back to Google Cloud. This tracks data movement over Google-managed connections (like query results). It doesn't include input data read from the external data lake (for example, S3) because that data stays within the remote cloud.
      */
     transferredBytes?: string;
     /**
@@ -3485,6 +3551,10 @@ declare namespace bigquery {
      * Output only. Number of rows copied to the destination table.
      */
     copiedRows?: string;
+    /**
+     * Output only. Destination region for a cross-region copy job. Not set for in-region copy jobs.
+     */
+    remoteDestinationRegion?: string;
   };
 
   type IJobStatus = {
@@ -3729,6 +3799,20 @@ declare namespace bigquery {
   };
 
   /**
+   * Column Metadata Index staleness detailed infnormation.
+   */
+  type IMetadataCacheStalenessInsight = {
+    /**
+     * Output only. Average column metadata index staleness of previous runs with the same query hash.
+     */
+    avgPreviousStalenessMs?: string;
+    /**
+     * Output only. The percent increase in staleness between the current job and the average staleness of previous jobs with the same query hash.
+     */
+    stalenessPercentageIncrease?: number;
+  };
+
+  /**
    * Statistics for metadata caching in queried tables.
    */
   type IMetadataCacheStatistics = {
@@ -3788,9 +3872,7 @@ declare namespace bigquery {
      * Output only. Training type of the job.
      */
     trainingType?:
-      | 'TRAINING_TYPE_UNSPECIFIED'
-      | 'SINGLE_TRAINING'
-      | 'HPARAM_TUNING';
+      'TRAINING_TYPE_UNSPECIFIED' | 'SINGLE_TRAINING' | 'HPARAM_TUNING';
   };
 
   type IModel = {
@@ -3964,6 +4046,24 @@ declare namespace bigquery {
   };
 
   /**
+   * Storage and caching statistics for object storage.
+   */
+  type IObjectStorageStats = {
+    /**
+     * Total bytes read from the GCP Lakehouse-internal cache, avoiding an object storage read.
+     */
+    cacheBytesRead?: string;
+    /**
+     * The cloud provider for this block of statistics.
+     */
+    cloudProvider?: 'CLOUD_PROVIDER_UNSPECIFIED' | 'GCP' | 'AWS' | 'AZURE';
+    /**
+     * Total bytes read directly from the cloud provider's storage.
+     */
+    objectStorageBytesRead?: string;
+  };
+
+  /**
    * Parquet Options for load and make external tables.
    */
   type IParquetOptions = {
@@ -4027,6 +4127,10 @@ declare namespace bigquery {
      * Output only. Standalone query stage performance insights, for exploring potential improvements.
      */
     stagePerformanceStandaloneInsights?: Array<IStagePerformanceStandaloneInsight>;
+    /**
+     * Output only. Performance insights for table-level attributes that changed compared to previous runs.
+     */
+    tableChangeInsights?: Array<ITableChangeInsight>;
   };
 
   /**
@@ -4292,6 +4396,10 @@ declare namespace bigquery {
    */
   type IQueryRequest = {
     /**
+     * Optional. Options specific to the Apache Arrow output format.
+     */
+    arrowSerializationOptions?: IArrowSerializationOptions;
+    /**
      * Optional. Connection properties which can modify the query behavior.
      */
     connectionProperties?: Array<IConnectionProperty>;
@@ -4371,11 +4479,16 @@ declare namespace bigquery {
      */
     queryParameters?: Array<IQueryParameter>;
     /**
+     * Optional. The query results format. If the value is anything other than `STRUCT_ENCODING` or unspecified: * The schema of the results will be provided in `QueryResponse.results_schema` field. * The results of the first page will be provided in `QueryResponse.results` field. * The `QueryResponse.rows` will not be populated. * The `QueryResponse.schema` for `QueryResponse.rows` will also not be populated since it is the schema of the `QueryResponse.rows`. This feature is not yet available.
+     */
+    queryResultsFormat?:
+      'QUERY_RESULTS_FORMAT_UNSPECIFIED' | 'STRUCT_ENCODING' | 'ARROW';
+    /**
      * Optional. A unique user provided identifier to ensure idempotent behavior for queries. Note that this is different from the job_id. It has the following properties: 1. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended. 2. Read only queries can ignore this token since they are nullipotent by definition. 3. For the purposes of idempotency ensured by the request_id, a request is considered duplicate of another only if they have the same request_id and are actually duplicates. When determining whether a request is a duplicate of another request, all parameters in the request that may affect the result are considered. For example, query, connection_properties, query_parameters, use_legacy_sql are parameters that affect the result and are considered when determining whether a request is a duplicate, but properties like timeout_ms don't affect the result and are thus not considered. Dry run query requests are never considered duplicate of another request. 4. When a duplicate mutating query request is detected, it returns: a. the results of the mutation if it completes successfully within the timeout. b. the running operation if it is still in progress at the end of the timeout. 5. Its lifetime is limited to 15 minutes. In other words, if two requests are sent with the same request_id, but more than 15 minutes apart, idempotency is not guaranteed.
      */
     requestId?: string;
     /**
-     * Optional. The reservation that jobs.query request would use. User can specify a reservation to execute the job.query. The expected format is `projects/{project}/locations/{location}/reservations/{reservation}`.
+     * Optional. The reservation that jobs.query request would use. User can specify a reservation to execute the job.query. The expected format is `projects/{project}/locations/{location}/reservations/{reservation}`. Forces the query to use on-demand billing when set to `none`. This requires the project or organization to have `reservation_override_mode` set to `ALLOW_ANY_OVERRIDE`.
      */
     reservation?: string;
     /**
@@ -4397,6 +4510,14 @@ declare namespace bigquery {
   };
 
   type IQueryResponse = {
+    /**
+     * Output only. Serialized row data in Arrow RecordBatch format.
+     */
+    arrowRecordBatch?: IArrowRecordBatch;
+    /**
+     * Output only. Arrow schema
+     */
+    arrowSchema?: IArrowSchema;
     /**
      * Whether the query result was fetched from the query cache.
      */
@@ -4441,6 +4562,10 @@ declare namespace bigquery {
      * Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
      */
     numDmlAffectedRows?: string;
+    /**
+     * Output only. The number of rows out of `total_rows` returned in this response. This feature is not yet available.
+     */
+    pageRowCount?: string;
     /**
      * A token used for paging results. A non-empty token indicates that additional results are available. To see additional results, query the [`jobs.getQueryResults`](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) method. For more information, see [Paging through table data](https://cloud.google.com/bigquery/docs/paging-results).
      */
@@ -4699,9 +4824,7 @@ declare namespace bigquery {
      * Optional. The determinism level of the JavaScript UDF, if defined.
      */
     determinismLevel?:
-      | 'DETERMINISM_LEVEL_UNSPECIFIED'
-      | 'DETERMINISTIC'
-      | 'NOT_DETERMINISTIC';
+      'DETERMINISM_LEVEL_UNSPECIFIED' | 'DETERMINISTIC' | 'NOT_DETERMINISTIC';
     /**
      * Output only. A hash of this resource.
      */
@@ -4783,10 +4906,7 @@ declare namespace bigquery {
      * Output only. The current build state of the routine.
      */
     buildState?:
-      | 'BUILD_STATE_UNSPECIFIED'
-      | 'IN_PROGRESS'
-      | 'SUCCEEDED'
-      | 'FAILED';
+      'BUILD_STATE_UNSPECIFIED' | 'IN_PROGRESS' | 'SUCCEEDED' | 'FAILED';
     /**
      * Output only. The time when the build state was updated last.
      */
@@ -4903,9 +5023,7 @@ declare namespace bigquery {
      * Determines which statement in the script represents the "key result", used to populate the schema and query results of the script job. Default is LAST.
      */
     keyResultStatement?:
-      | 'KEY_RESULT_STATEMENT_KIND_UNSPECIFIED'
-      | 'LAST'
-      | 'FIRST_SELECT';
+      'KEY_RESULT_STATEMENT_KIND_UNSPECIFIED' | 'LAST' | 'FIRST_SELECT';
     /**
      * Limit on the number of bytes billed per statement. Exceeding this budget results in an error.
      */
@@ -5577,6 +5695,24 @@ declare namespace bigquery {
   type ITableCell = {v?: any};
 
   /**
+   * Table-level performance insights compared to previous runs. These insights don't apply to specific query stages, rather they apply to the whole table.
+   */
+  type ITableChangeInsight = {
+    /**
+     * Output only. True if the table's column metadata index was not used in the current job, but was used in a previous job with the same query hash.
+     */
+    metadataCacheNotUsedButUsedPreviously?: boolean;
+    /**
+     * Output only. If present, indicates that the table's metadata column index staleness has increased significantly compared to previous jobs with the same query hash.
+     */
+    metadataCacheStalenessInsight?: IMetadataCacheStalenessInsight;
+    /**
+     * Output only. The table that was queried.
+     */
+    tableReference?: ITableReference;
+  };
+
+  /**
    * The TableConstraints defines the primary key and foreign key.
    */
   type ITableConstraints = {
@@ -5718,9 +5854,22 @@ declare namespace bigquery {
      */
     collation?: string;
     /**
+     * Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows: - Precedence: If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag. - Patching behavior (how this field behaves during a `Table.patch` schema update): - Unset: If the `data_governance_tags_info` field is omitted from the update request, the existing tags on the column are preserved. - Empty Field: To clear data governance tags from a column, send the `data_governance_tags_info` field as an empty object. This will remove all tags from the column. - Updating tags: To replace existing tag, send the field with the new tag.
+     */
+    dataGovernanceTagsInfo?: {
+      /**
+       * Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/pii" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "123456789012/pii": "sensitive", "myProject/cost_center": "sales"
+       */
+      dataGovernanceTags?: {[key: string]: string};
+    };
+    /**
      * Optional. Data policies attached to this field, used for field-level access control.
      */
     dataPolicies?: Array<IDataPolicyOption>;
+    /**
+     * Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.
+     */
+    dataPolicyList?: IDataPolicyList;
     /**
      * Optional. A SQL expression to specify the [default value] (https://cloud.google.com/bigquery/docs/default-values) for this field.
      */
@@ -6088,12 +6237,7 @@ declare namespace bigquery {
      * Enums for color space, used for processing images in Object Table. See more details at https://www.tensorflow.org/io/tutorials/colorspace.
      */
     colorSpace?:
-      | 'COLOR_SPACE_UNSPECIFIED'
-      | 'RGB'
-      | 'HSV'
-      | 'YIQ'
-      | 'YUV'
-      | 'GRAYSCALE';
+      'COLOR_SPACE_UNSPECIFIED' | 'RGB' | 'HSV' | 'YIQ' | 'YUV' | 'GRAYSCALE';
     /**
      * Subsample ratio of columns for each level for boosted tree models.
      */
@@ -6434,9 +6578,7 @@ declare namespace bigquery {
      * The strategy to determine learn rate for the current iteration.
      */
     learnRateStrategy?:
-      | 'LEARN_RATE_STRATEGY_UNSPECIFIED'
-      | 'LINE_SEARCH'
-      | 'CONSTANT';
+      'LEARN_RATE_STRATEGY_UNSPECIFIED' | 'LINE_SEARCH' | 'CONSTANT';
     /**
      * Type of loss function used during training run.
      */
@@ -6604,11 +6746,7 @@ declare namespace bigquery {
      * Tree construction algorithm for boosted tree models.
      */
     treeMethod?:
-      | 'TREE_METHOD_UNSPECIFIED'
-      | 'AUTO'
-      | 'EXACT'
-      | 'APPROX'
-      | 'HIST';
+      'TREE_METHOD_UNSPECIFIED' | 'AUTO' | 'EXACT' | 'APPROX' | 'HIST';
     /**
      * Smoothing window size for the trend component. When a positive value is specified, a center moving average smoothing is applied on the history trend. When the smoothing window is out of the boundary at the beginning or the end of the trend, the first element or the last element is padded to fill the smoothing window before the average is applied.
      */
@@ -6787,7 +6925,7 @@ declare namespace bigquery {
 
   namespace datasets {
     /**
-     * Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
+     * Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name. # IAM Permissions Requires the `bigquery.datasets.delete` permission on the dataset.
      */
     type IDeleteParams = {
       /**
@@ -6797,7 +6935,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Returns the dataset specified by datasetID.
+     * Returns the dataset specified by datasetID. # IAM Permissions Requires the `bigquery.datasets.get` permission on the dataset.
      */
     type IGetParams = {
       /**
@@ -6811,7 +6949,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Creates a new empty dataset.
+     * Creates a new empty dataset. # IAM Permissions Requires the `bigquery.datasets.create` permission on the project.
      */
     type IInsertParams = {
       /**
@@ -6821,7 +6959,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all datasets in the specified project to which the user has been granted the READER dataset role.
+     * Lists all datasets in the specified project to which the user has been granted the READER dataset role. # IAM Permissions Requires no specific IAM permission(s) to use this method. Results are filtered to only include datasets on which the caller has the `bigquery.datasets.get` permission.
      */
     type IListParams = {
       /**
@@ -6843,7 +6981,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports RFC5789 patch semantics.
+     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports RFC5789 patch semantics. # IAM Permissions Requires the following IAM permission(s) to use this method: - `bigquery.datasets.update` on the dataset. - `bigquery.datasets.get` on the dataset.
      */
     type IPatchParams = {
       /**
@@ -6861,7 +6999,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.
+     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. # IAM Permissions Requires the `bigquery.datasets.update` permission on the dataset.
      */
     type IUpdateParams = {
       /**
@@ -6881,7 +7019,7 @@ declare namespace bigquery {
 
   namespace jobs {
     /**
-     * Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
+     * Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs. # IAM Permissions Requires the `bigquery.jobs.update` permission on the job resource. If the user matches the creator of the job, the `bigquery.jobs.create` permission on the project is required instead.
      */
     type ICancelParams = {
       /**
@@ -6891,7 +7029,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted.
+     * Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted. # IAM Permissions Requires the `bigquery.jobs.delete` permission on the job resource.
      */
     type IDeleteParams = {
       /**
@@ -6901,7 +7039,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.
+     * Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role. # IAM Permissions Requires the `bigquery.jobs.get` permission on the job resource. If the user matches the creator of the job, the `bigquery.jobs.create` permission on the project is required instead.
      */
     type IGetParams = {
       /**
@@ -6911,7 +7049,7 @@ declare namespace bigquery {
     };
 
     /**
-     * RPC to get the results of a query job.
+     * RPC to get the results of a query job. # IAM Permissions Requires the following IAM permission(s) to use this method: - `bigquery.jobs.get` on the job. - `bigquery.tables.getData` on the destination table. If the user matches the creator of the job, the following IAM permission(s) are required instead: - `bigquery.jobs.create` on the project. - `bigquery.tables.getData` on the destination table.
      */
     type IGetQueryResultsParams = {
       /**
@@ -6949,7 +7087,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
+     * Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property. # IAM Permissions Requires no specific IAM permission(s) to use this method. Users are able to list the jobs they created. Additional access is granted based on the following permissions: - Users with the `bigquery.jobs.listAll` permission can list all jobs with all metadata. - Users with the `bigquery.jobs.list` permission can list all jobs, but with redacted information for jobs they did not create.
      */
     type IListParams = {
       /**
@@ -6989,7 +7127,7 @@ declare namespace bigquery {
 
   namespace models {
     /**
-     * Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method.
+     * Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method. # IAM Permissions Requires the `bigquery.models.list` permission on the dataset.
      */
     type IListParams = {
       /**
@@ -7005,7 +7143,7 @@ declare namespace bigquery {
 
   namespace projects {
     /**
-     * RPC to list projects to which the user has been granted any project role. Users of this method are encouraged to consider the [Resource Manager](https://cloud.google.com/resource-manager/docs/) API, which provides the underlying data for this method and has more capabilities.
+     * RPC to list projects to which the user has been granted any project role. Users of this method are encouraged to consider the [Resource Manager](https://cloud.google.com/resource-manager/docs/) API, which provides the underlying data for this method and has more capabilities. # IAM Permissions Requires no specific IAM permission(s) to use this method. The results are filtered to only include projects on which the caller has been granted a project-level role such as a BigQuery predefined IAM role or a basic role such as Viewer or Owner.
      */
     type IListParams = {
       /**
@@ -7021,7 +7159,7 @@ declare namespace bigquery {
 
   namespace routines {
     /**
-     * Gets the specified routine resource by routine ID.
+     * Gets the specified routine resource by routine ID. # IAM Permissions Requires the `bigquery.routines.get` permission on the routine.
      */
     type IGetParams = {
       /**
@@ -7031,7 +7169,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all routines in the specified dataset. Requires the READER dataset role.
+     * Lists all routines in the specified dataset. Requires the READER dataset role. # IAM Permissions Requires the `bigquery.routines.list` permission on the dataset.
      */
     type IListParams = {
       /**
@@ -7055,7 +7193,7 @@ declare namespace bigquery {
 
   namespace rowAccessPolicies {
     /**
-     * Deletes a row access policy.
+     * Deletes a row access policy. # IAM Permissions Requires the following IAM permission(s) on the table: - `bigquery.rowAccessPolicies.delete` - `bigquery.rowAccessPolicies.setIamPolicy`
      */
     type IDeleteParams = {
       /**
@@ -7065,7 +7203,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all row access policies on the specified table.
+     * Lists all row access policies on the specified table. # IAM Permissions Requires the `bigquery.rowAccessPolicies.list` permission on the table.
      */
     type IListParams = {
       /**
@@ -7081,7 +7219,7 @@ declare namespace bigquery {
 
   namespace tabledata {
     /**
-     * List the content of a table in rows.
+     * List the content of a table in rows. # IAM Permissions Requires the `bigquery.tables.getData` permission on the table.
      */
     type IListParams = {
       /**
@@ -7117,7 +7255,7 @@ declare namespace bigquery {
 
   namespace tables {
     /**
-     * Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.
+     * Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table. # IAM Permissions Requires the `bigquery.tables.get` permission on the table.
      */
     type IGetParams = {
       /**
@@ -7128,14 +7266,11 @@ declare namespace bigquery {
        * Optional. Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
        */
       view?:
-        | 'TABLE_METADATA_VIEW_UNSPECIFIED'
-        | 'BASIC'
-        | 'STORAGE_STATS'
-        | 'FULL';
+        'TABLE_METADATA_VIEW_UNSPECIFIED' | 'BASIC' | 'STORAGE_STATS' | 'FULL';
     };
 
     /**
-     * Lists all tables in the specified dataset. Requires the READER dataset role.
+     * Lists all tables in the specified dataset. Requires the READER dataset role. # IAM Permissions Requires the `bigquery.tables.list` permission on the dataset.
      */
     type IListParams = {
       /**
@@ -7149,7 +7284,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports RFC5789 patch semantics.
+     * Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports RFC5789 patch semantics. # IAM Permissions Requires the following IAM permission(s) on the table: - `bigquery.tables.update` - `bigquery.tables.get`
      */
     type IPatchParams = {
       /**
@@ -7159,7 +7294,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing table. The update method replaces the entire Table resource, whereas the patch method only replaces fields that are provided in the submitted Table resource.
+     * Updates information in an existing table. The update method replaces the entire Table resource, whereas the patch method only replaces fields that are provided in the submitted Table resource. # IAM Permissions Requires the `bigquery.tables.update` permission on the table.
      */
     type IUpdateParams = {
       /**

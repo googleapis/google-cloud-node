@@ -16,17 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DatastoreAdminClient } from '@google-cloud/datastore-api';
+import { DatastoreClient } from '@google-cloud/datastore-api';
 
 // check that the client class type name can be used
-function doStuffWithDatastoreAdminClient(client: DatastoreAdminClient) {
+function doStuffWithDatastoreClient(client: DatastoreClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const datastoreAdminClient = new DatastoreAdminClient();
-  doStuffWithDatastoreAdminClient(datastoreAdminClient);
+  const datastoreClient = new DatastoreClient();
+  doStuffWithDatastoreClient(datastoreClient);
 }
 
 main();
