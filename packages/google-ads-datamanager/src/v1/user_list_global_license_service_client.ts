@@ -887,6 +887,10 @@ export class UserListGlobalLicenseServiceClient {
    *   - `<`
    *   - `<=`
    *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(user_list_id, 123, 456)`
+   *
    *   **Unsupported Fields:**
    *
    *   - `name` (use get method instead)
@@ -1046,6 +1050,10 @@ export class UserListGlobalLicenseServiceClient {
    *   - `<`
    *   - `<=`
    *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(user_list_id, 123, 456)`
+   *
    *   **Unsupported Fields:**
    *
    *   - `name` (use get method instead)
@@ -1127,6 +1135,10 @@ export class UserListGlobalLicenseServiceClient {
    *   - `>=`
    *   - `<`
    *   - `<=`
+   *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(user_list_id, 123, 456)`
    *
    *   **Unsupported Fields:**
    *
@@ -1214,6 +1226,10 @@ export class UserListGlobalLicenseServiceClient {
    *   - `>=`
    *   - `<`
    *   - `<=`
+   *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(user_list_id, 123, 456)`
    *
    *   **Unsupported Fields:**
    *
@@ -1387,6 +1403,10 @@ export class UserListGlobalLicenseServiceClient {
    *   - `<`
    *   - `<=`
    *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(user_list_id, 123, 456)`
+   *
    *   **Unsupported Fields:**
    *
    *   - `name` (use get method instead)
@@ -1473,6 +1493,10 @@ export class UserListGlobalLicenseServiceClient {
    *   - `>=`
    *   - `<`
    *   - `<=`
+   *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(user_list_id, 123, 456)`
    *
    *   **Unsupported Fields:**
    *
