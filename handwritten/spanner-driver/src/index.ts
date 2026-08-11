@@ -12,8 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {Client} from './lib/client.js';
+import {ClientConfig, PoolConfig} from './lib/config.js';
 import {DatabaseError} from './lib/errors.js';
-import {ClientConfig} from './lib/config.js';
 import {escapeIdentifier, escapeLiteral} from './lib/pg/utilities.js';
+import {Pool} from './lib/pool.js';
+import {Query} from './lib/query.js';
+import {FieldDef, QueryConfig, QueryResult} from './lib/types.js';
 
-export {DatabaseError, ClientConfig, escapeIdentifier, escapeLiteral};
+export {
+  Client,
+  ClientConfig,
+  DatabaseError,
+  FieldDef,
+  Pool,
+  PoolConfig,
+  Query,
+  QueryConfig,
+  QueryResult,
+  escapeIdentifier,
+  escapeLiteral,
+};

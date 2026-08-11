@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Supported SQL dialects for Google Cloud Spanner.
+ * Supported SQL dialects for Google Spanner.
  * Note: Currently 'pg' (PostgreSQL) dialect is supported.
  */
 export type Dialect = 'pg' | 'googlesql';

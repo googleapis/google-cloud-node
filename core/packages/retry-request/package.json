@@ -1,6 +1,6 @@
 {
   "name": "retry-request",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "Retry a request.",
   "main": "index.js",
   "repository": {
@@ -34,15 +34,15 @@
   },
   "dependencies": {
     "extend": "^3.0.2",
-    "teeny-request": "^10.0.0"
+    "teeny-request": "^11.0.0"
   },
   "devDependencies": {
     "@types/request": "^2.48.13",
     "async": "^3.2.6",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^5.0.0",
-    "jsdoc-region-tag": "^4.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "lodash.range": "^3.2.0",
     "mocha": "^11.1.0",
     "typescript": "5.8.3"

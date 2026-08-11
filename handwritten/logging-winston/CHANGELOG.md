@@ -5,12 +5,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
-## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/logging-winston-v6.0.2...logging-winston-v6.1.0) (2026-07-30)
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/logging-winston-v6.0.2...logging-winston-v7.0.0) (2026-08-04)
 
+
+### ⚠ BREAKING CHANGES
+
+* Update logging-winston to minimum Node version of 22. ([#9050](https://github.com/googleapis/google-cloud-node/issues/9050))
 
 ### Features
 
-* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+* Update logging-winston to minimum Node version of 22. ([#9050](https://github.com/googleapis/google-cloud-node/issues/9050)) ([4c54d73](https://github.com/googleapis/google-cloud-node/commit/4c54d73fe65ca1e60a675bd37a9893ac8830e3eb)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
 
 ## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/logging-winston-v6.0.1...logging-winston-v6.0.2) (2026-05-11)
 

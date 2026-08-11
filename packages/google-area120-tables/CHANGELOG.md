@@ -1,5 +1,21 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v4.2.2...area120-tables-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+
+### Bug Fixes
+
+* Upgrade node auth dependencies in most generated packages to node 22 supported version ([#9053](https://github.com/googleapis/google-cloud-node/issues/9053)) ([128976a](https://github.com/googleapis/google-cloud-node/commit/128976a93ff1d68fb33df730fa3fe7b4dd8de9e0))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v4.2.1...area120-tables-v4.2.2) (2026-05-01)
 
 
