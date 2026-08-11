@@ -16,8 +16,6 @@ import assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch from 'node-fetch';
-import FormData from 'form-data';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
 import * as path from 'path';
