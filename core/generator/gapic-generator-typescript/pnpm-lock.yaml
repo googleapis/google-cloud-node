@@ -28,7 +28,7 @@ dependencies:
     version: 7.6.5
   protobufjs-cli:
     specifier: ^1.2.0
-    version: 1.2.0(protobufjs@7.6.5)
+    version: 1.2.1(protobufjs@7.6.5)
   yargs:
     specifier: ^17.7.2
     version: 17.7.2
@@ -2008,7 +2008,7 @@ packages:
       '@babel/traverse': 7.29.0
       google-gax: 5.0.6
       google-proto-files: 5.0.1
-      protobufjs-cli: 1.2.0(protobufjs@7.6.5)
+      protobufjs-cli: 1.2.1(protobufjs@7.6.5)
       rimraf: 5.0.10
       uglify-js: 3.19.3
       walk-up-path: 3.0.1
@@ -3218,8 +3218,8 @@ packages:
     dependencies:
       protobufjs: 7.6.5
 
-  /protobufjs-cli@1.2.0(protobufjs@7.6.5):
-    resolution: {integrity: sha512-+YvqJEmsmZHGzE5j0tvEzFeHm0sX7pzRFpyj7+GazhkS4Y0r+jgbioVvFxxSWIlPzUel/lxeOnLChBmV8NmyHA==}
+  /protobufjs-cli@1.2.1(protobufjs@7.6.5):
+    resolution: {integrity: sha512-2DePjPlVa3TPmq7qiO8RblAAasOCHLVIGgTFhtLo/e906UanwMfZCPXcPXYZBAB9uhFdU6WzVbXruJF6aM8wDA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     peerDependencies:

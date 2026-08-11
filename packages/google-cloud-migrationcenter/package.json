@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/migrationcenter",
-  "version": "2.2.2",
+  "version": "3.0.0",
   "description": "Migration Center API client for Node.js",
   "repository": {
     "type": "git",

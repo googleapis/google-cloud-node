@@ -14754,6 +14754,7 @@
                             "MEMORY_OPTIMIZED_X4_480_8T": 478547804,
                             "MEMORY_OPTIMIZED_X4_960_12T": 424752410,
                             "MEMORY_OPTIMIZED_X4_960_16T": 424752534,
+                            "NETWORK_OPTIMIZED_C4N": 147027572,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
                             "TYPE_UNSPECIFIED": 437714322
                           }
@@ -17208,6 +17209,11 @@
                     },
                     "DeleteInstanceRequest": {
                       "oneofs": {
+                        "_noGracefulShutdown": {
+                          "oneof": [
+                            "noGracefulShutdown"
+                          ]
+                        },
                         "_requestId": {
                           "oneof": [
                             "requestId"
@@ -17220,6 +17226,13 @@
                           "id": 18257045,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "noGracefulShutdown": {
+                          "type": "bool",
+                          "id": 336255890,
+                          "options": {
+                            "proto3_optional": true
                           }
                         },
                         "project": {
@@ -27518,6 +27531,38 @@
                         }
                       }
                     },
+                    "GetHostRequest": {
+                      "fields": {
+                        "association": {
+                          "type": "string",
+                          "id": 449371265,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetIamPolicyBackendBucketRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
@@ -30502,6 +30547,24 @@
                         }
                       }
                     },
+                    "GetReliabilityRiskRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reliabilityRisk": {
+                          "type": "string",
+                          "id": 340233140,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetReservationBlockRequest": {
                       "oneofs": {
                         "_view": {
@@ -31556,6 +31619,61 @@
                           "id": 367020684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetVersionHostRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "association": {
+                          "type": "string",
+                          "id": 449371265,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "hostsGetVersionRequestResource": {
+                          "type": "HostsGetVersionRequest",
+                          "id": 273373442,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
                           }
                         }
                       }
@@ -35041,6 +35159,203 @@
                         }
                       }
                     },
+                    "Host": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        },
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "aliasLinks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 296963338
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "HostStatus",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "ACTIVE": 314733318,
+                            "CREATING": 455564985,
+                            "DELETING": 528602024,
+                            "STATE_UNSPECIFIED": 470755401,
+                            "UNAVAILABLE": 413756464
+                          }
+                        }
+                      }
+                    },
+                    "HostPhysicalTopology": {
+                      "oneofs": {
+                        "_block": {
+                          "oneof": [
+                            "block"
+                          ]
+                        },
+                        "_cluster": {
+                          "oneof": [
+                            "cluster"
+                          ]
+                        },
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_subBlock": {
+                          "oneof": [
+                            "subBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "block": {
+                          "type": "string",
+                          "id": 93832333,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "cluster": {
+                          "type": "string",
+                          "id": 335221242,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subBlock": {
+                          "type": "string",
+                          "id": 478033358,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "HostRule": {
                       "oneofs": {
                         "_description": {
@@ -35070,6 +35385,136 @@
                         "pathMatcher": {
                           "type": "string",
                           "id": 337813272,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HostStatus": {
+                      "oneofs": {
+                        "_physicalTopology": {
+                          "oneof": [
+                            "physicalTopology"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "physicalTopology": {
+                          "type": "HostPhysicalTopology",
+                          "id": 279778519,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "runningInstances": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 536292350
+                        }
+                      }
+                    },
+                    "HostsGetVersionRequest": {
+                      "fields": {
+                        "sbomSelections": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 69155705
+                        }
+                      },
+                      "nested": {
+                        "SbomSelections": {
+                          "values": {
+                            "UNDEFINED_SBOM_SELECTIONS": 0,
+                            "SBOM_SELECTION_CURRENT": 423856692,
+                            "SBOM_SELECTION_TARGET": 152837462,
+                            "SBOM_SELECTION_UNSPECIFIED": 379615858
+                          }
+                        }
+                      }
+                    },
+                    "HostsListResponse": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "Host",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
                           "options": {
                             "proto3_optional": true
                           }
@@ -40638,6 +41083,7 @@
                             "UNDEFINED_STATUS": 0,
                             "DEPROVISIONING": 428935662,
                             "PENDING": 35394935,
+                            "PENDING_STOP": 362509770,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
                             "RUNNING": 121282975,
@@ -44604,6 +45050,7 @@
                             "UNDEFINED_STATUS": 0,
                             "DEPROVISIONING": 428935662,
                             "PENDING": 35394935,
+                            "PENDING_STOP": 362509770,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
                             "RUNNING": 121282975,
@@ -53409,6 +53856,93 @@
                         }
                       }
                     },
+                    "ListHostsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "association": {
+                          "type": "string",
+                          "id": 449371265,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "ListImagesRequest": {
                       "oneofs": {
                         "_filter": {
@@ -59618,6 +60152,79 @@
                         }
                       }
                     },
+                    "ListReliabilityRisksRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListReservationBlocksRequest": {
                       "oneofs": {
                         "_filter": {
@@ -63747,6 +64354,7 @@
                             "UNDEFINED_INSTANCE_STATUS": 0,
                             "DEPROVISIONING": 428935662,
                             "PENDING": 35394935,
+                            "PENDING_STOP": 362509770,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
                             "RUNNING": 121282975,
@@ -79088,6 +79696,196 @@
                         }
                       }
                     },
+                    "ReliabilityRisk": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_details": {
+                          "oneof": [
+                            "details"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_recommendation": {
+                          "oneof": [
+                            "recommendation"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "details": {
+                          "type": "RiskDetails",
+                          "id": 483979842,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "recommendation": {
+                          "type": "RiskRecommendation",
+                          "id": 45105081,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReliabilityRisksListResponse": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "ReliabilityRisk",
+                          "id": 100526016
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "RemoveAssociationFirewallPolicyRequest": {
                       "oneofs": {
                         "_name": {
@@ -83442,6 +84240,11 @@
                             "scheduling"
                           ]
                         },
+                        "_shutdownDetails": {
+                          "oneof": [
+                            "shutdownDetails"
+                          ]
+                        },
                         "_upcomingMaintenance": {
                           "oneof": [
                             "upcomingMaintenance"
@@ -83480,6 +84283,13 @@
                         "scheduling": {
                           "type": "ResourceStatusScheduling",
                           "id": 386688404,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shutdownDetails": {
+                          "type": "ResourceStatusShutdownDetails",
+                          "id": 15198553,
                           "options": {
                             "proto3_optional": true
                           }
@@ -83688,12 +84498,36 @@
                           "oneof": [
                             "consumedReservation"
                           ]
+                        },
+                        "_consumedReservationBlock": {
+                          "oneof": [
+                            "consumedReservationBlock"
+                          ]
+                        },
+                        "_consumedReservationSubBlock": {
+                          "oneof": [
+                            "consumedReservationSubBlock"
+                          ]
                         }
                       },
                       "fields": {
                         "consumedReservation": {
                           "type": "string",
                           "id": 318474741,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "consumedReservationBlock": {
+                          "type": "string",
+                          "id": 142321091,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "consumedReservationSubBlock": {
+                          "type": "string",
+                          "id": 461540356,
                           "options": {
                             "proto3_optional": true
                           }
@@ -83706,6 +84540,16 @@
                           "oneof": [
                             "availabilityDomain"
                           ]
+                        },
+                        "_gracefulShutdownTimestamp": {
+                          "oneof": [
+                            "gracefulShutdownTimestamp"
+                          ]
+                        },
+                        "_terminationTimestamp": {
+                          "oneof": [
+                            "terminationTimestamp"
+                          ]
                         }
                       },
                       "fields": {
@@ -83714,6 +84558,90 @@
                           "id": 252514344,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "gracefulShutdownTimestamp": {
+                          "type": "string",
+                          "id": 403022375,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "terminationTimestamp": {
+                          "type": "string",
+                          "id": 364180891,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ResourceStatusShutdownDetails": {
+                      "oneofs": {
+                        "_maxDuration": {
+                          "oneof": [
+                            "maxDuration"
+                          ]
+                        },
+                        "_requestTimestamp": {
+                          "oneof": [
+                            "requestTimestamp"
+                          ]
+                        },
+                        "_stopState": {
+                          "oneof": [
+                            "stopState"
+                          ]
+                        },
+                        "_targetState": {
+                          "oneof": [
+                            "targetState"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "maxDuration": {
+                          "type": "Duration",
+                          "id": 39954959,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestTimestamp": {
+                          "type": "string",
+                          "id": 521301862,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "stopState": {
+                          "type": "string",
+                          "id": 67347988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetState": {
+                          "type": "string",
+                          "id": 338978915,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StopState": {
+                          "values": {
+                            "UNDEFINED_STOP_STATE": 0,
+                            "PENDING_STOP": 362509770,
+                            "STOPPING": 350791796
+                          }
+                        },
+                        "TargetState": {
+                          "values": {
+                            "UNDEFINED_TARGET_STATE": 0,
+                            "DELETED": 120962041,
+                            "STOPPED": 444276141
                           }
                         }
                       }
@@ -83896,6 +84824,175 @@
                           "id": 303366577,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RiskDetails": {
+                      "oneofs": {
+                        "_duration": {
+                          "oneof": [
+                            "duration"
+                          ]
+                        },
+                        "_globalDnsInsight": {
+                          "oneof": [
+                            "globalDnsInsight"
+                          ]
+                        },
+                        "_lastUpdateTimestamp": {
+                          "oneof": [
+                            "lastUpdateTimestamp"
+                          ]
+                        },
+                        "_severity": {
+                          "oneof": [
+                            "severity"
+                          ]
+                        },
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "duration": {
+                          "type": "string",
+                          "id": 155471252,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "globalDnsInsight": {
+                          "type": "RiskDetailsGlobalDnsInsight",
+                          "id": 514929638,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "lastUpdateTimestamp": {
+                          "type": "string",
+                          "id": 12338089,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "severity": {
+                          "type": "string",
+                          "id": 404558589,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 3575610,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Severity": {
+                          "values": {
+                            "UNDEFINED_SEVERITY": 0,
+                            "CRITICAL": 50423711,
+                            "HIGH": 2217378,
+                            "LOW": 75572,
+                            "MEDIUM": 122782581,
+                            "SEVERITY_UNSPECIFIED": 304082133
+                          }
+                        },
+                        "Type": {
+                          "values": {
+                            "UNDEFINED_TYPE": 0,
+                            "GLOBAL_DNS": 164472429,
+                            "RISK_TYPE_UNSPECIFIED": 71308546
+                          }
+                        }
+                      }
+                    },
+                    "RiskDetailsGlobalDnsInsight": {
+                      "oneofs": {
+                        "_projectDefaultIsGlobalDns": {
+                          "oneof": [
+                            "projectDefaultIsGlobalDns"
+                          ]
+                        },
+                        "_queryObservationWindow": {
+                          "oneof": [
+                            "queryObservationWindow"
+                          ]
+                        },
+                        "_riskyQueryCount": {
+                          "oneof": [
+                            "riskyQueryCount"
+                          ]
+                        },
+                        "_totalQueryCount": {
+                          "oneof": [
+                            "totalQueryCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "projectDefaultIsGlobalDns": {
+                          "type": "bool",
+                          "id": 366337694,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "queryObservationWindow": {
+                          "type": "string",
+                          "id": 511008826,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "riskyQueryCount": {
+                          "type": "int64",
+                          "id": 351692195,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalQueryCount": {
+                          "type": "int64",
+                          "id": 171936349,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RiskRecommendation": {
+                      "oneofs": {
+                        "_content": {
+                          "oneof": [
+                            "content"
+                          ]
+                        },
+                        "_referenceUrl": {
+                          "oneof": [
+                            "referenceUrl"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 414659705,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "referenceUrl": {
+                          "type": "string",
+                          "id": 527537787,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -88107,6 +89204,11 @@
                             "availabilityDomain"
                           ]
                         },
+                        "_gracefulShutdown": {
+                          "oneof": [
+                            "gracefulShutdown"
+                          ]
+                        },
                         "_hostErrorTimeoutSeconds": {
                           "oneof": [
                             "hostErrorTimeoutSeconds"
@@ -88152,6 +89254,11 @@
                             "preemptible"
                           ]
                         },
+                        "_preemptionNoticeDuration": {
+                          "oneof": [
+                            "preemptionNoticeDuration"
+                          ]
+                        },
                         "_provisioningModel": {
                           "oneof": [
                             "provisioningModel"
@@ -88179,6 +89286,13 @@
                         "availabilityDomain": {
                           "type": "int32",
                           "id": 252514344,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "gracefulShutdown": {
+                          "type": "SchedulingGracefulShutdown",
+                          "id": 226325136,
                           "options": {
                             "proto3_optional": true
                           }
@@ -88251,6 +89365,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "preemptionNoticeDuration": {
+                          "type": "Duration",
+                          "id": 486176437,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "provisioningModel": {
                           "type": "string",
                           "id": 494423,
@@ -88296,6 +89417,36 @@
                             "RESERVATION_BOUND": 293538571,
                             "SPOT": 2552066,
                             "STANDARD": 484642493
+                          }
+                        }
+                      }
+                    },
+                    "SchedulingGracefulShutdown": {
+                      "oneofs": {
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        },
+                        "_maxDuration": {
+                          "oneof": [
+                            "maxDuration"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1018689,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxDuration": {
+                          "type": "Duration",
+                          "id": 39954959,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -97559,6 +98710,11 @@
                             "discardLocalSsd"
                           ]
                         },
+                        "_noGracefulShutdown": {
+                          "oneof": [
+                            "noGracefulShutdown"
+                          ]
+                        },
                         "_requestId": {
                           "oneof": [
                             "requestId"
@@ -97578,6 +98734,13 @@
                           "id": 18257045,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "noGracefulShutdown": {
+                          "type": "bool",
+                          "id": 336255890,
+                          "options": {
+                            "proto3_optional": true
                           }
                         },
                         "project": {
@@ -97807,6 +98970,11 @@
                             "selfLinkWithId"
                           ]
                         },
+                        "_shareSettings": {
+                          "oneof": [
+                            "shareSettings"
+                          ]
+                        },
                         "_state": {
                           "oneof": [
                             "state"
@@ -97942,6 +99110,13 @@
                         "selfLinkWithId": {
                           "type": "string",
                           "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shareSettings": {
+                          "type": "StoragePoolShareSettings",
+                          "id": 266668163,
                           "options": {
                             "proto3_optional": true
                           }
@@ -98617,6 +99792,33 @@
                         "totalProvisionedDiskThroughput": {
                           "type": "int64",
                           "id": 447677830,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "StoragePoolShareSettings": {
+                      "fields": {
+                        "projectMap": {
+                          "keyType": "string",
+                          "type": "StoragePoolShareSettingsProjectConfig",
+                          "id": 134212406
+                        }
+                      }
+                    },
+                    "StoragePoolShareSettingsProjectConfig": {
+                      "oneofs": {
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 177513473,
                           "options": {
                             "proto3_optional": true
                           }
@@ -114710,6 +115912,74 @@
                         }
                       }
                     },
+                    "Hosts": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetHostRequest",
+                          "responseType": "Host",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/zones/{zone}/{association}/hosts/{host}",
+                            "(google.api.method_signature)": "project,zone,association,host"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/zones/{zone}/{association}/hosts/{host}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,association,host"
+                            }
+                          ]
+                        },
+                        "GetVersion": {
+                          "requestType": "GetVersionHostRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "hosts_get_version_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{association}/hosts/{host}/getVersion",
+                            "(google.api.method_signature)": "project,zone,association,host,hosts_get_version_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "hosts_get_version_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{association}/hosts/{host}/getVersion"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,association,host,hosts_get_version_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListHostsRequest",
+                          "responseType": "HostsListResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/zones/{zone}/{association}/hosts",
+                            "(google.api.method_signature)": "project,zone,association"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/zones/{zone}/{association}/hosts"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,association"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "ImageFamilyViews": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -127081,6 +128351,50 @@
                             {
                               "(google.api.http)": {
                                 "get": "/compute/v1/projects/{project}/regions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ReliabilityRisks": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetReliabilityRiskRequest",
+                          "responseType": "ReliabilityRisk",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/reliabilityRisks/{reliability_risk}",
+                            "(google.api.method_signature)": "project,reliability_risk"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/reliabilityRisks/{reliability_risk}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,reliability_risk"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListReliabilityRisksRequest",
+                          "responseType": "ReliabilityRisksListResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/reliabilityRisks",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/reliabilityRisks"
                               }
                             },
                             {
@@ -148719,6 +150033,7 @@
                             "MEMORY_OPTIMIZED_X4_480_8T": 478547804,
                             "MEMORY_OPTIMIZED_X4_960_12T": 424752410,
                             "MEMORY_OPTIMIZED_X4_960_16T": 424752534,
+                            "NETWORK_OPTIMIZED_C4N": 147027572,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
                             "TYPE_UNSPECIFIED": 437714322
                           }
@@ -215705,6 +217020,11 @@
                             "name"
                           ]
                         },
+                        "_networkTier": {
+                          "oneof": [
+                            "networkTier"
+                          ]
+                        },
                         "_pdpScope": {
                           "oneof": [
                             "pdpScope"
@@ -215797,6 +217117,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "networkTier": {
+                          "type": "string",
+                          "id": 517397843,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "pdpScope": {
                           "type": "string",
                           "id": 524264785,
@@ -215844,6 +217171,15 @@
                             "UNDEFINED_IPV6_ACCESS_TYPE": 0,
                             "EXTERNAL": 35607499,
                             "INTERNAL": 279295677
+                          }
+                        },
+                        "NetworkTier": {
+                          "values": {
+                            "UNDEFINED_NETWORK_TIER": 0,
+                            "FIXED_STANDARD": 310464328,
+                            "PREMIUM": 399530551,
+                            "STANDARD": 484642493,
+                            "STANDARD_OVERRIDES_FIXED_STANDARD": 465847234
                           }
                         },
                         "PdpScope": {
@@ -216074,6 +217410,11 @@
                             "name"
                           ]
                         },
+                        "_networkTier": {
+                          "oneof": [
+                            "networkTier"
+                          ]
+                        },
                         "_parentPrefix": {
                           "oneof": [
                             "parentPrefix"
@@ -216192,6 +217533,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "networkTier": {
+                          "type": "string",
+                          "id": 517397843,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "parentPrefix": {
                           "type": "string",
                           "id": 15233991,
@@ -216255,6 +217603,15 @@
                             "EXTERNAL_IPV6_FORWARDING_RULE_CREATION": 398684356,
                             "EXTERNAL_IPV6_SUBNETWORK_CREATION": 61198284,
                             "INTERNAL_IPV6_SUBNETWORK_CREATION": 153239834
+                          }
+                        },
+                        "NetworkTier": {
+                          "values": {
+                            "UNDEFINED_NETWORK_TIER": 0,
+                            "FIXED_STANDARD": 310464328,
+                            "PREMIUM": 399530551,
+                            "STANDARD": 484642493,
+                            "STANDARD_OVERRIDES_FIXED_STANDARD": 465847234
                           }
                         },
                         "Purpose": {
@@ -223791,6 +225148,11 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 338216508
+                        },
+                        "networkTopologyIds": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 133972825
                         }
                       }
                     },
@@ -223843,6 +225205,11 @@
                             "availabilityDomain"
                           ]
                         },
+                        "_gracefulShutdownTimestamp": {
+                          "oneof": [
+                            "gracefulShutdownTimestamp"
+                          ]
+                        },
                         "_terminationTimestamp": {
                           "oneof": [
                             "terminationTimestamp"
@@ -223853,6 +225220,13 @@
                         "availabilityDomain": {
                           "type": "int32",
                           "id": 252514344,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "gracefulShutdownTimestamp": {
+                          "type": "string",
+                          "id": 403022375,
                           "options": {
                             "proto3_optional": true
                           }
@@ -227353,6 +228727,11 @@
                             "bfdStatus"
                           ]
                         },
+                        "_depreferenced": {
+                          "oneof": [
+                            "depreferenced"
+                          ]
+                        },
                         "_enableIpv4": {
                           "oneof": [
                             "enableIpv4"
@@ -227453,6 +228832,13 @@
                         "bfdStatus": {
                           "type": "BfdStatus",
                           "id": 395631729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "depreferenced": {
+                          "type": "bool",
+                          "id": 182429640,
                           "options": {
                             "proto3_optional": true
                           }
@@ -239340,6 +240726,11 @@
                             "selfLinkWithId"
                           ]
                         },
+                        "_shareSettings": {
+                          "oneof": [
+                            "shareSettings"
+                          ]
+                        },
                         "_state": {
                           "oneof": [
                             "state"
@@ -239475,6 +240866,13 @@
                         "selfLinkWithId": {
                           "type": "string",
                           "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shareSettings": {
+                          "type": "StoragePoolShareSettings",
+                          "id": 266668163,
                           "options": {
                             "proto3_optional": true
                           }
@@ -240150,6 +241548,33 @@
                         "totalProvisionedDiskThroughput": {
                           "type": "int64",
                           "id": 447677830,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "StoragePoolShareSettings": {
+                      "fields": {
+                        "projectMap": {
+                          "keyType": "string",
+                          "type": "StoragePoolShareSettingsProjectConfig",
+                          "id": 134212406
+                        }
+                      }
+                    },
+                    "StoragePoolShareSettingsProjectConfig": {
+                      "oneofs": {
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 177513473,
                           "options": {
                             "proto3_optional": true
                           }
@@ -278973,6 +280398,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -279082,6 +280511,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -279136,6 +280569,79 @@
                 "generateOmittedAsInternal": {
                   "type": "bool",
                   "id": 2
+                }
+              }
+            },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
                 }
               }
             },
@@ -279288,6 +280794,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -279482,6 +280990,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -279757,7 +281269,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -279817,7 +281332,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -279859,6 +281376,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -279931,6 +281452,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -280046,6 +281571,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -280125,6 +281654,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -280144,6 +281677,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -280182,6 +281719,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -280227,6 +281768,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -280253,6 +281798,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -280287,6 +281836,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -280428,8 +281981,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -280441,6 +281994,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -280518,7 +282082,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -280537,6 +282102,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }

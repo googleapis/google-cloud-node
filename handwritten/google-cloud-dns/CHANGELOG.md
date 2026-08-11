@@ -4,7 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
-## [5.3.3](https://github.com/googleapis/google-cloud-node/compare/dns-v5.3.2...dns-v5.3.3) (2026-08-04)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dns-v5.3.2...dns-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-dns to minimum Node version of 22. ([#9047](https://github.com/googleapis/google-cloud-node/issues/9047))
+
+### Features
+
+* Update google-cloud-dns to minimum Node version of 22. ([#9047](https://github.com/googleapis/google-cloud-node/issues/9047)) ([99a46a1](https://github.com/googleapis/google-cloud-node/commit/99a46a1f949e556e861f567ae5f645ecc00fd0db)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
 
 
 ### Bug Fixes

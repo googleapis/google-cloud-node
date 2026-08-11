@@ -3275,6 +3275,9 @@ export class DataformClient {
    *   The request object that will be sent.
    * @param {string} request.workspace
    *   Required. The workspace's name.
+   * @param {google.cloud.dataform.v1.PipelineConfig} [request.pipelineConfig]
+   *   Optional. The pipeline options which defines the pipeline type and path
+   *   within the Git repository.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
