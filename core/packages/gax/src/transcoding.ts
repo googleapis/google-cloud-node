@@ -127,8 +127,9 @@ export function buildQueryStringComponents(
     if (Array.isArray(request[key])) {
       for (const value of request[key] as JSONObject[]) {
         resultList.push(
-          `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
+          `${prefix}${encodeWithoutSlashes(key, key)}=${encodeWithoutSlashes(
             value.toString(),
+            key,
           )}`,
         );
       }
@@ -138,8 +139,9 @@ export function buildQueryStringComponents(
       );
     } else {
       resultList.push(
-        `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
+        `${prefix}${encodeWithoutSlashes(key, key)}=${encodeWithoutSlashes(
           request[key] === null ? 'null' : request[key]!.toString(),
+          key,
         )}`,
       );
     }
@@ -147,17 +149,32 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
-export function encodeWithSlashes(str: string): string {
+export function encodeWithSlashes(
+  str: string,
+  propertyName = 'resource ID',
+): string {
+  const segments = str.split('/');
+  if (segments.some(segment => segment === '.' || segment === '..')) {
+    throw new Error(
+      `Value for ${propertyName} must not contain segments that are exactly . or .. .`,
+    );
+  }
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~/0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
     .join('');
 }
 
-export function encodeWithoutSlashes(str: string): string {
+export function encodeWithoutSlashes(
+  str: string,
+  propertyName = 'resource ID',
+): string {
+  if (str === '.' || str === '..') {
+    throw new Error(`Invalid value ${str} for ${propertyName}`);
+  }
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
     .join('');
 }
 
@@ -168,9 +185,10 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
+  propertyName?: string,
 ): string | undefined {
   if (!pattern || pattern === '*') {
-    return encodeWithSlashes(fieldValue);
+    return encodeWithoutSlashes(fieldValue, propertyName);
   }
 
   if (!pattern.includes('*') && pattern !== fieldValue) {
@@ -186,11 +204,39 @@ export function applyPattern(
       '$',
   );
 
-  if (!fieldValue.match(regex)) {
+  const match = fieldValue.match(regex);
+  if (!match) {
     return undefined;
   }
 
-  return encodeWithoutSlashes(fieldValue);
+  // Extract and validate wildcards in the pattern
+  const wildcardRegex = /\*\*|\*/g;
+  let wcMatch;
+  const wildcards: string[] = [];
+  while ((wcMatch = wildcardRegex.exec(pattern)) !== null) {
+    wildcards.push(wcMatch[0]);
+  }
+
+  const capturedGroups = match.slice(1);
+  for (let i = 0; i < capturedGroups.length; i++) {
+    const groupVal = capturedGroups[i];
+    const wcType = wildcards[i];
+    const propName = propertyName || 'resource ID';
+    if (wcType === '*') {
+      if (groupVal === '.' || groupVal === '..') {
+        throw new Error(`Invalid value ${fieldValue} for ${propName}`);
+      }
+    } else if (wcType === '**') {
+      const segments = groupVal.split('/');
+      if (segments.some(seg => seg === '.' || seg === '..')) {
+        throw new Error(
+          `Value for ${propName} must not contain segments that are exactly . or .. .`,
+        );
+      }
+    }
+  }
+
+  return encodeWithSlashes(fieldValue, propertyName);
 }
 
 function fieldToCamelCase(field: string): string {
@@ -224,6 +270,7 @@ export function match(
     const appliedPattern = applyPattern(
       pattern,
       fieldValue === null ? 'null' : fieldValue!.toString(),
+      camelCasedField,
     );
     if (appliedPattern === undefined) {
       return undefined;

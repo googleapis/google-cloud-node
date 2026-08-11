@@ -366,7 +366,7 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20',
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
     );
   });
 
@@ -380,8 +380,68 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithoutSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20',
     );
+  });
+
+  describe('REST fallback security guidelines tests', () => {
+    it('throws error for invalid single asterisk values ("." and "..")', () => {
+      assert.throws(() => {
+        encodeWithoutSlashes('.', 'mySingleParam');
+      }, /Invalid value \. for mySingleParam/);
+
+      assert.throws(() => {
+        encodeWithoutSlashes('..', 'mySingleParam');
+      }, /Invalid value \.\. for mySingleParam/);
+
+      // default propertyName
+      assert.throws(() => {
+        encodeWithoutSlashes('.');
+      }, /Invalid value \. for resource ID/);
+    });
+
+    it('throws error for unsafe double asterisk path traversals', () => {
+      assert.throws(() => {
+        encodeWithSlashes('a/b/../..', 'myDoubleParam');
+      }, /Value for myDoubleParam must not contain segments that are exactly \. or \.\. \./);
+
+      assert.throws(() => {
+        encodeWithSlashes('a/..', 'myDoubleParam');
+      }, /Value for myDoubleParam must not contain segments that are exactly \. or \.\. \./);
+
+      assert.throws(() => {
+        encodeWithSlashes('..', 'myDoubleParam');
+      }, /Value for myDoubleParam must not contain segments that are exactly \. or \.\. \./);
+
+      assert.throws(() => {
+        encodeWithSlashes('.', 'myDoubleParam');
+      }, /Value for myDoubleParam must not contain segments that are exactly \. or \.\. \./);
+    });
+
+    it('correctly percent-encodes unsafe URL characters', () => {
+      assert.strictEqual(encodeWithoutSlashes('foo$bar?baz#qux'), 'foo%24bar%3Fbaz%23qux');
+      assert.strictEqual(encodeWithSlashes('foo$bar?baz#qux'), 'foo%24bar%3Fbaz%23qux');
+    });
+
+    it('validates single asterisk and double asterisk path templates within match/transcode', () => {
+      // test with single asterisk templates matching dot/two-dots in applyPattern
+      assert.throws(() => {
+        applyPattern('projects/*', 'projects/.', 'project');
+      }, /Invalid value projects\/\. for project/);
+
+      assert.throws(() => {
+        applyPattern('projects/*', 'projects/..', 'project');
+      }, /Invalid value projects\/\.\. for project/);
+
+      // test with double asterisk templates matching segments with dots in applyPattern
+      assert.throws(() => {
+        applyPattern('projects/*/locations/**', 'projects/p1/locations/..', 'location');
+      }, /Value for location must not contain segments that are exactly \. or \.\. \./);
+
+      assert.throws(() => {
+        applyPattern('projects/*/locations/**', 'projects/p1/locations/us/..', 'location');
+      }, /Value for location must not contain segments that are exactly \. or \.\. \./);
+    });
   });
 
   it('applyPattern', () => {
