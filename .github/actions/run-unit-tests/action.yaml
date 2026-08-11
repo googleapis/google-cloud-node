@@ -26,6 +26,7 @@ runs:
       shell: bash
       run: bash ci/run_conditional_tests.sh --strict
       env:
+        RUN_TESTS_MODE: RUN_UNIT_TESTS
         BUILD_TYPE: presubmit
         TEST_TYPE: units
         SHARD_TOTAL: ${{ inputs.shard-total }}

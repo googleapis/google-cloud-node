@@ -49,6 +49,10 @@ if [[ "${STRICT}" == "true" || "${STRICT}" == "1" ]]; then
         echo "Error: STRICT mode requires GIT_DIFF_ARG to be set." >&2
         exit 1
     fi
+    if [[ -z "${RUN_TESTS_MODE}" ]]; then
+        echo "Error: STRICT mode requires RUN_TESTS_MODE to be set." >&2
+        exit 1
+    fi
     set +e
     git diff --quiet ${GIT_DIFF_ARG}
     diff_status=$?
@@ -79,6 +83,20 @@ else
             # Run everything.
             GIT_DIFF_ARG=""
         fi
+    fi
+fi
+
+if [[ -n "${RUN_TESTS_MODE}" ]]; then
+    if [[ "${RUN_TESTS_MODE}" != "CALCULATE_SHARD_MATRIX" && "${RUN_TESTS_MODE}" != "RUN_UNIT_TESTS" ]]; then
+        echo "Error: RUN_TESTS_MODE must be either CALCULATE_SHARD_MATRIX or RUN_UNIT_TESTS." >&2
+        exit 1
+    fi
+fi
+
+if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
+    if [[ -z "${SHARD_TOTAL}" || -z "${SHARD_INDEX}" ]]; then
+        echo "Error: SHARD_TOTAL and SHARD_INDEX must be set when RUN_TESTS_MODE is RUN_UNIT_TESTS." >&2
+        exit 1
     fi
 fi
 
@@ -240,8 +258,8 @@ for subdir in ${subdirs[@]}; do
         fi
     done
 done
-# If DRY_RUN_SHARDS is set, output dynamic matrix values to GitHub Actions and exit
-if [[ "${DRY_RUN_SHARDS}" == "true" ]]; then
+# If RUN_TESTS_MODE is CALCULATE_SHARD_MATRIX, output dynamic matrix values to GitHub Actions and exit
+if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
     count=${#test_dirs[@]}
     if [[ $count -gt 15 ]]; then
         matrix="[0, 1, 2, 3, 4]"
