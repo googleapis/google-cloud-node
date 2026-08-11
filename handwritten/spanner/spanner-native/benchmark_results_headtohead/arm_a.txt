@@ -1,0 +1,58 @@
+====================================================================================================
+Arm arm-a: go; p95 latency improvement versus paired Node.js baseline
+{
+  "hostname": "irahul-test",
+  "machineShape": "n1-standard-1",
+  "vcpuCount": 1,
+  "platform": "linux-x64",
+  "nodeVersion": "v20.20.2",
+  "goVersion": "go version go1.25.3 linux/amd64",
+  "rustVersion": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "credentialProvider": "vm-metadata",
+  "armCommitSha": "cacdec97d08f6755e4830cd54ff10410ea150f06",
+  "armTreeCleanAtBuild": "true",
+  "harnessCommitSha": "e79ce61983a2ad78104decd39adb06db40c619ef",
+  "harnessTrackedTreeClean": true,
+  "targetDatabase": "projects/span-cloud-testing/instances/irahul-load-test/databases/db",
+  "queryTemplate": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT {rows}",
+  "directPath": {
+    "enabled": false,
+    "enableVariablesAbsentAtProcessStart": true,
+    "googleCloudDisableDirectPath": "true",
+    "disableDirectPath": "true",
+    "transport": "Go explicit GFE grpc.Dial path"
+  }
+}
+====================================================================================================
+
+rows=1 concurrency=1: warmup
+run=1 js.p95=14.59ms native.p95=7.93ms improvement=45.66%
+run=2 js.p95=13.53ms native.p95=8.04ms improvement=40.59%
+run=3 js.p95=15.50ms native.p95=8.36ms improvement=46.04%
+
+rows=1 concurrency=16: warmup
+run=1 js.p95=43.06ms native.p95=9.90ms improvement=77.01%
+run=2 js.p95=41.07ms native.p95=10.54ms improvement=74.32%
+run=3 js.p95=41.49ms native.p95=9.93ms improvement=76.07%
+
+rows=100 concurrency=1: warmup
+run=1 js.p95=17.29ms native.p95=8.96ms improvement=48.20%
+run=2 js.p95=15.71ms native.p95=8.97ms improvement=42.90%
+run=3 js.p95=14.88ms native.p95=8.67ms improvement=41.75%
+
+rows=100 concurrency=16: warmup
+run=1 js.p95=65.06ms native.p95=15.50ms improvement=76.18%
+run=2 js.p95=59.03ms native.p95=15.54ms improvement=73.67%
+run=3 js.p95=63.35ms native.p95=15.33ms improvement=75.81%
+
+rows=1000 concurrency=1: warmup
+run=1 js.p95=33.47ms native.p95=14.94ms improvement=55.38%
+run=2 js.p95=34.02ms native.p95=15.06ms improvement=55.73%
+run=3 js.p95=34.93ms native.p95=14.56ms improvement=58.32%
+
+rows=1000 concurrency=16: warmup
+run=1 js.p95=419.04ms native.p95=81.19ms improvement=80.62%
+run=2 js.p95=417.46ms native.p95=80.87ms improvement=80.63%
+run=3 js.p95=427.85ms native.p95=80.67ms improvement=81.15%
+
+Saved /home/irahul/spanner-rust-headtohead-b5/benchmark_results_headtohead_n1/arm_a.json

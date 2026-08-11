@@ -1,0 +1,39 @@
+hostname=irahul-test
+machine_shape=n1-standard-1
+vcpu_count=1
+arch=x86_64
+credential_provider=VM default service account via metadata for Node.js baseline, Go A, Go B2, and Rust
+credential_identity=rain-service-account@span-cloud-testing.iam.gserviceaccount.com
+credential_environment_variables=absent
+well_known_adc=absent
+gcloud_on_benchmark_path=absent
+direct_path=off for every arm
+direct_path_enable_variables=absent at every process start
+direct_path_disable_variables=true inside every process
+node_version=v20.20.2
+go_version=go1.25.3 linux/amd64
+rust_version=rustc 1.97.1 (8bab26f4f 2026-07-14)
+harness_commit=e79ce61983a2ad78104decd39adb06db40c619ef
+arm_a_commit=cacdec97d08f6755e4830cd54ff10410ea150f06
+arm_b2_commit=e79ce61983a2ad78104decd39adb06db40c619ef
+rust_commit=e79ce61983a2ad78104decd39adb06db40c619ef
+
+binary_sha256:
+51cd1e760a0d68f3bfd5b323a80f5c14fad3531fe8dfb092f943cf7f63ffce59  /home/irahul/spanner-rust-headtohead-b5/.build-artifacts/arm-a/spanner_go.node
+57fb9ebd89cea87a89519ed65d085f8bb6891f734fbe01eb5c334358d8572567  /home/irahul/spanner-rust-headtohead-b5/.build-artifacts/arm-a/libspanner_go.so
+7dc7c1c51f08a6d47fb87ea1ec39862ed18b47309ca58954a601a3ab005c711f  /home/irahul/spanner-rust-headtohead-b5/.build-artifacts/b2/spanner_go.node
+cb1e861acf53168b2cd81ffb60296d6b3c03d85d4d6fe384d16d353bb0b00b29  /home/irahul/spanner-rust-headtohead-b5/.build-artifacts/b2/libspanner_go.so
+5c441fa279eb59db171ccc8ae9601ad6618c3002cc32eb1d01325b9a05c8da4d  /home/irahul/spanner-rust-headtohead-b5/.build-artifacts/rust/spanner-native.linux-x64-gnu.node
+
+correctness:
+rows=1 concurrency=1 bytes=92 sha256=1f25fc96e0c67fd697822d2d8c491a3f5a53f431730bbc95f7f07dac4f925e4e identical=arm-a,arm-b2,rust
+rows=1 concurrency=16 bytes=1457 sha256=12550c44d57726bc2ff4df497211b80184657a91378ef2ddab976ded4aa8493c identical=arm-a,arm-b2,rust
+rows=100 concurrency=1 bytes=8993 sha256=642c12c025c33b96a9ad3faf2200f611540ccba0a77f6bfd450ea80ed43ba0f8 identical=arm-a,arm-b2,rust
+rows=100 concurrency=16 bytes=143873 sha256=3cf444714b2adba90a9551ab53b4d9fe802e400345ac904817a6ebb415889823 identical=arm-a,arm-b2,rust
+rows=1000 concurrency=1 bytes=90893 sha256=2cc04a5a783efb98658f395d2ab9be61c5c34d28e56066290173b8bb3c288250 identical=arm-a,arm-b2,rust
+rows=1000 concurrency=16 bytes=1454273 sha256=73fab9bad057c5a9d10bba2cede4481cf0e5860c8ef8748f5fe84da2aa2fdc05 identical=arm-a,arm-b2,rust
+
+result_sha256:
+343ae4e0d8b7e9a322d8d48982a374f4e3644f5f034f1e68e1ba70d9396f6dd7  /home/irahul/spanner-rust-headtohead-b5/benchmark_results_headtohead_n1/arm_a.json
+7776b5f8ea20292fc509743616f840cc7b954bae7381300e64f00183b187440f  /home/irahul/spanner-rust-headtohead-b5/benchmark_results_headtohead_n1/arm_b2.json
+cfc709652bc478d8082c2fe141a06455805940482e1c2a1c5330a4bd12a3a40d  /home/irahul/spanner-rust-headtohead-b5/benchmark_results_headtohead_n1/rust.json
