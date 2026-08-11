@@ -452,7 +452,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -470,7 +470,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -946,7 +946,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
