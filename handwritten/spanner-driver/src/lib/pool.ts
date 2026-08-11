@@ -168,8 +168,7 @@ export class Pool extends EventEmitter {
       const isExpiredByLifetime =
         this.options.maxLifetimeSeconds > 0 &&
         meta !== undefined &&
-        (Date.now() - meta.createdAt) / 1000 >=
-          this.options.maxLifetimeSeconds;
+        (Date.now() - meta.createdAt) / 1000 >= this.options.maxLifetimeSeconds;
 
       if (isExpiredByLifetime || !item.client.isConnected) {
         this.removeClient(item.client);
@@ -199,10 +198,7 @@ export class Pool extends EventEmitter {
       });
 
       try {
-        await this.connectAndInit(
-          client,
-          this.options.connectionTimeoutMillis,
-        );
+        await this.connectAndInit(client, this.options.connectionTimeoutMillis);
 
         // Re-check if pool has been closed while waiting for connection or onConnect
         if (this.isEnding || this.isEnded) {
@@ -377,7 +373,10 @@ export class Pool extends EventEmitter {
             this.onIdleTimeout(client);
           }, this.options.idleTimeoutMillis);
 
-          if (this.options.allowExitOnIdle && typeof idleTimer.unref === 'function') {
+          if (
+            this.options.allowExitOnIdle &&
+            typeof idleTimer.unref === 'function'
+          ) {
             idleTimer.unref();
           }
         }

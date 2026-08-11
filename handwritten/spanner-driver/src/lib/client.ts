@@ -17,8 +17,17 @@ import {ClientConfig, resolveDsn} from './config.js';
 import {DEFAULT_DIALECT, Dialect} from './constants.js';
 import {enrichError} from './errors.js';
 import {Query, QueryCallback} from './query.js';
-import {QueryConfig, QueryResult} from './types.js';
-import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
+import {
+  getDefaultTypeOverrides,
+  ITypeOverrides,
+  QueryConfig,
+  QueryResult,
+} from './types.js';
+import {
+  dispatchQueryError,
+  encodeParameters,
+  normalizeQueryArgs,
+} from './utilities.js';
 
 /**
  * Task entry stored in single-connection query execution queue.
@@ -44,6 +53,9 @@ export class Client extends EventEmitter {
 
   /** Active SQL dialect (defaults to `'pg'`). */
   readonly dialect: Dialect = DEFAULT_DIALECT;
+
+  /** Type parser override registry configured on this client. */
+  readonly types?: ITypeOverrides;
 
   /** Boolean indicating whether connection has been established. */
   public isConnected = false;
@@ -80,6 +92,7 @@ export class Client extends EventEmitter {
     this.config =
       typeof config === 'string' ? {connectionString: config} : config || {};
     this.dsn = this.config.connectionString || resolveDsn(this.config);
+    this.types = this.config.types;
   }
 
   /**
@@ -213,7 +226,12 @@ export class Client extends EventEmitter {
             await this.connect();
           }
 
-          // TODO(PR 4 - Native CGO Bridge): Execute query through native CGO bridge (spannerlib-node).
+          // Resolve effective type overrides in priority order: Query-level > Client-level > Dialect default
+          const effectiveTypes = this.getEffectiveTypeOverrides(query.types);
+          const _encodedValues = encodeParameters(query.values, effectiveTypes);
+          void _encodedValues;
+
+          // TODO(PR 6 - Native CGO Bridge): Execute query through native CGO bridge (spannerlib-node).
           // Both `command` and `txStatus` ('I', 'T', or 'E') will be returned by the native backend driver.
           const result: QueryResult<R> = {
             rows: [],
@@ -308,6 +326,18 @@ export class Client extends EventEmitter {
       return;
     }
     return this._doEnd();
+  }
+
+  /**
+   * Resolves the active type overrides registry in priority order:
+   * 1. Query-level override (`QueryConfig.types`)
+   * 2. Client-level override (`ClientConfig.types`)
+   * 3. Dialect default global registry (`getDefaultTypeOverrides(this.dialect)`)
+   */
+  private getEffectiveTypeOverrides(
+    queryTypes?: ITypeOverrides,
+  ): ITypeOverrides {
+    return queryTypes || this.types || getDefaultTypeOverrides(this.dialect);
   }
 
   private async _doEnd(): Promise<void> {

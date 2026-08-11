@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {EventEmitter} from 'events';
-import {QueryConfig} from './types.js';
+import {ITypeOverrides, QueryConfig} from './types.js';
 
 /**
  * Node callback function signature receiving `(err, result)`.
@@ -44,7 +44,7 @@ export class Query<T = unknown> extends EventEmitter {
   public rowMode?: 'array' | 'object';
 
   /** Optional custom type parser override registry. */
-  public types?: unknown;
+  public types?: ITypeOverrides;
 
   /** Internal promise backing Thenable async/await integration. */
   private promise!: Promise<T>;

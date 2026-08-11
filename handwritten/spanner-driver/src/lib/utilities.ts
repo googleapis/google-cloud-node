@@ -13,7 +13,13 @@
 // limitations under the License.
 
 import {Query, QueryCallback} from './query.js';
-import {QueryConfig, QueryResult} from './types.js';
+import {
+  FieldDef,
+  ITypeOverrides,
+  QueryConfig,
+  QueryResult,
+  TypeParser,
+} from './types.js';
 
 /**
  * Normalizes query arguments for `Client.query` and `Pool.query`, resolving
@@ -74,4 +80,63 @@ export function dispatchQueryError<T>(
       }
     });
   }
+}
+
+/**
+ * Decodes a raw database result row using the active type overrides registry or pre-resolved parsers.
+ *
+ * @template R - Result row type (object or array).
+ * @param rawRow - Raw column values array from database driver.
+ * @param fields - Column metadata descriptors (names and OIDs).
+ * @param typeOverridesOrParsers - Active type overrides registry or pre-resolved parser functions array.
+ * @param rowMode - Formatting mode ('object' or 'array').
+ * @returns Formatted JavaScript row object or array.
+ */
+export function decodeRow<R = Record<string, unknown>>(
+  rawRow: (string | null | undefined)[],
+  fields: FieldDef[],
+  typeOverridesOrParsers: ITypeOverrides | TypeParser[],
+  rowMode?: 'array' | 'object',
+): R {
+  const parsers: TypeParser[] = Array.isArray(typeOverridesOrParsers)
+    ? typeOverridesOrParsers
+    : fields.map(f => typeOverridesOrParsers.getTypeParser(f.dataTypeID));
+
+  if (rowMode === 'array') {
+    return rawRow.map((val, idx) => {
+      const parser = parsers[idx];
+      return val === null || val === undefined
+        ? null
+        : parser
+          ? parser(val)
+          : val;
+    }) as unknown as R;
+  }
+
+  const rowObj: Record<string, unknown> = {};
+  for (let i = 0; i < fields.length; i++) {
+    const field = fields[i];
+    const val = rawRow[i];
+    const parser = parsers[i];
+    rowObj[field.name] =
+      val === null || val === undefined ? null : parser ? parser(val) : val;
+  }
+  return rowObj as unknown as R;
+}
+
+/**
+ * Encodes query parameter values using the active type overrides registry.
+ *
+ * @param values - Positional parameter values passed to query.
+ * @param typeOverrides - Active type overrides registry.
+ * @returns Serialized parameter values array.
+ */
+export function encodeParameters(
+  values: unknown[] | undefined,
+  typeOverrides: ITypeOverrides,
+): unknown[] | undefined {
+  if (!values || !Array.isArray(values)) {
+    return values;
+  }
+  return values.map(val => typeOverrides.encodeValue(val));
 }

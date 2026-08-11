@@ -47,14 +47,22 @@ describe('Pool Class', () => {
     assert.strictEqual(pool.idleCount, 0);
 
     await client.release();
-    assert.strictEqual(client.isConnected, true, 'Client remains connected in idle pool');
+    assert.strictEqual(
+      client.isConnected,
+      true,
+      'Client remains connected in idle pool',
+    );
     assert.strictEqual(pool.idleCount, 1);
     assert.strictEqual(pool.totalCount, 1);
 
     await pool.end();
     assert.strictEqual(pool.idleCount, 0);
     assert.strictEqual(pool.totalCount, 0);
-    assert.strictEqual(client.isConnected, false, 'Client is closed when pool ends');
+    assert.strictEqual(
+      client.isConnected,
+      false,
+      'Client is closed when pool ends',
+    );
   });
 
   it('should reuse idle clients from the pool on subsequent connect() calls', async () => {
@@ -67,7 +75,11 @@ describe('Pool Class', () => {
     await client1.release();
 
     const client2 = await pool.connect();
-    assert.strictEqual(client1, client2, 'Should reuse the same client instance');
+    assert.strictEqual(
+      client1,
+      client2,
+      'Should reuse the same client instance',
+    );
     await client2.release();
     await pool.end();
   });
@@ -100,7 +112,11 @@ describe('Pool Class', () => {
     await p3;
 
     assert.strictEqual(c3Acquired, true);
-    assert.strictEqual(c3Client, c1, 'Queued acquirer should receive released client');
+    assert.strictEqual(
+      c3Client,
+      c1,
+      'Queued acquirer should receive released client',
+    );
     assert.strictEqual(pool.waitingCount, 0);
 
     await c2.release();
@@ -124,7 +140,10 @@ describe('Pool Class', () => {
       await pool.connect();
       assert.fail('Should have timed out waiting for connection');
     } catch (err: unknown) {
-      assert.strictEqual((err as Error).message, 'timeout exceeded when trying to connect');
+      assert.strictEqual(
+        (err as Error).message,
+        'timeout exceeded when trying to connect',
+      );
     }
 
     await c1.release();
@@ -148,7 +167,10 @@ describe('Pool Class', () => {
       await pool.connect();
       assert.fail('Should have timed out establishing connection');
     } catch (err: unknown) {
-      assert.strictEqual((err as Error).message, 'timeout exceeded when trying to connect');
+      assert.strictEqual(
+        (err as Error).message,
+        'timeout exceeded when trying to connect',
+      );
     } finally {
       Client.prototype.connect = origConnect;
     }
@@ -286,7 +308,11 @@ describe('Pool Class', () => {
     await p2;
 
     assert.strictEqual(waiterResolved, true);
-    assert.notStrictEqual(newClient, c1, 'Should instantiate a fresh new Client instance');
+    assert.notStrictEqual(
+      newClient,
+      c1,
+      'Should instantiate a fresh new Client instance',
+    );
     assert.strictEqual(newClient?.isConnected, true);
     assert.strictEqual(pool.waitingCount, 0);
     assert.strictEqual(pool.totalCount, 1);
@@ -311,8 +337,15 @@ describe('Pool Class', () => {
     c.emit('error', new Error('Background connection dropped'));
 
     assert.ok(receivedErr);
-    assert.strictEqual((receivedErr as Error).message, 'Background connection dropped');
-    assert.strictEqual(pool.totalCount, 0, 'Dead client should be removed from pool');
+    assert.strictEqual(
+      (receivedErr as Error).message,
+      'Background connection dropped',
+    );
+    assert.strictEqual(
+      pool.totalCount,
+      0,
+      'Dead client should be removed from pool',
+    );
 
     await pool.end();
   });
@@ -327,7 +360,11 @@ describe('Pool Class', () => {
     const c = await pool.connect();
     // Should not throw or crash uncaught exception and should remove dead client
     c.emit('error', new Error('Background silent drop'));
-    assert.strictEqual(pool.totalCount, 0, 'Dead client should be removed from pool');
+    assert.strictEqual(
+      pool.totalCount,
+      0,
+      'Dead client should be removed from pool',
+    );
 
     await pool.end();
   });
@@ -349,7 +386,11 @@ describe('Pool Class', () => {
     // Second and third release calls should safely no-op
     await c.release();
     await c.release();
-    assert.strictEqual(pool.idleCount, 1, 'idleCount must not duplicate client');
+    assert.strictEqual(
+      pool.idleCount,
+      1,
+      'idleCount must not duplicate client',
+    );
     assert.strictEqual(pool.totalCount, 1);
 
     await pool.end();
@@ -387,7 +428,11 @@ describe('Pool Class', () => {
     assert.strictEqual(c1, c1Again);
 
     await c1Again.release();
-    assert.strictEqual(pool.idleCount, 0, 'Client should be destroyed after 2 uses');
+    assert.strictEqual(
+      pool.idleCount,
+      0,
+      'Client should be destroyed after 2 uses',
+    );
     assert.strictEqual(pool.totalCount, 0);
     assert.strictEqual(c1.isConnected, false);
 
@@ -406,7 +451,11 @@ describe('Pool Class', () => {
     await new Promise(r => setTimeout(r, 60));
     await c1.release();
 
-    assert.strictEqual(pool.idleCount, 0, 'Client should be destroyed due to maxLifetimeSeconds');
+    assert.strictEqual(
+      pool.idleCount,
+      0,
+      'Client should be destroyed due to maxLifetimeSeconds',
+    );
     assert.strictEqual(pool.totalCount, 0);
     assert.strictEqual(c1.isConnected, false);
 
@@ -433,8 +482,16 @@ describe('Pool Class', () => {
 
     // Connect again -> should detect expired lifetime on checkout, evict c1, and create fresh c2
     const c2 = await pool.connect();
-    assert.notStrictEqual(c1, c2, 'Should create a fresh client rather than reusing expired idle client');
-    assert.strictEqual(c1.isConnected, false, 'Expired client should have been closed');
+    assert.notStrictEqual(
+      c1,
+      c2,
+      'Should create a fresh client rather than reusing expired idle client',
+    );
+    assert.strictEqual(
+      c1.isConnected,
+      false,
+      'Expired client should have been closed',
+    );
     assert.strictEqual(c2.isConnected, true);
     assert.strictEqual(pool.totalCount, 1);
 
@@ -474,7 +531,10 @@ describe('Pool Class', () => {
       await pool.connect();
       assert.fail('Should have thrown onConnect error');
     } catch (err: unknown) {
-      assert.strictEqual((err as Error).message, 'onConnect initialization failed');
+      assert.strictEqual(
+        (err as Error).message,
+        'onConnect initialization failed',
+      );
     }
 
     assert.strictEqual(pool.totalCount, 0);
@@ -628,7 +688,11 @@ describe('Pool Class', () => {
     }
 
     // Client should NOT be destroyed; it should be returned to idle pool
-    assert.strictEqual(pool.idleCount, 1, 'Client should be returned to idle pool');
+    assert.strictEqual(
+      pool.idleCount,
+      1,
+      'Client should be returned to idle pool',
+    );
     assert.strictEqual(pool.totalCount, 1);
 
     await pool.end();
@@ -854,7 +918,11 @@ describe('Pool Class', () => {
     assert.strictEqual(pool.totalCount, 1);
     await pool.end();
 
-    assert.strictEqual(queryFinished, true, 'pool.end() must wait for active in-flight client to finish');
+    assert.strictEqual(
+      queryFinished,
+      true,
+      'pool.end() must wait for active in-flight client to finish',
+    );
     assert.strictEqual(pool.totalCount, 0);
   });
 
@@ -887,7 +955,10 @@ describe('Pool Class', () => {
     await p2;
 
     assert.strictEqual(waiterRejected, true);
-    assert.strictEqual(waiterErrorMsg, 'Cannot acquire client from ending pool');
+    assert.strictEqual(
+      waiterErrorMsg,
+      'Cannot acquire client from ending pool',
+    );
     assert.strictEqual(pool.waitingCount, 0);
   });
 
@@ -911,9 +982,21 @@ describe('Pool Class', () => {
     idleClient.emit('error', new Error('Connection reset by peer'));
 
     // Broken client must be removed from the pool
-    assert.strictEqual(pool.idleCount, 0, 'Broken idle client should be purged');
-    assert.strictEqual(pool.totalCount, 0, 'Broken idle client should be removed from totalCount');
-    assert.strictEqual(idleClient.isConnected, false, 'Broken client should be closed');
+    assert.strictEqual(
+      pool.idleCount,
+      0,
+      'Broken idle client should be purged',
+    );
+    assert.strictEqual(
+      pool.totalCount,
+      0,
+      'Broken idle client should be removed from totalCount',
+    );
+    assert.strictEqual(
+      idleClient.isConnected,
+      false,
+      'Broken client should be closed',
+    );
 
     await pool.end();
   });
@@ -942,7 +1025,10 @@ describe('Pool Class', () => {
         await connectPromise;
         assert.fail('Should not allow client acquisition from an ending pool');
       } catch (err: unknown) {
-        assert.strictEqual((err as Error).message, 'Cannot acquire client from ending pool');
+        assert.strictEqual(
+          (err as Error).message,
+          'Cannot acquire client from ending pool',
+        );
       }
     } finally {
       Client.prototype.connect = originalConnect;
@@ -982,8 +1068,8 @@ describe('Pool Class', () => {
 
     try {
       const query = pool.query('SELECT 1');
-      query.on('fields', fields => receivedFields.push(fields));
-      query.on('row', row => receivedRows.push(row));
+      void query.on('fields', fields => receivedFields.push(fields));
+      void query.on('row', row => receivedRows.push(row));
 
       await query;
 

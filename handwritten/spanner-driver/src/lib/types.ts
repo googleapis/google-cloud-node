@@ -12,14 +12,67 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {DEFAULT_DIALECT, Dialect} from './constants.js';
+import {types as defaultPgTypes} from './pg/types.js';
+
+/**
+ * Type signature for parsing raw wire strings into JavaScript types.
+ */
+export type TypeParser<T = unknown> = (value: string) => T;
+
+/**
+ * Returns the default type overrides registry for the given SQL dialect.
+ *
+ * @param dialect - SQL dialect ('pg' or 'googlesql'). Defaults to 'pg'.
+ * @returns Default type overrides registry implementing ITypeOverrides.
+ */
+export function getDefaultTypeOverrides(
+  dialect: Dialect = DEFAULT_DIALECT,
+): ITypeOverrides {
+  switch (dialect) {
+    case 'pg':
+    default:
+      return defaultPgTypes;
+  }
+}
+
+/**
+ * Dialect-agnostic type codec interface for decoding query results and encoding parameters.
+ */
+export interface ITypeOverrides {
+  /**
+   * Retrieves parser function for a given column type ID (numeric OID for PG, string type for GoogleSQL).
+   */
+  getTypeParser(typeId: number | string, format?: string): TypeParser;
+
+  /**
+   * Registers a custom type parser function.
+   */
+  setTypeParser(
+    typeId: number | string,
+    formatOrFn: string | TypeParser,
+    fn?: TypeParser,
+  ): void;
+
+  /**
+   * Decodes a raw wire string value into a JavaScript type.
+   */
+  decodeValue(val: string | null | undefined, typeId: number | string): unknown;
+
+  /**
+   * Encodes a JavaScript parameter value into wire format.
+   */
+  encodeValue(val: unknown): unknown;
+}
+
 /**
  * Field metadata descriptor for query result set columns.
  */
 export interface FieldDef {
   /** Column name returned in query result set. */
   name: string;
-  /** PostgreSQL Object Identifier (OID) data type code. */
-  dataTypeID: number;
+  /** Column data type code (PostgreSQL numeric OID or GoogleSQL string descriptor). */
+  dataTypeID: number | string;
 }
 
 /**
@@ -53,5 +106,5 @@ export interface QueryConfig {
    */
   rowMode?: 'array' | 'object';
   /** Custom type parser registry hook for overriding OID data type decoding. */
-  types?: unknown;
+  types?: ITypeOverrides;
 }
