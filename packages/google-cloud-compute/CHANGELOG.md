@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.0.0...compute-v7.1.0) (2026-08-10)
+
+
+### Features
+
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
 ## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.15.0...compute-v7.0.0) (2026-08-04)
 
 
