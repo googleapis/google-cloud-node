@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.31.1
+version: v0.32.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 62da249e76b878fa8d667a0d7bfa4dc33d790cb8
-    sha256: abd8967d4827cb1c849ee49cf9f22c3acb0a498018684361fa690b2922c781b3
+    commit: fc62df08979faf46d3c4d7eec30c57e6046a29f1
+    sha256: c80127b908fe6dad563e81f3118e2b601f27e32011ad49a10eb89282a42f3c69
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -37,6 +37,9 @@ tools:
       version: 7.5.8
     - name: protobufjs-cli
       version: 1.2.0
+  protoc:
+    version: "33.2"
+    sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 default:
   keep:
     - librarian.js
@@ -184,7 +187,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.28.0
+    version: 0.29.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -222,7 +225,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.0.0
+    version: 7.1.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -660,12 +663,12 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.0.0
+    version: 7.1.0
     apis:
       - path: google/cloud/compute/v1
       - path: google/cloud/compute/v1beta
@@ -742,7 +745,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-databasecenter
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/cloud/databasecenter/v1beta
     copyright_year: "2026"
@@ -778,7 +781,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -967,7 +970,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
@@ -1951,7 +1954,7 @@ libraries:
           path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/iam/v3
       - path: google/iam/v2

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {Client} from './lib/client.js';
-import {ClientConfig} from './lib/config.js';
+import {ClientConfig, PoolConfig} from './lib/config.js';
 import {DatabaseError} from './lib/errors.js';
 import {escapeIdentifier, escapeLiteral} from './lib/pg/utilities.js';
 import {Pool} from './lib/pool.js';
@@ -26,6 +26,7 @@ export {
   DatabaseError,
   FieldDef,
   Pool,
+  PoolConfig,
   Query,
   QueryConfig,
   QueryResult,
