@@ -545,6 +545,11 @@
                 "getRemoteTransportProfile"
               ]
             },
+            "ParseFromActivationKey": {
+              "methods": [
+                "parseFromActivationKey"
+              ]
+            },
             "GetTransport": {
               "methods": [
                 "getTransport"
@@ -592,6 +597,11 @@
             "GetRemoteTransportProfile": {
               "methods": [
                 "getRemoteTransportProfile"
+              ]
+            },
+            "ParseFromActivationKey": {
+              "methods": [
+                "parseFromActivationKey"
               ]
             },
             "GetTransport": {

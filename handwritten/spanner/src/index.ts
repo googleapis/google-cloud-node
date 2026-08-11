@@ -61,7 +61,9 @@ import {
   GoogleError,
   ClientOptions,
 } from 'google-gax';
-import {google, google as instanceAdmin} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
+import instanceAdmin = protos.google;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {
@@ -2453,7 +2455,6 @@ export {MutationSet};
  * @property {constructor} SpannerClient
  *   Reference to {@link v1.SpannerClient}
  */
-import * as protos from '../protos/protos';
 import IInstanceConfig = instanceAdmin.spanner.admin.instance.v1.IInstanceConfig;
 import {RunTransactionOptions} from './transaction-runner';
 export {v1, protos};

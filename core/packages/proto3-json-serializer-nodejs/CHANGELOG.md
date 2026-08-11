@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/proto3-json-serializer-v4.0.0...proto3-json-serializer-v4.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/proto3-json-serializer-v3.0.6...proto3-json-serializer-v4.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update proto3-json-serializer-nodejs to minimum Node version of 22. ([#9001](https://github.com/googleapis/google-cloud-node/issues/9001))
+
+### Features
+
+* Update proto3-json-serializer-nodejs to minimum Node version of 22. ([#9001](https://github.com/googleapis/google-cloud-node/issues/9001)) ([a74f04b](https://github.com/googleapis/google-cloud-node/commit/a74f04b4d174270b6c77909d39538ac3298b6a44)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [3.0.6](https://github.com/googleapis/google-cloud-node/compare/proto3-json-serializer-v3.0.5...proto3-json-serializer-v3.0.6) (2026-07-23)
 
 

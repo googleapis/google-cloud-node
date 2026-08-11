@@ -27,7 +27,8 @@ import * as bu from '../src/backup';
 import {GetMetadataResponse} from '../src/backup';
 import {grpc} from 'google-gax';
 import {CLOUD_RESOURCE_HEADER} from '../src/common';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import EncryptionType = google.spanner.admin.database.v1.CreateBackupEncryptionConfig.EncryptionType;
 
 let promisified = false;

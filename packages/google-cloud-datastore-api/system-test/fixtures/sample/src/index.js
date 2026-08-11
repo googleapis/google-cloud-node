@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const admin = require('@google-cloud/datastore-api');
+const datastore = require('@google-cloud/datastore-api');
 
 function main() {
-  const datastoreAdminClient = new admin.DatastoreAdminClient();
+  const datastoreClient = new datastore.DatastoreClient();
 }
 
 main();
