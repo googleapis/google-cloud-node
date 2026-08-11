@@ -82,8 +82,10 @@
   "peerDependencies": {
     "bunyan": "*"
   },
+  "pnpm": { "overrides": { "yargs": "^17.7.2" } },
   "overrides": {
-    "whatwg-url": "^14.0.0"
+    "whatwg-url": "^14.0.0",
+    "yargs": "^17.7.2"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-bunyan"
 }
