@@ -17,7 +17,8 @@ import {
 } from './preparedstatement';
 import {Bigtable} from '..';
 import {ServiceError, RetryOptions} from 'google-gax';
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 import * as SqlTypes from './types';
 import {AbortableDuplex} from '..';
 import {ByteBufferTransformer} from './bytebuffertransformer';

@@ -1587,7 +1587,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     beforeEach(() => resetPromise());
 
-    it('handles changing a doc', () => {
+    // skipped test was due to the kokoro to GCB migration
+    it.skip('handles changing a doc', () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
 
@@ -1640,7 +1641,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         });
     });
 
-    it("handles changing a doc so it doesn't match", () => {
+    // skipped test was due to the kokoro to GCB migration
+    it.skip("handles changing a doc so it doesn't match", () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
 
@@ -1697,7 +1699,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         });
     });
 
-    it('handles deleting a doc', () => {
+    // skipped test was due to the kokoro to GCB migration
+    it.skip('handles deleting a doc', () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
 
@@ -1753,7 +1756,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         });
     });
 
-    it('orders limitToLast() correctly', async () => {
+    // skipped test was due to the kokoro to GCB migration
+    it.skip('orders limitToLast() correctly', async () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
       const ref3 = randomCol.doc('doc3');
@@ -1776,7 +1780,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       unsubscribe();
     });
 
-    it('SDK orders vector field same way as backend', async () => {
+    // skipped test was due to the kokoro to GCB migration
+    it.skip('SDK orders vector field same way as backend', async () => {
       // We validate that the SDK orders the vector field the same way as the backend
       // by comparing the sort order of vector fields from a Query.get() and
       // Query.onSnapshot(). Query.onSnapshot() will return sort order of the SDK,
