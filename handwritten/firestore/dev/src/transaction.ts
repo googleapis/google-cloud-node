@@ -784,6 +784,15 @@ export class Transaction implements firestore.Transaction {
           return r.transaction;
         });
 
+        // Nothing awaits `_transactionIdPromise` until a subsequent read, a
+        // commit, or a rollback. When the first read is the operation that
+        // fails, `rollback()` returns early for read-only transactions and never
+        // awaits it, and a read-write transaction can leave it rejected across a
+        // macrotask boundary. Node then reports an unhandled rejection, which
+        // terminates the process under the default `--unhandled-rejections=throw`.
+        // Observe the rejection here; awaiters still see it.
+        this._transactionIdPromise.catch(() => {});
+
         return resultPromise.then(r => r.result);
       }
     }
