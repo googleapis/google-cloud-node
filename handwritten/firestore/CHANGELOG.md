@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.7.1...firestore-v9.0.0) (2026-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **firestore:** update minimum Node version to 22 ([#9103](https://github.com/googleapis/google-cloud-node/issues/9103))
+
+### Features
+
+* **firestore:** Decouple handwritten sdk wrapper from embedded gapic clients ([#8928](https://github.com/googleapis/google-cloud-node/issues/8928)) ([9067c54](https://github.com/googleapis/google-cloud-node/commit/9067c54b9373750acf976a4ba5f30ab3d41f6196))
+* **firestore:** Update minimum Node version to 22 ([#9103](https://github.com/googleapis/google-cloud-node/issues/9103)) ([c244311](https://github.com/googleapis/google-cloud-node/commit/c244311061dc88451ebd9dba868db9e9d0fab2d0))
+
 ## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.7.0...firestore-v8.7.1) (2026-08-04)
 
 
