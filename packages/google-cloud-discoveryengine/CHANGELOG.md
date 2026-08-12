@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.9.0...discoveryengine-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.8.0...discoveryengine-v2.9.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.7.0...discoveryengine-v2.8.0) (2026-06-25)
 
 

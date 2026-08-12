@@ -1851,6 +1851,106 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
+    describe('adRule', async () => {
+      const fakePath = '/rendered/path/adRule';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_rule: 'adRuleValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.adRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adRulePath', () => {
+        const result = client.adRulePath('networkCodeValue', 'adRuleValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adRulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdRuleName', () => {
+        const result = client.matchNetworkCodeFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdRuleFromAdRuleName', () => {
+        const result = client.matchAdRuleFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'adRuleValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('adSpot', async () => {
+      const fakePath = '/rendered/path/adSpot';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_spot: 'adSpotValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.adSpotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adSpotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adSpotPath', () => {
+        const result = client.adSpotPath('networkCodeValue', 'adSpotValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdSpotName', () => {
+        const result = client.matchNetworkCodeFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdSpotFromAdSpotName', () => {
+        const result = client.matchAdSpotFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'adSpotValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('adUnit', async () => {
       const fakePath = '/rendered/path/adUnit';
       const expectedParameters = {
@@ -2160,6 +2260,59 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
         assert.strictEqual(result, 'browserLanguageValue');
         assert(
           (client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('cdnConfig', async () => {
+      const fakePath = '/rendered/path/cdnConfig';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        cdn_config: 'cdnConfigValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.cdnConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cdnConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cdnConfigPath', () => {
+        const result = client.cdnConfigPath(
+          'networkCodeValue',
+          'cdnConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCdnConfigName', () => {
+        const result = client.matchNetworkCodeFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCdnConfigFromCdnConfigName', () => {
+        const result = client.matchCdnConfigFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'cdnConfigValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -2582,6 +2735,109 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
         assert.strictEqual(result, 'contentLabelValue');
         assert(
           (client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creative', async () => {
+      const fakePath = '/rendered/path/creative';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative: 'creativeValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativePath', () => {
+        const result = client.creativePath('networkCodeValue', 'creativeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeName', () => {
+        const result = client.matchNetworkCodeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromCreativeName', () => {
+        const result = client.matchCreativeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeSet', async () => {
+      const fakePath = '/rendered/path/creativeSet';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_set: 'creativeSetValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativeSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeSetPath', () => {
+        const result = client.creativeSetPath(
+          'networkCodeValue',
+          'creativeSetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeSetName', () => {
+        const result = client.matchNetworkCodeFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeSetFromCreativeSetName', () => {
+        const result = client.matchCreativeSetFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'creativeSetValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3271,6 +3527,59 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
         assert.strictEqual(result, 'linkedDeviceValue');
         assert(
           (client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('liveStream', async () => {
+      const fakePath = '/rendered/path/liveStream';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        live_stream: 'liveStreamValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.liveStreamPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.liveStreamPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('liveStreamPath', () => {
+        const result = client.liveStreamPath(
+          'networkCodeValue',
+          'liveStreamValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLiveStreamName', () => {
+        const result = client.matchNetworkCodeFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLiveStreamFromLiveStreamName', () => {
+        const result = client.matchLiveStreamFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'liveStreamValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -4161,6 +4470,164 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
+    describe('slate', async () => {
+      const fakePath = '/rendered/path/slate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        slate: 'slateValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.slatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.slatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('slatePath', () => {
+        const result = client.slatePath('networkCodeValue', 'slateValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.slatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSlateName', () => {
+        const result = client.matchNetworkCodeFromSlateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSlateFromSlateName', () => {
+        const result = client.matchSlateFromSlateName(fakePath);
+        assert.strictEqual(result, 'slateValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('suggestedAdUnit', async () => {
+      const fakePath = '/rendered/path/suggestedAdUnit';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        suggested_ad_unit: 'suggestedAdUnitValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.suggestedAdUnitPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.suggestedAdUnitPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('suggestedAdUnitPath', () => {
+        const result = client.suggestedAdUnitPath(
+          'networkCodeValue',
+          'suggestedAdUnitValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSuggestedAdUnitName', () => {
+        const result = client.matchNetworkCodeFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSuggestedAdUnitFromSuggestedAdUnitName', () => {
+        const result =
+          client.matchSuggestedAdUnitFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'suggestedAdUnitValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('targetingPreset', async () => {
+      const fakePath = '/rendered/path/targetingPreset';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        targeting_preset: 'targetingPresetValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.targetingPresetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.targetingPresetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('targetingPresetPath', () => {
+        const result = client.targetingPresetPath(
+          'networkCodeValue',
+          'targetingPresetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromTargetingPresetName', () => {
+        const result = client.matchNetworkCodeFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTargetingPresetFromTargetingPresetName', () => {
+        const result =
+          client.matchTargetingPresetFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'targetingPresetValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('taxonomyCategory', async () => {
       const fakePath = '/rendered/path/taxonomyCategory';
       const expectedParameters = {
@@ -4263,6 +4730,70 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
         assert.strictEqual(result, 'teamValue');
         assert(
           (client.pathTemplates.teamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('thirdPartyCompany', async () => {
+      const fakePath = '/rendered/path/thirdPartyCompany';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        third_party_company: 'thirdPartyCompanyValue',
+      };
+      const client =
+        new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.thirdPartyCompanyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.thirdPartyCompanyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('thirdPartyCompanyPath', () => {
+        const result = client.thirdPartyCompanyPath(
+          'networkCodeValue',
+          'thirdPartyCompanyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchNetworkCodeFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchThirdPartyCompanyFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchThirdPartyCompanyFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'thirdPartyCompanyValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

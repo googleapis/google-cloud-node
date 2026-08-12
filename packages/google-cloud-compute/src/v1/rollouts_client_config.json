@@ -20,6 +20,11 @@
         }
       },
       "methods": {
+        "Advance": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Cancel": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
@@ -38,6 +43,16 @@
         "List": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "Pause": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "Resume": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }

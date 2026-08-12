@@ -38,7 +38,7 @@ import * as gapicConfig from './quota_controller_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  [Google Quota Control API](/service-control/overview)
+ *  [Google Quota Control API](https://cloud.google.com/service-control/overview)
  *
  *  Allows clients to allocate and release quota against a [managed
  *  service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
@@ -383,7 +383,8 @@ export class QuotaControllerClient {
    *   Name of the service as specified in the service configuration. For example,
    *   `"pubsub.googleapis.com"`.
    *
-   *   See {@link protos.google.api.Service|google.api.Service} for the definition of a service name.
+   *   See {@link protos.google.api.Service|google.api.Service} for the definition of a
+   *   service name.
    * @param {google.api.servicecontrol.v1.QuotaOperation} request.allocateOperation
    *   Operation that describes the quota allocation.
    * @param {string} request.serviceConfigId

@@ -8,16 +8,16 @@
     "!test/"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "mocha --recursive --timeout 240000"
   },
   "dependencies": {
-    "@google-cloud/automl": "^5.0.0",
-    "@google-cloud/text-to-speech": "^6.0.0",
-    "@google-cloud/translate": "^9.4.2",
-    "@google-cloud/vision": "^5.0.0",
+    "@google-cloud/automl": "^6.0.0",
+    "@google-cloud/text-to-speech": "^7.0.0",
+    "@google-cloud/translate": "^10.0.1",
+    "@google-cloud/vision": "^6.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {

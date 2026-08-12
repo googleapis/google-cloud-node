@@ -2476,6 +2476,88 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('folderLocationAccessPolicies', async () => {
+      const fakePath = '/rendered/path/folderLocationAccessPolicies';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+        access_policy: 'accessPolicyValue',
+      };
+      const client =
+        new principalaccessboundarypoliciesModule.v3.PrincipalAccessBoundaryPoliciesClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.folderLocationAccessPoliciesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderLocationAccessPoliciesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderLocationAccessPoliciesPath', () => {
+        const result = client.folderLocationAccessPoliciesPath(
+          'folderValue',
+          'locationValue',
+          'accessPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationAccessPoliciesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderLocationAccessPoliciesName', () => {
+        const result =
+          client.matchFolderFromFolderLocationAccessPoliciesName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFolderLocationAccessPoliciesName', () => {
+        const result =
+          client.matchLocationFromFolderLocationAccessPoliciesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAccessPolicyFromFolderLocationAccessPoliciesName', () => {
+        const result =
+          client.matchAccessPolicyFromFolderLocationAccessPoliciesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('folderLocationPolicyBindings', async () => {
       const fakePath = '/rendered/path/folderLocationPolicyBindings';
       const expectedParameters = {
@@ -2665,6 +2747,92 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       });
     });
 
+    describe('organizationLocationAccessPolicies', async () => {
+      const fakePath = '/rendered/path/organizationLocationAccessPolicies';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        access_policy: 'accessPolicyValue',
+      };
+      const client =
+        new principalaccessboundarypoliciesModule.v3.PrincipalAccessBoundaryPoliciesClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.organizationLocationAccessPoliciesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationAccessPoliciesPath', () => {
+        const result = client.organizationLocationAccessPoliciesPath(
+          'organizationValue',
+          'locationValue',
+          'accessPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationAccessPoliciesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationAccessPoliciesName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationAccessPoliciesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationAccessPoliciesName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationAccessPoliciesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAccessPolicyFromOrganizationLocationAccessPoliciesName', () => {
+        const result =
+          client.matchAccessPolicyFromOrganizationLocationAccessPoliciesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('organizationLocationPolicyBindings', async () => {
       const fakePath = '/rendered/path/organizationLocationPolicyBindings';
       const expectedParameters = {
@@ -2827,6 +2995,88 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         assert(
           (
             client.pathTemplates.principalAccessBoundaryPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationAccessPolicies', async () => {
+      const fakePath = '/rendered/path/projectLocationAccessPolicies';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        access_policy: 'accessPolicyValue',
+      };
+      const client =
+        new principalaccessboundarypoliciesModule.v3.PrincipalAccessBoundaryPoliciesClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationAccessPoliciesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAccessPoliciesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAccessPoliciesPath', () => {
+        const result = client.projectLocationAccessPoliciesPath(
+          'projectValue',
+          'locationValue',
+          'accessPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationAccessPoliciesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationAccessPoliciesName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAccessPoliciesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationAccessPoliciesName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAccessPoliciesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAccessPoliciesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAccessPolicyFromProjectLocationAccessPoliciesName', () => {
+        const result =
+          client.matchAccessPolicyFromProjectLocationAccessPoliciesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAccessPoliciesPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

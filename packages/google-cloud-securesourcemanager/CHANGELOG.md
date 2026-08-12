@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.11.0...securesourcemanager-v0.12.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.10.0...securesourcemanager-v0.11.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.9.1...securesourcemanager-v0.10.0) (2026-06-16)
 
 

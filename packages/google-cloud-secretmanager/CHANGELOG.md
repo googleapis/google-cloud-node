@@ -1,5 +1,23 @@
 # Changelog
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.3.0...secret-manager-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.2.0...secret-manager-v6.3.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.1.3...secret-manager-v6.2.0) (2026-06-16)
 
 

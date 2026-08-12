@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.7.0...kms-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.6.0...kms-v5.7.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.5.1...kms-v5.6.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/kms-v5.5.0...kms-v5.5.1) (2026-06-01)
 
 

@@ -1,7 +1,7 @@
 module.exports = {
   hooks: {
     readPackage(pkg, context) {
-      // Check if this package has yargs as a dependency or devDependency
+      // Override yargs for Node >= 24 to prevent ESM scope require errors
       if (pkg.dependencies && pkg.dependencies.yargs) {
         mutateYargs(pkg.dependencies, pkg.name, 'dependencies', context);
       }
@@ -22,3 +22,4 @@ function mutateYargs(deps, pkgName, depType, context) {
     deps.yargs = '18.0.0';
   }
 }
+

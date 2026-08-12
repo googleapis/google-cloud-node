@@ -160,7 +160,7 @@ describe('MessageStream', () => {
   before(() => {
     MessageStream = proxyquire('../src/message-stream.js', {
       stream: {PassThrough: FakePassThrough},
-      './v1/subscriber_client_config.json': FAKE_CLIENT_CONFIG,
+      './v1-old/subscriber_client_config.json': FAKE_CLIENT_CONFIG,
     }).MessageStream;
   });
 

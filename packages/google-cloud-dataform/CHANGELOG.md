@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v3.0.0...dataform-v3.1.0) (2026-08-10)
+
+
+### Features
+
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.5.0...dataform-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.4.0...dataform-v2.5.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.3.0...dataform-v2.4.0) (2026-06-25)
 
 

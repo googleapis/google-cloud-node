@@ -21,7 +21,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const common = require('./common-grpc/service-object');
 import {promisifyAll} from '@google-cloud/promisify';
-import * as extend from 'extend';
 import * as r from 'teeny-request';
 import {
   Snapshot,
@@ -29,7 +28,8 @@ import {
   PartitionedDml,
   TimestampBounds,
 } from './transaction';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {
   Database,
   CreateSessionCallback,
@@ -250,7 +250,7 @@ export class Session extends common.GrpcServiceObject {
             return;
           }
 
-          extend(this, session);
+          Object.assign(this, session);
           callback(null, this, apiResponse);
         });
       },

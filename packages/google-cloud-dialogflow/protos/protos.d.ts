@@ -71638,9 +71638,6 @@ export namespace google {
 
                         /** TurnInput virtualAgentParameters */
                         virtualAgentParameters?: (google.protobuf.IStruct|null);
-
-                        /** TurnInput toolResponses */
-                        toolResponses?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses|null);
                     }
 
                     /** Represents a TurnInput. */
@@ -71663,9 +71660,6 @@ export namespace google {
 
                         /** TurnInput virtualAgentParameters. */
                         public virtualAgentParameters?: (google.protobuf.IStruct|null);
-
-                        /** TurnInput toolResponses. */
-                        public toolResponses?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses|null);
 
                         /** TurnInput mainContent. */
                         public mainContent?: ("text"|"intent"|"event");
@@ -71746,215 +71740,6 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace TurnInput {
-
-                        /** Properties of a ToolResponse. */
-                        interface IToolResponse {
-
-                            /** ToolResponse id */
-                            id?: (string|null);
-
-                            /** ToolResponse tool */
-                            tool?: (string|null);
-
-                            /** ToolResponse response */
-                            response?: (google.protobuf.IStruct|null);
-                        }
-
-                        /** Represents a ToolResponse. */
-                        class ToolResponse implements IToolResponse {
-
-                            /**
-                             * Constructs a new ToolResponse.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse);
-
-                            /** ToolResponse id. */
-                            public id: string;
-
-                            /** ToolResponse tool. */
-                            public tool: string;
-
-                            /** ToolResponse response. */
-                            public response?: (google.protobuf.IStruct|null);
-
-                            /**
-                             * Creates a new ToolResponse instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns ToolResponse instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse;
-
-                            /**
-                             * Encodes the specified ToolResponse message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.verify|verify} messages.
-                             * @param message ToolResponse message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified ToolResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.verify|verify} messages.
-                             * @param message ToolResponse message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a ToolResponse message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns ToolResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse;
-
-                            /**
-                             * Decodes a ToolResponse message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns ToolResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse;
-
-                            /**
-                             * Verifies a ToolResponse message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a ToolResponse message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns ToolResponse
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse;
-
-                            /**
-                             * Creates a plain object from a ToolResponse message. Also converts values to other types if specified.
-                             * @param message ToolResponse
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this ToolResponse to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for ToolResponse
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        /** Properties of a ToolResponses. */
-                        interface IToolResponses {
-
-                            /** ToolResponses toolResponses */
-                            toolResponses?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse[]|null);
-                        }
-
-                        /** Represents a ToolResponses. */
-                        class ToolResponses implements IToolResponses {
-
-                            /**
-                             * Constructs a new ToolResponses.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses);
-
-                            /** ToolResponses toolResponses. */
-                            public toolResponses: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse[];
-
-                            /**
-                             * Creates a new ToolResponses instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns ToolResponses instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses;
-
-                            /**
-                             * Encodes the specified ToolResponses message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.verify|verify} messages.
-                             * @param message ToolResponses message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified ToolResponses message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.verify|verify} messages.
-                             * @param message ToolResponses message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a ToolResponses message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns ToolResponses
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses;
-
-                            /**
-                             * Decodes a ToolResponses message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns ToolResponses
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses;
-
-                            /**
-                             * Verifies a ToolResponses message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a ToolResponses message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns ToolResponses
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses;
-
-                            /**
-                             * Creates a plain object from a ToolResponses message. Also converts values to other types if specified.
-                             * @param message ToolResponses
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this ToolResponses to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for ToolResponses
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
                     }
 
                     /** Properties of an Input. */
@@ -72084,9 +71869,6 @@ export namespace google {
 
                     /** BidiStreamingAnalyzeContentResponse turnComplete */
                     turnComplete?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ITurnComplete|null);
-
-                    /** BidiStreamingAnalyzeContentResponse toolCalls */
-                    toolCalls?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls|null);
                 }
 
                 /** Represents a BidiStreamingAnalyzeContentResponse. */
@@ -72110,11 +71892,8 @@ export namespace google {
                     /** BidiStreamingAnalyzeContentResponse turnComplete. */
                     public turnComplete?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ITurnComplete|null);
 
-                    /** BidiStreamingAnalyzeContentResponse toolCalls. */
-                    public toolCalls?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls|null);
-
                     /** BidiStreamingAnalyzeContentResponse response. */
-                    public response?: ("recognitionResult"|"bargeInSignal"|"analyzeContentResponse"|"turnComplete"|"toolCalls");
+                    public response?: ("recognitionResult"|"bargeInSignal"|"analyzeContentResponse"|"turnComplete");
 
                     /**
                      * Creates a new BidiStreamingAnalyzeContentResponse instance using the specified properties.
@@ -72372,212 +72151,6 @@ export namespace google {
 
                         /**
                          * Gets the default type url for TurnComplete
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a ToolCall. */
-                    interface IToolCall {
-
-                        /** ToolCall id */
-                        id?: (string|null);
-
-                        /** ToolCall tool */
-                        tool?: (string|null);
-
-                        /** ToolCall args */
-                        args?: (google.protobuf.IStruct|null);
-                    }
-
-                    /** Represents a ToolCall. */
-                    class ToolCall implements IToolCall {
-
-                        /**
-                         * Constructs a new ToolCall.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall);
-
-                        /** ToolCall id. */
-                        public id: string;
-
-                        /** ToolCall tool. */
-                        public tool: string;
-
-                        /** ToolCall args. */
-                        public args?: (google.protobuf.IStruct|null);
-
-                        /**
-                         * Creates a new ToolCall instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ToolCall instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall;
-
-                        /**
-                         * Encodes the specified ToolCall message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.verify|verify} messages.
-                         * @param message ToolCall message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ToolCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.verify|verify} messages.
-                         * @param message ToolCall message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ToolCall message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ToolCall
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall;
-
-                        /**
-                         * Decodes a ToolCall message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ToolCall
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall;
-
-                        /**
-                         * Verifies a ToolCall message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ToolCall message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ToolCall
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall;
-
-                        /**
-                         * Creates a plain object from a ToolCall message. Also converts values to other types if specified.
-                         * @param message ToolCall
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ToolCall to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ToolCall
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a ToolCalls. */
-                    interface IToolCalls {
-
-                        /** ToolCalls toolCalls */
-                        toolCalls?: (google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall[]|null);
-                    }
-
-                    /** Represents a ToolCalls. */
-                    class ToolCalls implements IToolCalls {
-
-                        /**
-                         * Constructs a new ToolCalls.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls);
-
-                        /** ToolCalls toolCalls. */
-                        public toolCalls: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall[];
-
-                        /**
-                         * Creates a new ToolCalls instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ToolCalls instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls;
-
-                        /**
-                         * Encodes the specified ToolCalls message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.verify|verify} messages.
-                         * @param message ToolCalls message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ToolCalls message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.verify|verify} messages.
-                         * @param message ToolCalls message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ToolCalls message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ToolCalls
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls;
-
-                        /**
-                         * Decodes a ToolCalls message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ToolCalls
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls;
-
-                        /**
-                         * Verifies a ToolCalls message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ToolCalls message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ToolCalls
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls;
-
-                        /**
-                         * Creates a plain object from a ToolCalls message. Also converts values to other types if specified.
-                         * @param message ToolCalls
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ToolCalls to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ToolCalls
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -105594,6 +105167,12 @@ export namespace google {
 
                     /** SipTrunk displayName */
                     displayName?: (string|null);
+
+                    /** SipTrunk peerHostnames */
+                    peerHostnames?: (google.cloud.dialogflow.v2beta1.ISipHostname[]|null);
+
+                    /** SipTrunk googleRootCertFile */
+                    googleRootCertFile?: (google.cloud.dialogflow.v2beta1.SipTrunk.GoogleRootCertFile|keyof typeof google.cloud.dialogflow.v2beta1.SipTrunk.GoogleRootCertFile|null);
                 }
 
                 /** Represents a SipTrunk. */
@@ -105616,6 +105195,12 @@ export namespace google {
 
                     /** SipTrunk displayName. */
                     public displayName: string;
+
+                    /** SipTrunk peerHostnames. */
+                    public peerHostnames: google.cloud.dialogflow.v2beta1.ISipHostname[];
+
+                    /** SipTrunk googleRootCertFile. */
+                    public googleRootCertFile: (google.cloud.dialogflow.v2beta1.SipTrunk.GoogleRootCertFile|keyof typeof google.cloud.dialogflow.v2beta1.SipTrunk.GoogleRootCertFile);
 
                     /**
                      * Creates a new SipTrunk instance using the specified properties.
@@ -105693,6 +105278,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SipTrunk {
+
+                    /** GoogleRootCertFile enum. */
+                    enum GoogleRootCertFile {
+                        CERT_FILE_UNSPECIFIED = 0,
+                        EXTERNAL_PRIVATE_CA = 5
+                    }
                 }
 
                 /** Properties of a Connection. */
@@ -105935,6 +105529,386 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SipHostname. */
+                interface ISipHostname {
+
+                    /** SipHostname peerHostname */
+                    peerHostname?: (string|null);
+
+                    /** SipHostname enabledSipPing */
+                    enabledSipPing?: (boolean|null);
+
+                    /** SipHostname pingInterval */
+                    pingInterval?: (google.protobuf.IDuration|null);
+
+                    /** SipHostname peerSocketAddress */
+                    peerSocketAddress?: (string|null);
+
+                    /** SipHostname probeDetails */
+                    probeDetails?: (google.cloud.dialogflow.v2beta1.IProbeDetails|null);
+
+                    /** SipHostname connectionState */
+                    connectionState?: (google.cloud.dialogflow.v2beta1.SipHostname.ConnectionState|keyof typeof google.cloud.dialogflow.v2beta1.SipHostname.ConnectionState|null);
+
+                    /** SipHostname errorDetails */
+                    errorDetails?: (google.cloud.dialogflow.v2beta1.SipHostname.IHostnameErrorDetails|null);
+                }
+
+                /** Represents a SipHostname. */
+                class SipHostname implements ISipHostname {
+
+                    /**
+                     * Constructs a new SipHostname.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.ISipHostname);
+
+                    /** SipHostname peerHostname. */
+                    public peerHostname: string;
+
+                    /** SipHostname enabledSipPing. */
+                    public enabledSipPing: boolean;
+
+                    /** SipHostname pingInterval. */
+                    public pingInterval?: (google.protobuf.IDuration|null);
+
+                    /** SipHostname peerSocketAddress. */
+                    public peerSocketAddress: string;
+
+                    /** SipHostname probeDetails. */
+                    public probeDetails?: (google.cloud.dialogflow.v2beta1.IProbeDetails|null);
+
+                    /** SipHostname connectionState. */
+                    public connectionState: (google.cloud.dialogflow.v2beta1.SipHostname.ConnectionState|keyof typeof google.cloud.dialogflow.v2beta1.SipHostname.ConnectionState);
+
+                    /** SipHostname errorDetails. */
+                    public errorDetails?: (google.cloud.dialogflow.v2beta1.SipHostname.IHostnameErrorDetails|null);
+
+                    /**
+                     * Creates a new SipHostname instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SipHostname instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.ISipHostname): google.cloud.dialogflow.v2beta1.SipHostname;
+
+                    /**
+                     * Encodes the specified SipHostname message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SipHostname.verify|verify} messages.
+                     * @param message SipHostname message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.ISipHostname, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SipHostname message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SipHostname.verify|verify} messages.
+                     * @param message SipHostname message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ISipHostname, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SipHostname message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SipHostname
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.SipHostname;
+
+                    /**
+                     * Decodes a SipHostname message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SipHostname
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.SipHostname;
+
+                    /**
+                     * Verifies a SipHostname message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SipHostname message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SipHostname
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.SipHostname;
+
+                    /**
+                     * Creates a plain object from a SipHostname message. Also converts values to other types if specified.
+                     * @param message SipHostname
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.SipHostname, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SipHostname to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SipHostname
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SipHostname {
+
+                    /** ConnectionState enum. */
+                    enum ConnectionState {
+                        CONNECTION_STATE_UNSPECIFIED = 0,
+                        CONNECTED = 1,
+                        DISCONNECTED = 2,
+                        AUTHENTICATION_FAILED = 3,
+                        KEEPALIVE = 4
+                    }
+
+                    /** HostnameCertificateState enum. */
+                    enum HostnameCertificateState {
+                        HOSTNAME_CERTIFICATE_STATE_UNSPECIFIED = 0,
+                        VALID = 1,
+                        INVALID = 2,
+                        EXPIRED = 3,
+                        HOSTNAME_NOT_FOUND = 4,
+                        UNAUTHENTICATED = 5,
+                        TRUST_STORE_NOT_FOUND = 6,
+                        HOSTNAME_INVALID_FORMAT = 7,
+                        QUOTA_EXCEEDED = 8
+                    }
+
+                    /** Properties of a HostnameErrorDetails. */
+                    interface IHostnameErrorDetails {
+
+                        /** HostnameErrorDetails certificateState */
+                        certificateState?: (google.cloud.dialogflow.v2beta1.SipHostname.HostnameCertificateState|keyof typeof google.cloud.dialogflow.v2beta1.SipHostname.HostnameCertificateState|null);
+
+                        /** HostnameErrorDetails errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents a HostnameErrorDetails. */
+                    class HostnameErrorDetails implements IHostnameErrorDetails {
+
+                        /**
+                         * Constructs a new HostnameErrorDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2beta1.SipHostname.IHostnameErrorDetails);
+
+                        /** HostnameErrorDetails certificateState. */
+                        public certificateState: (google.cloud.dialogflow.v2beta1.SipHostname.HostnameCertificateState|keyof typeof google.cloud.dialogflow.v2beta1.SipHostname.HostnameCertificateState);
+
+                        /** HostnameErrorDetails errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new HostnameErrorDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HostnameErrorDetails instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2beta1.SipHostname.IHostnameErrorDetails): google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails;
+
+                        /**
+                         * Encodes the specified HostnameErrorDetails message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails.verify|verify} messages.
+                         * @param message HostnameErrorDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2beta1.SipHostname.IHostnameErrorDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HostnameErrorDetails message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails.verify|verify} messages.
+                         * @param message HostnameErrorDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.SipHostname.IHostnameErrorDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HostnameErrorDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HostnameErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails;
+
+                        /**
+                         * Decodes a HostnameErrorDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HostnameErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails;
+
+                        /**
+                         * Verifies a HostnameErrorDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HostnameErrorDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HostnameErrorDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails;
+
+                        /**
+                         * Creates a plain object from a HostnameErrorDetails message. Also converts values to other types if specified.
+                         * @param message HostnameErrorDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2beta1.SipHostname.HostnameErrorDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HostnameErrorDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HostnameErrorDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ProbeDetails. */
+                interface IProbeDetails {
+
+                    /** ProbeDetails optionsLatency */
+                    optionsLatency?: (google.protobuf.IDuration|null);
+
+                    /** ProbeDetails probeStatus */
+                    probeStatus?: (google.cloud.dialogflow.v2beta1.ProbeDetails.ProbeStatus|keyof typeof google.cloud.dialogflow.v2beta1.ProbeDetails.ProbeStatus|null);
+
+                    /** ProbeDetails initTime */
+                    initTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ProbeDetails. */
+                class ProbeDetails implements IProbeDetails {
+
+                    /**
+                     * Constructs a new ProbeDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IProbeDetails);
+
+                    /** ProbeDetails optionsLatency. */
+                    public optionsLatency?: (google.protobuf.IDuration|null);
+
+                    /** ProbeDetails probeStatus. */
+                    public probeStatus: (google.cloud.dialogflow.v2beta1.ProbeDetails.ProbeStatus|keyof typeof google.cloud.dialogflow.v2beta1.ProbeDetails.ProbeStatus);
+
+                    /** ProbeDetails initTime. */
+                    public initTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ProbeDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProbeDetails instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IProbeDetails): google.cloud.dialogflow.v2beta1.ProbeDetails;
+
+                    /**
+                     * Encodes the specified ProbeDetails message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ProbeDetails.verify|verify} messages.
+                     * @param message ProbeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IProbeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProbeDetails message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ProbeDetails.verify|verify} messages.
+                     * @param message ProbeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IProbeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProbeDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProbeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ProbeDetails;
+
+                    /**
+                     * Decodes a ProbeDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProbeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ProbeDetails;
+
+                    /**
+                     * Verifies a ProbeDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProbeDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProbeDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ProbeDetails;
+
+                    /**
+                     * Creates a plain object from a ProbeDetails message. Also converts values to other types if specified.
+                     * @param message ProbeDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.ProbeDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProbeDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProbeDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProbeDetails {
+
+                    /** ProbeStatus enum. */
+                    enum ProbeStatus {
+                        PROBE_STATUS_UNSPECIFIED = 0,
+                        PROBE_STATUS_SUCCESS = 1,
+                        PROBE_STATUS_FAILED = 2
                     }
                 }
 
@@ -108186,6 +108160,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -108199,6 +108176,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -108928,6 +108908,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -108947,6 +108930,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -109260,6 +109246,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -109652,6 +109997,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -112023,6 +112370,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -112045,6 +112395,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -112987,6 +113340,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -113021,6 +113377,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -113149,7 +113508,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -113252,6 +113612,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -115130,6 +115591,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -115152,6 +115616,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -115239,6 +115706,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -115255,6 +115725,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

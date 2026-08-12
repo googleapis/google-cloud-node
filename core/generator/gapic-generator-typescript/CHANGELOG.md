@@ -1,6 +1,39 @@
 # Changelog
 
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.0.0...gapic-generator-v5.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.13.0...gapic-generator-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 for the gapic-generator-typescript ([#9029](https://github.com/googleapis/google-cloud-node/issues/9029))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 for the gapic-generator-typescript ([#9029](https://github.com/googleapis/google-cloud-node/issues/9029)) ([863c3cc](https://github.com/googleapis/google-cloud-node/commit/863c3cc4b1c2e1d58f57bbaee1ade8fe96c19bc0))
+
+## [4.13.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.2...gapic-generator-v4.13.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [4.12.2](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.1...gapic-generator-v4.12.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* **generator:** Add long dependency to CJS template and update baselines ([#8685](https://github.com/googleapis/google-cloud-node/issues/8685)) ([8e51888](https://github.com/googleapis/google-cloud-node/commit/8e5188877da05a226e9976b2e5057eaec5054d1f))
+* **generator:** Update package.json template to monorepo repository/homepage schema and &gt;=18 engines range ([#8840](https://github.com/googleapis/google-cloud-node/issues/8840)) ([f120e17](https://github.com/googleapis/google-cloud-node/commit/f120e17e588d0a0d7fbf037aa17ab1c869dda90e))
+
 ## [4.12.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.0...gapic-generator-v4.12.1) (2026-06-26)
 
 
