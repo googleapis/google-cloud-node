@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@grpc/proto-loader": "^0.8.0",
-    "@opentelemetry/sdk-trace-base": "^@.17.0",
+    "@opentelemetry/sdk-trace-base": "^1.17.0",
     "@opentelemetry/sdk-trace-node": "^1.17.0",
     "@types/chai": "^5.2.3",
     "@types/duplexify": "^3.6.4",
