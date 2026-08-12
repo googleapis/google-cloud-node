@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/profiler",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Adds support for Cloud Profiler to Node.js applications",
   "repository": {
     "type": "git",
