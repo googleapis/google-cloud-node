@@ -274,6 +274,9 @@ export class LineItemServiceClient {
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
       ),
+      creativeWrapperPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeWrappers/{creative_wrapper}',
+      ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}',
       ),
@@ -282,6 +285,12 @@ export class LineItemServiceClient {
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
+      ),
+      daiAuthenticationKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}',
+      ),
+      daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
@@ -334,6 +343,9 @@ export class LineItemServiceClient {
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}',
       ),
+      partnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/partners/{partner}',
+      ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}',
       ),
@@ -378,6 +390,9 @@ export class LineItemServiceClient {
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
+      ),
+      viewabilityProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/viewabilityProviders/{viewability_provider}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
@@ -711,43 +726,42 @@ export class LineItemServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>archived</code></li>
-   *     <li><code>contractedUnitsBought</code></li>
-   *     <li><code>costType</code></li>
-   *     <li><code>createTime</code></li>
-   *     <li><code>creativePlaceholders.size.canonicalName</code></li>
-   *     <li><code>dealInfo.externalDealId</code></li>
-   *     <li><code>deliveryRateType</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>environmentType</code></li>
-   *     <li><code>externalLineItemId</code></li>
-   *     <li><code>goal.units</code></li>
-   *     <li><code>grpSettings.growbirdNielsenEnabled</code></li>
-   *     <li><code>grpSettings.inTargetRatioEstimateMilliPercent</code></li>
-   *     <li><code>lineItemType</code></li>
-   *     <li><code>missingCreatives</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>notes</code></li>
-   *     <li><code>order</code></li>
-   *     <li><code>orderDisplayName</code></li>
-   *     <li><code>priority</code></li>
-   *     <li><code>roadblockingType</code></li>
-   *     <li><code>startTime</code></li>
-   *     <li><code>stats.clickThroughRate</code></li>
-   *     <li><code>stats.clicksDelivered</code></li>
-   *     <li><code>stats.impressionsDelivered</code></li>
-   *     <li><code>stats.viewableImpressionsDelivered</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>targeting.inventoryTargeting.targetedAdUnits.adUnit</code></li>
-   *     <li><code>targeting.inventoryTargeting.targetedPlacements</code></li>
-   *     <li><code>targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications</code></li>
-   *     <li><code>updateSource</code></li>
-   *     <li><code>updateTime</code></li>
-   *     <li><code>webPropertyCode</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `archived`
+   *   * `contractedUnitsBought`
+   *   * `costType`
+   *   * `createTime`
+   *   * `creativePlaceholders.size.canonicalName`
+   *   * `dealInfo.externalDealId`
+   *   * `deliveryRateType`
+   *   * `displayName`
+   *   * `endTime`
+   *   * `environmentType`
+   *   * `externalLineItemId`
+   *   * `goal.units`
+   *   * `grpSettings.growbirdNielsenEnabled`
+   *   * `grpSettings.inTargetRatioEstimateMilliPercent`
+   *   * `lineItemType`
+   *   * `missingCreatives`
+   *   * `name`
+   *   * `notes`
+   *   * `order`
+   *   * `orderDisplayName`
+   *   * `priority`
+   *   * `roadblockingType`
+   *   * `startTime`
+   *   * `stats.clickThroughRate`
+   *   * `stats.clicksDelivered`
+   *   * `stats.impressionsDelivered`
+   *   * `stats.viewableImpressionsDelivered`
+   *   * `status`
+   *   * `targeting.inventoryTargeting.targetedAdUnits.adUnit`
+   *   * `targeting.inventoryTargeting.targetedPlacements`
+   *   * `targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications`
+   *   * `updateSource`
+   *   * `updateTime`
+   *   * `webPropertyCode`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -886,43 +900,42 @@ export class LineItemServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>archived</code></li>
-   *     <li><code>contractedUnitsBought</code></li>
-   *     <li><code>costType</code></li>
-   *     <li><code>createTime</code></li>
-   *     <li><code>creativePlaceholders.size.canonicalName</code></li>
-   *     <li><code>dealInfo.externalDealId</code></li>
-   *     <li><code>deliveryRateType</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>environmentType</code></li>
-   *     <li><code>externalLineItemId</code></li>
-   *     <li><code>goal.units</code></li>
-   *     <li><code>grpSettings.growbirdNielsenEnabled</code></li>
-   *     <li><code>grpSettings.inTargetRatioEstimateMilliPercent</code></li>
-   *     <li><code>lineItemType</code></li>
-   *     <li><code>missingCreatives</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>notes</code></li>
-   *     <li><code>order</code></li>
-   *     <li><code>orderDisplayName</code></li>
-   *     <li><code>priority</code></li>
-   *     <li><code>roadblockingType</code></li>
-   *     <li><code>startTime</code></li>
-   *     <li><code>stats.clickThroughRate</code></li>
-   *     <li><code>stats.clicksDelivered</code></li>
-   *     <li><code>stats.impressionsDelivered</code></li>
-   *     <li><code>stats.viewableImpressionsDelivered</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>targeting.inventoryTargeting.targetedAdUnits.adUnit</code></li>
-   *     <li><code>targeting.inventoryTargeting.targetedPlacements</code></li>
-   *     <li><code>targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications</code></li>
-   *     <li><code>updateSource</code></li>
-   *     <li><code>updateTime</code></li>
-   *     <li><code>webPropertyCode</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `archived`
+   *   * `contractedUnitsBought`
+   *   * `costType`
+   *   * `createTime`
+   *   * `creativePlaceholders.size.canonicalName`
+   *   * `dealInfo.externalDealId`
+   *   * `deliveryRateType`
+   *   * `displayName`
+   *   * `endTime`
+   *   * `environmentType`
+   *   * `externalLineItemId`
+   *   * `goal.units`
+   *   * `grpSettings.growbirdNielsenEnabled`
+   *   * `grpSettings.inTargetRatioEstimateMilliPercent`
+   *   * `lineItemType`
+   *   * `missingCreatives`
+   *   * `name`
+   *   * `notes`
+   *   * `order`
+   *   * `orderDisplayName`
+   *   * `priority`
+   *   * `roadblockingType`
+   *   * `startTime`
+   *   * `stats.clickThroughRate`
+   *   * `stats.clicksDelivered`
+   *   * `stats.impressionsDelivered`
+   *   * `stats.viewableImpressionsDelivered`
+   *   * `status`
+   *   * `targeting.inventoryTargeting.targetedAdUnits.adUnit`
+   *   * `targeting.inventoryTargeting.targetedPlacements`
+   *   * `targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications`
+   *   * `updateSource`
+   *   * `updateTime`
+   *   * `webPropertyCode`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -990,43 +1003,42 @@ export class LineItemServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>archived</code></li>
-   *     <li><code>contractedUnitsBought</code></li>
-   *     <li><code>costType</code></li>
-   *     <li><code>createTime</code></li>
-   *     <li><code>creativePlaceholders.size.canonicalName</code></li>
-   *     <li><code>dealInfo.externalDealId</code></li>
-   *     <li><code>deliveryRateType</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>environmentType</code></li>
-   *     <li><code>externalLineItemId</code></li>
-   *     <li><code>goal.units</code></li>
-   *     <li><code>grpSettings.growbirdNielsenEnabled</code></li>
-   *     <li><code>grpSettings.inTargetRatioEstimateMilliPercent</code></li>
-   *     <li><code>lineItemType</code></li>
-   *     <li><code>missingCreatives</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>notes</code></li>
-   *     <li><code>order</code></li>
-   *     <li><code>orderDisplayName</code></li>
-   *     <li><code>priority</code></li>
-   *     <li><code>roadblockingType</code></li>
-   *     <li><code>startTime</code></li>
-   *     <li><code>stats.clickThroughRate</code></li>
-   *     <li><code>stats.clicksDelivered</code></li>
-   *     <li><code>stats.impressionsDelivered</code></li>
-   *     <li><code>stats.viewableImpressionsDelivered</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>targeting.inventoryTargeting.targetedAdUnits.adUnit</code></li>
-   *     <li><code>targeting.inventoryTargeting.targetedPlacements</code></li>
-   *     <li><code>targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications</code></li>
-   *     <li><code>updateSource</code></li>
-   *     <li><code>updateTime</code></li>
-   *     <li><code>webPropertyCode</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `archived`
+   *   * `contractedUnitsBought`
+   *   * `costType`
+   *   * `createTime`
+   *   * `creativePlaceholders.size.canonicalName`
+   *   * `dealInfo.externalDealId`
+   *   * `deliveryRateType`
+   *   * `displayName`
+   *   * `endTime`
+   *   * `environmentType`
+   *   * `externalLineItemId`
+   *   * `goal.units`
+   *   * `grpSettings.growbirdNielsenEnabled`
+   *   * `grpSettings.inTargetRatioEstimateMilliPercent`
+   *   * `lineItemType`
+   *   * `missingCreatives`
+   *   * `name`
+   *   * `notes`
+   *   * `order`
+   *   * `orderDisplayName`
+   *   * `priority`
+   *   * `roadblockingType`
+   *   * `startTime`
+   *   * `stats.clickThroughRate`
+   *   * `stats.clicksDelivered`
+   *   * `stats.impressionsDelivered`
+   *   * `stats.viewableImpressionsDelivered`
+   *   * `status`
+   *   * `targeting.inventoryTargeting.targetedAdUnits.adUnit`
+   *   * `targeting.inventoryTargeting.targetedPlacements`
+   *   * `targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications`
+   *   * `updateSource`
+   *   * `updateTime`
+   *   * `webPropertyCode`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1946,6 +1958,46 @@ export class LineItemServiceClient {
   }
 
   /**
+   * Return a fully-qualified creativeWrapper resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_wrapper
+   * @returns {string} Resource name string.
+   */
+  creativeWrapperPath(networkCode: string, creativeWrapper: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.render({
+      network_code: networkCode,
+      creative_wrapper: creativeWrapper,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the creative_wrapper from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the creative_wrapper.
+   */
+  matchCreativeWrapperFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).creative_wrapper;
+  }
+
+  /**
    * Return a fully-qualified customField resource name string.
    *
    * @param {string} network_code
@@ -2067,6 +2119,92 @@ export class LineItemServiceClient {
     return this.pathTemplates.customTargetingValuePathTemplate.match(
       customTargetingValueName,
     ).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified daiAuthenticationKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_authentication_key
+   * @returns {string} Resource name string.
+   */
+  daiAuthenticationKeyPath(networkCode: string, daiAuthenticationKey: string) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.render({
+      network_code: networkCode,
+      dai_authentication_key: daiAuthenticationKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_authentication_key from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the dai_authentication_key.
+   */
+  matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).dai_authentication_key;
+  }
+
+  /**
+   * Return a fully-qualified daiEncodingProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_encoding_profile
+   * @returns {string} Resource name string.
+   */
+  daiEncodingProfilePath(networkCode: string, daiEncodingProfile: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.render({
+      network_code: networkCode,
+      dai_encoding_profile: daiEncodingProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiEncodingProfileName(daiEncodingProfileName: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_encoding_profile from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the dai_encoding_profile.
+   */
+  matchDaiEncodingProfileFromDaiEncodingProfileName(
+    daiEncodingProfileName: string,
+  ) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).dai_encoding_profile;
   }
 
   /**
@@ -2731,6 +2869,43 @@ export class LineItemServiceClient {
   }
 
   /**
+   * Return a fully-qualified partner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} partner
+   * @returns {string} Resource name string.
+   */
+  partnerPath(networkCode: string, partner: string) {
+    return this.pathTemplates.partnerPathTemplate.render({
+      network_code: networkCode,
+      partner: partner,
+    });
+  }
+
+  /**
+   * Parse the network_code from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the partner from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the partner.
+   */
+  matchPartnerFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).partner;
+  }
+
+  /**
    * Return a fully-qualified placement resource name string.
    *
    * @param {string} network_code
@@ -3310,6 +3485,48 @@ export class LineItemServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified viewabilityProvider resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} viewability_provider
+   * @returns {string} Resource name string.
+   */
+  viewabilityProviderPath(networkCode: string, viewabilityProvider: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.render({
+      network_code: networkCode,
+      viewability_provider: viewabilityProvider,
+    });
+  }
+
+  /**
+   * Parse the network_code from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromViewabilityProviderName(viewabilityProviderName: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the viewability_provider from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the viewability_provider.
+   */
+  matchViewabilityProviderFromViewabilityProviderName(
+    viewabilityProviderName: string,
+  ) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).viewability_provider;
   }
 
   /**

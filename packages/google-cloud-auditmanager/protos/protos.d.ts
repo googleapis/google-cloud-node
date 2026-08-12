@@ -588,6 +588,9 @@ export namespace google {
 
                     /** GenerateAuditReportRequest complianceFramework */
                     complianceFramework?: (string|null);
+
+                    /** GenerateAuditReportRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents a GenerateAuditReportRequest. */
@@ -613,6 +616,9 @@ export namespace google {
 
                     /** GenerateAuditReportRequest complianceFramework. */
                     public complianceFramework: string;
+
+                    /** GenerateAuditReportRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /** GenerateAuditReportRequest destination. */
                     public destination?: "gcsUri";

@@ -153,6 +153,7 @@ function main(query) {
    *  When `useAdminAccess` is set to `false`:
    *  - `create_time DESC`
    *  - `relevance DESC`
+   *     Developer Preview (https://developers.google.com/workspace/preview).
    */
   // const orderBy = 'abc123'
 

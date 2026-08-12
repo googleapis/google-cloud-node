@@ -3193,6 +3193,176 @@ describe('v1.AuditManagerClient', () => {
       });
     });
 
+    describe('organizationLocationAuditReports', async () => {
+      const fakePath = '/rendered/path/organizationLocationAuditReports';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        audit_report: 'auditReportValue',
+      };
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationLocationAuditReportsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationAuditReportsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationAuditReportsPath', () => {
+        const result = client.organizationLocationAuditReportsPath(
+          'organizationValue',
+          'locationValue',
+          'auditReportValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditReportsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationAuditReportsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationAuditReportsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationAuditReportsName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationAuditReportsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuditReportFromOrganizationLocationAuditReportsName', () => {
+        const result =
+          client.matchAuditReportFromOrganizationLocationAuditReportsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'auditReportValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationAuditScopeReports', async () => {
+      const fakePath = '/rendered/path/organizationLocationAuditScopeReports';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        audit_scope_report: 'auditScopeReportValue',
+      };
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationAuditScopeReportsPath', () => {
+        const result = client.organizationLocationAuditScopeReportsPath(
+          'organizationValue',
+          'locationValue',
+          'auditScopeReportValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationAuditScopeReportsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationAuditScopeReportsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationAuditScopeReportsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationAuditScopeReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationAuditScopeReportsName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationAuditScopeReportsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationAuditScopeReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuditScopeReportFromOrganizationLocationAuditScopeReportsName', () => {
+        const result =
+          client.matchAuditScopeReportFromOrganizationLocationAuditScopeReportsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'auditScopeReportValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationAuditScopeReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('organizationLocationEnrollments', async () => {
       const fakePath = '/rendered/path/organizationLocationEnrollments';
       const expectedParameters = {

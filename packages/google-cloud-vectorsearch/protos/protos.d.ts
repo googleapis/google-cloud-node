@@ -2492,6 +2492,9 @@ export namespace google {
 
                     /** Ranker rrf */
                     rrf?: (google.cloud.vectorsearch.v1.IReciprocalRankFusion|null);
+
+                    /** Ranker vertexRanker */
+                    vertexRanker?: (google.cloud.vectorsearch.v1.IVertexRanker|null);
                 }
 
                 /** Represents a Ranker. */
@@ -2506,8 +2509,14 @@ export namespace google {
                     /** Ranker rrf. */
                     public rrf?: (google.cloud.vectorsearch.v1.IReciprocalRankFusion|null);
 
+                    /** Ranker vertexRanker. */
+                    public vertexRanker?: (google.cloud.vectorsearch.v1.IVertexRanker|null);
+
                     /** Ranker ranker. */
                     public ranker?: "rrf";
+
+                    /** Ranker reranker. */
+                    public reranker?: "vertexRanker";
 
                     /**
                      * Creates a new Ranker instance using the specified properties.
@@ -2682,6 +2691,230 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexRanker. */
+                interface IVertexRanker {
+
+                    /** VertexRanker textRecordSpec */
+                    textRecordSpec?: (google.cloud.vectorsearch.v1.VertexRanker.ITextRecordSpec|null);
+
+                    /** VertexRanker model */
+                    model?: (string|null);
+
+                    /** VertexRanker topN */
+                    topN?: (number|null);
+                }
+
+                /** Represents a VertexRanker. */
+                class VertexRanker implements IVertexRanker {
+
+                    /**
+                     * Constructs a new VertexRanker.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IVertexRanker);
+
+                    /** VertexRanker textRecordSpec. */
+                    public textRecordSpec?: (google.cloud.vectorsearch.v1.VertexRanker.ITextRecordSpec|null);
+
+                    /** VertexRanker model. */
+                    public model: string;
+
+                    /** VertexRanker topN. */
+                    public topN: number;
+
+                    /** VertexRanker recordSpec. */
+                    public recordSpec?: "textRecordSpec";
+
+                    /**
+                     * Creates a new VertexRanker instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexRanker instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IVertexRanker): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Encodes the specified VertexRanker message. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexRanker.verify|verify} messages.
+                     * @param message VertexRanker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IVertexRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexRanker message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexRanker.verify|verify} messages.
+                     * @param message VertexRanker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IVertexRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexRanker message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexRanker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Decodes a VertexRanker message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexRanker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Verifies a VertexRanker message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexRanker message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexRanker
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Creates a plain object from a VertexRanker message. Also converts values to other types if specified.
+                     * @param message VertexRanker
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.VertexRanker, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexRanker to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexRanker
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VertexRanker {
+
+                    /** Properties of a TextRecordSpec. */
+                    interface ITextRecordSpec {
+
+                        /** TextRecordSpec query */
+                        query?: (string|null);
+
+                        /** TextRecordSpec titleTemplate */
+                        titleTemplate?: (string|null);
+
+                        /** TextRecordSpec contentTemplate */
+                        contentTemplate?: (string|null);
+                    }
+
+                    /** Represents a TextRecordSpec. */
+                    class TextRecordSpec implements ITextRecordSpec {
+
+                        /**
+                         * Constructs a new TextRecordSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.VertexRanker.ITextRecordSpec);
+
+                        /** TextRecordSpec query. */
+                        public query: string;
+
+                        /** TextRecordSpec titleTemplate. */
+                        public titleTemplate: string;
+
+                        /** TextRecordSpec contentTemplate. */
+                        public contentTemplate: string;
+
+                        /**
+                         * Creates a new TextRecordSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextRecordSpec instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.VertexRanker.ITextRecordSpec): google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Encodes the specified TextRecordSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec.verify|verify} messages.
+                         * @param message TextRecordSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.VertexRanker.ITextRecordSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextRecordSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec.verify|verify} messages.
+                         * @param message TextRecordSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.VertexRanker.ITextRecordSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextRecordSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextRecordSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Decodes a TextRecordSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextRecordSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Verifies a TextRecordSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextRecordSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextRecordSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Creates a plain object from a TextRecordSpec message. Also converts values to other types if specified.
+                         * @param message TextRecordSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextRecordSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextRecordSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a BatchSearchDataObjectsResponse. */

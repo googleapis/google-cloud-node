@@ -29,21 +29,21 @@ function main(scope, destinations) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource to be enrolled to the audit manager. Scope format
-   *  should be resource_type/resource_identifier Eg:
-   *  projects/{project}/locations/{location},
-   *  folders/{folder}/locations/{location}
-   *  organizations/{organization}/locations/{location}
+   *  Required. Organization, folder, or project to enroll in Audit Manager, in
+   *  one of the following formats:
+   *  * `projects/{project}/locations/{location}`
+   *  * `folders/{folder}/locations/{location}`
+   *  * `organizations/{organization}/locations/{location}`
    */
   // const scope = 'abc123'
   /**
-   *  Required. List of destination among which customer can choose to upload
-   *  their reports during the audit process. While enrolling at a
-   *  organization/folder level, customer can choose Cloud storage bucket in any
-   *  project. If the audit is triggered at project level using the service agent
-   *  at organization/folder level, all the destination options associated with
-   *  respective organization/folder level service agent will be available to
-   *  auditing projects.
+   *  Required. Cloud Storage buckets that you can upload your audit reports to
+   *  during the audit process.
+   *  When you enroll an organization or folder, you can choose a Cloud Storage
+   *  bucket from any project in the organization or folder. If you run an audit
+   *  at the project level using the service agent at the organization or folder
+   *  level, all the buckets that are associated with the service agent are
+   *  available.
    */
   // const destinations = [1,2,3,4]
 
