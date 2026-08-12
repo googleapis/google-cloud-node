@@ -55,5 +55,6 @@
   },
   "engines": {
     "node": ">=22"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/proto3-json-serializer-nodejs"
 }
