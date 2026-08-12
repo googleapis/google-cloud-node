@@ -51,7 +51,7 @@
     "object-hash": "^3.0.0",
     "proto3-json-serializer": "^4.0.0",
     "protobufjs": "^8.6.6",
-    "protobufjs-cli": "^1.2.0",
+    "protobufjs-cli": "^2.6.2",
     "prettier": "^3.3.3",
     "yargs": "^17.7.2"
   },
