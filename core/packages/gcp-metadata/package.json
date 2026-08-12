@@ -45,7 +45,7 @@
     "json-bigint": "^1.0.0"
   },
   "devDependencies": {
-    "@google-cloud/functions": "^4.0.0",
+    "@google-cloud/functions": "^5.0.0",
     "@types/json-bigint": "^1.0.4",
     "@types/mocha": "^10.0.10",
     "@types/ncp": "^2.0.8",

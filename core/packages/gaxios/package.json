@@ -78,7 +78,7 @@
     "karma-mocha": "^2.0.0",
     "karma-remap-coverage": "^0.1.5",
     "karma-sourcemap-loader": "^0.4.0",
-    "karma-webpack": "^5.0.1",
+    "karma-webpack": "^5.0.0",
     "mocha": "^11.1.0",
     "multiparty": "^4.2.1",
     "mv": "^2.1.1",
