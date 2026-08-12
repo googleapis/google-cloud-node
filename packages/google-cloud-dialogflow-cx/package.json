@@ -81,7 +81,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
+      "@sinonjs/fake-timers": "15.2.1",
+      "google-gax": "link:../../core/packages/gax"
     }
   }
 }

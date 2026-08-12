@@ -442,6 +442,27 @@ describe('v3.SessionsClient', () => {
       });
       await assert.rejects(client.detectIntent(request), expectedError);
     });
+
+    // This integration test verifies that the client safely blocks and rejects path traversal attacks
+    // in REST fallback mode when configured with malicious session ID inputs containing dot segments.
+    // This implements immediate validation to prevent unauthorized resource deletion or IDOR (e.g. b/506021899).
+    it('rejects path traversal in session ID for fallback/REST transport mode', async () => {
+      const client = new sessionsModule.v3.SessionsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+        fallback: true,
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.DetectIntentRequest(),
+      );
+      // Construct a malicious session path ending with dot segments (path traversal exploit payload)
+      request.session = 'projects/p1/locations/l1/agents/a1/sessions/..';
+      await assert.rejects(client.detectIntent(request), /Invalid value .* for session/);
+
+      request.session = 'projects/p1/locations/l1/agents/a1/sessions/.';
+      await assert.rejects(client.detectIntent(request), /Invalid value .* for session/);
+    });
   });
 
   describe('matchIntent', () => {
