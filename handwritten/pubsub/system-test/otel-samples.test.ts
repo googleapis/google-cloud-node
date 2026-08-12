@@ -41,9 +41,10 @@ describe('OpenTelemetry Samples System Tests', () => {
 
     // Build a tracer provider and a span processor to do
     // something with the spans we're generating.
-    provider = new NodeTracerProvider();
     processor = new SimpleSpanProcessor(exporter);
-    provider.addSpanProcessor(processor);
+    provider = new NodeTracerProvider({
+      spanProcessors: [processor],
+    });
     provider.register();
   });
 
