@@ -5,29 +5,37 @@ on:
   pull_request:
 name: presubmit
 jobs:
-  units:
+  setup:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22, 24, 26]
+    outputs:
+      shard-matrix: ${{ steps.set-matrix.outputs.shard_matrix }}
+      shard-total: ${{ steps.set-matrix.outputs.shard_total }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          fetch-depth: 300
+          fetch-depth: 2
           persist-credentials: false
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      - id: set-matrix
+        uses: ./.github/actions/calculate-shard-matrix
+  units:
+    needs: setup
+    name: units (Node ${{ matrix.node-version }}, Shard ${{ matrix.shard-index }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+        shard-index: ${{ fromJSON(needs.setup.outputs.shard-matrix) }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: ./.github/actions/run-unit-tests
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-        with:
-          version: ^10.0.0
-      - run: node --version
-      - run: ci/run_conditional_tests.sh
-        name: Run unit tests
-        env:
-          BUILD_TYPE: presubmit
-          TEST_TYPE: units
+          shard-total: ${{ needs.setup.outputs.shard-total }}
+          shard-index: ${{ matrix.shard-index }}
   lint:
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -43,3 +51,22 @@ jobs:
       - run: npm install
       - run: npm run lint
         name: Run monorepo linter
+
+  # Consolidate shards into jobs representing aggregate status to simplify branch protection requirements
+  units-status:
+    name: units (${{ matrix.node-version }})
+    needs: units
+    runs-on: ubuntu-latest
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Check shard status
+        uses: ./.github/actions/check-shard-status
+        with:
+          node-version: ${{ matrix.node-version }}
