@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [10.0.1](https://github.com/googleapis/google-cloud-node/compare/translate-v10.0.0...translate-v10.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies ([#9129](https://github.com/googleapis/google-cloud-node/issues/9129)) ([5f01912](https://github.com/googleapis/google-cloud-node/commit/5f0191225b96dabe41daa9f9d57a8c72749bf62d))
+
 ## [10.0.0](https://github.com/googleapis/google-cloud-node/compare/translate-v9.4.2...translate-v10.0.0) (2026-08-04)
 
 

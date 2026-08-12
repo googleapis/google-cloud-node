@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/containeranalysis",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Containeranalysis client for Node.js",
   "repository": {
     "type": "git",

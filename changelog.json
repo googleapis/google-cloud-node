@@ -5,6 +5,193 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "43e2fdc8-1255-4280-9dec-d6ba9287ef94",
+      "createTime": "2026-08-12T17:50:12.709Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "a239979e-cc77-4510-a063-387818dcfbfc",
+      "createTime": "2026-08-12T17:50:12.688Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "10.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "a9d93422-ba26-4c9f-aba2-8cfe71f38284",
+      "createTime": "2026-08-12T17:50:12.666Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "8.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "ea084909-87a2-493e-9735-2fa1d42d1276",
+      "createTime": "2026-08-12T17:50:12.641Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "10.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "e610d6ac-2c38-416f-a404-6efb5c800adb",
+      "createTime": "2026-08-12T17:50:12.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "54b1a79b-17f4-430e-905a-831fc395933f",
+      "createTime": "2026-08-12T17:50:12.598Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "8.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "3c65375a-50b5-4ddc-a3d8-ba91c0a3010e",
+      "createTime": "2026-08-12T17:50:12.572Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "de4450e6-d1eb-4318-b83e-52fb68293a45",
+      "createTime": "2026-08-12T17:50:12.550Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "634b9c39-46e0-4dde-8ab2-f6cf0591b4ea",
+      "createTime": "2026-08-12T17:50:12.529Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "81b6becf-9a1e-4973-bbf1-9847fa37a46f",
+      "createTime": "2026-08-12T17:50:12.505Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
+          "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
+          "issues": [
+            "9129"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentidentity",
+      "id": "a0cb9ea4-3338-46ca-ae15-4f0bd585fd36",
+      "createTime": "2026-08-12T17:50:12.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "fad57ff4b9164712426a041fc61db035859f9043",
           "message": "Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries",
           "issues": [
@@ -89666,5 +89853,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-12T11:58:27.205Z"
+  "updateTime": "2026-08-12T17:50:12.709Z"
 }
