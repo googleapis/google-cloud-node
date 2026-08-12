@@ -1899,6 +1899,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
+      metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
     version: 0.5.0
     apis:
