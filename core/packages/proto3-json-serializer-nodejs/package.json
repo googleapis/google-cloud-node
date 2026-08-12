@@ -1,6 +1,6 @@
 {
   "name": "proto3-json-serializer",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "repository": {
     "type": "git",
     "directory": "core/packages/proto3-json-serializer-nodejs",

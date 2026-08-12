@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v5.0.1...pack-n-play-v5.1.0) (2026-08-12)
+
+
+### Features
+
+* **ci:** Implement sharding for unit test performance ([#9021](https://github.com/googleapis/google-cloud-node/issues/9021)) ([1d977b5](https://github.com/googleapis/google-cloud-node/commit/1d977b5fab9c7d7ee25487bbbe95ae296a12e7b0))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v5.0.0...pack-n-play-v5.0.1) (2026-08-05)
 
 
