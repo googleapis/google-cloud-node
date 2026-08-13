@@ -42,14 +42,14 @@ accept your pull requests.
 
 1.  Install dependencies:
 
-        pnpm install
+        npm install
 
 1.  Run the tests:
 
-        pnpm run test
+        npm test
 
 1.  Lint (and maybe fix) any changes:
 
-        pnpm run fix
+        npm run fix
 
 [setup]: https://cloud.google.com/nodejs/docs/setup
