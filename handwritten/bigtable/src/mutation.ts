@@ -14,7 +14,7 @@
 
 import arrify = require('arrify');
 import * as is from 'is';
-import * as Long from 'long';
+import Long = require('long');
 
 import {protos} from '.';
 import btTypes = protos.google;
