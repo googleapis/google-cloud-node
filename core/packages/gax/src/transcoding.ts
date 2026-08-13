@@ -118,28 +118,46 @@ export function deleteField(request: JSONObject, field: string): void {
   delete request[part];
 }
 
+function validateSingleSegment(propertyName: string, value: string): void {
+  if (value === '.' || value === '..') {
+    throw new Error(`Invalid value ${value} for ${propertyName}`);
+  }
+}
+
+function validateMultiSegment(propertyName: string, value: string): void {
+  if (value) {
+    const segments = value.split('/');
+    if (segments.some(segment => segment === '.' || segment === '..')) {
+      throw new Error(`Value for ${propertyName} must not contain segments that are exactly . or ..`);
+    }
+  }
+}
+
 export function buildQueryStringComponents(
   request: JSONObject,
   prefix = '',
 ): string[] {
   const resultList = [];
   for (const key in request) {
-    if (Array.isArray(request[key])) {
-      for (const value of request[key] as JSONObject[]) {
+    const value = request[key];
+    if (Array.isArray(value)) {
+      const filtered = value.filter(val => val !== null && val !== undefined);
+      for (const val of filtered) {
+        const stringVal = typeof val === 'object' ? JSON.stringify(val) : val.toString();
         resultList.push(
           `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-            value.toString(),
+            stringVal,
           )}`,
         );
       }
-    } else if (typeof request[key] === 'object' && request[key] !== null) {
+    } else if (typeof value === 'object' && value !== null) {
       resultList.push(
-        ...buildQueryStringComponents(request[key] as JSONObject, `${key}.`),
+        ...buildQueryStringComponents(value as JSONObject, `${key}.`),
       );
-    } else {
+    } else if (value !== undefined) {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          request[key] === null ? 'null' : request[key]!.toString(),
+          value === null ? 'null' : value.toString(),
         )}`,
       );
     }
@@ -150,14 +168,20 @@ export function buildQueryStringComponents(
 export function encodeWithSlashes(str: string): string {
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c).replace(
+      /[!'()*]/g,
+      character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
+    )))
     .join('');
 }
 
 export function encodeWithoutSlashes(str: string): string {
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c).replace(
+      /[!'()*]/g,
+      character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
+    )))
     .join('');
 }
 
@@ -168,8 +192,10 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
+  propertyName = 'resource',
 ): string | undefined {
   if (!pattern || pattern === '*') {
+    validateSingleSegment(propertyName, fieldValue);
     return encodeWithSlashes(fieldValue);
   }
 
@@ -178,6 +204,9 @@ export function applyPattern(
   }
 
   // since we're converting the pattern to a regex, make necessary precautions:
+  // Identify the segments and wildcards in pattern to perform validation in order of appearance
+  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
+
   const regex = new RegExp(
     '^' +
       escapeRegExp(pattern)
@@ -186,8 +215,22 @@ export function applyPattern(
       '$',
   );
 
-  if (!fieldValue.match(regex)) {
+  const match = fieldValue.match(regex);
+  if (!match) {
     return undefined;
+  }
+
+  // Check the captured group values
+  for (let i = 1; i < match.length; i++) {
+    const groupVal = match[i];
+    if (groupVal !== undefined && groupVal !== null) {
+      const wildcardType = wildcards[i - 1];
+      if (wildcardType === '*') {
+        validateSingleSegment(propertyName, groupVal);
+      } else if (wildcardType === '**') {
+        validateMultiSegment(propertyName, groupVal);
+      }
+    }
   }
 
   return encodeWithoutSlashes(fieldValue);
@@ -224,6 +267,7 @@ export function match(
     const appliedPattern = applyPattern(
       pattern,
       fieldValue === null ? 'null' : fieldValue!.toString(),
+      camelCasedField,
     );
     if (appliedPattern === undefined) {
       return undefined;
