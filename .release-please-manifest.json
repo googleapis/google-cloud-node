@@ -229,6 +229,7 @@
   "packages/google-cloud-webrisk": "6.0.0",
   "packages/google-cloud-websecurityscanner": "5.0.0",
   "packages/google-cloud-workflows": "6.0.0",
+  "packages/google-cloud-workloadidentity": "0.0.0",
   "packages/google-cloud-workloadmanager": "0.3.0",
   "packages/google-cloud-workstations": "3.0.0",
   "packages/google-container": "7.0.0",
