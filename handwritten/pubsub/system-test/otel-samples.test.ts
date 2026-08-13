@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {Message, PubSub, Subscription, Topic} from '../src';
+import * as tracing from '../src/telemetry-tracing';
 import * as assert from 'assert';
 import {describe, it, after, before} from 'mocha';
 import {TestResources} from './testResources';
@@ -50,6 +51,7 @@ describe('OpenTelemetry Samples System Tests', () => {
 
   after(async () => {
     // Don't interfere with other tests.
+    tracing.setGloballyEnabled(false);
     provider.shutdown();
 
     const [subscriptions] = await pubsub.getSubscriptions();

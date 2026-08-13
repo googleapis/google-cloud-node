@@ -109,7 +109,13 @@ describe('Avro Samples System Tests', () => {
 
     const topicName = resources.generateName(`topic-rev`);
     const subName = resources.generateName(`sub-rev`);
-    const [topic] = await pubsub.createTopic(topicName);
+    const [topic] = await pubsub.createTopic({
+      name: topicName,
+      schemaSettings: {
+        schema: await pubsub.schema(schemaId).getName(),
+        encoding: 'BINARY',
+      },
+    });
     const [subscription] = await pubsub.createSubscription(topicName, subName);
 
     const type = avro.parse(definition);
