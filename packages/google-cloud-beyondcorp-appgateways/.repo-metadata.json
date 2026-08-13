@@ -7,7 +7,7 @@
     "distribution_name": "@google-cloud/appgateways",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "beyondcorp",
+    "name": "appgateways",
     "name_pretty": "BeyondCorp",
     "product_documentation": "https://cloud.google.com/beyondcorp/docs",
     "release_level": "stable",
