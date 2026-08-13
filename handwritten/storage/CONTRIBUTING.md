@@ -50,19 +50,19 @@ accept your pull requests.
 
 1.  Install dependencies:
 
-        npm install
+        pnpm install
 
 1.  Run the tests:
 
         # Run unit tests.
-        npm test
+        pnpm run test
 
         # Run all system tests.
         npm run system-test
 
 1.  Lint (and maybe fix) any changes:
 
-        npm run fix
+        pnpm run fix
 
 [setup]: https://cloud.google.com/nodejs/docs/setup
 [projects]: https://console.cloud.google.com/project

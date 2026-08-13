@@ -9,7 +9,6 @@ google/
 grafeas/
 storage/
 gapic/
-package-lock.json
 build/
 .vscode/
 __pycache__
