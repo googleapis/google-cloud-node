@@ -4049,7 +4049,8 @@
                         "TimestampGranularity": {
                           "values": {
                             "TIMESTAMP_GRANULARITY_UNSPECIFIED": 0,
-                            "MILLIS": 1
+                            "MILLIS": 1,
+                            "MICROS": 2
                           }
                         },
                         "View": {
@@ -6726,6 +6727,13 @@
                     "deleteFromRow": {
                       "type": "DeleteFromRow",
                       "id": 4
+                    },
+                    "timestampOrigin": {
+                      "type": "TimestampOrigin",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -6815,6 +6823,13 @@
                     },
                     "DeleteFromRow": {
                       "fields": {}
+                    },
+                    "TimestampOrigin": {
+                      "values": {
+                        "TIMESTAMP_ORIGIN_UNSPECIFIED": 0,
+                        "USER_SPECIFIED": 1,
+                        "CLIENT_AUTO_GENERATED": 2
+                      }
                     }
                   }
                 },

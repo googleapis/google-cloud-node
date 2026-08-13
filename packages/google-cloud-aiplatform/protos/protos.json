@@ -33878,6 +33878,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "buildSpec": {
+                          "type": "BuildSpec",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -34136,6 +34143,24 @@
                             "IDENTITY_TYPE_UNSPECIFIED": 0,
                             "SERVICE_ACCOUNT": 2,
                             "AGENT_IDENTITY": 3
+                          }
+                        },
+                        "BuildSpec": {
+                          "fields": {
+                            "workerPool": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "serviceAccount": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -41159,6 +41184,13 @@
                         "unmanagedContainerModel": {
                           "type": "UnmanagedContainerModel",
                           "id": 28
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 41,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
                         },
                         "inputConfig": {
                           "type": "InputConfig",
@@ -84576,6 +84608,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "buildSpec": {
+                          "type": "BuildSpec",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -84834,6 +84873,24 @@
                             "IDENTITY_TYPE_UNSPECIFIED": 0,
                             "SERVICE_ACCOUNT": 2,
                             "AGENT_IDENTITY": 3
+                          }
+                        },
+                        "BuildSpec": {
+                          "fields": {
+                            "workerPool": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "serviceAccount": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }

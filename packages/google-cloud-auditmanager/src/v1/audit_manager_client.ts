@@ -238,6 +238,14 @@ export class AuditManagerClient {
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}',
       ),
+      organizationLocationAuditReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/auditReports/{audit_report}',
+        ),
+      organizationLocationAuditScopeReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/auditScopeReports/{audit_scope_report}',
+        ),
       organizationLocationEnrollmentsPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/enrollments/{enrollment}',
@@ -517,7 +525,10 @@ export class AuditManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-auditmanager',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -540,28 +551,30 @@ export class AuditManagerClient {
   // -- Service calls --
   // -------------------
   /**
-   * Enrolls the customer resource(folder/project/organization) to the audit
-   * manager service by creating the audit managers Service Agent in customers
-   * workload and granting required permissions to the Service Agent. Please
-   * note that if enrollment request is made on the already enrolled workload
-   * then enrollment is executed overriding the existing set of destinations.
+   * Adds your project, folder, or organization to Audit
+   * Manager. This method creates the Audit Manager service agent in your
+   * workload and grants required permissions to the service agent.
+   * If you make this request on a workload that's already enrolled,
+   * then this method overrides the existing set of destinations.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.scope
-   *   Required. The resource to be enrolled to the audit manager. Scope format
-   *   should be resource_type/resource_identifier Eg:
-   *   projects/{project}/locations/{location},
-   *   folders/{folder}/locations/{location}
-   *   organizations/{organization}/locations/{location}
+   *   Required. Organization, folder, or project to enroll in Audit Manager, in
+   *   one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number[]} request.destinations
-   *   Required. List of destination among which customer can choose to upload
-   *   their reports during the audit process. While enrolling at a
-   *   organization/folder level, customer can choose Cloud storage bucket in any
-   *   project. If the audit is triggered at project level using the service agent
-   *   at organization/folder level, all the destination options associated with
-   *   respective organization/folder level service agent will be available to
-   *   auditing projects.
+   *   Required. Cloud Storage buckets that you can upload your audit reports to
+   *   during the audit process.
+   *
+   *   When you enroll an organization or folder, you can choose a Cloud Storage
+   *   bucket from any project in the organization or folder. If you run an audit
+   *   at the project level using the service agent at the organization or folder
+   *   level, all the buckets that are associated with the service agent are
+   *   available.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -693,25 +706,34 @@ export class AuditManagerClient {
       });
   }
   /**
-   * Generates a demo report highlighting different responsibilities
-   * (Google/Customer/ shared) required to be fulfilled for the customer's
-   * workload to be compliant with the given standard.
+   * Generates an audit scope report for the given standard.
+   *
+   * The report includes the following:
+   *
+   * * The technical attributes and constraints that Audit Manager uses to
+   *   verify your compliance with a framework.
+   * * A list of Google Cloud services and resources that are within the
+   *   scope of the framework.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.scope
-   *   Required. Scope for which the AuditScopeReport is required. Must be of
-   *   format resource_type/resource_identifier Eg:
-   *   projects/{project}/locations/{location},
-   *   folders/{folder}/locations/{location}
-   * @param {string} request.complianceStandard
-   *   Required. Compliance Standard against which the Scope Report must be
-   *   generated. Eg: FEDRAMP_MODERATE
+   *   Required. Project or folder that the audit scope report is generated for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {string} [request.complianceStandard]
+   *   Optional. Deprecated. The standard (industry or regulatory requirements)
+   *   that the audit scope report is run against.
+   *
+   *   Use the `compliance_framework` field instead.
    * @param {google.cloud.auditmanager.v1.GenerateAuditScopeReportRequest.AuditScopeReportFormat} request.reportFormat
-   *   Required. The format in which the Scope report bytes should be returned.
+   *   Required. Format for the audit scope report.
    * @param {string} request.complianceFramework
-   *   Required. Compliance framework against which the Scope Report must be
-   *   generated.
+   *   Required. Framework (set of controls) that the audit scope report is
+   *   generated against. For example, `NIST_800_53`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -849,14 +871,16 @@ export class AuditManagerClient {
       });
   }
   /**
-   * Get the overall audit report
+   * Gets the full metadata and findings for an audit report.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format
-   *   projects/{project}/locations/{location}/auditReports/{audit_report},
-   *   folders/{folder}/locations/{location}/auditReports/{audit_report}
+   *   Required. Name of the audit report, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/auditReports/{audit_report}`
+   *   * `folders/{folder}/locations/{location}/auditReports/{audit_report}`
+   *   * `organizations/{organization}/locations/{location}/auditReports/{audit_report}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -988,15 +1012,17 @@ export class AuditManagerClient {
       });
   }
   /**
-   * Get a resource along with its enrollment status.
+   * Gets a resource and its enrollment status.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format
-   *   folders/{folder}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status},
-   *   projects/{project}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status},
-   *   organizations/{organization}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}
+   *   Required. Name of the resource enrollment status, in one of the following
+   *   formats:
+   *
+   *   * `folders/{folder}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+   *   * `projects/{project}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+   *   * `organizations/{organization}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1135,27 +1161,35 @@ export class AuditManagerClient {
   }
 
   /**
-   * Register the Audit Report generation requests and returns the OperationId
-   * using which the customer can track the report generation progress.
+   * Registers audit report generation requests. This method returns the
+   * operation identifier that you can use to track the report generation
+   * progress.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.gcsUri
-   *   Destination Cloud storage bucket where report and evidence must be
-   *   uploaded. The Cloud storage bucket provided here must be selected among
-   *   the buckets entered during the enrollment process.
+   *   URL for the Cloud Storage bucket where the report and evidence is
+   *   uploaded. You must select a bucket that was provided during the
+   *   enrollment process.
    * @param {string} request.scope
-   *   Required. Scope for which the AuditScopeReport is required. Must be of
-   *   format resource_type/resource_identifier Eg:
-   *   projects/{project}/locations/{location},
-   *   folders/{folder}/locations/{location}
-   * @param {string} request.complianceStandard
-   *   Required. Compliance Standard against which the Scope Report must be
-   *   generated. Eg: FEDRAMP_MODERATE
+   *   Required. Organization, folder, or project that the audit applies to, in
+   *   one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {string} [request.complianceStandard]
+   *   Optional. Deprecated. Compliance standard for the audit report.
+   *
+   *   Use the `compliance_framework` field instead.
    * @param {google.cloud.auditmanager.v1.GenerateAuditReportRequest.AuditReportFormat} request.reportFormat
-   *   Required. The format in which the audit report should be created.
+   *   Required. Format for the audit report.
    * @param {string} request.complianceFramework
-   *   Required. Compliance framework against which the Report must be generated.
+   *   Required. The framework that's used for the audit report. For example,
+   *   `NIST_800_53`.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If `true`, only validate the request and don't generate the audit
+   *   report.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1319,17 +1353,26 @@ export class AuditManagerClient {
     >;
   }
   /**
-   * Lists audit reports in the selected parent scope
+   * Lists the audit reports for the organization, folder, or project that you
+   * specify as the parent scope.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which to list the reports.
+   *   Required. Parent organization, folder, or project to list reports for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1450,12 +1493,20 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which to list the reports.
+   *   Required. Parent organization, folder, or project to list reports for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1499,12 +1550,20 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which to list the reports.
+   *   Required. Parent organization, folder, or project to list reports for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1542,18 +1601,25 @@ export class AuditManagerClient {
     ) as AsyncIterable<protos.google.cloud.auditmanager.v1.IAuditReport>;
   }
   /**
-   * Fetches all resources under the parent along with their enrollment.
+   * Lists all the folders and projects in an organization or folder, along with
+   * their enrollments.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which the list of resources with enrollments
-   *   are required.
+   *   Required. Parent organization or folder to list enrollment statuses for,
+   *   in one of the following formats:
+   *
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1674,13 +1740,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which the list of resources with enrollments
-   *   are required.
+   *   Required. Parent organization or folder to list enrollment statuses for,
+   *   in one of the following formats:
+   *
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1725,13 +1797,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which the list of resources with enrollments
-   *   are required.
+   *   Required. Parent organization or folder to list enrollment statuses for,
+   *   in one of the following formats:
+   *
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1770,19 +1848,25 @@ export class AuditManagerClient {
     ) as AsyncIterable<protos.google.cloud.auditmanager.v1.IResourceEnrollmentStatus>;
   }
   /**
-   * Gets controls needed to be implemented to be compliant to a standard.
+   * Lists the controls that you must implement to become compliant to a
+   * regulatory standard.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Format
-   *   projects/{project}/locations/{location}/standards/{standard},
-   *   folders/{folder}/locations/{location}/standards/{standard}
+   *   Required. Standard to list controls for, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/standards/{standard}`
+   *   * `folders/{folder}/locations/{location}/standards/{standard}`
+   *   * `organizations/{organization}/locations/{location}/standards/{standard}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1903,14 +1987,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Format
-   *   projects/{project}/locations/{location}/standards/{standard},
-   *   folders/{folder}/locations/{location}/standards/{standard}
+   *   Required. Standard to list controls for, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/standards/{standard}`
+   *   * `folders/{folder}/locations/{location}/standards/{standard}`
+   *   * `organizations/{organization}/locations/{location}/standards/{standard}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1954,14 +2043,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Format
-   *   projects/{project}/locations/{location}/standards/{standard},
-   *   folders/{folder}/locations/{location}/standards/{standard}
+   *   Required. Standard to list controls for, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/standards/{standard}`
+   *   * `folders/{folder}/locations/{location}/standards/{standard}`
+   *   * `organizations/{organization}/locations/{location}/standards/{standard}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2748,6 +2842,140 @@ export class AuditManagerClient {
     return this.pathTemplates.organizationLocationPathTemplate.match(
       organizationLocationName,
     ).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationAuditReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} audit_report
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAuditReportsPath(
+    organization: string,
+    location: string,
+    auditReport: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        audit_report: auditReport,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAuditReports resource.
+   *
+   * @param {string} organizationLocationAuditReportsName
+   *   A fully-qualified path representing organization_location_auditReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAuditReportsName(
+    organizationLocationAuditReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.match(
+      organizationLocationAuditReportsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAuditReports resource.
+   *
+   * @param {string} organizationLocationAuditReportsName
+   *   A fully-qualified path representing organization_location_auditReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAuditReportsName(
+    organizationLocationAuditReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.match(
+      organizationLocationAuditReportsName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_report from OrganizationLocationAuditReports resource.
+   *
+   * @param {string} organizationLocationAuditReportsName
+   *   A fully-qualified path representing organization_location_auditReports resource.
+   * @returns {string} A string representing the audit_report.
+   */
+  matchAuditReportFromOrganizationLocationAuditReportsName(
+    organizationLocationAuditReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.match(
+      organizationLocationAuditReportsName,
+    ).audit_report;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationAuditScopeReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} audit_scope_report
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAuditScopeReportsPath(
+    organization: string,
+    location: string,
+    auditScopeReport: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        audit_scope_report: auditScopeReport,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_auditScopeReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAuditScopeReportsName(
+    organizationLocationAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match(
+      organizationLocationAuditScopeReportsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_auditScopeReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAuditScopeReportsName(
+    organizationLocationAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match(
+      organizationLocationAuditScopeReportsName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_scope_report from OrganizationLocationAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_auditScopeReports resource.
+   * @returns {string} A string representing the audit_scope_report.
+   */
+  matchAuditScopeReportFromOrganizationLocationAuditScopeReportsName(
+    organizationLocationAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match(
+      organizationLocationAuditScopeReportsName,
+    ).audit_scope_report;
   }
 
   /**
