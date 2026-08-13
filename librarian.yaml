@@ -1402,8 +1402,8 @@ libraries:
     nodejs:
       default_version: v3beta
       package_name: '@google-cloud/policy-troubleshooter-iam'
-      metadata_name_override: iam
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/iam/latest
+      metadata_name_override: iam
   - name: google-cloud-privatecatalog
     version: 5.0.0
     apis:
