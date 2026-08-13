@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.32.0
+version: v0.37.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -215,7 +215,7 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentidentity
-    version: 0.1.0
+    version: 0.1.1
     apis:
       - path: google/cloud/agentidentity/v1
       - path: google/cloud/agentidentity/v1beta
@@ -390,7 +390,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-asset
-    version: 7.0.0
+    version: 7.0.1
     apis:
       - path: google/cloud/asset/v1
       - path: google/cloud/asset/v1p7beta1
@@ -731,7 +731,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-contactcenterinsights
-    version: 5.0.0
+    version: 5.0.1
     apis:
       - path: google/cloud/contactcenterinsights/v1
     copyright_year: "2026"
@@ -1091,7 +1091,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/intrusion-detection-system
   - name: google-cloud-iot
-    version: 6.0.0
+    version: 6.0.1
     apis:
       - path: google/cloud/iot/v1
     copyright_year: "2026"
@@ -1115,7 +1115,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-language
-    version: 8.0.0
+    version: 8.0.1
     apis:
       - path: google/cloud/language/v2
       - path: google/cloud/language/v1
@@ -1476,7 +1476,7 @@ libraries:
           path: google/cloud/resourcemanager/v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
-    version: 5.0.0
+    version: 5.0.1
     apis:
       - path: google/cloud/retail/v2
         nodejs:
@@ -1550,7 +1550,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
   - name: google-cloud-securitycenter
-    version: 10.0.0
+    version: 10.0.1
     apis:
       - path: google/cloud/securitycenter/v2
       - path: google/cloud/securitycenter/v1
@@ -1606,7 +1606,7 @@ libraries:
       metadata_name_override: spanner-api
       name_pretty_override: Spanner API
   - name: google-cloud-speech
-    version: 8.0.0
+    version: 8.0.1
     apis:
       - path: google/cloud/speech/v2
       - path: google/cloud/speech/v1
@@ -1706,7 +1706,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-translate
-    version: 10.0.0
+    version: 10.0.1
     apis:
       - path: google/cloud/translate/v3
       - path: google/cloud/translate/v3beta1
@@ -1936,7 +1936,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/cloudprofiler'
   - name: google-devtools-containeranalysis
-    version: 7.0.0
+    version: 7.0.1
     apis:
       - path: google/devtools/containeranalysis/v1
       - path: google/devtools/containeranalysis/v1beta1
@@ -2113,7 +2113,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/monitoring-dashboards'
   - name: google-privacy-dlp
-    version: 7.0.0
+    version: 7.0.1
     apis:
       - path: google/privacy/dlp/v2
     copyright_year: "2026"

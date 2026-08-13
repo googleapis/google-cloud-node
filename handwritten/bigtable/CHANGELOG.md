@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.1.0...bigtable-v7.2.0) (2026-08-12)
+
+
+### Features
+
+* **ci:** Implement sharding for unit test performance ([#9021](https://github.com/googleapis/google-cloud-node/issues/9021)) ([1d977b5](https://github.com/googleapis/google-cloud-node/commit/1d977b5fab9c7d7ee25487bbbe95ae296a12e7b0))
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.0.0...bigtable-v7.1.0) (2026-08-05)
 
 
