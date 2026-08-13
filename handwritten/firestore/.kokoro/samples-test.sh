@@ -33,13 +33,13 @@ fi
 
 if [ -f samples/package.json ]; then
     npm install -g pnpm@9
-pnpm install
+    pnpm install
 
     # Install and link samples
     cd samples/
     npm link ../
     npm install -g pnpm@9
-pnpm install
+    pnpm install
     cd ..
     # If tests are running against main, configure FlakyBot
     # to open issues on failures:

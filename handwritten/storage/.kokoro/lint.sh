@@ -33,7 +33,7 @@ if [ -f samples/package.json ]; then
   cd samples/
   npm link ../
   npm install -g pnpm@9
-pnpm install
+  pnpm install
   cd ..
 fi
 
