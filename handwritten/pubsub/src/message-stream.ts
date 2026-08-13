@@ -18,7 +18,6 @@ import {promisify} from '@google-cloud/promisify';
 import {ClientStub, GoogleError, grpc} from 'google-gax';
 import * as isStreamEnded from 'is-stream-ended';
 import {PassThrough} from 'stream';
-import {randomUUID} from 'crypto';
 
 import {PullRetry} from './pull-retry';
 import {Subscriber} from './subscriber';
@@ -27,6 +26,7 @@ import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {ExponentialRetry} from './exponential-retry';
 import {DebugMessage} from './debug';
+import {randomUUID} from 'crypto';
 import {logs as baseLogs, LoggingFunction} from './logs';
 
 /**
@@ -35,9 +35,7 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog(
-    'subscriber-streams',
-  ) as LoggingFunction,
+  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
 };
 
 /*!
