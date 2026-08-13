@@ -15,13 +15,12 @@
 import {loggingUtils} from 'google-gax';
 
 export type LoggingFunction = loggingUtils.AdhocDebugLogFunction;
-export type Loggers = Record<string, LoggingFunction>;
 
 /**
  * Base logger. Other loggers will derive from this one.
  *
  * @private
  */
-export const logs: Loggers = {
-  pubsub: loggingUtils.log('pubsub'),
+export const logs = {
+  pubsub: loggingUtils.log('pubsub') as LoggingFunction,
 };

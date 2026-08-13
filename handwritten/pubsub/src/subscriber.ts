@@ -31,7 +31,7 @@ import {Duration, atMost as durationAtMost} from './temporal';
 import {EventEmitter} from 'events';
 
 import {awaitWithTimeout} from './util';
-import {logs as baseLogs, Loggers} from './logs';
+import {logs as baseLogs, LoggingFunction} from './logs';
 
 export {StatusError} from './message-stream';
 
@@ -43,10 +43,10 @@ type SubscriberClient = v1.SubscriberClient;
  *
  * @private
  */
-export const logs: Loggers = {
-  slowAck: baseLogs.pubsub.sublog('slow-ack'),
-  ackNack: baseLogs.pubsub.sublog('ack-nack'),
-  debug: baseLogs.pubsub.sublog('debug'),
+export const logs = {
+  slowAck: baseLogs.pubsub.sublog('slow-ack') as LoggingFunction,
+  ackNack: baseLogs.pubsub.sublog('ack-nack') as LoggingFunction,
+  debug: baseLogs.pubsub.sublog('debug') as LoggingFunction,
 };
 
 export type PullResponse = google.pubsub.v1.IStreamingPullResponse;
