@@ -1859,6 +1859,10 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-workloadidentity
+    apis:
+      - path: google/cloud/workloadidentity/v1
+    copyright_year: "2026"
   - name: google-cloud-workloadmanager
     version: 0.3.0
     apis:

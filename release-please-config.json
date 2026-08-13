@@ -309,6 +309,7 @@
     "packages/google-cloud-webrisk": {},
     "packages/google-cloud-websecurityscanner": {},
     "packages/google-cloud-workflows": {},
+    "packages/google-cloud-workloadidentity": {},
     "packages/google-cloud-workloadmanager": {},
     "packages/google-cloud-workstations": {},
     "packages/google-container": {},
