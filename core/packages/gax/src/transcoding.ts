@@ -119,7 +119,14 @@ export function deleteField(request: JSONObject, field: string): void {
 }
 
 function validateSingleSegment(propertyName: string, value: string): void {
-  if (value === '.' || value === '..') {
+  if (
+    value === '.' ||
+    value === '..' ||
+    value.includes('..') ||
+    value.includes('?') ||
+    value.includes('#') ||
+    value.includes('/')
+  ) {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
   }
 }
