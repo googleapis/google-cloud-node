@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {assert} from 'chai';
 import {describe, it, beforeEach} from 'mocha';
 import {TestResources} from './testResources';
+import * as assert from 'node:assert';
 
 describe('testResources (unit)', () => {
   const fixedId = 'fixed';
