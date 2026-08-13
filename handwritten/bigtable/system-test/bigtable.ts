@@ -35,11 +35,12 @@ import {Family} from '../src/family.js';
 import {Row} from '../src/row.js';
 import {Table} from '../src/table.js';
 import {RawFilter} from '../src/filter';
-import {generateId, PREFIX} from './common';
+import {generateId, reapBackups, reapInstances} from './common';
 import {BigtableTableAdminClient} from '../src/v2';
 import {ServiceError} from 'google-gax';
 import {BigtableDate, QueryResultRow} from '../src/execute-query/values';
-import {google} from '../protos/protos';
+import {protos} from '../src';
+import google = protos.google;
 
 type IBackup = google.bigtable.admin.v2.IBackup;
 
@@ -56,146 +57,88 @@ describe('Bigtable', () => {
   const CLUSTER_ID = generateId('cluster');
   const CLUSTER_ID_HDD = generateId('cluster');
 
-  async function reapBackups(instance: Instance) {
-    try {
-      const [backups] = await instance.getBackups();
-      for (const backup of backups) {
-        try {
-          await backup.delete({timeout: 50 * 1000});
-        } catch (e) {
-          console.log(`Error deleting backup: ${backup.id}: ${e}`);
-        }
-      }
-    } catch (e) {
-      console.error(`Error listing backups from ${instance.name}: ${e}`);
-    }
-  }
-
-  async function reapInstances() {
-    const [instances] = await bigtable.getInstances();
-    const testInstances = instances
-      .filter(i => i.id.match(PREFIX))
-      .filter(i => {
-        const timeCreated = i.metadata!.labels!.time_created as {} as Date;
-        // Only delete stale resources.
-        const oneHourAgo = new Date(Date.now() - 3600000);
-        return !timeCreated || timeCreated <= oneHourAgo;
-      });
-    // need to delete backups first due to instance deletion precondition
-    const deleteBackupPromises = testInstances.map(instance =>
-      reapBackups(instance),
-    );
-    for (const backupPromise of deleteBackupPromises) {
-      await backupPromise;
-    }
-    for (const instance of testInstances) {
-      try {
-        try {
-          await instance.delete();
-        } catch(e: any) {
-          console.warn("Skipping delete due to error", e.message);
-        }
-      } catch (e) {
-        console.log(`Error deleting instance: ${instance.id}`);
-      }
-    }
-  }
-
-  before(async function () {
-    await reapInstances();
-    try {
-      const [, operation] = await INSTANCE.create({
-        clusters: [
-          {
-            id: CLUSTER_ID,
-            location: 'us-central2-c',
-            nodes: 3,
-            storage: 'ssd',
-          },
-        ],
-        labels: {
-          time_created: Date.now(),
+  before(async () => {
+    await reapInstances(bigtable);
+    const [, operation] = await INSTANCE.create({
+      clusters: [
+        {
+          id: CLUSTER_ID,
+          location: 'us-central2-c',
+          nodes: 1,
+          storage: 'ssd',
         },
-      });
-      const [, operationHDD] = await INSTANCE_HDD.create({
-        clusters: [
-          {
-            id: CLUSTER_ID_HDD,
-            location: 'us-central2-c',
-            nodes: 3,
-            storage: 'hdd',
-          },
-        ],
-        labels: {
-          time_created: Date.now(),
+      ],
+      labels: {
+        time_created: String(Date.now()),
+      },
+    });
+    const [, operationHDD] = await INSTANCE_HDD.create({
+      clusters: [
+        {
+          id: CLUSTER_ID_HDD,
+          location: 'us-central2-c',
+          nodes: 1,
+          storage: 'hdd',
         },
-      });
-      await Promise.all([operation.promise(), operationHDD.promise()]);
-      await TABLE.create({
-        families: ['follows', 'traits'],
-      });
-      await TABLE_HDD.create({
-        families: ['follows', 'traits'],
-      });
-      await INSTANCE.createAppProfile(APP_PROFILE_ID, {
-        routing: 'any',
-        ignoreWarnings: true,
-      });
-    } catch(e: any) {
-      if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
-        console.warn('Skipping test suite due to RESOURCE_EXHAUSTED quota during setup', e.message);
-        this.skip();
-      }
-      throw e;
-    }
+      ],
+      labels: {
+        time_created: String(Date.now()),
+      },
+    });
+
+    await Promise.all([operation.promise(), operationHDD.promise()]);
+    await TABLE.create({
+      families: ['follows', 'traits'],
+    });
+    await TABLE_HDD.create({
+      families: ['follows', 'traits'],
+    });
+    await INSTANCE.createAppProfile(APP_PROFILE_ID, {
+      routing: 'any',
+      ignoreWarnings: true,
+    });
   });
 
   after(async () => {
-    const q = [];
     const instances = [INSTANCE, DIFF_INSTANCE, CMEK_INSTANCE, INSTANCE_HDD];
 
     // need to delete backups first due to instance deletion precondition
     await Promise.all(instances.map(instance => reapBackups(instance)));
     await Promise.all(
-      instances.map(instance => {
-        q.push(async () => {
-          try {
-            try {
-              await instance.delete();
-            } catch(e: any) {
-              console.warn("Skipping delete due to error", e.message);
-            }
-          } catch (e) {
-            console.log(`Error deleting instance: ${instance.id}`);
-          }
-        });
+      instances.map(async instance => {
+        try {
+          await instance.delete();
+        } catch (e) {
+          console.log(`Error deleting instance: ${instance.id}`);
+        }
       }),
     );
+    await reapInstances(bigtable);
   });
 
   describe('instances', () => {
-    it('should get a list of instances', async function() {
+    it('should get a list of instances', async () => {
       const [instances, failedLocations] = await bigtable.getInstances();
       assert(instances.length > 0);
       assert(Array.isArray(failedLocations));
     });
 
-    it('should check if an instance exists', async function() {
+    it('should check if an instance exists', async () => {
       const [exists] = await INSTANCE.exists();
       assert.strictEqual(exists, true);
     });
 
-    it('should check if an instance does not exist', async function() {
+    it('should check if an instance does not exist', async () => {
       const instance = bigtable.instance('fake-instance');
       const [exists] = await instance.exists();
       assert.strictEqual(exists, false);
     });
 
-    it('should get a single instance', async function() {
+    it('should get a single instance', async () => {
       await INSTANCE.get();
     });
 
-    it('should update an instance', async function() {
+    it('should update an instance', async () => {
       const metadata = {
         displayName: 'metadata-test',
       };
@@ -204,7 +147,7 @@ describe('Bigtable', () => {
       assert.strictEqual(metadata.displayName, metadata_.displayName);
     });
 
-    it('should get an Iam Policy for the instance', async function() {
+    it('should get an Iam Policy for the instance', async () => {
       const policyProperties = ['version', 'bindings', 'etag'];
       const [policy] = await INSTANCE.getIamPolicy();
       policyProperties.forEach(property => {
@@ -212,7 +155,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should test Iam permissions for the instance', async function() {
+    it('should test Iam permissions for the instance', async () => {
       const permissions = ['bigtable.tables.get', 'bigtable.tables.readRows'];
       const [grantedPermissions] =
         await INSTANCE.testIamPermissions(permissions);
@@ -222,44 +165,28 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should set Iam Policy on the instance', async function() {
-      try {
-        const instance = bigtable.instance(generateId('instance'));
-        const clusteId = generateId('cluster');
-        const [, operation] = await instance.create({
-          clusters: [
-            {
-              id: clusteId,
-              location: 'us-central2-c',
-              nodes: 3,
-            },
-          ],
-          labels: {
-            time_created: Date.now(),
+    it('should set Iam Policy on the instance', async () => {
+      const instance = bigtable.instance(generateId('instance'));
+      const clusteId = generateId('cluster');
+      const [, operation] = await instance.create({
+        clusters: [
+          {
+            id: clusteId,
+            location: 'us-central2-c',
+            nodes: 1,
           },
-        });
-        await operation.promise();
+        ],
+        labels: {
+          time_created: String(Date.now()),
+        },
+      });
+      await operation.promise();
 
-        const [policy] = await instance.getIamPolicy();
-        const [updatedPolicy] = await instance.setIamPolicy(policy);
-        Object.keys(policy).forEach(key => assert(key in updatedPolicy));
+      const [policy] = await instance.getIamPolicy();
+      const [updatedPolicy] = await instance.setIamPolicy(policy);
+      Object.keys(policy).forEach(key => assert(key in updatedPolicy));
 
-        try {
-
-          await instance.delete();
-
-        } catch(e: any) {
-
-          console.warn("Skipping delete due to error", e.message);
-
-        }
-      } catch (e: any) {
-        if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
-          this.skip();
-        } else {
-          throw e;
-        }
-      }
+      await instance.delete();
     });
   });
 
@@ -273,7 +200,7 @@ describe('Bigtable', () => {
     let keyRingsBaseUrl: string;
     let cryptoKeyVersionName: string;
 
-    before(async function() {
+    before(async () => {
       const projectId = await bigtable.auth.getProjectId();
       kmsKeyName = `projects/${projectId}/locations/us-central2/keyRings/${keyRingId}/cryptoKeys/${cryptoKeyId}`;
       keyRingsBaseUrl = `https://cloudkms.googleapis.com/v1/projects/${projectId}/locations/us-central2/keyRings`;
@@ -299,12 +226,12 @@ describe('Bigtable', () => {
           {
             id: CMEK_CLUSTER.id,
             location: 'us-central2-a',
-            nodes: 3,
+            nodes: 1,
             key: kmsKeyName,
           },
         ],
         labels: {
-          time_created: Date.now(),
+          time_created: String(Date.now()),
         },
       });
       await operation.promise();
@@ -320,18 +247,18 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should have created an instance', async function() {
+    it('should have created an instance', async () => {
       const [metadata] = await CMEK_CLUSTER.getMetadata();
       assert.deepStrictEqual(metadata.encryptionConfig, {kmsKeyName});
     });
 
-    it('should create a cluster', async function() {
+    it('should create a cluster', async () => {
       const cluster = CMEK_INSTANCE.cluster(generateId('cluster'));
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, operation] = await cluster.create({
         location: 'us-central2-b',
-        nodes: 3,
+        nodes: 1,
         key: kmsKeyName,
       });
       await operation.promise();
@@ -340,14 +267,14 @@ describe('Bigtable', () => {
       assert.deepStrictEqual(metadata.encryptionConfig, {kmsKeyName});
     });
 
-    it('should fail if key not provided', async function() {
+    it('should fail if key not provided', async () => {
       const cluster = CMEK_INSTANCE.cluster(generateId('cluster'));
 
       try {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [_, operation] = await cluster.create({
           location: 'us-central2-b',
-          nodes: 3,
+          nodes: 1,
         });
         await operation.promise();
         throw new Error('Cluster creation should not have succeeded');
@@ -362,7 +289,7 @@ describe('Bigtable', () => {
   });
 
   describe('appProfiles', () => {
-    it('should retrieve a list of app profiles', async function() {
+    it('should retrieve a list of app profiles', async () => {
       const [appProfiles] = await INSTANCE.getAppProfiles();
       assert(appProfiles[0] instanceof AppProfile);
       assert(appProfiles.length > 0);
@@ -382,22 +309,22 @@ describe('Bigtable', () => {
         });
     });
 
-    it('should check if an app profile exists', async function() {
+    it('should check if an app profile exists', async () => {
       const [exists] = await APP_PROFILE.exists();
       assert.strictEqual(exists, true);
     });
 
-    it('should check if an app profile does not exist', async function() {
+    it('should check if an app profile does not exist', async () => {
       const appProfile = INSTANCE.appProfile('should-not-exist');
       const [exists] = await appProfile.exists();
       assert.strictEqual(exists, false);
     });
 
-    it('should get an app profile', async function() {
+    it('should get an app profile', async () => {
       await APP_PROFILE.get();
     });
 
-    it('should delete an app profile', async function() {
+    it('should delete an app profile', async () => {
       const appProfile = INSTANCE.appProfile(generateId('app-profile'));
       await appProfile.create({
         routing: 'any',
@@ -406,7 +333,7 @@ describe('Bigtable', () => {
       await appProfile.delete({ignoreWarnings: true});
     });
 
-    it('should get the app profiles metadata', async function() {
+    it('should get the app profiles metadata', async () => {
       const [metadata] = await APP_PROFILE.getMetadata();
       assert.strictEqual(
         metadata.name,
@@ -414,7 +341,7 @@ describe('Bigtable', () => {
       );
     });
 
-    it('should update an app profile', async function() {
+    it('should update an app profile', async () => {
       const cluster = INSTANCE.cluster(CLUSTER_ID);
       const options = {
         routing: cluster,
@@ -441,29 +368,29 @@ describe('Bigtable', () => {
       CLUSTER = INSTANCE.cluster(CLUSTER_ID);
     });
 
-    it('should retrieve a list of clusters', async function() {
+    it('should retrieve a list of clusters', async () => {
       const [clusters] = await INSTANCE.getClusters();
       assert(clusters[0] instanceof Cluster);
     });
 
-    it('should check if a cluster exists', async function() {
+    it('should check if a cluster exists', async () => {
       const [exists] = await CLUSTER.exists();
       assert.strictEqual(exists, true);
     });
 
-    it('should check if a cluster does not exist', async function() {
+    it('should check if a cluster does not exist', async () => {
       const cluster = INSTANCE.cluster('fake-cluster');
       const [exists] = await cluster.exists();
       assert.strictEqual(exists, false);
     });
 
-    it('should get a cluster', async function() {
+    it('should get a cluster', async () => {
       await CLUSTER.get();
     });
 
-    it('should update a cluster', async function() {
+    it('should update a cluster', async () => {
       const metadata = {
-        nodes: 4,
+        nodes: 2,
       };
       const [operation] = await CLUSTER.setMetadata(metadata);
       await operation.promise();
@@ -473,7 +400,7 @@ describe('Bigtable', () => {
   });
 
   describe('tables', () => {
-    it('should retrieve a list of tables', async function() {
+    it('should retrieve a list of tables', async () => {
       const [tables] = await INSTANCE.getTables();
       assert(tables[0] instanceof Table);
     });
@@ -492,22 +419,22 @@ describe('Bigtable', () => {
         });
     });
 
-    it('should check if a table exists', async function() {
+    it('should check if a table exists', async () => {
       const [exists] = await TABLE.exists();
       assert.strictEqual(exists, true);
     });
 
-    it('should check if a table does not exist', async function() {
+    it('should check if a table does not exist', async () => {
       const table = INSTANCE.table('should-not-exist');
       const [exists] = await table.exists();
       assert.strictEqual(exists, false);
     });
 
-    it('should get a table', async function() {
+    it('should get a table', async () => {
       await TABLE.get();
     });
 
-    it('should get an Iam Policy for the table', async function() {
+    it('should get an Iam Policy for the table', async () => {
       const policyProperties = ['version', 'bindings', 'etag'];
       const [policy] = await TABLE.getIamPolicy();
       policyProperties.forEach(property => {
@@ -515,7 +442,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should test Iam permissions for the table', async function() {
+    it('should test Iam permissions for the table', async () => {
       const permissions = ['bigtable.tables.get', 'bigtable.tables.readRows'];
       const [grantedPermissions] = await TABLE.testIamPermissions(permissions);
       assert.strictEqual(grantedPermissions.length, permissions.length);
@@ -524,7 +451,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should set Iam Policy on the table', async function() {
+    it('should set Iam Policy on the table', async () => {
       const table = INSTANCE.table(generateId('table'));
       await table.create();
 
@@ -535,13 +462,13 @@ describe('Bigtable', () => {
       await table.delete();
     });
 
-    it('should delete a table', async function() {
+    it('should delete a table', async () => {
       const table = INSTANCE.table(generateId('table'));
       await table.create();
       await table.delete();
     });
 
-    it('should get the tables metadata', async function() {
+    it('should get the tables metadata', async () => {
       const [metadata] = await TABLE.getMetadata();
       assert.strictEqual(
         metadata.name,
@@ -549,7 +476,7 @@ describe('Bigtable', () => {
       );
     });
 
-    it('should create a table with column family data', async function() {
+    it('should create a table with column family data', async () => {
       const name = generateId('table');
       const options = {
         families: ['test'],
@@ -558,7 +485,7 @@ describe('Bigtable', () => {
       assert(table.metadata!.columnFamilies!.test);
     });
 
-    it('should create a table if autoCreate is true', async function() {
+    it('should create a table if autoCreate is true', async () => {
       const table = INSTANCE.table(generateId('table'));
       await table.get({autoCreate: true});
       await table.delete();
@@ -566,7 +493,7 @@ describe('Bigtable', () => {
   });
 
   describe('consistency tokens', () => {
-    it('should generate consistency token', async function() {
+    it('should generate consistency token', async () => {
       const [token] = await TABLE.generateConsistencyToken();
       assert.strictEqual(typeof token, 'string');
     });
@@ -578,13 +505,13 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should return boolean for checkConsistency of token', async function() {
+    it('should return boolean for checkConsistency of token', async () => {
       const [token] = await TABLE.generateConsistencyToken();
       const [res] = await TABLE.checkConsistency(token);
       assert.strictEqual(typeof res, 'boolean');
     });
 
-    it('should return boolean for waitForReplication', async function() {
+    it('should return boolean for waitForReplication', async () => {
       const [res] = await TABLE.waitForReplication();
       assert.strictEqual(typeof res, 'boolean');
     });
@@ -594,13 +521,13 @@ describe('Bigtable', () => {
     // We want to work with the gapic admin class for this version.
     const tableAdmin = bigtable.admin.getTableAdminClient();
 
-    it('should wait for consistency without an existing token', async function() {
+    it('should wait for consistency without an existing token', async () => {
       await tableAdmin.waitForConsistency(
         replaceProjectIdToken(TABLE.name, bigtable.projectId),
       );
     });
 
-    it('should wait for consistency with an existing token', async function() {
+    it('should wait for consistency with an existing token', async () => {
       const [token] = await tableAdmin.generateConsistencyToken({
         name: replaceProjectIdToken(TABLE.name, bigtable.projectId),
       });
@@ -612,7 +539,7 @@ describe('Bigtable', () => {
   });
 
   describe('replication states', () => {
-    it('should get a map of clusterId and state', async function() {
+    it('should get a map of clusterId and state', async () => {
       const [clusterStates] = await TABLE.getReplicationStates();
       assert(clusterStates instanceof Map);
       assert(clusterStates.has(CLUSTER_ID));
@@ -623,19 +550,19 @@ describe('Bigtable', () => {
     const FAMILY_ID = 'presidents';
     let FAMILY: Family;
 
-    before(async function() {
+    before(async () => {
       FAMILY = TABLE.family(FAMILY_ID);
       await FAMILY.create();
     });
 
-    it('should get a list of families', async function() {
+    it('should get a list of families', async () => {
       const [families] = await TABLE.getFamilies();
       assert.strictEqual(families.length, 3);
       assert(families[0] instanceof Family);
       assert.notStrictEqual(-1, families.map(f => f.id).indexOf(FAMILY.id));
     });
 
-    it('should get a family', async function() {
+    it('should get a family', async () => {
       const family = TABLE.family(FAMILY_ID);
       await family.get();
       assert(family instanceof Family);
@@ -643,24 +570,24 @@ describe('Bigtable', () => {
       assert.strictEqual(family.id, FAMILY.id);
     });
 
-    it('should check if a family exists', async function() {
+    it('should check if a family exists', async () => {
       const [exists] = await FAMILY.exists();
       assert.strictEqual(exists, true);
     });
 
-    it('should check if a family does not exist', async function() {
+    it('should check if a family does not exist', async () => {
       const family = TABLE.family('prezzies');
       const [exists] = await family.exists();
       assert.strictEqual(exists, false);
     });
 
-    it('should create a family if autoCreate is true', async function() {
+    it('should create a family if autoCreate is true', async () => {
       const family = TABLE.family('prezzies');
       await family.get({autoCreate: true});
       await family.delete();
     });
 
-    it('should create a family with nested gc rules', async function() {
+    it('should create a family with nested gc rules', async () => {
       const family = TABLE.family('prezzies');
       const options = {
         rule: {
@@ -706,12 +633,12 @@ describe('Bigtable', () => {
       await family.delete();
     });
 
-    it('should get the column family metadata', async function() {
+    it('should get the column family metadata', async () => {
       const [metadata] = await FAMILY.getMetadata();
       assert.strictEqual(FAMILY.metadata, metadata);
     });
 
-    it('should update a column family', async function() {
+    it('should update a column family', async () => {
       const rule = {
         age: {
           seconds: 10000,
@@ -724,7 +651,7 @@ describe('Bigtable', () => {
       assert.strictEqual(maxAge!.nanos, rule.age.nanos);
     });
 
-    it('should delete a column family', async function() {
+    it('should delete a column family', async () => {
       await FAMILY.delete();
     });
   });
@@ -733,7 +660,7 @@ describe('Bigtable', () => {
     describe('.exists()', () => {
       const row = TABLE.row('alincoln');
 
-      beforeEach(async function() {
+      beforeEach(async () => {
         await row.create({
           entry: {
             follows: {
@@ -747,12 +674,12 @@ describe('Bigtable', () => {
 
       afterEach(async () => row.delete());
 
-      it('should check if a row exists', async function() {
+      it('should check if a row exists', async () => {
         const [exists] = await row.exists();
         assert.strictEqual(exists, true);
       });
 
-      it('should check if a row does not exist', async function() {
+      it('should check if a row does not exist', async () => {
         const row = TABLE.row('gwashington');
         const [exists] = await row.exists();
         assert.strictEqual(exists, false);
@@ -760,7 +687,7 @@ describe('Bigtable', () => {
     });
 
     describe('inserting data', () => {
-      it('should insert rows', async function() {
+      it('should insert rows', async () => {
         const rows = [
           {
             key: 'gwashington',
@@ -792,7 +719,7 @@ describe('Bigtable', () => {
         await TABLE.insert(rows);
       });
 
-      it('should insert a large row', async function() {
+      it('should insert a large row', async () => {
         await TABLE.insert({
           key: 'gwashington',
           data: {
@@ -803,7 +730,7 @@ describe('Bigtable', () => {
         });
       });
 
-      it('should create an individual row', async function() {
+      it('should create an individual row', async () => {
         const row = TABLE.row('alincoln');
         const rowData = {
           follows: {
@@ -815,7 +742,7 @@ describe('Bigtable', () => {
         await row.create({entry: rowData});
       });
 
-      it('should insert individual cells', async function() {
+      it('should insert individual cells', async () => {
         const row = TABLE.row('gwashington');
         const rowData = {
           follows: {
@@ -825,7 +752,7 @@ describe('Bigtable', () => {
         await row.save(rowData);
       });
 
-      it('should allow for user specified timestamps', async function() {
+      it('should allow for user specified timestamps', async () => {
         const row = TABLE.row('gwashington');
         const rowData = {
           follows: {
@@ -838,14 +765,14 @@ describe('Bigtable', () => {
         await row.save(rowData);
       });
 
-      it('should increment a column value', async function() {
+      it('should increment a column value', async () => {
         const row = TABLE.row('gwashington');
         const increment = 5;
         const [value] = await row.increment('follows:increment', increment);
         assert.strictEqual(value, increment);
       });
 
-      it('should apply read/modify/write rules to a row', async function() {
+      it('should apply read/modify/write rules to a row', async () => {
         const row = TABLE.row('gwashington');
         const rule = {
           column: 'traits:teeth',
@@ -861,7 +788,7 @@ describe('Bigtable', () => {
         assert.strictEqual(data.traits.teeth[0].value, 'shiny-wood');
       });
 
-      it('should check and mutate a row', async function() {
+      it('should check and mutate a row', async () => {
         const row = TABLE.row('gwashington');
         const filter: RawFilter = {
           family: 'follows',
@@ -879,7 +806,7 @@ describe('Bigtable', () => {
     });
 
     describe('fetching data', () => {
-      it('should execute a query', async function() {
+      it('should execute a query', async () => {
         const [preparedStatement] = await INSTANCE.prepareStatement({
           query:
             'SELECT @stringParam AS strCol, @bytesParam as bytesCol, @int64Param AS intCol, @doubleParam AS doubleCol,\n' +
@@ -974,7 +901,7 @@ describe('Bigtable', () => {
           params.dateArrayParam,
         );
       });
-      it('should get rows', async function() {
+      it('should get rows', async () => {
         const [rows] = await TABLE.getRows();
         assert.strictEqual(rows.length, 4);
         assert(rows[0] instanceof Row);
@@ -1008,20 +935,20 @@ describe('Bigtable', () => {
           });
       });
 
-      it('should fetch an individual row', async function() {
+      it('should fetch an individual row', async () => {
         const row = TABLE.row('alincoln');
         const [row_] = await row.get();
         assert.strictEqual(row, row_);
       });
 
-      it('should limit the number of rows', async function() {
+      it('should limit the number of rows', async () => {
         const [rows] = await TABLE.getRows({
           limit: 1,
         });
         assert.strictEqual(rows.length, 1);
       });
 
-      it('should fetch a range of rows', async function() {
+      it('should fetch a range of rows', async () => {
         const options = {
           start: 'alincoln',
           end: 'jadams',
@@ -1030,7 +957,7 @@ describe('Bigtable', () => {
         assert.strictEqual(rows.length, 3);
       });
 
-      it('should fetch a range of rows via prefix', async function() {
+      it('should fetch a range of rows via prefix', async () => {
         const options = {
           prefix: 'g',
         };
@@ -1039,13 +966,13 @@ describe('Bigtable', () => {
         assert.strictEqual(rows[0].id, 'gwashington');
       });
 
-      it('should fetch individual cells of a row', async function() {
+      it('should fetch individual cells of a row', async () => {
         const row = TABLE.row('alincoln');
         const [data] = await row.get(['follows:gwashington']);
         assert.strictEqual(data.follows.gwashington[0].value, 1);
       });
 
-      it('should not decode the values', async function() {
+      it('should not decode the values', async () => {
         const row = TABLE.row('gwashington');
         const options = {
           decode: false,
@@ -1057,7 +984,7 @@ describe('Bigtable', () => {
         assert.strictEqual(value.toString(), 'shiny-wood');
       });
 
-      it('should get sample row keys', async function() {
+      it('should get sample row keys', async () => {
         const [keys] = await TABLE.sampleRowKeys();
         assert(keys.length > 0);
       });
@@ -1075,7 +1002,7 @@ describe('Bigtable', () => {
           });
       });
 
-      it('should end stream early', async function() {
+      it('should end stream early', async () => {
         const entries = [
           {
             key: 'gwashington',
@@ -1121,7 +1048,7 @@ describe('Bigtable', () => {
       });
 
       describe('filters', () => {
-        it('should get rows via column data', async function() {
+        it('should get rows via column data', async () => {
           const filter = {
             column: 'gwashington',
           };
@@ -1131,7 +1058,7 @@ describe('Bigtable', () => {
           assert.deepStrictEqual(keys, ['alincoln', 'jadams', 'tjefferson']);
         });
 
-        it('should get rows that satisfy the cell limit', async function() {
+        it('should get rows that satisfy the cell limit', async () => {
           const entry = {
             key: 'alincoln',
             data: {
@@ -1157,7 +1084,7 @@ describe('Bigtable', () => {
           assert.strictEqual(rowData.follows.tjefferson.length, 1);
         });
 
-        it('should get a range of columns', async function() {
+        it('should get a range of columns', async () => {
           const filter = [
             {
               row: 'tjefferson',
@@ -1178,7 +1105,7 @@ describe('Bigtable', () => {
           });
         });
 
-        it('should run a conditional filter', async function() {
+        it('should run a conditional filter', async () => {
           const filter = {
             condition: {
               test: [
@@ -1205,7 +1132,7 @@ describe('Bigtable', () => {
           assert.strictEqual(rows[0].id, 'tjefferson');
         });
 
-        it('should run a conditional filter with pass only', async function() {
+        it('should run a conditional filter with pass only', async () => {
           const filter = {
             condition: {
               test: [
@@ -1224,7 +1151,7 @@ describe('Bigtable', () => {
           assert(rows.length > 0);
         });
 
-        it('should only get cells for a specific family', async function() {
+        it('should only get cells for a specific family', async () => {
           const entries = [
             {
               key: 'gwashington',
@@ -1245,7 +1172,7 @@ describe('Bigtable', () => {
           assert.deepStrictEqual(families, ['traits']);
         });
 
-        it('should interleave filters', async function() {
+        it('should interleave filters', async () => {
           const filter = [
             {
               interleave: [
@@ -1268,7 +1195,7 @@ describe('Bigtable', () => {
           assert.deepStrictEqual(ids, ['gwashington', 'tjefferson']);
         });
 
-        it('should apply labels to the results', async function() {
+        it('should apply labels to the results', async () => {
           const filter = {
             label: 'test-label',
           };
@@ -1284,7 +1211,7 @@ describe('Bigtable', () => {
           });
         });
 
-        it('should run a regex against the row id', async function() {
+        it('should run a regex against the row id', async () => {
           const filter = {
             row: /[a-z]+on$/,
           };
@@ -1293,7 +1220,7 @@ describe('Bigtable', () => {
           assert.deepStrictEqual(keys, ['gwashington', 'tjefferson']);
         });
 
-        it('should run a sink filter', async function() {
+        it('should run a sink filter', async () => {
           const filter = [
             {
               row: 'alincoln',
@@ -1332,7 +1259,7 @@ describe('Bigtable', () => {
         });
       });
 
-      it('should accept a date range', async function() {
+      it('should accept a date range', async () => {
         const filter = {
           time: {
             start: new Date('March 21, 1986'),
@@ -1346,17 +1273,17 @@ describe('Bigtable', () => {
   });
 
   describe('deleting rows', () => {
-    it('should delete specific cells', async function() {
+    it('should delete specific cells', async () => {
       const row = TABLE.row('alincoln');
       await row.deleteCells(['follows:gwashington']);
     });
 
-    it('should delete a family', async function() {
+    it('should delete a family', async () => {
       const row = TABLE.row('gwashington');
       await row.deleteCells(['traits']);
     });
 
-    it('should delete all the cells', async function() {
+    it('should delete all the cells', async () => {
       const row = TABLE.row('alincoln');
       await row.delete();
     });
@@ -1364,7 +1291,7 @@ describe('Bigtable', () => {
 
   describe('.deleteRows()', () => {
     const table = INSTANCE.table(generateId('table'));
-    beforeEach(async function() {
+    beforeEach(async () => {
       const tableOptions = {
         families: ['cf1'],
       };
@@ -1395,7 +1322,7 @@ describe('Bigtable', () => {
       await table.delete();
     });
 
-    it('should delete the prefixes', async function() {
+    it('should delete the prefixes', async () => {
       await table.deleteRows('a');
       const [rows] = await table.getRows();
       assert.strictEqual(rows.length, 1);
@@ -1404,7 +1331,7 @@ describe('Bigtable', () => {
 
   describe('.truncate()', () => {
     const table = INSTANCE.table(generateId('table'));
-    beforeEach(async function() {
+    beforeEach(async () => {
       const tableOptions = {
         families: ['follows'],
       };
@@ -1426,7 +1353,7 @@ describe('Bigtable', () => {
       await table.delete();
     });
 
-    it('should truncate a table', async function() {
+    it('should truncate a table', async () => {
       await table.truncate();
       const [rows] = await table.getRows();
       assert.strictEqual(rows.length, 0);
@@ -1457,7 +1384,7 @@ describe('Bigtable', () => {
       expireTime.getTime() + 2 + 60 * 60 * 1000,
     );
 
-    before(async function() {
+    before(async () => {
       const [backup, op] = await CLUSTER.createBackup(backupIdFromCluster, {
         table: TABLE,
         expireTime,
@@ -1474,7 +1401,7 @@ describe('Bigtable', () => {
       );
     });
 
-    it('should create backup of a table (from cluster)', async function() {
+    it('should create backup of a table (from cluster)', async () => {
       await BACKUP.getMetadata();
 
       assert.strictEqual(BACKUP.metadata!.name, backupNameFromCluster);
@@ -1482,7 +1409,7 @@ describe('Bigtable', () => {
       assert.deepStrictEqual(BACKUP.expireDate, expireTime);
     });
 
-    it('should create backup of a table (from table)', async function() {
+    it('should create backup of a table (from table)', async () => {
       const [backup, op] = await TABLE.createBackup(backupIdFromTable, {
         expireTime,
       });
@@ -1494,13 +1421,13 @@ describe('Bigtable', () => {
       assert.deepStrictEqual(backup.expireDate, expireTime);
     });
 
-    it('should get a specific backup (cluster)', async function() {
+    it('should get a specific backup (cluster)', async () => {
       const [backup] = await CLUSTER.backup(backupIdFromCluster).get();
       assert.strictEqual(backup.metadata!.name, backupNameFromCluster);
       assert.strictEqual(backup.metadata!.state, 'READY');
     });
 
-    it('should get backups in an instance', async function() {
+    it('should get backups in an instance', async () => {
       const [backups] = await INSTANCE.getBackups();
       assert(Array.isArray(backups));
       assert(backups.length > 0);
@@ -1521,7 +1448,7 @@ describe('Bigtable', () => {
         });
     });
 
-    it('should get backups in a cluster', async function() {
+    it('should get backups in a cluster', async () => {
       const [backups] = await CLUSTER.getBackups();
       assert(Array.isArray(backups));
       assert(backups.length > 0);
@@ -1542,7 +1469,7 @@ describe('Bigtable', () => {
         });
     });
 
-    it('should restore a backup (cluster)', async function() {
+    it('should restore a backup (cluster)', async () => {
       const backup = CLUSTER.backup(backupIdFromCluster);
       const [table, op] = await backup.restore(restoreTableIdFromCluster);
       await op.promise();
@@ -1551,7 +1478,7 @@ describe('Bigtable', () => {
       assert.strictEqual(restoredTableId, restoreTableIdFromCluster);
     });
 
-    it('should restore a backup to a different instance', async function() {
+    it('should restore a backup to a different instance', async () => {
       const [, operation] = await DIFF_INSTANCE.create(
         createInstanceConfig(
           generateId('d-clust'),
@@ -1575,7 +1502,7 @@ describe('Bigtable', () => {
       assert.strictEqual(table.id, restoreTableIdFromCluster);
     });
 
-    it('should update a backup (cluster)', async function() {
+    it('should update a backup (cluster)', async () => {
       const backup = CLUSTER.backup(backupIdFromCluster);
       const [metadata] = await backup.setMetadata({
         expireTime: updateExpireTime,
@@ -1585,7 +1512,7 @@ describe('Bigtable', () => {
       assert.deepStrictEqual(backup.expireDate, updateExpireTime);
     });
 
-    it('should get an Iam Policy for the backup', async function() {
+    it('should get an Iam Policy for the backup', async () => {
       const policyProperties = ['version', 'bindings', 'etag'];
       const [policy] = await BACKUP.getIamPolicy();
 
@@ -1594,7 +1521,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should test Iam permissions for the backup', async function() {
+    it('should test Iam permissions for the backup', async () => {
       const permissions = ['bigtable.backups.get', 'bigtable.backups.delete'];
       const [grantedPermissions] = await BACKUP.testIamPermissions(permissions);
       assert.strictEqual(grantedPermissions.length, permissions.length);
@@ -1603,7 +1530,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should set Iam Policy on the backup', async function() {
+    it('should set Iam Policy on the backup', async () => {
       const backup = CLUSTER.backup(backupIdFromCluster);
 
       const [policy] = await backup.getIamPolicy();
@@ -1623,7 +1550,7 @@ describe('Bigtable', () => {
         PreciseDate.now() + (8 + 600) * 60 * 60 * 1000;
       const copyExpireTime = new PreciseDate(copyExpireTimeMilliseconds);
 
-      beforeEach(async function() {
+      beforeEach(async () => {
         // Sleep here for just over a minute so that the system tests don't
         // experience quota issues due to too many requests per minute.
         await new Promise(resolve => {
@@ -1709,10 +1636,10 @@ describe('Bigtable', () => {
             await backup.delete();
           }
         }
-        it('should copy to the same cluster with precise date expiry times', async function() {
+        it('should copy to the same cluster with precise date expiry times', async () => {
           await testWithExpiryTimes(sourceExpireTime, copyExpireTime);
         });
-        it('should copy to the same cluster with timestamp expiry times', async function() {
+        it('should copy to the same cluster with timestamp expiry times', async () => {
           // Calling toStruct converts times to a timestamp object.
           // For example: sourceExpireTime.toStruct() = {seconds: 1706659851, nanos: 981000000}
           await testWithExpiryTimes(
@@ -1720,14 +1647,14 @@ describe('Bigtable', () => {
             copyExpireTime.toStruct(),
           );
         });
-        it('should copy to the same cluster with date expiry times', async function() {
+        it('should copy to the same cluster with date expiry times', async () => {
           await testWithExpiryTimes(
             new Date(sourceExpireTimeMilliseconds),
             new Date(copyExpireTimeMilliseconds),
           );
         });
       });
-      it('should create backup of a table and copy it on another cluster of another instance', async function() {
+      it('should create backup of a table and copy it on another cluster of another instance', async () => {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
@@ -1747,12 +1674,15 @@ describe('Bigtable', () => {
               clusters: [
                 {
                   id: destinationClusterId,
-                  nodes: 3,
+                  nodes: 1,
                   location: 'us-central2-d',
                   storage: 'ssd',
                 },
               ],
-              labels: {'prod-label': 'prod-label'},
+              labels: {
+                'prod-label': 'prod-label',
+                time_created: String(Date.now()),
+              },
               type: 'production',
             };
             const [, operation] = await instance.create(instanceOptions);
@@ -1768,22 +1698,12 @@ describe('Bigtable', () => {
             },
             instance,
           );
-          try {
-            await instance.delete();
-          } catch(e: any) {
-            console.warn("Skipping delete due to error", e.message);
-          }
-        } catch(e: any) {
-          if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
-            this.skip();
-          } else {
-            throw e;
-          }
+          await instance.delete();
         } finally {
           await backup.delete();
         }
       });
-      it('should create backup of a table and copy it on another cluster of the same instance', async function() {
+      it('should create backup of a table and copy it on another cluster of the same instance', async () => {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
@@ -1801,7 +1721,7 @@ describe('Bigtable', () => {
               destinationClusterId,
             ).create({
               location: 'us-central2-b',
-              nodes: 3,
+              nodes: 1,
             });
             await operation.promise();
           }
@@ -1815,18 +1735,11 @@ describe('Bigtable', () => {
             },
             INSTANCE,
           );
-          await INSTANCE.cluster(destinationClusterId).delete();
-        } catch (e: any) {
-          if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
-            this.skip();
-          } else {
-            throw e;
-          }
         } finally {
           await backup.delete();
         }
       });
-      it('should create backup of a table and copy it on another project', async function() {
+      it('should create backup of a table and copy it on another project', async () => {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
@@ -1853,7 +1766,7 @@ describe('Bigtable', () => {
               clusters: [
                 {
                   id: destinationClusterId,
-                  nodes: 3,
+                  nodes: 1,
                   location: 'us-central2-d',
                   storage: 'ssd',
                 },
@@ -1879,7 +1792,7 @@ describe('Bigtable', () => {
           await backup.delete();
         }
       });
-      it('should restore a copied backup', async function() {
+      it('should restore a copied backup', async () => {
         const backupId = generateId('backup');
         const table = INSTANCE.table('old-table');
         {
@@ -1952,12 +1865,12 @@ describe('Bigtable', () => {
       nanos: 0,
     };
 
-    beforeEach(async function() {
+    beforeEach(async () => {
       // This is not ideal, but we are running into quota issues for admin API access.
       await new Promise(r => setTimeout(r, 60 * 1000));
     });
 
-    before(async function() {
+    before(async () => {
       const [backupOpSSD] = await tableAdmin.createBackup({
         parent: replaceProjectIdToken(
           INSTANCE.cluster(CLUSTER_ID).name,
@@ -2003,7 +1916,7 @@ describe('Bigtable', () => {
     });
 
     // This is here just to make sure that we are, in fact, getting a usable backup.
-    it('should create backup of a table (from table)', async function() {
+    it('should create backup of a table (from table)', async () => {
       assert.strictEqual(backupSSD.name, backupNameFromTableSSD);
       assert.strictEqual(
         new Number(backupSSD.expireTime?.seconds).valueOf(),
@@ -2017,7 +1930,7 @@ describe('Bigtable', () => {
       );
     });
 
-    it('should not optimize when restoring from the same backing type', async function() {
+    it('should not optimize when restoring from the same backing type', async () => {
       // HDD -> HDD and SSD -> SSD should both not trigger an optimize pass.
       const [restoreOp] = await tableAdmin.restoreTable({
         parent: replaceProjectIdToken(INSTANCE_HDD.name, bigtable.projectId),
@@ -2028,7 +1941,7 @@ describe('Bigtable', () => {
       assert.ok(!metadata.optimizeTableOperationName);
     });
 
-    it('should optimize when restoring from a different backing type', async function() {
+    it('should optimize when restoring from a different backing type', async () => {
       // HDD -> SSD should trigger an optimize.
       const [restoreOp] = await tableAdmin.restoreTable({
         parent: replaceProjectIdToken(INSTANCE.name, bigtable.projectId),
@@ -2172,7 +2085,7 @@ describe('Bigtable', () => {
       }
     }
 
-    before(async function() {
+    before(async () => {
       await createTable();
     });
 
@@ -2196,7 +2109,7 @@ describe('Bigtable', () => {
     });
 
     describe('ReadRows grpc calls', () => {
-      it('should call getRows for the authorized view', async function() {
+      it('should call getRows for the authorized view', async () => {
         const rows = (await authorizedView.getRows())[0];
         // The getRows call will only get one of the rows and only display
         // one of the columns visible in the view.
@@ -2238,7 +2151,7 @@ describe('Bigtable', () => {
     });
     describe('MutateRows grpc calls', () => {
       describe('For erroneous calls', () => {
-        it('should fail when writing to a row not in the authorized view', async function() {
+        it('should fail when writing to a row not in the authorized view', async () => {
           const mutation = {
             key: otherRowId,
             data: {
@@ -2258,7 +2171,7 @@ describe('Bigtable', () => {
             );
           }
         });
-        it('should fail when writing to a column not in the authorized view', async function() {
+        it('should fail when writing to a column not in the authorized view', async () => {
           const mutation = {
             key: rowId,
             data: {
@@ -2279,7 +2192,7 @@ describe('Bigtable', () => {
           }
         });
       });
-      it('should mutate a row for a row/column in view', async function() {
+      it('should mutate a row for a row/column in view', async () => {
         // Change the cell in view to a new value.
         const firstMutation = {
           key: rowId,
@@ -2311,7 +2224,7 @@ describe('Bigtable', () => {
         } as {} as Entry;
         await authorizedView.mutate(secondMutation, {} as MutateOptions);
       });
-      it('should insert a row for a row/column in view', async function() {
+      it('should insert a row for a row/column in view', async () => {
         // Change the cell in view to a new value.
         const firstMutation = {
           key: rowId,
@@ -2362,7 +2275,7 @@ describe('Bigtable', () => {
           );
       }
 
-      it('should get a sample of row keys', async function() {
+      it('should get a sample of row keys', async () => {
         const rowKeys = await authorizedView.sampleRowKeys();
         assert.strictEqual(rowKeys.length, 1);
         assert.strictEqual(rowKeys[0].length, 1);
@@ -2527,7 +2440,7 @@ describe('Bigtable', () => {
       });
     });
     describe('ReadModifyWriteRow grpc calls', () => {
-      it('should apply read/modify/write rules to a row', async function() {
+      it('should apply read/modify/write rules to a row', async () => {
         // Append a value to the table:
         const rule = {
           column: `${familyName}:${columnIdInView}`,
@@ -2556,7 +2469,7 @@ describe('Bigtable', () => {
         });
         await resetTable();
       });
-      it('should apply increment to a row', async function() {
+      it('should apply increment to a row', async () => {
         // First set the row in view cell value to a numeric value:
         const originalValue = Math.floor(Math.random() * 1000000000);
         await authorizedViewTable.deleteRows(rowId);
@@ -2612,7 +2525,7 @@ describe('Bigtable', () => {
       await table.delete();
     });
 
-    it('should only insert one row in the table with mutate', async function() {
+    it('should only insert one row in the table with mutate', async () => {
       // Create table
       const tableOptions = {
         families: ['columnFamily'],
@@ -2636,7 +2549,7 @@ describe('Bigtable', () => {
       assert.strictEqual(rows.length, 1);
     });
 
-    it('should insert one row in the table using mutate in a similar way to how the documentation says to use insert', async function() {
+    it('should insert one row in the table using mutate in a similar way to how the documentation says to use insert', async () => {
       // Create table
       const tableOptions = {
         families: ['columnFamily'],
@@ -2659,7 +2572,7 @@ describe('Bigtable', () => {
       assert.strictEqual(rows.length, 1);
     });
 
-    it('should only insert one row in the table with insert as described by the GCP documentation', async function() {
+    it('should only insert one row in the table with insert as described by the GCP documentation', async () => {
       // Create table
       const tableOptions = {
         families: ['follows'],

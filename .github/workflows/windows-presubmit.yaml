@@ -15,14 +15,8 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
-      - name: Calculate Matrix
-        id: set-matrix
-        run: |
-          export DRY_RUN_SHARDS=true
-          export BUILD_TYPE=presubmit
-          export TEST_TYPE=units
-          export GIT_DIFF_ARG=HEAD^1
-          bash ci/run_conditional_tests.sh
+      - id: set-matrix
+        uses: ./.github/actions/calculate-shard-matrix
   units:
     needs: setup
     name: units (Node ${{ matrix.node-version }}, Shard ${{ matrix.shard-index }})
@@ -37,32 +31,11 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      - uses: ./.github/actions/run-unit-tests
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-      - name: Install Workspace Dependencies (Frozen Lockfile)
-        run: pnpm install --frozen-lockfile --ignore-scripts
-      - name: Cache Turborepo
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-      - name: Compile Workspace (Turborepo Caching)
-        run: pnpm run compile --concurrency=4
-      - run: node --version
-      - run: bash ci/run_conditional_tests.sh
-        name: Run windows unit tests
-        shell: bash
-        env:
-          BUILD_TYPE: presubmit
-          TEST_TYPE: units
-          SHARD_TOTAL: ${{ needs.setup.outputs.shard-total }}
-          SHARD_INDEX: ${{ matrix.shard-index }}
-          GIT_DIFF_ARG: HEAD^1
+          shard-total: ${{ needs.setup.outputs.shard-total }}
+          shard-index: ${{ matrix.shard-index }}
 
   # Dummy jobs to satisfy branch protection requirements for each node version
   units-status:
@@ -75,25 +48,10 @@ jobs:
       matrix:
         node-version: [22, 24, 26]
     steps:
-      - name: Check shard status
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          script: |
-            const { data: { jobs } } = await github.rest.actions.listJobsForWorkflowRun({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: context.runId,
-            });
-            const nodeVersion = '${{ matrix.node-version }}';
-            const shardJobs = jobs.filter(j => j.name.includes(`units (Node ${nodeVersion},`));
-            if (shardJobs.length === 0) {
-              core.setFailed(`No shard jobs found for Node ${nodeVersion}`);
-              return;
-            }
-            const failed = shardJobs.filter(j => j.conclusion === 'failure' || j.conclusion === 'cancelled');
-            if (failed.length > 0) {
-              const failedLinks = failed.map(j => `- ${j.name}: ${j.html_url}`).join('\n');
-              core.setFailed(`${failed.length} shards failed for Node ${nodeVersion}:\n${failedLinks}`);
-            } else {
-              core.info(`All shards passed for Node ${nodeVersion}`);
-            }
+          persist-credentials: false
+      - name: Check shard status
+        uses: ./.github/actions/check-shard-status
+        with:
+          node-version: ${{ matrix.node-version }}

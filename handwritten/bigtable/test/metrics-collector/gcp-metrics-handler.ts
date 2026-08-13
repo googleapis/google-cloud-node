@@ -149,9 +149,7 @@ describe('Bigtable/GCPMetricsHandler', () => {
         }
       }
       const sdkMetrics = require('@opentelemetry/sdk-metrics');
-      class FastPeriodicExportingMetricReader
-        extends sdkMetrics.PeriodicExportingMetricReader
-      {
+      class FastPeriodicExportingMetricReader extends sdkMetrics.PeriodicExportingMetricReader {
         constructor(options: any) {
           super({
             ...options,

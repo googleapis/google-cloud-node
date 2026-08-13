@@ -17,7 +17,8 @@ import {Mutation} from '../src/mutation.js';
 const {tests} = require('../../system-test/data/read-rows-retry-test.json') as {
   tests: Test[];
 };
-import {google} from '../protos/protos';
+import {protos} from '../src';
+import google = protos.google;
 import * as assert from 'assert';
 import {describe, it, afterEach, beforeEach} from 'mocha';
 import * as sinon from 'sinon';
@@ -111,60 +112,47 @@ describe('Bigtable/Table', () => {
   (bigtable as any).grpcCredentials = grpc.credentials.createInsecure();
 
   describe('close', () => {
-    it('should fail when invoking readRows with closed client', async function () {
+    it('should fail when invoking readRows with closed client', async () => {
       const instance = bigtable.instance(INSTANCE_NAME);
       const table = instance.table('fake-table');
-      let operation;
       try {
-        [, operation] = await instance.create({
+        const [, operation] = await instance.create({
           clusters: {
             id: 'fake-cluster3',
             location: 'us-west1-c',
             nodes: 1,
           },
         });
-      } catch (e: any) {
-        if (e.code === 8 || e.message.includes('RESOURCE_EXHAUSTED')) {
-          this.skip();
-        }
-        throw e;
-      }
-      await operation.promise();
-      const gaxOptions: CallOptions = {
-        retry: {
-          retryCodes: [grpc.status.DEADLINE_EXCEEDED, grpc.status.NOT_FOUND],
-        },
-        maxRetries: 10,
-      };
-      await table.create({
-        gaxOptions,
-      });
-      await table.getRows(); // This is done to initialize the data client
-      await bigtable.close();
-      try {
-        await table.getRows();
-        assert.fail(
-          'An error should have been thrown because the client is closed',
-        );
-      } catch (err: any) {
-        assert.strictEqual(err.message, 'The client has already been closed.');
-      }
-    });
-    after(async function () {
-      const bigtableSecondClient = new Bigtable();
-      const instance = bigtableSecondClient.instance(INSTANCE_NAME);
-      try {
+        await operation.promise();
+        const gaxOptions: CallOptions = {
+          retry: {
+            retryCodes: [grpc.status.DEADLINE_EXCEEDED, grpc.status.NOT_FOUND],
+          },
+          maxRetries: 10,
+        };
+        await table.create({
+          gaxOptions,
+        });
+        await table.getRows(); // This is done to initialize the data client
+        await bigtable.close();
         try {
-          await instance.delete({});
-        } catch(e: any) {
-          console.warn("Skipping delete due to error", e.message);
+          await table.getRows();
+          assert.fail(
+            'An error should have been thrown because the client is closed',
+          );
+        } catch (err: any) {
+          assert.strictEqual(err.message, 'The client has already been closed.');
         }
-      } catch (e: any) {
-        if (e.code === 8 || e.message.includes('RESOURCE_EXHAUSTED')) {
-          console.warn('Skipping instance.delete() due to RESOURCE_EXHAUSTED');
-          return;
+      } finally {
+        const bigtableSecondClient = new Bigtable();
+        try {
+          const cleanInstance = bigtableSecondClient.instance(INSTANCE_NAME);
+          await cleanInstance.delete({});
+        } catch (e) {
+          // ignore error if already deleted
+        } finally {
+          await bigtableSecondClient.close();
         }
-        throw e;
       }
     });
   });

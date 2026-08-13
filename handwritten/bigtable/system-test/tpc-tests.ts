@@ -14,6 +14,7 @@
 
 import {after, describe, it} from 'mocha';
 import {Bigtable} from '../src';
+import {generateId} from './common';
 
 // INSTRUCTIONS FOR RUNNING TEST:
 // 1. Change describe.skip to describe.only below.
@@ -70,19 +71,20 @@ describe.skip('Universe domain tests', () => {
     }
   }
 
-  const instanceId = 'emulator-test-instance';
+  const instanceId = generateId('emu-test-inst');
   const tableId = 'my-table';
   const columnFamilyId = 'cf1';
 
   after(async () => {
-    // TODO: Solve the issue where tests fail because instances don't get created on time.
-    // Notes: Creating instances can take time and if they are not ready in
-    // time then tests can fail. This shouldn't happen because if the create
-    // instance long running operation completes then the instance should be
-    // ready and shouldn't produce the `Error: 5 NOT_FOUND` error.
-    // Uncomment the code below when the task above is addressed:
-    // const instance = bigtable.instance(instanceId);
-    // try {   await instance.delete({}); } catch(e: any) {   console.warn("Skipping delete due to error", e.message); }
+    const cleanClient = new Bigtable();
+    try {
+      const instance = cleanClient.instance(instanceId);
+      await instance.delete({});
+    } catch (e) {
+      console.log(`Error deleting instance ${instanceId}: ${e}`);
+    } finally {
+      await cleanClient.close();
+    }
   });
 
   it('should set the universe with a client option', done => {

@@ -274,6 +274,33 @@ export namespace google {
 
                     /** SourceConfig automaticBackupsReplicationEnabled */
                     automaticBackupsReplicationEnabled?: (boolean|null);
+
+                    /** SourceConfig sourceType */
+                    sourceType?: (google.cloud.oracledatabase.v1.SourceConfig.SourceType|keyof typeof google.cloud.oracledatabase.v1.SourceConfig.SourceType|null);
+
+                    /** SourceConfig cloneType */
+                    cloneType?: (google.cloud.oracledatabase.v1.SourceConfig.CloneType|keyof typeof google.cloud.oracledatabase.v1.SourceConfig.CloneType|null);
+
+                    /** SourceConfig refreshableMode */
+                    refreshableMode?: (google.cloud.oracledatabase.v1.SourceConfig.RefreshableMode|keyof typeof google.cloud.oracledatabase.v1.SourceConfig.RefreshableMode|null);
+
+                    /** SourceConfig autoRefreshFrequencySeconds */
+                    autoRefreshFrequencySeconds?: (number|null);
+
+                    /** SourceConfig autoRefreshPointLagSeconds */
+                    autoRefreshPointLagSeconds?: (number|null);
+
+                    /** SourceConfig autoRefreshStartTime */
+                    autoRefreshStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceConfig autonomousDatabaseBackup */
+                    autonomousDatabaseBackup?: (string|null);
+
+                    /** SourceConfig backupTime */
+                    backupTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceConfig useLatestAvailableBackup */
+                    useLatestAvailableBackup?: (boolean|null);
                 }
 
                 /** Represents a SourceConfig. */
@@ -290,6 +317,33 @@ export namespace google {
 
                     /** SourceConfig automaticBackupsReplicationEnabled. */
                     public automaticBackupsReplicationEnabled: boolean;
+
+                    /** SourceConfig sourceType. */
+                    public sourceType: (google.cloud.oracledatabase.v1.SourceConfig.SourceType|keyof typeof google.cloud.oracledatabase.v1.SourceConfig.SourceType);
+
+                    /** SourceConfig cloneType. */
+                    public cloneType: (google.cloud.oracledatabase.v1.SourceConfig.CloneType|keyof typeof google.cloud.oracledatabase.v1.SourceConfig.CloneType);
+
+                    /** SourceConfig refreshableMode. */
+                    public refreshableMode: (google.cloud.oracledatabase.v1.SourceConfig.RefreshableMode|keyof typeof google.cloud.oracledatabase.v1.SourceConfig.RefreshableMode);
+
+                    /** SourceConfig autoRefreshFrequencySeconds. */
+                    public autoRefreshFrequencySeconds: number;
+
+                    /** SourceConfig autoRefreshPointLagSeconds. */
+                    public autoRefreshPointLagSeconds?: (number|null);
+
+                    /** SourceConfig autoRefreshStartTime. */
+                    public autoRefreshStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceConfig autonomousDatabaseBackup. */
+                    public autonomousDatabaseBackup: string;
+
+                    /** SourceConfig backupTime. */
+                    public backupTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceConfig useLatestAvailableBackup. */
+                    public useLatestAvailableBackup: boolean;
 
                     /**
                      * Creates a new SourceConfig instance using the specified properties.
@@ -367,6 +421,33 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SourceConfig {
+
+                    /** RefreshableMode enum. */
+                    enum RefreshableMode {
+                        REFRESHABLE_MODE_UNSPECIFIED = 0,
+                        AUTOMATIC = 1,
+                        MANUAL = 2
+                    }
+
+                    /** SourceType enum. */
+                    enum SourceType {
+                        SOURCE_TYPE_UNSPECIFIED = 0,
+                        CLONE_DATABASE = 1,
+                        CROSS_REGION_DISASTER_RECOVERY = 2,
+                        CLONE_TO_REFRESHABLE = 3,
+                        BACKUP_FROM_ID = 4,
+                        BACKUP_FROM_TIMESTAMP = 5
+                    }
+
+                    /** CloneType enum. */
+                    enum CloneType {
+                        CLONE_TYPE_UNSPECIFIED = 0,
+                        FULL = 1,
+                        METADATA = 2
+                    }
                 }
 
                 /** Properties of an AutonomousDatabaseProperties. */
@@ -566,6 +647,9 @@ export namespace google {
 
                     /** AutonomousDatabaseProperties localAdgAutoFailoverMaxDataLossLimitDuration */
                     localAdgAutoFailoverMaxDataLossLimitDuration?: (number|null);
+
+                    /** AutonomousDatabaseProperties refreshableClone */
+                    refreshableClone?: (boolean|null);
                 }
 
                 /** Represents an AutonomousDatabaseProperties. */
@@ -771,6 +855,9 @@ export namespace google {
 
                     /** AutonomousDatabaseProperties localAdgAutoFailoverMaxDataLossLimitDuration. */
                     public localAdgAutoFailoverMaxDataLossLimitDuration?: (number|null);
+
+                    /** AutonomousDatabaseProperties refreshableClone. */
+                    public refreshableClone?: (boolean|null);
 
                     /**
                      * Creates a new AutonomousDatabaseProperties instance using the specified properties.
@@ -2053,6 +2140,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ScheduledOperationDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutonomousDatabaseRefreshableClone. */
+                interface IAutonomousDatabaseRefreshableClone {
+
+                    /** AutonomousDatabaseRefreshableClone name */
+                    name?: (string|null);
+
+                    /** AutonomousDatabaseRefreshableClone region */
+                    region?: (string|null);
+                }
+
+                /** Represents an AutonomousDatabaseRefreshableClone. */
+                class AutonomousDatabaseRefreshableClone implements IAutonomousDatabaseRefreshableClone {
+
+                    /**
+                     * Constructs a new AutonomousDatabaseRefreshableClone.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClone);
+
+                    /** AutonomousDatabaseRefreshableClone name. */
+                    public name: string;
+
+                    /** AutonomousDatabaseRefreshableClone region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new AutonomousDatabaseRefreshableClone instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutonomousDatabaseRefreshableClone instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClone): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone;
+
+                    /**
+                     * Encodes the specified AutonomousDatabaseRefreshableClone message. Does not implicitly {@link google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone.verify|verify} messages.
+                     * @param message AutonomousDatabaseRefreshableClone message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutonomousDatabaseRefreshableClone message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone.verify|verify} messages.
+                     * @param message AutonomousDatabaseRefreshableClone message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutonomousDatabaseRefreshableClone message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutonomousDatabaseRefreshableClone
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone;
+
+                    /**
+                     * Decodes an AutonomousDatabaseRefreshableClone message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutonomousDatabaseRefreshableClone
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone;
+
+                    /**
+                     * Verifies an AutonomousDatabaseRefreshableClone message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutonomousDatabaseRefreshableClone message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutonomousDatabaseRefreshableClone
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone;
+
+                    /**
+                     * Creates a plain object from an AutonomousDatabaseRefreshableClone message. Also converts values to other types if specified.
+                     * @param message AutonomousDatabaseRefreshableClone
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClone, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutonomousDatabaseRefreshableClone to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutonomousDatabaseRefreshableClone
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7727,6 +7917,15 @@ export namespace google {
 
                     /** DbSystemShape minDbNodeStoragePerNodeGb */
                     minDbNodeStoragePerNodeGb?: (number|null);
+
+                    /** DbSystemShape minimumCoreCount */
+                    minimumCoreCount?: (number|null);
+
+                    /** DbSystemShape availableCoreCount */
+                    availableCoreCount?: (number|null);
+
+                    /** DbSystemShape coreCountIncrement */
+                    coreCountIncrement?: (number|null);
                 }
 
                 /** Represents a DbSystemShape. */
@@ -7773,6 +7972,15 @@ export namespace google {
 
                     /** DbSystemShape minDbNodeStoragePerNodeGb. */
                     public minDbNodeStoragePerNodeGb: number;
+
+                    /** DbSystemShape minimumCoreCount. */
+                    public minimumCoreCount: number;
+
+                    /** DbSystemShape availableCoreCount. */
+                    public availableCoreCount: number;
+
+                    /** DbSystemShape coreCountIncrement. */
+                    public coreCountIncrement: number;
 
                     /**
                      * Creates a new DbSystemShape instance using the specified properties.
@@ -8970,6 +9178,12 @@ export namespace google {
 
                     /** ExascaleConfig availableStorageSizeGb */
                     availableStorageSizeGb?: (number|null);
+
+                    /** ExascaleConfig totalVmStorageSizeGb */
+                    totalVmStorageSizeGb?: (number|null);
+
+                    /** ExascaleConfig availableVmStorageSizeGb */
+                    availableVmStorageSizeGb?: (number|null);
                 }
 
                 /** Represents an ExascaleConfig. */
@@ -8986,6 +9200,12 @@ export namespace google {
 
                     /** ExascaleConfig availableStorageSizeGb. */
                     public availableStorageSizeGb: number;
+
+                    /** ExascaleConfig totalVmStorageSizeGb. */
+                    public totalVmStorageSizeGb: number;
+
+                    /** ExascaleConfig availableVmStorageSizeGb. */
+                    public availableVmStorageSizeGb: number;
 
                     /**
                      * Creates a new ExascaleConfig instance using the specified properties.
@@ -9236,6 +9456,9 @@ export namespace google {
                     /** ConfigureExascaleCloudExadataInfrastructureRequest totalStorageSizeGb */
                     totalStorageSizeGb?: (number|null);
 
+                    /** ConfigureExascaleCloudExadataInfrastructureRequest totalVmStorageSizeGb */
+                    totalVmStorageSizeGb?: (number|null);
+
                     /** ConfigureExascaleCloudExadataInfrastructureRequest requestId */
                     requestId?: (string|null);
                 }
@@ -9254,6 +9477,9 @@ export namespace google {
 
                     /** ConfigureExascaleCloudExadataInfrastructureRequest totalStorageSizeGb. */
                     public totalStorageSizeGb: number;
+
+                    /** ConfigureExascaleCloudExadataInfrastructureRequest totalVmStorageSizeGb. */
+                    public totalVmStorageSizeGb: number;
 
                     /** ConfigureExascaleCloudExadataInfrastructureRequest requestId. */
                     public requestId: string;
@@ -9368,6 +9594,9 @@ export namespace google {
 
                     /** ExadbVmCluster entitlementId */
                     entitlementId?: (string|null);
+
+                    /** ExadbVmCluster identityConnector */
+                    identityConnector?: (google.cloud.oracledatabase.v1.IIdentityConnector|null);
                 }
 
                 /** Represents an ExadbVmCluster. */
@@ -9408,6 +9637,9 @@ export namespace google {
 
                     /** ExadbVmCluster entitlementId. */
                     public entitlementId: string;
+
+                    /** ExadbVmCluster identityConnector. */
+                    public identityConnector?: (google.cloud.oracledatabase.v1.IIdentityConnector|null);
 
                     /**
                      * Creates a new ExadbVmCluster instance using the specified properties.
@@ -25074,6 +25306,34 @@ export namespace google {
                     public failoverAutonomousDatabase(request: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RefreshAutonomousDatabase.
+                     * @param request RefreshAutonomousDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public refreshAutonomousDatabase(request: google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.RefreshAutonomousDatabaseCallback): void;
+
+                    /**
+                     * Calls RefreshAutonomousDatabase.
+                     * @param request RefreshAutonomousDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public refreshAutonomousDatabase(request: google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetAutonomousDatabaseRefreshableClones.
+                     * @param request GetAutonomousDatabaseRefreshableClonesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutonomousDatabaseRefreshableClones
+                     */
+                    public getAutonomousDatabaseRefreshableClones(request: google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetAutonomousDatabaseRefreshableClonesCallback): void;
+
+                    /**
+                     * Calls GetAutonomousDatabaseRefreshableClones.
+                     * @param request GetAutonomousDatabaseRefreshableClonesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAutonomousDatabaseRefreshableClones(request: google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest): Promise<google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones>;
+
+                    /**
                      * Calls ListOdbNetworks.
                      * @param request ListOdbNetworksRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListOdbNetworksResponse
@@ -25957,6 +26217,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type FailoverAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|refreshAutonomousDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RefreshAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getAutonomousDatabaseRefreshableClones}.
+                     * @param error Error, if any
+                     * @param [response] AutonomousDatabaseRefreshableClones
+                     */
+                    type GetAutonomousDatabaseRefreshableClonesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listOdbNetworks}.
@@ -29856,6 +30130,303 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetAutonomousDatabaseRefreshableClonesRequest. */
+                interface IGetAutonomousDatabaseRefreshableClonesRequest {
+
+                    /** GetAutonomousDatabaseRefreshableClonesRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAutonomousDatabaseRefreshableClonesRequest. */
+                class GetAutonomousDatabaseRefreshableClonesRequest implements IGetAutonomousDatabaseRefreshableClonesRequest {
+
+                    /**
+                     * Constructs a new GetAutonomousDatabaseRefreshableClonesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest);
+
+                    /** GetAutonomousDatabaseRefreshableClonesRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAutonomousDatabaseRefreshableClonesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAutonomousDatabaseRefreshableClonesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest): google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest;
+
+                    /**
+                     * Encodes the specified GetAutonomousDatabaseRefreshableClonesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest.verify|verify} messages.
+                     * @param message GetAutonomousDatabaseRefreshableClonesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAutonomousDatabaseRefreshableClonesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest.verify|verify} messages.
+                     * @param message GetAutonomousDatabaseRefreshableClonesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAutonomousDatabaseRefreshableClonesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAutonomousDatabaseRefreshableClonesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest;
+
+                    /**
+                     * Decodes a GetAutonomousDatabaseRefreshableClonesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAutonomousDatabaseRefreshableClonesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest;
+
+                    /**
+                     * Verifies a GetAutonomousDatabaseRefreshableClonesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAutonomousDatabaseRefreshableClonesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAutonomousDatabaseRefreshableClonesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest;
+
+                    /**
+                     * Creates a plain object from a GetAutonomousDatabaseRefreshableClonesRequest message. Also converts values to other types if specified.
+                     * @param message GetAutonomousDatabaseRefreshableClonesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAutonomousDatabaseRefreshableClonesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAutonomousDatabaseRefreshableClonesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutonomousDatabaseRefreshableClones. */
+                interface IAutonomousDatabaseRefreshableClones {
+
+                    /** AutonomousDatabaseRefreshableClones autonomousDatabaseRefreshableClones */
+                    autonomousDatabaseRefreshableClones?: (google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClone[]|null);
+                }
+
+                /** Represents an AutonomousDatabaseRefreshableClones. */
+                class AutonomousDatabaseRefreshableClones implements IAutonomousDatabaseRefreshableClones {
+
+                    /**
+                     * Constructs a new AutonomousDatabaseRefreshableClones.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones);
+
+                    /** AutonomousDatabaseRefreshableClones autonomousDatabaseRefreshableClones. */
+                    public autonomousDatabaseRefreshableClones: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClone[];
+
+                    /**
+                     * Creates a new AutonomousDatabaseRefreshableClones instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutonomousDatabaseRefreshableClones instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones;
+
+                    /**
+                     * Encodes the specified AutonomousDatabaseRefreshableClones message. Does not implicitly {@link google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones.verify|verify} messages.
+                     * @param message AutonomousDatabaseRefreshableClones message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutonomousDatabaseRefreshableClones message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones.verify|verify} messages.
+                     * @param message AutonomousDatabaseRefreshableClones message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutonomousDatabaseRefreshableClones message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutonomousDatabaseRefreshableClones
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones;
+
+                    /**
+                     * Decodes an AutonomousDatabaseRefreshableClones message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutonomousDatabaseRefreshableClones
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones;
+
+                    /**
+                     * Verifies an AutonomousDatabaseRefreshableClones message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutonomousDatabaseRefreshableClones message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutonomousDatabaseRefreshableClones
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones;
+
+                    /**
+                     * Creates a plain object from an AutonomousDatabaseRefreshableClones message. Also converts values to other types if specified.
+                     * @param message AutonomousDatabaseRefreshableClones
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutonomousDatabaseRefreshableClones to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutonomousDatabaseRefreshableClones
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RefreshAutonomousDatabaseRequest. */
+                interface IRefreshAutonomousDatabaseRequest {
+
+                    /** RefreshAutonomousDatabaseRequest name */
+                    name?: (string|null);
+
+                    /** RefreshAutonomousDatabaseRequest refreshCutoffTime */
+                    refreshCutoffTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RefreshAutonomousDatabaseRequest. */
+                class RefreshAutonomousDatabaseRequest implements IRefreshAutonomousDatabaseRequest {
+
+                    /**
+                     * Constructs a new RefreshAutonomousDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest);
+
+                    /** RefreshAutonomousDatabaseRequest name. */
+                    public name: string;
+
+                    /** RefreshAutonomousDatabaseRequest refreshCutoffTime. */
+                    public refreshCutoffTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RefreshAutonomousDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefreshAutonomousDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest): google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest;
+
+                    /**
+                     * Encodes the specified RefreshAutonomousDatabaseRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message RefreshAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefreshAutonomousDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message RefreshAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefreshAutonomousDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefreshAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest;
+
+                    /**
+                     * Decodes a RefreshAutonomousDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefreshAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest;
+
+                    /**
+                     * Verifies a RefreshAutonomousDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefreshAutonomousDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefreshAutonomousDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a RefreshAutonomousDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message RefreshAutonomousDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefreshAutonomousDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RefreshAutonomousDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerateAutonomousDatabaseWalletRequest. */
                 interface IGenerateAutonomousDatabaseWalletRequest {
 
@@ -31764,6 +32335,12 @@ export namespace google {
 
                     /** CloudVmClusterProperties storageManagementType */
                     storageManagementType?: (google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType|keyof typeof google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType|null);
+
+                    /** CloudVmClusterProperties vmFileSystemStorageType */
+                    vmFileSystemStorageType?: (google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmFileSystemStorageType|keyof typeof google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmFileSystemStorageType|null);
+
+                    /** CloudVmClusterProperties vmBackupStorageType */
+                    vmBackupStorageType?: (google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmBackupStorageType|keyof typeof google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmBackupStorageType|null);
                 }
 
                 /** Represents a CloudVmClusterProperties. */
@@ -31877,6 +32454,12 @@ export namespace google {
                     /** CloudVmClusterProperties storageManagementType. */
                     public storageManagementType: (google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType|keyof typeof google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType);
 
+                    /** CloudVmClusterProperties vmFileSystemStorageType. */
+                    public vmFileSystemStorageType: (google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmFileSystemStorageType|keyof typeof google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmFileSystemStorageType);
+
+                    /** CloudVmClusterProperties vmBackupStorageType. */
+                    public vmBackupStorageType: (google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmBackupStorageType|keyof typeof google.cloud.oracledatabase.v1.CloudVmClusterProperties.VmBackupStorageType);
+
                     /**
                      * Creates a new CloudVmClusterProperties instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31988,6 +32571,20 @@ export namespace google {
                         STORAGE_MANAGEMENT_TYPE_UNSPECIFIED = 0,
                         ASM = 1,
                         EXASCALE = 2
+                    }
+
+                    /** VmFileSystemStorageType enum. */
+                    enum VmFileSystemStorageType {
+                        VM_FILE_SYSTEM_STORAGE_TYPE_UNSPECIFIED = 0,
+                        VM_FILE_SYSTEM_STORAGE_TYPE_LOCAL = 1,
+                        VM_FILE_SYSTEM_STORAGE_TYPE_EXASCALE = 2
+                    }
+
+                    /** VmBackupStorageType enum. */
+                    enum VmBackupStorageType {
+                        VM_BACKUP_STORAGE_TYPE_UNSPECIFIED = 0,
+                        VM_BACKUP_STORAGE_TYPE_LOCAL = 1,
+                        VM_BACKUP_STORAGE_TYPE_EXASCALE = 2
                     }
                 }
 
@@ -33577,6 +34174,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -33590,6 +34190,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -34319,6 +34922,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -34338,6 +34944,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -34657,6 +35266,365 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -34778,6 +35746,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -37152,6 +38122,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -37174,6 +38147,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -38116,6 +39092,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -38150,6 +39129,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -38278,7 +39260,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -38381,6 +39364,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -40329,6 +41413,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -40351,6 +41438,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -40438,6 +41528,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -40454,6 +41547,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

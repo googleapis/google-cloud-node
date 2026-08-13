@@ -10150,6 +10150,108 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RefreshRateTypeEnum. */
+                interface IRefreshRateTypeEnum {
+                }
+
+                /** Represents a RefreshRateTypeEnum. */
+                class RefreshRateTypeEnum implements IRefreshRateTypeEnum {
+
+                    /**
+                     * Constructs a new RefreshRateTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IRefreshRateTypeEnum);
+
+                    /**
+                     * Creates a new RefreshRateTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefreshRateTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IRefreshRateTypeEnum): google.ads.admanager.v1.RefreshRateTypeEnum;
+
+                    /**
+                     * Encodes the specified RefreshRateTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.RefreshRateTypeEnum.verify|verify} messages.
+                     * @param message RefreshRateTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IRefreshRateTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefreshRateTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.RefreshRateTypeEnum.verify|verify} messages.
+                     * @param message RefreshRateTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IRefreshRateTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefreshRateTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefreshRateTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.RefreshRateTypeEnum;
+
+                    /**
+                     * Decodes a RefreshRateTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefreshRateTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.RefreshRateTypeEnum;
+
+                    /**
+                     * Verifies a RefreshRateTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefreshRateTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefreshRateTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.RefreshRateTypeEnum;
+
+                    /**
+                     * Creates a plain object from a RefreshRateTypeEnum message. Also converts values to other types if specified.
+                     * @param message RefreshRateTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.RefreshRateTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefreshRateTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RefreshRateTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RefreshRateTypeEnum {
+
+                    /** RefreshRateType enum. */
+                    enum RefreshRateType {
+                        REFRESH_RATE_TYPE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        OPTIMIZED = 2,
+                        FIXED_INTERVAL = 3
+                    }
+                }
+
                 /** Properties of an AdUnit. */
                 interface IAdUnit {
 
@@ -10227,6 +10329,9 @@ export namespace google {
 
                     /** AdUnit effectiveAdsenseEnabled */
                     effectiveAdsenseEnabled?: (boolean|null);
+
+                    /** AdUnit refreshRateType */
+                    refreshRateType?: (google.ads.admanager.v1.RefreshRateTypeEnum.RefreshRateType|keyof typeof google.ads.admanager.v1.RefreshRateTypeEnum.RefreshRateType|null);
                 }
 
                 /** Represents an AdUnit. */
@@ -10312,6 +10417,9 @@ export namespace google {
 
                     /** AdUnit effectiveAdsenseEnabled. */
                     public effectiveAdsenseEnabled?: (boolean|null);
+
+                    /** AdUnit refreshRateType. */
+                    public refreshRateType?: (google.ads.admanager.v1.RefreshRateTypeEnum.RefreshRateType|keyof typeof google.ads.admanager.v1.RefreshRateTypeEnum.RefreshRateType|null);
 
                     /**
                      * Creates a new AdUnit instance using the specified properties.
@@ -20328,6 +20436,48 @@ export namespace google {
 
                     /** ChildPublisher name */
                     name?: (string|null);
+
+                    /** ChildPublisher displayName */
+                    displayName?: (string|null);
+
+                    /** ChildPublisher email */
+                    email?: (string|null);
+
+                    /** ChildPublisher childNetwork */
+                    childNetwork?: (string|null);
+
+                    /** ChildPublisher delegationType */
+                    delegationType?: (google.ads.admanager.v1.DelegationTypeEnum.DelegationType|keyof typeof google.ads.admanager.v1.DelegationTypeEnum.DelegationType|null);
+
+                    /** ChildPublisher parentRevenueShareMillipercent */
+                    parentRevenueShareMillipercent?: (number|Long|string|null);
+
+                    /** ChildPublisher sellerId */
+                    sellerId?: (string|null);
+
+                    /** ChildPublisher readinessStatus */
+                    readinessStatus?: (google.ads.admanager.v1.McmReadinessStatusEnum.McmReadinessStatus|keyof typeof google.ads.admanager.v1.McmReadinessStatusEnum.McmReadinessStatus|null);
+
+                    /** ChildPublisher invitationStatus */
+                    invitationStatus?: (google.ads.admanager.v1.DelegationInvitationStatusEnum.DelegationInvitationStatus|keyof typeof google.ads.admanager.v1.DelegationInvitationStatusEnum.DelegationInvitationStatus|null);
+
+                    /** ChildPublisher approvalStatus */
+                    approvalStatus?: (google.ads.admanager.v1.DelegationApprovalStatusEnum.DelegationApprovalStatus|keyof typeof google.ads.admanager.v1.DelegationApprovalStatusEnum.DelegationApprovalStatus|null);
+
+                    /** ChildPublisher identityVerificationStatus */
+                    identityVerificationStatus?: (google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum.ChildPublisherIdentityVerificationStatus|keyof typeof google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum.ChildPublisherIdentityVerificationStatus|null);
+
+                    /** ChildPublisher addressVerificationStatus */
+                    addressVerificationStatus?: (google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum.ChildPublisherAddressVerificationStatus|keyof typeof google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum.ChildPublisherAddressVerificationStatus|null);
+
+                    /** ChildPublisher pendingOnboardingTasks */
+                    pendingOnboardingTasks?: (google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum.ChildPublisherOnboardingTask[]|null);
+
+                    /** ChildPublisher accountStatus */
+                    accountStatus?: (google.ads.admanager.v1.DelegationAccountStatusEnum.DelegationAccountStatus|keyof typeof google.ads.admanager.v1.DelegationAccountStatusEnum.DelegationAccountStatus|null);
+
+                    /** ChildPublisher approvedManageAccountRevenueShareMillipercent */
+                    approvedManageAccountRevenueShareMillipercent?: (number|Long|string|null);
                 }
 
                 /** Represents a ChildPublisher. */
@@ -20341,6 +20491,48 @@ export namespace google {
 
                     /** ChildPublisher name. */
                     public name: string;
+
+                    /** ChildPublisher displayName. */
+                    public displayName?: (string|null);
+
+                    /** ChildPublisher email. */
+                    public email?: (string|null);
+
+                    /** ChildPublisher childNetwork. */
+                    public childNetwork?: (string|null);
+
+                    /** ChildPublisher delegationType. */
+                    public delegationType?: (google.ads.admanager.v1.DelegationTypeEnum.DelegationType|keyof typeof google.ads.admanager.v1.DelegationTypeEnum.DelegationType|null);
+
+                    /** ChildPublisher parentRevenueShareMillipercent. */
+                    public parentRevenueShareMillipercent?: (number|Long|string|null);
+
+                    /** ChildPublisher sellerId. */
+                    public sellerId?: (string|null);
+
+                    /** ChildPublisher readinessStatus. */
+                    public readinessStatus?: (google.ads.admanager.v1.McmReadinessStatusEnum.McmReadinessStatus|keyof typeof google.ads.admanager.v1.McmReadinessStatusEnum.McmReadinessStatus|null);
+
+                    /** ChildPublisher invitationStatus. */
+                    public invitationStatus?: (google.ads.admanager.v1.DelegationInvitationStatusEnum.DelegationInvitationStatus|keyof typeof google.ads.admanager.v1.DelegationInvitationStatusEnum.DelegationInvitationStatus|null);
+
+                    /** ChildPublisher approvalStatus. */
+                    public approvalStatus?: (google.ads.admanager.v1.DelegationApprovalStatusEnum.DelegationApprovalStatus|keyof typeof google.ads.admanager.v1.DelegationApprovalStatusEnum.DelegationApprovalStatus|null);
+
+                    /** ChildPublisher identityVerificationStatus. */
+                    public identityVerificationStatus?: (google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum.ChildPublisherIdentityVerificationStatus|keyof typeof google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum.ChildPublisherIdentityVerificationStatus|null);
+
+                    /** ChildPublisher addressVerificationStatus. */
+                    public addressVerificationStatus?: (google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum.ChildPublisherAddressVerificationStatus|keyof typeof google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum.ChildPublisherAddressVerificationStatus|null);
+
+                    /** ChildPublisher pendingOnboardingTasks. */
+                    public pendingOnboardingTasks: google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum.ChildPublisherOnboardingTask[];
+
+                    /** ChildPublisher accountStatus. */
+                    public accountStatus?: (google.ads.admanager.v1.DelegationAccountStatusEnum.DelegationAccountStatus|keyof typeof google.ads.admanager.v1.DelegationAccountStatusEnum.DelegationAccountStatus|null);
+
+                    /** ChildPublisher approvedManageAccountRevenueShareMillipercent. */
+                    public approvedManageAccountRevenueShareMillipercent?: (number|Long|string|null);
 
                     /**
                      * Creates a new ChildPublisher instance using the specified properties.
@@ -20414,6 +20606,2044 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ChildPublisher
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DelegationTypeEnum. */
+                interface IDelegationTypeEnum {
+                }
+
+                /** Represents a DelegationTypeEnum. */
+                class DelegationTypeEnum implements IDelegationTypeEnum {
+
+                    /**
+                     * Constructs a new DelegationTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDelegationTypeEnum);
+
+                    /**
+                     * Creates a new DelegationTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DelegationTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDelegationTypeEnum): google.ads.admanager.v1.DelegationTypeEnum;
+
+                    /**
+                     * Encodes the specified DelegationTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.DelegationTypeEnum.verify|verify} messages.
+                     * @param message DelegationTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDelegationTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DelegationTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DelegationTypeEnum.verify|verify} messages.
+                     * @param message DelegationTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDelegationTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DelegationTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DelegationTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DelegationTypeEnum;
+
+                    /**
+                     * Decodes a DelegationTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DelegationTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DelegationTypeEnum;
+
+                    /**
+                     * Verifies a DelegationTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DelegationTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DelegationTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DelegationTypeEnum;
+
+                    /**
+                     * Creates a plain object from a DelegationTypeEnum message. Also converts values to other types if specified.
+                     * @param message DelegationTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DelegationTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DelegationTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DelegationTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DelegationTypeEnum {
+
+                    /** DelegationType enum. */
+                    enum DelegationType {
+                        DELEGATION_TYPE_UNSPECIFIED = 0,
+                        MANAGE_ACCOUNT = 1,
+                        MANAGE_INVENTORY = 2
+                    }
+                }
+
+                /** Properties of a McmReadinessStatusEnum. */
+                interface IMcmReadinessStatusEnum {
+                }
+
+                /** Represents a McmReadinessStatusEnum. */
+                class McmReadinessStatusEnum implements IMcmReadinessStatusEnum {
+
+                    /**
+                     * Constructs a new McmReadinessStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IMcmReadinessStatusEnum);
+
+                    /**
+                     * Creates a new McmReadinessStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McmReadinessStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IMcmReadinessStatusEnum): google.ads.admanager.v1.McmReadinessStatusEnum;
+
+                    /**
+                     * Encodes the specified McmReadinessStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.McmReadinessStatusEnum.verify|verify} messages.
+                     * @param message McmReadinessStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IMcmReadinessStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McmReadinessStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.McmReadinessStatusEnum.verify|verify} messages.
+                     * @param message McmReadinessStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IMcmReadinessStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McmReadinessStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McmReadinessStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.McmReadinessStatusEnum;
+
+                    /**
+                     * Decodes a McmReadinessStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McmReadinessStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.McmReadinessStatusEnum;
+
+                    /**
+                     * Verifies a McmReadinessStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McmReadinessStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McmReadinessStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.McmReadinessStatusEnum;
+
+                    /**
+                     * Creates a plain object from a McmReadinessStatusEnum message. Also converts values to other types if specified.
+                     * @param message McmReadinessStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.McmReadinessStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McmReadinessStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McmReadinessStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace McmReadinessStatusEnum {
+
+                    /** McmReadinessStatus enum. */
+                    enum McmReadinessStatus {
+                        MCM_READINESS_STATUS_UNSPECIFIED = 0,
+                        INACTIVE = 1,
+                        NOT_READY = 2,
+                        READY = 3
+                    }
+                }
+
+                /** Properties of a DelegationInvitationStatusEnum. */
+                interface IDelegationInvitationStatusEnum {
+                }
+
+                /** Represents a DelegationInvitationStatusEnum. */
+                class DelegationInvitationStatusEnum implements IDelegationInvitationStatusEnum {
+
+                    /**
+                     * Constructs a new DelegationInvitationStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDelegationInvitationStatusEnum);
+
+                    /**
+                     * Creates a new DelegationInvitationStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DelegationInvitationStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDelegationInvitationStatusEnum): google.ads.admanager.v1.DelegationInvitationStatusEnum;
+
+                    /**
+                     * Encodes the specified DelegationInvitationStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.DelegationInvitationStatusEnum.verify|verify} messages.
+                     * @param message DelegationInvitationStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDelegationInvitationStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DelegationInvitationStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DelegationInvitationStatusEnum.verify|verify} messages.
+                     * @param message DelegationInvitationStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDelegationInvitationStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DelegationInvitationStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DelegationInvitationStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DelegationInvitationStatusEnum;
+
+                    /**
+                     * Decodes a DelegationInvitationStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DelegationInvitationStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DelegationInvitationStatusEnum;
+
+                    /**
+                     * Verifies a DelegationInvitationStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DelegationInvitationStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DelegationInvitationStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DelegationInvitationStatusEnum;
+
+                    /**
+                     * Creates a plain object from a DelegationInvitationStatusEnum message. Also converts values to other types if specified.
+                     * @param message DelegationInvitationStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DelegationInvitationStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DelegationInvitationStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DelegationInvitationStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DelegationInvitationStatusEnum {
+
+                    /** DelegationInvitationStatus enum. */
+                    enum DelegationInvitationStatus {
+                        DELEGATION_INVITATION_STATUS_UNSPECIFIED = 0,
+                        ACCEPTED = 1,
+                        EXPIRED = 2,
+                        PENDING = 3,
+                        REJECTED = 4,
+                        WITHDRAWN = 5,
+                        DEACTIVATED_BY_AD_MANAGER = 6
+                    }
+                }
+
+                /** Properties of a DelegationAccountStatusEnum. */
+                interface IDelegationAccountStatusEnum {
+                }
+
+                /** Represents a DelegationAccountStatusEnum. */
+                class DelegationAccountStatusEnum implements IDelegationAccountStatusEnum {
+
+                    /**
+                     * Constructs a new DelegationAccountStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDelegationAccountStatusEnum);
+
+                    /**
+                     * Creates a new DelegationAccountStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DelegationAccountStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDelegationAccountStatusEnum): google.ads.admanager.v1.DelegationAccountStatusEnum;
+
+                    /**
+                     * Encodes the specified DelegationAccountStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.DelegationAccountStatusEnum.verify|verify} messages.
+                     * @param message DelegationAccountStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDelegationAccountStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DelegationAccountStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DelegationAccountStatusEnum.verify|verify} messages.
+                     * @param message DelegationAccountStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDelegationAccountStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DelegationAccountStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DelegationAccountStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DelegationAccountStatusEnum;
+
+                    /**
+                     * Decodes a DelegationAccountStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DelegationAccountStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DelegationAccountStatusEnum;
+
+                    /**
+                     * Verifies a DelegationAccountStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DelegationAccountStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DelegationAccountStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DelegationAccountStatusEnum;
+
+                    /**
+                     * Creates a plain object from a DelegationAccountStatusEnum message. Also converts values to other types if specified.
+                     * @param message DelegationAccountStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DelegationAccountStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DelegationAccountStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DelegationAccountStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DelegationAccountStatusEnum {
+
+                    /** DelegationAccountStatus enum. */
+                    enum DelegationAccountStatus {
+                        DELEGATION_ACCOUNT_STATUS_UNSPECIFIED = 0,
+                        INVITED = 1,
+                        DECLINED = 2,
+                        APPROVED = 3,
+                        CLOSED_BY_PUBLISHER = 4,
+                        CLOSED_INVALID_ACTIVITY = 5,
+                        CLOSED_POLICY_VIOLATION = 6,
+                        DEACTIVATED_BY_AD_MANAGER = 7,
+                        DISAPPROVED_DUPLICATE_ACCOUNT = 8,
+                        DISAPPROVED_INELIGIBLE = 9,
+                        PENDING_GOOGLE_APPROVAL = 10,
+                        EXPIRED = 11,
+                        INACTIVE = 12
+                    }
+                }
+
+                /** Properties of a DelegationApprovalStatusEnum. */
+                interface IDelegationApprovalStatusEnum {
+                }
+
+                /** Represents a DelegationApprovalStatusEnum. */
+                class DelegationApprovalStatusEnum implements IDelegationApprovalStatusEnum {
+
+                    /**
+                     * Constructs a new DelegationApprovalStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDelegationApprovalStatusEnum);
+
+                    /**
+                     * Creates a new DelegationApprovalStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DelegationApprovalStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDelegationApprovalStatusEnum): google.ads.admanager.v1.DelegationApprovalStatusEnum;
+
+                    /**
+                     * Encodes the specified DelegationApprovalStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.DelegationApprovalStatusEnum.verify|verify} messages.
+                     * @param message DelegationApprovalStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDelegationApprovalStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DelegationApprovalStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DelegationApprovalStatusEnum.verify|verify} messages.
+                     * @param message DelegationApprovalStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDelegationApprovalStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DelegationApprovalStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DelegationApprovalStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DelegationApprovalStatusEnum;
+
+                    /**
+                     * Decodes a DelegationApprovalStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DelegationApprovalStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DelegationApprovalStatusEnum;
+
+                    /**
+                     * Verifies a DelegationApprovalStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DelegationApprovalStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DelegationApprovalStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DelegationApprovalStatusEnum;
+
+                    /**
+                     * Creates a plain object from a DelegationApprovalStatusEnum message. Also converts values to other types if specified.
+                     * @param message DelegationApprovalStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DelegationApprovalStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DelegationApprovalStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DelegationApprovalStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DelegationApprovalStatusEnum {
+
+                    /** DelegationApprovalStatus enum. */
+                    enum DelegationApprovalStatus {
+                        DELEGATION_APPROVAL_STATUS_UNSPECIFIED = 0,
+                        APPROVED = 1,
+                        CLOSED_BY_PUBLISHER = 2,
+                        CLOSED_INVALID_ACTIVITY = 3,
+                        CLOSED_POLICY_VIOLATION = 4,
+                        DEACTIVATED_BY_AD_MANAGER = 5,
+                        DISAPPROVED_DUPLICATE_ACCOUNT = 6,
+                        DISAPPROVED_INELIGIBLE = 7,
+                        PENDING_GOOGLE_APPROVAL = 8
+                    }
+                }
+
+                /** Properties of a ChildPublisherIdentityVerificationStatusEnum. */
+                interface IChildPublisherIdentityVerificationStatusEnum {
+                }
+
+                /** Represents a ChildPublisherIdentityVerificationStatusEnum. */
+                class ChildPublisherIdentityVerificationStatusEnum implements IChildPublisherIdentityVerificationStatusEnum {
+
+                    /**
+                     * Constructs a new ChildPublisherIdentityVerificationStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IChildPublisherIdentityVerificationStatusEnum);
+
+                    /**
+                     * Creates a new ChildPublisherIdentityVerificationStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChildPublisherIdentityVerificationStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IChildPublisherIdentityVerificationStatusEnum): google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum;
+
+                    /**
+                     * Encodes the specified ChildPublisherIdentityVerificationStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum.verify|verify} messages.
+                     * @param message ChildPublisherIdentityVerificationStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IChildPublisherIdentityVerificationStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChildPublisherIdentityVerificationStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum.verify|verify} messages.
+                     * @param message ChildPublisherIdentityVerificationStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IChildPublisherIdentityVerificationStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChildPublisherIdentityVerificationStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChildPublisherIdentityVerificationStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum;
+
+                    /**
+                     * Decodes a ChildPublisherIdentityVerificationStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChildPublisherIdentityVerificationStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum;
+
+                    /**
+                     * Verifies a ChildPublisherIdentityVerificationStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChildPublisherIdentityVerificationStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChildPublisherIdentityVerificationStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum;
+
+                    /**
+                     * Creates a plain object from a ChildPublisherIdentityVerificationStatusEnum message. Also converts values to other types if specified.
+                     * @param message ChildPublisherIdentityVerificationStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ChildPublisherIdentityVerificationStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChildPublisherIdentityVerificationStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChildPublisherIdentityVerificationStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChildPublisherIdentityVerificationStatusEnum {
+
+                    /** ChildPublisherIdentityVerificationStatus enum. */
+                    enum ChildPublisherIdentityVerificationStatus {
+                        CHILD_PUBLISHER_IDENTITY_VERIFICATION_STATUS_UNSPECIFIED = 0,
+                        EXEMPT = 1,
+                        EXPIRED = 2,
+                        FAILED = 3,
+                        PENDING = 4,
+                        NOT_ELIGIBLE = 5,
+                        VERIFIED = 6
+                    }
+                }
+
+                /** Properties of a ChildPublisherAddressVerificationStatusEnum. */
+                interface IChildPublisherAddressVerificationStatusEnum {
+                }
+
+                /** Represents a ChildPublisherAddressVerificationStatusEnum. */
+                class ChildPublisherAddressVerificationStatusEnum implements IChildPublisherAddressVerificationStatusEnum {
+
+                    /**
+                     * Constructs a new ChildPublisherAddressVerificationStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IChildPublisherAddressVerificationStatusEnum);
+
+                    /**
+                     * Creates a new ChildPublisherAddressVerificationStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChildPublisherAddressVerificationStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IChildPublisherAddressVerificationStatusEnum): google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum;
+
+                    /**
+                     * Encodes the specified ChildPublisherAddressVerificationStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum.verify|verify} messages.
+                     * @param message ChildPublisherAddressVerificationStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IChildPublisherAddressVerificationStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChildPublisherAddressVerificationStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum.verify|verify} messages.
+                     * @param message ChildPublisherAddressVerificationStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IChildPublisherAddressVerificationStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChildPublisherAddressVerificationStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChildPublisherAddressVerificationStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum;
+
+                    /**
+                     * Decodes a ChildPublisherAddressVerificationStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChildPublisherAddressVerificationStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum;
+
+                    /**
+                     * Verifies a ChildPublisherAddressVerificationStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChildPublisherAddressVerificationStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChildPublisherAddressVerificationStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum;
+
+                    /**
+                     * Creates a plain object from a ChildPublisherAddressVerificationStatusEnum message. Also converts values to other types if specified.
+                     * @param message ChildPublisherAddressVerificationStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ChildPublisherAddressVerificationStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChildPublisherAddressVerificationStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChildPublisherAddressVerificationStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChildPublisherAddressVerificationStatusEnum {
+
+                    /** ChildPublisherAddressVerificationStatus enum. */
+                    enum ChildPublisherAddressVerificationStatus {
+                        CHILD_PUBLISHER_ADDRESS_VERIFICATION_STATUS_UNSPECIFIED = 0,
+                        EXEMPT = 1,
+                        EXPIRED = 2,
+                        FAILED = 3,
+                        PENDING = 4,
+                        NOT_ELIGIBLE = 5,
+                        VERIFIED = 6
+                    }
+                }
+
+                /** Properties of a ChildPublisherOnboardingTaskEnum. */
+                interface IChildPublisherOnboardingTaskEnum {
+                }
+
+                /** Represents a ChildPublisherOnboardingTaskEnum. */
+                class ChildPublisherOnboardingTaskEnum implements IChildPublisherOnboardingTaskEnum {
+
+                    /**
+                     * Constructs a new ChildPublisherOnboardingTaskEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IChildPublisherOnboardingTaskEnum);
+
+                    /**
+                     * Creates a new ChildPublisherOnboardingTaskEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChildPublisherOnboardingTaskEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IChildPublisherOnboardingTaskEnum): google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum;
+
+                    /**
+                     * Encodes the specified ChildPublisherOnboardingTaskEnum message. Does not implicitly {@link google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum.verify|verify} messages.
+                     * @param message ChildPublisherOnboardingTaskEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IChildPublisherOnboardingTaskEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChildPublisherOnboardingTaskEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum.verify|verify} messages.
+                     * @param message ChildPublisherOnboardingTaskEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IChildPublisherOnboardingTaskEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChildPublisherOnboardingTaskEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChildPublisherOnboardingTaskEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum;
+
+                    /**
+                     * Decodes a ChildPublisherOnboardingTaskEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChildPublisherOnboardingTaskEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum;
+
+                    /**
+                     * Verifies a ChildPublisherOnboardingTaskEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChildPublisherOnboardingTaskEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChildPublisherOnboardingTaskEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum;
+
+                    /**
+                     * Creates a plain object from a ChildPublisherOnboardingTaskEnum message. Also converts values to other types if specified.
+                     * @param message ChildPublisherOnboardingTaskEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ChildPublisherOnboardingTaskEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChildPublisherOnboardingTaskEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChildPublisherOnboardingTaskEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChildPublisherOnboardingTaskEnum {
+
+                    /** ChildPublisherOnboardingTask enum. */
+                    enum ChildPublisherOnboardingTask {
+                        CHILD_PUBLISHER_ONBOARDING_TASK_UNSPECIFIED = 0,
+                        BILLING_PROFILE_CREATION = 1,
+                        PHONE_PIN_VERIFICATION = 2,
+                        AD_MANAGER_ACCOUNT_SETUP = 4
+                    }
+                }
+
+                /** Properties of a McmEarningsProductTypeEnum. */
+                interface IMcmEarningsProductTypeEnum {
+                }
+
+                /** Represents a McmEarningsProductTypeEnum. */
+                class McmEarningsProductTypeEnum implements IMcmEarningsProductTypeEnum {
+
+                    /**
+                     * Constructs a new McmEarningsProductTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IMcmEarningsProductTypeEnum);
+
+                    /**
+                     * Creates a new McmEarningsProductTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McmEarningsProductTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IMcmEarningsProductTypeEnum): google.ads.admanager.v1.McmEarningsProductTypeEnum;
+
+                    /**
+                     * Encodes the specified McmEarningsProductTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.McmEarningsProductTypeEnum.verify|verify} messages.
+                     * @param message McmEarningsProductTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IMcmEarningsProductTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McmEarningsProductTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.McmEarningsProductTypeEnum.verify|verify} messages.
+                     * @param message McmEarningsProductTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IMcmEarningsProductTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McmEarningsProductTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McmEarningsProductTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.McmEarningsProductTypeEnum;
+
+                    /**
+                     * Decodes a McmEarningsProductTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McmEarningsProductTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.McmEarningsProductTypeEnum;
+
+                    /**
+                     * Verifies a McmEarningsProductTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McmEarningsProductTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McmEarningsProductTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.McmEarningsProductTypeEnum;
+
+                    /**
+                     * Creates a plain object from a McmEarningsProductTypeEnum message. Also converts values to other types if specified.
+                     * @param message McmEarningsProductTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.McmEarningsProductTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McmEarningsProductTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McmEarningsProductTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace McmEarningsProductTypeEnum {
+
+                    /** McmEarningsProductType enum. */
+                    enum McmEarningsProductType {
+                        MCM_EARNINGS_PRODUCT_TYPE_UNSPECIFIED = 0,
+                        AD_EXCHANGE_CONTENT = 1,
+                        AD_EXCHANGE_CONTENT_HOST = 2,
+                        AD_EXCHANGE_GAMES = 3,
+                        AD_EXCHANGE_GAMES_HOST = 4,
+                        AD_EXCHANGE_MOBILE_CONTENT_APP = 5,
+                        AD_EXCHANGE_MOBILE_CONTENT_APP_HOST = 6,
+                        AD_EXCHANGE_VIDEO = 7,
+                        AD_EXCHANGE_VIDEO_HOST = 8,
+                        AD_EXCHANGE_RESERVATIONS = 9,
+                        AD_EXCHANGE_PREFERRED_DEALS = 10,
+                        OFFERWALL = 11,
+                        BUYER_DIRECT = 12
+                    }
+                }
+
+                /** Represents a ChildPublisherService */
+                class ChildPublisherService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ChildPublisherService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ChildPublisherService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ChildPublisherService;
+
+                    /**
+                     * Calls GetChildPublisher.
+                     * @param request GetChildPublisherRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ChildPublisher
+                     */
+                    public getChildPublisher(request: google.ads.admanager.v1.IGetChildPublisherRequest, callback: google.ads.admanager.v1.ChildPublisherService.GetChildPublisherCallback): void;
+
+                    /**
+                     * Calls GetChildPublisher.
+                     * @param request GetChildPublisherRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getChildPublisher(request: google.ads.admanager.v1.IGetChildPublisherRequest): Promise<google.ads.admanager.v1.ChildPublisher>;
+
+                    /**
+                     * Calls ListChildPublishers.
+                     * @param request ListChildPublishersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListChildPublishersResponse
+                     */
+                    public listChildPublishers(request: google.ads.admanager.v1.IListChildPublishersRequest, callback: google.ads.admanager.v1.ChildPublisherService.ListChildPublishersCallback): void;
+
+                    /**
+                     * Calls ListChildPublishers.
+                     * @param request ListChildPublishersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listChildPublishers(request: google.ads.admanager.v1.IListChildPublishersRequest): Promise<google.ads.admanager.v1.ListChildPublishersResponse>;
+
+                    /**
+                     * Calls CreateChildPublisher.
+                     * @param request CreateChildPublisherRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ChildPublisher
+                     */
+                    public createChildPublisher(request: google.ads.admanager.v1.ICreateChildPublisherRequest, callback: google.ads.admanager.v1.ChildPublisherService.CreateChildPublisherCallback): void;
+
+                    /**
+                     * Calls CreateChildPublisher.
+                     * @param request CreateChildPublisherRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createChildPublisher(request: google.ads.admanager.v1.ICreateChildPublisherRequest): Promise<google.ads.admanager.v1.ChildPublisher>;
+
+                    /**
+                     * Calls BatchCreateChildPublishers.
+                     * @param request BatchCreateChildPublishersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateChildPublishersResponse
+                     */
+                    public batchCreateChildPublishers(request: google.ads.admanager.v1.IBatchCreateChildPublishersRequest, callback: google.ads.admanager.v1.ChildPublisherService.BatchCreateChildPublishersCallback): void;
+
+                    /**
+                     * Calls BatchCreateChildPublishers.
+                     * @param request BatchCreateChildPublishersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateChildPublishers(request: google.ads.admanager.v1.IBatchCreateChildPublishersRequest): Promise<google.ads.admanager.v1.BatchCreateChildPublishersResponse>;
+
+                    /**
+                     * Calls UpdateChildPublisher.
+                     * @param request UpdateChildPublisherRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ChildPublisher
+                     */
+                    public updateChildPublisher(request: google.ads.admanager.v1.IUpdateChildPublisherRequest, callback: google.ads.admanager.v1.ChildPublisherService.UpdateChildPublisherCallback): void;
+
+                    /**
+                     * Calls UpdateChildPublisher.
+                     * @param request UpdateChildPublisherRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateChildPublisher(request: google.ads.admanager.v1.IUpdateChildPublisherRequest): Promise<google.ads.admanager.v1.ChildPublisher>;
+
+                    /**
+                     * Calls BatchUpdateChildPublishers.
+                     * @param request BatchUpdateChildPublishersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateChildPublishersResponse
+                     */
+                    public batchUpdateChildPublishers(request: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest, callback: google.ads.admanager.v1.ChildPublisherService.BatchUpdateChildPublishersCallback): void;
+
+                    /**
+                     * Calls BatchUpdateChildPublishers.
+                     * @param request BatchUpdateChildPublishersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateChildPublishers(request: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest): Promise<google.ads.admanager.v1.BatchUpdateChildPublishersResponse>;
+                }
+
+                namespace ChildPublisherService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|getChildPublisher}.
+                     * @param error Error, if any
+                     * @param [response] ChildPublisher
+                     */
+                    type GetChildPublisherCallback = (error: (Error|null), response?: google.ads.admanager.v1.ChildPublisher) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|listChildPublishers}.
+                     * @param error Error, if any
+                     * @param [response] ListChildPublishersResponse
+                     */
+                    type ListChildPublishersCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListChildPublishersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|createChildPublisher}.
+                     * @param error Error, if any
+                     * @param [response] ChildPublisher
+                     */
+                    type CreateChildPublisherCallback = (error: (Error|null), response?: google.ads.admanager.v1.ChildPublisher) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|batchCreateChildPublishers}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateChildPublishersResponse
+                     */
+                    type BatchCreateChildPublishersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateChildPublishersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|updateChildPublisher}.
+                     * @param error Error, if any
+                     * @param [response] ChildPublisher
+                     */
+                    type UpdateChildPublisherCallback = (error: (Error|null), response?: google.ads.admanager.v1.ChildPublisher) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|batchUpdateChildPublishers}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateChildPublishersResponse
+                     */
+                    type BatchUpdateChildPublishersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateChildPublishersResponse) => void;
+                }
+
+                /** Properties of a GetChildPublisherRequest. */
+                interface IGetChildPublisherRequest {
+
+                    /** GetChildPublisherRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetChildPublisherRequest. */
+                class GetChildPublisherRequest implements IGetChildPublisherRequest {
+
+                    /**
+                     * Constructs a new GetChildPublisherRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetChildPublisherRequest);
+
+                    /** GetChildPublisherRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetChildPublisherRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetChildPublisherRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetChildPublisherRequest): google.ads.admanager.v1.GetChildPublisherRequest;
+
+                    /**
+                     * Encodes the specified GetChildPublisherRequest message. Does not implicitly {@link google.ads.admanager.v1.GetChildPublisherRequest.verify|verify} messages.
+                     * @param message GetChildPublisherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetChildPublisherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetChildPublisherRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetChildPublisherRequest.verify|verify} messages.
+                     * @param message GetChildPublisherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetChildPublisherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetChildPublisherRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetChildPublisherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetChildPublisherRequest;
+
+                    /**
+                     * Decodes a GetChildPublisherRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetChildPublisherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetChildPublisherRequest;
+
+                    /**
+                     * Verifies a GetChildPublisherRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetChildPublisherRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetChildPublisherRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetChildPublisherRequest;
+
+                    /**
+                     * Creates a plain object from a GetChildPublisherRequest message. Also converts values to other types if specified.
+                     * @param message GetChildPublisherRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetChildPublisherRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetChildPublisherRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetChildPublisherRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListChildPublishersRequest. */
+                interface IListChildPublishersRequest {
+
+                    /** ListChildPublishersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListChildPublishersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListChildPublishersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListChildPublishersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListChildPublishersRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListChildPublishersRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListChildPublishersRequest. */
+                class ListChildPublishersRequest implements IListChildPublishersRequest {
+
+                    /**
+                     * Constructs a new ListChildPublishersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListChildPublishersRequest);
+
+                    /** ListChildPublishersRequest parent. */
+                    public parent: string;
+
+                    /** ListChildPublishersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListChildPublishersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListChildPublishersRequest filter. */
+                    public filter: string;
+
+                    /** ListChildPublishersRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListChildPublishersRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListChildPublishersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListChildPublishersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListChildPublishersRequest): google.ads.admanager.v1.ListChildPublishersRequest;
+
+                    /**
+                     * Encodes the specified ListChildPublishersRequest message. Does not implicitly {@link google.ads.admanager.v1.ListChildPublishersRequest.verify|verify} messages.
+                     * @param message ListChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListChildPublishersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListChildPublishersRequest.verify|verify} messages.
+                     * @param message ListChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListChildPublishersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListChildPublishersRequest;
+
+                    /**
+                     * Decodes a ListChildPublishersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListChildPublishersRequest;
+
+                    /**
+                     * Verifies a ListChildPublishersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListChildPublishersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListChildPublishersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListChildPublishersRequest;
+
+                    /**
+                     * Creates a plain object from a ListChildPublishersRequest message. Also converts values to other types if specified.
+                     * @param message ListChildPublishersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListChildPublishersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListChildPublishersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListChildPublishersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListChildPublishersResponse. */
+                interface IListChildPublishersResponse {
+
+                    /** ListChildPublishersResponse childPublishers */
+                    childPublishers?: (google.ads.admanager.v1.IChildPublisher[]|null);
+
+                    /** ListChildPublishersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListChildPublishersResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListChildPublishersResponse. */
+                class ListChildPublishersResponse implements IListChildPublishersResponse {
+
+                    /**
+                     * Constructs a new ListChildPublishersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListChildPublishersResponse);
+
+                    /** ListChildPublishersResponse childPublishers. */
+                    public childPublishers: google.ads.admanager.v1.IChildPublisher[];
+
+                    /** ListChildPublishersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListChildPublishersResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListChildPublishersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListChildPublishersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListChildPublishersResponse): google.ads.admanager.v1.ListChildPublishersResponse;
+
+                    /**
+                     * Encodes the specified ListChildPublishersResponse message. Does not implicitly {@link google.ads.admanager.v1.ListChildPublishersResponse.verify|verify} messages.
+                     * @param message ListChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListChildPublishersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListChildPublishersResponse.verify|verify} messages.
+                     * @param message ListChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListChildPublishersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListChildPublishersResponse;
+
+                    /**
+                     * Decodes a ListChildPublishersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListChildPublishersResponse;
+
+                    /**
+                     * Verifies a ListChildPublishersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListChildPublishersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListChildPublishersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListChildPublishersResponse;
+
+                    /**
+                     * Creates a plain object from a ListChildPublishersResponse message. Also converts values to other types if specified.
+                     * @param message ListChildPublishersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListChildPublishersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListChildPublishersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListChildPublishersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateChildPublisherRequest. */
+                interface ICreateChildPublisherRequest {
+
+                    /** CreateChildPublisherRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateChildPublisherRequest childPublisher */
+                    childPublisher?: (google.ads.admanager.v1.IChildPublisher|null);
+                }
+
+                /** Represents a CreateChildPublisherRequest. */
+                class CreateChildPublisherRequest implements ICreateChildPublisherRequest {
+
+                    /**
+                     * Constructs a new CreateChildPublisherRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateChildPublisherRequest);
+
+                    /** CreateChildPublisherRequest parent. */
+                    public parent: string;
+
+                    /** CreateChildPublisherRequest childPublisher. */
+                    public childPublisher?: (google.ads.admanager.v1.IChildPublisher|null);
+
+                    /**
+                     * Creates a new CreateChildPublisherRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateChildPublisherRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateChildPublisherRequest): google.ads.admanager.v1.CreateChildPublisherRequest;
+
+                    /**
+                     * Encodes the specified CreateChildPublisherRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateChildPublisherRequest.verify|verify} messages.
+                     * @param message CreateChildPublisherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateChildPublisherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateChildPublisherRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateChildPublisherRequest.verify|verify} messages.
+                     * @param message CreateChildPublisherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateChildPublisherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateChildPublisherRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateChildPublisherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateChildPublisherRequest;
+
+                    /**
+                     * Decodes a CreateChildPublisherRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateChildPublisherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateChildPublisherRequest;
+
+                    /**
+                     * Verifies a CreateChildPublisherRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateChildPublisherRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateChildPublisherRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateChildPublisherRequest;
+
+                    /**
+                     * Creates a plain object from a CreateChildPublisherRequest message. Also converts values to other types if specified.
+                     * @param message CreateChildPublisherRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateChildPublisherRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateChildPublisherRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateChildPublisherRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateChildPublishersRequest. */
+                interface IBatchCreateChildPublishersRequest {
+
+                    /** BatchCreateChildPublishersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateChildPublishersRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateChildPublisherRequest[]|null);
+                }
+
+                /** Represents a BatchCreateChildPublishersRequest. */
+                class BatchCreateChildPublishersRequest implements IBatchCreateChildPublishersRequest {
+
+                    /**
+                     * Constructs a new BatchCreateChildPublishersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateChildPublishersRequest);
+
+                    /** BatchCreateChildPublishersRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateChildPublishersRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateChildPublisherRequest[];
+
+                    /**
+                     * Creates a new BatchCreateChildPublishersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateChildPublishersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateChildPublishersRequest): google.ads.admanager.v1.BatchCreateChildPublishersRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateChildPublishersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchCreateChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateChildPublishersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchCreateChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateChildPublishersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateChildPublishersRequest;
+
+                    /**
+                     * Decodes a BatchCreateChildPublishersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateChildPublishersRequest;
+
+                    /**
+                     * Verifies a BatchCreateChildPublishersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateChildPublishersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateChildPublishersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateChildPublishersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateChildPublishersRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateChildPublishersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateChildPublishersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateChildPublishersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateChildPublishersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateChildPublishersResponse. */
+                interface IBatchCreateChildPublishersResponse {
+
+                    /** BatchCreateChildPublishersResponse childPublishers */
+                    childPublishers?: (google.ads.admanager.v1.IChildPublisher[]|null);
+                }
+
+                /** Represents a BatchCreateChildPublishersResponse. */
+                class BatchCreateChildPublishersResponse implements IBatchCreateChildPublishersResponse {
+
+                    /**
+                     * Constructs a new BatchCreateChildPublishersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateChildPublishersResponse);
+
+                    /** BatchCreateChildPublishersResponse childPublishers. */
+                    public childPublishers: google.ads.admanager.v1.IChildPublisher[];
+
+                    /**
+                     * Creates a new BatchCreateChildPublishersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateChildPublishersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateChildPublishersResponse): google.ads.admanager.v1.BatchCreateChildPublishersResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateChildPublishersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchCreateChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateChildPublishersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchCreateChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateChildPublishersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateChildPublishersResponse;
+
+                    /**
+                     * Decodes a BatchCreateChildPublishersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateChildPublishersResponse;
+
+                    /**
+                     * Verifies a BatchCreateChildPublishersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateChildPublishersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateChildPublishersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateChildPublishersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateChildPublishersResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateChildPublishersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateChildPublishersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateChildPublishersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateChildPublishersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateChildPublisherRequest. */
+                interface IUpdateChildPublisherRequest {
+
+                    /** UpdateChildPublisherRequest childPublisher */
+                    childPublisher?: (google.ads.admanager.v1.IChildPublisher|null);
+
+                    /** UpdateChildPublisherRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateChildPublisherRequest. */
+                class UpdateChildPublisherRequest implements IUpdateChildPublisherRequest {
+
+                    /**
+                     * Constructs a new UpdateChildPublisherRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateChildPublisherRequest);
+
+                    /** UpdateChildPublisherRequest childPublisher. */
+                    public childPublisher?: (google.ads.admanager.v1.IChildPublisher|null);
+
+                    /** UpdateChildPublisherRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateChildPublisherRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateChildPublisherRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateChildPublisherRequest): google.ads.admanager.v1.UpdateChildPublisherRequest;
+
+                    /**
+                     * Encodes the specified UpdateChildPublisherRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateChildPublisherRequest.verify|verify} messages.
+                     * @param message UpdateChildPublisherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateChildPublisherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateChildPublisherRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateChildPublisherRequest.verify|verify} messages.
+                     * @param message UpdateChildPublisherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateChildPublisherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateChildPublisherRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateChildPublisherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateChildPublisherRequest;
+
+                    /**
+                     * Decodes an UpdateChildPublisherRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateChildPublisherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateChildPublisherRequest;
+
+                    /**
+                     * Verifies an UpdateChildPublisherRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateChildPublisherRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateChildPublisherRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateChildPublisherRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateChildPublisherRequest message. Also converts values to other types if specified.
+                     * @param message UpdateChildPublisherRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateChildPublisherRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateChildPublisherRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateChildPublisherRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateChildPublishersRequest. */
+                interface IBatchUpdateChildPublishersRequest {
+
+                    /** BatchUpdateChildPublishersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateChildPublishersRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateChildPublisherRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateChildPublishersRequest. */
+                class BatchUpdateChildPublishersRequest implements IBatchUpdateChildPublishersRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateChildPublishersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest);
+
+                    /** BatchUpdateChildPublishersRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateChildPublishersRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateChildPublisherRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateChildPublishersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateChildPublishersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest): google.ads.admanager.v1.BatchUpdateChildPublishersRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateChildPublishersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchUpdateChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateChildPublishersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchUpdateChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateChildPublishersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateChildPublishersRequest;
+
+                    /**
+                     * Decodes a BatchUpdateChildPublishersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateChildPublishersRequest;
+
+                    /**
+                     * Verifies a BatchUpdateChildPublishersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateChildPublishersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateChildPublishersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateChildPublishersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateChildPublishersRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateChildPublishersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateChildPublishersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateChildPublishersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateChildPublishersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateChildPublishersResponse. */
+                interface IBatchUpdateChildPublishersResponse {
+
+                    /** BatchUpdateChildPublishersResponse childPublishers */
+                    childPublishers?: (google.ads.admanager.v1.IChildPublisher[]|null);
+                }
+
+                /** Represents a BatchUpdateChildPublishersResponse. */
+                class BatchUpdateChildPublishersResponse implements IBatchUpdateChildPublishersResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateChildPublishersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateChildPublishersResponse);
+
+                    /** BatchUpdateChildPublishersResponse childPublishers. */
+                    public childPublishers: google.ads.admanager.v1.IChildPublisher[];
+
+                    /**
+                     * Creates a new BatchUpdateChildPublishersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateChildPublishersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateChildPublishersResponse): google.ads.admanager.v1.BatchUpdateChildPublishersResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateChildPublishersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchUpdateChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateChildPublishersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchUpdateChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateChildPublishersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateChildPublishersResponse;
+
+                    /**
+                     * Decodes a BatchUpdateChildPublishersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateChildPublishersResponse;
+
+                    /**
+                     * Verifies a BatchUpdateChildPublishersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateChildPublishersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateChildPublishersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateChildPublishersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateChildPublishersResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateChildPublishersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateChildPublishersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateChildPublishersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateChildPublishersResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -22947,6 +25177,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public listCompanies(request: google.ads.admanager.v1.IListCompaniesRequest): Promise<google.ads.admanager.v1.ListCompaniesResponse>;
+
+                    /**
+                     * Calls CreateCompany.
+                     * @param request CreateCompanyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Company
+                     */
+                    public createCompany(request: google.ads.admanager.v1.ICreateCompanyRequest, callback: google.ads.admanager.v1.CompanyService.CreateCompanyCallback): void;
+
+                    /**
+                     * Calls CreateCompany.
+                     * @param request CreateCompanyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCompany(request: google.ads.admanager.v1.ICreateCompanyRequest): Promise<google.ads.admanager.v1.Company>;
+
+                    /**
+                     * Calls BatchCreateCompanies.
+                     * @param request BatchCreateCompaniesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateCompaniesResponse
+                     */
+                    public batchCreateCompanies(request: google.ads.admanager.v1.IBatchCreateCompaniesRequest, callback: google.ads.admanager.v1.CompanyService.BatchCreateCompaniesCallback): void;
+
+                    /**
+                     * Calls BatchCreateCompanies.
+                     * @param request BatchCreateCompaniesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateCompanies(request: google.ads.admanager.v1.IBatchCreateCompaniesRequest): Promise<google.ads.admanager.v1.BatchCreateCompaniesResponse>;
+
+                    /**
+                     * Calls UpdateCompany.
+                     * @param request UpdateCompanyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Company
+                     */
+                    public updateCompany(request: google.ads.admanager.v1.IUpdateCompanyRequest, callback: google.ads.admanager.v1.CompanyService.UpdateCompanyCallback): void;
+
+                    /**
+                     * Calls UpdateCompany.
+                     * @param request UpdateCompanyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCompany(request: google.ads.admanager.v1.IUpdateCompanyRequest): Promise<google.ads.admanager.v1.Company>;
+
+                    /**
+                     * Calls BatchUpdateCompanies.
+                     * @param request BatchUpdateCompaniesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateCompaniesResponse
+                     */
+                    public batchUpdateCompanies(request: google.ads.admanager.v1.IBatchUpdateCompaniesRequest, callback: google.ads.admanager.v1.CompanyService.BatchUpdateCompaniesCallback): void;
+
+                    /**
+                     * Calls BatchUpdateCompanies.
+                     * @param request BatchUpdateCompaniesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateCompanies(request: google.ads.admanager.v1.IBatchUpdateCompaniesRequest): Promise<google.ads.admanager.v1.BatchUpdateCompaniesResponse>;
                 }
 
                 namespace CompanyService {
@@ -22964,6 +25250,34 @@ export namespace google {
                      * @param [response] ListCompaniesResponse
                      */
                     type ListCompaniesCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListCompaniesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CompanyService|createCompany}.
+                     * @param error Error, if any
+                     * @param [response] Company
+                     */
+                    type CreateCompanyCallback = (error: (Error|null), response?: google.ads.admanager.v1.Company) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CompanyService|batchCreateCompanies}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateCompaniesResponse
+                     */
+                    type BatchCreateCompaniesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateCompaniesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CompanyService|updateCompany}.
+                     * @param error Error, if any
+                     * @param [response] Company
+                     */
+                    type UpdateCompanyCallback = (error: (Error|null), response?: google.ads.admanager.v1.Company) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CompanyService|batchUpdateCompanies}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateCompaniesResponse
+                     */
+                    type BatchUpdateCompaniesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateCompaniesResponse) => void;
                 }
 
                 /** Properties of a GetCompanyRequest. */
@@ -23293,6 +25607,612 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListCompaniesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCompanyRequest. */
+                interface ICreateCompanyRequest {
+
+                    /** CreateCompanyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCompanyRequest company */
+                    company?: (google.ads.admanager.v1.ICompany|null);
+                }
+
+                /** Represents a CreateCompanyRequest. */
+                class CreateCompanyRequest implements ICreateCompanyRequest {
+
+                    /**
+                     * Constructs a new CreateCompanyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateCompanyRequest);
+
+                    /** CreateCompanyRequest parent. */
+                    public parent: string;
+
+                    /** CreateCompanyRequest company. */
+                    public company?: (google.ads.admanager.v1.ICompany|null);
+
+                    /**
+                     * Creates a new CreateCompanyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCompanyRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateCompanyRequest): google.ads.admanager.v1.CreateCompanyRequest;
+
+                    /**
+                     * Encodes the specified CreateCompanyRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateCompanyRequest.verify|verify} messages.
+                     * @param message CreateCompanyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateCompanyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCompanyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateCompanyRequest.verify|verify} messages.
+                     * @param message CreateCompanyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateCompanyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCompanyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCompanyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateCompanyRequest;
+
+                    /**
+                     * Decodes a CreateCompanyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCompanyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateCompanyRequest;
+
+                    /**
+                     * Verifies a CreateCompanyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCompanyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCompanyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateCompanyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCompanyRequest message. Also converts values to other types if specified.
+                     * @param message CreateCompanyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateCompanyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCompanyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCompanyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateCompaniesRequest. */
+                interface IBatchCreateCompaniesRequest {
+
+                    /** BatchCreateCompaniesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateCompaniesRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateCompanyRequest[]|null);
+                }
+
+                /** Represents a BatchCreateCompaniesRequest. */
+                class BatchCreateCompaniesRequest implements IBatchCreateCompaniesRequest {
+
+                    /**
+                     * Constructs a new BatchCreateCompaniesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateCompaniesRequest);
+
+                    /** BatchCreateCompaniesRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateCompaniesRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateCompanyRequest[];
+
+                    /**
+                     * Creates a new BatchCreateCompaniesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateCompaniesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateCompaniesRequest): google.ads.admanager.v1.BatchCreateCompaniesRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateCompaniesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCompaniesRequest.verify|verify} messages.
+                     * @param message BatchCreateCompaniesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateCompaniesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateCompaniesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCompaniesRequest.verify|verify} messages.
+                     * @param message BatchCreateCompaniesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateCompaniesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateCompaniesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateCompaniesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateCompaniesRequest;
+
+                    /**
+                     * Decodes a BatchCreateCompaniesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateCompaniesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateCompaniesRequest;
+
+                    /**
+                     * Verifies a BatchCreateCompaniesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateCompaniesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateCompaniesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateCompaniesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateCompaniesRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateCompaniesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateCompaniesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateCompaniesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateCompaniesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateCompaniesResponse. */
+                interface IBatchCreateCompaniesResponse {
+
+                    /** BatchCreateCompaniesResponse companies */
+                    companies?: (google.ads.admanager.v1.ICompany[]|null);
+                }
+
+                /** Represents a BatchCreateCompaniesResponse. */
+                class BatchCreateCompaniesResponse implements IBatchCreateCompaniesResponse {
+
+                    /**
+                     * Constructs a new BatchCreateCompaniesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateCompaniesResponse);
+
+                    /** BatchCreateCompaniesResponse companies. */
+                    public companies: google.ads.admanager.v1.ICompany[];
+
+                    /**
+                     * Creates a new BatchCreateCompaniesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateCompaniesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateCompaniesResponse): google.ads.admanager.v1.BatchCreateCompaniesResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateCompaniesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCompaniesResponse.verify|verify} messages.
+                     * @param message BatchCreateCompaniesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateCompaniesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateCompaniesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCompaniesResponse.verify|verify} messages.
+                     * @param message BatchCreateCompaniesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateCompaniesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateCompaniesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateCompaniesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateCompaniesResponse;
+
+                    /**
+                     * Decodes a BatchCreateCompaniesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateCompaniesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateCompaniesResponse;
+
+                    /**
+                     * Verifies a BatchCreateCompaniesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateCompaniesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateCompaniesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateCompaniesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateCompaniesResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateCompaniesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateCompaniesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateCompaniesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateCompaniesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCompanyRequest. */
+                interface IUpdateCompanyRequest {
+
+                    /** UpdateCompanyRequest company */
+                    company?: (google.ads.admanager.v1.ICompany|null);
+
+                    /** UpdateCompanyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCompanyRequest. */
+                class UpdateCompanyRequest implements IUpdateCompanyRequest {
+
+                    /**
+                     * Constructs a new UpdateCompanyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateCompanyRequest);
+
+                    /** UpdateCompanyRequest company. */
+                    public company?: (google.ads.admanager.v1.ICompany|null);
+
+                    /** UpdateCompanyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCompanyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCompanyRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateCompanyRequest): google.ads.admanager.v1.UpdateCompanyRequest;
+
+                    /**
+                     * Encodes the specified UpdateCompanyRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateCompanyRequest.verify|verify} messages.
+                     * @param message UpdateCompanyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateCompanyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCompanyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateCompanyRequest.verify|verify} messages.
+                     * @param message UpdateCompanyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateCompanyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCompanyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCompanyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateCompanyRequest;
+
+                    /**
+                     * Decodes an UpdateCompanyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCompanyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateCompanyRequest;
+
+                    /**
+                     * Verifies an UpdateCompanyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCompanyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCompanyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateCompanyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCompanyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCompanyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateCompanyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCompanyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCompanyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateCompaniesRequest. */
+                interface IBatchUpdateCompaniesRequest {
+
+                    /** BatchUpdateCompaniesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateCompaniesRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateCompanyRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateCompaniesRequest. */
+                class BatchUpdateCompaniesRequest implements IBatchUpdateCompaniesRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateCompaniesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateCompaniesRequest);
+
+                    /** BatchUpdateCompaniesRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateCompaniesRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateCompanyRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateCompaniesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateCompaniesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateCompaniesRequest): google.ads.admanager.v1.BatchUpdateCompaniesRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateCompaniesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCompaniesRequest.verify|verify} messages.
+                     * @param message BatchUpdateCompaniesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateCompaniesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateCompaniesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCompaniesRequest.verify|verify} messages.
+                     * @param message BatchUpdateCompaniesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateCompaniesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateCompaniesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateCompaniesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateCompaniesRequest;
+
+                    /**
+                     * Decodes a BatchUpdateCompaniesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateCompaniesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateCompaniesRequest;
+
+                    /**
+                     * Verifies a BatchUpdateCompaniesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateCompaniesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateCompaniesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateCompaniesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateCompaniesRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateCompaniesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateCompaniesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateCompaniesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateCompaniesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateCompaniesResponse. */
+                interface IBatchUpdateCompaniesResponse {
+
+                    /** BatchUpdateCompaniesResponse companies */
+                    companies?: (google.ads.admanager.v1.ICompany[]|null);
+                }
+
+                /** Represents a BatchUpdateCompaniesResponse. */
+                class BatchUpdateCompaniesResponse implements IBatchUpdateCompaniesResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateCompaniesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateCompaniesResponse);
+
+                    /** BatchUpdateCompaniesResponse companies. */
+                    public companies: google.ads.admanager.v1.ICompany[];
+
+                    /**
+                     * Creates a new BatchUpdateCompaniesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateCompaniesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateCompaniesResponse): google.ads.admanager.v1.BatchUpdateCompaniesResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateCompaniesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCompaniesResponse.verify|verify} messages.
+                     * @param message BatchUpdateCompaniesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateCompaniesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateCompaniesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCompaniesResponse.verify|verify} messages.
+                     * @param message BatchUpdateCompaniesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateCompaniesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateCompaniesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateCompaniesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateCompaniesResponse;
+
+                    /**
+                     * Decodes a BatchUpdateCompaniesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateCompaniesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateCompaniesResponse;
+
+                    /**
+                     * Verifies a BatchUpdateCompaniesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateCompaniesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateCompaniesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateCompaniesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateCompaniesResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateCompaniesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateCompaniesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateCompaniesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateCompaniesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -27468,6 +30388,131 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ConversionEventEnum. */
+                interface IConversionEventEnum {
+                }
+
+                /** Represents a ConversionEventEnum. */
+                class ConversionEventEnum implements IConversionEventEnum {
+
+                    /**
+                     * Constructs a new ConversionEventEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IConversionEventEnum);
+
+                    /**
+                     * Creates a new ConversionEventEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversionEventEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IConversionEventEnum): google.ads.admanager.v1.ConversionEventEnum;
+
+                    /**
+                     * Encodes the specified ConversionEventEnum message. Does not implicitly {@link google.ads.admanager.v1.ConversionEventEnum.verify|verify} messages.
+                     * @param message ConversionEventEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IConversionEventEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversionEventEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ConversionEventEnum.verify|verify} messages.
+                     * @param message ConversionEventEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IConversionEventEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversionEventEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversionEventEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ConversionEventEnum;
+
+                    /**
+                     * Decodes a ConversionEventEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversionEventEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ConversionEventEnum;
+
+                    /**
+                     * Verifies a ConversionEventEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversionEventEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversionEventEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ConversionEventEnum;
+
+                    /**
+                     * Creates a plain object from a ConversionEventEnum message. Also converts values to other types if specified.
+                     * @param message ConversionEventEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ConversionEventEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversionEventEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversionEventEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversionEventEnum {
+
+                    /** ConversionEvent enum. */
+                    enum ConversionEvent {
+                        CONVERSION_EVENT_UNSPECIFIED = 0,
+                        ACCEPT_INVITATION = 1,
+                        CLICK_TRACKING = 2,
+                        CLOSE = 3,
+                        COLLAPSE = 4,
+                        COMPLETE = 5,
+                        CREATIVE_VIEW = 6,
+                        CUSTOM_CLICK = 7,
+                        ENGAGED_VIEW = 8,
+                        EXPAND = 9,
+                        FIRST_QUARTILE = 10,
+                        FULLSCREEN = 11,
+                        FULLY_VIEWABLE_AUDIBLE_HALF_DURATION_IMPRESSION = 12,
+                        MEASURABLE_IMPRESSION = 13,
+                        MIDPOINT = 14,
+                        MUTE = 15,
+                        PAUSE = 16,
+                        RESUME = 17,
+                        REWIND = 18,
+                        SKIPPED = 19,
+                        SKIP_SHOWN = 20,
+                        START = 21,
+                        SURVEY = 22,
+                        THIRD_QUARTILE = 23,
+                        UNMUTE = 24,
+                        VIDEO_ABANDON = 25,
+                        VIEWABLE_IMPRESSION = 26
+                    }
+                }
+
                 /** Properties of a Creative. */
                 interface ICreative {
 
@@ -30317,6 +33362,2305 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListCreativeTemplatesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreativeWrapperTypeEnum. */
+                interface ICreativeWrapperTypeEnum {
+                }
+
+                /** Represents a CreativeWrapperTypeEnum. */
+                class CreativeWrapperTypeEnum implements ICreativeWrapperTypeEnum {
+
+                    /**
+                     * Constructs a new CreativeWrapperTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreativeWrapperTypeEnum);
+
+                    /**
+                     * Creates a new CreativeWrapperTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreativeWrapperTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreativeWrapperTypeEnum): google.ads.admanager.v1.CreativeWrapperTypeEnum;
+
+                    /**
+                     * Encodes the specified CreativeWrapperTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapperTypeEnum.verify|verify} messages.
+                     * @param message CreativeWrapperTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreativeWrapperTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreativeWrapperTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapperTypeEnum.verify|verify} messages.
+                     * @param message CreativeWrapperTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreativeWrapperTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreativeWrapperTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreativeWrapperTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreativeWrapperTypeEnum;
+
+                    /**
+                     * Decodes a CreativeWrapperTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreativeWrapperTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreativeWrapperTypeEnum;
+
+                    /**
+                     * Verifies a CreativeWrapperTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreativeWrapperTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreativeWrapperTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreativeWrapperTypeEnum;
+
+                    /**
+                     * Creates a plain object from a CreativeWrapperTypeEnum message. Also converts values to other types if specified.
+                     * @param message CreativeWrapperTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreativeWrapperTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreativeWrapperTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreativeWrapperTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CreativeWrapperTypeEnum {
+
+                    /** CreativeWrapperType enum. */
+                    enum CreativeWrapperType {
+                        CREATIVE_WRAPPER_TYPE_UNSPECIFIED = 0,
+                        HTML = 1,
+                        VIDEO_TRACKING_URL = 2
+                    }
+                }
+
+                /** Properties of a CreativeWrapperStatusEnum. */
+                interface ICreativeWrapperStatusEnum {
+                }
+
+                /** Represents a CreativeWrapperStatusEnum. */
+                class CreativeWrapperStatusEnum implements ICreativeWrapperStatusEnum {
+
+                    /**
+                     * Constructs a new CreativeWrapperStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreativeWrapperStatusEnum);
+
+                    /**
+                     * Creates a new CreativeWrapperStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreativeWrapperStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreativeWrapperStatusEnum): google.ads.admanager.v1.CreativeWrapperStatusEnum;
+
+                    /**
+                     * Encodes the specified CreativeWrapperStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapperStatusEnum.verify|verify} messages.
+                     * @param message CreativeWrapperStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreativeWrapperStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreativeWrapperStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapperStatusEnum.verify|verify} messages.
+                     * @param message CreativeWrapperStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreativeWrapperStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreativeWrapperStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreativeWrapperStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreativeWrapperStatusEnum;
+
+                    /**
+                     * Decodes a CreativeWrapperStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreativeWrapperStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreativeWrapperStatusEnum;
+
+                    /**
+                     * Verifies a CreativeWrapperStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreativeWrapperStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreativeWrapperStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreativeWrapperStatusEnum;
+
+                    /**
+                     * Creates a plain object from a CreativeWrapperStatusEnum message. Also converts values to other types if specified.
+                     * @param message CreativeWrapperStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreativeWrapperStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreativeWrapperStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreativeWrapperStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CreativeWrapperStatusEnum {
+
+                    /** CreativeWrapperStatus enum. */
+                    enum CreativeWrapperStatus {
+                        CREATIVE_WRAPPER_STATUS_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        INACTIVE = 2
+                    }
+                }
+
+                /** Properties of a CreativeWrapperOrderingEnum. */
+                interface ICreativeWrapperOrderingEnum {
+                }
+
+                /** Represents a CreativeWrapperOrderingEnum. */
+                class CreativeWrapperOrderingEnum implements ICreativeWrapperOrderingEnum {
+
+                    /**
+                     * Constructs a new CreativeWrapperOrderingEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreativeWrapperOrderingEnum);
+
+                    /**
+                     * Creates a new CreativeWrapperOrderingEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreativeWrapperOrderingEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreativeWrapperOrderingEnum): google.ads.admanager.v1.CreativeWrapperOrderingEnum;
+
+                    /**
+                     * Encodes the specified CreativeWrapperOrderingEnum message. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapperOrderingEnum.verify|verify} messages.
+                     * @param message CreativeWrapperOrderingEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreativeWrapperOrderingEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreativeWrapperOrderingEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapperOrderingEnum.verify|verify} messages.
+                     * @param message CreativeWrapperOrderingEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreativeWrapperOrderingEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreativeWrapperOrderingEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreativeWrapperOrderingEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreativeWrapperOrderingEnum;
+
+                    /**
+                     * Decodes a CreativeWrapperOrderingEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreativeWrapperOrderingEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreativeWrapperOrderingEnum;
+
+                    /**
+                     * Verifies a CreativeWrapperOrderingEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreativeWrapperOrderingEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreativeWrapperOrderingEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreativeWrapperOrderingEnum;
+
+                    /**
+                     * Creates a plain object from a CreativeWrapperOrderingEnum message. Also converts values to other types if specified.
+                     * @param message CreativeWrapperOrderingEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreativeWrapperOrderingEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreativeWrapperOrderingEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreativeWrapperOrderingEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CreativeWrapperOrderingEnum {
+
+                    /** CreativeWrapperOrdering enum. */
+                    enum CreativeWrapperOrdering {
+                        CREATIVE_WRAPPER_ORDERING_UNSPECIFIED = 0,
+                        INNER = 1,
+                        NO_PREFERENCE = 2,
+                        OUTER = 3
+                    }
+                }
+
+                /** Properties of a CreativeWrapper. */
+                interface ICreativeWrapper {
+
+                    /** CreativeWrapper name */
+                    name?: (string|null);
+
+                    /** CreativeWrapper label */
+                    label?: (string|null);
+
+                    /** CreativeWrapper creativeWrapperType */
+                    creativeWrapperType?: (google.ads.admanager.v1.CreativeWrapperTypeEnum.CreativeWrapperType|keyof typeof google.ads.admanager.v1.CreativeWrapperTypeEnum.CreativeWrapperType|null);
+
+                    /** CreativeWrapper headerCreative */
+                    headerCreative?: (string|null);
+
+                    /** CreativeWrapper footerCreative */
+                    footerCreative?: (string|null);
+
+                    /** CreativeWrapper htmlHeader */
+                    htmlHeader?: (string|null);
+
+                    /** CreativeWrapper htmlFooter */
+                    htmlFooter?: (string|null);
+
+                    /** CreativeWrapper ampHeader */
+                    ampHeader?: (string|null);
+
+                    /** CreativeWrapper ampFooter */
+                    ampFooter?: (string|null);
+
+                    /** CreativeWrapper videoTrackingUrls */
+                    videoTrackingUrls?: (google.ads.admanager.v1.IVideoTrackingUrl[]|null);
+
+                    /** CreativeWrapper thirdPartyDataDeclaration */
+                    thirdPartyDataDeclaration?: (google.ads.admanager.v1.IThirdPartyDataDeclaration|null);
+
+                    /** CreativeWrapper ordering */
+                    ordering?: (google.ads.admanager.v1.CreativeWrapperOrderingEnum.CreativeWrapperOrdering|keyof typeof google.ads.admanager.v1.CreativeWrapperOrderingEnum.CreativeWrapperOrdering|null);
+
+                    /** CreativeWrapper status */
+                    status?: (google.ads.admanager.v1.CreativeWrapperStatusEnum.CreativeWrapperStatus|keyof typeof google.ads.admanager.v1.CreativeWrapperStatusEnum.CreativeWrapperStatus|null);
+                }
+
+                /** Represents a CreativeWrapper. */
+                class CreativeWrapper implements ICreativeWrapper {
+
+                    /**
+                     * Constructs a new CreativeWrapper.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreativeWrapper);
+
+                    /** CreativeWrapper name. */
+                    public name: string;
+
+                    /** CreativeWrapper label. */
+                    public label: string;
+
+                    /** CreativeWrapper creativeWrapperType. */
+                    public creativeWrapperType?: (google.ads.admanager.v1.CreativeWrapperTypeEnum.CreativeWrapperType|keyof typeof google.ads.admanager.v1.CreativeWrapperTypeEnum.CreativeWrapperType|null);
+
+                    /** CreativeWrapper headerCreative. */
+                    public headerCreative?: (string|null);
+
+                    /** CreativeWrapper footerCreative. */
+                    public footerCreative?: (string|null);
+
+                    /** CreativeWrapper htmlHeader. */
+                    public htmlHeader?: (string|null);
+
+                    /** CreativeWrapper htmlFooter. */
+                    public htmlFooter?: (string|null);
+
+                    /** CreativeWrapper ampHeader. */
+                    public ampHeader?: (string|null);
+
+                    /** CreativeWrapper ampFooter. */
+                    public ampFooter?: (string|null);
+
+                    /** CreativeWrapper videoTrackingUrls. */
+                    public videoTrackingUrls: google.ads.admanager.v1.IVideoTrackingUrl[];
+
+                    /** CreativeWrapper thirdPartyDataDeclaration. */
+                    public thirdPartyDataDeclaration?: (google.ads.admanager.v1.IThirdPartyDataDeclaration|null);
+
+                    /** CreativeWrapper ordering. */
+                    public ordering?: (google.ads.admanager.v1.CreativeWrapperOrderingEnum.CreativeWrapperOrdering|keyof typeof google.ads.admanager.v1.CreativeWrapperOrderingEnum.CreativeWrapperOrdering|null);
+
+                    /** CreativeWrapper status. */
+                    public status?: (google.ads.admanager.v1.CreativeWrapperStatusEnum.CreativeWrapperStatus|keyof typeof google.ads.admanager.v1.CreativeWrapperStatusEnum.CreativeWrapperStatus|null);
+
+                    /**
+                     * Creates a new CreativeWrapper instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreativeWrapper instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreativeWrapper): google.ads.admanager.v1.CreativeWrapper;
+
+                    /**
+                     * Encodes the specified CreativeWrapper message. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapper.verify|verify} messages.
+                     * @param message CreativeWrapper message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreativeWrapper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreativeWrapper message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreativeWrapper.verify|verify} messages.
+                     * @param message CreativeWrapper message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreativeWrapper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreativeWrapper message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreativeWrapper
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreativeWrapper;
+
+                    /**
+                     * Decodes a CreativeWrapper message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreativeWrapper
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreativeWrapper;
+
+                    /**
+                     * Verifies a CreativeWrapper message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreativeWrapper message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreativeWrapper
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreativeWrapper;
+
+                    /**
+                     * Creates a plain object from a CreativeWrapper message. Also converts values to other types if specified.
+                     * @param message CreativeWrapper
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreativeWrapper, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreativeWrapper to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreativeWrapper
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ThirdPartyDataDeclaration. */
+                interface IThirdPartyDataDeclaration {
+
+                    /** ThirdPartyDataDeclaration declarationType */
+                    declarationType?: (google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum.ThirdPartyDataDeclarationType|keyof typeof google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum.ThirdPartyDataDeclarationType|null);
+
+                    /** ThirdPartyDataDeclaration thirdPartyCompanies */
+                    thirdPartyCompanies?: (string[]|null);
+                }
+
+                /** Represents a ThirdPartyDataDeclaration. */
+                class ThirdPartyDataDeclaration implements IThirdPartyDataDeclaration {
+
+                    /**
+                     * Constructs a new ThirdPartyDataDeclaration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IThirdPartyDataDeclaration);
+
+                    /** ThirdPartyDataDeclaration declarationType. */
+                    public declarationType: (google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum.ThirdPartyDataDeclarationType|keyof typeof google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum.ThirdPartyDataDeclarationType);
+
+                    /** ThirdPartyDataDeclaration thirdPartyCompanies. */
+                    public thirdPartyCompanies: string[];
+
+                    /**
+                     * Creates a new ThirdPartyDataDeclaration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ThirdPartyDataDeclaration instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IThirdPartyDataDeclaration): google.ads.admanager.v1.ThirdPartyDataDeclaration;
+
+                    /**
+                     * Encodes the specified ThirdPartyDataDeclaration message. Does not implicitly {@link google.ads.admanager.v1.ThirdPartyDataDeclaration.verify|verify} messages.
+                     * @param message ThirdPartyDataDeclaration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IThirdPartyDataDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ThirdPartyDataDeclaration message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ThirdPartyDataDeclaration.verify|verify} messages.
+                     * @param message ThirdPartyDataDeclaration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IThirdPartyDataDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ThirdPartyDataDeclaration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ThirdPartyDataDeclaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ThirdPartyDataDeclaration;
+
+                    /**
+                     * Decodes a ThirdPartyDataDeclaration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ThirdPartyDataDeclaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ThirdPartyDataDeclaration;
+
+                    /**
+                     * Verifies a ThirdPartyDataDeclaration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ThirdPartyDataDeclaration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ThirdPartyDataDeclaration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ThirdPartyDataDeclaration;
+
+                    /**
+                     * Creates a plain object from a ThirdPartyDataDeclaration message. Also converts values to other types if specified.
+                     * @param message ThirdPartyDataDeclaration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ThirdPartyDataDeclaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ThirdPartyDataDeclaration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ThirdPartyDataDeclaration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ThirdPartyDataDeclarationTypeEnum. */
+                interface IThirdPartyDataDeclarationTypeEnum {
+                }
+
+                /** Represents a ThirdPartyDataDeclarationTypeEnum. */
+                class ThirdPartyDataDeclarationTypeEnum implements IThirdPartyDataDeclarationTypeEnum {
+
+                    /**
+                     * Constructs a new ThirdPartyDataDeclarationTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IThirdPartyDataDeclarationTypeEnum);
+
+                    /**
+                     * Creates a new ThirdPartyDataDeclarationTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ThirdPartyDataDeclarationTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IThirdPartyDataDeclarationTypeEnum): google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum;
+
+                    /**
+                     * Encodes the specified ThirdPartyDataDeclarationTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum.verify|verify} messages.
+                     * @param message ThirdPartyDataDeclarationTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IThirdPartyDataDeclarationTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ThirdPartyDataDeclarationTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum.verify|verify} messages.
+                     * @param message ThirdPartyDataDeclarationTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IThirdPartyDataDeclarationTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ThirdPartyDataDeclarationTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ThirdPartyDataDeclarationTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum;
+
+                    /**
+                     * Decodes a ThirdPartyDataDeclarationTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ThirdPartyDataDeclarationTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum;
+
+                    /**
+                     * Verifies a ThirdPartyDataDeclarationTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ThirdPartyDataDeclarationTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ThirdPartyDataDeclarationTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum;
+
+                    /**
+                     * Creates a plain object from a ThirdPartyDataDeclarationTypeEnum message. Also converts values to other types if specified.
+                     * @param message ThirdPartyDataDeclarationTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ThirdPartyDataDeclarationTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ThirdPartyDataDeclarationTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ThirdPartyDataDeclarationTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ThirdPartyDataDeclarationTypeEnum {
+
+                    /** ThirdPartyDataDeclarationType enum. */
+                    enum ThirdPartyDataDeclarationType {
+                        THIRD_PARTY_DATA_DECLARATION_TYPE_UNSPECIFIED = 0,
+                        DECLARED = 1,
+                        NONE = 2
+                    }
+                }
+
+                /** Properties of a VideoTrackingUrl. */
+                interface IVideoTrackingUrl {
+
+                    /** VideoTrackingUrl conversionEvent */
+                    conversionEvent?: (google.ads.admanager.v1.ConversionEventEnum.ConversionEvent|keyof typeof google.ads.admanager.v1.ConversionEventEnum.ConversionEvent|null);
+
+                    /** VideoTrackingUrl url */
+                    url?: (string|null);
+                }
+
+                /** Represents a VideoTrackingUrl. */
+                class VideoTrackingUrl implements IVideoTrackingUrl {
+
+                    /**
+                     * Constructs a new VideoTrackingUrl.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IVideoTrackingUrl);
+
+                    /** VideoTrackingUrl conversionEvent. */
+                    public conversionEvent: (google.ads.admanager.v1.ConversionEventEnum.ConversionEvent|keyof typeof google.ads.admanager.v1.ConversionEventEnum.ConversionEvent);
+
+                    /** VideoTrackingUrl url. */
+                    public url: string;
+
+                    /**
+                     * Creates a new VideoTrackingUrl instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoTrackingUrl instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IVideoTrackingUrl): google.ads.admanager.v1.VideoTrackingUrl;
+
+                    /**
+                     * Encodes the specified VideoTrackingUrl message. Does not implicitly {@link google.ads.admanager.v1.VideoTrackingUrl.verify|verify} messages.
+                     * @param message VideoTrackingUrl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IVideoTrackingUrl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoTrackingUrl message, length delimited. Does not implicitly {@link google.ads.admanager.v1.VideoTrackingUrl.verify|verify} messages.
+                     * @param message VideoTrackingUrl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IVideoTrackingUrl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoTrackingUrl message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoTrackingUrl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.VideoTrackingUrl;
+
+                    /**
+                     * Decodes a VideoTrackingUrl message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoTrackingUrl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.VideoTrackingUrl;
+
+                    /**
+                     * Verifies a VideoTrackingUrl message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoTrackingUrl message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoTrackingUrl
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.VideoTrackingUrl;
+
+                    /**
+                     * Creates a plain object from a VideoTrackingUrl message. Also converts values to other types if specified.
+                     * @param message VideoTrackingUrl
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.VideoTrackingUrl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoTrackingUrl to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VideoTrackingUrl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a CreativeWrapperService */
+                class CreativeWrapperService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CreativeWrapperService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CreativeWrapperService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CreativeWrapperService;
+
+                    /**
+                     * Calls GetCreativeWrapper.
+                     * @param request GetCreativeWrapperRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CreativeWrapper
+                     */
+                    public getCreativeWrapper(request: google.ads.admanager.v1.IGetCreativeWrapperRequest, callback: google.ads.admanager.v1.CreativeWrapperService.GetCreativeWrapperCallback): void;
+
+                    /**
+                     * Calls GetCreativeWrapper.
+                     * @param request GetCreativeWrapperRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCreativeWrapper(request: google.ads.admanager.v1.IGetCreativeWrapperRequest): Promise<google.ads.admanager.v1.CreativeWrapper>;
+
+                    /**
+                     * Calls ListCreativeWrappers.
+                     * @param request ListCreativeWrappersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCreativeWrappersResponse
+                     */
+                    public listCreativeWrappers(request: google.ads.admanager.v1.IListCreativeWrappersRequest, callback: google.ads.admanager.v1.CreativeWrapperService.ListCreativeWrappersCallback): void;
+
+                    /**
+                     * Calls ListCreativeWrappers.
+                     * @param request ListCreativeWrappersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCreativeWrappers(request: google.ads.admanager.v1.IListCreativeWrappersRequest): Promise<google.ads.admanager.v1.ListCreativeWrappersResponse>;
+
+                    /**
+                     * Calls CreateCreativeWrapper.
+                     * @param request CreateCreativeWrapperRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CreativeWrapper
+                     */
+                    public createCreativeWrapper(request: google.ads.admanager.v1.ICreateCreativeWrapperRequest, callback: google.ads.admanager.v1.CreativeWrapperService.CreateCreativeWrapperCallback): void;
+
+                    /**
+                     * Calls CreateCreativeWrapper.
+                     * @param request CreateCreativeWrapperRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCreativeWrapper(request: google.ads.admanager.v1.ICreateCreativeWrapperRequest): Promise<google.ads.admanager.v1.CreativeWrapper>;
+
+                    /**
+                     * Calls BatchCreateCreativeWrappers.
+                     * @param request BatchCreateCreativeWrappersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateCreativeWrappersResponse
+                     */
+                    public batchCreateCreativeWrappers(request: google.ads.admanager.v1.IBatchCreateCreativeWrappersRequest, callback: google.ads.admanager.v1.CreativeWrapperService.BatchCreateCreativeWrappersCallback): void;
+
+                    /**
+                     * Calls BatchCreateCreativeWrappers.
+                     * @param request BatchCreateCreativeWrappersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateCreativeWrappers(request: google.ads.admanager.v1.IBatchCreateCreativeWrappersRequest): Promise<google.ads.admanager.v1.BatchCreateCreativeWrappersResponse>;
+
+                    /**
+                     * Calls UpdateCreativeWrapper.
+                     * @param request UpdateCreativeWrapperRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CreativeWrapper
+                     */
+                    public updateCreativeWrapper(request: google.ads.admanager.v1.IUpdateCreativeWrapperRequest, callback: google.ads.admanager.v1.CreativeWrapperService.UpdateCreativeWrapperCallback): void;
+
+                    /**
+                     * Calls UpdateCreativeWrapper.
+                     * @param request UpdateCreativeWrapperRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCreativeWrapper(request: google.ads.admanager.v1.IUpdateCreativeWrapperRequest): Promise<google.ads.admanager.v1.CreativeWrapper>;
+
+                    /**
+                     * Calls BatchUpdateCreativeWrappers.
+                     * @param request BatchUpdateCreativeWrappersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateCreativeWrappersResponse
+                     */
+                    public batchUpdateCreativeWrappers(request: google.ads.admanager.v1.IBatchUpdateCreativeWrappersRequest, callback: google.ads.admanager.v1.CreativeWrapperService.BatchUpdateCreativeWrappersCallback): void;
+
+                    /**
+                     * Calls BatchUpdateCreativeWrappers.
+                     * @param request BatchUpdateCreativeWrappersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateCreativeWrappers(request: google.ads.admanager.v1.IBatchUpdateCreativeWrappersRequest): Promise<google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse>;
+
+                    /**
+                     * Calls BatchActivateCreativeWrappers.
+                     * @param request BatchActivateCreativeWrappersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchActivateCreativeWrappersResponse
+                     */
+                    public batchActivateCreativeWrappers(request: google.ads.admanager.v1.IBatchActivateCreativeWrappersRequest, callback: google.ads.admanager.v1.CreativeWrapperService.BatchActivateCreativeWrappersCallback): void;
+
+                    /**
+                     * Calls BatchActivateCreativeWrappers.
+                     * @param request BatchActivateCreativeWrappersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchActivateCreativeWrappers(request: google.ads.admanager.v1.IBatchActivateCreativeWrappersRequest): Promise<google.ads.admanager.v1.BatchActivateCreativeWrappersResponse>;
+
+                    /**
+                     * Calls BatchDeactivateCreativeWrappers.
+                     * @param request BatchDeactivateCreativeWrappersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchDeactivateCreativeWrappersResponse
+                     */
+                    public batchDeactivateCreativeWrappers(request: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersRequest, callback: google.ads.admanager.v1.CreativeWrapperService.BatchDeactivateCreativeWrappersCallback): void;
+
+                    /**
+                     * Calls BatchDeactivateCreativeWrappers.
+                     * @param request BatchDeactivateCreativeWrappersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeactivateCreativeWrappers(request: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersRequest): Promise<google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse>;
+                }
+
+                namespace CreativeWrapperService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|getCreativeWrapper}.
+                     * @param error Error, if any
+                     * @param [response] CreativeWrapper
+                     */
+                    type GetCreativeWrapperCallback = (error: (Error|null), response?: google.ads.admanager.v1.CreativeWrapper) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|listCreativeWrappers}.
+                     * @param error Error, if any
+                     * @param [response] ListCreativeWrappersResponse
+                     */
+                    type ListCreativeWrappersCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListCreativeWrappersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|createCreativeWrapper}.
+                     * @param error Error, if any
+                     * @param [response] CreativeWrapper
+                     */
+                    type CreateCreativeWrapperCallback = (error: (Error|null), response?: google.ads.admanager.v1.CreativeWrapper) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|batchCreateCreativeWrappers}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateCreativeWrappersResponse
+                     */
+                    type BatchCreateCreativeWrappersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateCreativeWrappersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|updateCreativeWrapper}.
+                     * @param error Error, if any
+                     * @param [response] CreativeWrapper
+                     */
+                    type UpdateCreativeWrapperCallback = (error: (Error|null), response?: google.ads.admanager.v1.CreativeWrapper) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|batchUpdateCreativeWrappers}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateCreativeWrappersResponse
+                     */
+                    type BatchUpdateCreativeWrappersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|batchActivateCreativeWrappers}.
+                     * @param error Error, if any
+                     * @param [response] BatchActivateCreativeWrappersResponse
+                     */
+                    type BatchActivateCreativeWrappersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchActivateCreativeWrappersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.CreativeWrapperService|batchDeactivateCreativeWrappers}.
+                     * @param error Error, if any
+                     * @param [response] BatchDeactivateCreativeWrappersResponse
+                     */
+                    type BatchDeactivateCreativeWrappersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse) => void;
+                }
+
+                /** Properties of a GetCreativeWrapperRequest. */
+                interface IGetCreativeWrapperRequest {
+
+                    /** GetCreativeWrapperRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCreativeWrapperRequest. */
+                class GetCreativeWrapperRequest implements IGetCreativeWrapperRequest {
+
+                    /**
+                     * Constructs a new GetCreativeWrapperRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetCreativeWrapperRequest);
+
+                    /** GetCreativeWrapperRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCreativeWrapperRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCreativeWrapperRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetCreativeWrapperRequest): google.ads.admanager.v1.GetCreativeWrapperRequest;
+
+                    /**
+                     * Encodes the specified GetCreativeWrapperRequest message. Does not implicitly {@link google.ads.admanager.v1.GetCreativeWrapperRequest.verify|verify} messages.
+                     * @param message GetCreativeWrapperRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetCreativeWrapperRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCreativeWrapperRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetCreativeWrapperRequest.verify|verify} messages.
+                     * @param message GetCreativeWrapperRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetCreativeWrapperRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCreativeWrapperRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCreativeWrapperRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetCreativeWrapperRequest;
+
+                    /**
+                     * Decodes a GetCreativeWrapperRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCreativeWrapperRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetCreativeWrapperRequest;
+
+                    /**
+                     * Verifies a GetCreativeWrapperRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCreativeWrapperRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCreativeWrapperRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetCreativeWrapperRequest;
+
+                    /**
+                     * Creates a plain object from a GetCreativeWrapperRequest message. Also converts values to other types if specified.
+                     * @param message GetCreativeWrapperRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetCreativeWrapperRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCreativeWrapperRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCreativeWrapperRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCreativeWrappersRequest. */
+                interface IListCreativeWrappersRequest {
+
+                    /** ListCreativeWrappersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCreativeWrappersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCreativeWrappersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListCreativeWrappersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCreativeWrappersRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListCreativeWrappersRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListCreativeWrappersRequest. */
+                class ListCreativeWrappersRequest implements IListCreativeWrappersRequest {
+
+                    /**
+                     * Constructs a new ListCreativeWrappersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListCreativeWrappersRequest);
+
+                    /** ListCreativeWrappersRequest parent. */
+                    public parent: string;
+
+                    /** ListCreativeWrappersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCreativeWrappersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListCreativeWrappersRequest filter. */
+                    public filter: string;
+
+                    /** ListCreativeWrappersRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListCreativeWrappersRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListCreativeWrappersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCreativeWrappersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListCreativeWrappersRequest): google.ads.admanager.v1.ListCreativeWrappersRequest;
+
+                    /**
+                     * Encodes the specified ListCreativeWrappersRequest message. Does not implicitly {@link google.ads.admanager.v1.ListCreativeWrappersRequest.verify|verify} messages.
+                     * @param message ListCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCreativeWrappersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListCreativeWrappersRequest.verify|verify} messages.
+                     * @param message ListCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCreativeWrappersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListCreativeWrappersRequest;
+
+                    /**
+                     * Decodes a ListCreativeWrappersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListCreativeWrappersRequest;
+
+                    /**
+                     * Verifies a ListCreativeWrappersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCreativeWrappersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCreativeWrappersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListCreativeWrappersRequest;
+
+                    /**
+                     * Creates a plain object from a ListCreativeWrappersRequest message. Also converts values to other types if specified.
+                     * @param message ListCreativeWrappersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListCreativeWrappersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCreativeWrappersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCreativeWrappersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCreativeWrappersResponse. */
+                interface IListCreativeWrappersResponse {
+
+                    /** ListCreativeWrappersResponse creativeWrappers */
+                    creativeWrappers?: (google.ads.admanager.v1.ICreativeWrapper[]|null);
+
+                    /** ListCreativeWrappersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListCreativeWrappersResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListCreativeWrappersResponse. */
+                class ListCreativeWrappersResponse implements IListCreativeWrappersResponse {
+
+                    /**
+                     * Constructs a new ListCreativeWrappersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListCreativeWrappersResponse);
+
+                    /** ListCreativeWrappersResponse creativeWrappers. */
+                    public creativeWrappers: google.ads.admanager.v1.ICreativeWrapper[];
+
+                    /** ListCreativeWrappersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListCreativeWrappersResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListCreativeWrappersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCreativeWrappersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListCreativeWrappersResponse): google.ads.admanager.v1.ListCreativeWrappersResponse;
+
+                    /**
+                     * Encodes the specified ListCreativeWrappersResponse message. Does not implicitly {@link google.ads.admanager.v1.ListCreativeWrappersResponse.verify|verify} messages.
+                     * @param message ListCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCreativeWrappersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListCreativeWrappersResponse.verify|verify} messages.
+                     * @param message ListCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCreativeWrappersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListCreativeWrappersResponse;
+
+                    /**
+                     * Decodes a ListCreativeWrappersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListCreativeWrappersResponse;
+
+                    /**
+                     * Verifies a ListCreativeWrappersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCreativeWrappersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCreativeWrappersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListCreativeWrappersResponse;
+
+                    /**
+                     * Creates a plain object from a ListCreativeWrappersResponse message. Also converts values to other types if specified.
+                     * @param message ListCreativeWrappersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListCreativeWrappersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCreativeWrappersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCreativeWrappersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCreativeWrapperRequest. */
+                interface ICreateCreativeWrapperRequest {
+
+                    /** CreateCreativeWrapperRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCreativeWrapperRequest creativeWrapper */
+                    creativeWrapper?: (google.ads.admanager.v1.ICreativeWrapper|null);
+                }
+
+                /** Represents a CreateCreativeWrapperRequest. */
+                class CreateCreativeWrapperRequest implements ICreateCreativeWrapperRequest {
+
+                    /**
+                     * Constructs a new CreateCreativeWrapperRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateCreativeWrapperRequest);
+
+                    /** CreateCreativeWrapperRequest parent. */
+                    public parent: string;
+
+                    /** CreateCreativeWrapperRequest creativeWrapper. */
+                    public creativeWrapper?: (google.ads.admanager.v1.ICreativeWrapper|null);
+
+                    /**
+                     * Creates a new CreateCreativeWrapperRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCreativeWrapperRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateCreativeWrapperRequest): google.ads.admanager.v1.CreateCreativeWrapperRequest;
+
+                    /**
+                     * Encodes the specified CreateCreativeWrapperRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateCreativeWrapperRequest.verify|verify} messages.
+                     * @param message CreateCreativeWrapperRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateCreativeWrapperRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCreativeWrapperRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateCreativeWrapperRequest.verify|verify} messages.
+                     * @param message CreateCreativeWrapperRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateCreativeWrapperRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCreativeWrapperRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCreativeWrapperRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateCreativeWrapperRequest;
+
+                    /**
+                     * Decodes a CreateCreativeWrapperRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCreativeWrapperRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateCreativeWrapperRequest;
+
+                    /**
+                     * Verifies a CreateCreativeWrapperRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCreativeWrapperRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCreativeWrapperRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateCreativeWrapperRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCreativeWrapperRequest message. Also converts values to other types if specified.
+                     * @param message CreateCreativeWrapperRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateCreativeWrapperRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCreativeWrapperRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCreativeWrapperRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateCreativeWrappersRequest. */
+                interface IBatchCreateCreativeWrappersRequest {
+
+                    /** BatchCreateCreativeWrappersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateCreativeWrappersRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateCreativeWrapperRequest[]|null);
+                }
+
+                /** Represents a BatchCreateCreativeWrappersRequest. */
+                class BatchCreateCreativeWrappersRequest implements IBatchCreateCreativeWrappersRequest {
+
+                    /**
+                     * Constructs a new BatchCreateCreativeWrappersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateCreativeWrappersRequest);
+
+                    /** BatchCreateCreativeWrappersRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateCreativeWrappersRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateCreativeWrapperRequest[];
+
+                    /**
+                     * Creates a new BatchCreateCreativeWrappersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateCreativeWrappersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateCreativeWrappersRequest): google.ads.admanager.v1.BatchCreateCreativeWrappersRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateCreativeWrappersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchCreateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateCreativeWrappersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchCreateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateCreativeWrappersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateCreativeWrappersRequest;
+
+                    /**
+                     * Decodes a BatchCreateCreativeWrappersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateCreativeWrappersRequest;
+
+                    /**
+                     * Verifies a BatchCreateCreativeWrappersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateCreativeWrappersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateCreativeWrappersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateCreativeWrappersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateCreativeWrappersRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateCreativeWrappersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateCreativeWrappersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateCreativeWrappersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateCreativeWrappersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateCreativeWrappersResponse. */
+                interface IBatchCreateCreativeWrappersResponse {
+
+                    /** BatchCreateCreativeWrappersResponse creativeWrappers */
+                    creativeWrappers?: (google.ads.admanager.v1.ICreativeWrapper[]|null);
+                }
+
+                /** Represents a BatchCreateCreativeWrappersResponse. */
+                class BatchCreateCreativeWrappersResponse implements IBatchCreateCreativeWrappersResponse {
+
+                    /**
+                     * Constructs a new BatchCreateCreativeWrappersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateCreativeWrappersResponse);
+
+                    /** BatchCreateCreativeWrappersResponse creativeWrappers. */
+                    public creativeWrappers: google.ads.admanager.v1.ICreativeWrapper[];
+
+                    /**
+                     * Creates a new BatchCreateCreativeWrappersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateCreativeWrappersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateCreativeWrappersResponse): google.ads.admanager.v1.BatchCreateCreativeWrappersResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateCreativeWrappersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchCreateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateCreativeWrappersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchCreateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateCreativeWrappersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateCreativeWrappersResponse;
+
+                    /**
+                     * Decodes a BatchCreateCreativeWrappersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateCreativeWrappersResponse;
+
+                    /**
+                     * Verifies a BatchCreateCreativeWrappersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateCreativeWrappersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateCreativeWrappersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateCreativeWrappersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateCreativeWrappersResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateCreativeWrappersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateCreativeWrappersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateCreativeWrappersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateCreativeWrappersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCreativeWrapperRequest. */
+                interface IUpdateCreativeWrapperRequest {
+
+                    /** UpdateCreativeWrapperRequest creativeWrapper */
+                    creativeWrapper?: (google.ads.admanager.v1.ICreativeWrapper|null);
+
+                    /** UpdateCreativeWrapperRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCreativeWrapperRequest. */
+                class UpdateCreativeWrapperRequest implements IUpdateCreativeWrapperRequest {
+
+                    /**
+                     * Constructs a new UpdateCreativeWrapperRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateCreativeWrapperRequest);
+
+                    /** UpdateCreativeWrapperRequest creativeWrapper. */
+                    public creativeWrapper?: (google.ads.admanager.v1.ICreativeWrapper|null);
+
+                    /** UpdateCreativeWrapperRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCreativeWrapperRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCreativeWrapperRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateCreativeWrapperRequest): google.ads.admanager.v1.UpdateCreativeWrapperRequest;
+
+                    /**
+                     * Encodes the specified UpdateCreativeWrapperRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateCreativeWrapperRequest.verify|verify} messages.
+                     * @param message UpdateCreativeWrapperRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateCreativeWrapperRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCreativeWrapperRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateCreativeWrapperRequest.verify|verify} messages.
+                     * @param message UpdateCreativeWrapperRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateCreativeWrapperRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCreativeWrapperRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCreativeWrapperRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateCreativeWrapperRequest;
+
+                    /**
+                     * Decodes an UpdateCreativeWrapperRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCreativeWrapperRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateCreativeWrapperRequest;
+
+                    /**
+                     * Verifies an UpdateCreativeWrapperRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCreativeWrapperRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCreativeWrapperRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateCreativeWrapperRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCreativeWrapperRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCreativeWrapperRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateCreativeWrapperRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCreativeWrapperRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCreativeWrapperRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateCreativeWrappersRequest. */
+                interface IBatchUpdateCreativeWrappersRequest {
+
+                    /** BatchUpdateCreativeWrappersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateCreativeWrappersRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateCreativeWrapperRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateCreativeWrappersRequest. */
+                class BatchUpdateCreativeWrappersRequest implements IBatchUpdateCreativeWrappersRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateCreativeWrappersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateCreativeWrappersRequest);
+
+                    /** BatchUpdateCreativeWrappersRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateCreativeWrappersRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateCreativeWrapperRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateCreativeWrappersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateCreativeWrappersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateCreativeWrappersRequest): google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateCreativeWrappersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchUpdateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateCreativeWrappersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchUpdateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateCreativeWrappersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest;
+
+                    /**
+                     * Decodes a BatchUpdateCreativeWrappersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest;
+
+                    /**
+                     * Verifies a BatchUpdateCreativeWrappersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateCreativeWrappersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateCreativeWrappersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateCreativeWrappersRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateCreativeWrappersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateCreativeWrappersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateCreativeWrappersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateCreativeWrappersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateCreativeWrappersResponse. */
+                interface IBatchUpdateCreativeWrappersResponse {
+
+                    /** BatchUpdateCreativeWrappersResponse creativeWrappers */
+                    creativeWrappers?: (google.ads.admanager.v1.ICreativeWrapper[]|null);
+                }
+
+                /** Represents a BatchUpdateCreativeWrappersResponse. */
+                class BatchUpdateCreativeWrappersResponse implements IBatchUpdateCreativeWrappersResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateCreativeWrappersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateCreativeWrappersResponse);
+
+                    /** BatchUpdateCreativeWrappersResponse creativeWrappers. */
+                    public creativeWrappers: google.ads.admanager.v1.ICreativeWrapper[];
+
+                    /**
+                     * Creates a new BatchUpdateCreativeWrappersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateCreativeWrappersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateCreativeWrappersResponse): google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateCreativeWrappersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchUpdateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateCreativeWrappersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchUpdateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateCreativeWrappersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse;
+
+                    /**
+                     * Decodes a BatchUpdateCreativeWrappersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse;
+
+                    /**
+                     * Verifies a BatchUpdateCreativeWrappersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateCreativeWrappersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateCreativeWrappersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateCreativeWrappersResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateCreativeWrappersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateCreativeWrappersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateCreativeWrappersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateCreativeWrappersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateCreativeWrappersRequest. */
+                interface IBatchActivateCreativeWrappersRequest {
+
+                    /** BatchActivateCreativeWrappersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchActivateCreativeWrappersRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchActivateCreativeWrappersRequest. */
+                class BatchActivateCreativeWrappersRequest implements IBatchActivateCreativeWrappersRequest {
+
+                    /**
+                     * Constructs a new BatchActivateCreativeWrappersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateCreativeWrappersRequest);
+
+                    /** BatchActivateCreativeWrappersRequest parent. */
+                    public parent: string;
+
+                    /** BatchActivateCreativeWrappersRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchActivateCreativeWrappersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateCreativeWrappersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateCreativeWrappersRequest): google.ads.admanager.v1.BatchActivateCreativeWrappersRequest;
+
+                    /**
+                     * Encodes the specified BatchActivateCreativeWrappersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchActivateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateCreativeWrappersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchActivateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateCreativeWrappersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateCreativeWrappersRequest;
+
+                    /**
+                     * Decodes a BatchActivateCreativeWrappersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateCreativeWrappersRequest;
+
+                    /**
+                     * Verifies a BatchActivateCreativeWrappersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateCreativeWrappersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateCreativeWrappersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateCreativeWrappersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchActivateCreativeWrappersRequest message. Also converts values to other types if specified.
+                     * @param message BatchActivateCreativeWrappersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateCreativeWrappersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateCreativeWrappersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateCreativeWrappersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateCreativeWrappersResponse. */
+                interface IBatchActivateCreativeWrappersResponse {
+                }
+
+                /** Represents a BatchActivateCreativeWrappersResponse. */
+                class BatchActivateCreativeWrappersResponse implements IBatchActivateCreativeWrappersResponse {
+
+                    /**
+                     * Constructs a new BatchActivateCreativeWrappersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateCreativeWrappersResponse);
+
+                    /**
+                     * Creates a new BatchActivateCreativeWrappersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateCreativeWrappersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateCreativeWrappersResponse): google.ads.admanager.v1.BatchActivateCreativeWrappersResponse;
+
+                    /**
+                     * Encodes the specified BatchActivateCreativeWrappersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchActivateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateCreativeWrappersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchActivateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateCreativeWrappersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateCreativeWrappersResponse;
+
+                    /**
+                     * Decodes a BatchActivateCreativeWrappersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateCreativeWrappersResponse;
+
+                    /**
+                     * Verifies a BatchActivateCreativeWrappersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateCreativeWrappersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateCreativeWrappersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateCreativeWrappersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchActivateCreativeWrappersResponse message. Also converts values to other types if specified.
+                     * @param message BatchActivateCreativeWrappersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateCreativeWrappersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateCreativeWrappersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateCreativeWrappersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateCreativeWrappersRequest. */
+                interface IBatchDeactivateCreativeWrappersRequest {
+
+                    /** BatchDeactivateCreativeWrappersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeactivateCreativeWrappersRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchDeactivateCreativeWrappersRequest. */
+                class BatchDeactivateCreativeWrappersRequest implements IBatchDeactivateCreativeWrappersRequest {
+
+                    /**
+                     * Constructs a new BatchDeactivateCreativeWrappersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersRequest);
+
+                    /** BatchDeactivateCreativeWrappersRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeactivateCreativeWrappersRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchDeactivateCreativeWrappersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateCreativeWrappersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersRequest): google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest;
+
+                    /**
+                     * Encodes the specified BatchDeactivateCreativeWrappersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchDeactivateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateCreativeWrappersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest.verify|verify} messages.
+                     * @param message BatchDeactivateCreativeWrappersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateCreativeWrappersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest;
+
+                    /**
+                     * Decodes a BatchDeactivateCreativeWrappersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateCreativeWrappersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest;
+
+                    /**
+                     * Verifies a BatchDeactivateCreativeWrappersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateCreativeWrappersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateCreativeWrappersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateCreativeWrappersRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateCreativeWrappersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateCreativeWrappersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateCreativeWrappersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateCreativeWrappersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateCreativeWrappersResponse. */
+                interface IBatchDeactivateCreativeWrappersResponse {
+                }
+
+                /** Represents a BatchDeactivateCreativeWrappersResponse. */
+                class BatchDeactivateCreativeWrappersResponse implements IBatchDeactivateCreativeWrappersResponse {
+
+                    /**
+                     * Constructs a new BatchDeactivateCreativeWrappersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersResponse);
+
+                    /**
+                     * Creates a new BatchDeactivateCreativeWrappersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateCreativeWrappersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersResponse): google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse;
+
+                    /**
+                     * Encodes the specified BatchDeactivateCreativeWrappersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchDeactivateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateCreativeWrappersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse.verify|verify} messages.
+                     * @param message BatchDeactivateCreativeWrappersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateCreativeWrappersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateCreativeWrappersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse;
+
+                    /**
+                     * Decodes a BatchDeactivateCreativeWrappersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateCreativeWrappersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse;
+
+                    /**
+                     * Verifies a BatchDeactivateCreativeWrappersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateCreativeWrappersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateCreativeWrappersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateCreativeWrappersResponse message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateCreativeWrappersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateCreativeWrappersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateCreativeWrappersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateCreativeWrappersResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -37033,6 +42377,4223 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BatchDeactivateCustomTargetingValuesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DaiAuthenticationKeyStatusEnum. */
+                interface IDaiAuthenticationKeyStatusEnum {
+                }
+
+                /** Represents a DaiAuthenticationKeyStatusEnum. */
+                class DaiAuthenticationKeyStatusEnum implements IDaiAuthenticationKeyStatusEnum {
+
+                    /**
+                     * Constructs a new DaiAuthenticationKeyStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDaiAuthenticationKeyStatusEnum);
+
+                    /**
+                     * Creates a new DaiAuthenticationKeyStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DaiAuthenticationKeyStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDaiAuthenticationKeyStatusEnum): google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum;
+
+                    /**
+                     * Encodes the specified DaiAuthenticationKeyStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum.verify|verify} messages.
+                     * @param message DaiAuthenticationKeyStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDaiAuthenticationKeyStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DaiAuthenticationKeyStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum.verify|verify} messages.
+                     * @param message DaiAuthenticationKeyStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDaiAuthenticationKeyStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DaiAuthenticationKeyStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DaiAuthenticationKeyStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum;
+
+                    /**
+                     * Decodes a DaiAuthenticationKeyStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DaiAuthenticationKeyStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum;
+
+                    /**
+                     * Verifies a DaiAuthenticationKeyStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DaiAuthenticationKeyStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DaiAuthenticationKeyStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum;
+
+                    /**
+                     * Creates a plain object from a DaiAuthenticationKeyStatusEnum message. Also converts values to other types if specified.
+                     * @param message DaiAuthenticationKeyStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DaiAuthenticationKeyStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DaiAuthenticationKeyStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DaiAuthenticationKeyStatusEnum {
+
+                    /** DaiAuthenticationKeyStatus enum. */
+                    enum DaiAuthenticationKeyStatus {
+                        DAI_AUTHENTICATION_KEY_STATUS_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        INACTIVE = 2
+                    }
+                }
+
+                /** Properties of a DaiAuthenticationKeyTypeEnum. */
+                interface IDaiAuthenticationKeyTypeEnum {
+                }
+
+                /** Represents a DaiAuthenticationKeyTypeEnum. */
+                class DaiAuthenticationKeyTypeEnum implements IDaiAuthenticationKeyTypeEnum {
+
+                    /**
+                     * Constructs a new DaiAuthenticationKeyTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDaiAuthenticationKeyTypeEnum);
+
+                    /**
+                     * Creates a new DaiAuthenticationKeyTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DaiAuthenticationKeyTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDaiAuthenticationKeyTypeEnum): google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum;
+
+                    /**
+                     * Encodes the specified DaiAuthenticationKeyTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum.verify|verify} messages.
+                     * @param message DaiAuthenticationKeyTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDaiAuthenticationKeyTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DaiAuthenticationKeyTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum.verify|verify} messages.
+                     * @param message DaiAuthenticationKeyTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDaiAuthenticationKeyTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DaiAuthenticationKeyTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DaiAuthenticationKeyTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum;
+
+                    /**
+                     * Decodes a DaiAuthenticationKeyTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DaiAuthenticationKeyTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum;
+
+                    /**
+                     * Verifies a DaiAuthenticationKeyTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DaiAuthenticationKeyTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DaiAuthenticationKeyTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum;
+
+                    /**
+                     * Creates a plain object from a DaiAuthenticationKeyTypeEnum message. Also converts values to other types if specified.
+                     * @param message DaiAuthenticationKeyTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DaiAuthenticationKeyTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DaiAuthenticationKeyTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DaiAuthenticationKeyTypeEnum {
+
+                    /** DaiAuthenticationKeyType enum. */
+                    enum DaiAuthenticationKeyType {
+                        DAI_AUTHENTICATION_KEY_TYPE_UNSPECIFIED = 0,
+                        API = 1,
+                        HMAC = 2
+                    }
+                }
+
+                /** Properties of a DaiAuthenticationKey. */
+                interface IDaiAuthenticationKey {
+
+                    /** DaiAuthenticationKey name */
+                    name?: (string|null);
+
+                    /** DaiAuthenticationKey status */
+                    status?: (google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum.DaiAuthenticationKeyStatus|keyof typeof google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum.DaiAuthenticationKeyStatus|null);
+
+                    /** DaiAuthenticationKey displayName */
+                    displayName?: (string|null);
+
+                    /** DaiAuthenticationKey keyType */
+                    keyType?: (google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum.DaiAuthenticationKeyType|keyof typeof google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum.DaiAuthenticationKeyType|null);
+                }
+
+                /** Represents a DaiAuthenticationKey. */
+                class DaiAuthenticationKey implements IDaiAuthenticationKey {
+
+                    /**
+                     * Constructs a new DaiAuthenticationKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDaiAuthenticationKey);
+
+                    /** DaiAuthenticationKey name. */
+                    public name: string;
+
+                    /** DaiAuthenticationKey status. */
+                    public status?: (google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum.DaiAuthenticationKeyStatus|keyof typeof google.ads.admanager.v1.DaiAuthenticationKeyStatusEnum.DaiAuthenticationKeyStatus|null);
+
+                    /** DaiAuthenticationKey displayName. */
+                    public displayName?: (string|null);
+
+                    /** DaiAuthenticationKey keyType. */
+                    public keyType?: (google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum.DaiAuthenticationKeyType|keyof typeof google.ads.admanager.v1.DaiAuthenticationKeyTypeEnum.DaiAuthenticationKeyType|null);
+
+                    /**
+                     * Creates a new DaiAuthenticationKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DaiAuthenticationKey instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDaiAuthenticationKey): google.ads.admanager.v1.DaiAuthenticationKey;
+
+                    /**
+                     * Encodes the specified DaiAuthenticationKey message. Does not implicitly {@link google.ads.admanager.v1.DaiAuthenticationKey.verify|verify} messages.
+                     * @param message DaiAuthenticationKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDaiAuthenticationKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DaiAuthenticationKey message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DaiAuthenticationKey.verify|verify} messages.
+                     * @param message DaiAuthenticationKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDaiAuthenticationKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DaiAuthenticationKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DaiAuthenticationKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DaiAuthenticationKey;
+
+                    /**
+                     * Decodes a DaiAuthenticationKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DaiAuthenticationKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DaiAuthenticationKey;
+
+                    /**
+                     * Verifies a DaiAuthenticationKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DaiAuthenticationKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DaiAuthenticationKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DaiAuthenticationKey;
+
+                    /**
+                     * Creates a plain object from a DaiAuthenticationKey message. Also converts values to other types if specified.
+                     * @param message DaiAuthenticationKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DaiAuthenticationKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DaiAuthenticationKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DaiAuthenticationKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DaiAuthenticationKeyService */
+                class DaiAuthenticationKeyService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DaiAuthenticationKeyService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DaiAuthenticationKeyService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DaiAuthenticationKeyService;
+
+                    /**
+                     * Calls GetDaiAuthenticationKey.
+                     * @param request GetDaiAuthenticationKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DaiAuthenticationKey
+                     */
+                    public getDaiAuthenticationKey(request: google.ads.admanager.v1.IGetDaiAuthenticationKeyRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.GetDaiAuthenticationKeyCallback): void;
+
+                    /**
+                     * Calls GetDaiAuthenticationKey.
+                     * @param request GetDaiAuthenticationKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDaiAuthenticationKey(request: google.ads.admanager.v1.IGetDaiAuthenticationKeyRequest): Promise<google.ads.admanager.v1.DaiAuthenticationKey>;
+
+                    /**
+                     * Calls ListDaiAuthenticationKeys.
+                     * @param request ListDaiAuthenticationKeysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDaiAuthenticationKeysResponse
+                     */
+                    public listDaiAuthenticationKeys(request: google.ads.admanager.v1.IListDaiAuthenticationKeysRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.ListDaiAuthenticationKeysCallback): void;
+
+                    /**
+                     * Calls ListDaiAuthenticationKeys.
+                     * @param request ListDaiAuthenticationKeysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDaiAuthenticationKeys(request: google.ads.admanager.v1.IListDaiAuthenticationKeysRequest): Promise<google.ads.admanager.v1.ListDaiAuthenticationKeysResponse>;
+
+                    /**
+                     * Calls CreateDaiAuthenticationKey.
+                     * @param request CreateDaiAuthenticationKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DaiAuthenticationKey
+                     */
+                    public createDaiAuthenticationKey(request: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.CreateDaiAuthenticationKeyCallback): void;
+
+                    /**
+                     * Calls CreateDaiAuthenticationKey.
+                     * @param request CreateDaiAuthenticationKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDaiAuthenticationKey(request: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest): Promise<google.ads.admanager.v1.DaiAuthenticationKey>;
+
+                    /**
+                     * Calls BatchCreateDaiAuthenticationKeys.
+                     * @param request BatchCreateDaiAuthenticationKeysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateDaiAuthenticationKeysResponse
+                     */
+                    public batchCreateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.BatchCreateDaiAuthenticationKeysCallback): void;
+
+                    /**
+                     * Calls BatchCreateDaiAuthenticationKeys.
+                     * @param request BatchCreateDaiAuthenticationKeysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysRequest): Promise<google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse>;
+
+                    /**
+                     * Calls UpdateDaiAuthenticationKey.
+                     * @param request UpdateDaiAuthenticationKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DaiAuthenticationKey
+                     */
+                    public updateDaiAuthenticationKey(request: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.UpdateDaiAuthenticationKeyCallback): void;
+
+                    /**
+                     * Calls UpdateDaiAuthenticationKey.
+                     * @param request UpdateDaiAuthenticationKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDaiAuthenticationKey(request: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest): Promise<google.ads.admanager.v1.DaiAuthenticationKey>;
+
+                    /**
+                     * Calls BatchUpdateDaiAuthenticationKeys.
+                     * @param request BatchUpdateDaiAuthenticationKeysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateDaiAuthenticationKeysResponse
+                     */
+                    public batchUpdateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.BatchUpdateDaiAuthenticationKeysCallback): void;
+
+                    /**
+                     * Calls BatchUpdateDaiAuthenticationKeys.
+                     * @param request BatchUpdateDaiAuthenticationKeysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysRequest): Promise<google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse>;
+
+                    /**
+                     * Calls BatchActivateDaiAuthenticationKeys.
+                     * @param request BatchActivateDaiAuthenticationKeysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchActivateDaiAuthenticationKeysResponse
+                     */
+                    public batchActivateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.BatchActivateDaiAuthenticationKeysCallback): void;
+
+                    /**
+                     * Calls BatchActivateDaiAuthenticationKeys.
+                     * @param request BatchActivateDaiAuthenticationKeysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchActivateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysRequest): Promise<google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse>;
+
+                    /**
+                     * Calls BatchDeactivateDaiAuthenticationKeys.
+                     * @param request BatchDeactivateDaiAuthenticationKeysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchDeactivateDaiAuthenticationKeysResponse
+                     */
+                    public batchDeactivateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysRequest, callback: google.ads.admanager.v1.DaiAuthenticationKeyService.BatchDeactivateDaiAuthenticationKeysCallback): void;
+
+                    /**
+                     * Calls BatchDeactivateDaiAuthenticationKeys.
+                     * @param request BatchDeactivateDaiAuthenticationKeysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeactivateDaiAuthenticationKeys(request: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysRequest): Promise<google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse>;
+                }
+
+                namespace DaiAuthenticationKeyService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|getDaiAuthenticationKey}.
+                     * @param error Error, if any
+                     * @param [response] DaiAuthenticationKey
+                     */
+                    type GetDaiAuthenticationKeyCallback = (error: (Error|null), response?: google.ads.admanager.v1.DaiAuthenticationKey) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|listDaiAuthenticationKeys}.
+                     * @param error Error, if any
+                     * @param [response] ListDaiAuthenticationKeysResponse
+                     */
+                    type ListDaiAuthenticationKeysCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListDaiAuthenticationKeysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|createDaiAuthenticationKey}.
+                     * @param error Error, if any
+                     * @param [response] DaiAuthenticationKey
+                     */
+                    type CreateDaiAuthenticationKeyCallback = (error: (Error|null), response?: google.ads.admanager.v1.DaiAuthenticationKey) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|batchCreateDaiAuthenticationKeys}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateDaiAuthenticationKeysResponse
+                     */
+                    type BatchCreateDaiAuthenticationKeysCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|updateDaiAuthenticationKey}.
+                     * @param error Error, if any
+                     * @param [response] DaiAuthenticationKey
+                     */
+                    type UpdateDaiAuthenticationKeyCallback = (error: (Error|null), response?: google.ads.admanager.v1.DaiAuthenticationKey) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|batchUpdateDaiAuthenticationKeys}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateDaiAuthenticationKeysResponse
+                     */
+                    type BatchUpdateDaiAuthenticationKeysCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|batchActivateDaiAuthenticationKeys}.
+                     * @param error Error, if any
+                     * @param [response] BatchActivateDaiAuthenticationKeysResponse
+                     */
+                    type BatchActivateDaiAuthenticationKeysCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiAuthenticationKeyService|batchDeactivateDaiAuthenticationKeys}.
+                     * @param error Error, if any
+                     * @param [response] BatchDeactivateDaiAuthenticationKeysResponse
+                     */
+                    type BatchDeactivateDaiAuthenticationKeysCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse) => void;
+                }
+
+                /** Properties of a GetDaiAuthenticationKeyRequest. */
+                interface IGetDaiAuthenticationKeyRequest {
+
+                    /** GetDaiAuthenticationKeyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDaiAuthenticationKeyRequest. */
+                class GetDaiAuthenticationKeyRequest implements IGetDaiAuthenticationKeyRequest {
+
+                    /**
+                     * Constructs a new GetDaiAuthenticationKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetDaiAuthenticationKeyRequest);
+
+                    /** GetDaiAuthenticationKeyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDaiAuthenticationKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDaiAuthenticationKeyRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetDaiAuthenticationKeyRequest): google.ads.admanager.v1.GetDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Encodes the specified GetDaiAuthenticationKeyRequest message. Does not implicitly {@link google.ads.admanager.v1.GetDaiAuthenticationKeyRequest.verify|verify} messages.
+                     * @param message GetDaiAuthenticationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetDaiAuthenticationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDaiAuthenticationKeyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetDaiAuthenticationKeyRequest.verify|verify} messages.
+                     * @param message GetDaiAuthenticationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetDaiAuthenticationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDaiAuthenticationKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDaiAuthenticationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Decodes a GetDaiAuthenticationKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDaiAuthenticationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Verifies a GetDaiAuthenticationKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDaiAuthenticationKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDaiAuthenticationKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Creates a plain object from a GetDaiAuthenticationKeyRequest message. Also converts values to other types if specified.
+                     * @param message GetDaiAuthenticationKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetDaiAuthenticationKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDaiAuthenticationKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDaiAuthenticationKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDaiAuthenticationKeysRequest. */
+                interface IListDaiAuthenticationKeysRequest {
+
+                    /** ListDaiAuthenticationKeysRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDaiAuthenticationKeysRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDaiAuthenticationKeysRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDaiAuthenticationKeysRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDaiAuthenticationKeysRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListDaiAuthenticationKeysRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListDaiAuthenticationKeysRequest. */
+                class ListDaiAuthenticationKeysRequest implements IListDaiAuthenticationKeysRequest {
+
+                    /**
+                     * Constructs a new ListDaiAuthenticationKeysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListDaiAuthenticationKeysRequest);
+
+                    /** ListDaiAuthenticationKeysRequest parent. */
+                    public parent: string;
+
+                    /** ListDaiAuthenticationKeysRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDaiAuthenticationKeysRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDaiAuthenticationKeysRequest filter. */
+                    public filter: string;
+
+                    /** ListDaiAuthenticationKeysRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListDaiAuthenticationKeysRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListDaiAuthenticationKeysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDaiAuthenticationKeysRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListDaiAuthenticationKeysRequest): google.ads.admanager.v1.ListDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Encodes the specified ListDaiAuthenticationKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.ListDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message ListDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDaiAuthenticationKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message ListDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDaiAuthenticationKeysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Decodes a ListDaiAuthenticationKeysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Verifies a ListDaiAuthenticationKeysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDaiAuthenticationKeysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDaiAuthenticationKeysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Creates a plain object from a ListDaiAuthenticationKeysRequest message. Also converts values to other types if specified.
+                     * @param message ListDaiAuthenticationKeysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListDaiAuthenticationKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDaiAuthenticationKeysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDaiAuthenticationKeysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDaiAuthenticationKeysResponse. */
+                interface IListDaiAuthenticationKeysResponse {
+
+                    /** ListDaiAuthenticationKeysResponse daiAuthenticationKeys */
+                    daiAuthenticationKeys?: (google.ads.admanager.v1.IDaiAuthenticationKey[]|null);
+
+                    /** ListDaiAuthenticationKeysResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDaiAuthenticationKeysResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListDaiAuthenticationKeysResponse. */
+                class ListDaiAuthenticationKeysResponse implements IListDaiAuthenticationKeysResponse {
+
+                    /**
+                     * Constructs a new ListDaiAuthenticationKeysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListDaiAuthenticationKeysResponse);
+
+                    /** ListDaiAuthenticationKeysResponse daiAuthenticationKeys. */
+                    public daiAuthenticationKeys: google.ads.admanager.v1.IDaiAuthenticationKey[];
+
+                    /** ListDaiAuthenticationKeysResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDaiAuthenticationKeysResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListDaiAuthenticationKeysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDaiAuthenticationKeysResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListDaiAuthenticationKeysResponse): google.ads.admanager.v1.ListDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Encodes the specified ListDaiAuthenticationKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.ListDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message ListDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDaiAuthenticationKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message ListDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDaiAuthenticationKeysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Decodes a ListDaiAuthenticationKeysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Verifies a ListDaiAuthenticationKeysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDaiAuthenticationKeysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDaiAuthenticationKeysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Creates a plain object from a ListDaiAuthenticationKeysResponse message. Also converts values to other types if specified.
+                     * @param message ListDaiAuthenticationKeysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListDaiAuthenticationKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDaiAuthenticationKeysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDaiAuthenticationKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDaiAuthenticationKeyRequest. */
+                interface ICreateDaiAuthenticationKeyRequest {
+
+                    /** CreateDaiAuthenticationKeyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDaiAuthenticationKeyRequest daiAuthenticationKey */
+                    daiAuthenticationKey?: (google.ads.admanager.v1.IDaiAuthenticationKey|null);
+                }
+
+                /** Represents a CreateDaiAuthenticationKeyRequest. */
+                class CreateDaiAuthenticationKeyRequest implements ICreateDaiAuthenticationKeyRequest {
+
+                    /**
+                     * Constructs a new CreateDaiAuthenticationKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest);
+
+                    /** CreateDaiAuthenticationKeyRequest parent. */
+                    public parent: string;
+
+                    /** CreateDaiAuthenticationKeyRequest daiAuthenticationKey. */
+                    public daiAuthenticationKey?: (google.ads.admanager.v1.IDaiAuthenticationKey|null);
+
+                    /**
+                     * Creates a new CreateDaiAuthenticationKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDaiAuthenticationKeyRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest): google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Encodes the specified CreateDaiAuthenticationKeyRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest.verify|verify} messages.
+                     * @param message CreateDaiAuthenticationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDaiAuthenticationKeyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest.verify|verify} messages.
+                     * @param message CreateDaiAuthenticationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDaiAuthenticationKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDaiAuthenticationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Decodes a CreateDaiAuthenticationKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDaiAuthenticationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Verifies a CreateDaiAuthenticationKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDaiAuthenticationKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDaiAuthenticationKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDaiAuthenticationKeyRequest message. Also converts values to other types if specified.
+                     * @param message CreateDaiAuthenticationKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateDaiAuthenticationKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDaiAuthenticationKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDaiAuthenticationKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateDaiAuthenticationKeysRequest. */
+                interface IBatchCreateDaiAuthenticationKeysRequest {
+
+                    /** BatchCreateDaiAuthenticationKeysRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateDaiAuthenticationKeysRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest[]|null);
+                }
+
+                /** Represents a BatchCreateDaiAuthenticationKeysRequest. */
+                class BatchCreateDaiAuthenticationKeysRequest implements IBatchCreateDaiAuthenticationKeysRequest {
+
+                    /**
+                     * Constructs a new BatchCreateDaiAuthenticationKeysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysRequest);
+
+                    /** BatchCreateDaiAuthenticationKeysRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateDaiAuthenticationKeysRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateDaiAuthenticationKeyRequest[];
+
+                    /**
+                     * Creates a new BatchCreateDaiAuthenticationKeysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateDaiAuthenticationKeysRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysRequest): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiAuthenticationKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchCreateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiAuthenticationKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchCreateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateDaiAuthenticationKeysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Decodes a BatchCreateDaiAuthenticationKeysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Verifies a BatchCreateDaiAuthenticationKeysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateDaiAuthenticationKeysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateDaiAuthenticationKeysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateDaiAuthenticationKeysRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateDaiAuthenticationKeysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateDaiAuthenticationKeysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateDaiAuthenticationKeysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateDaiAuthenticationKeysResponse. */
+                interface IBatchCreateDaiAuthenticationKeysResponse {
+
+                    /** BatchCreateDaiAuthenticationKeysResponse daiAuthenticationKeys */
+                    daiAuthenticationKeys?: (google.ads.admanager.v1.IDaiAuthenticationKey[]|null);
+                }
+
+                /** Represents a BatchCreateDaiAuthenticationKeysResponse. */
+                class BatchCreateDaiAuthenticationKeysResponse implements IBatchCreateDaiAuthenticationKeysResponse {
+
+                    /**
+                     * Constructs a new BatchCreateDaiAuthenticationKeysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysResponse);
+
+                    /** BatchCreateDaiAuthenticationKeysResponse daiAuthenticationKeys. */
+                    public daiAuthenticationKeys: google.ads.admanager.v1.IDaiAuthenticationKey[];
+
+                    /**
+                     * Creates a new BatchCreateDaiAuthenticationKeysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateDaiAuthenticationKeysResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysResponse): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiAuthenticationKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchCreateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiAuthenticationKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchCreateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateDaiAuthenticationKeysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Decodes a BatchCreateDaiAuthenticationKeysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Verifies a BatchCreateDaiAuthenticationKeysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateDaiAuthenticationKeysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateDaiAuthenticationKeysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateDaiAuthenticationKeysResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateDaiAuthenticationKeysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateDaiAuthenticationKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateDaiAuthenticationKeysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateDaiAuthenticationKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDaiAuthenticationKeyRequest. */
+                interface IUpdateDaiAuthenticationKeyRequest {
+
+                    /** UpdateDaiAuthenticationKeyRequest daiAuthenticationKey */
+                    daiAuthenticationKey?: (google.ads.admanager.v1.IDaiAuthenticationKey|null);
+
+                    /** UpdateDaiAuthenticationKeyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDaiAuthenticationKeyRequest. */
+                class UpdateDaiAuthenticationKeyRequest implements IUpdateDaiAuthenticationKeyRequest {
+
+                    /**
+                     * Constructs a new UpdateDaiAuthenticationKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest);
+
+                    /** UpdateDaiAuthenticationKeyRequest daiAuthenticationKey. */
+                    public daiAuthenticationKey?: (google.ads.admanager.v1.IDaiAuthenticationKey|null);
+
+                    /** UpdateDaiAuthenticationKeyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDaiAuthenticationKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDaiAuthenticationKeyRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest): google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Encodes the specified UpdateDaiAuthenticationKeyRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest.verify|verify} messages.
+                     * @param message UpdateDaiAuthenticationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDaiAuthenticationKeyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest.verify|verify} messages.
+                     * @param message UpdateDaiAuthenticationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDaiAuthenticationKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDaiAuthenticationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Decodes an UpdateDaiAuthenticationKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDaiAuthenticationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Verifies an UpdateDaiAuthenticationKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDaiAuthenticationKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDaiAuthenticationKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDaiAuthenticationKeyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDaiAuthenticationKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateDaiAuthenticationKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDaiAuthenticationKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDaiAuthenticationKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateDaiAuthenticationKeysRequest. */
+                interface IBatchUpdateDaiAuthenticationKeysRequest {
+
+                    /** BatchUpdateDaiAuthenticationKeysRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateDaiAuthenticationKeysRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateDaiAuthenticationKeysRequest. */
+                class BatchUpdateDaiAuthenticationKeysRequest implements IBatchUpdateDaiAuthenticationKeysRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateDaiAuthenticationKeysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysRequest);
+
+                    /** BatchUpdateDaiAuthenticationKeysRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateDaiAuthenticationKeysRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateDaiAuthenticationKeyRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateDaiAuthenticationKeysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateDaiAuthenticationKeysRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysRequest): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiAuthenticationKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchUpdateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiAuthenticationKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchUpdateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateDaiAuthenticationKeysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Decodes a BatchUpdateDaiAuthenticationKeysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Verifies a BatchUpdateDaiAuthenticationKeysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateDaiAuthenticationKeysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateDaiAuthenticationKeysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateDaiAuthenticationKeysRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateDaiAuthenticationKeysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateDaiAuthenticationKeysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateDaiAuthenticationKeysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateDaiAuthenticationKeysResponse. */
+                interface IBatchUpdateDaiAuthenticationKeysResponse {
+
+                    /** BatchUpdateDaiAuthenticationKeysResponse daiAuthenticationKeys */
+                    daiAuthenticationKeys?: (google.ads.admanager.v1.IDaiAuthenticationKey[]|null);
+                }
+
+                /** Represents a BatchUpdateDaiAuthenticationKeysResponse. */
+                class BatchUpdateDaiAuthenticationKeysResponse implements IBatchUpdateDaiAuthenticationKeysResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateDaiAuthenticationKeysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysResponse);
+
+                    /** BatchUpdateDaiAuthenticationKeysResponse daiAuthenticationKeys. */
+                    public daiAuthenticationKeys: google.ads.admanager.v1.IDaiAuthenticationKey[];
+
+                    /**
+                     * Creates a new BatchUpdateDaiAuthenticationKeysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateDaiAuthenticationKeysResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysResponse): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiAuthenticationKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchUpdateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiAuthenticationKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchUpdateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateDaiAuthenticationKeysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Decodes a BatchUpdateDaiAuthenticationKeysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Verifies a BatchUpdateDaiAuthenticationKeysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateDaiAuthenticationKeysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateDaiAuthenticationKeysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateDaiAuthenticationKeysResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateDaiAuthenticationKeysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateDaiAuthenticationKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateDaiAuthenticationKeysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateDaiAuthenticationKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateDaiAuthenticationKeysRequest. */
+                interface IBatchActivateDaiAuthenticationKeysRequest {
+
+                    /** BatchActivateDaiAuthenticationKeysRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchActivateDaiAuthenticationKeysRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchActivateDaiAuthenticationKeysRequest. */
+                class BatchActivateDaiAuthenticationKeysRequest implements IBatchActivateDaiAuthenticationKeysRequest {
+
+                    /**
+                     * Constructs a new BatchActivateDaiAuthenticationKeysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysRequest);
+
+                    /** BatchActivateDaiAuthenticationKeysRequest parent. */
+                    public parent: string;
+
+                    /** BatchActivateDaiAuthenticationKeysRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchActivateDaiAuthenticationKeysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateDaiAuthenticationKeysRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysRequest): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiAuthenticationKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchActivateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiAuthenticationKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchActivateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateDaiAuthenticationKeysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Decodes a BatchActivateDaiAuthenticationKeysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Verifies a BatchActivateDaiAuthenticationKeysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateDaiAuthenticationKeysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateDaiAuthenticationKeysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Creates a plain object from a BatchActivateDaiAuthenticationKeysRequest message. Also converts values to other types if specified.
+                     * @param message BatchActivateDaiAuthenticationKeysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateDaiAuthenticationKeysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateDaiAuthenticationKeysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateDaiAuthenticationKeysResponse. */
+                interface IBatchActivateDaiAuthenticationKeysResponse {
+                }
+
+                /** Represents a BatchActivateDaiAuthenticationKeysResponse. */
+                class BatchActivateDaiAuthenticationKeysResponse implements IBatchActivateDaiAuthenticationKeysResponse {
+
+                    /**
+                     * Constructs a new BatchActivateDaiAuthenticationKeysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysResponse);
+
+                    /**
+                     * Creates a new BatchActivateDaiAuthenticationKeysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateDaiAuthenticationKeysResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysResponse): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiAuthenticationKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchActivateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiAuthenticationKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchActivateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateDaiAuthenticationKeysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Decodes a BatchActivateDaiAuthenticationKeysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Verifies a BatchActivateDaiAuthenticationKeysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateDaiAuthenticationKeysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateDaiAuthenticationKeysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Creates a plain object from a BatchActivateDaiAuthenticationKeysResponse message. Also converts values to other types if specified.
+                     * @param message BatchActivateDaiAuthenticationKeysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateDaiAuthenticationKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateDaiAuthenticationKeysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateDaiAuthenticationKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateDaiAuthenticationKeysRequest. */
+                interface IBatchDeactivateDaiAuthenticationKeysRequest {
+
+                    /** BatchDeactivateDaiAuthenticationKeysRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeactivateDaiAuthenticationKeysRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchDeactivateDaiAuthenticationKeysRequest. */
+                class BatchDeactivateDaiAuthenticationKeysRequest implements IBatchDeactivateDaiAuthenticationKeysRequest {
+
+                    /**
+                     * Constructs a new BatchDeactivateDaiAuthenticationKeysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysRequest);
+
+                    /** BatchDeactivateDaiAuthenticationKeysRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeactivateDaiAuthenticationKeysRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchDeactivateDaiAuthenticationKeysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateDaiAuthenticationKeysRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysRequest): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Encodes the specified BatchDeactivateDaiAuthenticationKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchDeactivateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateDaiAuthenticationKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest.verify|verify} messages.
+                     * @param message BatchDeactivateDaiAuthenticationKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateDaiAuthenticationKeysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Decodes a BatchDeactivateDaiAuthenticationKeysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateDaiAuthenticationKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Verifies a BatchDeactivateDaiAuthenticationKeysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateDaiAuthenticationKeysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateDaiAuthenticationKeysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateDaiAuthenticationKeysRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateDaiAuthenticationKeysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateDaiAuthenticationKeysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateDaiAuthenticationKeysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateDaiAuthenticationKeysResponse. */
+                interface IBatchDeactivateDaiAuthenticationKeysResponse {
+                }
+
+                /** Represents a BatchDeactivateDaiAuthenticationKeysResponse. */
+                class BatchDeactivateDaiAuthenticationKeysResponse implements IBatchDeactivateDaiAuthenticationKeysResponse {
+
+                    /**
+                     * Constructs a new BatchDeactivateDaiAuthenticationKeysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysResponse);
+
+                    /**
+                     * Creates a new BatchDeactivateDaiAuthenticationKeysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateDaiAuthenticationKeysResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysResponse): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Encodes the specified BatchDeactivateDaiAuthenticationKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchDeactivateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateDaiAuthenticationKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse.verify|verify} messages.
+                     * @param message BatchDeactivateDaiAuthenticationKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateDaiAuthenticationKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateDaiAuthenticationKeysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Decodes a BatchDeactivateDaiAuthenticationKeysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateDaiAuthenticationKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Verifies a BatchDeactivateDaiAuthenticationKeysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateDaiAuthenticationKeysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateDaiAuthenticationKeysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateDaiAuthenticationKeysResponse message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateDaiAuthenticationKeysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateDaiAuthenticationKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateDaiAuthenticationKeysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateDaiAuthenticationKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContainerTypeEnum. */
+                interface IContainerTypeEnum {
+                }
+
+                /** Represents a ContainerTypeEnum. */
+                class ContainerTypeEnum implements IContainerTypeEnum {
+
+                    /**
+                     * Constructs a new ContainerTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IContainerTypeEnum);
+
+                    /**
+                     * Creates a new ContainerTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContainerTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IContainerTypeEnum): google.ads.admanager.v1.ContainerTypeEnum;
+
+                    /**
+                     * Encodes the specified ContainerTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.ContainerTypeEnum.verify|verify} messages.
+                     * @param message ContainerTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IContainerTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContainerTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ContainerTypeEnum.verify|verify} messages.
+                     * @param message ContainerTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IContainerTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContainerTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContainerTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ContainerTypeEnum;
+
+                    /**
+                     * Decodes a ContainerTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContainerTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ContainerTypeEnum;
+
+                    /**
+                     * Verifies a ContainerTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContainerTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContainerTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ContainerTypeEnum;
+
+                    /**
+                     * Creates a plain object from a ContainerTypeEnum message. Also converts values to other types if specified.
+                     * @param message ContainerTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ContainerTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContainerTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContainerTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ContainerTypeEnum {
+
+                    /** ContainerType enum. */
+                    enum ContainerType {
+                        CONTAINER_TYPE_UNSPECIFIED = 0,
+                        TS = 1,
+                        FMP4 = 2,
+                        HLS_AUDIO = 3
+                    }
+                }
+
+                /** Properties of a DaiEncodingProfileStatusEnum. */
+                interface IDaiEncodingProfileStatusEnum {
+                }
+
+                /** Represents a DaiEncodingProfileStatusEnum. */
+                class DaiEncodingProfileStatusEnum implements IDaiEncodingProfileStatusEnum {
+
+                    /**
+                     * Constructs a new DaiEncodingProfileStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDaiEncodingProfileStatusEnum);
+
+                    /**
+                     * Creates a new DaiEncodingProfileStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DaiEncodingProfileStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDaiEncodingProfileStatusEnum): google.ads.admanager.v1.DaiEncodingProfileStatusEnum;
+
+                    /**
+                     * Encodes the specified DaiEncodingProfileStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.DaiEncodingProfileStatusEnum.verify|verify} messages.
+                     * @param message DaiEncodingProfileStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDaiEncodingProfileStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DaiEncodingProfileStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DaiEncodingProfileStatusEnum.verify|verify} messages.
+                     * @param message DaiEncodingProfileStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDaiEncodingProfileStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DaiEncodingProfileStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DaiEncodingProfileStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DaiEncodingProfileStatusEnum;
+
+                    /**
+                     * Decodes a DaiEncodingProfileStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DaiEncodingProfileStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DaiEncodingProfileStatusEnum;
+
+                    /**
+                     * Verifies a DaiEncodingProfileStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DaiEncodingProfileStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DaiEncodingProfileStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DaiEncodingProfileStatusEnum;
+
+                    /**
+                     * Creates a plain object from a DaiEncodingProfileStatusEnum message. Also converts values to other types if specified.
+                     * @param message DaiEncodingProfileStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DaiEncodingProfileStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DaiEncodingProfileStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DaiEncodingProfileStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DaiEncodingProfileStatusEnum {
+
+                    /** DaiEncodingProfileStatus enum. */
+                    enum DaiEncodingProfileStatus {
+                        DAI_ENCODING_PROFILE_STATUS_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        ARCHIVED = 2
+                    }
+                }
+
+                /** Properties of a DaiEncodingProfileVariantTypeEnum. */
+                interface IDaiEncodingProfileVariantTypeEnum {
+                }
+
+                /** Represents a DaiEncodingProfileVariantTypeEnum. */
+                class DaiEncodingProfileVariantTypeEnum implements IDaiEncodingProfileVariantTypeEnum {
+
+                    /**
+                     * Constructs a new DaiEncodingProfileVariantTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDaiEncodingProfileVariantTypeEnum);
+
+                    /**
+                     * Creates a new DaiEncodingProfileVariantTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DaiEncodingProfileVariantTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDaiEncodingProfileVariantTypeEnum): google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum;
+
+                    /**
+                     * Encodes the specified DaiEncodingProfileVariantTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum.verify|verify} messages.
+                     * @param message DaiEncodingProfileVariantTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDaiEncodingProfileVariantTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DaiEncodingProfileVariantTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum.verify|verify} messages.
+                     * @param message DaiEncodingProfileVariantTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDaiEncodingProfileVariantTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DaiEncodingProfileVariantTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DaiEncodingProfileVariantTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum;
+
+                    /**
+                     * Decodes a DaiEncodingProfileVariantTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DaiEncodingProfileVariantTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum;
+
+                    /**
+                     * Verifies a DaiEncodingProfileVariantTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DaiEncodingProfileVariantTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DaiEncodingProfileVariantTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum;
+
+                    /**
+                     * Creates a plain object from a DaiEncodingProfileVariantTypeEnum message. Also converts values to other types if specified.
+                     * @param message DaiEncodingProfileVariantTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DaiEncodingProfileVariantTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DaiEncodingProfileVariantTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DaiEncodingProfileVariantTypeEnum {
+
+                    /** DaiEncodingProfileVariantType enum. */
+                    enum DaiEncodingProfileVariantType {
+                        DAI_ENCODING_PROFILE_VARIANT_TYPE_UNSPECIFIED = 0,
+                        MEDIA = 1,
+                        IFRAME = 2,
+                        SUBTITLES = 3
+                    }
+                }
+
+                /** Properties of a DaiEncodingProfile. */
+                interface IDaiEncodingProfile {
+
+                    /** DaiEncodingProfile name */
+                    name?: (string|null);
+
+                    /** DaiEncodingProfile displayName */
+                    displayName?: (string|null);
+
+                    /** DaiEncodingProfile status */
+                    status?: (google.ads.admanager.v1.DaiEncodingProfileStatusEnum.DaiEncodingProfileStatus|keyof typeof google.ads.admanager.v1.DaiEncodingProfileStatusEnum.DaiEncodingProfileStatus|null);
+
+                    /** DaiEncodingProfile variantType */
+                    variantType?: (google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum.DaiEncodingProfileVariantType|keyof typeof google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum.DaiEncodingProfileVariantType|null);
+
+                    /** DaiEncodingProfile containerType */
+                    containerType?: (google.ads.admanager.v1.ContainerTypeEnum.ContainerType|keyof typeof google.ads.admanager.v1.ContainerTypeEnum.ContainerType|null);
+
+                    /** DaiEncodingProfile videoSettings */
+                    videoSettings?: (google.ads.admanager.v1.IVideoSettings|null);
+
+                    /** DaiEncodingProfile audioSettings */
+                    audioSettings?: (google.ads.admanager.v1.IAudioSettings|null);
+                }
+
+                /** Represents a DaiEncodingProfile. */
+                class DaiEncodingProfile implements IDaiEncodingProfile {
+
+                    /**
+                     * Constructs a new DaiEncodingProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDaiEncodingProfile);
+
+                    /** DaiEncodingProfile name. */
+                    public name: string;
+
+                    /** DaiEncodingProfile displayName. */
+                    public displayName?: (string|null);
+
+                    /** DaiEncodingProfile status. */
+                    public status?: (google.ads.admanager.v1.DaiEncodingProfileStatusEnum.DaiEncodingProfileStatus|keyof typeof google.ads.admanager.v1.DaiEncodingProfileStatusEnum.DaiEncodingProfileStatus|null);
+
+                    /** DaiEncodingProfile variantType. */
+                    public variantType?: (google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum.DaiEncodingProfileVariantType|keyof typeof google.ads.admanager.v1.DaiEncodingProfileVariantTypeEnum.DaiEncodingProfileVariantType|null);
+
+                    /** DaiEncodingProfile containerType. */
+                    public containerType?: (google.ads.admanager.v1.ContainerTypeEnum.ContainerType|keyof typeof google.ads.admanager.v1.ContainerTypeEnum.ContainerType|null);
+
+                    /** DaiEncodingProfile videoSettings. */
+                    public videoSettings?: (google.ads.admanager.v1.IVideoSettings|null);
+
+                    /** DaiEncodingProfile audioSettings. */
+                    public audioSettings?: (google.ads.admanager.v1.IAudioSettings|null);
+
+                    /**
+                     * Creates a new DaiEncodingProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DaiEncodingProfile instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDaiEncodingProfile): google.ads.admanager.v1.DaiEncodingProfile;
+
+                    /**
+                     * Encodes the specified DaiEncodingProfile message. Does not implicitly {@link google.ads.admanager.v1.DaiEncodingProfile.verify|verify} messages.
+                     * @param message DaiEncodingProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDaiEncodingProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DaiEncodingProfile message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DaiEncodingProfile.verify|verify} messages.
+                     * @param message DaiEncodingProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDaiEncodingProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DaiEncodingProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DaiEncodingProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DaiEncodingProfile;
+
+                    /**
+                     * Decodes a DaiEncodingProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DaiEncodingProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DaiEncodingProfile;
+
+                    /**
+                     * Verifies a DaiEncodingProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DaiEncodingProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DaiEncodingProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DaiEncodingProfile;
+
+                    /**
+                     * Creates a plain object from a DaiEncodingProfile message. Also converts values to other types if specified.
+                     * @param message DaiEncodingProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DaiEncodingProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DaiEncodingProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DaiEncodingProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AudioSettings. */
+                interface IAudioSettings {
+
+                    /** AudioSettings codec */
+                    codec?: (string|null);
+
+                    /** AudioSettings bitrate */
+                    bitrate?: (number|Long|string|null);
+
+                    /** AudioSettings channels */
+                    channels?: (number|Long|string|null);
+
+                    /** AudioSettings sampleRateHertz */
+                    sampleRateHertz?: (number|Long|string|null);
+                }
+
+                /** Represents an AudioSettings. */
+                class AudioSettings implements IAudioSettings {
+
+                    /**
+                     * Constructs a new AudioSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IAudioSettings);
+
+                    /** AudioSettings codec. */
+                    public codec?: (string|null);
+
+                    /** AudioSettings bitrate. */
+                    public bitrate?: (number|Long|string|null);
+
+                    /** AudioSettings channels. */
+                    public channels?: (number|Long|string|null);
+
+                    /** AudioSettings sampleRateHertz. */
+                    public sampleRateHertz?: (number|Long|string|null);
+
+                    /**
+                     * Creates a new AudioSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudioSettings instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IAudioSettings): google.ads.admanager.v1.AudioSettings;
+
+                    /**
+                     * Encodes the specified AudioSettings message. Does not implicitly {@link google.ads.admanager.v1.AudioSettings.verify|verify} messages.
+                     * @param message AudioSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IAudioSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudioSettings message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudioSettings.verify|verify} messages.
+                     * @param message AudioSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IAudioSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudioSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudioSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudioSettings;
+
+                    /**
+                     * Decodes an AudioSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudioSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudioSettings;
+
+                    /**
+                     * Verifies an AudioSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudioSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudioSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudioSettings;
+
+                    /**
+                     * Creates a plain object from an AudioSettings message. Also converts values to other types if specified.
+                     * @param message AudioSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.AudioSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudioSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudioSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VideoSettings. */
+                interface IVideoSettings {
+
+                    /** VideoSettings codec */
+                    codec?: (string|null);
+
+                    /** VideoSettings bitrate */
+                    bitrate?: (number|Long|string|null);
+
+                    /** VideoSettings framesPerSecond */
+                    framesPerSecond?: (number|null);
+
+                    /** VideoSettings resolution */
+                    resolution?: (google.ads.admanager.v1.ISize|null);
+                }
+
+                /** Represents a VideoSettings. */
+                class VideoSettings implements IVideoSettings {
+
+                    /**
+                     * Constructs a new VideoSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IVideoSettings);
+
+                    /** VideoSettings codec. */
+                    public codec?: (string|null);
+
+                    /** VideoSettings bitrate. */
+                    public bitrate?: (number|Long|string|null);
+
+                    /** VideoSettings framesPerSecond. */
+                    public framesPerSecond?: (number|null);
+
+                    /** VideoSettings resolution. */
+                    public resolution?: (google.ads.admanager.v1.ISize|null);
+
+                    /**
+                     * Creates a new VideoSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoSettings instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IVideoSettings): google.ads.admanager.v1.VideoSettings;
+
+                    /**
+                     * Encodes the specified VideoSettings message. Does not implicitly {@link google.ads.admanager.v1.VideoSettings.verify|verify} messages.
+                     * @param message VideoSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IVideoSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoSettings message, length delimited. Does not implicitly {@link google.ads.admanager.v1.VideoSettings.verify|verify} messages.
+                     * @param message VideoSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IVideoSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.VideoSettings;
+
+                    /**
+                     * Decodes a VideoSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.VideoSettings;
+
+                    /**
+                     * Verifies a VideoSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.VideoSettings;
+
+                    /**
+                     * Creates a plain object from a VideoSettings message. Also converts values to other types if specified.
+                     * @param message VideoSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.VideoSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VideoSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DaiEncodingProfileService */
+                class DaiEncodingProfileService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DaiEncodingProfileService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DaiEncodingProfileService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DaiEncodingProfileService;
+
+                    /**
+                     * Calls GetDaiEncodingProfile.
+                     * @param request GetDaiEncodingProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DaiEncodingProfile
+                     */
+                    public getDaiEncodingProfile(request: google.ads.admanager.v1.IGetDaiEncodingProfileRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.GetDaiEncodingProfileCallback): void;
+
+                    /**
+                     * Calls GetDaiEncodingProfile.
+                     * @param request GetDaiEncodingProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDaiEncodingProfile(request: google.ads.admanager.v1.IGetDaiEncodingProfileRequest): Promise<google.ads.admanager.v1.DaiEncodingProfile>;
+
+                    /**
+                     * Calls ListDaiEncodingProfiles.
+                     * @param request ListDaiEncodingProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDaiEncodingProfilesResponse
+                     */
+                    public listDaiEncodingProfiles(request: google.ads.admanager.v1.IListDaiEncodingProfilesRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.ListDaiEncodingProfilesCallback): void;
+
+                    /**
+                     * Calls ListDaiEncodingProfiles.
+                     * @param request ListDaiEncodingProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDaiEncodingProfiles(request: google.ads.admanager.v1.IListDaiEncodingProfilesRequest): Promise<google.ads.admanager.v1.ListDaiEncodingProfilesResponse>;
+
+                    /**
+                     * Calls CreateDaiEncodingProfile.
+                     * @param request CreateDaiEncodingProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DaiEncodingProfile
+                     */
+                    public createDaiEncodingProfile(request: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.CreateDaiEncodingProfileCallback): void;
+
+                    /**
+                     * Calls CreateDaiEncodingProfile.
+                     * @param request CreateDaiEncodingProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDaiEncodingProfile(request: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest): Promise<google.ads.admanager.v1.DaiEncodingProfile>;
+
+                    /**
+                     * Calls BatchCreateDaiEncodingProfiles.
+                     * @param request BatchCreateDaiEncodingProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateDaiEncodingProfilesResponse
+                     */
+                    public batchCreateDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.BatchCreateDaiEncodingProfilesCallback): void;
+
+                    /**
+                     * Calls BatchCreateDaiEncodingProfiles.
+                     * @param request BatchCreateDaiEncodingProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesRequest): Promise<google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse>;
+
+                    /**
+                     * Calls UpdateDaiEncodingProfile.
+                     * @param request UpdateDaiEncodingProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DaiEncodingProfile
+                     */
+                    public updateDaiEncodingProfile(request: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.UpdateDaiEncodingProfileCallback): void;
+
+                    /**
+                     * Calls UpdateDaiEncodingProfile.
+                     * @param request UpdateDaiEncodingProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDaiEncodingProfile(request: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest): Promise<google.ads.admanager.v1.DaiEncodingProfile>;
+
+                    /**
+                     * Calls BatchUpdateDaiEncodingProfiles.
+                     * @param request BatchUpdateDaiEncodingProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateDaiEncodingProfilesResponse
+                     */
+                    public batchUpdateDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.BatchUpdateDaiEncodingProfilesCallback): void;
+
+                    /**
+                     * Calls BatchUpdateDaiEncodingProfiles.
+                     * @param request BatchUpdateDaiEncodingProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesRequest): Promise<google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse>;
+
+                    /**
+                     * Calls BatchActivateDaiEncodingProfiles.
+                     * @param request BatchActivateDaiEncodingProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchActivateDaiEncodingProfilesResponse
+                     */
+                    public batchActivateDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.BatchActivateDaiEncodingProfilesCallback): void;
+
+                    /**
+                     * Calls BatchActivateDaiEncodingProfiles.
+                     * @param request BatchActivateDaiEncodingProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchActivateDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesRequest): Promise<google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse>;
+
+                    /**
+                     * Calls BatchArchiveDaiEncodingProfiles.
+                     * @param request BatchArchiveDaiEncodingProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchArchiveDaiEncodingProfilesResponse
+                     */
+                    public batchArchiveDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesRequest, callback: google.ads.admanager.v1.DaiEncodingProfileService.BatchArchiveDaiEncodingProfilesCallback): void;
+
+                    /**
+                     * Calls BatchArchiveDaiEncodingProfiles.
+                     * @param request BatchArchiveDaiEncodingProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchArchiveDaiEncodingProfiles(request: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesRequest): Promise<google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse>;
+                }
+
+                namespace DaiEncodingProfileService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|getDaiEncodingProfile}.
+                     * @param error Error, if any
+                     * @param [response] DaiEncodingProfile
+                     */
+                    type GetDaiEncodingProfileCallback = (error: (Error|null), response?: google.ads.admanager.v1.DaiEncodingProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|listDaiEncodingProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListDaiEncodingProfilesResponse
+                     */
+                    type ListDaiEncodingProfilesCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListDaiEncodingProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|createDaiEncodingProfile}.
+                     * @param error Error, if any
+                     * @param [response] DaiEncodingProfile
+                     */
+                    type CreateDaiEncodingProfileCallback = (error: (Error|null), response?: google.ads.admanager.v1.DaiEncodingProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|batchCreateDaiEncodingProfiles}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateDaiEncodingProfilesResponse
+                     */
+                    type BatchCreateDaiEncodingProfilesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|updateDaiEncodingProfile}.
+                     * @param error Error, if any
+                     * @param [response] DaiEncodingProfile
+                     */
+                    type UpdateDaiEncodingProfileCallback = (error: (Error|null), response?: google.ads.admanager.v1.DaiEncodingProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|batchUpdateDaiEncodingProfiles}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateDaiEncodingProfilesResponse
+                     */
+                    type BatchUpdateDaiEncodingProfilesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|batchActivateDaiEncodingProfiles}.
+                     * @param error Error, if any
+                     * @param [response] BatchActivateDaiEncodingProfilesResponse
+                     */
+                    type BatchActivateDaiEncodingProfilesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.DaiEncodingProfileService|batchArchiveDaiEncodingProfiles}.
+                     * @param error Error, if any
+                     * @param [response] BatchArchiveDaiEncodingProfilesResponse
+                     */
+                    type BatchArchiveDaiEncodingProfilesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse) => void;
+                }
+
+                /** Properties of a GetDaiEncodingProfileRequest. */
+                interface IGetDaiEncodingProfileRequest {
+
+                    /** GetDaiEncodingProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDaiEncodingProfileRequest. */
+                class GetDaiEncodingProfileRequest implements IGetDaiEncodingProfileRequest {
+
+                    /**
+                     * Constructs a new GetDaiEncodingProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetDaiEncodingProfileRequest);
+
+                    /** GetDaiEncodingProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDaiEncodingProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDaiEncodingProfileRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetDaiEncodingProfileRequest): google.ads.admanager.v1.GetDaiEncodingProfileRequest;
+
+                    /**
+                     * Encodes the specified GetDaiEncodingProfileRequest message. Does not implicitly {@link google.ads.admanager.v1.GetDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message GetDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDaiEncodingProfileRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message GetDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDaiEncodingProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetDaiEncodingProfileRequest;
+
+                    /**
+                     * Decodes a GetDaiEncodingProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetDaiEncodingProfileRequest;
+
+                    /**
+                     * Verifies a GetDaiEncodingProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDaiEncodingProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDaiEncodingProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetDaiEncodingProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetDaiEncodingProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetDaiEncodingProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetDaiEncodingProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDaiEncodingProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDaiEncodingProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDaiEncodingProfilesRequest. */
+                interface IListDaiEncodingProfilesRequest {
+
+                    /** ListDaiEncodingProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDaiEncodingProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDaiEncodingProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDaiEncodingProfilesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDaiEncodingProfilesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListDaiEncodingProfilesRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListDaiEncodingProfilesRequest. */
+                class ListDaiEncodingProfilesRequest implements IListDaiEncodingProfilesRequest {
+
+                    /**
+                     * Constructs a new ListDaiEncodingProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListDaiEncodingProfilesRequest);
+
+                    /** ListDaiEncodingProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListDaiEncodingProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDaiEncodingProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDaiEncodingProfilesRequest filter. */
+                    public filter: string;
+
+                    /** ListDaiEncodingProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListDaiEncodingProfilesRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListDaiEncodingProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDaiEncodingProfilesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListDaiEncodingProfilesRequest): google.ads.admanager.v1.ListDaiEncodingProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListDaiEncodingProfilesRequest message. Does not implicitly {@link google.ads.admanager.v1.ListDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message ListDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDaiEncodingProfilesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message ListDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDaiEncodingProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListDaiEncodingProfilesRequest;
+
+                    /**
+                     * Decodes a ListDaiEncodingProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListDaiEncodingProfilesRequest;
+
+                    /**
+                     * Verifies a ListDaiEncodingProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDaiEncodingProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDaiEncodingProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListDaiEncodingProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDaiEncodingProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListDaiEncodingProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListDaiEncodingProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDaiEncodingProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDaiEncodingProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDaiEncodingProfilesResponse. */
+                interface IListDaiEncodingProfilesResponse {
+
+                    /** ListDaiEncodingProfilesResponse daiEncodingProfiles */
+                    daiEncodingProfiles?: (google.ads.admanager.v1.IDaiEncodingProfile[]|null);
+
+                    /** ListDaiEncodingProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDaiEncodingProfilesResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListDaiEncodingProfilesResponse. */
+                class ListDaiEncodingProfilesResponse implements IListDaiEncodingProfilesResponse {
+
+                    /**
+                     * Constructs a new ListDaiEncodingProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListDaiEncodingProfilesResponse);
+
+                    /** ListDaiEncodingProfilesResponse daiEncodingProfiles. */
+                    public daiEncodingProfiles: google.ads.admanager.v1.IDaiEncodingProfile[];
+
+                    /** ListDaiEncodingProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDaiEncodingProfilesResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListDaiEncodingProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDaiEncodingProfilesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListDaiEncodingProfilesResponse): google.ads.admanager.v1.ListDaiEncodingProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListDaiEncodingProfilesResponse message. Does not implicitly {@link google.ads.admanager.v1.ListDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message ListDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDaiEncodingProfilesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message ListDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDaiEncodingProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListDaiEncodingProfilesResponse;
+
+                    /**
+                     * Decodes a ListDaiEncodingProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListDaiEncodingProfilesResponse;
+
+                    /**
+                     * Verifies a ListDaiEncodingProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDaiEncodingProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDaiEncodingProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListDaiEncodingProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDaiEncodingProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListDaiEncodingProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListDaiEncodingProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDaiEncodingProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDaiEncodingProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDaiEncodingProfileRequest. */
+                interface ICreateDaiEncodingProfileRequest {
+
+                    /** CreateDaiEncodingProfileRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDaiEncodingProfileRequest daiEncodingProfile */
+                    daiEncodingProfile?: (google.ads.admanager.v1.IDaiEncodingProfile|null);
+                }
+
+                /** Represents a CreateDaiEncodingProfileRequest. */
+                class CreateDaiEncodingProfileRequest implements ICreateDaiEncodingProfileRequest {
+
+                    /**
+                     * Constructs a new CreateDaiEncodingProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest);
+
+                    /** CreateDaiEncodingProfileRequest parent. */
+                    public parent: string;
+
+                    /** CreateDaiEncodingProfileRequest daiEncodingProfile. */
+                    public daiEncodingProfile?: (google.ads.admanager.v1.IDaiEncodingProfile|null);
+
+                    /**
+                     * Creates a new CreateDaiEncodingProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDaiEncodingProfileRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest): google.ads.admanager.v1.CreateDaiEncodingProfileRequest;
+
+                    /**
+                     * Encodes the specified CreateDaiEncodingProfileRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message CreateDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDaiEncodingProfileRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message CreateDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDaiEncodingProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateDaiEncodingProfileRequest;
+
+                    /**
+                     * Decodes a CreateDaiEncodingProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateDaiEncodingProfileRequest;
+
+                    /**
+                     * Verifies a CreateDaiEncodingProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDaiEncodingProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDaiEncodingProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateDaiEncodingProfileRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDaiEncodingProfileRequest message. Also converts values to other types if specified.
+                     * @param message CreateDaiEncodingProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateDaiEncodingProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDaiEncodingProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDaiEncodingProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateDaiEncodingProfilesRequest. */
+                interface IBatchCreateDaiEncodingProfilesRequest {
+
+                    /** BatchCreateDaiEncodingProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateDaiEncodingProfilesRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateDaiEncodingProfileRequest[]|null);
+                }
+
+                /** Represents a BatchCreateDaiEncodingProfilesRequest. */
+                class BatchCreateDaiEncodingProfilesRequest implements IBatchCreateDaiEncodingProfilesRequest {
+
+                    /**
+                     * Constructs a new BatchCreateDaiEncodingProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesRequest);
+
+                    /** BatchCreateDaiEncodingProfilesRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateDaiEncodingProfilesRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateDaiEncodingProfileRequest[];
+
+                    /**
+                     * Creates a new BatchCreateDaiEncodingProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateDaiEncodingProfilesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesRequest): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiEncodingProfilesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchCreateDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiEncodingProfilesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchCreateDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateDaiEncodingProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Decodes a BatchCreateDaiEncodingProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Verifies a BatchCreateDaiEncodingProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateDaiEncodingProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateDaiEncodingProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateDaiEncodingProfilesRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateDaiEncodingProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateDaiEncodingProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateDaiEncodingProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateDaiEncodingProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateDaiEncodingProfilesResponse. */
+                interface IBatchCreateDaiEncodingProfilesResponse {
+
+                    /** BatchCreateDaiEncodingProfilesResponse daiEncodingProfiles */
+                    daiEncodingProfiles?: (google.ads.admanager.v1.IDaiEncodingProfile[]|null);
+                }
+
+                /** Represents a BatchCreateDaiEncodingProfilesResponse. */
+                class BatchCreateDaiEncodingProfilesResponse implements IBatchCreateDaiEncodingProfilesResponse {
+
+                    /**
+                     * Constructs a new BatchCreateDaiEncodingProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesResponse);
+
+                    /** BatchCreateDaiEncodingProfilesResponse daiEncodingProfiles. */
+                    public daiEncodingProfiles: google.ads.admanager.v1.IDaiEncodingProfile[];
+
+                    /**
+                     * Creates a new BatchCreateDaiEncodingProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateDaiEncodingProfilesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesResponse): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiEncodingProfilesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchCreateDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateDaiEncodingProfilesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchCreateDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateDaiEncodingProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Decodes a BatchCreateDaiEncodingProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Verifies a BatchCreateDaiEncodingProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateDaiEncodingProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateDaiEncodingProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateDaiEncodingProfilesResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateDaiEncodingProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateDaiEncodingProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateDaiEncodingProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateDaiEncodingProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDaiEncodingProfileRequest. */
+                interface IUpdateDaiEncodingProfileRequest {
+
+                    /** UpdateDaiEncodingProfileRequest daiEncodingProfile */
+                    daiEncodingProfile?: (google.ads.admanager.v1.IDaiEncodingProfile|null);
+
+                    /** UpdateDaiEncodingProfileRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDaiEncodingProfileRequest. */
+                class UpdateDaiEncodingProfileRequest implements IUpdateDaiEncodingProfileRequest {
+
+                    /**
+                     * Constructs a new UpdateDaiEncodingProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest);
+
+                    /** UpdateDaiEncodingProfileRequest daiEncodingProfile. */
+                    public daiEncodingProfile?: (google.ads.admanager.v1.IDaiEncodingProfile|null);
+
+                    /** UpdateDaiEncodingProfileRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDaiEncodingProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDaiEncodingProfileRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest): google.ads.admanager.v1.UpdateDaiEncodingProfileRequest;
+
+                    /**
+                     * Encodes the specified UpdateDaiEncodingProfileRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message UpdateDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDaiEncodingProfileRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message UpdateDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDaiEncodingProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateDaiEncodingProfileRequest;
+
+                    /**
+                     * Decodes an UpdateDaiEncodingProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateDaiEncodingProfileRequest;
+
+                    /**
+                     * Verifies an UpdateDaiEncodingProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDaiEncodingProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDaiEncodingProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateDaiEncodingProfileRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDaiEncodingProfileRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDaiEncodingProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateDaiEncodingProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDaiEncodingProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDaiEncodingProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateDaiEncodingProfilesRequest. */
+                interface IBatchUpdateDaiEncodingProfilesRequest {
+
+                    /** BatchUpdateDaiEncodingProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateDaiEncodingProfilesRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateDaiEncodingProfilesRequest. */
+                class BatchUpdateDaiEncodingProfilesRequest implements IBatchUpdateDaiEncodingProfilesRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateDaiEncodingProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesRequest);
+
+                    /** BatchUpdateDaiEncodingProfilesRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateDaiEncodingProfilesRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateDaiEncodingProfileRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateDaiEncodingProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateDaiEncodingProfilesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesRequest): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiEncodingProfilesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchUpdateDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiEncodingProfilesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchUpdateDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateDaiEncodingProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Decodes a BatchUpdateDaiEncodingProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Verifies a BatchUpdateDaiEncodingProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateDaiEncodingProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateDaiEncodingProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateDaiEncodingProfilesRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateDaiEncodingProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateDaiEncodingProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateDaiEncodingProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateDaiEncodingProfilesResponse. */
+                interface IBatchUpdateDaiEncodingProfilesResponse {
+
+                    /** BatchUpdateDaiEncodingProfilesResponse daiEncodingProfiles */
+                    daiEncodingProfiles?: (google.ads.admanager.v1.IDaiEncodingProfile[]|null);
+                }
+
+                /** Represents a BatchUpdateDaiEncodingProfilesResponse. */
+                class BatchUpdateDaiEncodingProfilesResponse implements IBatchUpdateDaiEncodingProfilesResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateDaiEncodingProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesResponse);
+
+                    /** BatchUpdateDaiEncodingProfilesResponse daiEncodingProfiles. */
+                    public daiEncodingProfiles: google.ads.admanager.v1.IDaiEncodingProfile[];
+
+                    /**
+                     * Creates a new BatchUpdateDaiEncodingProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateDaiEncodingProfilesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesResponse): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiEncodingProfilesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchUpdateDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateDaiEncodingProfilesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchUpdateDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateDaiEncodingProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Decodes a BatchUpdateDaiEncodingProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Verifies a BatchUpdateDaiEncodingProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateDaiEncodingProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateDaiEncodingProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateDaiEncodingProfilesResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateDaiEncodingProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateDaiEncodingProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateDaiEncodingProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateDaiEncodingProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateDaiEncodingProfilesRequest. */
+                interface IBatchActivateDaiEncodingProfilesRequest {
+
+                    /** BatchActivateDaiEncodingProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchActivateDaiEncodingProfilesRequest requests */
+                    requests?: (google.ads.admanager.v1.IActivateDaiEncodingProfileRequest[]|null);
+                }
+
+                /** Represents a BatchActivateDaiEncodingProfilesRequest. */
+                class BatchActivateDaiEncodingProfilesRequest implements IBatchActivateDaiEncodingProfilesRequest {
+
+                    /**
+                     * Constructs a new BatchActivateDaiEncodingProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesRequest);
+
+                    /** BatchActivateDaiEncodingProfilesRequest parent. */
+                    public parent: string;
+
+                    /** BatchActivateDaiEncodingProfilesRequest requests. */
+                    public requests: google.ads.admanager.v1.IActivateDaiEncodingProfileRequest[];
+
+                    /**
+                     * Creates a new BatchActivateDaiEncodingProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateDaiEncodingProfilesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesRequest): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiEncodingProfilesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchActivateDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiEncodingProfilesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchActivateDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateDaiEncodingProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Decodes a BatchActivateDaiEncodingProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Verifies a BatchActivateDaiEncodingProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateDaiEncodingProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateDaiEncodingProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchActivateDaiEncodingProfilesRequest message. Also converts values to other types if specified.
+                     * @param message BatchActivateDaiEncodingProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateDaiEncodingProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateDaiEncodingProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateDaiEncodingProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateDaiEncodingProfilesResponse. */
+                interface IBatchActivateDaiEncodingProfilesResponse {
+                }
+
+                /** Represents a BatchActivateDaiEncodingProfilesResponse. */
+                class BatchActivateDaiEncodingProfilesResponse implements IBatchActivateDaiEncodingProfilesResponse {
+
+                    /**
+                     * Constructs a new BatchActivateDaiEncodingProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesResponse);
+
+                    /**
+                     * Creates a new BatchActivateDaiEncodingProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateDaiEncodingProfilesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesResponse): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiEncodingProfilesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchActivateDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateDaiEncodingProfilesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchActivateDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateDaiEncodingProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Decodes a BatchActivateDaiEncodingProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Verifies a BatchActivateDaiEncodingProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateDaiEncodingProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateDaiEncodingProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchActivateDaiEncodingProfilesResponse message. Also converts values to other types if specified.
+                     * @param message BatchActivateDaiEncodingProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateDaiEncodingProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateDaiEncodingProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateDaiEncodingProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ActivateDaiEncodingProfileRequest. */
+                interface IActivateDaiEncodingProfileRequest {
+
+                    /** ActivateDaiEncodingProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ActivateDaiEncodingProfileRequest. */
+                class ActivateDaiEncodingProfileRequest implements IActivateDaiEncodingProfileRequest {
+
+                    /**
+                     * Constructs a new ActivateDaiEncodingProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IActivateDaiEncodingProfileRequest);
+
+                    /** ActivateDaiEncodingProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ActivateDaiEncodingProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ActivateDaiEncodingProfileRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IActivateDaiEncodingProfileRequest): google.ads.admanager.v1.ActivateDaiEncodingProfileRequest;
+
+                    /**
+                     * Encodes the specified ActivateDaiEncodingProfileRequest message. Does not implicitly {@link google.ads.admanager.v1.ActivateDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message ActivateDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IActivateDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ActivateDaiEncodingProfileRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ActivateDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message ActivateDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IActivateDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ActivateDaiEncodingProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ActivateDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ActivateDaiEncodingProfileRequest;
+
+                    /**
+                     * Decodes an ActivateDaiEncodingProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ActivateDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ActivateDaiEncodingProfileRequest;
+
+                    /**
+                     * Verifies an ActivateDaiEncodingProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ActivateDaiEncodingProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ActivateDaiEncodingProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ActivateDaiEncodingProfileRequest;
+
+                    /**
+                     * Creates a plain object from an ActivateDaiEncodingProfileRequest message. Also converts values to other types if specified.
+                     * @param message ActivateDaiEncodingProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ActivateDaiEncodingProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ActivateDaiEncodingProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ActivateDaiEncodingProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchArchiveDaiEncodingProfilesRequest. */
+                interface IBatchArchiveDaiEncodingProfilesRequest {
+
+                    /** BatchArchiveDaiEncodingProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchArchiveDaiEncodingProfilesRequest requests */
+                    requests?: (google.ads.admanager.v1.IArchiveDaiEncodingProfileRequest[]|null);
+                }
+
+                /** Represents a BatchArchiveDaiEncodingProfilesRequest. */
+                class BatchArchiveDaiEncodingProfilesRequest implements IBatchArchiveDaiEncodingProfilesRequest {
+
+                    /**
+                     * Constructs a new BatchArchiveDaiEncodingProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesRequest);
+
+                    /** BatchArchiveDaiEncodingProfilesRequest parent. */
+                    public parent: string;
+
+                    /** BatchArchiveDaiEncodingProfilesRequest requests. */
+                    public requests: google.ads.admanager.v1.IArchiveDaiEncodingProfileRequest[];
+
+                    /**
+                     * Creates a new BatchArchiveDaiEncodingProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchArchiveDaiEncodingProfilesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesRequest): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest;
+
+                    /**
+                     * Encodes the specified BatchArchiveDaiEncodingProfilesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchArchiveDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchArchiveDaiEncodingProfilesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest.verify|verify} messages.
+                     * @param message BatchArchiveDaiEncodingProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchArchiveDaiEncodingProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchArchiveDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest;
+
+                    /**
+                     * Decodes a BatchArchiveDaiEncodingProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchArchiveDaiEncodingProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest;
+
+                    /**
+                     * Verifies a BatchArchiveDaiEncodingProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchArchiveDaiEncodingProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchArchiveDaiEncodingProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchArchiveDaiEncodingProfilesRequest message. Also converts values to other types if specified.
+                     * @param message BatchArchiveDaiEncodingProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchArchiveDaiEncodingProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchArchiveDaiEncodingProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchArchiveDaiEncodingProfilesResponse. */
+                interface IBatchArchiveDaiEncodingProfilesResponse {
+                }
+
+                /** Represents a BatchArchiveDaiEncodingProfilesResponse. */
+                class BatchArchiveDaiEncodingProfilesResponse implements IBatchArchiveDaiEncodingProfilesResponse {
+
+                    /**
+                     * Constructs a new BatchArchiveDaiEncodingProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesResponse);
+
+                    /**
+                     * Creates a new BatchArchiveDaiEncodingProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchArchiveDaiEncodingProfilesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesResponse): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse;
+
+                    /**
+                     * Encodes the specified BatchArchiveDaiEncodingProfilesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchArchiveDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchArchiveDaiEncodingProfilesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse.verify|verify} messages.
+                     * @param message BatchArchiveDaiEncodingProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchArchiveDaiEncodingProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchArchiveDaiEncodingProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchArchiveDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse;
+
+                    /**
+                     * Decodes a BatchArchiveDaiEncodingProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchArchiveDaiEncodingProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse;
+
+                    /**
+                     * Verifies a BatchArchiveDaiEncodingProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchArchiveDaiEncodingProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchArchiveDaiEncodingProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchArchiveDaiEncodingProfilesResponse message. Also converts values to other types if specified.
+                     * @param message BatchArchiveDaiEncodingProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchArchiveDaiEncodingProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchArchiveDaiEncodingProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchArchiveDaiEncodingProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ArchiveDaiEncodingProfileRequest. */
+                interface IArchiveDaiEncodingProfileRequest {
+
+                    /** ArchiveDaiEncodingProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ArchiveDaiEncodingProfileRequest. */
+                class ArchiveDaiEncodingProfileRequest implements IArchiveDaiEncodingProfileRequest {
+
+                    /**
+                     * Constructs a new ArchiveDaiEncodingProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IArchiveDaiEncodingProfileRequest);
+
+                    /** ArchiveDaiEncodingProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ArchiveDaiEncodingProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ArchiveDaiEncodingProfileRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IArchiveDaiEncodingProfileRequest): google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest;
+
+                    /**
+                     * Encodes the specified ArchiveDaiEncodingProfileRequest message. Does not implicitly {@link google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message ArchiveDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IArchiveDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ArchiveDaiEncodingProfileRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest.verify|verify} messages.
+                     * @param message ArchiveDaiEncodingProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IArchiveDaiEncodingProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ArchiveDaiEncodingProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ArchiveDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest;
+
+                    /**
+                     * Decodes an ArchiveDaiEncodingProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ArchiveDaiEncodingProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest;
+
+                    /**
+                     * Verifies an ArchiveDaiEncodingProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ArchiveDaiEncodingProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ArchiveDaiEncodingProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest;
+
+                    /**
+                     * Creates a plain object from an ArchiveDaiEncodingProfileRequest message. Also converts values to other types if specified.
+                     * @param message ArchiveDaiEncodingProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ArchiveDaiEncodingProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ArchiveDaiEncodingProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ArchiveDaiEncodingProfileRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -47292,6 +56853,12 @@ export namespace google {
                     /** LiveStream assetKey */
                     assetKey?: (string|null);
 
+                    /** LiveStream slate */
+                    slate?: (string|null);
+
+                    /** LiveStream dvrWindowDuration */
+                    dvrWindowDuration?: (google.protobuf.IDuration|null);
+
                     /** LiveStream enableDaiAuthenticationKeys */
                     enableDaiAuthenticationKeys?: (boolean|null);
 
@@ -47318,6 +56885,9 @@ export namespace google {
 
                     /** LiveStream defaultAdBreakDuration */
                     defaultAdBreakDuration?: (google.protobuf.IDuration|null);
+
+                    /** LiveStream daiAuthenticationKeys */
+                    daiAuthenticationKeys?: (string[]|null);
 
                     /** LiveStream sourceContentConfigurations */
                     sourceContentConfigurations?: (string[]|null);
@@ -47357,6 +56927,12 @@ export namespace google {
 
                     /** LiveStream customAssetKey */
                     customAssetKey?: (string|null);
+
+                    /** LiveStream daiEncodingProfiles */
+                    daiEncodingProfiles?: (string[]|null);
+
+                    /** LiveStream segmentUrlAuthenticationKeys */
+                    segmentUrlAuthenticationKeys?: (string[]|null);
 
                     /** LiveStream adBreakMarkups */
                     adBreakMarkups?: (google.ads.admanager.v1.AdBreakMarkupTypeEnum.AdBreakMarkupType[]|null);
@@ -47422,6 +56998,12 @@ export namespace google {
                     /** LiveStream assetKey. */
                     public assetKey?: (string|null);
 
+                    /** LiveStream slate. */
+                    public slate?: (string|null);
+
+                    /** LiveStream dvrWindowDuration. */
+                    public dvrWindowDuration?: (google.protobuf.IDuration|null);
+
                     /** LiveStream enableDaiAuthenticationKeys. */
                     public enableDaiAuthenticationKeys?: (boolean|null);
 
@@ -47448,6 +57030,9 @@ export namespace google {
 
                     /** LiveStream defaultAdBreakDuration. */
                     public defaultAdBreakDuration?: (google.protobuf.IDuration|null);
+
+                    /** LiveStream daiAuthenticationKeys. */
+                    public daiAuthenticationKeys: string[];
 
                     /** LiveStream sourceContentConfigurations. */
                     public sourceContentConfigurations: string[];
@@ -47487,6 +57072,12 @@ export namespace google {
 
                     /** LiveStream customAssetKey. */
                     public customAssetKey?: (string|null);
+
+                    /** LiveStream daiEncodingProfiles. */
+                    public daiEncodingProfiles: string[];
+
+                    /** LiveStream segmentUrlAuthenticationKeys. */
+                    public segmentUrlAuthenticationKeys: string[];
 
                     /** LiveStream adBreakMarkups. */
                     public adBreakMarkups: google.ads.admanager.v1.AdBreakMarkupTypeEnum.AdBreakMarkupType[];
@@ -50724,218 +60315,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DelegationTypeEnum. */
-                interface IDelegationTypeEnum {
-                }
-
-                /** Represents a DelegationTypeEnum. */
-                class DelegationTypeEnum implements IDelegationTypeEnum {
-
-                    /**
-                     * Constructs a new DelegationTypeEnum.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.ads.admanager.v1.IDelegationTypeEnum);
-
-                    /**
-                     * Creates a new DelegationTypeEnum instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DelegationTypeEnum instance
-                     */
-                    public static create(properties?: google.ads.admanager.v1.IDelegationTypeEnum): google.ads.admanager.v1.DelegationTypeEnum;
-
-                    /**
-                     * Encodes the specified DelegationTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.DelegationTypeEnum.verify|verify} messages.
-                     * @param message DelegationTypeEnum message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.ads.admanager.v1.IDelegationTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DelegationTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DelegationTypeEnum.verify|verify} messages.
-                     * @param message DelegationTypeEnum message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.ads.admanager.v1.IDelegationTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DelegationTypeEnum message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DelegationTypeEnum
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DelegationTypeEnum;
-
-                    /**
-                     * Decodes a DelegationTypeEnum message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DelegationTypeEnum
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DelegationTypeEnum;
-
-                    /**
-                     * Verifies a DelegationTypeEnum message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DelegationTypeEnum message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DelegationTypeEnum
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DelegationTypeEnum;
-
-                    /**
-                     * Creates a plain object from a DelegationTypeEnum message. Also converts values to other types if specified.
-                     * @param message DelegationTypeEnum
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.ads.admanager.v1.DelegationTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DelegationTypeEnum to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DelegationTypeEnum
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace DelegationTypeEnum {
-
-                    /** DelegationType enum. */
-                    enum DelegationType {
-                        DELEGATION_TYPE_UNSPECIFIED = 0,
-                        MANAGE_ACCOUNT = 1,
-                        MANAGE_INVENTORY = 2
-                    }
-                }
-
-                /** Properties of a McmEarningsProductTypeEnum. */
-                interface IMcmEarningsProductTypeEnum {
-                }
-
-                /** Represents a McmEarningsProductTypeEnum. */
-                class McmEarningsProductTypeEnum implements IMcmEarningsProductTypeEnum {
-
-                    /**
-                     * Constructs a new McmEarningsProductTypeEnum.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.ads.admanager.v1.IMcmEarningsProductTypeEnum);
-
-                    /**
-                     * Creates a new McmEarningsProductTypeEnum instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns McmEarningsProductTypeEnum instance
-                     */
-                    public static create(properties?: google.ads.admanager.v1.IMcmEarningsProductTypeEnum): google.ads.admanager.v1.McmEarningsProductTypeEnum;
-
-                    /**
-                     * Encodes the specified McmEarningsProductTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.McmEarningsProductTypeEnum.verify|verify} messages.
-                     * @param message McmEarningsProductTypeEnum message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.ads.admanager.v1.IMcmEarningsProductTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified McmEarningsProductTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.McmEarningsProductTypeEnum.verify|verify} messages.
-                     * @param message McmEarningsProductTypeEnum message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.ads.admanager.v1.IMcmEarningsProductTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a McmEarningsProductTypeEnum message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns McmEarningsProductTypeEnum
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.McmEarningsProductTypeEnum;
-
-                    /**
-                     * Decodes a McmEarningsProductTypeEnum message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns McmEarningsProductTypeEnum
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.McmEarningsProductTypeEnum;
-
-                    /**
-                     * Verifies a McmEarningsProductTypeEnum message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a McmEarningsProductTypeEnum message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns McmEarningsProductTypeEnum
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.McmEarningsProductTypeEnum;
-
-                    /**
-                     * Creates a plain object from a McmEarningsProductTypeEnum message. Also converts values to other types if specified.
-                     * @param message McmEarningsProductTypeEnum
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.ads.admanager.v1.McmEarningsProductTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this McmEarningsProductTypeEnum to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for McmEarningsProductTypeEnum
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace McmEarningsProductTypeEnum {
-
-                    /** McmEarningsProductType enum. */
-                    enum McmEarningsProductType {
-                        MCM_EARNINGS_PRODUCT_TYPE_UNSPECIFIED = 0,
-                        AD_EXCHANGE_CONTENT = 1,
-                        AD_EXCHANGE_CONTENT_HOST = 2,
-                        AD_EXCHANGE_GAMES = 3,
-                        AD_EXCHANGE_GAMES_HOST = 4,
-                        AD_EXCHANGE_MOBILE_CONTENT_APP = 5,
-                        AD_EXCHANGE_MOBILE_CONTENT_APP_HOST = 6,
-                        AD_EXCHANGE_VIDEO = 7,
-                        AD_EXCHANGE_VIDEO_HOST = 8,
-                        AD_EXCHANGE_RESERVATIONS = 9,
-                        AD_EXCHANGE_PREFERRED_DEALS = 10,
-                        OFFERWALL = 11,
-                        BUYER_DIRECT = 12
-                    }
                 }
 
                 /** Represents a McmEarningsService */
@@ -59294,6 +68673,919 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Partner. */
+                interface IPartner {
+
+                    /** Partner name */
+                    name?: (string|null);
+
+                    /** Partner displayName */
+                    displayName?: (string|null);
+
+                    /** Partner address */
+                    address?: (string|null);
+
+                    /** Partner email */
+                    email?: (string|null);
+
+                    /** Partner fax */
+                    fax?: (string|null);
+
+                    /** Partner phone */
+                    phone?: (string|null);
+
+                    /** Partner externalId */
+                    externalId?: (string|null);
+
+                    /** Partner comment */
+                    comment?: (string|null);
+
+                    /** Partner appliedLabels */
+                    appliedLabels?: (google.ads.admanager.v1.IAppliedLabel[]|null);
+
+                    /** Partner primaryContact */
+                    primaryContact?: (string|null);
+
+                    /** Partner appliedTeams */
+                    appliedTeams?: (string[]|null);
+
+                    /** Partner updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Partner creditStatus */
+                    creditStatus?: (google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus|keyof typeof google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus|null);
+                }
+
+                /** Represents a Partner. */
+                class Partner implements IPartner {
+
+                    /**
+                     * Constructs a new Partner.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IPartner);
+
+                    /** Partner name. */
+                    public name: string;
+
+                    /** Partner displayName. */
+                    public displayName?: (string|null);
+
+                    /** Partner address. */
+                    public address?: (string|null);
+
+                    /** Partner email. */
+                    public email?: (string|null);
+
+                    /** Partner fax. */
+                    public fax?: (string|null);
+
+                    /** Partner phone. */
+                    public phone?: (string|null);
+
+                    /** Partner externalId. */
+                    public externalId?: (string|null);
+
+                    /** Partner comment. */
+                    public comment?: (string|null);
+
+                    /** Partner appliedLabels. */
+                    public appliedLabels: google.ads.admanager.v1.IAppliedLabel[];
+
+                    /** Partner primaryContact. */
+                    public primaryContact?: (string|null);
+
+                    /** Partner appliedTeams. */
+                    public appliedTeams: string[];
+
+                    /** Partner updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Partner creditStatus. */
+                    public creditStatus?: (google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus|keyof typeof google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus|null);
+
+                    /**
+                     * Creates a new Partner instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Partner instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IPartner): google.ads.admanager.v1.Partner;
+
+                    /**
+                     * Encodes the specified Partner message. Does not implicitly {@link google.ads.admanager.v1.Partner.verify|verify} messages.
+                     * @param message Partner message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IPartner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Partner message, length delimited. Does not implicitly {@link google.ads.admanager.v1.Partner.verify|verify} messages.
+                     * @param message Partner message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IPartner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Partner message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Partner
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.Partner;
+
+                    /**
+                     * Decodes a Partner message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Partner
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.Partner;
+
+                    /**
+                     * Verifies a Partner message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Partner message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Partner
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.Partner;
+
+                    /**
+                     * Creates a plain object from a Partner message. Also converts values to other types if specified.
+                     * @param message Partner
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.Partner, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Partner to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Partner
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a PartnerService */
+                class PartnerService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PartnerService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PartnerService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PartnerService;
+
+                    /**
+                     * Calls GetPartner.
+                     * @param request GetPartnerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Partner
+                     */
+                    public getPartner(request: google.ads.admanager.v1.IGetPartnerRequest, callback: google.ads.admanager.v1.PartnerService.GetPartnerCallback): void;
+
+                    /**
+                     * Calls GetPartner.
+                     * @param request GetPartnerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPartner(request: google.ads.admanager.v1.IGetPartnerRequest): Promise<google.ads.admanager.v1.Partner>;
+
+                    /**
+                     * Calls ListPartners.
+                     * @param request ListPartnersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPartnersResponse
+                     */
+                    public listPartners(request: google.ads.admanager.v1.IListPartnersRequest, callback: google.ads.admanager.v1.PartnerService.ListPartnersCallback): void;
+
+                    /**
+                     * Calls ListPartners.
+                     * @param request ListPartnersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPartners(request: google.ads.admanager.v1.IListPartnersRequest): Promise<google.ads.admanager.v1.ListPartnersResponse>;
+
+                    /**
+                     * Calls UpdatePartner.
+                     * @param request UpdatePartnerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Partner
+                     */
+                    public updatePartner(request: google.ads.admanager.v1.IUpdatePartnerRequest, callback: google.ads.admanager.v1.PartnerService.UpdatePartnerCallback): void;
+
+                    /**
+                     * Calls UpdatePartner.
+                     * @param request UpdatePartnerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePartner(request: google.ads.admanager.v1.IUpdatePartnerRequest): Promise<google.ads.admanager.v1.Partner>;
+
+                    /**
+                     * Calls BatchUpdatePartners.
+                     * @param request BatchUpdatePartnersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdatePartnersResponse
+                     */
+                    public batchUpdatePartners(request: google.ads.admanager.v1.IBatchUpdatePartnersRequest, callback: google.ads.admanager.v1.PartnerService.BatchUpdatePartnersCallback): void;
+
+                    /**
+                     * Calls BatchUpdatePartners.
+                     * @param request BatchUpdatePartnersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdatePartners(request: google.ads.admanager.v1.IBatchUpdatePartnersRequest): Promise<google.ads.admanager.v1.BatchUpdatePartnersResponse>;
+                }
+
+                namespace PartnerService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.PartnerService|getPartner}.
+                     * @param error Error, if any
+                     * @param [response] Partner
+                     */
+                    type GetPartnerCallback = (error: (Error|null), response?: google.ads.admanager.v1.Partner) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.PartnerService|listPartners}.
+                     * @param error Error, if any
+                     * @param [response] ListPartnersResponse
+                     */
+                    type ListPartnersCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListPartnersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.PartnerService|updatePartner}.
+                     * @param error Error, if any
+                     * @param [response] Partner
+                     */
+                    type UpdatePartnerCallback = (error: (Error|null), response?: google.ads.admanager.v1.Partner) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.PartnerService|batchUpdatePartners}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdatePartnersResponse
+                     */
+                    type BatchUpdatePartnersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdatePartnersResponse) => void;
+                }
+
+                /** Properties of a GetPartnerRequest. */
+                interface IGetPartnerRequest {
+
+                    /** GetPartnerRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPartnerRequest. */
+                class GetPartnerRequest implements IGetPartnerRequest {
+
+                    /**
+                     * Constructs a new GetPartnerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetPartnerRequest);
+
+                    /** GetPartnerRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPartnerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPartnerRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetPartnerRequest): google.ads.admanager.v1.GetPartnerRequest;
+
+                    /**
+                     * Encodes the specified GetPartnerRequest message. Does not implicitly {@link google.ads.admanager.v1.GetPartnerRequest.verify|verify} messages.
+                     * @param message GetPartnerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetPartnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPartnerRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetPartnerRequest.verify|verify} messages.
+                     * @param message GetPartnerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetPartnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPartnerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPartnerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetPartnerRequest;
+
+                    /**
+                     * Decodes a GetPartnerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPartnerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetPartnerRequest;
+
+                    /**
+                     * Verifies a GetPartnerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPartnerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPartnerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetPartnerRequest;
+
+                    /**
+                     * Creates a plain object from a GetPartnerRequest message. Also converts values to other types if specified.
+                     * @param message GetPartnerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetPartnerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPartnerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPartnerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPartnersRequest. */
+                interface IListPartnersRequest {
+
+                    /** ListPartnersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPartnersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPartnersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListPartnersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPartnersRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListPartnersRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListPartnersRequest. */
+                class ListPartnersRequest implements IListPartnersRequest {
+
+                    /**
+                     * Constructs a new ListPartnersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListPartnersRequest);
+
+                    /** ListPartnersRequest parent. */
+                    public parent: string;
+
+                    /** ListPartnersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPartnersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListPartnersRequest filter. */
+                    public filter: string;
+
+                    /** ListPartnersRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListPartnersRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListPartnersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPartnersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListPartnersRequest): google.ads.admanager.v1.ListPartnersRequest;
+
+                    /**
+                     * Encodes the specified ListPartnersRequest message. Does not implicitly {@link google.ads.admanager.v1.ListPartnersRequest.verify|verify} messages.
+                     * @param message ListPartnersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListPartnersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPartnersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListPartnersRequest.verify|verify} messages.
+                     * @param message ListPartnersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListPartnersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPartnersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPartnersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListPartnersRequest;
+
+                    /**
+                     * Decodes a ListPartnersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPartnersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListPartnersRequest;
+
+                    /**
+                     * Verifies a ListPartnersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPartnersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPartnersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListPartnersRequest;
+
+                    /**
+                     * Creates a plain object from a ListPartnersRequest message. Also converts values to other types if specified.
+                     * @param message ListPartnersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListPartnersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPartnersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPartnersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPartnersResponse. */
+                interface IListPartnersResponse {
+
+                    /** ListPartnersResponse partners */
+                    partners?: (google.ads.admanager.v1.IPartner[]|null);
+
+                    /** ListPartnersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListPartnersResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListPartnersResponse. */
+                class ListPartnersResponse implements IListPartnersResponse {
+
+                    /**
+                     * Constructs a new ListPartnersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListPartnersResponse);
+
+                    /** ListPartnersResponse partners. */
+                    public partners: google.ads.admanager.v1.IPartner[];
+
+                    /** ListPartnersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListPartnersResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListPartnersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPartnersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListPartnersResponse): google.ads.admanager.v1.ListPartnersResponse;
+
+                    /**
+                     * Encodes the specified ListPartnersResponse message. Does not implicitly {@link google.ads.admanager.v1.ListPartnersResponse.verify|verify} messages.
+                     * @param message ListPartnersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListPartnersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPartnersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListPartnersResponse.verify|verify} messages.
+                     * @param message ListPartnersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListPartnersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPartnersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPartnersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListPartnersResponse;
+
+                    /**
+                     * Decodes a ListPartnersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPartnersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListPartnersResponse;
+
+                    /**
+                     * Verifies a ListPartnersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPartnersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPartnersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListPartnersResponse;
+
+                    /**
+                     * Creates a plain object from a ListPartnersResponse message. Also converts values to other types if specified.
+                     * @param message ListPartnersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListPartnersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPartnersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPartnersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePartnerRequest. */
+                interface IUpdatePartnerRequest {
+
+                    /** UpdatePartnerRequest partner */
+                    partner?: (google.ads.admanager.v1.IPartner|null);
+
+                    /** UpdatePartnerRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePartnerRequest. */
+                class UpdatePartnerRequest implements IUpdatePartnerRequest {
+
+                    /**
+                     * Constructs a new UpdatePartnerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdatePartnerRequest);
+
+                    /** UpdatePartnerRequest partner. */
+                    public partner?: (google.ads.admanager.v1.IPartner|null);
+
+                    /** UpdatePartnerRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePartnerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePartnerRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdatePartnerRequest): google.ads.admanager.v1.UpdatePartnerRequest;
+
+                    /**
+                     * Encodes the specified UpdatePartnerRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdatePartnerRequest.verify|verify} messages.
+                     * @param message UpdatePartnerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdatePartnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePartnerRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdatePartnerRequest.verify|verify} messages.
+                     * @param message UpdatePartnerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdatePartnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePartnerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePartnerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdatePartnerRequest;
+
+                    /**
+                     * Decodes an UpdatePartnerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePartnerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdatePartnerRequest;
+
+                    /**
+                     * Verifies an UpdatePartnerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePartnerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePartnerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdatePartnerRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePartnerRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePartnerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdatePartnerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePartnerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePartnerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdatePartnersRequest. */
+                interface IBatchUpdatePartnersRequest {
+
+                    /** BatchUpdatePartnersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdatePartnersRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdatePartnerRequest[]|null);
+                }
+
+                /** Represents a BatchUpdatePartnersRequest. */
+                class BatchUpdatePartnersRequest implements IBatchUpdatePartnersRequest {
+
+                    /**
+                     * Constructs a new BatchUpdatePartnersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdatePartnersRequest);
+
+                    /** BatchUpdatePartnersRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdatePartnersRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdatePartnerRequest[];
+
+                    /**
+                     * Creates a new BatchUpdatePartnersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdatePartnersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdatePartnersRequest): google.ads.admanager.v1.BatchUpdatePartnersRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdatePartnersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdatePartnersRequest.verify|verify} messages.
+                     * @param message BatchUpdatePartnersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdatePartnersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdatePartnersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdatePartnersRequest.verify|verify} messages.
+                     * @param message BatchUpdatePartnersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdatePartnersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdatePartnersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdatePartnersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdatePartnersRequest;
+
+                    /**
+                     * Decodes a BatchUpdatePartnersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdatePartnersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdatePartnersRequest;
+
+                    /**
+                     * Verifies a BatchUpdatePartnersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdatePartnersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdatePartnersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdatePartnersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdatePartnersRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdatePartnersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdatePartnersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdatePartnersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdatePartnersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdatePartnersResponse. */
+                interface IBatchUpdatePartnersResponse {
+
+                    /** BatchUpdatePartnersResponse partners */
+                    partners?: (google.ads.admanager.v1.IPartner[]|null);
+                }
+
+                /** Represents a BatchUpdatePartnersResponse. */
+                class BatchUpdatePartnersResponse implements IBatchUpdatePartnersResponse {
+
+                    /**
+                     * Constructs a new BatchUpdatePartnersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdatePartnersResponse);
+
+                    /** BatchUpdatePartnersResponse partners. */
+                    public partners: google.ads.admanager.v1.IPartner[];
+
+                    /**
+                     * Creates a new BatchUpdatePartnersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdatePartnersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdatePartnersResponse): google.ads.admanager.v1.BatchUpdatePartnersResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdatePartnersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdatePartnersResponse.verify|verify} messages.
+                     * @param message BatchUpdatePartnersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdatePartnersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdatePartnersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdatePartnersResponse.verify|verify} messages.
+                     * @param message BatchUpdatePartnersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdatePartnersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdatePartnersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdatePartnersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdatePartnersResponse;
+
+                    /**
+                     * Decodes a BatchUpdatePartnersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdatePartnersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdatePartnersResponse;
+
+                    /**
+                     * Verifies a BatchUpdatePartnersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdatePartnersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdatePartnersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdatePartnersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdatePartnersResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdatePartnersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdatePartnersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdatePartnersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdatePartnersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a PlacementStatusEnum. */
                 interface IPlacementStatusEnum {
                 }
@@ -65196,6 +75488,7 @@ export namespace google {
                         KEY_VALUES_ID = 214,
                         KEY_VALUES_NAME = 215,
                         KEY_VALUES_SET = 713,
+                        LANDING_PAGE_DOMAIN = 242,
                         LINE_ITEM_AGENCY = 663,
                         LINE_ITEM_ARCHIVED = 188,
                         LINE_ITEM_AVERAGE_NUMBER_OF_VIEWERS = 694,
@@ -65293,6 +75586,7 @@ export namespace google {
                         NIELSEN_SEGMENT = 699,
                         NIELSEN_SITE_URL = 700,
                         NO_FILL_REASON_CATEGORY_NAME = 587,
+                        NUM_ADS_IN_POD = 804,
                         OPERATING_SYSTEM_CATEGORY = 117,
                         OPERATING_SYSTEM_CATEGORY_NAME = 118,
                         OPERATING_SYSTEM_VERSION_ID = 238,
@@ -65377,6 +75671,8 @@ export namespace google {
                         REJECTION_CLASS_CATEGORY_NAME = 591,
                         RENDERED_CREATIVE_SIZE = 343,
                         REQUESTED_AD_SIZES = 352,
+                        REQUESTED_CREATIVE_ORIENTATION = 828,
+                        REQUESTED_CREATIVE_ORIENTATION_NAME = 829,
                         REQUEST_TYPE = 146,
                         REQUEST_TYPE_NAME = 147,
                         REVENUE_VERIFICATION_ID = 645,
@@ -65904,6 +76200,7 @@ export namespace google {
                         CREATIVE_LOAD_TIME_500_1000_PERCENT = 325,
                         CREATIVE_LOAD_TIME_GT_8000_PERCENT = 329,
                         CTR = 3,
+                        CTR_WITH_COMPANION = 742,
                         DEALS_BIDS = 542,
                         DEALS_BID_RATE = 543,
                         DEALS_BID_REQUESTS = 544,
@@ -65944,6 +76241,7 @@ export namespace google {
                         GOOGLE_SOLD_RESERVATION_COVIEWED_IMPRESSIONS = 127,
                         GOOGLE_SOLD_RESERVATION_IMPRESSIONS = 126,
                         IMPRESSIONS = 1,
+                        IMPRESSIONS_WITH_COMPANION = 741,
                         INACTIVE_BEGIN_TO_RENDER_IMPRESSIONS = 407,
                         INVENTORY_SHARES = 547,
                         INVENTORY_SHARE_PARTNER_UNFILLED_OPPORTUNITIES = 548,
@@ -66003,6 +76301,9 @@ export namespace google {
                         PARTNER_SOLD_CODE_SERVED = 125,
                         PARTNER_SOLD_COVIEWED_IMPRESSIONS = 124,
                         PARTNER_SOLD_IMPRESSIONS = 123,
+                        POD_ECPM = 738,
+                        POD_ECPM_WITHOUT_CPD = 739,
+                        POD_VIEWS = 740,
                         PROGRAMMATIC_ELIGIBLE_AD_REQUESTS = 177,
                         PROGRAMMATIC_MATCH_RATE = 178,
                         PROGRAMMATIC_RESPONSES_SERVED = 176,
@@ -67154,7 +77455,7 @@ export namespace google {
                     reportId?: (number|Long|string|null);
 
                     /** Report visibility */
-                    visibility?: (google.ads.admanager.v1.Report.Visibility|keyof typeof google.ads.admanager.v1.Report.Visibility|null);
+                    visibility?: (google.ads.admanager.v1.ReportVisibilityEnum.ReportVisibility|keyof typeof google.ads.admanager.v1.ReportVisibilityEnum.ReportVisibility|null);
 
                     /** Report reportDefinition */
                     reportDefinition?: (google.ads.admanager.v1.IReportDefinition|null);
@@ -67191,7 +77492,7 @@ export namespace google {
                     public reportId: (number|Long|string);
 
                     /** Report visibility. */
-                    public visibility: (google.ads.admanager.v1.Report.Visibility|keyof typeof google.ads.admanager.v1.Report.Visibility);
+                    public visibility: (google.ads.admanager.v1.ReportVisibilityEnum.ReportVisibility|keyof typeof google.ads.admanager.v1.ReportVisibilityEnum.ReportVisibility);
 
                     /** Report reportDefinition. */
                     public reportDefinition?: (google.ads.admanager.v1.IReportDefinition|null);
@@ -67287,17 +77588,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Report {
-
-                    /** Visibility enum. */
-                    enum Visibility {
-                        HIDDEN = 0,
-                        DRAFT = 1,
-                        VISIBLE = 2,
-                        SAVED = 2
-                    }
                 }
 
                 /** Properties of a ReportDataTable. */
@@ -67627,6 +77917,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ReportVisibilityEnum. */
+                interface IReportVisibilityEnum {
+                }
+
+                /** Represents a ReportVisibilityEnum. */
+                class ReportVisibilityEnum implements IReportVisibilityEnum {
+
+                    /**
+                     * Constructs a new ReportVisibilityEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IReportVisibilityEnum);
+
+                    /**
+                     * Creates a new ReportVisibilityEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportVisibilityEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IReportVisibilityEnum): google.ads.admanager.v1.ReportVisibilityEnum;
+
+                    /**
+                     * Encodes the specified ReportVisibilityEnum message. Does not implicitly {@link google.ads.admanager.v1.ReportVisibilityEnum.verify|verify} messages.
+                     * @param message ReportVisibilityEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IReportVisibilityEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportVisibilityEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ReportVisibilityEnum.verify|verify} messages.
+                     * @param message ReportVisibilityEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IReportVisibilityEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportVisibilityEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportVisibilityEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ReportVisibilityEnum;
+
+                    /**
+                     * Decodes a ReportVisibilityEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportVisibilityEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ReportVisibilityEnum;
+
+                    /**
+                     * Verifies a ReportVisibilityEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportVisibilityEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportVisibilityEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ReportVisibilityEnum;
+
+                    /**
+                     * Creates a plain object from a ReportVisibilityEnum message. Also converts values to other types if specified.
+                     * @param message ReportVisibilityEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ReportVisibilityEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportVisibilityEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportVisibilityEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReportVisibilityEnum {
+
+                    /** ReportVisibility enum. */
+                    enum ReportVisibility {
+                        HIDDEN = 0,
+                        VISIBLE = 2
                     }
                 }
 
@@ -79794,6 +90184,1276 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ViewabilityProvider. */
+                interface IViewabilityProvider {
+
+                    /** ViewabilityProvider name */
+                    name?: (string|null);
+
+                    /** ViewabilityProvider displayName */
+                    displayName?: (string|null);
+
+                    /** ViewabilityProvider vendorKey */
+                    vendorKey?: (string|null);
+
+                    /** ViewabilityProvider verificationScriptUrl */
+                    verificationScriptUrl?: (string|null);
+
+                    /** ViewabilityProvider verificationScriptUrlParameters */
+                    verificationScriptUrlParameters?: (string|null);
+
+                    /** ViewabilityProvider rejectionTrackerUrl */
+                    rejectionTrackerUrl?: (string|null);
+
+                    /** ViewabilityProvider address */
+                    address?: (string|null);
+
+                    /** ViewabilityProvider email */
+                    email?: (string|null);
+
+                    /** ViewabilityProvider fax */
+                    fax?: (string|null);
+
+                    /** ViewabilityProvider phone */
+                    phone?: (string|null);
+
+                    /** ViewabilityProvider externalId */
+                    externalId?: (string|null);
+
+                    /** ViewabilityProvider comment */
+                    comment?: (string|null);
+
+                    /** ViewabilityProvider primaryContact */
+                    primaryContact?: (string|null);
+
+                    /** ViewabilityProvider appliedTeams */
+                    appliedTeams?: (string[]|null);
+
+                    /** ViewabilityProvider updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ViewabilityProvider. */
+                class ViewabilityProvider implements IViewabilityProvider {
+
+                    /**
+                     * Constructs a new ViewabilityProvider.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IViewabilityProvider);
+
+                    /** ViewabilityProvider name. */
+                    public name: string;
+
+                    /** ViewabilityProvider displayName. */
+                    public displayName?: (string|null);
+
+                    /** ViewabilityProvider vendorKey. */
+                    public vendorKey?: (string|null);
+
+                    /** ViewabilityProvider verificationScriptUrl. */
+                    public verificationScriptUrl?: (string|null);
+
+                    /** ViewabilityProvider verificationScriptUrlParameters. */
+                    public verificationScriptUrlParameters?: (string|null);
+
+                    /** ViewabilityProvider rejectionTrackerUrl. */
+                    public rejectionTrackerUrl?: (string|null);
+
+                    /** ViewabilityProvider address. */
+                    public address?: (string|null);
+
+                    /** ViewabilityProvider email. */
+                    public email?: (string|null);
+
+                    /** ViewabilityProvider fax. */
+                    public fax?: (string|null);
+
+                    /** ViewabilityProvider phone. */
+                    public phone?: (string|null);
+
+                    /** ViewabilityProvider externalId. */
+                    public externalId?: (string|null);
+
+                    /** ViewabilityProvider comment. */
+                    public comment?: (string|null);
+
+                    /** ViewabilityProvider primaryContact. */
+                    public primaryContact?: (string|null);
+
+                    /** ViewabilityProvider appliedTeams. */
+                    public appliedTeams: string[];
+
+                    /** ViewabilityProvider updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ViewabilityProvider instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ViewabilityProvider instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IViewabilityProvider): google.ads.admanager.v1.ViewabilityProvider;
+
+                    /**
+                     * Encodes the specified ViewabilityProvider message. Does not implicitly {@link google.ads.admanager.v1.ViewabilityProvider.verify|verify} messages.
+                     * @param message ViewabilityProvider message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IViewabilityProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ViewabilityProvider message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ViewabilityProvider.verify|verify} messages.
+                     * @param message ViewabilityProvider message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IViewabilityProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ViewabilityProvider message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ViewabilityProvider
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ViewabilityProvider;
+
+                    /**
+                     * Decodes a ViewabilityProvider message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ViewabilityProvider
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ViewabilityProvider;
+
+                    /**
+                     * Verifies a ViewabilityProvider message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ViewabilityProvider message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ViewabilityProvider
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ViewabilityProvider;
+
+                    /**
+                     * Creates a plain object from a ViewabilityProvider message. Also converts values to other types if specified.
+                     * @param message ViewabilityProvider
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ViewabilityProvider, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ViewabilityProvider to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ViewabilityProvider
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a ViewabilityProviderService */
+                class ViewabilityProviderService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ViewabilityProviderService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ViewabilityProviderService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ViewabilityProviderService;
+
+                    /**
+                     * Calls GetViewabilityProvider.
+                     * @param request GetViewabilityProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ViewabilityProvider
+                     */
+                    public getViewabilityProvider(request: google.ads.admanager.v1.IGetViewabilityProviderRequest, callback: google.ads.admanager.v1.ViewabilityProviderService.GetViewabilityProviderCallback): void;
+
+                    /**
+                     * Calls GetViewabilityProvider.
+                     * @param request GetViewabilityProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getViewabilityProvider(request: google.ads.admanager.v1.IGetViewabilityProviderRequest): Promise<google.ads.admanager.v1.ViewabilityProvider>;
+
+                    /**
+                     * Calls ListViewabilityProviders.
+                     * @param request ListViewabilityProvidersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListViewabilityProvidersResponse
+                     */
+                    public listViewabilityProviders(request: google.ads.admanager.v1.IListViewabilityProvidersRequest, callback: google.ads.admanager.v1.ViewabilityProviderService.ListViewabilityProvidersCallback): void;
+
+                    /**
+                     * Calls ListViewabilityProviders.
+                     * @param request ListViewabilityProvidersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listViewabilityProviders(request: google.ads.admanager.v1.IListViewabilityProvidersRequest): Promise<google.ads.admanager.v1.ListViewabilityProvidersResponse>;
+
+                    /**
+                     * Calls CreateViewabilityProvider.
+                     * @param request CreateViewabilityProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ViewabilityProvider
+                     */
+                    public createViewabilityProvider(request: google.ads.admanager.v1.ICreateViewabilityProviderRequest, callback: google.ads.admanager.v1.ViewabilityProviderService.CreateViewabilityProviderCallback): void;
+
+                    /**
+                     * Calls CreateViewabilityProvider.
+                     * @param request CreateViewabilityProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createViewabilityProvider(request: google.ads.admanager.v1.ICreateViewabilityProviderRequest): Promise<google.ads.admanager.v1.ViewabilityProvider>;
+
+                    /**
+                     * Calls BatchCreateViewabilityProviders.
+                     * @param request BatchCreateViewabilityProvidersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateViewabilityProvidersResponse
+                     */
+                    public batchCreateViewabilityProviders(request: google.ads.admanager.v1.IBatchCreateViewabilityProvidersRequest, callback: google.ads.admanager.v1.ViewabilityProviderService.BatchCreateViewabilityProvidersCallback): void;
+
+                    /**
+                     * Calls BatchCreateViewabilityProviders.
+                     * @param request BatchCreateViewabilityProvidersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateViewabilityProviders(request: google.ads.admanager.v1.IBatchCreateViewabilityProvidersRequest): Promise<google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse>;
+
+                    /**
+                     * Calls UpdateViewabilityProvider.
+                     * @param request UpdateViewabilityProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ViewabilityProvider
+                     */
+                    public updateViewabilityProvider(request: google.ads.admanager.v1.IUpdateViewabilityProviderRequest, callback: google.ads.admanager.v1.ViewabilityProviderService.UpdateViewabilityProviderCallback): void;
+
+                    /**
+                     * Calls UpdateViewabilityProvider.
+                     * @param request UpdateViewabilityProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateViewabilityProvider(request: google.ads.admanager.v1.IUpdateViewabilityProviderRequest): Promise<google.ads.admanager.v1.ViewabilityProvider>;
+
+                    /**
+                     * Calls BatchUpdateViewabilityProviders.
+                     * @param request BatchUpdateViewabilityProvidersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateViewabilityProvidersResponse
+                     */
+                    public batchUpdateViewabilityProviders(request: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersRequest, callback: google.ads.admanager.v1.ViewabilityProviderService.BatchUpdateViewabilityProvidersCallback): void;
+
+                    /**
+                     * Calls BatchUpdateViewabilityProviders.
+                     * @param request BatchUpdateViewabilityProvidersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateViewabilityProviders(request: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersRequest): Promise<google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse>;
+                }
+
+                namespace ViewabilityProviderService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ViewabilityProviderService|getViewabilityProvider}.
+                     * @param error Error, if any
+                     * @param [response] ViewabilityProvider
+                     */
+                    type GetViewabilityProviderCallback = (error: (Error|null), response?: google.ads.admanager.v1.ViewabilityProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ViewabilityProviderService|listViewabilityProviders}.
+                     * @param error Error, if any
+                     * @param [response] ListViewabilityProvidersResponse
+                     */
+                    type ListViewabilityProvidersCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListViewabilityProvidersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ViewabilityProviderService|createViewabilityProvider}.
+                     * @param error Error, if any
+                     * @param [response] ViewabilityProvider
+                     */
+                    type CreateViewabilityProviderCallback = (error: (Error|null), response?: google.ads.admanager.v1.ViewabilityProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ViewabilityProviderService|batchCreateViewabilityProviders}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateViewabilityProvidersResponse
+                     */
+                    type BatchCreateViewabilityProvidersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ViewabilityProviderService|updateViewabilityProvider}.
+                     * @param error Error, if any
+                     * @param [response] ViewabilityProvider
+                     */
+                    type UpdateViewabilityProviderCallback = (error: (Error|null), response?: google.ads.admanager.v1.ViewabilityProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ViewabilityProviderService|batchUpdateViewabilityProviders}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateViewabilityProvidersResponse
+                     */
+                    type BatchUpdateViewabilityProvidersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse) => void;
+                }
+
+                /** Properties of a GetViewabilityProviderRequest. */
+                interface IGetViewabilityProviderRequest {
+
+                    /** GetViewabilityProviderRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetViewabilityProviderRequest. */
+                class GetViewabilityProviderRequest implements IGetViewabilityProviderRequest {
+
+                    /**
+                     * Constructs a new GetViewabilityProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetViewabilityProviderRequest);
+
+                    /** GetViewabilityProviderRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetViewabilityProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetViewabilityProviderRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetViewabilityProviderRequest): google.ads.admanager.v1.GetViewabilityProviderRequest;
+
+                    /**
+                     * Encodes the specified GetViewabilityProviderRequest message. Does not implicitly {@link google.ads.admanager.v1.GetViewabilityProviderRequest.verify|verify} messages.
+                     * @param message GetViewabilityProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetViewabilityProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetViewabilityProviderRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetViewabilityProviderRequest.verify|verify} messages.
+                     * @param message GetViewabilityProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetViewabilityProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetViewabilityProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetViewabilityProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetViewabilityProviderRequest;
+
+                    /**
+                     * Decodes a GetViewabilityProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetViewabilityProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetViewabilityProviderRequest;
+
+                    /**
+                     * Verifies a GetViewabilityProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetViewabilityProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetViewabilityProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetViewabilityProviderRequest;
+
+                    /**
+                     * Creates a plain object from a GetViewabilityProviderRequest message. Also converts values to other types if specified.
+                     * @param message GetViewabilityProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetViewabilityProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetViewabilityProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetViewabilityProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListViewabilityProvidersRequest. */
+                interface IListViewabilityProvidersRequest {
+
+                    /** ListViewabilityProvidersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListViewabilityProvidersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListViewabilityProvidersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListViewabilityProvidersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListViewabilityProvidersRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListViewabilityProvidersRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListViewabilityProvidersRequest. */
+                class ListViewabilityProvidersRequest implements IListViewabilityProvidersRequest {
+
+                    /**
+                     * Constructs a new ListViewabilityProvidersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListViewabilityProvidersRequest);
+
+                    /** ListViewabilityProvidersRequest parent. */
+                    public parent: string;
+
+                    /** ListViewabilityProvidersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListViewabilityProvidersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListViewabilityProvidersRequest filter. */
+                    public filter: string;
+
+                    /** ListViewabilityProvidersRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListViewabilityProvidersRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListViewabilityProvidersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViewabilityProvidersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListViewabilityProvidersRequest): google.ads.admanager.v1.ListViewabilityProvidersRequest;
+
+                    /**
+                     * Encodes the specified ListViewabilityProvidersRequest message. Does not implicitly {@link google.ads.admanager.v1.ListViewabilityProvidersRequest.verify|verify} messages.
+                     * @param message ListViewabilityProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListViewabilityProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViewabilityProvidersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListViewabilityProvidersRequest.verify|verify} messages.
+                     * @param message ListViewabilityProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListViewabilityProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViewabilityProvidersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViewabilityProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListViewabilityProvidersRequest;
+
+                    /**
+                     * Decodes a ListViewabilityProvidersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViewabilityProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListViewabilityProvidersRequest;
+
+                    /**
+                     * Verifies a ListViewabilityProvidersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViewabilityProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViewabilityProvidersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListViewabilityProvidersRequest;
+
+                    /**
+                     * Creates a plain object from a ListViewabilityProvidersRequest message. Also converts values to other types if specified.
+                     * @param message ListViewabilityProvidersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListViewabilityProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViewabilityProvidersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListViewabilityProvidersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListViewabilityProvidersResponse. */
+                interface IListViewabilityProvidersResponse {
+
+                    /** ListViewabilityProvidersResponse viewabilityProviders */
+                    viewabilityProviders?: (google.ads.admanager.v1.IViewabilityProvider[]|null);
+
+                    /** ListViewabilityProvidersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListViewabilityProvidersResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListViewabilityProvidersResponse. */
+                class ListViewabilityProvidersResponse implements IListViewabilityProvidersResponse {
+
+                    /**
+                     * Constructs a new ListViewabilityProvidersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListViewabilityProvidersResponse);
+
+                    /** ListViewabilityProvidersResponse viewabilityProviders. */
+                    public viewabilityProviders: google.ads.admanager.v1.IViewabilityProvider[];
+
+                    /** ListViewabilityProvidersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListViewabilityProvidersResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListViewabilityProvidersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViewabilityProvidersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListViewabilityProvidersResponse): google.ads.admanager.v1.ListViewabilityProvidersResponse;
+
+                    /**
+                     * Encodes the specified ListViewabilityProvidersResponse message. Does not implicitly {@link google.ads.admanager.v1.ListViewabilityProvidersResponse.verify|verify} messages.
+                     * @param message ListViewabilityProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListViewabilityProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViewabilityProvidersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListViewabilityProvidersResponse.verify|verify} messages.
+                     * @param message ListViewabilityProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListViewabilityProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViewabilityProvidersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViewabilityProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListViewabilityProvidersResponse;
+
+                    /**
+                     * Decodes a ListViewabilityProvidersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViewabilityProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListViewabilityProvidersResponse;
+
+                    /**
+                     * Verifies a ListViewabilityProvidersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViewabilityProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViewabilityProvidersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListViewabilityProvidersResponse;
+
+                    /**
+                     * Creates a plain object from a ListViewabilityProvidersResponse message. Also converts values to other types if specified.
+                     * @param message ListViewabilityProvidersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListViewabilityProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViewabilityProvidersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListViewabilityProvidersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateViewabilityProviderRequest. */
+                interface ICreateViewabilityProviderRequest {
+
+                    /** CreateViewabilityProviderRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateViewabilityProviderRequest viewabilityProvider */
+                    viewabilityProvider?: (google.ads.admanager.v1.IViewabilityProvider|null);
+                }
+
+                /** Represents a CreateViewabilityProviderRequest. */
+                class CreateViewabilityProviderRequest implements ICreateViewabilityProviderRequest {
+
+                    /**
+                     * Constructs a new CreateViewabilityProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateViewabilityProviderRequest);
+
+                    /** CreateViewabilityProviderRequest parent. */
+                    public parent: string;
+
+                    /** CreateViewabilityProviderRequest viewabilityProvider. */
+                    public viewabilityProvider?: (google.ads.admanager.v1.IViewabilityProvider|null);
+
+                    /**
+                     * Creates a new CreateViewabilityProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateViewabilityProviderRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateViewabilityProviderRequest): google.ads.admanager.v1.CreateViewabilityProviderRequest;
+
+                    /**
+                     * Encodes the specified CreateViewabilityProviderRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateViewabilityProviderRequest.verify|verify} messages.
+                     * @param message CreateViewabilityProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateViewabilityProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateViewabilityProviderRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateViewabilityProviderRequest.verify|verify} messages.
+                     * @param message CreateViewabilityProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateViewabilityProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateViewabilityProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateViewabilityProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateViewabilityProviderRequest;
+
+                    /**
+                     * Decodes a CreateViewabilityProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateViewabilityProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateViewabilityProviderRequest;
+
+                    /**
+                     * Verifies a CreateViewabilityProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateViewabilityProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateViewabilityProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateViewabilityProviderRequest;
+
+                    /**
+                     * Creates a plain object from a CreateViewabilityProviderRequest message. Also converts values to other types if specified.
+                     * @param message CreateViewabilityProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateViewabilityProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateViewabilityProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateViewabilityProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateViewabilityProvidersRequest. */
+                interface IBatchCreateViewabilityProvidersRequest {
+
+                    /** BatchCreateViewabilityProvidersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateViewabilityProvidersRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateViewabilityProviderRequest[]|null);
+                }
+
+                /** Represents a BatchCreateViewabilityProvidersRequest. */
+                class BatchCreateViewabilityProvidersRequest implements IBatchCreateViewabilityProvidersRequest {
+
+                    /**
+                     * Constructs a new BatchCreateViewabilityProvidersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateViewabilityProvidersRequest);
+
+                    /** BatchCreateViewabilityProvidersRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateViewabilityProvidersRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateViewabilityProviderRequest[];
+
+                    /**
+                     * Creates a new BatchCreateViewabilityProvidersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateViewabilityProvidersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateViewabilityProvidersRequest): google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateViewabilityProvidersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest.verify|verify} messages.
+                     * @param message BatchCreateViewabilityProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateViewabilityProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateViewabilityProvidersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest.verify|verify} messages.
+                     * @param message BatchCreateViewabilityProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateViewabilityProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateViewabilityProvidersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateViewabilityProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest;
+
+                    /**
+                     * Decodes a BatchCreateViewabilityProvidersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateViewabilityProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest;
+
+                    /**
+                     * Verifies a BatchCreateViewabilityProvidersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateViewabilityProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateViewabilityProvidersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateViewabilityProvidersRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateViewabilityProvidersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateViewabilityProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateViewabilityProvidersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateViewabilityProvidersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateViewabilityProvidersResponse. */
+                interface IBatchCreateViewabilityProvidersResponse {
+
+                    /** BatchCreateViewabilityProvidersResponse viewabilityProviders */
+                    viewabilityProviders?: (google.ads.admanager.v1.IViewabilityProvider[]|null);
+                }
+
+                /** Represents a BatchCreateViewabilityProvidersResponse. */
+                class BatchCreateViewabilityProvidersResponse implements IBatchCreateViewabilityProvidersResponse {
+
+                    /**
+                     * Constructs a new BatchCreateViewabilityProvidersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateViewabilityProvidersResponse);
+
+                    /** BatchCreateViewabilityProvidersResponse viewabilityProviders. */
+                    public viewabilityProviders: google.ads.admanager.v1.IViewabilityProvider[];
+
+                    /**
+                     * Creates a new BatchCreateViewabilityProvidersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateViewabilityProvidersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateViewabilityProvidersResponse): google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateViewabilityProvidersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse.verify|verify} messages.
+                     * @param message BatchCreateViewabilityProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateViewabilityProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateViewabilityProvidersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse.verify|verify} messages.
+                     * @param message BatchCreateViewabilityProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateViewabilityProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateViewabilityProvidersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateViewabilityProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse;
+
+                    /**
+                     * Decodes a BatchCreateViewabilityProvidersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateViewabilityProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse;
+
+                    /**
+                     * Verifies a BatchCreateViewabilityProvidersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateViewabilityProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateViewabilityProvidersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateViewabilityProvidersResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateViewabilityProvidersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateViewabilityProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateViewabilityProvidersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateViewabilityProvidersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateViewabilityProviderRequest. */
+                interface IUpdateViewabilityProviderRequest {
+
+                    /** UpdateViewabilityProviderRequest viewabilityProvider */
+                    viewabilityProvider?: (google.ads.admanager.v1.IViewabilityProvider|null);
+
+                    /** UpdateViewabilityProviderRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateViewabilityProviderRequest. */
+                class UpdateViewabilityProviderRequest implements IUpdateViewabilityProviderRequest {
+
+                    /**
+                     * Constructs a new UpdateViewabilityProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateViewabilityProviderRequest);
+
+                    /** UpdateViewabilityProviderRequest viewabilityProvider. */
+                    public viewabilityProvider?: (google.ads.admanager.v1.IViewabilityProvider|null);
+
+                    /** UpdateViewabilityProviderRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateViewabilityProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateViewabilityProviderRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateViewabilityProviderRequest): google.ads.admanager.v1.UpdateViewabilityProviderRequest;
+
+                    /**
+                     * Encodes the specified UpdateViewabilityProviderRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateViewabilityProviderRequest.verify|verify} messages.
+                     * @param message UpdateViewabilityProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateViewabilityProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateViewabilityProviderRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateViewabilityProviderRequest.verify|verify} messages.
+                     * @param message UpdateViewabilityProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateViewabilityProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateViewabilityProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateViewabilityProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateViewabilityProviderRequest;
+
+                    /**
+                     * Decodes an UpdateViewabilityProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateViewabilityProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateViewabilityProviderRequest;
+
+                    /**
+                     * Verifies an UpdateViewabilityProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateViewabilityProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateViewabilityProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateViewabilityProviderRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateViewabilityProviderRequest message. Also converts values to other types if specified.
+                     * @param message UpdateViewabilityProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateViewabilityProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateViewabilityProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateViewabilityProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateViewabilityProvidersRequest. */
+                interface IBatchUpdateViewabilityProvidersRequest {
+
+                    /** BatchUpdateViewabilityProvidersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateViewabilityProvidersRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateViewabilityProviderRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateViewabilityProvidersRequest. */
+                class BatchUpdateViewabilityProvidersRequest implements IBatchUpdateViewabilityProvidersRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateViewabilityProvidersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersRequest);
+
+                    /** BatchUpdateViewabilityProvidersRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateViewabilityProvidersRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateViewabilityProviderRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateViewabilityProvidersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateViewabilityProvidersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersRequest): google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateViewabilityProvidersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest.verify|verify} messages.
+                     * @param message BatchUpdateViewabilityProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateViewabilityProvidersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest.verify|verify} messages.
+                     * @param message BatchUpdateViewabilityProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateViewabilityProvidersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateViewabilityProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest;
+
+                    /**
+                     * Decodes a BatchUpdateViewabilityProvidersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateViewabilityProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest;
+
+                    /**
+                     * Verifies a BatchUpdateViewabilityProvidersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateViewabilityProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateViewabilityProvidersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateViewabilityProvidersRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateViewabilityProvidersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateViewabilityProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateViewabilityProvidersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateViewabilityProvidersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateViewabilityProvidersResponse. */
+                interface IBatchUpdateViewabilityProvidersResponse {
+
+                    /** BatchUpdateViewabilityProvidersResponse viewabilityProviders */
+                    viewabilityProviders?: (google.ads.admanager.v1.IViewabilityProvider[]|null);
+                }
+
+                /** Represents a BatchUpdateViewabilityProvidersResponse. */
+                class BatchUpdateViewabilityProvidersResponse implements IBatchUpdateViewabilityProvidersResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateViewabilityProvidersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersResponse);
+
+                    /** BatchUpdateViewabilityProvidersResponse viewabilityProviders. */
+                    public viewabilityProviders: google.ads.admanager.v1.IViewabilityProvider[];
+
+                    /**
+                     * Creates a new BatchUpdateViewabilityProvidersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateViewabilityProvidersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersResponse): google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateViewabilityProvidersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse.verify|verify} messages.
+                     * @param message BatchUpdateViewabilityProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateViewabilityProvidersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse.verify|verify} messages.
+                     * @param message BatchUpdateViewabilityProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateViewabilityProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateViewabilityProvidersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateViewabilityProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse;
+
+                    /**
+                     * Decodes a BatchUpdateViewabilityProvidersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateViewabilityProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse;
+
+                    /**
+                     * Verifies a BatchUpdateViewabilityProvidersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateViewabilityProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateViewabilityProvidersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateViewabilityProvidersResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateViewabilityProvidersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateViewabilityProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateViewabilityProvidersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateViewabilityProvidersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a WebProperty. */
                 interface IWebProperty {
 
@@ -81174,6 +92834,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -81187,6 +92850,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -81916,6 +93582,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -81935,6 +93604,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -82254,6 +93926,365 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -82375,6 +94406,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -84746,6 +96779,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -84768,6 +96804,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -85710,6 +97749,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -85744,6 +97786,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -85872,7 +97917,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -85975,6 +98021,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -87524,6 +99671,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -87546,6 +99696,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -87633,6 +99786,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -87649,6 +99805,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

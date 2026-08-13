@@ -25,7 +25,8 @@ import {
   RunResponse,
   Snapshot,
 } from './transaction';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {Session, Database} from '.';
 import {
   CLOUD_RESOURCE_HEADER,

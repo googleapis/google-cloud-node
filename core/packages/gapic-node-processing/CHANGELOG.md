@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.2](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.1...gapic-node-processing-v0.2.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.0...gapic-node-processing-v0.2.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.11...gapic-node-processing-v0.2.0) (2026-07-29)
 
 

@@ -593,6 +593,12 @@ export class OracleDatabaseClient {
     const failoverAutonomousDatabaseMetadata = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const refreshAutonomousDatabaseResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase',
+    ) as gax.protobuf.Type;
+    const refreshAutonomousDatabaseMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createOdbNetworkResponse = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OdbNetwork',
     ) as gax.protobuf.Type;
@@ -836,6 +842,15 @@ export class OracleDatabaseClient {
           failoverAutonomousDatabaseMetadata,
         ),
       ),
+      refreshAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        refreshAutonomousDatabaseResponse.decode.bind(
+          refreshAutonomousDatabaseResponse,
+        ),
+        refreshAutonomousDatabaseMetadata.decode.bind(
+          refreshAutonomousDatabaseMetadata,
+        ),
+      ),
       createOdbNetwork: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createOdbNetworkResponse.decode.bind(createOdbNetworkResponse),
@@ -1065,6 +1080,8 @@ export class OracleDatabaseClient {
       'restartAutonomousDatabase',
       'switchoverAutonomousDatabase',
       'failoverAutonomousDatabase',
+      'refreshAutonomousDatabase',
+      'getAutonomousDatabaseRefreshableClones',
       'listOdbNetworks',
       'getOdbNetwork',
       'createOdbNetwork',
@@ -1800,6 +1817,160 @@ export class OracleDatabaseClient {
         ]) => {
           this._log.info(
             'generateAutonomousDatabaseWallet response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets the refreshable clones for a given Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Autonomous Database resource whose refreshable clones are to
+   *   be listed. Format:
+   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones|AutonomousDatabaseRefreshableClones}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.get_autonomous_database_refreshable_clones.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabaseRefreshableClones_async
+   */
+  getAutonomousDatabaseRefreshableClones(
+    request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAutonomousDatabaseRefreshableClones(
+    request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutonomousDatabaseRefreshableClones(
+    request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutonomousDatabaseRefreshableClones(
+    request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+          | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'getAutonomousDatabaseRefreshableClones request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+          | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getAutonomousDatabaseRefreshableClones response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAutonomousDatabaseRefreshableClones(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+          (
+            | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getAutonomousDatabaseRefreshableClones response %j',
             response,
           );
           return [response, options, rawResponse];
@@ -3787,6 +3958,8 @@ export class OracleDatabaseClient {
    *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
    * @param {number} request.totalStorageSizeGb
    *   Required. The total storage to be allocated to Exascale in GBs.
+   * @param {number} [request.totalVmStorageSizeGb]
+   *   Optional. Storage size needed for VM storage on Exascale in GBs.
    * @param {string} [request.requestId]
    *   Optional. An optional ID to identify the request.
    * @param {object} [options]
@@ -5911,6 +6084,181 @@ export class OracleDatabaseClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.failoverAutonomousDatabase,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Refreshes the refreshable clone of an Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the AutonomousDatabase resource.
+   *   Format:
+   *   projects/{project}/location/{location}/autonomousDatabases/{autonomous_database}
+   * @param {google.protobuf.Timestamp} request.refreshCutoffTime
+   *   Required. The timestamp to which the Autonomous Database refreshable clone
+   *   will be refreshed. Changes made in the primary database after this
+   *   timestamp are not part of the data refresh.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.refresh_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_RefreshAutonomousDatabase_async
+   */
+  refreshAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  refreshAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  refreshAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  refreshAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('refreshAutonomousDatabase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('refreshAutonomousDatabase request %j', request);
+    return this.innerApiCalls
+      .refreshAutonomousDatabase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('refreshAutonomousDatabase response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `refreshAutonomousDatabase()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.refresh_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_RefreshAutonomousDatabase_async
+   */
+  async checkRefreshAutonomousDatabaseProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('refreshAutonomousDatabase long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.refreshAutonomousDatabase,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
@@ -10793,8 +11141,8 @@ export class OracleDatabaseClient {
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. An expression for filtering the results of the request. Only the
-   *   shape, gcp_oracle_zone and gi_version fields are supported in this format:
-   *   `shape="{shape}"`.
+   *   `shape` and `gcp_oracle_zone_id` fields are supported in the following
+   *   format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -10926,8 +11274,8 @@ export class OracleDatabaseClient {
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. An expression for filtering the results of the request. Only the
-   *   shape, gcp_oracle_zone and gi_version fields are supported in this format:
-   *   `shape="{shape}"`.
+   *   `shape` and `gcp_oracle_zone_id` fields are supported in the following
+   *   format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -10982,8 +11330,8 @@ export class OracleDatabaseClient {
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. An expression for filtering the results of the request. Only the
-   *   shape, gcp_oracle_zone and gi_version fields are supported in this format:
-   *   `shape="{shape}"`.
+   *   `shape` and `gcp_oracle_zone_id` fields are supported in the following
+   *   format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -11038,9 +11386,9 @@ export class OracleDatabaseClient {
    *   fields except the filter should remain the same as in the request that
    *   provided this page token.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   *   Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-   *   `shape_family="{shapeFamily}" AND
+   *   Optional. An expression for filtering the results of the request. Only the
+   *   `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+   *   following format: `shape_family="{shape_family}" AND
    *   gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -11173,9 +11521,9 @@ export class OracleDatabaseClient {
    *   fields except the filter should remain the same as in the request that
    *   provided this page token.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   *   Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-   *   `shape_family="{shapeFamily}" AND
+   *   Optional. An expression for filtering the results of the request. Only the
+   *   `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+   *   following format: `shape_family="{shape_family}" AND
    *   gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -11231,9 +11579,9 @@ export class OracleDatabaseClient {
    *   fields except the filter should remain the same as in the request that
    *   provided this page token.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   *   Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-   *   `shape_family="{shapeFamily}" AND
+   *   Optional. An expression for filtering the results of the request. Only the
+   *   `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+   *   following format: `shape_family="{shape_family}" AND
    *   gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -11286,9 +11634,11 @@ export class OracleDatabaseClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   gcp_oracle_zone_id field is supported in this format:
-   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   *   Optional. An expression for filtering the results of the request. The
+   *   `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+   *   are supported in the following format:
+   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+   *   shape_family="{shape_family}" AND database_edition="{database_edition}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -11418,9 +11768,11 @@ export class OracleDatabaseClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   gcp_oracle_zone_id field is supported in this format:
-   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   *   Optional. An expression for filtering the results of the request. The
+   *   `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+   *   are supported in the following format:
+   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+   *   shape_family="{shape_family}" AND database_edition="{database_edition}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -11473,9 +11825,11 @@ export class OracleDatabaseClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   gcp_oracle_zone_id field is supported in this format:
-   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   *   Optional. An expression for filtering the results of the request. The
+   *   `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+   *   are supported in the following format:
+   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+   *   shape_family="{shape_family}" AND database_edition="{database_edition}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

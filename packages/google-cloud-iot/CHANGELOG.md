@@ -1,5 +1,23 @@
 # Changelog
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/iot-v6.0.0...iot-v6.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies ([#9129](https://github.com/googleapis/google-cloud-node/issues/9129)) ([5f01912](https://github.com/googleapis/google-cloud-node/commit/5f0191225b96dabe41daa9f9d57a8c72749bf62d))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/iot-v5.2.3...iot-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [5.2.3](https://github.com/googleapis/google-cloud-node/compare/iot-v5.2.2...iot-v5.2.3) (2026-06-01)
 
 

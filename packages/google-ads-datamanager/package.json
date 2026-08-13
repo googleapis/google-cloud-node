@@ -1,6 +1,6 @@
 {
   "name": "@google-ads/datamanager",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Data Manager API client for Node.js",
   "repository": {
     "type": "git",
@@ -43,26 +43,26 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",
     "c8": "^10.1.3",
-    "gapic-tools": "^1.0.0",
+    "gapic-tools": "^2.0.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^4.0.0",
-    "jsdoc-region-tag": "^3.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
-    "pack-n-play": "^3.0.0",
+    "pack-n-play": "^5.0.0",
     "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"

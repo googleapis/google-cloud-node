@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {describe, it, before, after} from 'mocha';
-import {generateId} from './common';
+import {generateId, reapInstances} from './common';
 import {AppProfileOptions, Bigtable, Instance} from '../src';
 import {AppProfile} from '../src';
 import assert = require('assert');
@@ -37,54 +37,41 @@ describe('📦 App Profile', () => {
       return getAppProfileResponse[0];
     }
 
-    before(async function() {
-      try {
-        // Creates an instance with clusters
-        const instanceClusters = [
-          'us-east1-c',
-          'us-central2-b',
-          'us-west1-b',
-        ].map(location => {
+    before(async () => {
+      await reapInstances(bigtable);
+      // Creates an instance with clusters
+      const instanceClusters = [
+        'us-east1-c',
+        'us-central2-b',
+        'us-west1-b',
+      ].map(location => {
+        return {
+          id: generateId('cluster'),
+          location,
+        };
+      });
+      clusterIds = instanceClusters.map(cluster => cluster.id);
+      const instanceId = generateId('instance');
+      instance = bigtable.instance(instanceId);
+      const [, operation] = await instance.create({
+        clusters: instanceClusters.map(cluster => {
           return {
-            id: generateId('cluster'),
-            location,
+            ...cluster,
+            nodes: 1,
           };
-        });
-        clusterIds = instanceClusters.map(cluster => cluster.id);
-        const instanceId = generateId('instance');
-        instance = bigtable.instance(instanceId);
-        const [, operation] = await instance.create({
-          clusters: instanceClusters.map(cluster => {
-            return {
-              ...cluster,
-              nodes: 1,
-            };
-          }),
-          labels: {
-            time_created: Date.now(),
-          },
-        });
-        await operation.promise();
-      } catch (e: any) {
-        if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
-          console.log('Skipping app-profile tests due to quota');
-          this.skip();
-        }
-        throw e;
-      }
+        }),
+        labels: {
+          time_created: String(Date.now()),
+        },
+      });
+      await operation.promise();
     });
 
     after(async () => {
-      try {
-        try {
-          await instance.delete();
-        } catch(e: any) {
-          console.warn("Skipping delete due to error", e.message);
-        }
-      } catch (err) {}
+      await instance.delete();
     });
 
-    it('should create a profile with a single cluster', async function() {
+    it('should create a profile with a single cluster', async () => {
       const options = {
         routing: instance.cluster(clusterIds[1]),
       };
@@ -95,7 +82,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should create a profile with multiple clusters', async function() {
+    it('should create a profile with multiple clusters', async () => {
       const options = {
         routing: new Set([
           instance.cluster(clusterIds[1]),
@@ -109,7 +96,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should create a profile with multiple clusters using strings', async function() {
+    it('should create a profile with multiple clusters using strings', async () => {
       const options = {
         routing: new Set([clusterIds[1], clusterIds[2]]),
       };
@@ -120,7 +107,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should create a profile with no clusters', async function() {
+    it('should create a profile with no clusters', async () => {
       const options: {routing: 'any'} = {
         routing: 'any',
       };
@@ -131,7 +118,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should ensure clusters match an updated profile', async function() {
+    it('should ensure clusters match an updated profile', async () => {
       const options = {
         routing: instance.cluster(clusterIds[1]),
       };

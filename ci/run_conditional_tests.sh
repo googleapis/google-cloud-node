@@ -30,31 +30,73 @@ fi
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
+
 if [[ "$(node -v)" == v22* ]]; then
   export NODE_OPTIONS="${NODE_OPTIONS} --no-warnings=DEP0040"
+  export NODE_OPTIONS="${NODE_OPTIONS} --no-experimental-require-module"
 fi
-export NODE_OPTIONS="${NODE_OPTIONS} --no-experimental-require-module"
 
-if [ -z "${GIT_DIFF_ARG}" ]; then
-    if [ "${BUILD_TYPE}" == "presubmit" ]; then
-        # For presubmit build, we want to know the difference from the
-        # common commit in origin/main.
-        GIT_DIFF_ARG="origin/main..."
+for arg in "$@"; do
+    case "${arg}" in
+        --strict)
+            STRICT=true
+            ;;
+    esac
+done
 
-        # Then fetch enough history for finding the common commit.
-        git fetch origin main --deepen=300
+if [[ "${STRICT}" == "true" || "${STRICT}" == "1" ]]; then
+    if [ -z "${GIT_DIFF_ARG}" ]; then
+        echo "Error: STRICT mode requires GIT_DIFF_ARG to be set." >&2
+        exit 1
+    fi
+    if [[ -z "${RUN_TESTS_MODE}" ]]; then
+        echo "Error: STRICT mode requires RUN_TESTS_MODE to be set." >&2
+        exit 1
+    fi
+    set +e
+    git diff --quiet ${GIT_DIFF_ARG}
+    diff_status=$?
+    set -e
+    if [[ ${diff_status} -ne 0 && ${diff_status} -ne 1 ]]; then
+        echo "Error: STRICT mode git diff ${GIT_DIFF_ARG} failed with exit code ${diff_status}." >&2
+        exit 1
+    fi
+else
+    if [ -z "${GIT_DIFF_ARG}" ]; then
+        if [ "${BUILD_TYPE}" == "presubmit" ]; then
+            # For presubmit build, we want to know the difference from the
+            # common commit in origin/main.
+            GIT_DIFF_ARG="origin/main..."
 
-    elif [ "${BUILD_TYPE}" == "continuous" ]; then
-        # For continuous build, we want to know the difference in the last
-        # commit. This assumes we use squash commit when merging PRs.
-        GIT_DIFF_ARG="HEAD~.."
+            # Then fetch enough history for finding the common commit.
+            git fetch origin main --deepen=300
 
-        # Then fetch one last commit for getting the diff.
-        git fetch origin main --deepen=1
+        elif [ "${BUILD_TYPE}" == "continuous" ]; then
+            # For continuous build, we want to know the difference in the last
+            # commit. This assumes we use squash commit when merging PRs.
+            GIT_DIFF_ARG="HEAD~.."
 
-    else
-        # Run everything.
-        GIT_DIFF_ARG=""
+            # Then fetch one last commit for getting the diff.
+            git fetch origin main --deepen=1
+
+        else
+            # Run everything.
+            GIT_DIFF_ARG=""
+        fi
+    fi
+fi
+
+if [[ -n "${RUN_TESTS_MODE}" ]]; then
+    if [[ "${RUN_TESTS_MODE}" != "CALCULATE_SHARD_MATRIX" && "${RUN_TESTS_MODE}" != "RUN_UNIT_TESTS" ]]; then
+        echo "Error: RUN_TESTS_MODE must be either CALCULATE_SHARD_MATRIX or RUN_UNIT_TESTS." >&2
+        exit 1
+    fi
+fi
+
+if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
+    if [[ -z "${SHARD_TOTAL}" || -z "${SHARD_INDEX}" ]]; then
+        echo "Error: SHARD_TOTAL and SHARD_INDEX must be set when RUN_TESTS_MODE is RUN_UNIT_TESTS." >&2
+        exit 1
     fi
 fi
 
@@ -67,7 +109,6 @@ set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
-    # echo "skipping trigger of tests for now: tracking in #7540"
     echo "change detected in ci, we should test everything"
     echo "result of git diff ${GIT_DIFF_ARG} ci:"
     git diff ${GIT_DIFF_ARG} ci
@@ -217,8 +258,8 @@ for subdir in ${subdirs[@]}; do
         fi
     done
 done
-# If DRY_RUN_SHARDS is set, output dynamic matrix values to GitHub Actions and exit
-if [[ "${DRY_RUN_SHARDS}" == "true" ]]; then
+# If RUN_TESTS_MODE is CALCULATE_SHARD_MATRIX, output dynamic matrix values to GitHub Actions and exit
+if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
     count=${#test_dirs[@]}
     if [[ $count -gt 15 ]]; then
         matrix="[0, 1, 2, 3, 4]"

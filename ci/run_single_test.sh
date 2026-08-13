@@ -18,7 +18,7 @@ set -e
 
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-export NODE_OPTIONS="--max_old_space_size=6144 --no-deprecation --no-experimental-require-module"
+export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=6144 --no-deprecation"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
@@ -41,9 +41,16 @@ else
     export MOCHA_REPORTER=dot
 fi
 
-# Dependencies are pre-installed globally at the workspace root.
-# We only execute compilation / prep if required by the package.
-pnpm run --filter "...{.}" --if-present compile
+# Install dependencies
+# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
+# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
+PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
+if command -v cygpath >/dev/null 2>&1; then
+    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
+fi
+
+echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
+pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"
 
 
 retval=0

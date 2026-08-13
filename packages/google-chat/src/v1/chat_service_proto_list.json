@@ -11,6 +11,7 @@
   "../../protos/google/chat/v1/event_payload.proto",
   "../../protos/google/chat/v1/group.proto",
   "../../protos/google/chat/v1/history_state.proto",
+  "../../protos/google/chat/v1/markup_syntax.proto",
   "../../protos/google/chat/v1/matched_url.proto",
   "../../protos/google/chat/v1/membership.proto",
   "../../protos/google/chat/v1/message.proto",
