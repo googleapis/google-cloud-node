@@ -204,9 +204,6 @@ export function applyPattern(
   }
 
   // since we're converting the pattern to a regex, make necessary precautions:
-  // Identify the segments and wildcards in pattern to perform validation in order of appearance
-  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
-
   const regex = new RegExp(
     '^' +
       escapeRegExp(pattern)
@@ -219,6 +216,9 @@ export function applyPattern(
   if (!match) {
     return undefined;
   }
+
+  // Identify the segments and wildcards in pattern to perform validation in order of appearance
+  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
 
   // Check the captured group values
   for (let i = 1; i < match.length; i++) {
