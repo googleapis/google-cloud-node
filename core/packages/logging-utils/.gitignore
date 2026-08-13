@@ -11,6 +11,7 @@ system-test/secrets.js
 system-test/*key.json
 build
 .vscode
+package-lock.json
 .system-test-run/
 .kitchen-sink/
 .showcase-server-dir/

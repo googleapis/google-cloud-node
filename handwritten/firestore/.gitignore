@@ -12,6 +12,7 @@ system-test/secrets.js
 system-test/*key.json
 *.lock
 .DS_Store
+package-lock.json
 __pycache__
 *.tsbuildinfo
 local-work/
