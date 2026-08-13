@@ -206,6 +206,7 @@
     "packages/google-cloud-firestore-api": {
       "component": "google-cloud-firestore-api"
     },
+    "packages/google-cloud-ftp": {},
     "packages/google-cloud-functions": {},
     "packages/google-cloud-gdchardwaremanagement": {},
     "packages/google-cloud-geminidataanalytics": {},

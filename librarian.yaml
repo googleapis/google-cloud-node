@@ -982,6 +982,10 @@ libraries:
       package_name: '@google-cloud/firestore-api'
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
+  - name: google-cloud-ftp
+    apis:
+      - path: google/cloud/ftp/v1
+    copyright_year: "2026"
   - name: google-cloud-functions
     version: 5.0.0
     apis:
