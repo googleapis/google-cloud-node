@@ -292,9 +292,8 @@ for versions compatible with Node.js 10.
 ## Post-quantum Cryptography
 
 A minimum Node version of >=22.20 is required for post-quantum cryptography to
-be used. When running an application with a supported node version and making
-requests with a client library, network traffic will automatically be secure
-against post-quantum decryption methods.
+be used. When running an application with a supported node version, the client
+library will attempt to negotiate and use post-quantum cryptography for all requests.
 
 ## Versioning
 
