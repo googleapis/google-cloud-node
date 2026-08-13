@@ -17,9 +17,6 @@ import { describe, it } from 'mocha';
 import { v3 } from '../src';
 import * as path from 'path';
 
-// Load transcoding module using absolute path to bypass package.json exports restriction
-const transcodingPath = path.resolve(__dirname, '../../node_modules/google-gax/build/src/transcoding.js');
-const transcoding = require(transcodingPath);
 const sinon = require('sinon');
 
 describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () => {
@@ -64,27 +61,6 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
     );
   });
 
-  // Test 3: Double Asterisk Dot-Dot Validation on custom template
-  it('3. should throw an error for double-asterisk segment traversal containing segments that are exactly ".."', () => {
-    assert.throws(() => {
-      transcoding.applyPattern(
-        'projects/*/locations/*/agents/*/sessions/**',
-        'projects/p/locations/l/agents/a/sessions/agents/../subagent',
-        'session'
-      );
-    }, /Value for session must not contain segments that are exactly \. or \.\./);
-  });
-
-  // Test 4: Double Asterisk Dot Validation on custom template
-  it('4. should throw an error for double-asterisk segment traversal containing segments that are exactly "."', () => {
-    assert.throws(() => {
-      transcoding.applyPattern(
-        'projects/*/locations/*/agents/*/sessions/**',
-        'projects/p/locations/l/agents/a/sessions/agents/./subagent',
-        'session'
-      );
-    }, /Value for session must not contain segments that are exactly \. or \.\./);
-  });
 
   // Test 5: Standard Valid Path fallback REST call
   it('5. should pass transcoding validation with a valid session path and construct the correct REST URL', async () => {
@@ -111,46 +87,4 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
     assert.ok(requestUrl.includes('my-session%3F%24httpMethod%3DDELETE%23'));
   });
 
-  // Test 7: BuildQueryStringComponents stability with null values
-  it('7. should build query string safely and skip null elements in arrays without throwing a TypeError', () => {
-    const components = transcoding.buildQueryStringComponents({
-      query: 'test',
-      repeatedValues: [null, 'value1'],
-    });
-    assert.deepStrictEqual(components, [
-      'query=test',
-      'repeatedValues=value1',
-    ]);
-  });
-
-  // Test 8: BuildQueryStringComponents stability with undefined values
-  it('8. should build query string safely and skip undefined elements in arrays without throwing a TypeError', () => {
-    const components = transcoding.buildQueryStringComponents({
-      query: 'test',
-      repeatedValues: [undefined, 'value1'],
-    });
-    assert.deepStrictEqual(components, [
-      'query=test',
-      'repeatedValues=value1',
-    ]);
-  });
-
-  // Test 9: ApplyPattern stability with unmatched optional capture groups
-  it('9. should handle optional unmatched groups gracefully without throwing TypeErrors', () => {
-    const res = transcoding.applyPattern('projects/*', 'projects/p', 'session');
-    assert.strictEqual(res, 'projects/p');
-  });
-
-  // Test 10: Percent-encode RFC 3986 unreserved characters preservation
-  it('10. should preserve unreserved characters while strictly percent-encoding all other characters', () => {
-    // Standard RFC unreserved characters: [-_.~0-9a-zA-Z]
-    const unreserved = 'abc-123_.~';
-    assert.strictEqual(transcoding.encodeWithSlashes(unreserved), unreserved);
-
-    // Reserved and special characters: should be percent encoded, including !'()*
-    const specialChars = "!'()*";
-    const encoded = transcoding.encodeWithSlashes(specialChars);
-    // ! -> %21, ' -> %27, ( -> %28, ) -> %29, * -> %2A
-    assert.strictEqual(encoded, '%21%27%28%29%2A');
-  });
 });
