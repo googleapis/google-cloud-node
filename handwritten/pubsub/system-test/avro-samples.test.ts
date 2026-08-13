@@ -78,12 +78,16 @@ describe('Avro Samples System Tests', () => {
     assert.ok(messageId);
 
     const message = await new Promise<Message>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Timeout waiting for Avro record')), 15000);
-      subscription.once('message', (m: Message) => {
+      const messageHandler = (m: Message) => {
         clearTimeout(timeout);
         m.ack();
         resolve(m);
-      });
+      };
+      const timeout = setTimeout(() => {
+        subscription.removeListener('message', messageHandler);
+        reject(new Error('Timeout waiting for Avro record'));
+      }, 15000);
+      subscription.once('message', messageHandler);
     });
 
     const schemaMetadata = Schema.metadataFromMessage(message.attributes);
