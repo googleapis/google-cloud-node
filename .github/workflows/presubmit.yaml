@@ -59,7 +59,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       - name: Compile Workspace (Turborepo Caching)
-        run: pnpm run compile
+        run: pnpm run compile -- --concurrency=4
       - run: pnpm run lint
         name: Run monorepo linter
 
