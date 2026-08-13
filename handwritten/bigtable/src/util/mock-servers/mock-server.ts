@@ -29,7 +29,9 @@ export class MockServer {
     callback?: (port: string) => void,
     port?: string | number | undefined,
   ) {
-    const portString = Number(port !== undefined ? port : DEFAULT_PORT).toString();
+    const portString = Number(
+      port !== undefined ? port : DEFAULT_PORT,
+    ).toString();
     this.port = portString;
     const server = new grpc.Server();
     this.server = server;

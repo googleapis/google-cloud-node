@@ -78,11 +78,9 @@ describe('Bigtable/ReadRows', () => {
   });
 
   // helper function because some tests run slower
-  // on Windows and need a longer timeout
+  // under CI load and need a longer timeout
   function setWindowsTestTimeout(test: mocha.Context) {
-    if (process.platform === 'win32') {
-      test.timeout(60000); // it runs much slower on Windows!
-    }
+    test.timeout(60000);
   }
 
   it('should create read stream and read synchronously', function (done) {
