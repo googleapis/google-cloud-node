@@ -41,6 +41,7 @@
     "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
     "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
     "test": "npm run test:esm && npm run test:cjs",
+    "system-test": "mocha build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
@@ -58,5 +59,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "optionalDependencies": {
+    "spannerlib-node": "file:../../../go-sql-spanner/spannerlib/wrappers/spannerlib-node/spannerlib-node-0.1.0.tgz"
   }
 }

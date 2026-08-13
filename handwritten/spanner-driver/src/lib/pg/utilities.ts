@@ -51,3 +51,21 @@ export const escapeLiteral = (str: string): string => {
   }
   return "'" + str.replace(/'/g, "''") + "'";
 };
+
+/**
+ * Prepares a parameter value for PostgreSQL dialect queries by unwrapping
+ * objects implementing custom `.toPostgres()` serialization hooks (e.g. Knex/ORMs).
+ *
+ * @param val - Parameter value to prepare.
+ * @returns Serialized or unwrapped parameter value.
+ */
+export function preparePgValue(val: unknown): unknown {
+  if (
+    typeof val === 'object' &&
+    val !== null &&
+    typeof (val as {toPostgres?: unknown}).toPostgres === 'function'
+  ) {
+    return (val as {toPostgres: () => unknown}).toPostgres();
+  }
+  return val;
+}

@@ -9,5 +9,12 @@
     "skipLibCheck": true,
     "types": ["node", "mocha"]
   },
-  "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"]
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts",
+    "system-test/*.ts",
+    "system-test/**/*.ts"
+  ]
 }
