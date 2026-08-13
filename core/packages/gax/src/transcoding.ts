@@ -192,7 +192,7 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
-  propertyName = 'resource',
+  propertyName = 'resource', // Used to provide precise error messages when path validation fails
 ): string | undefined {
   if (!pattern || pattern === '*') {
     validateSingleSegment(propertyName, fieldValue);
