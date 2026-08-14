@@ -183,15 +183,13 @@ function strictEncodeURIComponent(str: string): string {
 }
 
 export function encodeWithSlashes(str: string): string {
-  return str
-    .split('')
+  return [...str]
     .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
 
 export function encodeWithoutSlashes(str: string): string {
-  return str
-    .split('')
+  return [...str]
     .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
