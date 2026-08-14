@@ -138,6 +138,7 @@ describe('Spanner', () => {
             INSTANCE_CONFIG.config,
           ),
           nodeCount: 1,
+          edition: 2,
           displayName: 'Test name for instance.',
           labels: {
             created: Math.round(Date.now() / 1000).toString(), // current time
@@ -6999,6 +7000,117 @@ describe('Spanner', () => {
           Name: name,
         },
       ]);
+    });
+  });
+
+  describe('Queues', () => {
+    const QUEUE_NAME = 'MyQueue';
+    let gsqlQueueSupported = true;
+    let pgQueueSupported = true;
+
+    before(async () => {
+      if (IS_EMULATOR_ENABLED) {
+        return;
+      }
+
+      try {
+        const queueDdl = `CREATE QUEUE ${QUEUE_NAME} (
+          Id INT64 NOT NULL,
+          Payload STRING(MAX) NOT NULL
+        ) PRIMARY KEY (Id)`;
+        const [operation] = await DATABASE.updateSchema(queueDdl);
+        await operation.promise();
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          gsqlQueueSupported = false;
+        } else {
+          throw err;
+        }
+      }
+
+      try {
+        const pgQueueDdl = `CREATE QUEUE ${QUEUE_NAME} (
+          id bigint NOT NULL,
+          "Payload" varchar NOT NULL,
+          PRIMARY KEY (id)
+        )`;
+        const [pgOperation] = await PG_DATABASE.updateSchema(pgQueueDdl);
+        await pgOperation.promise();
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          pgQueueSupported = false;
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should send and ack a message in GoogleSQL', async function () {
+      if (!gsqlQueueSupported) {
+        this.skip();
+      }
+
+      try {
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueSend(QUEUE_NAME, [123], {
+            payload: {foo: 'bar'},
+          });
+          await transaction.commit();
+        });
+
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [123], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should send and ack a message in PostgreSQL', async function () {
+      if (!pgQueueSupported) {
+        this.skip();
+      }
+
+      try {
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueSend(QUEUE_NAME, [456], {
+            payload: {foo: 'bar'},
+          });
+          await transaction.commit();
+        });
+
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [456], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
     });
   });
 
