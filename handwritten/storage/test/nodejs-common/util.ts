@@ -131,7 +131,7 @@ describe('common/util', () => {
       }
 
       async getRequestHeaders() {
-        return {};
+        return new Headers();
       }
 
       request = OAuth2Client.prototype.request.bind(this);

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import AbortController from 'abort-controller';
 import {createHash} from 'crypto';
 import {
   GaxiosOptions,
@@ -45,6 +44,13 @@ import {HashStreamValidator} from './hash-stream-validator.js';
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 const packageJson = getPackageJSON();
+
+function getResponseHeader(headers: any, name: string): string | undefined {
+  if (headers && typeof headers.get === 'function') {
+    return headers.get(name) || undefined;
+  }
+  return headers?.[name] || headers?.[name.toLowerCase()] || undefined;
+}
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
 
@@ -615,7 +621,7 @@ export class Upload extends Writable {
    *
    * @param headers The headers object to modify.
    */
-  #applyChecksumHeaders(headers: GaxiosOptions['headers']) {
+  #applyChecksumHeaders(headers: Record<string, string>) {
     const checksums: string[] = [];
 
     if (this.#hashValidator?.crc32cEnabled) {
@@ -631,7 +637,7 @@ export class Upload extends Writable {
     }
 
     if (checksums.length > 0) {
-      headers!['X-Goog-Hash'] = checksums.join(',');
+      headers['X-Goog-Hash'] = checksums.join(',');
     }
   }
 
@@ -792,7 +798,7 @@ export class Upload extends Writable {
 
   protected async createURIAsync(): Promise<string> {
     const metadata = {...this.metadata};
-    const headers: gaxios.Headers = {};
+    const headers: Record<string, string> = {};
 
     // Delete content length and content type from metadata if they exist.
     // These are headers and should not be sent as part of the metadata.
@@ -802,7 +808,7 @@ export class Upload extends Writable {
     }
 
     if (metadata.contentType) {
-      headers!['X-Upload-Content-Type'] = metadata.contentType;
+      headers['X-Upload-Content-Type'] = metadata.contentType;
       delete metadata.contentType;
     }
 
@@ -833,13 +839,16 @@ export class Upload extends Writable {
       },
     };
 
-    if (metadata.contentLength) {
-      reqOpts.headers!['X-Upload-Content-Length'] =
-        metadata.contentLength.toString();
-    }
+    const reqHeaders = reqOpts.headers;
+    if (reqHeaders && !(reqHeaders instanceof Headers) && !Array.isArray(reqHeaders)) {
+      if (metadata.contentLength) {
+        reqHeaders['X-Upload-Content-Length'] =
+          metadata.contentLength.toString();
+      }
 
-    if (metadata.contentType) {
-      reqOpts.headers!['X-Upload-Content-Type'] = metadata.contentType;
+      if (metadata.contentType) {
+        reqHeaders['X-Upload-Content-Type'] = metadata.contentType;
+      }
     }
 
     if (typeof this.generation !== 'undefined') {
@@ -855,7 +864,10 @@ export class Upload extends Writable {
     }
 
     if (this.origin) {
-      reqOpts.headers!.Origin = this.origin;
+      const reqHeaders = reqOpts.headers;
+      if (reqHeaders && !(reqHeaders instanceof Headers) && !Array.isArray(reqHeaders)) {
+        reqHeaders.Origin = this.origin;
+      }
     }
     const uri = await AsyncRetry(
       async (bail: (err: Error) => void) => {
@@ -863,7 +875,7 @@ export class Upload extends Writable {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
           this.currentInvocationId.uri = crypto.randomUUID();
-          return res.headers.location;
+          return getResponseHeader(res.headers, 'location') || '';
         } catch (err) {
           const e = err as GaxiosError;
           const apiError = {
@@ -882,7 +894,8 @@ export class Upload extends Writable {
           ) {
             throw e;
           } else {
-            return bail(e);
+            bail(e);
+            return '';
           }
         }
       },
@@ -1005,7 +1018,7 @@ export class Upload extends Writable {
       googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
     }
 
-    const headers: GaxiosOptions['headers'] = {
+    const headers: Record<string, string> = {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': googAPIClient,
     };
@@ -1050,7 +1063,7 @@ export class Upload extends Writable {
 
       // `Content-Length` for multiple chunk uploads is the size of the chunk,
       // not the overall object
-      headers['Content-Length'] = bytesToUpload;
+      headers['Content-Length'] = bytesToUpload.toString();
       headers['Content-Range'] =
         `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
 
@@ -1111,7 +1124,7 @@ export class Upload extends Writable {
     const shouldContinueWithNextMultiChunkRequest =
       this.chunkSize &&
       resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE &&
-      resp.headers.range &&
+      getResponseHeader(resp.headers, 'range') &&
       moreDataToUpload;
 
     /**
@@ -1127,7 +1140,7 @@ export class Upload extends Writable {
       // Use the upper value in this header to determine where to start the next chunk.
       // We should not assume that the server received all bytes sent in the request.
       // https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload
-      const range: string = resp.headers.range;
+      const range: string = getResponseHeader(resp.headers, 'range')!;
       this.offset = Number(range.split('-')[1]) + 1;
 
       // We should not assume that the server received all bytes sent in the request.
@@ -1223,7 +1236,7 @@ export class Upload extends Writable {
       method: 'PUT',
       url: this.uri,
       headers: {
-        'Content-Length': 0,
+        'Content-Length': '0',
         'Content-Range': 'bytes */*',
         'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
@@ -1264,8 +1277,9 @@ export class Upload extends Writable {
       const resp = await this.checkUploadStatus({retry: false});
 
       if (resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE) {
-        if (typeof resp.headers.range === 'string') {
-          this.offset = Number(resp.headers.range.split('-')[1]) + 1;
+        const range = getResponseHeader(resp.headers, 'range');
+        if (typeof range === 'string') {
+          this.offset = Number(range.split('-')[1]) + 1;
           return;
         }
       }
@@ -1288,10 +1302,12 @@ export class Upload extends Writable {
   private async makeRequest(reqOpts: GaxiosOptions): GaxiosPromise {
     if (this.encryption) {
       reqOpts.headers = reqOpts.headers || {};
-      reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
-      reqOpts.headers['x-goog-encryption-key'] = this.encryption.key.toString();
-      reqOpts.headers['x-goog-encryption-key-sha256'] =
-        this.encryption.hash.toString();
+      if (!(reqOpts.headers instanceof Headers) && !Array.isArray(reqOpts.headers)) {
+        reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
+        reqOpts.headers['x-goog-encryption-key'] = this.encryption.key.toString();
+        reqOpts.headers['x-goog-encryption-key-sha256'] =
+          this.encryption.hash.toString();
+      }
     }
 
     if (this.userProject) {

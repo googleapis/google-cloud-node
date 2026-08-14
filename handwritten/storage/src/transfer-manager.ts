@@ -32,7 +32,7 @@ import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
 import {ApiError} from './nodejs-common/index.js';
-import {GaxiosResponse, Headers} from 'gaxios';
+import {GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {getRuntimeTrackingString, getUserAgentString} from './util.js';
@@ -220,7 +220,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     };
   }
 
-  #setGoogApiClientHeaders(headers: Headers = {}): Headers {
+  #setGoogApiClientHeaders(headers: Record<string, string> = {}): Record<string, string> {
     let headerFound = false;
     let userAgentFound = false;
 
@@ -258,11 +258,11 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    *
    * @returns {Promise<void>}
    */
-  async initiateUpload(headers: Headers = {}): Promise<void> {
+  async initiateUpload(headers: Record<string, string> = {}): Promise<void> {
     const url = `${this.baseUrl}?uploads`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
+        const res = await this.authClient.request<any>({
           headers: this.#setGoogApiClientHeaders(headers),
           method: 'POST',
           url,
@@ -294,7 +294,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
-    let headers: Headers = this.#setGoogApiClientHeaders();
+    let headers: Record<string, string> = this.#setGoogApiClientHeaders();
 
     if (validation === 'md5') {
       const hash = createHash('md5').update(chunk).digest('base64');
@@ -309,7 +309,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
+        const res = await this.authClient.request<any>({
           url,
           method: 'PUT',
           body: chunk,
@@ -318,7 +318,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        this.partsMap.set(partNumber, res.headers['etag']);
+        this.partsMap.set(partNumber, res.headers.get('etag') || '');
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }
@@ -344,7 +344,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     )}</CompleteMultipartUpload>`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
+        const res = await this.authClient.request<any>({
           headers: this.#setGoogApiClientHeaders(),
           url,
           method: 'POST',
@@ -371,7 +371,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
+        const res = await this.authClient.request<any>({
           url,
           method: 'DELETE',
         });

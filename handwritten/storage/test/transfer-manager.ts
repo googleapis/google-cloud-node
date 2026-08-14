@@ -42,6 +42,7 @@ import fs from 'fs';
 import {promises as fsp, Stats} from 'fs';
 import * as sinon from 'sinon';
 import {DownloadResponseWithStatus, SkipReason} from '../src/file.js';
+import {getHeader} from './test-utils.js';
 
 describe('Transfer Manager', () => {
   const BUCKET_NAME = 'test-bucket';
@@ -886,16 +887,25 @@ describe('Transfer Manager', () => {
         }
 
         async getRequestHeaders() {
-          return {};
+          return new Headers();
         }
 
         async request(opts: GaxiosOptions) {
+          if (opts.url && opts.url.toString().includes('oauth2.googleapis.com')) {
+            return {
+              data: {
+                access_token: 'abc123',
+              },
+              headers: {},
+            } as GaxiosResponse;
+          }
+
           called = true;
 
           assert(opts.headers);
-          assert('x-goog-api-client' in opts.headers);
+          assert(getHeader(opts.headers, 'x-goog-api-client'));
           assert.match(
-            opts.headers['x-goog-api-client'],
+            getHeader(opts.headers, 'x-goog-api-client'),
             /gccl-gcs-cmd\/tm.upload_sharded/
           );
 
@@ -905,7 +915,7 @@ describe('Transfer Manager', () => {
                 <UploadId>1</UploadId>
               </InitiateMultipartUploadResult>`
             ),
-            headers: {},
+            headers: new Headers({ etag: 'etag-val' }),
           } as GaxiosResponse;
         }
       }
@@ -927,15 +937,24 @@ describe('Transfer Manager', () => {
         }
 
         async getRequestHeaders() {
-          return {};
+          return new Headers();
         }
 
         async request(opts: GaxiosOptions) {
+          if (opts.url && opts.url.toString().includes('oauth2.googleapis.com')) {
+            return {
+              data: {
+                access_token: 'abc123',
+              },
+              headers: {},
+            } as GaxiosResponse;
+          }
+
           called = true;
 
           assert(opts.headers);
-          assert('User-Agent' in opts.headers);
-          assert.match(opts.headers['User-Agent'], /gcloud-node/);
+          assert(getHeader(opts.headers, 'User-Agent'));
+          assert.match(getHeader(opts.headers, 'User-Agent'), /gcloud-node/);
 
           return {
             data: Buffer.from(
@@ -943,7 +962,7 @@ describe('Transfer Manager', () => {
                 <UploadId>1</UploadId>
               </InitiateMultipartUploadResult>`
             ),
-            headers: {},
+            headers: new Headers({ etag: 'etag-val' }),
           } as GaxiosResponse;
         }
       }
