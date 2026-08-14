@@ -7,7 +7,7 @@
     "distribution_name": "@google-cloud/clientgateways",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "beyondcorp",
+    "name": "clientgateways",
     "name_pretty": "BeyondCorp",
     "product_documentation": "https://cloud.google.com/beyondcorp/docs",
     "release_level": "stable",
