@@ -8176,6 +8176,55 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
 
+  packages/google-cloud-ftp:
+    dependencies:
+      google-gax:
+        specifier: ^5.0.0
+        version: 5.0.6
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^1.0.3
+        version: 1.1.0(protobufjs@7.6.5)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^5.0.2
+        version: 5.0.4
+      jsdoc-region-tag:
+        specifier: ^4.0.1
+        version: 4.0.1
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^4.2.1
+        version: 4.2.1
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+
   packages/google-cloud-functions:
     dependencies:
       google-gax:
@@ -13060,6 +13109,55 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
+
+  packages/google-cloud-workloadidentity:
+    dependencies:
+      google-gax:
+        specifier: ^5.0.0
+        version: 5.0.6
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^1.0.3
+        version: 1.1.0(protobufjs@7.6.5)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^5.0.2
+        version: 5.0.4
+      jsdoc-region-tag:
+        specifier: ^4.0.1
+        version: 4.0.1
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^4.2.1
+        version: 4.2.1
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
 
   packages/google-cloud-workloadmanager:
     dependencies:
@@ -30519,6 +30617,20 @@ snapshots:
       google-gax: 5.0.6
       google-proto-files: 5.0.1
       protobufjs-cli: 1.3.3(protobufjs@7.5.9)
+      uglify-js: 3.19.3
+      walk-up-path: 3.0.1
+      walkdir: 0.4.1
+    transitivePeerDependencies:
+      - protobufjs
+      - supports-color
+
+  gapic-tools@1.1.0(protobufjs@7.6.5):
+    dependencies:
+      '@babel/core': 7.27.7
+      '@babel/traverse': 7.27.7
+      google-gax: 5.0.6
+      google-proto-files: 5.0.1
+      protobufjs-cli: 1.3.3(protobufjs@7.6.5)
       uglify-js: 3.19.3
       walk-up-path: 3.0.1
       walkdir: 0.4.1
