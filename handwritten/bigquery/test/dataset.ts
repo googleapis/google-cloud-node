@@ -1104,4 +1104,31 @@ describe('BigQuery/Dataset', () => {
       assert.strictEqual(table.location, location);
     });
   });
+
+  describe('security - URI encoding and path traversal protection', () => {
+    it('should throw error when dataset id or path segment is dot or dot-dot', () => {
+      const bigqueryMock = {
+        projectId: 'my-project',
+        request: util.noop,
+      } as {} as _root.BigQuery;
+
+      assert.throws(() => {
+        const invalidDataset = new Dataset(bigqueryMock, '..');
+        invalidDataset.getMetadata(assert.ifError);
+      }, /Invalid value \.\. for path segment\./);
+    });
+
+    it('should percent-encode query parameter injection payload in table name', done => {
+      const maliciousTableId = 'table_name?$httpMethod=DELETE#';
+      const table = ds.table(maliciousTableId);
+
+      ds.request = (reqOpts: DecorateRequestOptions) => {
+        assert(reqOpts.uri.includes('table_name%3F%24httpMethod%3DDELETE%23'));
+        assert(!reqOpts.uri.includes('?$httpMethod=DELETE#'));
+        done();
+      };
+
+      table.getMetadata(assert.ifError);
+    });
+  });
 });
