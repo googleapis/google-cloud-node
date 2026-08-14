@@ -15,7 +15,6 @@
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
 import { v3 } from '../src';
-import * as path from 'path';
 
 const sinon = require('sinon');
 
@@ -62,6 +61,7 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
       /Invalid value \.\. for session/
     );
   });
+
 
 
   // Test 5: Standard Valid Path fallback REST call
