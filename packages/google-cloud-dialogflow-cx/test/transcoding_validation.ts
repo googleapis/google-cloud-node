@@ -91,6 +91,7 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
   it('7. should protect against path traversal and query injection by percent-encoding combined patterns', async () => {
     // This request is permitted because the template uses * instead of **
     // * is supposed to match against exactly . or ..
+    // This is okay because we still percent encode the ? parameter.
     // example: POST https://<location>-dialogflow.googleapis.com/v3/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent
     await client.initialize();
     await client.detectIntent({
