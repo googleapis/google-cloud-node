@@ -118,12 +118,18 @@ export function deleteField(request: JSONObject, field: string): void {
   delete request[part];
 }
 
+// Validates a single path segment matched by a single wildcard (*).
+// Checks that the segment is not exactly '.' or '..' (directory traversal indicators).
 function validateSingleSegment(propertyName: string, value: string): void {
   if (value === '.' || value === '..') {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
   }
 }
 
+// Validates a multi-segment path matched by a double wildcard (**).
+// Splitting by slash, it checks that no individual segment is exactly '.' or '..'.
+// This segment-by-segment check prevents directory traversal while allowing
+// legitimate resource names containing dots (e.g., domain-scoped project IDs).
 function validateMultiSegment(propertyName: string, value: string): void {
   if (value) {
     // Split by slash and check for exact segment matches of '.' or '..' rather
@@ -165,6 +171,8 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
+// Strictly percent-encodes a character to comply with RFC 3986.
+// This is necessary because encodeURIComponent does not encode !, ', (, ), and *.
 function strictEncodeURIComponent(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g,
