@@ -67,5 +67,10 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-serviceusage",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }
