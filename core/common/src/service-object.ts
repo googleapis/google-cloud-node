@@ -563,16 +563,24 @@ class ServiceObject<T = any> extends EventEmitter {
     const uriComponents = [this.baseUrl, this.id || '', reqOpts.uri];
 
     if (isAbsoluteUrl) {
-      uriComponents.splice(0, uriComponents.indexOf(reqOpts.uri));
+      const url = new URL(reqOpts.uri);
+      const encodedPath = util.encodeURIPath(url.pathname);
+      url.pathname = encodedPath;
+      let res = url.toString();
+      if (!reqOpts.uri.endsWith('/') && res.endsWith('/')) {
+        res = res.slice(0, -1);
+      }
+      reqOpts.uri = res;
+    } else {
+      reqOpts.uri = uriComponents
+        .filter(x => x!.trim()) // Limit to non-empty strings.
+        .map(uriComponent => {
+          const trimSlashesRegex = /^\/*|\/*$/g;
+          const trimmed = uriComponent!.replace(trimSlashesRegex, '');
+          return util.encodeURIPath(trimmed);
+        })
+        .join('/');
     }
-
-    reqOpts.uri = uriComponents
-      .filter(x => x!.trim()) // Limit to non-empty strings.
-      .map(uriComponent => {
-        const trimSlashesRegex = /^\/*|\/*$/g;
-        return uriComponent!.replace(trimSlashesRegex, '');
-      })
-      .join('/');
 
     const childInterceptors = (arrify as unknown as (arg1: any) => [])(
       reqOpts.interceptors_!,

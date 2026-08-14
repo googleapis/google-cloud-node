@@ -1878,6 +1878,28 @@ describe('Bucket', () => {
     });
   });
 
+  describe('security - URI encoding and path traversal protection', () => {
+    it('should throw error when bucket name or object path segment is dot or dot-dot', () => {
+      assert.throws(() => {
+        const invalidBucket = new Bucket(STORAGE, '..');
+        invalidBucket.getMetadata(assert.ifError);
+      }, /Invalid value \.\. for path segment\./);
+    });
+
+    it('should percent-encode query parameter injection payload in file name', done => {
+      const maliciousFileName = 'file_name?\\$httpMethod=DELETE#';
+      const file = bucket.file(maliciousFileName);
+
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert(reqOpts.uri.includes('file_name%3F%24httpMethod%3DDELETE%23'));
+        assert(!reqOpts.uri.includes('?$httpMethod=DELETE#'));
+        done();
+      };
+
+      file.getMetadata(assert.ifError);
+    });
+  });
+
   describe('file', () => {
     const FILE_NAME = 'remote-file-name.jpg';
     let file: FakeFile;
