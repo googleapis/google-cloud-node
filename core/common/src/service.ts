@@ -212,19 +212,27 @@ export class Service {
     uriComponents.push(reqOpts.uri);
 
     if (isAbsoluteUrl) {
-      uriComponents.splice(0, uriComponents.indexOf(reqOpts.uri));
+      const url = new URL(reqOpts.uri);
+      const encodedPath = util.encodeURIPath(url.pathname);
+      url.pathname = encodedPath;
+      let res = url.toString();
+      if (!reqOpts.uri.endsWith('/') && res.endsWith('/')) {
+        res = res.slice(0, -1);
+      }
+      reqOpts.uri = res;
+    } else {
+      reqOpts.uri = uriComponents
+        .map(uriComponent => {
+          const trimSlashesRegex = /^\/*|\/*$/g;
+          const trimmed = uriComponent.replace(trimSlashesRegex, '');
+          return util.encodeURIPath(trimmed);
+        })
+        .join('/')
+        // Some URIs have colon separators.
+        // Bad: https://.../projects/:list
+        // Good: https://.../projects:list
+        .replace(/\/:/g, ':');
     }
-
-    reqOpts.uri = uriComponents
-      .map(uriComponent => {
-        const trimSlashesRegex = /^\/*|\/*$/g;
-        return uriComponent.replace(trimSlashesRegex, '');
-      })
-      .join('/')
-      // Some URIs have colon separators.
-      // Bad: https://.../projects/:list
-      // Good: https://.../projects:list
-      .replace(/\/:/g, ':');
 
     const requestInterceptors = this.getRequestInterceptors();
 
