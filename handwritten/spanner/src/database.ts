@@ -2940,6 +2940,7 @@ class Database extends common.GrpcServiceObject {
             performance.clearMarks(`M3_gcp_header_recv_${reqId}`);
             performance.clearMarks(`M3_grpc_header_recv_${reqId}`);
             performance.clearMarks(`M3_gax_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_raw_${reqId}`);
             performance.clearMarks(`M3_grpc_data_recv_${reqId}`);
             performance.clearMarks(`M3_gcp_data_recv_${reqId}`);
             performance.clearMarks(`M3_gax_data_recv_${reqId}`);
@@ -2950,17 +2951,17 @@ class Database extends common.GrpcServiceObject {
             callback!(err as grpc.ServiceError, rows, stats, metadata);
           })
           .on('response', response => {
-            // [MARK M3]: First Data Row Chunk Received at SDK layer
-            if (!m3Marked) {
-              m3Marked = true;
-              performance.mark(m3Name);
-            }
             if (response.metadata) {
               metadata = response.metadata;
             }
           })
           .on('stats', _stats => (stats = _stats))
           .on('data', row => {
+            // [MARK M3]: First Data Row Chunk Received at SDK layer
+            if (!m3Marked) {
+              m3Marked = true;
+              performance.mark(m3Name);
+            }
             rows.push(row);
           })
           .on('end', () => {
@@ -3000,7 +3001,7 @@ class Database extends common.GrpcServiceObject {
             safeMeasure(
               `5_True_External_Flight_To_Data_${reqId}`,
               `M2_socket_write_${reqId}`,
-              `M3_gcp_data_recv_${reqId}`,
+              `M3_grpc_data_recv_raw_${reqId}`,
             );
 
             // Inbound Post-Processing (Pure Client CPU):
@@ -3017,18 +3018,17 @@ class Database extends common.GrpcServiceObject {
               `M3_gax_data_recv_${reqId}`,
             );
             // 3. Spanner SDK (PartialResultStream) decodes the raw chunk into native JS types.
-            // We measure from GAX emitting data to the SDK emitting 'response' to isolate pure synchronous CPU decoding.
+            // We measure from GAX emitting data to the SDK pushing the decoded row.
             safeMeasure(
               `1b_SDK_PostProcessing_${reqId}`,
               `M3_gax_data_recv_${reqId}`,
               m3Name,
             );
-            // 4. grpc-js protobuf decode happens in native HTTP/2 before M3_gcp_data_recv.
-            // We set it to 0ms here so the benchmark script structure is maintained.
+            // 4. grpc-js protobuf decode happens in JS before M3_gcp_data_recv.
             safeMeasure(
               `4b_grpc_js_PostProcessing_${reqId}`,
+              `M3_grpc_data_recv_raw_${reqId}`,
               `M3_gcp_data_recv_${reqId}`,
-              `M3_gcp_data_recv_${reqId}`, // 0ms
             );
 
             // Backward-compatible coarse metric:
@@ -3043,6 +3043,7 @@ class Database extends common.GrpcServiceObject {
             performance.clearMarks(`M3_gcp_header_recv_${reqId}`);
             performance.clearMarks(`M3_grpc_header_recv_${reqId}`);
             performance.clearMarks(`M3_gax_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_raw_${reqId}`);
             performance.clearMarks(`M3_grpc_data_recv_${reqId}`);
             performance.clearMarks(`M3_gcp_data_recv_${reqId}`);
             performance.clearMarks(`M3_gax_data_recv_${reqId}`);
