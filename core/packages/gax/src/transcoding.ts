@@ -172,10 +172,12 @@ export function buildQueryStringComponents(
 }
 
 // Strictly percent-encodes a character to comply with RFC 3986.
-// This is necessary because encodeURIComponent does not encode !, ', (, ), and *.
+// This is necessary because encodeURIComponent natively encodes URL-unsafe
+// characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
+// To ensure strict compliance, we manually encode those preserved characters.
 function strictEncodeURIComponent(str: string): string {
   return encodeURIComponent(str).replace(
-    /[!'()*]/g,
+    /[!'()*]/g, // Characters preserved by encodeURIComponent
     character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
   );
 }
