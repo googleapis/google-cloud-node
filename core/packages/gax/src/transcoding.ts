@@ -124,22 +124,25 @@ export function buildQueryStringComponents(
 ): string[] {
   const resultList = [];
   for (const key in request) {
-    if (Array.isArray(request[key])) {
-      for (const value of request[key] as JSONObject[]) {
+    const value = request[key];
+    if (Array.isArray(value)) {
+      const filtered = value.filter(val => val !== null && val !== undefined);
+      for (const val of filtered) {
+        const stringVal = typeof val === 'object' ? JSON.stringify(val) : val.toString();
         resultList.push(
           `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-            value.toString(),
+            stringVal,
           )}`,
         );
       }
-    } else if (typeof request[key] === 'object' && request[key] !== null) {
+    } else if (typeof value === 'object' && value !== null) {
       resultList.push(
-        ...buildQueryStringComponents(request[key] as JSONObject, `${key}.`),
+        ...buildQueryStringComponents(value as JSONObject, `${key}.`),
       );
-    } else {
+    } else if (value !== undefined) {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          request[key] === null ? 'null' : request[key]!.toString(),
+          value === null ? 'null' : value.toString(),
         )}`,
       );
     }

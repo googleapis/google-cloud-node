@@ -561,6 +561,28 @@ describe('gRPC to HTTP transcoding', () => {
       ],
     );
   });
+
+  it('buildQueryStringComponents should build query string safely and skip null elements in arrays without throwing a TypeError', () => {
+    const components = buildQueryStringComponents({
+      query: 'test',
+      repeatedValues: [null, 'value1'],
+    });
+    assert.deepStrictEqual(components, [
+      'query=test',
+      'repeatedValues=value1',
+    ]);
+  });
+
+  it('buildQueryStringComponents should build query string safely and skip undefined elements in arrays without throwing a TypeError', () => {
+    const components = buildQueryStringComponents({
+      query: 'test',
+      repeatedValues: [undefined as any, 'value1'],
+    });
+    assert.deepStrictEqual(components, [
+      'query=test',
+      'repeatedValues=value1',
+    ]);
+  });
 });
 
 describe('override the HTTP rules in protoJson', () => {
