@@ -140,7 +140,7 @@ export function buildQueryStringComponents(
     } else {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          requestValue === null ? 'null' : requestValue.toString(),
+          requestValue === null || requestValue === undefined ? 'null' : requestValue.toString(),
         )}`,
       );
     }
