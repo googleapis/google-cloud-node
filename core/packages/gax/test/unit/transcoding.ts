@@ -370,6 +370,12 @@ describe('gRPC to HTTP transcoding', () => {
     );
   });
 
+  it('should correctly handle Unicode surrogate pairs in encodeWithSlashes', () => {
+    // Emojis (like 😊) are surrogate pairs.
+    // They should be encoded successfully instead of throwing a URIError.
+    assert.strictEqual(encodeWithSlashes('😊'), '%F0%9F%98%8A');
+  });
+
   it('should preserve unreserved characters while strictly percent-encoding all other characters in encodeWithSlashes', () => {
     // Standard RFC unreserved characters: [-_.~0-9a-zA-Z]
     const unreserved = 'abc-123_.~';
@@ -394,6 +400,12 @@ describe('gRPC to HTTP transcoding', () => {
       ),
       '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
     );
+  });
+
+  it('should correctly handle Unicode surrogate pairs in encodeWithoutSlashes', () => {
+    // Emojis (like 😊) are surrogate pairs.
+    // They should be encoded successfully instead of throwing a URIError.
+    assert.strictEqual(encodeWithoutSlashes('😊'), '%F0%9F%98%8A');
   });
 
   it('applyPattern', () => {
