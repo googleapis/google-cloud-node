@@ -165,23 +165,24 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
+function strictEncodeURIComponent(str: string): string {
+  return encodeURIComponent(str).replace(
+    /[!'()*]/g,
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
+  );
+}
+
 export function encodeWithSlashes(str: string): string {
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c).replace(
-      /[!'()*]/g,
-      character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
-    )))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
 
 export function encodeWithoutSlashes(str: string): string {
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c).replace(
-      /[!'()*]/g,
-      character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
-    )))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
 
