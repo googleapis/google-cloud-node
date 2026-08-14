@@ -4,6 +4,25 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "58307799cfd9fe1ece7982479a0219f35d7128a6",
+          "message": "Update storage to minimum Node version of 22.",
+          "issues": [
+            "9079",
+            "8985"
+          ],
+          "breakingChangeNote": "Update storage to minimum Node version of 22. ([#9079](https://github.com/googleapis/google-cloud-node/issues/9079))"
+        }
+      ],
+      "version": "8.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "d1224eea-a73e-4470-9036-91fac8c6a63f",
+      "createTime": "2026-08-13T13:28:43.410Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "5f0191225b96dabe41daa9f9d57a8c72749bf62d",
           "message": "Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies",
@@ -89853,5 +89872,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-12T17:50:12.709Z"
+  "updateTime": "2026-08-13T13:28:43.410Z"
 }

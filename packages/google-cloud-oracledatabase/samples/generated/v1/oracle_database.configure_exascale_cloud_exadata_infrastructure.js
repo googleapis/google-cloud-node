@@ -39,6 +39,10 @@ function main(name, totalStorageSizeGb) {
    */
   // const totalStorageSizeGb = 1234
   /**
+   *  Optional. Storage size needed for VM storage on Exascale in GBs.
+   */
+  // const totalVmStorageSizeGb = 1234
+  /**
    *  Optional. An optional ID to identify the request.
    */
   // const requestId = 'abc123'

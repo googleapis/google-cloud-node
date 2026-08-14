@@ -122557,6 +122557,9 @@ export namespace google {
 
                     /** ReasoningEngineSpec identityType */
                     identityType?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IdentityType|keyof typeof google.cloud.aiplatform.v1.ReasoningEngineSpec.IdentityType|null);
+
+                    /** ReasoningEngineSpec buildSpec */
+                    buildSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IBuildSpec|null);
                 }
 
                 /** Represents a ReasoningEngineSpec. */
@@ -122591,6 +122594,9 @@ export namespace google {
 
                     /** ReasoningEngineSpec identityType. */
                     public identityType: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IdentityType|keyof typeof google.cloud.aiplatform.v1.ReasoningEngineSpec.IdentityType);
+
+                    /** ReasoningEngineSpec buildSpec. */
+                    public buildSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IBuildSpec|null);
 
                     /** ReasoningEngineSpec deploymentSource. */
                     public deploymentSource?: ("sourceCodeSpec"|"containerSpec");
@@ -123664,6 +123670,109 @@ export namespace google {
                         IDENTITY_TYPE_UNSPECIFIED = 0,
                         SERVICE_ACCOUNT = 2,
                         AGENT_IDENTITY = 3
+                    }
+
+                    /** Properties of a BuildSpec. */
+                    interface IBuildSpec {
+
+                        /** BuildSpec workerPool */
+                        workerPool?: (string|null);
+
+                        /** BuildSpec serviceAccount */
+                        serviceAccount?: (string|null);
+                    }
+
+                    /** Represents a BuildSpec. */
+                    class BuildSpec implements IBuildSpec {
+
+                        /**
+                         * Constructs a new BuildSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.IBuildSpec);
+
+                        /** BuildSpec workerPool. */
+                        public workerPool: string;
+
+                        /** BuildSpec serviceAccount. */
+                        public serviceAccount: string;
+
+                        /**
+                         * Creates a new BuildSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BuildSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.IBuildSpec): google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Encodes the specified BuildSpec message. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec.verify|verify} messages.
+                         * @param message BuildSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.IBuildSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BuildSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec.verify|verify} messages.
+                         * @param message BuildSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.IBuildSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BuildSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BuildSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Decodes a BuildSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BuildSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Verifies a BuildSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BuildSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BuildSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Creates a plain object from a BuildSpec message. Also converts values to other types if specified.
+                         * @param message BuildSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BuildSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BuildSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -151549,6 +151658,9 @@ export namespace google {
                     /** BatchPredictionJob unmanagedContainerModel */
                     unmanagedContainerModel?: (google.cloud.aiplatform.v1beta1.IUnmanagedContainerModel|null);
 
+                    /** BatchPredictionJob endpoint */
+                    endpoint?: (string|null);
+
                     /** BatchPredictionJob inputConfig */
                     inputConfig?: (google.cloud.aiplatform.v1beta1.BatchPredictionJob.IInputConfig|null);
 
@@ -151654,6 +151766,9 @@ export namespace google {
 
                     /** BatchPredictionJob unmanagedContainerModel. */
                     public unmanagedContainerModel?: (google.cloud.aiplatform.v1beta1.IUnmanagedContainerModel|null);
+
+                    /** BatchPredictionJob endpoint. */
+                    public endpoint: string;
 
                     /** BatchPredictionJob inputConfig. */
                     public inputConfig?: (google.cloud.aiplatform.v1beta1.BatchPredictionJob.IInputConfig|null);
@@ -312090,6 +312205,9 @@ export namespace google {
 
                     /** ReasoningEngineSpec identityType */
                     identityType?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IdentityType|keyof typeof google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IdentityType|null);
+
+                    /** ReasoningEngineSpec buildSpec */
+                    buildSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IBuildSpec|null);
                 }
 
                 /** Represents a ReasoningEngineSpec. */
@@ -312124,6 +312242,9 @@ export namespace google {
 
                     /** ReasoningEngineSpec identityType. */
                     public identityType: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IdentityType|keyof typeof google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IdentityType);
+
+                    /** ReasoningEngineSpec buildSpec. */
+                    public buildSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IBuildSpec|null);
 
                     /** ReasoningEngineSpec deploymentSource. */
                     public deploymentSource?: ("sourceCodeSpec"|"containerSpec");
@@ -313197,6 +313318,109 @@ export namespace google {
                         IDENTITY_TYPE_UNSPECIFIED = 0,
                         SERVICE_ACCOUNT = 2,
                         AGENT_IDENTITY = 3
+                    }
+
+                    /** Properties of a BuildSpec. */
+                    interface IBuildSpec {
+
+                        /** BuildSpec workerPool */
+                        workerPool?: (string|null);
+
+                        /** BuildSpec serviceAccount */
+                        serviceAccount?: (string|null);
+                    }
+
+                    /** Represents a BuildSpec. */
+                    class BuildSpec implements IBuildSpec {
+
+                        /**
+                         * Constructs a new BuildSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IBuildSpec);
+
+                        /** BuildSpec workerPool. */
+                        public workerPool: string;
+
+                        /** BuildSpec serviceAccount. */
+                        public serviceAccount: string;
+
+                        /**
+                         * Creates a new BuildSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BuildSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IBuildSpec): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Encodes the specified BuildSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec.verify|verify} messages.
+                         * @param message BuildSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IBuildSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BuildSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec.verify|verify} messages.
+                         * @param message BuildSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IBuildSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BuildSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BuildSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Decodes a BuildSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BuildSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Verifies a BuildSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BuildSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BuildSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec;
+
+                        /**
+                         * Creates a plain object from a BuildSpec message. Also converts values to other types if specified.
+                         * @param message BuildSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.BuildSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BuildSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BuildSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 

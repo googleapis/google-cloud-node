@@ -741,12 +741,24 @@
                           "oneof": [
                             "rrf"
                           ]
+                        },
+                        "reranker": {
+                          "oneof": [
+                            "vertexRanker"
+                          ]
                         }
                       },
                       "fields": {
                         "rrf": {
                           "type": "ReciprocalRankFusion",
                           "id": 1
+                        },
+                        "vertexRanker": {
+                          "type": "VertexRanker",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -758,6 +770,62 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VertexRanker": {
+                      "oneofs": {
+                        "recordSpec": {
+                          "oneof": [
+                            "textRecordSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textRecordSpec": {
+                          "type": "TextRecordSpec",
+                          "id": 6
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "topN": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TextRecordSpec": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "titleTemplate": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "contentTemplate": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }

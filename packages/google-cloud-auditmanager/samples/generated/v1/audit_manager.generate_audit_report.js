@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(scope, complianceStandard, reportFormat, complianceFramework) {
+function main(scope, reportFormat, complianceFramework) {
   // [START auditmanager_v1_generated_AuditManager_GenerateAuditReport_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,31 +29,33 @@ function main(scope, complianceStandard, reportFormat, complianceFramework) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Destination Cloud storage bucket where report and evidence must be
-   *  uploaded. The Cloud storage bucket provided here must be selected among
-   *  the buckets entered during the enrollment process.
+   *  URL for the Cloud Storage bucket where the report and evidence is
+   *  uploaded. You must select a bucket that was provided during the
+   *  enrollment process.
    */
   // const gcsUri = 'abc123'
   /**
-   *  Required. Scope for which the AuditScopeReport is required. Must be of
-   *  format resource_type/resource_identifier Eg:
-   *  projects/{project}/locations/{location},
-   *  folders/{folder}/locations/{location}
+   *  Required. Organization, folder, or project that the audit applies to, in
+   *  one of the following formats:
+   *  * `projects/{project}/locations/{location}`
+   *  * `folders/{folder}/locations/{location}`
+   *  * `organizations/{organization}/locations/{location}`
    */
   // const scope = 'abc123'
   /**
-   *  Required. Compliance Standard against which the Scope Report must be
-   *  generated. Eg: FEDRAMP_MODERATE
-   */
-  // const complianceStandard = 'abc123'
-  /**
-   *  Required. The format in which the audit report should be created.
+   *  Required. Format for the audit report.
    */
   // const reportFormat = {}
   /**
-   *  Required. Compliance framework against which the Report must be generated.
+   *  Required. The framework that's used for the audit report. For example,
+   *  `NIST_800_53`.
    */
   // const complianceFramework = 'abc123'
+  /**
+   *  Optional. If `true`, only validate the request and don't generate the audit
+   *  report.
+   */
+  // const validateOnly = true
 
   // Imports the Auditmanager library
   const {AuditManagerClient} = require('@google-cloud/auditmanager').v1;
@@ -65,7 +67,6 @@ function main(scope, complianceStandard, reportFormat, complianceFramework) {
     // Construct request
     const request = {
       scope,
-      complianceStandard,
       reportFormat,
       complianceFramework,
     };

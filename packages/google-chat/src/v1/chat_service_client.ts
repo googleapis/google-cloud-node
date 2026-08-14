@@ -506,6 +506,9 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.admin.memberships.readonly',
       'https://www.googleapis.com/auth/chat.admin.spaces',
       'https://www.googleapis.com/auth/chat.admin.spaces.readonly',
+      'https://www.googleapis.com/auth/chat.app.all.memberships.readonly',
+      'https://www.googleapis.com/auth/chat.app.all.messages.readonly',
+      'https://www.googleapis.com/auth/chat.app.all.spaces.readonly',
       'https://www.googleapis.com/auth/chat.app.delete',
       'https://www.googleapis.com/auth/chat.app.memberships',
       'https://www.googleapis.com/auth/chat.app.memberships.readonly',
@@ -982,6 +985,9 @@ export class ChatServiceClient {
    *   `clientAssignedMessageId` field for `{message}`. For details, see [Name a
    *   message]
    *   (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6746,6 +6752,9 @@ export class ChatServiceClient {
    *   Optional. Whether to include deleted messages. Deleted messages include
    *   deleted time and metadata about their deletion, but message content is
    *   unavailable.
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6927,6 +6936,9 @@ export class ChatServiceClient {
    *   Optional. Whether to include deleted messages. Deleted messages include
    *   deleted time and metadata about their deletion, but message content is
    *   unavailable.
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -7041,6 +7053,9 @@ export class ChatServiceClient {
    *   Optional. Whether to include deleted messages. Deleted messages include
    *   deleted time and metadata about their deletion, but message content is
    *   unavailable.
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -7765,6 +7780,9 @@ export class ChatServiceClient {
    *   The default ordering is `create_time desc`. Only a single order per query
    *   (`create_time` or `relevance`) is supported. Only descending order (`desc`)
    *   is supported, and it must be specified after the order attribute.
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {google.chat.v1.SearchMessagesRequest.SearchMessagesView} [request.view]
    *   Optional. Specifies what kind of search results view to return. The default
    *   is `SEARCH_MESSAGES_VIEW_BASIC`.
@@ -8039,6 +8057,9 @@ export class ChatServiceClient {
    *   The default ordering is `create_time desc`. Only a single order per query
    *   (`create_time` or `relevance`) is supported. Only descending order (`desc`)
    *   is supported, and it must be specified after the order attribute.
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {google.chat.v1.SearchMessagesRequest.SearchMessagesView} [request.view]
    *   Optional. Specifies what kind of search results view to return. The default
    *   is `SEARCH_MESSAGES_VIEW_BASIC`.
@@ -8246,6 +8267,9 @@ export class ChatServiceClient {
    *   The default ordering is `create_time desc`. Only a single order per query
    *   (`create_time` or `relevance`) is supported. Only descending order (`desc`)
    *   is supported, and it must be specified after the order attribute.
+   * @param {google.chat.v1.MarkupSyntax} [request.markupSyntax]
+   *   Optional. Specifies the desired output syntax for the Chat message
+   *   `formatted_text` field.
    * @param {google.chat.v1.SearchMessagesRequest.SearchMessagesView} [request.view]
    *   Optional. Specifies what kind of search results view to return. The default
    *   is `SEARCH_MESSAGES_VIEW_BASIC`.
@@ -8777,6 +8801,7 @@ export class ChatServiceClient {
    *
    *   - `create_time DESC`
    *   - `relevance DESC`
+   *      [Developer Preview](https://developers.google.com/workspace/preview).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9037,6 +9062,7 @@ export class ChatServiceClient {
    *
    *   - `create_time DESC`
    *   - `relevance DESC`
+   *      [Developer Preview](https://developers.google.com/workspace/preview).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9230,6 +9256,7 @@ export class ChatServiceClient {
    *
    *   - `create_time DESC`
    *   - `relevance DESC`
+   *      [Developer Preview](https://developers.google.com/workspace/preview).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

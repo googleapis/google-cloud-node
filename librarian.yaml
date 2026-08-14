@@ -16,8 +16,8 @@ version: v0.37.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: fc62df08979faf46d3c4d7eec30c57e6046a29f1
-    sha256: c80127b908fe6dad563e81f3118e2b601f27e32011ad49a10eb89282a42f3c69
+    commit: f76fc6dcdd744681c9d3e2fc30b0fc813118c295
+    sha256: f89a9e70418646337d71fb79d3679e8a3183682bb5fd1e3457e325886c8dad9d
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -456,6 +456,7 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnections'
+      metadata_name_override: appconnections
   - name: google-cloud-beyondcorp-appconnectors
     version: 3.0.0
     apis:
@@ -464,6 +465,7 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnectors'
+      metadata_name_override: appconnectors
   - name: google-cloud-beyondcorp-appgateways
     version: 3.0.0
     apis:
@@ -472,6 +474,7 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appgateways'
+      metadata_name_override: appgateways
   - name: google-cloud-beyondcorp-clientconnectorservices
     version: 4.0.0
     apis:
@@ -480,6 +483,7 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientconnectorservices'
+      metadata_name_override: clientconnectorservices
   - name: google-cloud-beyondcorp-clientgateways
     version: 3.0.0
     apis:
@@ -488,6 +492,7 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientgateways'
+      metadata_name_override: clientgateways
   - name: google-cloud-bigquery-analyticshub
     version: 3.0.0
     apis:
@@ -511,6 +516,7 @@ libraries:
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/bigquery-data-exchange'
+      metadata_name_override: analyticshub
   - name: google-cloud-bigquery-datapolicies
     version: 3.0.0
     apis:
@@ -982,6 +988,10 @@ libraries:
       package_name: '@google-cloud/firestore-api'
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
+  - name: google-cloud-ftp
+    apis:
+      - path: google/cloud/ftp/v1
+    copyright_year: "2026"
   - name: google-cloud-functions
     version: 5.0.0
     apis:
@@ -1397,6 +1407,7 @@ libraries:
       default_version: v3beta
       package_name: '@google-cloud/policy-troubleshooter-iam'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/iam/latest
+      metadata_name_override: iam
   - name: google-cloud-privatecatalog
     version: 5.0.0
     apis:
@@ -1859,6 +1870,10 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-workloadidentity
+    apis:
+      - path: google/cloud/workloadidentity/v1
+    copyright_year: "2026"
   - name: google-cloud-workloadmanager
     version: 0.3.0
     apis:
@@ -2112,6 +2127,7 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/monitoring-dashboards'
+      metadata_name_override: monitoring-dashboards
   - name: google-privacy-dlp
     version: 7.0.1
     apis:
