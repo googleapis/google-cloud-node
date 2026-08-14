@@ -126,6 +126,9 @@ function validateSingleSegment(propertyName: string, value: string): void {
 
 function validateMultiSegment(propertyName: string, value: string): void {
   if (value) {
+    // Split by slash and check for exact segment matches of '.' or '..' rather
+    // than using a simple string.includes('.') check. This avoids rejecting
+    // valid domain-scoped resource segments (e.g. projects/example.com:project-id).
     const segments = value.split('/');
     if (segments.some(segment => segment === '.' || segment === '..')) {
       throw new Error(`Value for ${propertyName} must not contain segments that are exactly . or ..`);
