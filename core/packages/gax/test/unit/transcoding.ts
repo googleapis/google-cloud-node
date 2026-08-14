@@ -561,6 +561,22 @@ describe('gRPC to HTTP transcoding', () => {
       ],
     );
   });
+
+  it('should gracefully handle undefined property values without throwing', () => {
+    const request = {
+      definedField: 'value',
+      undefinedField: undefined,
+    };
+
+    // Prior to PR 9150, this threw: TypeError: Cannot read properties of undefined (reading 'toString')
+    // With PR 9150, it gracefully serializes the undefined property to 'null'
+    const result = buildQueryStringComponents(request as any);
+
+    assert.deepStrictEqual(result, [
+      'definedField=value',
+      'undefinedField=null',
+    ]);
+  });
 });
 
 describe('override the HTTP rules in protoJson', () => {
