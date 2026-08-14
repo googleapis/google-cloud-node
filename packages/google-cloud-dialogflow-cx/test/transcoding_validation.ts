@@ -102,4 +102,28 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
     const requestUrl = fetchStub.firstCall.args[0];
     assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/..%3F%24httpMethod%3DDELETE%23:detectIntent'));
   });
+
+  // Test 8: Combined Path Traversal (.) and Query Parameter Injection
+  it('8. should protect against path traversal and query injection by percent-encoding combined patterns using dot', async () => {
+    await client.initialize();
+    await client.detectIntent({
+      session: 'projects/p/locations/l/agents/a/sessions/.?$httpMethod=DELETE#',
+      queryInput: { text: { text: 'hello' }, languageCode: 'en' },
+    });
+    assert.strictEqual(fetchStub.callCount, 1);
+    const requestUrl = fetchStub.firstCall.args[0];
+    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/.%3F%24httpMethod%3DDELETE%23:detectIntent'));
+  });
+
+  // Test 9: Percent-encoding all other characters
+  it('9. should percent-encode all other characters except unreserved ones', async () => {
+    await client.initialize();
+    await client.detectIntent({
+      session: 'projects/p/locations/l/agents/a/sessions/ !@$&\'()*+,;=:%',
+      queryInput: { text: { text: 'hello' }, languageCode: 'en' },
+    });
+    assert.strictEqual(fetchStub.callCount, 1);
+    const requestUrl = fetchStub.firstCall.args[0];
+    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/%20%21%40%24%26%27%28%29%2A%2B%2C%3B%3D%3A%25:detectIntent'));
+  });
 });
