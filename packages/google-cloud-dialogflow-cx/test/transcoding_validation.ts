@@ -88,14 +88,14 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
   });
 
   // Test 7: Combined Path Traversal and Query Parameter Injection
-  it('7. should protect against path traversal and query injection by throwing a validation error on combined patterns', async () => {
+  it('7. should protect against path traversal and query injection by percent-encoding combined patterns', async () => {
     await client.initialize();
-    await assert.rejects(
-      client.detectIntent({
-        session: 'projects/p/locations/l/agents/a/sessions/..?$httpMethod=DELETE#',
-        queryInput: { text: { text: 'hello' }, languageCode: 'en' },
-      }),
-      /Invalid value \.\.\?\$httpMethod=DELETE# for session/
-    );
+    await client.detectIntent({
+      session: 'projects/p/locations/l/agents/a/sessions/..?$httpMethod=DELETE#',
+      queryInput: { text: { text: 'hello' }, languageCode: 'en' },
+    });
+    assert.strictEqual(fetchStub.callCount, 1);
+    const requestUrl = fetchStub.firstCall.args[0];
+    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/..%3F%24httpMethod%3DDELETE%23:detectIntent'));
   });
 });
