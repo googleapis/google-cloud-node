@@ -89,9 +89,6 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
 
   // Test 7: Combined Path Traversal and Query Parameter Injection
   it('7. should protect against path traversal and query injection by percent-encoding combined patterns', async () => {
-    // This request is permitted because the template uses * instead of **
-    // * is supposed to match against exactly . or ..
-    // example: POST https://<location>-dialogflow.googleapis.com/v3/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent
     await client.initialize();
     await client.detectIntent({
       session: 'projects/p/locations/l/agents/a/sessions/..?$httpMethod=DELETE#',
