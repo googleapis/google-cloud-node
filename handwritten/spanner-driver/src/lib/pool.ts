@@ -168,8 +168,7 @@ export class Pool extends EventEmitter {
       const isExpiredByLifetime =
         this.options.maxLifetimeSeconds > 0 &&
         meta !== undefined &&
-        (Date.now() - meta.createdAt) / 1000 >=
-          this.options.maxLifetimeSeconds;
+        (Date.now() - meta.createdAt) / 1000 >= this.options.maxLifetimeSeconds;
 
       if (isExpiredByLifetime || !item.client.isConnected) {
         this.removeClient(item.client);
@@ -199,10 +198,7 @@ export class Pool extends EventEmitter {
       });
 
       try {
-        await this.connectAndInit(
-          client,
-          this.options.connectionTimeoutMillis,
-        );
+        await this.connectAndInit(client, this.options.connectionTimeoutMillis);
 
         // Re-check if pool has been closed while waiting for connection or onConnect
         if (this.isEnding || this.isEnded) {
@@ -377,7 +373,10 @@ export class Pool extends EventEmitter {
             this.onIdleTimeout(client);
           }, this.options.idleTimeoutMillis);
 
-          if (this.options.allowExitOnIdle && typeof idleTimer.unref === 'function') {
+          if (
+            this.options.allowExitOnIdle &&
+            typeof idleTimer.unref === 'function'
+          ) {
             idleTimer.unref();
           }
         }
@@ -456,7 +455,11 @@ export class Pool extends EventEmitter {
 
   /**
    * Executes a query by acquiring a client, executing the statement, and automatically releasing the client.
-   * Supports Promises, callbacks, and streaming row events.
+   * Supports Promises, callbacks, and row-by-row event listeners.
+   *
+   * **Memory Consideration**: Like standard `node-postgres`, calling `pool.query()` buffers all result
+   * rows in memory before resolving the returned `QueryResult.rows` array. For large datasets,
+   * query pagination (`LIMIT` / `OFFSET`) should be used to manage memory consumption.
    *
    * @template R - Row result shape type (defaults to `Record<string, unknown>`).
    * @param queryText - SQL query string, `QueryConfig` object, or `Query` instance.
@@ -494,8 +497,8 @@ export class Pool extends EventEmitter {
       );
       queryForClient.rowMode = query.rowMode;
       queryForClient.types = query.types;
-      void queryForClient.on('row', row => {
-        void query.emit('row', row);
+      void queryForClient.on('row', (row, result) => {
+        void query.emit('row', row, result);
       });
       void queryForClient.on('fields', fields => {
         void query.emit('fields', fields);
