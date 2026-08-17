@@ -171,27 +171,23 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
-// Strictly percent-encodes a character to comply with RFC 3986.
-// This is necessary because encodeURIComponent natively encodes URL-unsafe
-// characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
-// To ensure strict compliance, we manually encode those preserved characters.
-function strictEncodeURIComponent(str: string): string {
-  return encodeURIComponent(str).replace(
-    /[!'()*]/g, // Characters preserved by encodeURIComponent
-    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
-  );
-}
-
 /**
  * Percent-encodes a string according to RFC 3986, preserving only unreserved
  * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
  * including slashes ('/'), are percent-encoded.
  *
+ * This is necessary because encodeURIComponent natively encodes URL-unsafe
+ * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
+ * To ensure strict compliance, we manually encode those preserved characters.
+ *
  * @param {string} str - The input string to encode.
  * @returns {string} The percent-encoded string.
  */
 export function encodeWithSlashes(str: string): string {
-  return strictEncodeURIComponent(str);
+  return encodeURIComponent(str).replace(
+    /[!'()*]/g, // Characters preserved by encodeURIComponent
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
+  );
 }
 
 /**
@@ -203,7 +199,7 @@ export function encodeWithSlashes(str: string): string {
  * @returns {string} The percent-encoded string with slashes preserved.
  */
 export function encodeWithoutSlashes(str: string): string {
-  return str.split('/').map(strictEncodeURIComponent).join('/');
+  return str.split('/').map(encodeWithSlashes).join('/');
 }
 
 function escapeRegExp(str: string) {
