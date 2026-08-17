@@ -73,7 +73,7 @@ enum Sign {
  * in addition to several custom types as noted below.
  *
  * @class
- * @extends external:Date
+ * @extends Date
  *
  * @param {number|string|bigint|Date|DateTuple|DateStruct} [time] The time
  *     value.
