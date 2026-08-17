@@ -458,10 +458,10 @@ describe('gRPC to HTTP transcoding', () => {
   it('applyPattern should percent-encode query injection attempt on double-asterisk without throwing traversal error', () => {
     const res = applyPattern(
       'projects/*/locations/*/agents/*/sessions/**',
-      'projects/p/locations/l/agents/a/sessions/..?$httpMethod=DELETE#',
+      'projects/p/locations/l/agents/a/sessions/..?$foo=BAR#',
       'session'
     );
-    assert.strictEqual(res, 'projects/p/locations/l/agents/a/sessions/..%3F%24httpMethod%3DDELETE%23');
+    assert.strictEqual(res, 'projects/p/locations/l/agents/a/sessions/..%3F%24foo%3DBAR%23');
   });
 
   it('applyPattern should handle optional unmatched groups gracefully without throwing TypeErrors', () => {
