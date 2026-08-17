@@ -131,8 +131,10 @@ export class CommentsMap {
                 const messageType = fd.messageType[p[1]].name;
                 const field = fd.messageType[p[1]].field![p[3]];
                 if (field) {
-                  // Type Enum: TYPE_STRING, TYPE_BOOL, etc.
-                  let paramType = Type[field.type!];
+                  let paramType =
+                    (typeof field.type === 'string'
+                      ? field.type
+                      : Type[field.type ?? Type.TYPE_DOUBLE]) || '';
                   // If field.label is 'REPEATED' then the paramType is an array.
                   if (field.label === 3) {
                     paramType += '[]';
