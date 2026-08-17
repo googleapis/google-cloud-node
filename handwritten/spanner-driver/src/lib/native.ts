@@ -12,12 +12,72 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Connection, Pool, Rows, SpannerLibError} from 'spannerlib-node';
+import {createRequire} from 'module';
+import type {
+  Connection as IConnection,
+  Pool as IPool,
+  Rows as IRows,
+  SpannerLibError as ISpannerLibError,
+} from 'spannerlib-node';
 
-// 1. Target Production Platform & Architecture Package Loading:
-// In production, prebuilt native binaries will be distributed as optional dependencies:
-// import { createRequire } from 'module';
-// const require = createRequire(import.meta.url);
-// export const NativeBridge = require(`@google-cloud/spannerlib-node-${process.platform}-${process.arch}`);
+// Resolves a require function compatible with both ESM and CommonJS runtimes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const nodeRequire: (id: string) => any =
+  typeof require === 'function'
+    ? require
+    : createRequire(process.cwd() + '/package.json');
 
-export {Connection, Pool, Rows, SpannerLibError};
+function tryRequire(moduleName: string) {
+  try {
+    return nodeRequire(moduleName);
+  } catch {
+    return null;
+  }
+}
+
+// 1. Dynamic Platform Package Loading:
+// Attempts to load matching platform package (@google-cloud/spannerlib-node-<platform>-<arch>)
+// or fallback development package ('spannerlib-node').
+const platformKey = `${process.platform}-${process.arch}`;
+const nativeModule =
+  tryRequire(`@google-cloud/spannerlib-node-${platformKey}`) ||
+  tryRequire('spannerlib-node');
+
+let PoolValue: {create(dsn: string): Promise<IPool>};
+let ConnectionValue: unknown;
+let RowsValue: unknown;
+let SpannerLibErrorValue: typeof ISpannerLibError;
+
+if (nativeModule) {
+  PoolValue = nativeModule.Pool;
+  ConnectionValue = nativeModule.Connection;
+  RowsValue = nativeModule.Rows;
+  SpannerLibErrorValue = nativeModule.SpannerLibError;
+} else {
+  // 2. Unit Test / CI Fallback Stubs:
+  // When native package is absent in CI, stub classes allow unit tests to mock and run.
+  PoolValue = class {
+    static async create(dsn: string): Promise<IPool> {
+      throw new Error(
+        `Native Spanner driver addon (@google-cloud/spannerlib-node-${platformKey}) is not installed. ` +
+          `Failed to connect to Spanner database (DSN: ${dsn}).`,
+      );
+    }
+  };
+
+  ConnectionValue = class {};
+  RowsValue = class {};
+  SpannerLibErrorValue = class extends Error {
+    code?: number;
+  };
+}
+
+export type Connection = IConnection;
+export type Pool = IPool;
+export type Rows = IRows;
+export type SpannerLibError = ISpannerLibError;
+
+export const Pool = PoolValue;
+export const Connection = ConnectionValue;
+export const Rows = RowsValue;
+export const SpannerLibError = SpannerLibErrorValue;

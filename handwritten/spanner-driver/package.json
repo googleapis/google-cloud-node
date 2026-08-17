@@ -61,6 +61,9 @@
     "node": ">=22"
   },
   "optionalDependencies": {
-    "spannerlib-node": "file:../../../go-sql-spanner/spannerlib/wrappers/spannerlib-node/spannerlib-node-0.1.0.tgz"
+    "@google-cloud/spannerlib-node-darwin-arm64": "^0.1.0",
+    "@google-cloud/spannerlib-node-linux-x64": "^0.1.0",
+    "@google-cloud/spannerlib-node-linux-arm64": "^0.1.0",
+    "@google-cloud/spannerlib-node-win32-x64": "^0.1.0"
   }
 }
