@@ -58,7 +58,7 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "optionalDependencies": {
     "spannerlib-node": "file:../../../go-sql-spanner/spannerlib/wrappers/spannerlib-node/spannerlib-node-0.1.0.tgz"

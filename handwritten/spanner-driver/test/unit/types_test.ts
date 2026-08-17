@@ -20,7 +20,6 @@ import {
   parseBool,
   parseBytea,
   parseFloatVal,
-  parseInteger,
   parsePgArray,
   parseString,
   parseTimestamp,
@@ -47,8 +46,6 @@ describe('Type System & Parsers', () => {
     });
 
     it('should parse integers (INT8)', () => {
-      assert.strictEqual(parseInteger('42'), 42);
-      assert.strictEqual(parseInteger('123456'), 123456);
       // INT8 returns string by default to prevent 64-bit precision loss
       const largeInt = '9223372036854775807';
       assert.strictEqual(
@@ -128,19 +125,17 @@ describe('Type System & Parsers', () => {
   describe('PostgreSQL Array Parser', () => {
     it('should parse 1D and nested pre-parsed array elements', () => {
       assert.deepStrictEqual(
-        types.getTypeParser(1022)('{1.5,2.5,3.5}'),
+        types.getTypeParser(1022)([1.5, 2.5, 3.5]),
         [1.5, 2.5, 3.5],
       );
-      assert.deepStrictEqual(types.getTypeParser(1016)('{"10","20"}'), [
+      assert.deepStrictEqual(types.getTypeParser(1016)(['10', '20']), [
         '10',
         '20',
       ]);
-      assert.deepStrictEqual(types.getTypeParser(1000)('{t,f,true,false}'), [
-        true,
-        false,
-        true,
-        false,
-      ]);
+      assert.deepStrictEqual(
+        types.getTypeParser(1000)([true, false, true, false]),
+        [true, false, true, false],
+      );
       assert.deepStrictEqual(
         types.getTypeParser(1009)([
           ['a', 'b'],
@@ -153,16 +148,16 @@ describe('Type System & Parsers', () => {
       );
     });
 
-    it('should parse arrays with NULL elements, whitespace, and quoted commas', () => {
+    it('should parse arrays with NULL elements', () => {
       assert.deepStrictEqual(
-        parsePgArray('{1,NULL,3,null}', val => (val ? Number(val) : null)),
+        parsePgArray([1, null, 3, null], val => (val ? Number(val) : null)),
         [1, null, 3, null],
       );
       assert.deepStrictEqual(
-        parsePgArray('{"hello, world", "foo, bar"}', val => String(val)),
+        parsePgArray(['hello, world', 'foo, bar'], val => String(val)),
         ['hello, world', 'foo, bar'],
       );
-      assert.deepStrictEqual(parsePgArray('{}'), []);
+      assert.deepStrictEqual(parsePgArray([]), []);
       assert.deepStrictEqual(parsePgArray(null), []);
     });
   });
@@ -189,7 +184,7 @@ describe('Type System & Parsers', () => {
       overrides.setTypeParser(1016, val =>
         overrides.arrayParser(val, x => Number(x) * 10),
       );
-      assert.deepStrictEqual(overrides.getTypeParser(1016)('{1,2}'), [10, 20]);
+      assert.deepStrictEqual(overrides.getTypeParser(1016)([1, 2]), [10, 20]);
     });
 
     it('should support hierarchical parent fallback in TypeOverrides', () => {
@@ -216,13 +211,21 @@ describe('Type System & Parsers', () => {
     it('should provide arrayParser helper and throw on non-numeric OID', () => {
       const overrides = new TypeOverrides();
       assert.deepStrictEqual(
-        overrides.arrayParser('{10,20}', val => Number(val) + 1),
+        overrides.arrayParser([10, 20], val => Number(val) + 1),
         [11, 21],
       );
 
       assert.throws(() => {
         overrides.getTypeParser('INVALID_OID');
       }, /Invalid PostgreSQL OID/);
+
+      assert.throws(() => {
+        overrides.getTypeParser(BuiltinOids.INT8, 'binary');
+      }, /Binary wire format is not supported/);
+
+      assert.throws(() => {
+        overrides.setTypeParser(BuiltinOids.INT8, 'binary', val => val);
+      }, /Binary wire format is not supported/);
     });
   });
 
@@ -233,7 +236,7 @@ describe('Type System & Parsers', () => {
       {name: 'active', dataTypeID: BuiltinOids.BOOL},
       {name: 'tags', dataTypeID: 1009},
     ];
-    const rawRow = ['101', 'Spanner', 't', '{"cloud","db"}'];
+    const rawRow = ['101', 'Spanner', 't', ['cloud', 'db']];
 
     it('should decode row in object mode', () => {
       const parsers = fields.map(f => types.getTypeParser(f.dataTypeID));
@@ -288,11 +291,56 @@ describe('Type System & Parsers', () => {
       );
     });
 
+    it('should decode rows containing structValue and array of structValues', () => {
+      const structFields: FieldDef[] = [
+        {name: 'user', dataTypeID: BuiltinOids.JSON},
+        {name: 'items', dataTypeID: 3807},
+      ];
+      const listValue = {
+        values: [
+          {
+            structValue: {
+              fields: {
+                id: {stringValue: '100'},
+                score: {numberValue: 98.5},
+              },
+            },
+          },
+          {
+            listValue: {
+              values: [
+                {
+                  structValue: {
+                    fields: {
+                      itemId: {stringValue: 'item_1'},
+                      qty: {numberValue: 5},
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      };
+      const raw = Codec.extractRawRow(
+        listValue as Parameters<typeof Codec.extractRawRow>[0],
+      );
+      const parsers = structFields.map(f => types.getTypeParser(f.dataTypeID));
+      const decoded = Codec.decodeRow<Record<string, unknown>>(
+        raw,
+        structFields,
+        parsers,
+      );
+      assert.deepStrictEqual(decoded, {
+        user: {id: '100', score: 98.5},
+        items: [{itemId: 'item_1', qty: 5}],
+      });
+    });
+
     it('should handle pre-parsed values gracefully in parsers', () => {
       const date = new Date('2026-08-11T10:00:00.000Z');
       assert.strictEqual(parseTimestamp(date), date);
       assert.strictEqual(parseBool(true), true);
-      assert.strictEqual(parseInteger(42), 42);
       assert.strictEqual(parseFloatVal(3.14), 3.14);
       assert.strictEqual(parseString(100), '100');
       assert.strictEqual(parseBytea(Buffer.from('hi')).toString(), 'hi');

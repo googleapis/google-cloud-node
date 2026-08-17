@@ -98,7 +98,7 @@ describe('Codec Utilities', () => {
       assert.deepStrictEqual(Codec.extractRawRow({}), []);
     });
 
-    it('should extract string wire representations correctly', () => {
+    it('should extract values directly without unnecessary string conversions', () => {
       const listValue: GoogleProto.protobuf.IListValue = {
         values: [
           {stringValue: 'hello'},
@@ -114,11 +114,11 @@ describe('Codec Utilities', () => {
       const raw = Codec.extractRawRow(listValue);
       assert.strictEqual(raw[0], 'hello');
       assert.strictEqual(raw[1], '123');
-      assert.strictEqual(raw[2], 't');
-      assert.strictEqual(raw[3], 'f');
-      assert.strictEqual(raw[4], '45.6');
+      assert.strictEqual(raw[2], true);
+      assert.strictEqual(raw[3], false);
+      assert.strictEqual(raw[4], 45.6);
       assert.strictEqual(raw[5], null);
-      assert.strictEqual(typeof raw[6], 'string');
+      assert.deepStrictEqual(raw[6], {k: 'v'});
     });
   });
 
@@ -214,6 +214,19 @@ describe('Codec Utilities', () => {
       assert.deepStrictEqual(fields.p2, {stringValue: '123'});
       assert.deepStrictEqual(fields.p3, {boolValue: true});
       assert.deepStrictEqual(fields.p4, {stringValue: 'custom_val'});
+    });
+
+    it('should unwrap custom objects with .toPostgres() inside array parameters', () => {
+      // Custom ORM / domain model wrappers
+      const customId1 = {toPostgres: () => 101};
+      const customId2 = {toPostgres: () => 102};
+      // Pass array of custom objects to parameter $1
+      const {fields} = Codec.encodeParams([[customId1, customId2]], 'pg');
+      assert.deepStrictEqual(fields.p1, {
+        listValue: {
+          values: [{stringValue: '101'}, {stringValue: '102'}],
+        },
+      });
     });
   });
 });

@@ -69,15 +69,6 @@ export function parseBool(val: unknown): boolean {
 }
 
 /**
- * Parses integer text wire strings into number.
- */
-export function parseInteger(val: unknown): number {
-  if (typeof val === 'number') return Math.trunc(val);
-  if (typeof val !== 'string') return Number(val);
-  return parseInt(val, 10);
-}
-
-/**
  * Parses floating point text wire strings into number.
  */
 export function parseFloatVal(val: unknown): number {
@@ -157,63 +148,11 @@ export function parsePgArray(
         : elementParser(item);
     });
   }
-  if (typeof source === 'string') {
-    const trimmed = source.trim();
-    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
-      const inner = trimmed.slice(1, -1).trim();
-      if (!inner) return [];
-      return inner
-        .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
-        .map(s => s.trim().replace(/^"(.*)"$/, '$1'))
-        .map(s => (s.toUpperCase() === 'NULL' ? null : elementParser(s)));
-    }
-  }
   return [];
 }
 
 // -----------------------------------------------------------------------------
-// Binary Format Parsers (matches pg-types/lib/binaryParsers.js)
-// -----------------------------------------------------------------------------
-
-function parseBinaryBool(value: unknown): boolean {
-  if (Buffer.isBuffer(value)) {
-    return value[0] !== 0;
-  }
-  return parseBool(value);
-}
-
-function parseBinaryFloat32(value: unknown): number {
-  if (Buffer.isBuffer(value) && value.length >= 4) {
-    return value.readFloatBE(0);
-  }
-  return parseFloatVal(value);
-}
-
-function parseBinaryFloat64(value: unknown): number {
-  if (Buffer.isBuffer(value) && value.length >= 8) {
-    return value.readDoubleBE(0);
-  }
-  return parseFloatVal(value);
-}
-
-function parseBinaryTimestamp(value: unknown): Date {
-  if (Buffer.isBuffer(value) && value.length >= 8) {
-    const rawValue = 0x100000000 * value.readInt32BE(0) + value.readUInt32BE(4);
-    // discard usecs and shift from PostgreSQL epoch (2000-01-01) to Unix epoch (1970-01-01)
-    return new Date(Math.round(rawValue / 1000) + 946684800000);
-  }
-  return parseTimestamp(value);
-}
-
-function parseBinaryText(value: unknown): string {
-  if (Buffer.isBuffer(value)) {
-    return value.toString('utf8');
-  }
-  return parseString(value);
-}
-
-// -----------------------------------------------------------------------------
-// Parser Registries (matches pg-types textParsers and binaryParsers)
+// Parser Registries (matches pg-types textParsers)
 // -----------------------------------------------------------------------------
 
 const textParsers: Record<number, TypeParser> = {
@@ -248,49 +187,18 @@ const textParsers: Record<number, TypeParser> = {
   3807: (val: unknown) => parsePgArray(val, parseJson),
 };
 
-const binaryParsers: Record<number, TypeParser> = {
-  [BuiltinOids.BOOL]: parseBinaryBool,
-  [BuiltinOids.BYTEA]: parseBytea,
-  [BuiltinOids.INT8]: parseBinaryText,
-  [BuiltinOids.TEXT]: parseBinaryText,
-  [BuiltinOids.JSON]: parseJson,
-  [BuiltinOids.FLOAT4]: parseBinaryFloat32,
-  [BuiltinOids.FLOAT8]: parseBinaryFloat64,
-  [BuiltinOids.VARCHAR]: parseBinaryText,
-  [BuiltinOids.DATE]: parseBinaryText,
-  [BuiltinOids.TIMESTAMP]: parseBinaryTimestamp,
-  [BuiltinOids.TIMESTAMPTZ]: parseBinaryTimestamp,
-  [BuiltinOids.INTERVAL]: parseBinaryText,
-  [BuiltinOids.NUMERIC]: parseBinaryText,
-  [BuiltinOids.UUID]: parseBinaryText,
-  [BuiltinOids.JSONB]: parseJson,
-};
-
-const defaultTypeParsers: Record<string, Record<number, TypeParser>> = {
-  text: textParsers,
-  binary: binaryParsers,
-};
-
 /**
  * TypeOverrides provides a scoped type parser and encoder registry.
  * Matches `pg-types.TypeOverrides` and allows overriding type parsers per query, client, or globally.
  */
 export class TypeOverrides implements ITypeOverrides {
-  private readonly _types: {
-    text: Map<number, TypeParser>;
-    binary: Map<number, TypeParser>;
-    [format: string]: Map<number, TypeParser>;
-  };
+  private readonly _types: Map<number, TypeParser> = new Map();
   private readonly _parent?: ITypeOverrides;
 
   /** Standard PostgreSQL catalog OID constants matching `pg-types.builtins`. */
   public readonly builtins = BuiltinOids;
 
   constructor(parent?: ITypeOverrides) {
-    this._types = {
-      text: new Map(),
-      binary: new Map(),
-    };
     this._parent = parent;
   }
 
@@ -298,35 +206,39 @@ export class TypeOverrides implements ITypeOverrides {
    * Retrieves the type parser registered for a specific PostgreSQL OID.
    *
    * @param oid - PostgreSQL Object Identifier number (e.g. 20 for INT8, 1184 for TIMESTAMPTZ).
-   * @param format - Formatting mode ('text' or 'binary'). Defaults to 'text'.
+   * @param format - Formatting mode ('text'). Defaults to 'text'.
    * @returns Parsing function converting wire string or buffer into JavaScript value.
    */
   public getTypeParser(oid: number | string, format = 'text'): TypeParser {
+    if (format === 'binary') {
+      throw new Error(
+        'Binary wire format is not supported in @google-cloud/spanner-driver because rows are transported via Spanner Protobuf.',
+      );
+    }
     const numOid = typeof oid === 'string' ? Number(oid) : oid;
     if (typeof numOid !== 'number' || Number.isNaN(numOid)) {
       throw new TypeError(
         `Invalid PostgreSQL OID: "${oid}". OID must be numeric.`,
       );
     }
-    const fmt = format || 'text';
     // 1. Explicitly registered parser in local overrides
-    const local = this._types[fmt]?.get(numOid);
+    const local = this._types.get(numOid);
     if (local) {
       return local;
     }
     // 2. Fallback to parent TypeOverrides instance if defined
     if (this._parent) {
-      return this._parent.getTypeParser(numOid, fmt);
+      return this._parent.getTypeParser(numOid, format);
     }
     // 3. Fallback to global built-in defaults
-    return defaultTypeParsers[fmt]?.[numOid] || parseString;
+    return textParsers[numOid] || parseString;
   }
 
   /**
    * Registers a custom type parser function for a specific PostgreSQL OID.
    *
    * @param oid - PostgreSQL Object Identifier number.
-   * @param formatOrFn - 'text' or 'binary' format string, or parser function.
+   * @param formatOrFn - 'text' format string, or parser function.
    * @param fn - Parser function if format string was passed as second argument.
    */
   public setTypeParser(
@@ -334,12 +246,6 @@ export class TypeOverrides implements ITypeOverrides {
     formatOrFn: string | TypeParser,
     fn?: TypeParser,
   ): void {
-    const numOid = typeof oid === 'string' ? Number(oid) : oid;
-    if (typeof numOid !== 'number' || Number.isNaN(numOid)) {
-      throw new TypeError(
-        `Invalid PostgreSQL OID: "${oid}". OID must be numeric.`,
-      );
-    }
     let format = 'text';
     let parser: TypeParser;
     if (typeof formatOrFn === 'function') {
@@ -348,13 +254,21 @@ export class TypeOverrides implements ITypeOverrides {
       format = formatOrFn || 'text';
       parser = fn!;
     }
+    if (format === 'binary') {
+      throw new Error(
+        'Binary wire format is not supported in @google-cloud/spanner-driver because rows are transported via Spanner Protobuf.',
+      );
+    }
+    const numOid = typeof oid === 'string' ? Number(oid) : oid;
+    if (typeof numOid !== 'number' || Number.isNaN(numOid)) {
+      throw new TypeError(
+        `Invalid PostgreSQL OID: "${oid}". OID must be numeric.`,
+      );
+    }
     if (typeof parser !== 'function') {
       throw new TypeError('Type parser must be a function');
     }
-    if (!this._types[format]) {
-      this._types[format] = new Map();
-    }
-    this._types[format].set(numOid, parser);
+    this._types.set(numOid, parser);
   }
 
   /**

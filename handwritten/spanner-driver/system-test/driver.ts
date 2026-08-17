@@ -256,7 +256,8 @@ describe('Spanner Driver System Tests (PostgreSQL Dialect)', function () {
       );
 
       // Seed AllTypes table
-      await client.query('DELETE FROM AllTypes WHERE Id = 1');
+      await client.query('DELETE FROM AllTypes WHERE Id IN (1, 2, 3, 4)');
+      // Row 1: Fully populated values
       await client.query(
         `INSERT INTO AllTypes (
           Id, ColBool, ColBytea, ColInt8, ColFloat4, ColFloat8, ColNumeric, ColText, ColVarchar,
@@ -298,6 +299,137 @@ describe('Spanner Driver System Tests (PostgreSQL Dialect)', function () {
           [{k: 'v1'}, {k: 'v2'}],
           [
             'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+            'b1ffcd00-0d1c-5fa9-cc7e-7cc0ce491b22',
+          ],
+        ],
+      );
+
+      // Row 2: NULL values for all nullable columns
+      await client.query(
+        `INSERT INTO AllTypes (
+          Id, ColBool, ColBytea, ColInt8, ColFloat4, ColFloat8, ColNumeric, ColText, ColVarchar,
+          ColDate, ColTimestamp, ColJsonb, ColUuid,
+          ArrBool, ArrBytea, ArrInt8, ArrFloat4, ArrFloat8, ArrNumeric, ArrText,
+          ArrDate, ArrTimestamp, ArrJsonb, ArrUuid
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9,
+          $10, $11, $12, $13,
+          $14, $15, $16, $17, $18, $19, $20,
+          $21, $22, $23, $24
+        )`,
+        [
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ],
+      );
+
+      // Row 3: Empty arrays
+      await client.query(
+        `INSERT INTO AllTypes (
+          Id, ColBool, ColBytea, ColInt8, ColFloat4, ColFloat8, ColNumeric, ColText, ColVarchar,
+          ColDate, ColTimestamp, ColJsonb, ColUuid,
+          ArrBool, ArrBytea, ArrInt8, ArrFloat4, ArrFloat8, ArrNumeric, ArrText,
+          ArrDate, ArrTimestamp, ArrJsonb, ArrUuid
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9,
+          $10, $11, $12, $13,
+          $14, $15, $16, $17, $18, $19, $20,
+          $21, $22, $23, $24
+        )`,
+        [
+          3,
+          false,
+          Buffer.from(''),
+          0,
+          0.5,
+          0.5,
+          '0',
+          'Empty arrays row',
+          'Empty arrays',
+          '2026-01-01',
+          new Date('2026-01-01T00:00:00.000Z'),
+          {},
+          '00000000-0000-0000-0000-000000000000',
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
+
+      // Row 4: Arrays with NULL elements inside them
+      await client.query(
+        `INSERT INTO AllTypes (
+          Id, ColBool, ColBytea, ColInt8, ColFloat4, ColFloat8, ColNumeric, ColText, ColVarchar,
+          ColDate, ColTimestamp, ColJsonb, ColUuid,
+          ArrBool, ArrBytea, ArrInt8, ArrFloat4, ArrFloat8, ArrNumeric, ArrText,
+          ArrDate, ArrTimestamp, ArrJsonb, ArrUuid
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9,
+          $10, $11, $12, $13,
+          $14, $15, $16, $17, $18, $19, $20,
+          $21, $22, $23, $24
+        )`,
+        [
+          4,
+          true,
+          Buffer.from('Null elements row'),
+          100,
+          1.5,
+          2.5,
+          '50.5',
+          'Null elements in arrays',
+          'Null elements',
+          '2026-05-05',
+          new Date('2026-05-05T12:00:00.000Z'),
+          {hasNulls: true},
+          'c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33',
+          [true, null, false],
+          [Buffer.from('bin1'), null, Buffer.from('bin3')],
+          [100, null, 300],
+          [1.1, null, 3.3],
+          [3.1415, null, 2.7182],
+          ['10.5', null, '30.125'],
+          ['alpha', null, 'gamma'],
+          ['2026-01-01', null, '2026-06-01'],
+          [
+            new Date('2026-01-01T00:00:00.000Z'),
+            null,
+            new Date('2026-06-01T00:00:00.000Z'),
+          ],
+          [{k: 'v1'}, null, {k: 'v3'}],
+          [
+            'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+            null,
             'b1ffcd00-0d1c-5fa9-cc7e-7cc0ce491b22',
           ],
         ],
@@ -697,13 +829,167 @@ describe('Spanner Driver System Tests (PostgreSQL Dialect)', function () {
         assert.deepStrictEqual(res.rows[0].int_arr, ['10', '20', '30']);
       });
 
-      it('should query AllTypes rows using array membership filter ($1 = ANY(ArrUuid))', async () => {
+      it('should read and decode row with all NULL column values (Id = 2)', async () => {
         const res = await client.query(
-          'SELECT Id FROM AllTypes WHERE $1 = ANY(ArrUuid)',
-          ['a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'],
+          'SELECT ColBool, ColBytea, ColInt8, ColFloat4, ColFloat8, ColNumeric, ColText, ColVarchar, ColDate, ColTimestamp, ColJsonb, ColUuid, ArrBool, ArrBytea, ArrInt8, ArrFloat4, ArrFloat8, ArrNumeric, ArrText, ArrDate, ArrTimestamp, ArrJsonb, ArrUuid FROM AllTypes WHERE Id = 2',
         );
         assert.strictEqual(res.rowCount, 1);
+        const row = res.rows[0] as Record<string, unknown>;
+        assert.ok(row, 'Expected row to be returned');
+        const getCol = (name: string) =>
+          row[name.toLowerCase()] !== undefined
+            ? row[name.toLowerCase()]
+            : row[name];
+
+        assert.strictEqual(getCol('ColBool'), null);
+        assert.strictEqual(getCol('ColBytea'), null);
+        assert.strictEqual(getCol('ColInt8'), null);
+        assert.strictEqual(getCol('ColFloat4'), null);
+        assert.strictEqual(getCol('ColFloat8'), null);
+        assert.strictEqual(getCol('ColNumeric'), null);
+        assert.strictEqual(getCol('ColText'), null);
+        assert.strictEqual(getCol('ColVarchar'), null);
+        assert.strictEqual(getCol('ColDate'), null);
+        assert.strictEqual(getCol('ColTimestamp'), null);
+        assert.strictEqual(getCol('ColJsonb'), null);
+        assert.strictEqual(getCol('ColUuid'), null);
+        assert.strictEqual(getCol('ArrBool'), null);
+        assert.strictEqual(getCol('ArrBytea'), null);
+        assert.strictEqual(getCol('ArrInt8'), null);
+        assert.strictEqual(getCol('ArrFloat4'), null);
+        assert.strictEqual(getCol('ArrFloat8'), null);
+        assert.strictEqual(getCol('ArrNumeric'), null);
+        assert.strictEqual(getCol('ArrText'), null);
+        assert.strictEqual(getCol('ArrDate'), null);
+        assert.strictEqual(getCol('ArrTimestamp'), null);
+        assert.strictEqual(getCol('ArrJsonb'), null);
+        assert.strictEqual(getCol('ArrUuid'), null);
+      });
+
+      it('should read and decode row with empty array columns (Id = 3)', async () => {
+        const res = await client.query(
+          'SELECT ArrBool, ArrBytea, ArrInt8, ArrFloat4, ArrFloat8, ArrNumeric, ArrText, ArrDate, ArrTimestamp, ArrJsonb, ArrUuid FROM AllTypes WHERE Id = 3',
+        );
+        assert.strictEqual(res.rowCount, 1);
+        const row = res.rows[0];
+        assert.deepStrictEqual(row.arrbool || row.ArrBool, []);
+        assert.deepStrictEqual(row.arrbytea || row.ArrBytea, []);
+        assert.deepStrictEqual(row.arrint8 || row.ArrInt8, []);
+        assert.deepStrictEqual(row.arrfloat4 || row.ArrFloat4, []);
+        assert.deepStrictEqual(row.arrfloat8 || row.ArrFloat8, []);
+        assert.deepStrictEqual(row.arrnumeric || row.ArrNumeric, []);
+        assert.deepStrictEqual(row.arrtext || row.ArrText, []);
+        assert.deepStrictEqual(row.arrdate || row.ArrDate, []);
+        assert.deepStrictEqual(row.arrtimestamp || row.ArrTimestamp, []);
+        assert.deepStrictEqual(row.arrjsonb || row.ArrJsonb, []);
+        assert.deepStrictEqual(row.arruuid || row.ArrUuid, []);
+      });
+
+      it('should read and decode row with arrays containing NULL elements (Id = 4)', async () => {
+        const res = await client.query(
+          'SELECT ArrBool, ArrBytea, ArrInt8, ArrFloat4, ArrFloat8, ArrNumeric, ArrText, ArrDate, ArrTimestamp, ArrJsonb, ArrUuid FROM AllTypes WHERE Id = 4',
+        );
+        assert.strictEqual(res.rowCount, 1);
+        const row = res.rows[0];
+        assert.deepStrictEqual(row.arrbool || row.ArrBool, [true, null, false]);
+        const byteaArr = (row.arrbytea || row.ArrBytea) as (Buffer | null)[];
+        assert.ok(Array.isArray(byteaArr));
+        assert.strictEqual(byteaArr[0]?.toString(), 'bin1');
+        assert.strictEqual(byteaArr[1], null);
+        assert.strictEqual(byteaArr[2]?.toString(), 'bin3');
+        assert.deepStrictEqual(row.arrint8 || row.ArrInt8, [
+          '100',
+          null,
+          '300',
+        ]);
+        const float4Arr = (row.arrfloat4 || row.ArrFloat4) as (number | null)[];
+        assert.ok(Math.abs(float4Arr[0]! - 1.1) < 0.01);
+        assert.strictEqual(float4Arr[1], null);
+        assert.ok(Math.abs(float4Arr[2]! - 3.3) < 0.01);
+        assert.deepStrictEqual(row.arrnumeric || row.ArrNumeric, [
+          '10.5',
+          null,
+          '30.125',
+        ]);
+        assert.deepStrictEqual(row.arrtext || row.ArrText, [
+          'alpha',
+          null,
+          'gamma',
+        ]);
+        assert.deepStrictEqual(row.arrdate || row.ArrDate, [
+          '2026-01-01',
+          null,
+          '2026-06-01',
+        ]);
+        const tsArr = (row.arrtimestamp || row.ArrTimestamp) as (Date | null)[];
+        assert.ok(tsArr[0] instanceof Date);
+        assert.strictEqual(tsArr[1], null);
+        assert.ok(tsArr[2] instanceof Date);
+        assert.deepStrictEqual(row.arrjsonb || row.ArrJsonb, [
+          {k: 'v1'},
+          null,
+          {k: 'v3'},
+        ]);
+        assert.deepStrictEqual(row.arruuid || row.ArrUuid, [
+          'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+          null,
+          'b1ffcd00-0d1c-5fa9-cc7e-7cc0ce491b22',
+        ]);
+      });
+
+      it('should support objects with custom .toPostgres() in queries and array parameters', async () => {
+        const customSingerId = {
+          toPostgres: () => 1,
+        };
+        const customItem1 = {
+          toPostgres: () => 'Richards',
+        };
+        const customItem2 = {
+          toPostgres: () => 'Smith',
+        };
+
+        // Scalar parameter with .toPostgres()
+        const res1 = await client.query(
+          'SELECT SingerId, FirstName FROM Singers WHERE SingerId = $1',
+          [customSingerId],
+        );
+        assert.strictEqual(res1.rowCount, 1);
+        assert.strictEqual(
+          res1.rows[0].firstname || res1.rows[0].FirstName,
+          'Marc',
+        );
+
+        // Array parameter with .toPostgres() elements inside array
+        const res2 = await client.query(
+          'SELECT SingerId, LastName FROM Singers WHERE LastName = ANY($1) ORDER BY SingerId',
+          [[customItem1, customItem2]],
+        );
+        assert.strictEqual(res2.rowCount, 2);
+        assert.strictEqual(
+          res2.rows[0].lastname || res2.rows[0].LastName,
+          'Richards',
+        );
+        assert.strictEqual(
+          res2.rows[1].lastname || res2.rows[1].LastName,
+          'Smith',
+        );
+
+        // Array value returned from .toPostgres()
+        const res3 = await client.query(
+          'SELECT SingerId, FirstName FROM Singers WHERE SingerId = ANY($1)',
+          [{toPostgres: () => [1, 2]}],
+        );
+        assert.strictEqual(res3.rowCount, 2);
+      });
+
+      it('should query AllTypes rows using array membership filter ($1 = ANY(ArrUuid))', async () => {
+        const res = await client.query(
+          'SELECT Id FROM AllTypes WHERE $1 = ANY(ArrUuid) ORDER BY Id',
+          ['a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'],
+        );
+        assert.strictEqual(res.rowCount, 2); // Rows 1 and 4 have this UUID in ArrUuid
         assert.strictEqual(String(res.rows[0].id || res.rows[0].Id), '1');
+        assert.strictEqual(String(res.rows[1].id || res.rows[1].Id), '4');
       });
 
       it('should query AllTypes rows using numeric array membership filter ($1 = ANY(ArrInt8))', async () => {
@@ -935,6 +1221,30 @@ describe('Spanner Driver System Tests (PostgreSQL Dialect)', function () {
       assert.strictEqual(results[0].rowCount, 1);
       assert.strictEqual(results[1].rowCount, 1);
       assert.strictEqual(results[2].rowCount, 1);
+    });
+
+    it('should stream rows and fields events via pool.query()', async () => {
+      const q = pool.query('SELECT SingerId, FirstName FROM Singers');
+      let fieldsReceived = false;
+      const rows: unknown[] = [];
+      let lastResult: QueryResult | undefined;
+
+      void q.on('fields', fields => {
+        fieldsReceived = true;
+        assert.ok(fields.length >= 2);
+      });
+      void q.on('row', (row, result) => {
+        rows.push(row);
+        lastResult = result;
+        assert.ok(result);
+        assert.ok(result.fields.length >= 2);
+      });
+
+      const res = (await q) as QueryResult;
+      assert.strictEqual(fieldsReceived, true);
+      assert.strictEqual(rows.length >= 2, true);
+      assert.ok(lastResult);
+      assert.deepStrictEqual(res.rows, rows);
     });
   });
 });

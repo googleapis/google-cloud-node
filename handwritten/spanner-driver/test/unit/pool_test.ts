@@ -1077,15 +1077,20 @@ describe('Pool Class', () => {
 
       const receivedFields: unknown[] = [];
       const receivedRows: unknown[] = [];
+      let receivedResult: unknown = null;
 
       const query = pool.query('SELECT 1');
       void query.on('fields', fields => receivedFields.push(fields));
-      void query.on('row', row => receivedRows.push(row));
+      void query.on('row', (row, result) => {
+        receivedRows.push(row);
+        receivedResult = result;
+      });
 
       await query;
 
       assert.strictEqual(receivedFields.length, 1, 'Should emit fields event');
       assert.strictEqual(receivedRows.length, 1, 'Should emit row event');
+      assert.ok(receivedResult, 'Should pass result object as 2nd parameter');
 
       await pool.end();
     });

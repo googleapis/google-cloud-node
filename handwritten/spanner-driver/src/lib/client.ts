@@ -148,6 +148,10 @@ export class Client extends EventEmitter {
           'Invalid Spanner connection configuration: project, instance, and database must be provided.',
         );
       }
+      // TODO(Follow-up PR): Share native Spanner pools across clients using the same DSN
+      // rather than creating a new Pool per Client. A Pool creates an underlying gRPC channel
+      // pool and can create many Connection instances, whereas Connection is lightweight.
+      // Reference: https://github.com/googleapis/dotnet-spanner-entity-framework/blob/e4dd7124a6b60c70f0f38db3f7507d2bb087d629/spanner-ado-net/spanner-ado-net/SpannerConnection.cs#L371
       const pool = await Pool.create(this.dsn);
       this.nativePool = pool;
       try {
@@ -168,6 +172,10 @@ export class Client extends EventEmitter {
           await this.nativePool.close().catch(() => {});
           this.nativePool = undefined;
         }
+        throw enrichError(
+          new Error('Cannot connect: Client was already closed'),
+          this.dialect,
+        );
       } else {
         this.isConnected = true;
       }
@@ -179,7 +187,11 @@ export class Client extends EventEmitter {
   /**
    * Executes a SQL query against Google Spanner.
    * Supports Promises (`await client.query(sql)`), callbacks (`client.query(sql, cb)`),
-   * and streaming row events (`client.query(sql).on('row', cb)`).
+   * and row-by-row event listeners (`client.query(sql).on('row', cb)`).
+   *
+   * **Memory Consideration**: Like standard `node-postgres`, calling `client.query()` buffers all result
+   * rows in memory before resolving the returned `QueryResult.rows` array. For large datasets,
+   * query pagination (`LIMIT` / `OFFSET`) should be used to manage memory consumption.
    *
    * @template R - Row result shape type (defaults to `Record<string, unknown>`).
    * @param queryText - SQL statement text string, `QueryConfig` configuration object, or existing `Query` instance.
@@ -198,166 +210,24 @@ export class Client extends EventEmitter {
       callback,
     );
 
-    const sqlText = query.text;
-    const sqlValues = query.values;
-
-    if (typeof sqlText !== 'string' || !sqlText.trim()) {
-      const err = enrichError(
-        new Error('Query text must be a non-empty string'),
-        this.dialect,
-      );
-      dispatchQueryError(err, query, actualCallback);
-      const executionPromise = Promise.reject<QueryResult<R>>(err);
-      executionPromise.catch(() => {});
-      query.setPromise(executionPromise);
+    const validationError = this._validateQuery(query);
+    if (validationError) {
+      dispatchQueryError(validationError, query, actualCallback);
+      query.reject(validationError);
       return query;
     }
-
-    if (
-      sqlValues !== undefined &&
-      sqlValues !== null &&
-      !Array.isArray(sqlValues)
-    ) {
-      const err = enrichError(
-        new Error('Query values must be an Array'),
-        this.dialect,
-      );
-      dispatchQueryError(err, query, actualCallback);
-      const executionPromise = Promise.reject<QueryResult<R>>(err);
-      executionPromise.catch(() => {});
-      query.setPromise(executionPromise);
-      return query;
-    }
-
-    if (this.isEnded) {
-      const err = enrichError(
-        new Error('Client was closed and is not queryable'),
-        this.dialect,
-      );
-      dispatchQueryError(err, query, actualCallback);
-      const executionPromise = Promise.reject<QueryResult<R>>(err);
-      executionPromise.catch(() => {});
-      query.setPromise(executionPromise);
-      return query;
-    }
-
-    let resolveTask!: (val: QueryResult<R>) => void;
-    let rejectTask!: (err: unknown) => void;
-    const executionPromise = new Promise<QueryResult<R>>((res, rej) => {
-      resolveTask = res;
-      rejectTask = rej;
-    });
-
-    query.setPromise(executionPromise);
-    executionPromise.catch(() => {});
 
     const task: QueryTask<QueryResult<R>> = {
       run: async () => {
         try {
-          if (this.isEnded) {
-            throw new Error('Client was closed and is not queryable');
-          }
           if (!this.isConnected) {
             await this.connect();
           }
 
-          const resultSets: QueryResult<R>[] = [];
-
-          if (this.nativeConnection) {
-            // Encode params
-            let executeRequest: Parameters<Connection['execute']>[0] = sqlText;
-            if (query.values && query.values.length > 0) {
-              const {fields} = Codec.encodeParams(query.values, this.dialect);
-              executeRequest = {
-                sql: sqlText,
-                params: {fields},
-              };
-            }
-            const nativeRows =
-              await this.nativeConnection.execute(executeRequest);
-            try {
-              this.txStatus = this.nativeConnection.transactionState || 'I';
-
-              let hasMoreResultSets = true;
-              while (hasMoreResultSets) {
-                const metadata = await nativeRows.metadata();
-                const fields = Codec.mapMetadataToFieldDefs(
-                  metadata,
-                  this.dialect,
-                );
-                if (fields.length > 0) {
-                  query.emit('fields', fields);
-                }
-
-                const parsers = Codec.getTypeParsers(
-                  fields,
-                  query.types || this.types,
-                  this.dialect,
-                );
-
-                const currentRows: R[] = [];
-                const currentResult: QueryResult<R> = {
-                  rows: currentRows,
-                  fields,
-                  rowCount: 0,
-                  // TODO(PR - Command Resolution): Parse or receive SQL command tag from backend
-                  command: 'SELECT',
-                };
-
-                let listValue;
-                while ((listValue = await nativeRows.next()) !== null) {
-                  const rawRow = Codec.extractRawRow(listValue);
-                  const decoded = Codec.decodeRow<R>(
-                    rawRow,
-                    fields,
-                    parsers,
-                    query.rowMode,
-                  );
-                  currentRows.push(decoded);
-                  currentResult.rowCount = currentRows.length;
-                  query.emit('row', decoded, currentResult);
-                }
-
-                const stats = await nativeRows.resultSetStats();
-                if (
-                  stats &&
-                  stats.rowCountExact !== undefined &&
-                  stats.rowCountExact !== null
-                ) {
-                  currentResult.rowCount =
-                    typeof stats.rowCountExact === 'number'
-                      ? stats.rowCountExact
-                      : parseInt(String(stats.rowCountExact), 10);
-                } else {
-                  const updateCount = await nativeRows.updateCount();
-                  currentResult.rowCount =
-                    updateCount >= 0 ? updateCount : currentRows.length;
-                }
-
-                // TODO(PR - Command Resolution): Parse or receive SQL command tag from backend
-                currentResult.command = 'SELECT';
-                resultSets.push(currentResult);
-
-                if (typeof nativeRows.nextResultSet === 'function') {
-                  hasMoreResultSets = Boolean(await nativeRows.nextResultSet());
-                } else {
-                  hasMoreResultSets = false;
-                }
-              }
-            } finally {
-              await nativeRows.close();
-            }
-          }
-
-          const finalResult: QueryResult<R> | QueryResult<R>[] =
-            resultSets.length > 1
-              ? resultSets
-              : resultSets[0] || {
-                  rows: [],
-                  fields: [],
-                  rowCount: 0,
-                  command: 'SELECT',
-                };
+          const finalResult = await this._executeOnNativeConnection<R>(
+            query.text!,
+            query,
+          );
 
           query.emit('end', finalResult);
           if (actualCallback) {
@@ -365,7 +235,7 @@ export class Client extends EventEmitter {
               actualCallback!(null, finalResult as QueryResult<R>),
             );
           }
-          resolveTask(finalResult as QueryResult<R>);
+          query.resolve(finalResult as QueryResult<R>);
           return finalResult as QueryResult<R>;
         } catch (err: unknown) {
           if (this.nativeConnection) {
@@ -373,19 +243,179 @@ export class Client extends EventEmitter {
           }
           const enriched = enrichError(err, this.dialect);
           dispatchQueryError(enriched, query, actualCallback);
-          rejectTask(enriched);
+          query.reject(enriched);
           throw enriched;
         }
       },
       cancel: (err: Error) => {
         dispatchQueryError(err, query, actualCallback);
-        rejectTask(err);
+        query.reject(err);
       },
     };
 
     this.queryQueue.push(task as QueryTask<unknown>);
     void this.processQueue();
     return query;
+  }
+
+  /**
+   * Validates query text, positional parameter arrays, and client state.
+   */
+  private _validateQuery<R>(query: Query<QueryResult<R>>): Error | null {
+    const sqlText = query.text;
+    const sqlValues = query.values;
+
+    if (typeof sqlText !== 'string' || !sqlText.trim()) {
+      return enrichError(
+        new Error('Query text must be a non-empty string'),
+        this.dialect,
+      );
+    }
+
+    if (
+      sqlValues !== undefined &&
+      sqlValues !== null &&
+      !Array.isArray(sqlValues)
+    ) {
+      return enrichError(
+        new Error('Query values must be an Array'),
+        this.dialect,
+      );
+    }
+
+    if (this.isEnded) {
+      return enrichError(
+        new Error('Client was closed and is not queryable'),
+        this.dialect,
+      );
+    }
+
+    return null;
+  }
+
+  /**
+   * Builds native execution request object, encoding parameters if present.
+   */
+  private _buildExecuteRequest(
+    sqlText: string,
+    values?: unknown[],
+  ): Parameters<Connection['execute']>[0] {
+    if (values && values.length > 0) {
+      const {fields} = Codec.encodeParams(values, this.dialect);
+      return {
+        sql: sqlText,
+        params: {fields},
+      };
+    }
+    return sqlText;
+  }
+
+  /**
+   * Decodes rows, field metadata, and row stats for a single native result set.
+   */
+  private async _decodeResultSet<R>(
+    nativeRows: Awaited<ReturnType<Connection['execute']>>,
+    query: Query<QueryResult<R>>,
+  ): Promise<QueryResult<R>> {
+    const metadata = await nativeRows.metadata();
+    const fields = Codec.mapMetadataToFieldDefs(metadata, this.dialect);
+    if (fields.length > 0) {
+      query.emit('fields', fields);
+    }
+
+    const parsers = Codec.getTypeParsers(
+      fields,
+      query.types || this.types,
+      this.dialect,
+    );
+
+    const currentRows: R[] = [];
+    const currentResult: QueryResult<R> = {
+      rows: currentRows,
+      fields,
+      rowCount: 0,
+      // TODO(PR - Command Resolution): Parse or receive SQL command tag from backend
+      command: 'SELECT',
+    };
+
+    let listValue;
+    while ((listValue = await nativeRows.next()) !== null) {
+      const rawRow = Codec.extractRawRow(listValue);
+      const decoded = Codec.decodeRow<R>(
+        rawRow,
+        fields,
+        parsers,
+        query.rowMode,
+      );
+      currentRows.push(decoded);
+      currentResult.rowCount = currentRows.length;
+      query.emit('row', decoded, currentResult);
+    }
+
+    const stats = await nativeRows.resultSetStats();
+    if (
+      stats &&
+      stats.rowCountExact !== undefined &&
+      stats.rowCountExact !== null
+    ) {
+      currentResult.rowCount =
+        typeof stats.rowCountExact === 'number'
+          ? stats.rowCountExact
+          : parseInt(String(stats.rowCountExact), 10);
+    } else {
+      const updateCount = await nativeRows.updateCount();
+      currentResult.rowCount =
+        updateCount >= 0 ? updateCount : currentRows.length;
+    }
+
+    currentResult.command = 'SELECT';
+    return currentResult;
+  }
+
+  /**
+   * Executes query on native Spanner connection, handling multi-result sets and cleanup.
+   */
+  private async _executeOnNativeConnection<R>(
+    sqlText: string,
+    query: Query<QueryResult<R>>,
+  ): Promise<QueryResult<R> | QueryResult<R>[]> {
+    if (!this.nativeConnection) {
+      throw enrichError(
+        new Error('Connection terminated: Client was closed or not connected'),
+        this.dialect,
+      );
+    }
+
+    const executeRequest = this._buildExecuteRequest(sqlText, query.values);
+    const nativeRows = await this.nativeConnection.execute(executeRequest);
+
+    try {
+      this.txStatus = this.nativeConnection.transactionState || 'I';
+      const resultSets: QueryResult<R>[] = [];
+
+      let hasMoreResultSets = true;
+      while (hasMoreResultSets) {
+        const resultSet = await this._decodeResultSet<R>(nativeRows, query);
+        resultSets.push(resultSet);
+
+        if (typeof nativeRows.nextResultSet === 'function') {
+          hasMoreResultSets = Boolean(await nativeRows.nextResultSet());
+        } else {
+          hasMoreResultSets = false;
+        }
+      }
+
+      return resultSets.length > 1
+        ? resultSets
+        : resultSets[0] || {
+            rows: [],
+            fields: [],
+            rowCount: 0,
+            command: 'SELECT',
+          };
+    } finally {
+      await nativeRows.close().catch(() => {});
+    }
   }
 
   /**
@@ -487,7 +517,10 @@ export class Client extends EventEmitter {
     // Cancel pending queries in queue to prevent execution after client close
     const pendingTasks = this.queryQueue;
     this.queryQueue = [];
-    const closeError = new Error('Client was closed and is not queryable');
+    const closeError = enrichError(
+      new Error('Client was closed and is not queryable'),
+      this.dialect,
+    );
     for (const task of pendingTasks) {
       if (task.cancel) {
         task.cancel(closeError);

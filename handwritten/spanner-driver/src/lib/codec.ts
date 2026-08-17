@@ -43,9 +43,10 @@ export class Codec {
    * Encodes a JavaScript value to Spanner Protobuf value and type format.
    *
    * @param val - JavaScript value.
+   * @param dialect - Active SQL dialect ('pg' or 'googlesql'). Defaults to 'pg'.
    * @returns EncodedParam containing `valueProto` and `typeProto`.
    */
-  static encodeValue(val: unknown): EncodedParam {
+  static encodeValue(val: unknown, dialect: Dialect = 'pg'): EncodedParam {
     if (val === null || val === undefined) {
       return {
         valueProto: {nullValue: google.protobuf.NullValue.NULL_VALUE},
@@ -53,6 +54,14 @@ export class Codec {
           code: google.spanner.v1.TypeCode.TYPE_CODE_UNSPECIFIED,
         },
       };
+    }
+
+    // Prepare dialect-specific values (e.g. unwrap .toPostgres() custom objects in 'pg' dialect)
+    if (dialect === 'pg') {
+      const prepared = preparePgValue(val);
+      if (prepared !== val) {
+        return Codec.encodeValue(prepared, dialect);
+      }
     }
 
     if (typeof val === 'boolean') {
@@ -117,7 +126,7 @@ export class Codec {
           },
         };
       }
-      const encodedElements = val.map(el => Codec.encodeValue(el));
+      const encodedElements = val.map(el => Codec.encodeValue(el, dialect));
       const firstNonUnspecified = encodedElements.find(
         el =>
           el.typeProto && el.typeProto.code !== TypeCode.TYPE_CODE_UNSPECIFIED,
@@ -170,8 +179,7 @@ export class Codec {
     }
 
     for (let i = 0; i < values.length; i++) {
-      const rawVal = dialect === 'pg' ? preparePgValue(values[i]) : values[i];
-      const encoded = Codec.encodeValue(rawVal);
+      const encoded = Codec.encodeValue(values[i], dialect);
       fields[`p${i + 1}`] = encoded.valueProto;
     }
 
@@ -290,13 +298,19 @@ export class Codec {
       return v.stringValue;
     }
     if (v.numberValue !== undefined && v.numberValue !== null) {
-      return String(v.numberValue);
+      return v.numberValue;
     }
     if (v.boolValue !== undefined && v.boolValue !== null) {
-      return v.boolValue ? 't' : 'f';
+      return v.boolValue;
     }
     if (v.structValue) {
-      return JSON.stringify(v.structValue);
+      const obj: Record<string, unknown> = {};
+      if (v.structValue.fields) {
+        for (const [key, val] of Object.entries(v.structValue.fields)) {
+          obj[key] = Codec.extractSingleValue(val);
+        }
+      }
+      return obj;
     }
     if (v.listValue) {
       return v.listValue.values

@@ -455,7 +455,11 @@ export class Pool extends EventEmitter {
 
   /**
    * Executes a query by acquiring a client, executing the statement, and automatically releasing the client.
-   * Supports Promises, callbacks, and streaming row events.
+   * Supports Promises, callbacks, and row-by-row event listeners.
+   *
+   * **Memory Consideration**: Like standard `node-postgres`, calling `pool.query()` buffers all result
+   * rows in memory before resolving the returned `QueryResult.rows` array. For large datasets,
+   * query pagination (`LIMIT` / `OFFSET`) should be used to manage memory consumption.
    *
    * @template R - Row result shape type (defaults to `Record<string, unknown>`).
    * @param queryText - SQL query string, `QueryConfig` object, or `Query` instance.
@@ -493,8 +497,8 @@ export class Pool extends EventEmitter {
       );
       queryForClient.rowMode = query.rowMode;
       queryForClient.types = query.types;
-      void queryForClient.on('row', row => {
-        void query.emit('row', row);
+      void queryForClient.on('row', (row, result) => {
+        void query.emit('row', row, result);
       });
       void queryForClient.on('fields', fields => {
         void query.emit('fields', fields);

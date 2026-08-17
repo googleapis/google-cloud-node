@@ -396,6 +396,23 @@ describe('Client Class', () => {
       }
     });
 
+    it('should throw Connection terminated if nativeConnection is missing during query execution', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      (client as unknown as {isConnected: boolean}).isConnected = true;
+      (client as unknown as {nativeConnection: unknown}).nativeConnection =
+        undefined;
+
+      await assert.rejects(
+        async () => client.query('SELECT 1'),
+        /Connection terminated/,
+      );
+      await client.end();
+    });
+
     it('should emit end event on Query when query execution completes', done => {
       const client = new Client({
         project: 'p',
@@ -477,6 +494,36 @@ describe('Client Class', () => {
       });
       const res = await client.query('SELECT $1 as name', ['hello']);
       assert.strictEqual(res.command, 'SELECT');
+      await client.end();
+    });
+
+    it('should support QueryConfig object with rowMode array', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      const res = await client.query({
+        text: 'SELECT 1',
+        rowMode: 'array',
+      });
+      assert.strictEqual(res.command, 'SELECT');
+      assert.strictEqual(res.rowCount, 1);
+      assert.deepStrictEqual(res.rows, [['1']]);
+      await client.end();
+    });
+
+    it('should support queries with empty values array and undefined values', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      const res1 = await client.query('SELECT 1', []);
+      assert.strictEqual(res1.rowCount, 1);
+
+      const res2 = await client.query('SELECT 1', undefined);
+      assert.strictEqual(res2.rowCount, 1);
       await client.end();
     });
 

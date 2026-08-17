@@ -147,6 +147,32 @@ export class Query<T = unknown> extends EventEmitter {
   }
 
   /**
+   * Resolves the internal query promise with a result value.
+   *
+   * @param value - Result value resolving the query promise.
+   */
+  public resolve(value: T): void {
+    if (this.promiseResolver) {
+      const resolver = this.promiseResolver;
+      this.promiseResolver = undefined;
+      resolver.resolve(value);
+    }
+  }
+
+  /**
+   * Rejects the internal query promise with an error.
+   *
+   * @param reason - Error or rejection reason.
+   */
+  public reject(reason: unknown): void {
+    if (this.promiseResolver) {
+      const resolver = this.promiseResolver;
+      this.promiseResolver = undefined;
+      resolver.reject(reason);
+    }
+  }
+
+  /**
    * Binds internal Promise backing Thenable operations.
    *
    * @param promise - Internal execution Promise.

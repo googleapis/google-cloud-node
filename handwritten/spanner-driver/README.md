@@ -131,10 +131,12 @@ console.log(`Waiting Requests:  ${pool.waitingCount}`); // Queued queries waitin
 
 ---
 
-### 3. Streaming Rows & Events
+### 3. Row & Query Event Listeners
+
+`Query` instances extend `EventEmitter`, allowing you to listen to `row`, `fields`, `end`, and `error` events:
 
 ```typescript
-import { Client, Query } from '@google-cloud/spanner-driver';
+import { Client } from '@google-cloud/spanner-driver';
 
 const client = new Client({
   project: 'my-gcp-project',
@@ -144,13 +146,15 @@ const client = new Client({
 
 await client.connect();
 
-// Stream rows as they arrive from Spanner gRPC stream
-client.query('SELECT * FROM large_table')
+// Listen to query events as rows are decoded
+client.query('SELECT id, name FROM users')
   .on('fields', fields => console.log('Column metadata:', fields))
   .on('row', row => console.log('Received Row:', row))
   .on('end', result => console.log('Query completed. Row count:', result.rowCount))
   .on('error', err => console.error('Query error:', err));
 ```
+
+> **Note on Memory**: Listening to `.on('row')` events does not bypass in-memory row buffering in `QueryResult.rows`. For large queries, use SQL pagination (`LIMIT` / `OFFSET`).
 
 ---
 
@@ -233,6 +237,11 @@ When working with Cloud Spanner's PostgreSQL dialect, keep the following behavio
    - SQL query projections and expressions can generate multidimensional arrays (e.g. `SELECT ARRAY[ARRAY[1, 2], ARRAY[3, 4]]`). The driver's array parser recursively decodes nested arrays into multidimensional JavaScript arrays (e.g. `[[1, 2], [3, 4]]`).
 4. **64-bit Integer Precision (`INT8` / `BIGINT`)**:
    - By default, `INT8` columns are returned as strings to prevent precision loss beyond JavaScript's 53-bit `Number.MAX_SAFE_INTEGER` ($9,007,199,254,740,991$). Use `types.setTypeParser(BuiltinOids.INT8, BigInt)` or `Number` based on your application's requirements.
+5. **Memory Usage & Result Set Buffering**:
+   - Like standard `node-postgres`, calling `client.query()` or `pool.query()` buffers all returned rows into the in-memory `QueryResult.rows` array before resolving the Promise or callback.
+   - For large datasets, use SQL query pagination (`LIMIT` / `OFFSET`) or selective filtering to avoid excessive memory consumption.
+6. **Wire Format & Parsers**:
+   - The driver communicates with Cloud Spanner via gRPC Protobuf rather than PostgreSQL's raw TCP wire protocol. Type parsers operate on text, JSON, and structured Protobuf representations; binary wire protocol parsers (`format: 'binary'`) are not applicable.
 
 ---
 
