@@ -11,6 +11,6 @@
     "name": "ftp",
     "name_pretty": "Cloud FTP",
     "product_documentation": "https://docs.cloud.google.com/cloud-ftp",
-    "release_level": "stable",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-node"
 }

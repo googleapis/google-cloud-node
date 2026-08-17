@@ -989,6 +989,7 @@ libraries:
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
   - name: google-cloud-ftp
+    version: 0.0.0
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
