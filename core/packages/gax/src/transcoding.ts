@@ -120,7 +120,7 @@ export function deleteField(request: JSONObject, field: string): void {
 
 // Validates a single path segment matched by a single wildcard (*).
 // Checks that the segment is not exactly '.' or '..' (directory traversal indicators).
-function validateSingleSegment(propertyName: string, value: string): void {
+function validateUriPathSegment(propertyName: string, value: string): void {
   if (value === '.' || value === '..') {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
   }
@@ -130,7 +130,7 @@ function validateSingleSegment(propertyName: string, value: string): void {
 // Splitting by slash, it checks that no individual segment is exactly '.' or '..'.
 // This segment-by-segment check prevents directory traversal while allowing
 // legitimate resource names containing dots (e.g., domain-scoped project IDs).
-function validateMultiSegment(propertyName: string, value: string): void {
+function validateUriPath(propertyName: string, value: string): void {
   if (value) {
     // Split by slash and check for exact segment matches of '.' or '..' rather
     // than using a simple string.includes('.') check. This avoids rejecting
@@ -204,7 +204,7 @@ export function applyPattern(
   propertyName = 'resource', // Used to provide precise error messages when path validation fails
 ): string | undefined {
   if (!pattern || pattern === '*') {
-    validateSingleSegment(propertyName, fieldValue);
+    validateUriPathSegment(propertyName, fieldValue);
     return encodeWithSlashes(fieldValue);
   }
 
@@ -235,9 +235,9 @@ export function applyPattern(
     if (groupVal !== undefined && groupVal !== null) {
       const wildcardType = wildcards[i - 1];
       if (wildcardType === '*') {
-        validateSingleSegment(propertyName, groupVal);
+        validateUriPathSegment(propertyName, groupVal);
       } else if (wildcardType === '**') {
-        validateMultiSegment(propertyName, groupVal);
+        validateUriPath(propertyName, groupVal);
       }
     }
   }
