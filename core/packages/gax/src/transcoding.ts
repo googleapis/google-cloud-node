@@ -191,9 +191,7 @@ function strictEncodeURIComponent(str: string): string {
  * @returns {string} The percent-encoded string.
  */
 export function encodeWithSlashes(str: string): string {
-  return [...str]
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : strictEncodeURIComponent(c)))
-    .join('');
+  return strictEncodeURIComponent(str);
 }
 
 /**
@@ -205,9 +203,7 @@ export function encodeWithSlashes(str: string): string {
  * @returns {string} The percent-encoded string with slashes preserved.
  */
 export function encodeWithoutSlashes(str: string): string {
-  return [...str]
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : strictEncodeURIComponent(c)))
-    .join('');
+  return str.split('/').map(strictEncodeURIComponent).join('/');
 }
 
 function escapeRegExp(str: string) {
