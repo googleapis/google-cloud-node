@@ -182,12 +182,28 @@ function strictEncodeURIComponent(str: string): string {
   );
 }
 
+/**
+ * Percent-encodes a string according to RFC 3986, preserving only unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
+ * including slashes ('/'), are percent-encoded.
+ *
+ * @param {string} str - The input string to encode.
+ * @returns {string} The percent-encoded string.
+ */
 export function encodeWithSlashes(str: string): string {
   return [...str]
     .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
 
+/**
+ * Percent-encodes a string according to RFC 3986, preserving unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
+ * characters are percent-encoded.
+ *
+ * @param {string} str - The input string to encode.
+ * @returns {string} The percent-encoded string with slashes preserved.
+ */
 export function encodeWithoutSlashes(str: string): string {
   return [...str]
     .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : strictEncodeURIComponent(c)))
