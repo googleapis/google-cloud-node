@@ -59,7 +59,12 @@ jobs:
             echo "==================== GIT DIFF ===================="
             git diff
             echo "=================================================="
-            echo "Regeneration failed. Please run 'librarian generate --all' to update the generated files."
+            V=$(sed -n 's/^version: //p' librarian.yaml)
+            echo "Regeneration failed. Please run:"
+            echo ""
+            echo "  go run github.com/googleapis/librarian/cmd/librarian@$V generate --all"
+            echo ""
+            echo "to update the generated files."
             exit 1
           fi
       - name: Create issue if previous step fails
