@@ -19,7 +19,8 @@ export class SpannerRowParser {
   processChunk(chunk: google.spanner.v1.PartialResultSet): (Row | Json)[] {
     const rowsFound: (Row | Json)[] = [];
     if (!this._fields && chunk.metadata?.rowType?.fields) {
-      this._fields = chunk.metadata.rowType.fields as google.spanner.v1.StructType.Field[];
+      this._fields = chunk.metadata.rowType
+        .fields as google.spanner.v1.StructType.Field[];
       this._decoders = this._fields.map(({name, type}) => {
         const columnMetadata = (this._options.columnsMetadata as any)?.[name!];
         return codec.getDecoder(
@@ -34,14 +35,23 @@ export class SpannerRowParser {
       return rowsFound;
     }
 
-    let values = chunk.values || [];
-    
+    const chunkValues = chunk.values || [];
+    const numValues = chunkValues.length;
+    const values = new Array(numValues);
+    for (let i = 0; i < numValues; i++) {
+      values[i] = GrpcService.decodeValue_(chunkValues[i]);
+    }
+
     // Resolve pending cross-boundary value
     if (this._pendingValue !== undefined && values.length > 0) {
       const type = this._fields[this._values.length % this._fields.length].type;
-      const merged = this.merge(type! as google.spanner.v1.Type, this._pendingValue, values[0]);
+      const merged = this.merge(
+        type! as google.spanner.v1.Type,
+        this._pendingValue,
+        values[0],
+      );
       this._pendingValue = undefined;
-      
+
       if (merged.length === 1) {
         values[0] = merged[0];
       } else {
@@ -75,7 +85,9 @@ export class SpannerRowParser {
     }
 
     // 2. Process complete rows directly from the chunk array with an offset
-    const completeRowsPossible = Math.floor((values.length - offset) / fieldCount);
+    const completeRowsPossible = Math.floor(
+      (values.length - offset) / fieldCount,
+    );
     for (let r = 0; r < completeRowsPossible; r++) {
       rowsFound.push(this._createRow(values, offset));
       offset += fieldCount;
@@ -105,7 +117,7 @@ export class SpannerRowParser {
         const {name} = fields[i];
         if (!name && !includeNameless) continue;
         const fieldName = name ? name : `_${i}`;
-        json[fieldName] = decoders[i](GrpcService.decodeValue_(rawValuesList[offset + i]));
+        json[fieldName] = decoders[i](rawValuesList[offset + i]);
       }
       return json;
     }
@@ -115,10 +127,10 @@ export class SpannerRowParser {
     for (let i = 0; i < fieldCount; i++) {
       fields[i] = {
         name: this._fields![i].name,
-        value: this._decoders![i](GrpcService.decodeValue_(rawValuesList[offset + i])),
+        value: this._decoders![i](rawValuesList[offset + i]),
       };
     }
-    
+
     Object.defineProperty(fields, 'toJSON', {
       value: (options?: JSONOptions): Json => {
         return codec.convertFieldsToJson(fields as Field[], options);
@@ -127,11 +139,7 @@ export class SpannerRowParser {
     return fields as Row;
   }
 
-  private merge(
-    type: google.spanner.v1.Type,
-    head: any,
-    tail: any,
-  ): any[] {
+  private merge(type: google.spanner.v1.Type, head: any, tail: any): any[] {
     if (
       type.code === google.spanner.v1.TypeCode.ARRAY ||
       type.code === 'ARRAY' ||
@@ -162,7 +170,8 @@ export class SpannerRowParser {
     ) {
       listType = type.arrayElementType as google.spanner.v1.Type;
     } else {
-      listType = type.structType!.fields![head.length - 1].type as google.spanner.v1.Type;
+      listType = type.structType!.fields![head.length - 1]
+        .type as google.spanner.v1.Type;
     }
     const merged = this.merge(listType, head.pop(), tail.shift());
     return [...head, ...merged, ...tail];
