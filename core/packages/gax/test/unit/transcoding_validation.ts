@@ -14,13 +14,7 @@
 
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
-import * as path from 'path';
-
-const dialogflowPath = path.resolve(
-  __dirname,
-  '../../../../../../packages/google-cloud-dialogflow-cx'
-);
-const { v3 } = require(dialogflowPath);
+const { v3 } = require('../../../../../../packages/google-cloud-dialogflow-cx');
 
 const sinon = require('sinon');
 
