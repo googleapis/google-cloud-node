@@ -70,4 +70,3 @@ export {
 export {GaxiosResponseWithHTTP2} from './http2';
 
 export * from './util';
-export * from './transcoding';
