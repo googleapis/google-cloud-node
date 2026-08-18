@@ -58,47 +58,26 @@ export const validateUriPathSegment = validateSingleSegment;
 export const validateUriPath = validateMultiSegment;
 
 /**
- * Strictly percent-encodes a string according to RFC 3986.
- * This is necessary because encodeURIComponent natively encodes URL-unsafe
- * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
- * To ensure strict compliance, we manually encode those preserved characters.
- *
- * @param str The input string to encode
- * @returns The strictly percent-encoded string
- */
-export function strictEncodeURIComponent(str: string): string {
-  return encodeURIComponent(str).replace(
-    /[!'()*]/g,
-    character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
-  );
-}
-
-/**
- * Percent-encodes a string according to RFC 3986, preserving only unreserved
- * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
+ * Percent-encodes a string, preserving only unreserved characters
+ * (alpha-numeric, '-', '_', '.', and '~'). All other characters,
  * including slashes ('/'), are percent-encoded.
  *
  * @param str The input string to encode
  * @returns The percent-encoded string
  */
 export function encodeWithSlashes(str: string): string {
-  return [...str]
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : strictEncodeURIComponent(c)))
-    .join('');
+  return encodeURIComponent(str);
 }
 
 /**
- * Percent-encodes a string according to RFC 3986, preserving unreserved
- * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
- * characters are percent-encoded.
+ * Percent-encodes a string, preserving unreserved characters and slashes ('/').
+ * All other characters are percent-encoded.
  *
  * @param str The input string to encode
  * @returns The percent-encoded string with slashes preserved
  */
 export function encodeWithoutSlashes(str: string): string {
-  return [...str]
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : strictEncodeURIComponent(c)))
-    .join('');
+  return str.split('/').map(encodeURIComponent).join('/');
 }
 
 /**

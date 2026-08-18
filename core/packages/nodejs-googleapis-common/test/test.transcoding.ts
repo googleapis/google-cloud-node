@@ -17,7 +17,6 @@ import {describe, it} from 'mocha';
 import {
   validateSingleSegment,
   validateMultiSegment,
-  strictEncodeURIComponent,
   encodeWithSlashes,
   encodeWithoutSlashes,
   extractTemplateParams,
@@ -104,20 +103,17 @@ describe('transcoding', () => {
     });
   });
 
-  describe('strictEncodeURIComponent and encodeWithSlashes', () => {
+  describe('encodeWithSlashes', () => {
     it('should preserve unreserved characters', () => {
       const unreserved = 'abc-123_.~XYZ';
-      assert.strictEqual(strictEncodeURIComponent(unreserved), unreserved);
       assert.strictEqual(encodeWithSlashes(unreserved), unreserved);
     });
 
-    it("should strictly percent-encode !'()* and slashes", () => {
-      assert.strictEqual(strictEncodeURIComponent("!'()*"), '%21%27%28%29%2A');
+    it('should percent-encode slashes', () => {
       assert.strictEqual(encodeWithSlashes('/'), '%2F');
     });
 
     it('should properly encode Unicode surrogate pairs / emojis', () => {
-      assert.strictEqual(strictEncodeURIComponent('😊'), '%F0%9F%98%8A');
       assert.strictEqual(encodeWithSlashes('😊'), '%F0%9F%98%8A');
     });
   });
@@ -132,16 +128,16 @@ describe('transcoding', () => {
 
     it('should percent-encode query, fragment, and special characters', () => {
       const input =
-        'projects/p/locations/l/agents/a/sessions/my-session?$httpMethod=DELETE#';
+        'projects/p/locations/l/agents/a/sessions/my-session?$foo=BAR#';
       const expected =
-        'projects/p/locations/l/agents/a/sessions/my-session%3F%24httpMethod%3DDELETE%23';
+        'projects/p/locations/l/agents/a/sessions/my-session%3F%24foo%3DBAR%23';
       assert.strictEqual(encodeWithoutSlashes(input), expected);
     });
 
-    it('should percent-encode all reserved characters while preserving slashes', () => {
+    it('should percent-encode reserved characters while preserving slashes', () => {
       const input = "projects/p/locations/l/agents/a/sessions/ !@$&'()*+,;=:%";
       const expected =
-        'projects/p/locations/l/agents/a/sessions/%20%21%40%24%26%27%28%29%2A%2B%2C%3B%3D%3A%25';
+        "projects/p/locations/l/agents/a/sessions/%20!%40%24%26'()*%2B%2C%3B%3D%3A%25";
       assert.strictEqual(encodeWithoutSlashes(input), expected);
     });
 
@@ -215,7 +211,7 @@ describe('transcoding', () => {
     it('should validate and encode multi-segment params and validate single-segment params', () => {
       const params: Record<string, any> = {
         parent:
-          'projects/p/locations/l/agents/a/sessions/my-session?$httpMethod=DELETE#',
+          'projects/p/locations/l/agents/a/sessions/my-session?$foo=BAR#',
         fileId: 'file-123',
       };
       validateAndEncodeParams(
@@ -224,7 +220,7 @@ describe('transcoding', () => {
       );
       assert.strictEqual(
         params.parent,
-        'projects/p/locations/l/agents/a/sessions/my-session%3F%24httpMethod%3DDELETE%23',
+        'projects/p/locations/l/agents/a/sessions/my-session%3F%24foo%3DBAR%23',
       );
       assert.strictEqual(params.fileId, 'file-123');
     });

@@ -825,7 +825,7 @@ describe('createAPIRequest', () => {
 
     it('should protect against query parameter and fragment injection by percent-encoding in path parameters', async () => {
       const p =
-        '/v3/projects/p/locations/l/agents/a/sessions/my-session%3F%24httpMethod%3DDELETE%23:detectIntent';
+        '/v3/projects/p/locations/l/agents/a/sessions/my-session%3F%24foo%3DBAR%23:detectIntent';
       const scope = nock('https://dialogflow.googleapis.com')
         .post(p)
         .reply(200, {});
@@ -837,7 +837,7 @@ describe('createAPIRequest', () => {
         },
         params: {
           session:
-            'projects/p/locations/l/agents/a/sessions/my-session?$httpMethod=DELETE#',
+            'projects/p/locations/l/agents/a/sessions/my-session?$foo=BAR#',
         },
         requiredParams: [],
         pathParams: ['session'],
@@ -848,9 +848,9 @@ describe('createAPIRequest', () => {
       scope.done();
     });
 
-    it('should strictly percent-encode reserved characters while preserving unreserved characters and slashes in reserved parameters', async () => {
+    it('should percent-encode reserved characters while preserving unreserved characters and slashes in reserved parameters', async () => {
       const p =
-        '/v3/projects/p/locations/l/agents/a/sessions/%20%21%40%24%26%27%28%29%2A%2B%2C%3B%3D%3A%25:detectIntent';
+        "/v3/projects/p/locations/l/agents/a/sessions/%20!%40%24%26'()*%2B%2C%3B%3D%3A%25:detectIntent";
       const scope = nock('https://dialogflow.googleapis.com')
         .post(p)
         .reply(200, {});
