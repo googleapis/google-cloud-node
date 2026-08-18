@@ -24,7 +24,7 @@ import {SchemaParameters} from './schema';
 import * as h2 from './http2';
 import {GaxiosResponseWithHTTP2} from './http2';
 import {headersToClassicHeaders, marshallGaxiosResponse} from './util';
-import {validateAndEncodePathParams} from './transcoding';
+import {normalizePathParams, validateAndEncodeParams} from './transcoding';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../package.json');
@@ -157,6 +157,9 @@ async function createAPIRequestAsync<T>(
     }
   });
 
+  // Un-alias path parameters that were modified due to conflicts with reserved names
+  normalizePathParams(parameters.pathParams);
+
   // Check for missing required parameters in the API request
   const missingParams = getMissingParams(params, parameters.requiredParams);
   if (missingParams) {
@@ -166,7 +169,7 @@ async function createAPIRequestAsync<T>(
   }
 
   // Validate and encode path params to prevent traversal and injection attacks
-  validateAndEncodePathParams(
+  validateAndEncodeParams(
     [
       options.url !== undefined && options.url !== null
         ? typeof options.url === 'object'
@@ -176,7 +179,6 @@ async function createAPIRequestAsync<T>(
       parameters.mediaUrl ?? undefined,
     ],
     params,
-    parameters.pathParams,
   );
 
   // Parse urls

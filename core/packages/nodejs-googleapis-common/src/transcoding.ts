@@ -144,19 +144,35 @@ export function extractTemplateParams(urlTemplate: string): {
 }
 
 /**
+ * Modifies the pathParams array in-place to normalize / un-alias parameters
+ * that have trailing underscores (e.g. 'resource_' -> 'resource') due to
+ * conflicts with JavaScript reserved words.
+ *
+ * @param pathParams List of path parameter names to normalize in-place
+ */
+export function normalizePathParams(pathParams?: string[]): void {
+  if (!pathParams || !Array.isArray(pathParams)) {
+    return;
+  }
+  for (let i = 0; i < pathParams.length; i++) {
+    if (pathParams[i].slice(-1) === '_') {
+      pathParams[i] = pathParams[i].slice(0, -1);
+    }
+  }
+}
+
+/**
  * Validates path parameters against traversal attacks ('.' and '..') and encodes
- * multi-segment parameters so that reserved characters (query params, fragments, etc.)
- * cannot be injected into the path.
+ * multi-segment parameters in params so that reserved characters (query params, fragments, etc.)
+ * cannot be injected into the path. Modifies params in-place.
  *
  * @param urlTemplates List of URL templates associated with the request (e.g. url, mediaUrl)
  * @param params Request parameters dictionary (modified in-place)
- * @param pathParams List of path parameter names
  */
-export function validateAndEncodePathParams(
+export function validateAndEncodeParams(
   urlTemplates: (string | undefined)[],
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: Record<string, any>,
-  pathParams?: string[],
 ): void {
   // Early return if params is undefined, null, or not an object
   if (!params || typeof params !== 'object') {
@@ -184,21 +200,7 @@ export function validateAndEncodePathParams(
     }
   }
 
-  // 2. Include any declared pathParams from the API metadata that were not found in template expressions.
-  // Also check for un-aliased names (e.g. 'resource_' -> 'resource') used to avoid JavaScript reserved words.
-  if (pathParams && Array.isArray(pathParams)) {
-    for (const p of pathParams) {
-      const normalizedP = p.replace(/_$/, '');
-      if (!multiSegmentParams.has(p) && !multiSegmentParams.has(normalizedP)) {
-        singleSegmentParams.add(p);
-        if (normalizedP !== p) {
-          singleSegmentParams.add(normalizedP);
-        }
-      }
-    }
-  }
-
-  // 3. Process multi-segment parameters ({+param}):
+  // 2. Process multi-segment parameters ({+param}):
   // - Validate that no individual path segment is '.' or '..' (rejecting path traversal while
   //   permitting valid domain-scoped names like 'projects/example.com:my-project').
   // - Pre-encode with encodeWithoutSlashes so that reserved characters ('?', '#', '$', '&', '=')
@@ -219,7 +221,7 @@ export function validateAndEncodePathParams(
     }
   }
 
-  // 4. Process single-segment parameters ({param}):
+  // 3. Process single-segment parameters ({param}):
   // - Validate that the segment is not exactly '.' or '..' to block path traversal.
   // - Note: We do NOT pre-encode single-segment values here because url-template standard expansion
   //   ({param}) automatically applies strict percent-encoding to all reserved characters;
@@ -240,4 +242,17 @@ export function validateAndEncodePathParams(
       }
     }
   }
+}
+
+/**
+ * Backward compatibility helper combining pathParams normalization and params validation/encoding.
+ */
+export function validateAndEncodePathParams(
+  urlTemplates: (string | undefined)[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: Record<string, any>,
+  pathParams?: string[],
+): void {
+  normalizePathParams(pathParams);
+  validateAndEncodeParams(urlTemplates, params);
 }
