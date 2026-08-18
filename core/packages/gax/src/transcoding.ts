@@ -137,9 +137,7 @@ function validateUriPath(propertyName: string, value: string): void {
     // valid domain-scoped resource segments (e.g. projects/example.com:project-id).
     const segments = value.split('/');
     if (segments.some(segment => segment === '.' || segment === '..')) {
-      throw new Error(
-        `Value for ${propertyName} must not contain segments that are exactly . or ..`,
-      );
+      throw new Error(`Value for ${propertyName} must not contain segments that are exactly . or ..`);
     }
   }
 }
@@ -150,25 +148,22 @@ export function buildQueryStringComponents(
 ): string[] {
   const resultList = [];
   for (const key in request) {
-    const requestValue = request[key];
-    if (Array.isArray(requestValue)) {
-      for (const value of requestValue as JSONObject[]) {
+    if (Array.isArray(request[key])) {
+      for (const value of request[key] as JSONObject[]) {
         resultList.push(
           `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
             value.toString(),
           )}`,
         );
       }
-    } else if (typeof requestValue === 'object' && requestValue !== null) {
+    } else if (typeof request[key] === 'object' && request[key] !== null) {
       resultList.push(
-        ...buildQueryStringComponents(requestValue as JSONObject, `${key}.`),
+        ...buildQueryStringComponents(request[key] as JSONObject, `${key}.`),
       );
     } else {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          requestValue === null || requestValue === undefined
-            ? 'null'
-            : requestValue.toString(),
+          request[key] === null ? 'null' : request[key]!.toString(),
         )}`,
       );
     }
@@ -176,18 +171,35 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
+/**
+ * Percent-encodes a string according to RFC 3986, preserving only unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
+ * including slashes ('/'), are percent-encoded.
+ *
+ * This is necessary because encodeURIComponent natively encodes URL-unsafe
+ * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
+ * To ensure strict compliance, we manually encode those preserved characters.
+ *
+ * @param {string} str - The input string to encode.
+ * @returns {string} The percent-encoded string.
+ */
 export function encodeWithSlashes(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g, // Characters preserved by encodeURIComponent
-    character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
   );
 }
 
+/**
+ * Percent-encodes a string according to RFC 3986, preserving unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
+ * characters are percent-encoded.
+ *
+ * @param {string} str - The input string to encode.
+ * @returns {string} The percent-encoded string with slashes preserved.
+ */
 export function encodeWithoutSlashes(str: string): string {
-  return str
-    .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
-    .join('');
+  return str.split('/').map(encodeWithSlashes).join('/');
 }
 
 function escapeRegExp(str: string) {
@@ -197,8 +209,10 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
+  propertyName = 'resource', // Used to provide precise error messages when path validation fails
 ): string | undefined {
   if (!pattern || pattern === '*') {
+    validateUriPathSegment(propertyName, fieldValue);
     return encodeWithSlashes(fieldValue);
   }
 
@@ -215,8 +229,25 @@ export function applyPattern(
       '$',
   );
 
-  if (!fieldValue.match(regex)) {
+  const match = fieldValue.match(regex);
+  if (!match) {
     return undefined;
+  }
+
+  // Identify the segments and wildcards in pattern to perform validation in order of appearance
+  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
+
+  // Check the captured group values
+  for (let i = 1; i < match.length; i++) {
+    const groupVal = match[i];
+    if (groupVal !== undefined && groupVal !== null) {
+      const wildcardType = wildcards[i - 1];
+      if (wildcardType === '*') {
+        validateUriPathSegment(propertyName, groupVal);
+      } else if (wildcardType === '**') {
+        validateUriPath(propertyName, groupVal);
+      }
+    }
   }
 
   return encodeWithoutSlashes(fieldValue);
@@ -253,6 +284,7 @@ export function match(
     const appliedPattern = applyPattern(
       pattern,
       fieldValue === null ? 'null' : fieldValue!.toString(),
+      camelCasedField,
     );
     if (appliedPattern === undefined) {
       return undefined;

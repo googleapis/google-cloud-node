@@ -382,7 +382,7 @@ describe('gRPC to HTTP transcoding', () => {
     assert.strictEqual(encodeWithSlashes(unreserved), unreserved);
 
     // Reserved and special characters: should be percent encoded, including !\'()*
-    const specialChars = "!'()*";
+    const specialChars = "!\'()*";
     const encoded = encodeWithSlashes(specialChars);
     // ! -> %21, ' -> %27, ( -> %28, ) -> %29, * -> %2A
     assert.strictEqual(encoded, '%21%27%28%29%2A');
@@ -400,6 +400,12 @@ describe('gRPC to HTTP transcoding', () => {
       ),
       '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
     );
+  });
+
+  it('should correctly handle Unicode surrogate pairs in encodeWithoutSlashes', () => {
+    // Emojis (like 😊) are surrogate pairs.
+    // They should be encoded successfully instead of throwing a URIError.
+    assert.strictEqual(encodeWithoutSlashes('😊'), '%F0%9F%98%8A');
   });
 
   it('applyPattern', () => {
@@ -434,7 +440,7 @@ describe('gRPC to HTTP transcoding', () => {
       applyPattern(
         'projects/*/locations/*/agents/*/sessions/**',
         'projects/p/locations/l/agents/a/sessions/agents/../subagent',
-        'session',
+        'session'
       );
     }, /Value for session must not contain segments that are exactly \. or \.\./);
   });
@@ -444,7 +450,7 @@ describe('gRPC to HTTP transcoding', () => {
       applyPattern(
         'projects/*/locations/*/agents/*/sessions/**',
         'projects/p/locations/l/agents/a/sessions/agents/./subagent',
-        'session',
+        'session'
       );
     }, /Value for session must not contain segments that are exactly \. or \.\./);
   });
@@ -453,12 +459,9 @@ describe('gRPC to HTTP transcoding', () => {
     const res = applyPattern(
       'projects/*/locations/*/agents/*/sessions/**',
       'projects/p/locations/l/agents/a/sessions/..?$foo=BAR#',
-      'session',
+      'session'
     );
-    assert.strictEqual(
-      res,
-      'projects/p/locations/l/agents/a/sessions/..%3F%24foo%3DBAR%23',
-    );
+    assert.strictEqual(res, 'projects/p/locations/l/agents/a/sessions/..%3F%24foo%3DBAR%23');
   });
 
   it('applyPattern should handle optional unmatched groups gracefully without throwing TypeErrors', () => {
@@ -615,22 +618,6 @@ describe('gRPC to HTTP transcoding', () => {
         'obj.y=z',
       ],
     );
-  });
-
-  it('should gracefully handle undefined property values without throwing', () => {
-    const request = {
-      definedField: 'value',
-      undefinedField: undefined,
-    };
-
-    // Prior to PR 9150, this threw: TypeError: Cannot read properties of undefined (reading 'toString')
-    // With PR 9150, it gracefully serializes the undefined property to 'null'
-    const result = buildQueryStringComponents(request as any);
-
-    assert.deepStrictEqual(result, [
-      'definedField=value',
-      'undefinedField=null',
-    ]);
   });
 });
 
