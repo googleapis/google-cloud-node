@@ -3,7 +3,8 @@
   "compilerOptions": {
     "lib": ["es2023", "dom"],
     "rootDir": ".",
-    "outDir": "build"
+    "outDir": "build",
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": [
     "src/*.ts",

@@ -763,4 +763,134 @@ describe('createAPIRequest', () => {
       );
     });
   });
+
+  describe('path parameter validation and security', () => {
+    it('should throw an error for single-segment path traversal containing "." or ".."', async () => {
+      await assert.rejects(
+        createAPIRequest({
+          options: {url: 'https://example.com/drive/v3/files/{fileId}'},
+          params: {fileId: '.'},
+          requiredParams: [],
+          pathParams: ['fileId'],
+          context: fakeContext,
+        }),
+        /Invalid value \. for fileId/,
+      );
+
+      await assert.rejects(
+        createAPIRequest({
+          options: {url: 'https://example.com/drive/v3/files/{fileId}'},
+          params: {fileId: '..'},
+          requiredParams: [],
+          pathParams: ['fileId'],
+          context: fakeContext,
+        }),
+        /Invalid value \.\. for fileId/,
+      );
+    });
+
+    it('should throw an error for multi-segment path traversal containing "." or ".." segments', async () => {
+      await assert.rejects(
+        createAPIRequest({
+          options: {
+            url: 'https://dialogflow.googleapis.com/v3/{+session}:detectIntent',
+          },
+          params: {
+            session:
+              'projects/p/locations/l/agents/a/sessions/agents/../subagent',
+          },
+          requiredParams: [],
+          pathParams: ['session'],
+          context: fakeContext,
+        }),
+        /Value for session must not contain segments that are exactly \. or \.\./,
+      );
+
+      await assert.rejects(
+        createAPIRequest({
+          options: {
+            url: 'https://dialogflow.googleapis.com/v3/{+session}:detectIntent',
+          },
+          params: {
+            session:
+              'projects/p/locations/l/agents/a/sessions/agents/./subagent',
+          },
+          requiredParams: [],
+          pathParams: ['session'],
+          context: fakeContext,
+        }),
+        /Value for session must not contain segments that are exactly \. or \.\./,
+      );
+    });
+
+    it('should protect against query parameter and fragment injection by percent-encoding in path parameters', async () => {
+      const p =
+        '/v3/projects/p/locations/l/agents/a/sessions/my-session%3F%24httpMethod%3DDELETE%23:detectIntent';
+      const scope = nock('https://dialogflow.googleapis.com')
+        .post(p)
+        .reply(200, {});
+
+      const res = await createAPIRequest({
+        options: {
+          url: 'https://dialogflow.googleapis.com/v3/{+session}:detectIntent',
+          method: 'POST',
+        },
+        params: {
+          session:
+            'projects/p/locations/l/agents/a/sessions/my-session?$httpMethod=DELETE#',
+        },
+        requiredParams: [],
+        pathParams: ['session'],
+        context: fakeContext,
+      });
+
+      assert.ok(res.config.url?.toString().endsWith(p));
+      scope.done();
+    });
+
+    it('should strictly percent-encode reserved characters while preserving unreserved characters and slashes in reserved parameters', async () => {
+      const p =
+        '/v3/projects/p/locations/l/agents/a/sessions/%20%21%40%24%26%27%28%29%2A%2B%2C%3B%3D%3A%25:detectIntent';
+      const scope = nock('https://dialogflow.googleapis.com')
+        .post(p)
+        .reply(200, {});
+
+      const res = await createAPIRequest({
+        options: {
+          url: 'https://dialogflow.googleapis.com/v3/{+session}:detectIntent',
+          method: 'POST',
+        },
+        params: {
+          session: "projects/p/locations/l/agents/a/sessions/ !@$&'()*+,;=:%",
+        },
+        requiredParams: [],
+        pathParams: ['session'],
+        context: fakeContext,
+      });
+
+      assert.ok(res.config.url?.toString().endsWith(p));
+      scope.done();
+    });
+
+    it('should allow valid domain-scoped resource paths containing dots and colon', async () => {
+      const p = '/v1/projects/example.com%3Amy-project/locations/us-central1';
+      const scope = nock('https://example.com').get(p).reply(200, {});
+
+      const res = await createAPIRequest({
+        options: {
+          url: 'https://example.com/v1/{+parent}',
+          method: 'GET',
+        },
+        params: {
+          parent: 'projects/example.com:my-project/locations/us-central1',
+        },
+        requiredParams: [],
+        pathParams: ['parent'],
+        context: fakeContext,
+      });
+
+      assert.ok(res.config.url?.toString().endsWith(p));
+      scope.done();
+    });
+  });
 });
