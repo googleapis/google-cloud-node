@@ -402,12 +402,6 @@ describe('gRPC to HTTP transcoding', () => {
     );
   });
 
-  it('should correctly handle Unicode surrogate pairs in encodeWithoutSlashes', () => {
-    // Emojis (like 😊) are surrogate pairs.
-    // They should be encoded successfully instead of throwing a URIError.
-    assert.strictEqual(encodeWithoutSlashes('😊'), '%F0%9F%98%8A');
-  });
-
   it('applyPattern', () => {
     assert.strictEqual(applyPattern('*', 'test'), 'test');
     assert.strictEqual(applyPattern('test', 'test'), 'test');

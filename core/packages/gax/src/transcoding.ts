@@ -176,18 +176,6 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
-/**
- * Percent-encodes a string according to RFC 3986, preserving only unreserved
- * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
- * including slashes ('/'), are percent-encoded.
- *
- * This is necessary because encodeURIComponent natively encodes URL-unsafe
- * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
- * To ensure strict compliance, we manually encode those preserved characters.
- *
- * @param {string} str - The input string to encode.
- * @returns {string} The percent-encoded string.
- */
 export function encodeWithSlashes(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g, // Characters preserved by encodeURIComponent
@@ -195,16 +183,11 @@ export function encodeWithSlashes(str: string): string {
   );
 }
 
-/**
- * Percent-encodes a string according to RFC 3986, preserving unreserved
- * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
- * characters are percent-encoded.
- *
- * @param {string} str - The input string to encode.
- * @returns {string} The percent-encoded string with slashes preserved.
- */
 export function encodeWithoutSlashes(str: string): string {
-  return str.split('/').map(encodeWithSlashes).join('/');
+  return str
+    .split('')
+    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .join('');
 }
 
 function escapeRegExp(str: string) {
@@ -214,10 +197,8 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
-  propertyName = 'resource', // Used to provide precise error messages when path validation fails
 ): string | undefined {
   if (!pattern || pattern === '*') {
-    validateUriPathSegment(propertyName, fieldValue);
     return encodeWithSlashes(fieldValue);
   }
 
@@ -234,25 +215,8 @@ export function applyPattern(
       '$',
   );
 
-  const match = fieldValue.match(regex);
-  if (!match) {
+  if (!fieldValue.match(regex)) {
     return undefined;
-  }
-
-  // Identify the segments and wildcards in pattern to perform validation in order of appearance
-  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
-
-  // Check the captured group values
-  for (let i = 1; i < match.length; i++) {
-    const groupVal = match[i];
-    if (groupVal !== undefined && groupVal !== null) {
-      const wildcardType = wildcards[i - 1];
-      if (wildcardType === '*') {
-        validateUriPathSegment(propertyName, groupVal);
-      } else if (wildcardType === '**') {
-        validateUriPath(propertyName, groupVal);
-      }
-    }
   }
 
   return encodeWithoutSlashes(fieldValue);
@@ -289,7 +253,6 @@ export function match(
     const appliedPattern = applyPattern(
       pattern,
       fieldValue === null ? 'null' : fieldValue!.toString(),
-      camelCasedField,
     );
     if (appliedPattern === undefined) {
       return undefined;
