@@ -243,16 +243,3 @@ export function validateAndEncodeParams(
     }
   }
 }
-
-/**
- * Backward compatibility helper combining pathParams normalization and params validation/encoding.
- */
-export function validateAndEncodePathParams(
-  urlTemplates: (string | undefined)[],
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: Record<string, any>,
-  pathParams?: string[],
-): void {
-  normalizePathParams(pathParams);
-  validateAndEncodeParams(urlTemplates, params);
-}

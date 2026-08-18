@@ -23,7 +23,6 @@ import {
   extractTemplateParams,
   normalizePathParams,
   validateAndEncodeParams,
-  validateAndEncodePathParams,
 } from '../src/transcoding';
 
 describe('transcoding', () => {
@@ -271,79 +270,6 @@ describe('transcoding', () => {
         validateAndEncodeParams(
           ['https://example.com/v1/{+name}/files/{fileId}'],
           params,
-        );
-      });
-    });
-  });
-
-  describe('validateAndEncodePathParams', () => {
-    it('should validate and encode multi-segment params and validate single-segment params', () => {
-      const params: Record<string, any> = {
-        parent:
-          'projects/p/locations/l/agents/a/sessions/my-session?$httpMethod=DELETE#',
-        fileId: 'file-123',
-      };
-      validateAndEncodePathParams(
-        ['https://example.com/v1/{+parent}/files/{fileId}'],
-        params,
-        ['parent', 'fileId'],
-      );
-      assert.strictEqual(
-        params.parent,
-        'projects/p/locations/l/agents/a/sessions/my-session%3F%24httpMethod%3DDELETE%23',
-      );
-      assert.strictEqual(params.fileId, 'file-123');
-    });
-
-    it('should throw on path traversal in multi-segment params', () => {
-      const params: Record<string, any> = {
-        name: 'projects/p/locations/l/agents/a/sessions/agents/../subagent',
-      };
-      assert.throws(() => {
-        validateAndEncodePathParams(
-          ['https://example.com/v1/{+name}'],
-          params,
-          ['name'],
-        );
-      }, /Value for name must not contain segments that are exactly \. or \.\./);
-    });
-
-    it('should throw on path traversal in single-segment params', () => {
-      const params: Record<string, any> = {
-        fileId: '..',
-      };
-      assert.throws(() => {
-        validateAndEncodePathParams(
-          ['https://example.com/drive/v3/files/{fileId}'],
-          params,
-          ['fileId'],
-        );
-      }, /Invalid value \.\. for fileId/);
-    });
-
-    it('should handle array path parameters', () => {
-      const params: Record<string, any> = {
-        names: ['projects/p/loc/l/a/1?$foo=bar#', 'projects/p/loc/l/a/2'],
-      };
-      validateAndEncodePathParams(['https://example.com/v1/{+names}'], params, [
-        'names',
-      ]);
-      assert.deepStrictEqual(params.names, [
-        'projects/p/loc/l/a/1%3F%24foo%3Dbar%23',
-        'projects/p/loc/l/a/2',
-      ]);
-    });
-
-    it('should handle missing and null params gracefully', () => {
-      const params: Record<string, any> = {
-        name: null,
-        fileId: undefined,
-      };
-      assert.doesNotThrow(() => {
-        validateAndEncodePathParams(
-          ['https://example.com/v1/{+name}/files/{fileId}'],
-          params,
-          ['name', 'fileId'],
         );
       });
     });
