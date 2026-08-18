@@ -1148,7 +1148,7 @@ class Table {
           }
 
           transaction![method](this.name, rows as Key[]);
-          transaction!.commit(options, (err, resp) => {
+          void transaction!.commit(options, (err, resp) => {
             if (err) {
               setSpanError(span, err);
             }
