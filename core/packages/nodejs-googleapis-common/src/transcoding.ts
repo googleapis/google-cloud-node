@@ -52,6 +52,12 @@ export function validateMultiSegment(
 }
 
 /**
+ * Aliases for compatibility with GAX naming conventions.
+ */
+export const validateUriPathSegment = validateSingleSegment;
+export const validateUriPath = validateMultiSegment;
+
+/**
  * Strictly percent-encodes a string according to RFC 3986.
  * This is necessary because encodeURIComponent natively encodes URL-unsafe
  * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
