@@ -148,22 +148,23 @@ export function buildQueryStringComponents(
 ): string[] {
   const resultList = [];
   for (const key in request) {
-    if (Array.isArray(request[key])) {
-      for (const value of request[key] as JSONObject[]) {
+    const requestValue = request[key];
+    if (Array.isArray(requestValue)) {
+      for (const value of requestValue as JSONObject[]) {
         resultList.push(
           `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
             value.toString(),
           )}`,
         );
       }
-    } else if (typeof request[key] === 'object' && request[key] !== null) {
+    } else if (typeof requestValue === 'object' && requestValue !== null) {
       resultList.push(
-        ...buildQueryStringComponents(request[key] as JSONObject, `${key}.`),
+        ...buildQueryStringComponents(requestValue as JSONObject, `${key}.`),
       );
     } else {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          request[key] === null ? 'null' : request[key]!.toString(),
+          requestValue === null || requestValue === undefined ? 'null' : requestValue.toString(),
         )}`,
       );
     }
