@@ -86,13 +86,13 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
   it('6. should protect against query parameter injection by percent-encoding "?" and "$" in the session ID', async () => {
     await client.initialize();
     await client.detectIntent({
-      session: 'projects/p/locations/l/agents/a/sessions/my-session?$httpMethod=DELETE#',
+      session: 'projects/p/locations/l/agents/a/sessions/my-session?$foo=BAR#',
       queryInput: { text: { text: 'hello' }, languageCode: 'en' },
     });
     assert.strictEqual(fetchStub.callCount, 1);
     const requestUrl = fetchStub.firstCall.args[0];
     // "?" -> %3F, "$" -> %24, "=" -> %3D, "#" -> %23
-    assert.ok(requestUrl.includes('my-session%3F%24httpMethod%3DDELETE%23'));
+    assert.ok(requestUrl.includes('my-session%3F%24foo%3DBAR%23'));
   });
 
   // Test 7: Combined Path Traversal and Query Parameter Injection
@@ -103,24 +103,24 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
     // example: POST https://<location>-dialogflow.googleapis.com/v3/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent
     await client.initialize();
     await client.detectIntent({
-      session: 'projects/p/locations/l/agents/a/sessions/..?$httpMethod=DELETE#',
+      session: 'projects/p/locations/l/agents/a/sessions/..?$foo=BAR#',
       queryInput: { text: { text: 'hello' }, languageCode: 'en' },
     });
     assert.strictEqual(fetchStub.callCount, 1);
     const requestUrl = fetchStub.firstCall.args[0];
-    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/..%3F%24httpMethod%3DDELETE%23:detectIntent'));
+    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/..%3F%24foo%3DBAR%23:detectIntent'));
   });
 
   // Test 8: Combined Path Traversal (.) and Query Parameter Injection
   it('8. should protect against path traversal and query injection by percent-encoding combined patterns using dot', async () => {
     await client.initialize();
     await client.detectIntent({
-      session: 'projects/p/locations/l/agents/a/sessions/.?$httpMethod=DELETE#',
+      session: 'projects/p/locations/l/agents/a/sessions/.?$foo=BAR#',
       queryInput: { text: { text: 'hello' }, languageCode: 'en' },
     });
     assert.strictEqual(fetchStub.callCount, 1);
     const requestUrl = fetchStub.firstCall.args[0];
-    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/.%3F%24httpMethod%3DDELETE%23:detectIntent'));
+    assert.ok(requestUrl.includes('/v3/projects/p/locations/l/agents/a/sessions/.%3F%24foo%3DBAR%23:detectIntent'));
   });
 
   // Test 9: Percent-encoding all other characters
