@@ -48,6 +48,38 @@ function isReadableStream(obj: any) {
   );
 }
 
+export function validateUriPathSegment(
+  propertyName: string,
+  value: string,
+): void {
+  if (value === '.' || value === '..') {
+    throw new Error(`Invalid value ${value} for ${propertyName}`);
+  }
+}
+
+export function validateUriPath(propertyName: string, value: string): void {
+  const segments = value.split('/');
+  for (const segment of segments) {
+    if (segment === '.' || segment === '..') {
+      throw new Error(
+        `Value for ${propertyName} must not contain segments that are exactly . or ..`,
+      );
+    }
+  }
+}
+
+export function encodeWithSlashes(str: string): string {
+  return [...str]
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
+    .join('');
+}
+
+export function encodeWithoutSlashes(str: string): string {
+  return [...str]
+    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .join('');
+}
+
 function getMissingParams(params: SchemaParameters, required: string[]) {
   const missing = new Array<string>();
   required.forEach(param => {
@@ -165,15 +197,48 @@ async function createAPIRequestAsync<T>(
   }
 
   // Parse urls
+  const processedParams = Object.assign({}, params);
+  if (parameters.pathParams && parameters.pathParams.length > 0) {
+    const urlStr =
+      typeof options.url === 'object'
+        ? options.url.toString()
+        : options.url || '';
+    const mediaUrlStr = parameters.mediaUrl || '';
+    for (const param of parameters.pathParams) {
+      if (
+        processedParams[param] !== undefined &&
+        processedParams[param] !== null
+      ) {
+        const valStr = String(processedParams[param]);
+        const isReservedInUrl = new RegExp(
+          `\\{\\+[^}]*\\b${param}\\b[^}]*\\}`,
+        ).test(urlStr);
+        const isReservedInMediaUrl = new RegExp(
+          `\\{\\+[^}]*\\b${param}\\b[^}]*\\}`,
+        ).test(mediaUrlStr);
+        const isReserved = isReservedInUrl || isReservedInMediaUrl;
+        if (isReserved) {
+          validateUriPath(param, valStr);
+          processedParams[param] = encodeWithoutSlashes(valStr);
+        } else {
+          validateUriPathSegment(param, valStr);
+          // Standard expressions ({param}) are automatically percent-encoded by url-template.
+          // We only need validation here so url-template does not double-encode (%25...).
+        }
+      }
+    }
+  }
+
   if (options.url) {
     let url = options.url;
     if (typeof url === 'object') {
       url = url.toString();
     }
-    options.url = urlTemplate.parse(url).expand(params);
+    options.url = urlTemplate.parse(url).expand(processedParams);
   }
   if (parameters.mediaUrl) {
-    parameters.mediaUrl = urlTemplate.parse(parameters.mediaUrl).expand(params);
+    parameters.mediaUrl =
+      urlTemplate.parse(parameters.mediaUrl).expand(processedParams);
   }
 
   // Rewrite url if rootUrl is globally set
