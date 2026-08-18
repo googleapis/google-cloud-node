@@ -158,12 +158,20 @@ export function validateAndEncodePathParams(
   params: Record<string, any>,
   pathParams?: string[],
 ): void {
+  // Early return if params is undefined, null, or not an object
   if (!params || typeof params !== 'object') {
     return;
   }
+
+  // Track which parameters are multi-segment ({+param}) vs single-segment ({param}).
+  // - Multi-segment parameters allow slashes ('/') for hierarchical resource paths,
+  //   requiring segment-by-segment traversal checks and strict percent-encoding with slashes preserved.
+  // - Single-segment parameters disallow slashes and are automatically percent-encoded by url-template,
+  //   requiring only direct '.' and '..' traversal validation.
   const multiSegmentParams = new Set<string>();
   const singleSegmentParams = new Set<string>();
 
+  // 1. Scan provided URL templates (options.url and parameters.mediaUrl) to extract parameter names
   for (const tmpl of urlTemplates) {
     if (tmpl) {
       const extracted = extractTemplateParams(tmpl);
@@ -176,6 +184,8 @@ export function validateAndEncodePathParams(
     }
   }
 
+  // 2. Include any declared pathParams from the API metadata that were not found in template expressions.
+  // Also check for un-aliased names (e.g. 'resource_' -> 'resource') used to avoid JavaScript reserved words.
   if (pathParams && Array.isArray(pathParams)) {
     for (const p of pathParams) {
       const normalizedP = p.replace(/_$/, '');
@@ -188,7 +198,12 @@ export function validateAndEncodePathParams(
     }
   }
 
-  // Validate and encode multi-segment parameters
+  // 3. Process multi-segment parameters ({+param}):
+  // - Validate that no individual path segment is '.' or '..' (rejecting path traversal while
+  //   permitting valid domain-scoped names like 'projects/example.com:my-project').
+  // - Pre-encode with encodeWithoutSlashes so that reserved characters ('?', '#', '$', '&', '=')
+  //   are strictly percent-encoded according to RFC 3986 before url-template reserved expansion runs,
+  //   preventing query parameter and fragment injection while keeping slashes ('/') intact.
   for (const param of multiSegmentParams) {
     const val = params[param];
     if (val !== undefined && val !== null) {
@@ -204,8 +219,13 @@ export function validateAndEncodePathParams(
     }
   }
 
-  // Validate single-segment parameters
+  // 4. Process single-segment parameters ({param}):
+  // - Validate that the segment is not exactly '.' or '..' to block path traversal.
+  // - Note: We do NOT pre-encode single-segment values here because url-template standard expansion
+  //   ({param}) automatically applies strict percent-encoding to all reserved characters;
+  //   pre-encoding would lead to double percent-encoding (%25...).
   for (const param of singleSegmentParams) {
+    // Skip if already processed under multiSegmentParams
     if (multiSegmentParams.has(param)) {
       continue;
     }
