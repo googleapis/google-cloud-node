@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import type {Client} from './client.js';
+import type {ITypeOverrides} from './types.js';
 
 /**
  * Configuration options for establishing a connection to Google Spanner.
@@ -31,7 +32,7 @@ export interface ClientConfig {
   /** Spanner Database ID. */
   database?: string;
   /** Custom type parsers registry. */
-  types?: unknown;
+  types?: ITypeOverrides;
 }
 
 /**

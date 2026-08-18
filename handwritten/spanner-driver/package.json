@@ -41,6 +41,7 @@
     "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
     "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
     "test": "npm run test:esm && npm run test:cjs",
+    "system-test": "mocha build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
@@ -57,6 +58,12 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
+  },
+  "optionalDependencies": {
+    "@google-cloud/spannerlib-node-darwin-arm64": "^0.1.0",
+    "@google-cloud/spannerlib-node-linux-x64": "^0.1.0",
+    "@google-cloud/spannerlib-node-linux-arm64": "^0.1.0",
+    "@google-cloud/spannerlib-node-win32-x64": "^0.1.0"
   }
 }
