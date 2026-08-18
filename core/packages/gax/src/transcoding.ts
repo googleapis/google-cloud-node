@@ -118,6 +118,30 @@ export function deleteField(request: JSONObject, field: string): void {
   delete request[part];
 }
 
+// Validates a single path segment matched by a single wildcard (*).
+// Checks that the segment is not exactly '.' or '..' (directory traversal indicators).
+function validateSingleSegment(propertyName: string, value: string): void {
+  if (value === '.' || value === '..') {
+    throw new Error(`Invalid value ${value} for ${propertyName}`);
+  }
+}
+
+// Validates a multi-segment path matched by a double wildcard (**).
+// Splitting by slash, it checks that no individual segment is exactly '.' or '..'.
+// This segment-by-segment check prevents directory traversal while allowing
+// legitimate resource names containing dots (e.g., domain-scoped project IDs).
+function validateMultiSegment(propertyName: string, value: string): void {
+  if (value) {
+    // Split by slash and check for exact segment matches of '.' or '..' rather
+    // than using a simple string.includes('.') check. This avoids rejecting
+    // valid domain-scoped resource segments (e.g. projects/example.com:project-id).
+    const segments = value.split('/');
+    if (segments.some(segment => segment === '.' || segment === '..')) {
+      throw new Error(`Value for ${propertyName} must not contain segments that are exactly . or ..`);
+    }
+  }
+}
+
 export function buildQueryStringComponents(
   request: JSONObject,
   prefix = '',
@@ -148,17 +172,28 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
+// Strictly percent-encodes a character to comply with RFC 3986.
+// This is necessary because encodeURIComponent natively encodes URL-unsafe
+// characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
+// To ensure strict compliance, we manually encode those preserved characters.
+function strictEncodeURIComponent(str: string): string {
+  return encodeURIComponent(str).replace(
+    /[!'()*]/g, // Characters preserved by encodeURIComponent
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
+  );
+}
+
 export function encodeWithSlashes(str: string): string {
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
 
 export function encodeWithoutSlashes(str: string): string {
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : strictEncodeURIComponent(c)))
     .join('');
 }
 
@@ -169,8 +204,10 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
+  propertyName = 'resource', // Used to provide precise error messages when path validation fails
 ): string | undefined {
   if (!pattern || pattern === '*') {
+    validateSingleSegment(propertyName, fieldValue);
     return encodeWithSlashes(fieldValue);
   }
 
@@ -187,8 +224,25 @@ export function applyPattern(
       '$',
   );
 
-  if (!fieldValue.match(regex)) {
+  const match = fieldValue.match(regex);
+  if (!match) {
     return undefined;
+  }
+
+  // Identify the segments and wildcards in pattern to perform validation in order of appearance
+  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
+
+  // Check the captured group values
+  for (let i = 1; i < match.length; i++) {
+    const groupVal = match[i];
+    if (groupVal !== undefined && groupVal !== null) {
+      const wildcardType = wildcards[i - 1];
+      if (wildcardType === '*') {
+        validateSingleSegment(propertyName, groupVal);
+      } else if (wildcardType === '**') {
+        validateMultiSegment(propertyName, groupVal);
+      }
+    }
   }
 
   return encodeWithoutSlashes(fieldValue);
@@ -225,6 +279,7 @@ export function match(
     const appliedPattern = applyPattern(
       pattern,
       fieldValue === null ? 'null' : fieldValue!.toString(),
+      camelCasedField,
     );
     if (appliedPattern === undefined) {
       return undefined;

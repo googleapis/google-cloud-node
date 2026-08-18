@@ -370,6 +370,18 @@ describe('gRPC to HTTP transcoding', () => {
     );
   });
 
+  it('should preserve unreserved characters while strictly percent-encoding all other characters in encodeWithSlashes', () => {
+    // Standard RFC unreserved characters: [-_.~0-9a-zA-Z]
+    const unreserved = 'abc-123_.~';
+    assert.strictEqual(encodeWithSlashes(unreserved), unreserved);
+
+    // Reserved and special characters: should be percent encoded, including !\'()*
+    const specialChars = "!\'()*";
+    const encoded = encodeWithSlashes(specialChars);
+    // ! -> %21, ' -> %27, ( -> %28, ) -> %29, * -> %2A
+    assert.strictEqual(encoded, '%21%27%28%29%2A');
+  });
+
   it('encodeWithoutSlashes', () => {
     assert.strictEqual(encodeWithoutSlashes('abcd'), 'abcd');
     assert.strictEqual(
@@ -409,6 +421,40 @@ describe('gRPC to HTTP transcoding', () => {
       applyPattern('projects/*/locations/**', 'projects/test/locations/us/q/z'),
       'projects/test/locations/us/q/z',
     );
+  });
+
+  it('applyPattern should throw an error for double-asterisk segment traversal containing segments that are exactly ".."', () => {
+    assert.throws(() => {
+      applyPattern(
+        'projects/*/locations/*/agents/*/sessions/**',
+        'projects/p/locations/l/agents/a/sessions/agents/../subagent',
+        'session'
+      );
+    }, /Value for session must not contain segments that are exactly \. or \.\./);
+  });
+
+  it('applyPattern should throw an error for double-asterisk segment traversal containing segments that are exactly "."', () => {
+    assert.throws(() => {
+      applyPattern(
+        'projects/*/locations/*/agents/*/sessions/**',
+        'projects/p/locations/l/agents/a/sessions/agents/./subagent',
+        'session'
+      );
+    }, /Value for session must not contain segments that are exactly \. or \.\./);
+  });
+
+  it('applyPattern should percent-encode query injection attempt on double-asterisk without throwing traversal error', () => {
+    const res = applyPattern(
+      'projects/*/locations/*/agents/*/sessions/**',
+      'projects/p/locations/l/agents/a/sessions/..?$httpMethod=DELETE#',
+      'session'
+    );
+    assert.strictEqual(res, 'projects/p/locations/l/agents/a/sessions/..%3F%24httpMethod%3DDELETE%23');
+  });
+
+  it('applyPattern should handle optional unmatched groups gracefully without throwing TypeErrors', () => {
+    const res = applyPattern('projects/*', 'projects/p', 'session');
+    assert.strictEqual(res, 'projects/p');
   });
 
   it('flattenObject', () => {
