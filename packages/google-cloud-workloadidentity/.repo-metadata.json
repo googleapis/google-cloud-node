@@ -10,6 +10,6 @@
     "name": "workloadidentity",
     "name_pretty": "Workload Identity",
     "product_documentation": "https://cloud.google.com/iam/docs",
-    "release_level": "stable",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-node"
 }
