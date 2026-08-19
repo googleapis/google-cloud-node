@@ -19,7 +19,7 @@
  * @param propertyName Name of the parameter being validated
  * @param value Value of the path segment
  */
-export function validateUriPathSegment(
+function validateUriPathSegment(
   propertyName: string,
   value: string,
 ): void {
@@ -37,7 +37,7 @@ export function validateUriPathSegment(
  * @param propertyName Name of the parameter being validated
  * @param value Value of the multi-segment path
  */
-export function validateUriPath(
+function validateUriPath(
   propertyName: string,
   value: string,
 ): void {
@@ -52,12 +52,6 @@ export function validateUriPath(
 }
 
 /**
- * Aliases for backwards compatibility.
- */
-export const validateSingleSegment = validateUriPathSegment;
-export const validateMultiSegment = validateUriPath;
-
-/**
  * Percent-encodes a string according to RFC 3986, preserving only unreserved
  * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
  * including slashes ('/'), are percent-encoded.
@@ -69,7 +63,7 @@ export const validateMultiSegment = validateUriPath;
  * @param str The input string to encode
  * @returns The percent-encoded string
  */
-export function encodeWithSlashes(str: string): string {
+function encodeWithSlashes(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g, // Characters preserved by encodeURIComponent
     character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
@@ -84,7 +78,7 @@ export function encodeWithSlashes(str: string): string {
  * @param str The input string to encode
  * @returns The percent-encoded string with slashes preserved
  */
-export function encodeWithoutSlashes(str: string): string {
+function encodeWithoutSlashes(str: string): string {
   return str.split('/').map(encodeWithSlashes).join('/');
 }
 
@@ -93,7 +87,7 @@ export function encodeWithoutSlashes(str: string): string {
  *
  * @param urlTemplate The RFC 6570 URI template string
  */
-export function extractTemplateParams(urlTemplate: string): {
+function extractTemplateParams(urlTemplate: string): {
   multiSegmentParams: Set<string>;
   singleSegmentParams: Set<string>;
 } {
