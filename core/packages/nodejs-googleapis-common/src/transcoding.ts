@@ -225,18 +225,11 @@ export function validateAndEncodeParams(
     if (val === undefined || val === null) {
       continue;
     }
-    if (Array.isArray(val)) {
-      const transformed = val.map(item =>
-        applyPattern(wildcard, String(item), param),
-      );
-      if (wildcard === '**') {
-        params[param] = transformed;
-      }
-    } else {
-      const transformed = applyPattern(wildcard, String(val), param);
-      if (wildcard === '**') {
-        params[param] = transformed;
-      }
+    const transformed = Array.isArray(val)
+      ? val.map(item => applyPattern(wildcard, String(item), param))
+      : applyPattern(wildcard, String(val), param);
+    if (wildcard === '**') {
+      params[param] = transformed;
     }
   }
 }
