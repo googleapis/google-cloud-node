@@ -91,10 +91,15 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         napi_get_null(env, &null_val);
 
         if (batch->error_msg != nullptr) {
-            napi_value err_obj, err_msg_val, err_code_val;
+            std::cerr << "[spanner_go_napi] Error received from Go: " << batch->error_msg 
+                      << " (code: " << batch->error_code << ")" << std::endl;
+            napi_value err_obj = nullptr, err_msg_val = nullptr, err_code_str = nullptr;
             napi_create_string_utf8(env, batch->error_msg, NAPI_AUTO_LENGTH, &err_msg_val);
-            napi_create_int32(env, batch->error_code, &err_code_val);
-            napi_create_error(env, err_code_val, err_msg_val, &err_obj);
+            std::string code_str = std::to_string(batch->error_code);
+            napi_create_string_utf8(env, code_str.c_str(), code_str.length(), &err_code_str);
+            if (napi_create_error(env, err_code_str, err_msg_val, &err_obj) != napi_ok || err_obj == nullptr) {
+                napi_create_error(env, nullptr, err_msg_val, &err_obj);
+            }
 
             napi_value argv[3] = { err_obj, null_val, null_val };
             napi_call_function(env, global, js_cb, 3, argv, nullptr);
@@ -322,8 +327,9 @@ napi_value ExecuteStreamingSqlNative(napi_env env, napi_callback_info info) {
     if (is_typedarray) {
         napi_typedarray_type type;
         napi_value arraybuffer;
-        size_t byte_offset;
+        size_t byte_offset = 0;
         napi_get_typedarray_info(env, args[3], &type, &req_len, &req_data, &arraybuffer, &byte_offset);
+        req_data = static_cast<char*>(req_data) + byte_offset;
     } else {
         bool is_buffer = false;
         napi_is_buffer(env, args[3], &is_buffer);

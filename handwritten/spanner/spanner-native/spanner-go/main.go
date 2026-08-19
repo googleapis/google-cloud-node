@@ -307,6 +307,7 @@ func ExecuteStreamingSqlGo(
 			// 1. Decode ExecuteSqlRequest protobuf bytes
 			var req spannerpb.ExecuteSqlRequest
 			if err := proto.Unmarshal(rawBytes, &req); err != nil {
+				fmt.Fprintf(os.Stderr, "[spanner-go] Protobuf decode failed (rawBytes len=%d): %v\n", len(rawBytes), err)
 				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true)
 				return
 			}
@@ -322,6 +323,7 @@ func ExecuteStreamingSqlGo(
 			// Fetch OAuth2 bearer token from memory cache
 			token, err := client.GetToken()
 			if err != nil {
+				fmt.Fprintf(os.Stderr, "[spanner-go] Auth token retrieval failed: %v\n", err)
 				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
 				return
 			}
@@ -335,6 +337,7 @@ func ExecuteStreamingSqlGo(
 			stream, err := client.ExecuteStreamingSql(ctx, &req)
 			if err != nil {
 				st, _ := status.FromError(err)
+				fmt.Fprintf(os.Stderr, "[spanner-go] ExecuteStreamingSql gRPC error: code=%d msg=%s\n", st.Code(), st.Message())
 				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
 					continue // Retry loop
 				}

@@ -1,7 +1,7 @@
 /**
  * Comprehensive Cloud Spanner Benchmark Suite: Go Native Shared Core with DirectPath
  * 
- * Tests Go Shared Core with GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS=true
+ * Tests Go Shared Core with GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS=false
  * against Spanner in span-cloud-testing.
  */
 
@@ -10,7 +10,7 @@ const { performance } = require('perf_hooks');
 const os = require('os');
 const fs = require('fs');
 
-process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'true';
+process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'false';
 process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
 
 const PROJECT = 'span-cloud-testing';
