@@ -291,7 +291,7 @@ async function runTest1(db, rustClient, goClient) {
       query: q.label,
       javascript: js,
       rust_1ch: rust,
-      go_directpath_1ch: go
+      /* go_directpath_1ch: go */
     });
   }
 
@@ -340,9 +340,7 @@ async function runTest2(db, rustClients, goClients) {
     rust_16ch: rustRes16,
     rust_32ch: rustRes32,
     rust_50ch: rustRes50,
-    go_directpath_16ch: goRes16,
-    go_directpath_32ch: goRes32,
-    go_directpath_50ch: goRes50
+
   };
 }
 
@@ -423,11 +421,10 @@ async function runTest3(db, rustClient4, goClient4) {
       concurrency,
       javascript: jsRes,
       rust_4ch: rustRes,
-      go_directpath_4ch: goRes,
+      
       rustSpeedup,
       rustLatImp,
-      goSpeedup,
-      goLatImp
+      
     });
   }
 
