@@ -36145,6 +36145,9 @@ export namespace google {
 
                 /** FeatureFlags sessionsRequired */
                 sessionsRequired?: (boolean|null);
+
+                /** FeatureFlags microsecondTimestamp */
+                microsecondTimestamp?: (boolean|null);
             }
 
             /** Represents a FeatureFlags. */
@@ -36191,6 +36194,9 @@ export namespace google {
 
                 /** FeatureFlags sessionsRequired. */
                 public sessionsRequired: boolean;
+
+                /** FeatureFlags microsecondTimestamp. */
+                public microsecondTimestamp: boolean;
 
                 /**
                  * Creates a new FeatureFlags instance using the specified properties.

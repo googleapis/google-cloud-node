@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, subscriber) {
-  // [START health_v4_generated_DataSubscriptionService_CreateSubscriber_async]
+function main(name, branch) {
+  // [START dataform_v1beta1_generated_Dataform_CheckoutWorkspaceBranch_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,50 @@ function main(parent, subscriber) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource where this subscriber will be created.
-   *  Format: projects/{project_number}
-   *  Example: projects/1234567890
+   *  Required. The workspace resource name.
+   *  Format:
+   *  projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. The subscriber to create.
+   *  Required. The name of the branch in the Git repository to which the
+   *  workspace should be checked out.
    */
-  // const subscriber = {}
+  // const branch = 'abc123'
   /**
-   *  Optional. The ID to use for the subscriber, which will become the final
-   *  component of the subscriber's resource name.
-   *  This value should be 4-36 characters, and valid characters
-   *  are /[a-z]([a-z0-9-]{2,34}[a-z0-9])/.
+   *  Optional. If set to true and the branch does not exist, it will be created.
+   *  Otherwise, an error will be thrown.
    */
-  // const subscriberId = 'abc123'
+  // const createIfNotExists = true
+  /**
+   *  Optional. The name of the branch in the Git repository from which the new
+   *  branch should be created. If left unset, the workspace's current branch
+   *  name will be used. Accepts only branch names from FetchWorkspaceBranches
+   *  response, and can only be set if `create_if_not_exists` is true. Oherwise,
+   *  an error will be thrown.
+   */
+  // const sourceBranch = 'abc123'
 
-  // Imports the Health library
-  const {DataSubscriptionServiceClient} = require('@google-cloud/health').v4;
+  // Imports the Dataform library
+  const {DataformClient} = require('@google-cloud/dataform').v1beta1;
 
   // Instantiates a client
-  const healthClient = new DataSubscriptionServiceClient();
+  const dataformClient = new DataformClient();
 
-  async function callCreateSubscriber() {
+  async function callCheckoutWorkspaceBranch() {
     // Construct request
     const request = {
-      parent,
-      subscriber,
+      name,
+      branch,
     };
 
     // Run request
-    const [operation] = await healthClient.createSubscriber(request);
-    const [response] = await operation.promise();
+    const response = await dataformClient.checkoutWorkspaceBranch(request);
     console.log(response);
   }
 
-  callCreateSubscriber();
-  // [END health_v4_generated_DataSubscriptionService_CreateSubscriber_async]
+  callCheckoutWorkspaceBranch();
+  // [END dataform_v1beta1_generated_Dataform_CheckoutWorkspaceBranch_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -772,6 +772,10 @@ export class BigQueryReadClient {
    *   The offset requested must be less than the last row read from Read.
    *   Requesting a larger offset is undefined. If not specified, start reading
    *   from offset zero.
+   * @param {google.cloud.bigquery.storage.v1.ArrowSerializationOptions} [request.arrowSerializationOptions]
+   *   Optional. Options specific to the Apache Arrow output format.
+   *
+   *   This feature is not yet available.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

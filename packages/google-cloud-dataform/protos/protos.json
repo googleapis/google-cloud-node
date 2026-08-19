@@ -3288,6 +3288,13 @@
                       }
                     },
                     "CodeCompilationConfig": {
+                      "oneofs": {
+                        "_lineageEnabled": {
+                          "oneof": [
+                            "lineageEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "defaultDatabase": {
                           "type": "string",
@@ -3365,6 +3372,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lineageEnabled": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -6406,6 +6421,82 @@
                             }
                           ]
                         },
+                        "SyncWorkspaceRefs": {
+                          "requestType": "SyncWorkspaceRefsRequest",
+                          "responseType": "SyncWorkspaceRefsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:syncWorkspaceRefs",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:syncWorkspaceRefs",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchWorkspaceBranches": {
+                          "requestType": "FetchWorkspaceBranchesRequest",
+                          "responseType": "FetchWorkspaceBranchesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:fetchBranches"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:fetchBranches"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteBranch": {
+                          "requestType": "DeleteBranchRequest",
+                          "responseType": "DeleteBranchResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:deleteBranch",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:deleteBranch",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "CheckoutWorkspaceBranch": {
+                          "requestType": "CheckoutWorkspaceBranchRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:checkout",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:checkout",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchCurrentWorkspaceBranch": {
+                          "requestType": "FetchCurrentWorkspaceBranchRequest",
+                          "responseType": "FetchCurrentWorkspaceBranchResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:fetchCurrentBranch"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:fetchCurrentBranch"
+                              }
+                            }
+                          ]
+                        },
                         "PushGitCommits": {
                           "requestType": "PushGitCommitsRequest",
                           "responseType": "PushGitCommitsResponse",
@@ -7903,6 +7994,21 @@
                           "oneof": [
                             "disableMoves"
                           ]
+                        },
+                        "_originalBranch": {
+                          "oneof": [
+                            "originalBranch"
+                          ]
+                        },
+                        "_enableBranchManagement": {
+                          "oneof": [
+                            "enableBranchManagement"
+                          ]
+                        },
+                        "_shallow": {
+                          "oneof": [
+                            "shallow"
+                          ]
                         }
                       },
                       "fields": {
@@ -7943,11 +8049,42 @@
                             "proto3_optional": true
                           }
                         },
+                        "originalBranch": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
                         "privateResourceMetadata": {
                           "type": "PrivateResourceMetadata",
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enableBranchManagement": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "depth": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "shallow": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -8105,6 +8242,97 @@
                       }
                     },
                     "PullGitCommitsResponse": {
+                      "fields": {}
+                    },
+                    "CheckoutWorkspaceBranchRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        },
+                        "branch": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createIfNotExists": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sourceBranch": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SyncWorkspaceRefsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        },
+                        "remoteBranchName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deepen": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SyncWorkspaceRefsResponse": {
+                      "fields": {}
+                    },
+                    "DeleteBranchRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        },
+                        "branch": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteBranchResponse": {
                       "fields": {}
                     },
                     "PushGitCommitsRequest": {
@@ -9178,6 +9406,13 @@
                       }
                     },
                     "CodeCompilationConfig": {
+                      "oneofs": {
+                        "_lineageEnabled": {
+                          "oneof": [
+                            "lineageEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "defaultDatabase": {
                           "type": "string",
@@ -9255,6 +9490,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lineageEnabled": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -11711,6 +11954,94 @@
                             "SUCCEEDED": 2,
                             "FAILED": 3
                           }
+                        }
+                      }
+                    },
+                    "FetchWorkspaceBranchesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        },
+                        "filter": {
+                          "type": "BranchFilter",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BranchFilter": {
+                          "values": {
+                            "BRANCH_FILTER_UNSPECIFIED": 0,
+                            "LOCAL_ONLY": 1,
+                            "REMOTE_ONLY": 2,
+                            "ALL": 3
+                          }
+                        }
+                      }
+                    },
+                    "BranchMetadata": {
+                      "fields": {
+                        "branchName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "lastCommit": {
+                          "type": "CommitLogEntry",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchWorkspaceBranchesResponse": {
+                      "fields": {
+                        "branches": {
+                          "rule": "repeated",
+                          "type": "BranchMetadata",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchCurrentWorkspaceBranchRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        }
+                      }
+                    },
+                    "FetchCurrentWorkspaceBranchResponse": {
+                      "fields": {
+                        "branchName": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }
