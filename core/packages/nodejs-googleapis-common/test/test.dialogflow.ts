@@ -28,8 +28,13 @@ describe('Dialogflow Apiary Client User Simulation', () => {
     // 1. User initializes the Dialogflow Apiary client
     const dialogflow = new dialogflow_v3.Dialogflow({});
 
-    const traversalSession =
-      'projects/p/locations/l/agents/a/sessions/agents/../subagent';
+    await assert.rejects(
+      dialogflow.projects.locations.agents.sessions.detectIntent({
+        session: 'projects/p/locations/l/agents/a/sessions/agents/../subagent',
+        requestBody: {},
+      }),
+      /Value for session must not contain segments that are exactly \. or \.\./,
+    );
 
     // =========================================================================================
     // UNDER THE HOOD: VALUES PASSED INTO createAPIRequest
@@ -55,13 +60,6 @@ describe('Dialogflow Apiary Client User Simulation', () => {
     // - createAPIRequest immediately rejects with an Error before sending any HTTP request:
     //   /Value for session must not contain segments that are exactly \. or \.\./
     // =========================================================================================
-    await assert.rejects(
-      dialogflow.projects.locations.agents.sessions.detectIntent({
-        session: traversalSession,
-        requestBody: {},
-      }),
-      /Value for session must not contain segments that are exactly \. or \.\./,
-    );
   });
 
   it('detectIntent: prevents query injection when user supplies a session containing "?" and "$"', async () => {
