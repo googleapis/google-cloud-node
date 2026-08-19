@@ -494,17 +494,6 @@ class Acl extends AclRoleAccessorMethods {
    * });
    *
    * ```
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_add_file_owner
-   * Example of adding an owner to a file:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_add_bucket_owner
-   * Example of adding an owner to a bucket:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_add_bucket_default_owner
-   * Example of adding a default owner to a bucket:
    */
   add(
     options: AddAclOptions,
@@ -594,17 +583,6 @@ class Acl extends AclRoleAccessorMethods {
    * });
    *
    * ```
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_remove_bucket_owner
-   * Example of removing an owner from a bucket:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_remove_bucket_default_owner
-   * Example of removing a default owner from a bucket:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_remove_file_owner
-   * Example of removing an owner from a bucket:
    */
   delete(
     options: RemoveAclOptions,
@@ -704,21 +682,6 @@ class Acl extends AclRoleAccessorMethods {
    * });
    *
    * ```
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_print_file_acl
-   * Example of printing a file's ACL:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_print_file_acl_for_user
-   * Example of printing a file's ACL for a specific user:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_print_bucket_acl
-   * Example of printing a bucket's ACL:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_print_bucket_acl_for_user
-   * Example of printing a bucket's ACL for a specific user:
    */
   get(
     optionsOrCallback?: GetAclOptions | GetAclCallback,

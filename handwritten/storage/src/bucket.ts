@@ -659,17 +659,6 @@ export enum BucketExceptionMessages {
  * });
  *
  * ```
- * @example <caption>include:samples/iam.js</caption>
- * region_tag:storage_view_bucket_iam_members
- * Example of retrieving a bucket's IAM policy:
- *
- * @example <caption>include:samples/iam.js</caption>
- * region_tag:storage_add_bucket_iam_member
- * Example of adding to a bucket's IAM policy:
- *
- * @example <caption>include:samples/iam.js</caption>
- * region_tag:storage_remove_bucket_iam_member
- * Example of removing from a bucket's IAM policy:
  */
 /**
  * Cloud Storage uses access control lists (ACLs) to manage object and
@@ -729,29 +718,6 @@ export enum BucketExceptionMessages {
  * });
  *
  * ```
- * @example <caption>include:samples/acl.js</caption>
- * region_tag:storage_print_bucket_acl
- * Example of printing a bucket's ACL:
- *
- * @example <caption>include:samples/acl.js</caption>
- * region_tag:storage_print_bucket_acl_for_user
- * Example of printing a bucket's ACL for a specific user:
- *
- * @example <caption>include:samples/acl.js</caption>
- * region_tag:storage_add_bucket_owner
- * Example of adding an owner to a bucket:
- *
- * @example <caption>include:samples/acl.js</caption>
- * region_tag:storage_remove_bucket_owner
- * Example of removing an owner from a bucket:
- *
- * @example <caption>include:samples/acl.js</caption>
- * region_tag:storage_add_bucket_default_owner
- * Example of adding a default owner to a bucket:
- *
- * @example <caption>include:samples/acl.js</caption>
- * region_tag:storage_remove_bucket_default_owner
- * Example of removing a default owner from a bucket:
  */
 /**
  * The API-formatted resource description of the bucket.
@@ -994,9 +960,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        * });
        *
        * ```
-       * @example <caption>include:samples/buckets.js</caption>
-       * region_tag:storage_delete_bucket
-       * Another example:
        */
       delete: {
         reqOpts: {
@@ -1154,9 +1117,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        * });
        *
        * ```
-       * @example <caption>include:samples/requesterPays.js</caption>
-       * region_tag:storage_get_requester_pays_status
-       * Example of retrieving the requester pays status of a bucket:
        */
       getMetadata: {
         reqOpts: {
@@ -2085,9 +2045,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/createNotification.js</caption>
-   * region_tag:storage_create_bucket_notifications
-   * Another example:
    */
   createNotification(
     topic: string,
@@ -2459,9 +2416,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/requesterPays.js</caption>
-   * region_tag:storage_disable_requester_pays
-   * Example of disabling requester pays:
    */
   disableRequesterPays(
     optionsOrCallback?:
@@ -2657,9 +2611,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/requesterPays.js</caption>
-   * region_tag:storage_enable_requester_pays
-   * Example of enabling requester pays:
    */
   enableRequesterPays(
     optionsOrCallback?:
@@ -2949,14 +2900,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     // files contains objects that DO NOT have the 'priority' context key.
    * });
    * ```
-   *
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_list_files
-   * Another example:
-   *
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_list_files_with_prefix
-   * Example of listing files, filtered by a prefix:
    */
   getFiles(
     queryOrCallback?: GetFilesOptions | GetFilesCallback,
@@ -3158,9 +3101,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/listNotifications.js</caption>
-   * region_tag:storage_list_bucket_notifications
-   * Another example:
    */
   getNotifications(
     optionsOrCallback?: GetNotificationsOptions | GetNotificationsCallback,
@@ -4478,13 +4418,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * To upload a file from a URL, use {@link File#createWriteStream}.
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_upload_file
-   * Another example:
-   *
-   * @example <caption>include:samples/encryption.js</caption>
-   * region_tag:storage_upload_encrypted_file
-   * Example of uploading an encrypted file:
    */
   upload(
     pathString: string,

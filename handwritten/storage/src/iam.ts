@@ -236,9 +236,6 @@ class Iam {
    *   });
    *
    * ```
-   * @example <caption>include:samples/iam.js</caption>
-   * region_tag:storage_view_bucket_iam_members
-   * Example of retrieving a bucket's IAM policy:
    */
   getPolicy(
     optionsOrCallback?: GetPolicyOptions | GetPolicyCallback,
@@ -320,13 +317,6 @@ class Iam {
    * });
    *
    * ```
-   * @example <caption>include:samples/iam.js</caption>
-   * region_tag:storage_add_bucket_iam_member
-   * Example of adding to a bucket's IAM policy:
-   *
-   * @example <caption>include:samples/iam.js</caption>
-   * region_tag:storage_remove_bucket_iam_member
-   * Example of removing from a bucket's IAM policy:
    */
   setPolicy(
     policy: Policy,

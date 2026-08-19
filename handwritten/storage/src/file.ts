@@ -570,6 +570,12 @@ export interface ContextValue {
   readonly updateTime?: string;
 }
 
+export interface Contexts {
+  custom: {
+    [key: string]: ContextValue | null;
+  } | null;
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -584,11 +590,7 @@ export interface FileMetadata extends BaseMetadata {
     encryptionAlgorithm?: string;
     keySha256?: string;
   };
-  contexts?: {
-    custom: {
-      [key: string]: ContextValue | null;
-    } | null;
-  };
+  contexts?: Contexts;
   customTime?: string;
   eventBasedHold?: boolean | null;
   readonly eventBasedHoldReleaseTime?: string;
@@ -898,9 +900,6 @@ class File extends ServiceObject<File, FileMetadata> {
        * });
        *
        * ```
-       * @example <caption>include:samples/files.js</caption>
-       * region_tag:storage_delete_file
-       * Another example:
        */
       delete: {
         reqOpts: {
@@ -1043,9 +1042,6 @@ class File extends ServiceObject<File, FileMetadata> {
        * });
        *
        * ```
-       * @example <caption>include:samples/files.js</caption>
-       * region_tag:storage_get_metadata
-       * Another example:
        */
       getMetadata: {
         reqOpts: {
@@ -1374,9 +1370,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_copy_file
-   * Another example:
    */
   copy(
     destination: string | Bucket | File,
@@ -2432,17 +2425,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_download_file
-   * Another example:
-   *
-   * @example <caption>include:samples/encryption.js</caption>
-   * region_tag:storage_download_encrypted_file
-   * Example of downloading an encrypted file:
-   *
-   * @example <caption>include:samples/requesterPays.js</caption>
-   * region_tag:storage_download_file_requester_pays
-   * Example of downloading a file where the requester pays:
    */
   download(
     optionsOrCallback?: DownloadOptions | DownloadCallback,
@@ -2547,13 +2529,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/encryption.js</caption>
-   * region_tag:storage_upload_encrypted_file
-   * Example of uploading an encrypted file:
-   *
-   * @example <caption>include:samples/encryption.js</caption>
-   * region_tag:storage_download_encrypted_file
-   * Example of downloading an encrypted file:
    */
   setEncryptionKey(encryptionKey: string | Buffer) {
     this.encryptionKey = encryptionKey;
@@ -3271,9 +3246,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_generate_signed_url
-   * Another example:
    */
   getSignedUrl(
     cfg: GetSignedUrlConfig,
@@ -3562,9 +3534,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_make_public
-   * Another example:
    */
   makePublic(
     callback?: MakeFilePublicCallback,
@@ -3708,9 +3677,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_move_file
-   * Another example:
    */
   moveFileAtomic(
     destination: string | File,
@@ -3925,9 +3891,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * });
    *
    * ```
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_move_file
-   * Another example:
    */
   move(
     destination: string | Bucket | File,
@@ -4165,10 +4128,6 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {RotateEncryptionKeyOptions} [options] - Configuration options.
    * @param {RotateEncryptionKeyCallback} [callback]
    * @returns {Promise<File>}
-   *
-   * @example <caption>include:samples/encryption.js</caption>
-   * region_tag:storage_rotate_encryption_key
-   * Example of rotating the encryption key for this file:
    */
   rotateEncryptionKey(
     optionsOrCallback?:
