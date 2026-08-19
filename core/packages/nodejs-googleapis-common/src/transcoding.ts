@@ -85,7 +85,21 @@ function encodeWithoutSlashes(str: string): string {
 /**
  * Extracts template parameters and their corresponding wildcard types ('*' or '**').
  *
+ * @example
+ * ```ts
+ * // Input:
+ * 'https://example.com/v1/{+parent}/databases/{databaseId}/documents/{+documentPath}'
+ *
+ * // Output:
+ * [
+ *   { param: 'parent', wildcard: '**' },
+ *   { param: 'databaseId', wildcard: '*' },
+ *   { param: 'documentPath', wildcard: '**' }
+ * ]
+ * ```
+ *
  * @param urlTemplate The RFC 6570 URI template string
+ * @returns Array of parameter names and their associated wildcard pattern
  */
 function extractTemplateParams(urlTemplate: string): Array<{
   param: string;
