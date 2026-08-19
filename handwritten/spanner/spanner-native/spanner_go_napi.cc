@@ -329,7 +329,6 @@ napi_value ExecuteStreamingSqlNative(napi_env env, napi_callback_info info) {
         napi_value arraybuffer;
         size_t byte_offset = 0;
         napi_get_typedarray_info(env, args[3], &type, &req_len, &req_data, &arraybuffer, &byte_offset);
-        req_data = static_cast<char*>(req_data) + byte_offset;
     } else {
         bool is_buffer = false;
         napi_is_buffer(env, args[3], &is_buffer);

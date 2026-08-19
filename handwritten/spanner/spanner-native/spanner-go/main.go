@@ -318,17 +318,25 @@ func ExecuteStreamingSqlGo(
 			}
 
 			// 2. Prepare outgoing gRPC context with metadata headers
-			md := metadata.New(metaMap)
-
-			// Fetch OAuth2 bearer token from memory cache
-			token, err := client.GetToken()
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "[spanner-go] Auth token retrieval failed: %v\n", err)
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
-				return
+			md := metadata.New(nil)
+			for k, v := range metaMap {
+				if client.useGapic && (k == "x-goog-user-project" || k == "authorization") {
+					continue // GAPIC automatically manages project & auth tokens internally
+				}
+				md.Set(k, v)
 			}
-			if token != nil && token.AccessToken != "" {
-				md.Set("authorization", "Bearer "+token.AccessToken)
+
+			if !client.useGapic {
+				// Fetch OAuth2 bearer token from memory cache for raw gRPC connections
+				token, err := client.GetToken()
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "[spanner-go] Auth token retrieval failed: %v\n", err)
+					sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
+					return
+				}
+				if token != nil && token.AccessToken != "" {
+					md.Set("authorization", "Bearer "+token.AccessToken)
+				}
 			}
 
 			ctx := metadata.NewOutgoingContext(client.ctx, md)
