@@ -169,13 +169,14 @@ async function createAPIRequestAsync<T>(
   }
 
   // Validate and encode path params to prevent traversal and injection attacks
-  const urlTemplateString =
+  validateAndEncodeParams(
     options.url !== undefined && options.url !== null
       ? typeof options.url === 'object'
         ? options.url.toString()
         : options.url
-      : parameters.mediaUrl ?? undefined;
-  validateAndEncodeParams(urlTemplateString, params);
+      : parameters.mediaUrl ?? undefined,
+    params,
+  );
 
   // Parse urls
   if (options.url) {
