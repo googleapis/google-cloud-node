@@ -13,8 +13,23 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import * as path from 'path';
 import {describe, it, afterEach} from 'mocha';
 import * as nock from 'nock';
+
+// Ensure @googleapis/dialogflow uses our local development version of googleapis-common
+const localCommon = require('../src');
+const dfPath = require.resolve('@googleapis/dialogflow');
+const commonPath = require.resolve('googleapis-common', {
+  paths: [path.dirname(dfPath)],
+});
+require.cache[commonPath] = {
+  id: commonPath,
+  filename: commonPath,
+  loaded: true,
+  exports: localCommon,
+} as NodeModule;
+
 import {dialogflow_v3} from '@googleapis/dialogflow';
 
 nock.disableNetConnect();
@@ -24,8 +39,7 @@ describe('Dialogflow Apiary Client User Simulation', () => {
     nock.cleanAll();
   });
 
-  it.skip('detectIntent: throws validation error when session path contains path traversal segments', async () => {
-    // TODO: Re-enable this test when the googleapis-common version with the new encoding is released.
+  it('detectIntent: throws validation error when session path contains path traversal segments', async () => {
     // 1. User initializes the Dialogflow Apiary client
     const dialogflow = new dialogflow_v3.Dialogflow({});
 
@@ -63,8 +77,7 @@ describe('Dialogflow Apiary Client User Simulation', () => {
     // =========================================================================================
   });
 
-  it.skip('detectIntent: prevents query injection when user supplies a session containing "?" and "$"', async () => {
-    // TODO: Re-enable this test when the googleapis-common version with the new encoding is released.
+  it('detectIntent: prevents query injection when user supplies a session containing "?" and "$"', async () => {
     const dialogflow = new dialogflow_v3.Dialogflow({});
 
     const injectionSession =
