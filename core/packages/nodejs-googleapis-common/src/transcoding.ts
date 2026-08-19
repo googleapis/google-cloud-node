@@ -170,46 +170,34 @@ export function validateAndEncodeParams(
   const {multiSegmentParams, singleSegmentParams} =
     extractTemplateParams(urlTemplate);
 
-  // 2. Process multi-segment parameters ({+param}):
-  // - Validate that no individual path segment is '.' or '..' (rejecting path traversal while
-  //   permitting valid domain-scoped names like 'projects/example.com:my-project').
-  // - Pre-encode with encodeWithoutSlashes so that reserved characters ('?', '#', '$', '&', '=')
-  //   are strictly percent-encoded according to RFC 3986 before url-template reserved expansion runs,
-  //   preventing query parameter and fragment injection while keeping slashes ('/') intact.
-  for (const param of multiSegmentParams) {
+  // 2. Validate and encode parameters:
+  // - Multi-segment parameters ({+param}) allow slashes for hierarchical resource paths;
+  //   each slash-separated segment is validated against traversal ('.' or '..') and pre-encoded
+  //   with encodeWithoutSlashes to prevent query parameter/fragment injection.
+  // - Single-segment parameters ({param}) disallow '.' and '..'; url-template standard expansion
+  //   handles character percent-encoding automatically.
+  const allParams = new Set([...multiSegmentParams, ...singleSegmentParams]);
+  for (const param of allParams) {
     const val = params[param];
-    if (val !== undefined && val !== null) {
-      if (Array.isArray(val)) {
-        for (const item of val) {
-          validateUriPath(param, String(item));
-        }
-        params[param] = val.map(item => encodeWithoutSlashes(String(item)));
-      } else {
-        validateUriPath(param, String(val));
-        params[param] = encodeWithoutSlashes(String(val));
-      }
-    }
-  }
-
-  // 3. Process single-segment parameters ({param}):
-  // - Validate that the segment is not exactly '.' or '..' to block path traversal.
-  // - Note: We do NOT pre-encode single-segment values here because url-template standard expansion
-  //   ({param}) automatically applies strict percent-encoding to all reserved characters;
-  //   pre-encoding would lead to double percent-encoding (%25...).
-  for (const param of singleSegmentParams) {
-    // Skip if already processed under multiSegmentParams
-    if (multiSegmentParams.has(param)) {
+    if (val === undefined || val === null) {
       continue;
     }
-    const val = params[param];
-    if (val !== undefined && val !== null) {
-      if (Array.isArray(val)) {
-        for (const item of val) {
-          validateUriPathSegment(param, String(item));
-        }
+    const isMultiSegment = multiSegmentParams.has(param);
+    const isArray = Array.isArray(val);
+    const items: unknown[] = isArray ? val : [val];
+
+    for (const item of items) {
+      if (isMultiSegment) {
+        validateUriPath(param, String(item));
       } else {
-        validateUriPathSegment(param, String(val));
+        validateUriPathSegment(param, String(item));
       }
+    }
+
+    if (isMultiSegment) {
+      params[param] = isArray
+        ? val.map(item => encodeWithoutSlashes(String(item)))
+        : encodeWithoutSlashes(String(val));
     }
   }
 }
