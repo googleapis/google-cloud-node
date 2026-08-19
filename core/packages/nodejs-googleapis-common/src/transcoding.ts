@@ -122,6 +122,16 @@ function escapeRegExp(str: string) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+/**
+ * Matches the applyPattern method in google-gax verbatim.
+ * Validates a field value against a wildcard pattern ('*' single-segment or '**' multi-segment)
+ * to prevent path traversal attacks ('.' and '..') and percent-encodes the string.
+ *
+ * @param pattern The wildcard pattern ('*' or '**')
+ * @param fieldValue The string value to validate and encode
+ * @param propertyName Name of the parameter being validated (used for error reporting)
+ * @returns The encoded string if the value matches the pattern, or undefined if it does not
+ */
 function applyPattern(
   pattern: string,
   fieldValue: string,
