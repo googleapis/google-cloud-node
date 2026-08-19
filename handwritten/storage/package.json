@@ -128,5 +128,13 @@
     "yargs": "^17.7.2",
     "cross-env": "^7.0.3"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage",
+  "overrides": {
+    "jwa": "^2.0.1",
+    "jws": "^4.0.1"
+  },
+  "resolutions": {
+    "jwa": "^2.0.1",
+    "jws": "^4.0.1"
+  }
 }
