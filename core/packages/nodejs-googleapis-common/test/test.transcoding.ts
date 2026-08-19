@@ -15,8 +15,8 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import {
-  validateSingleSegment,
-  validateMultiSegment,
+  validateUriPathSegment,
+  validateUriPath,
   encodeWithSlashes,
   encodeWithoutSlashes,
   extractTemplateParams,
@@ -25,80 +25,80 @@ import {
 } from '../src/transcoding';
 
 describe('transcoding', () => {
-  describe('validateSingleSegment', () => {
+  describe('validateUriPathSegment', () => {
     it('should throw for "."', () => {
       assert.throws(() => {
-        validateSingleSegment('fileId', '.');
+        validateUriPathSegment('fileId', '.');
       }, /Invalid value \. for fileId/);
     });
 
     it('should throw for ".."', () => {
       assert.throws(() => {
-        validateSingleSegment('fileId', '..');
+        validateUriPathSegment('fileId', '..');
       }, /Invalid value \.\. for fileId/);
     });
 
     it('should allow valid single segment names', () => {
       assert.doesNotThrow(() => {
-        validateSingleSegment('fileId', 'valid-id');
-        validateSingleSegment('fileId', 'file.txt');
-        validateSingleSegment('fileId', 'example.com');
+        validateUriPathSegment('fileId', 'valid-id');
+        validateUriPathSegment('fileId', 'file.txt');
+        validateUriPathSegment('fileId', 'example.com');
       });
     });
   });
 
-  describe('validateMultiSegment', () => {
+  describe('validateUriPath', () => {
     it('should throw for ".." segment in multi-segment path', () => {
       assert.throws(() => {
-        validateMultiSegment(
+        validateUriPath(
           'session',
           'projects/p/locations/l/agents/a/sessions/agents/../subagent',
         );
       }, /Value for session must not contain segments that are exactly \. or \.\./);
 
       assert.throws(() => {
-        validateMultiSegment('name', '..');
+        validateUriPath('name', '..');
       }, /Value for name must not contain segments that are exactly \. or \.\./);
 
       assert.throws(() => {
-        validateMultiSegment('name', 'a/b/..');
+        validateUriPath('name', 'a/b/..');
       }, /Value for name must not contain segments that are exactly \. or \.\./);
     });
 
     it('should throw for "." segment in multi-segment path', () => {
       assert.throws(() => {
-        validateMultiSegment(
+        validateUriPath(
           'session',
           'projects/p/locations/l/agents/a/sessions/agents/./subagent',
         );
       }, /Value for session must not contain segments that are exactly \. or \.\./);
 
       assert.throws(() => {
-        validateMultiSegment('name', '.');
+        validateUriPath('name', '.');
       }, /Value for name must not contain segments that are exactly \. or \.\./);
 
       assert.throws(() => {
-        validateMultiSegment('name', './a/b');
+        validateUriPath('name', './a/b');
       }, /Value for name must not contain segments that are exactly \. or \.\./);
     });
 
     it('should allow valid domain-scoped and resource paths with dots', () => {
       assert.doesNotThrow(() => {
-        validateMultiSegment(
+        validateUriPath(
           'parent',
           'projects/example.com:custom-project/locations/global',
         );
-        validateMultiSegment(
+        validateUriPath(
           'session',
           'projects/p/locations/l/agents/a/sessions/123.456',
         );
-        validateMultiSegment('name', 'a/b/c');
+        validateUriPath('name', 'a/b/c');
       });
     });
 
     it('should allow empty/falsy values', () => {
       assert.doesNotThrow(() => {
-        validateMultiSegment('name', '');
+        validateUriPath('name', '');
       });
     });
   });
@@ -115,6 +115,18 @@ describe('transcoding', () => {
 
     it('should properly encode Unicode surrogate pairs / emojis', () => {
       assert.strictEqual(encodeWithSlashes('😊'), '%F0%9F%98%8A');
+    });
+
+    it('should preserve unreserved characters while strictly percent-encoding all other characters in encodeWithSlashes', () => {
+      // Standard RFC unreserved characters: [-_.~0-9a-zA-Z]
+      const unreserved = 'abc-123_.~XYZ';
+      assert.strictEqual(encodeWithSlashes(unreserved), unreserved);
+
+      // Reserved and special characters: should be percent encoded, including !\'()*
+      const specialChars = "!'()*";
+      const encoded = encodeWithSlashes(specialChars);
+      // ! -> %21, ' -> %27, ( -> %28, ) -> %29, * -> %2A
+      assert.strictEqual(encoded, '%21%27%28%29%2A');
     });
   });
 
@@ -137,7 +149,7 @@ describe('transcoding', () => {
     it('should percent-encode reserved characters while preserving slashes', () => {
       const input = "projects/p/locations/l/agents/a/sessions/ !@$&'()*+,;=:%";
       const expected =
-        "projects/p/locations/l/agents/a/sessions/%20!%40%24%26'()*%2B%2C%3B%3D%3A%25";
+        'projects/p/locations/l/agents/a/sessions/%20%21%40%24%26%27%28%29%2A%2B%2C%3B%3D%3A%25';
       assert.strictEqual(encodeWithoutSlashes(input), expected);
     });
 

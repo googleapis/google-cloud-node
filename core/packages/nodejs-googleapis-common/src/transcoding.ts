@@ -19,7 +19,7 @@
  * @param propertyName Name of the parameter being validated
  * @param value Value of the path segment
  */
-export function validateSingleSegment(
+export function validateUriPathSegment(
   propertyName: string,
   value: string,
 ): void {
@@ -37,7 +37,7 @@ export function validateSingleSegment(
  * @param propertyName Name of the parameter being validated
  * @param value Value of the multi-segment path
  */
-export function validateMultiSegment(
+export function validateUriPath(
   propertyName: string,
   value: string,
 ): void {
@@ -52,32 +52,40 @@ export function validateMultiSegment(
 }
 
 /**
- * Aliases for compatibility with GAX naming conventions.
+ * Aliases for backwards compatibility.
  */
-export const validateUriPathSegment = validateSingleSegment;
-export const validateUriPath = validateMultiSegment;
+export const validateSingleSegment = validateUriPathSegment;
+export const validateMultiSegment = validateUriPath;
 
 /**
- * Percent-encodes a string, preserving only unreserved characters
- * (alpha-numeric, '-', '_', '.', and '~'). All other characters,
+ * Percent-encodes a string according to RFC 3986, preserving only unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
  * including slashes ('/'), are percent-encoded.
+ *
+ * This is necessary because encodeURIComponent natively encodes URL-unsafe
+ * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
+ * To ensure strict compliance, we manually encode those preserved characters.
  *
  * @param str The input string to encode
  * @returns The percent-encoded string
  */
 export function encodeWithSlashes(str: string): string {
-  return encodeURIComponent(str);
+  return encodeURIComponent(str).replace(
+    /[!'()*]/g, // Characters preserved by encodeURIComponent
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
+  );
 }
 
 /**
- * Percent-encodes a string, preserving unreserved characters and slashes ('/').
- * All other characters are percent-encoded.
+ * Percent-encodes a string according to RFC 3986, preserving unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
+ * characters are percent-encoded.
  *
  * @param str The input string to encode
  * @returns The percent-encoded string with slashes preserved
  */
 export function encodeWithoutSlashes(str: string): string {
-  return str.split('/').map(encodeURIComponent).join('/');
+  return str.split('/').map(encodeWithSlashes).join('/');
 }
 
 /**
@@ -190,11 +198,11 @@ export function validateAndEncodeParams(
     if (val !== undefined && val !== null) {
       if (Array.isArray(val)) {
         for (const item of val) {
-          validateMultiSegment(param, String(item));
+          validateUriPath(param, String(item));
         }
         params[param] = val.map(item => encodeWithoutSlashes(String(item)));
       } else {
-        validateMultiSegment(param, String(val));
+        validateUriPath(param, String(val));
         params[param] = encodeWithoutSlashes(String(val));
       }
     }
@@ -214,10 +222,10 @@ export function validateAndEncodeParams(
     if (val !== undefined && val !== null) {
       if (Array.isArray(val)) {
         for (const item of val) {
-          validateSingleSegment(param, String(item));
+          validateUriPathSegment(param, String(item));
         }
       } else {
-        validateSingleSegment(param, String(val));
+        validateUriPathSegment(param, String(val));
       }
     }
   }

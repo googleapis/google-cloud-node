@@ -850,7 +850,7 @@ describe('createAPIRequest', () => {
 
     it('should percent-encode reserved characters while preserving unreserved characters and slashes in reserved parameters', async () => {
       const p =
-        "/v3/projects/p/locations/l/agents/a/sessions/%20!%40%24%26'()*%2B%2C%3B%3D%3A%25:detectIntent";
+        '/v3/projects/p/locations/l/agents/a/sessions/%20%21%40%24%26%27%28%29%2A%2B%2C%3B%3D%3A%25:detectIntent';
       const scope = nock('https://dialogflow.googleapis.com')
         .post(p)
         .reply(200, {});

@@ -537,17 +537,17 @@ describe('Dialogflow Apiary Client User Simulation', () => {
     //
     // BEHAVIORAL EFFECT OF THIS BRANCH ON createAPIRequest:
     // -----------------------------------------------------
-    // - encodeWithoutSlashes runs encodeURIComponent per slash segment:
+    // - encodeWithoutSlashes runs RFC 3986 percent-encoding per slash segment:
     //   - '?' becomes '%3F'
     //   - '$' becomes '%24'
     //   - '=' becomes '%3D'
     //   - '&' becomes '%26'
     //   - '#' becomes '%23'
-    //   - '(', ')', '*' are preserved without double-escaping.
+    //   - '(', ')', '*' are percent-encoded strictly as '%28', '%29', '%2A'.
     // - This prevents $foo=BAR and admin=1 from becoming actual query parameters.
     // =========================================================================================
     const expectedPath =
-      '/v3/projects/p/locations/l/agents/a/sessions/session-(1)*%3F%24foo%3DBAR%26admin%3D1%23frag:detectIntent';
+      '/v3/projects/p/locations/l/agents/a/sessions/session-%281%29%2A%3F%24foo%3DBAR%26admin%3D1%23frag:detectIntent';
 
     const scope = nock('https://dialogflow.googleapis.com')
       .post(expectedPath, {})
