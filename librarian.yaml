@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.37.0
+version: v0.38.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
