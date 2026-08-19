@@ -283,17 +283,10 @@ async function runTest1(db, rustClient, goClient) {
     console.log(`\n  Executing: ${q.label}...`);
     const js = await runBenchmark(() => db.executeSqlJs(q.sql), 1, 5000);
     const rust = await runBenchmark(() => rustClient.executeSqlNative(q.sql), 1, 5000);
-    const go = await runBenchmark(() => goClient.executeSqlNative(q.sql), 1, 5000);
+    // const go = await runBenchmark(() => goClient.executeSqlNative(q.sql), 1, 5000);
 
     const rustSpeedup = (rust.qps / (js.qps || 1)).toFixed(2);
-    const goSpeedup = (go.qps / (js.qps || 1)).toFixed(2);
-    const rustLatImp = (((js.p95 - rust.p95) / (js.p95 || 1)) * 100).toFixed(1);
-    const goLatImp = (((js.p95 - go.p95) / (js.p95 || 1)) * 100).toFixed(1);
-
-    console.log(`    JavaScript Baseline    : ${js.qps.toFixed(1)} QPS | p50: ${js.p50.toFixed(2)}ms | p95: ${js.p95.toFixed(2)}ms | Lag: ${js.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Rust Shared Core (1 Ch): ${rust.qps.toFixed(1)} QPS | p50: ${rust.p50.toFixed(2)}ms | p95: ${rust.p95.toFixed(2)}ms | Lag: ${rust.avgLagMs.toFixed(2)}ms (${rustSpeedup}x speedup, ${rustLatImp}% lat imp)`);
-    console.log(`    Go DirectPath    (1 Ch): ${go.qps.toFixed(1)} QPS | p50: ${go.p50.toFixed(2)}ms | p95: ${go.p95.toFixed(2)}ms | Lag: ${go.avgLagMs.toFixed(2)}ms (${goSpeedup}x speedup, ${goLatImp}% lat imp)`);
-
+    
     results.push({
       query: q.label,
       javascript: js,
@@ -321,9 +314,9 @@ async function runTest2(db, rustClients, goClients) {
   const rustRes32 = await runCustomerReplication(() => rustClients[32].executeSqlNative(SQL), 110, 1000);
   const rustRes50 = await runCustomerReplication(() => rustClients[50].executeSqlNative(SQL), 110, 1000);
 
-  const goRes16 = await runCustomerReplication(() => goClients[16].executeSqlNative(SQL), 110, 1000);
-  const goRes32 = await runCustomerReplication(() => goClients[32].executeSqlNative(SQL), 110, 1000);
-  const goRes50 = await runCustomerReplication(() => goClients[50].executeSqlNative(SQL), 110, 1000);
+  // const goRes16 = await runCustomerReplication(() => goClients[16].executeSqlNative(SQL), 110, 1000);
+  // const goRes32 = await runCustomerReplication(() => goClients[32].executeSqlNative(SQL), 110, 1000);
+  // const goRes50 = await runCustomerReplication(() => goClients[50].executeSqlNative(SQL), 110, 1000);
 
   const printSummary = (label, r, base = null) => {
     console.log(`\n  [${label}]`);
@@ -341,9 +334,6 @@ async function runTest2(db, rustClients, goClients) {
   printSummary('Rust (16 Channels)', rustRes16, jsRes);
   printSummary('Rust (32 Channels)', rustRes32, jsRes);
   printSummary('Rust (50 Channels)', rustRes50, jsRes);
-  printSummary('Go DirectPath (16 Channels)', goRes16, jsRes);
-  printSummary('Go DirectPath (32 Channels)', goRes32, jsRes);
-  printSummary('Go DirectPath (50 Channels)', goRes50, jsRes);
 
   return {
     javascript: jsRes,
@@ -424,23 +414,8 @@ async function runTest3(db, rustClient4, goClient4) {
     ].join(' | '));
 
     // 3. Go DirectPath Native (4 Channels)
-    const goRes = await runBenchmark(() => goClient4.executeSqlNative(SQL), concurrency, DURATION_MS);
-    const goSpeedup = jsRes.qps > 0 ? (goRes.qps / jsRes.qps).toFixed(2) + 'x' : '0.00x';
-    const goLatImp = jsRes.p95 > 0 ? (((jsRes.p95 - goRes.p95) / jsRes.p95) * 100).toFixed(1) + '%' : '0.0%';
-    const goQpsP95 = `${goRes.qps.toFixed(1)} / ${goRes.p95.toFixed(1)}`;
-
-    console.log([
-      String(concurrency).padEnd(12),
-      `Go DirectPath (${MATRIX_CHANNEL_COUNT} Ch)`.padEnd(26),
-      goQpsP95.padEnd(18),
-      goRes.p50.toFixed(1).padEnd(10),
-      goRes.p99.toFixed(1).padEnd(10),
-      `${goRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
-      `${goRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
-      `${goRes.cpuUtil.toFixed(1)}%`.padEnd(10),
-      goSpeedup.padEnd(10),
-      goLatImp.padEnd(10)
-    ].join(' | '));
+    // const goRes = await runBenchmark(() => goClient4.executeSqlNative(SQL), concurrency, DURATION_MS);
+    
 
     console.log('-'.repeat(110));
 
@@ -485,24 +460,18 @@ async function main() {
     50: new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 50, 'rust'),
   };
 
-  const goClients = {
-    1: new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 1, 'go'),
-    4: new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4, 'go'),
-    16: new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go'),
-    32: new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 32, 'go'),
-    50: new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 50, 'go'),
-  };
+  /* const goClients = { ... }; */
 
   console.log(`Warming up connections and auth tokens (${WARMUP_MS / 1000}s)...`);
   await runBenchmark(() => db.executeSqlJs(SQL), 2, WARMUP_MS / 2);
   await runBenchmark(() => rustClients[4].executeSqlNative(SQL), 2, WARMUP_MS / 2);
-  await runBenchmark(() => goClients[4].executeSqlNative(SQL), 2, WARMUP_MS / 2);
+  // await runBenchmark(() => goClients[4].executeSqlNative(SQL), 2, WARMUP_MS / 2);
   console.log('Warmup complete.');
 
   // Execute Suites
-  const test1Results = await runTest1(db, rustClients[1], goClients[1]);
-  const test2Results = await runTest2(db, rustClients, goClients);
-  const test3Results = await runTest3(db, rustClients[4], goClients[4]);
+  const test1Results = await runTest1(db, rustClients[1], null); // const test1Results = await runTest1(db, rustClients[1], goClients[1]);
+  const test2Results = await runTest2(db, rustClients, null); // const test2Results = await runTest2(db, rustClients, goClients);
+  const test3Results = await runTest3(db, rustClients[4], null); // const test3Results = await runTest3(db, rustClients[4], goClients[4]);
 
   // Save results to JSON
   const outputData = {
@@ -526,7 +495,7 @@ async function main() {
   // Cleanup
   db.close();
   for (const ch of Object.keys(rustClients)) rustClients[ch].close();
-  for (const ch of Object.keys(goClients)) goClients[ch].close();
+  // for (const ch of Object.keys(goClients)) goClients[ch].close();
 
   process.exit(0);
 }
