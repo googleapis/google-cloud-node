@@ -54,7 +54,9 @@ impl CoreClient {
             for _ in 0..limit {
                 let ep = tonic::transport::Endpoint::from_static(endpoint)
                     .tls_config(tls_config.clone())
-                    .expect("TLS config error");
+                    .expect("TLS config error")
+                    .initial_stream_window_size(Some(4 * 1024 * 1024))
+                    .initial_connection_window_size(Some(16 * 1024 * 1024));
                 channels.push(ep.connect().await.expect("Connect error"));
             }
             (channels, auth_manager)
@@ -91,7 +93,7 @@ pub enum SpannerValue {
 
 #[derive(Clone)]
 pub struct SpannerResult {
-    pub rows: Vec<Vec<SpannerValue>>,
+    pub rows: Vec<u8>,
     pub telemetry: Telemetry,
 }
 
@@ -108,55 +110,30 @@ pub struct SpannerError {
 }
 
 /// Helper to convert a protobuf Value to a native SpannerValue using metadata row_type.
-fn decode_value(val: &prost_types::Value, field_type: Option<&Type>) -> SpannerValue {
-    use prost_types::value::Kind;
-    if let Some(Kind::NullValue(_)) = val.kind {
-        return SpannerValue::Null;
-    }
 
-    match &val.kind {
-        Some(Kind::BoolValue(b)) => SpannerValue::Bool(*b),
-        Some(Kind::NumberValue(n)) => SpannerValue::Float64(*n),
-        Some(Kind::StringValue(s)) => {
-            if let Some(t) = field_type {
-                match t.code {
-                    c if c == TypeCode::Int64 as i32 => SpannerValue::Int64(s.clone()),
-                    c if c == TypeCode::Timestamp as i32 => SpannerValue::Timestamp(s.clone()),
-                    c if c == TypeCode::Date as i32 => SpannerValue::Date(s.clone()),
-                    c if c == TypeCode::Numeric as i32 => SpannerValue::Numeric(s.clone()),
-                    c if c == TypeCode::Bytes as i32 => SpannerValue::Bytes(s.clone()),
-                    c if c == TypeCode::Json as i32 => SpannerValue::Json(s.clone()),
-                    _ => SpannerValue::String(s.clone()),
-                }
-            } else {
-                SpannerValue::String(s.clone())
-            }
+fn encode_value(val: &prost_types::Value, buf: &mut Vec<u8>) {
+    use prost_types::value::Kind;
+    if val.kind.is_none() {
+        buf.push(0); // Null
+        return;
+    }
+    match val.kind.as_ref().unwrap() {
+        Kind::NullValue(_) => buf.push(0), // Null
+        Kind::BoolValue(b) => {
+            buf.push(3);
+            buf.push(if *b { 1 } else { 0 });
         }
-        Some(Kind::ListValue(l)) => {
-            let elem_type = field_type.and_then(|t| t.array_element_type.as_deref());
-            let arr = l.values.iter().map(|v| decode_value(v, elem_type)).collect();
-            SpannerValue::Array(arr)
+        Kind::NumberValue(n) => {
+            buf.push(2);
+            buf.extend_from_slice(&n.to_le_bytes());
         }
-        Some(Kind::StructValue(s)) => {
-            let mut st = Vec::new();
-            if let Some(t) = field_type {
-                if let Some(struct_type) = &t.struct_type {
-                    for f in &struct_type.fields {
-                        let field_val = s.fields.get(&f.name).unwrap_or(&prost_types::Value { kind: Some(Kind::NullValue(0)) });
-                        st.push((f.name.clone(), decode_value(field_val, f.r#type.as_ref())));
-                    }
-                }
-            }
-            if st.is_empty() {
-                // fallback
-                for (k, v) in &s.fields {
-                    st.push((k.clone(), decode_value(v, None)));
-                }
-            }
-            SpannerValue::Struct(st)
+        Kind::StringValue(s) => {
+            buf.push(1);
+            let bytes = s.as_bytes();
+            buf.extend_from_slice(&(bytes.len() as u32).to_le_bytes());
+            buf.extend_from_slice(bytes);
         }
-        None => SpannerValue::Null,
-        _ => SpannerValue::Null,
+        _ => buf.push(0), // Fallback complex types to Null (like Go)
     }
 }
 
@@ -197,16 +174,18 @@ pub async fn execute_streaming_sql(
     routing_key: String,
     metadata: Vec<(String, String)>,
     request_bytes: Vec<u8>,
-    sender: mpsc::Sender<Result<SpannerResult, SpannerError>>
+    on_batch: impl Fn(Result<SpannerResult, SpannerError>) + Send + Sync + 'static
 ) {
     let mut last_resume_token: Vec<u8> = Vec::new();
     let mut attempt_count = 0;
     
     // Maintain decoding state across retries
-    let mut current_row = Vec::new();
+    let mut current_row: Vec<prost_types::Value> = Vec::new();
     let mut row_type: Option<Vec<Field>> = None;
     let mut pending_value: Option<prost_types::Value> = None;
-    let mut batch = Vec::with_capacity(100);
+    let mut batch: Vec<u8> = Vec::with_capacity(16 * 1024);
+    let mut batch_row_count = 0u32;
+    let mut col_count_saved = false;
 
     loop {
         attempt_count += 1;
@@ -215,11 +194,11 @@ pub async fn execute_streaming_sql(
         let mut request = match ExecuteSqlRequest::decode(&request_bytes[..]) {
             Ok(req) => req,
             Err(e) => {
-                let _ = sender.send(Err(SpannerError {
+                on_batch(Err(SpannerError {
                     code: 3, // INVALID_ARGUMENT
                     message: format!("Failed to decode request bytes: {}", e),
                     details: vec![],
-                })).await;
+                }));
                 return;
             }
         };
@@ -247,11 +226,11 @@ pub async fn execute_streaming_sql(
                 }
             }
             Err(e) => {
-                let _ = sender.send(Err(SpannerError {
+                on_batch(Err(SpannerError {
                     code: 16, // UNAUTHENTICATED
                     message: format!("Failed to fetch GCP auth token: {}", e),
                     details: vec![],
-                })).await;
+                }));
                 return;
             }
         }
@@ -268,11 +247,11 @@ pub async fn execute_streaming_sql(
                 if (e.code() == tonic::Code::Unavailable || e.code() == tonic::Code::Internal) && !last_resume_token.is_empty() {
                     continue; // Retry loop entirely transparent to JS
                 }
-                let _ = sender.send(Err(SpannerError {
+                on_batch(Err(SpannerError {
                     code: e.code() as i32,
                     message: e.message().to_string(),
                     details: e.details().to_vec(),
-                })).await;
+                }));
                 return;
             }
         };
@@ -312,49 +291,38 @@ pub async fn execute_streaming_sql(
                         if let Some(first) = values_iter.next() {
                             let merged = merge_proto_values(pending, first);
                             let field_idx = current_row.len();
-                            let field_type = row_type.as_ref().and_then(|f| f.get(field_idx)).and_then(|f| f.r#type.as_ref());
-                            current_row.push(decode_value(&merged, field_type));
-                            
-                            if num_fields > 0 && current_row.len() == num_fields {
-                                batch.push(std::mem::take(&mut current_row));
-                                if batch.len() >= 100 {
-                                    let mut tel = Telemetry::default();
-                                    tel.attempt_count = telemetry.attempt_count;
-                                    tel.server_timing = telemetry.server_timing.clone();
-                                    let _ = sender.send(Ok(SpannerResult {
-                                        rows: std::mem::take(&mut batch),
-                                        telemetry: tel
-                                    })).await;
-                                }
-                            }
-                        } else {
-                            pending_value = Some(pending);
-                        }
-                    }
-
-                    let mut remaining_values: Vec<prost_types::Value> = values_iter.collect();
-
-                    if chunk.chunked_value {
-                        if !remaining_values.is_empty() {
-                            pending_value = remaining_values.pop();
-                        }
-                    }
-
-                    for val in remaining_values {
-                        let field_idx = current_row.len();
-                        let field_type = row_type.as_ref().and_then(|f| f.get(field_idx)).and_then(|f| f.r#type.as_ref());
-                        current_row.push(decode_value(&val, field_type));
+                        current_row.push(val);
                         
                         if num_fields > 0 && current_row.len() == num_fields {
-                            batch.push(std::mem::take(&mut current_row));
+                            
+                        if !col_count_saved {
+                            batch.extend_from_slice(&0u32.to_le_bytes()); // placeholder for row_count
+                            batch.extend_from_slice(&(current_row.len() as u32).to_le_bytes());
+                            col_count_saved = true;
+                        }
+                        for val in &current_row {
+                            encode_value(val, &mut batch);
+                        }
+                        batch_row_count += 1;
+                        current_row.clear();
+
                             if batch.len() >= 100 {
                                 let mut tel = Telemetry::default();
                                 tel.attempt_count = telemetry.attempt_count;
                                 tel.server_timing = telemetry.server_timing.clone();
-                                let _ = sender.send(Ok(SpannerResult {
-                                    rows: std::mem::take(&mut batch),
+                                on_batch(Ok(SpannerResult {
+                                    rows: {
+                                        if batch_row_count > 0 {
+                                            let rc_bytes = batch_row_count.to_le_bytes();
+                                            batch[0..4].copy_from_slice(&rc_bytes);
+                                        }
+                                        let out = std::mem::take(&mut batch);
+                                        batch_row_count = 0;
+                                        col_count_saved = false;
+                                        out
+                                    },
                                     telemetry: tel
-                                })).await;
+                                }));
                             }
                         }
                     }
@@ -369,11 +337,11 @@ pub async fn execute_streaming_sql(
                         break; // Break inner stream consumption loop, trigger outer loop retry
                     }
                     
-                    let _ = sender.send(Err(SpannerError {
+                    on_batch(Err(SpannerError {
                         code: e.code() as i32,
                         message: e.message().to_string(),
                         details: e.details().to_vec(),
-                    })).await;
+                    }));
                     return;
                 }
             }
@@ -405,10 +373,16 @@ pub async fn execute_streaming_sql(
         let mut tel = Telemetry::default();
         tel.attempt_count = telemetry.attempt_count;
         tel.server_timing = telemetry.server_timing.clone();
-        let _ = sender.send(Ok(SpannerResult {
-            rows: batch,
+        on_batch(Ok(SpannerResult {
+            rows: {
+            if batch_row_count > 0 {
+                let rc_bytes = batch_row_count.to_le_bytes();
+                batch[0..4].copy_from_slice(&rc_bytes);
+            }
+            batch
+        },
             telemetry: tel
-        })).await;
+        }));
         
         break; // Stream fully consumed, exit outer retry loop
     }

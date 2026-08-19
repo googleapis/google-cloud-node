@@ -102,15 +102,8 @@ pub fn execute_streaming_sql_native(
         |ctx: ThreadSafeCallContext<Option<SpannerResult>>| {
             match ctx.value {
                 Some(res) => {
-                    let mut outer = ctx.env.create_array_with_length(res.rows.len())?;
-                    for (i, row) in res.rows.into_iter().enumerate() {
-                        let mut inner = ctx.env.create_array_with_length(row.len())?;
-                        for (j, cell) in row.into_iter().enumerate() {
-                            let js_val = convert_to_js(&ctx.env, &cell)?;
-                            inner.set_element(j as u32, js_val)?;
-                        }
-                        outer.set_element(i as u32, inner)?;
-                    }
+                    
+                    let buffer_val = ctx.env.create_buffer_with_data(res.rows)?.into_raw().into_unknown();
                     
                     let mut js_telemetry = ctx.env.create_object()?;
                     if let Some(timing) = res.telemetry.server_timing {
@@ -119,7 +112,8 @@ pub fn execute_streaming_sql_native(
                     js_telemetry.set_named_property("attemptCount", ctx.env.create_uint32(res.telemetry.attempt_count)?)?;
                     
                     // We return (err, batch, telemetry)
-                    Ok(vec![ctx.env.get_null()?.into_unknown(), outer.into_unknown(), js_telemetry.into_unknown()])
+                    Ok(vec![ctx.env.get_null()?.into_unknown(), buffer_val, js_telemetry.into_unknown()])
+
                 }
                 None => {
                     // End of stream, pass null
@@ -132,38 +126,31 @@ pub fn execute_streaming_sql_native(
     // V8 thread returns immediately.
     // RUNTIME.spawn runs the task on the Tokio background threads.
     client_clone.runtime.clone().spawn(async move {
-        let (tx, mut rx) = tokio::sync::mpsc::channel(100);
-
-        // Spawn core execution
+        
         let core_client = client_clone.clone();
-        tokio::spawn(async move {
-            execute_streaming_sql(
-                &core_client,
-                routing_key,
-                metadata,
-                req_bytes,
-                tx
-            ).await;
-        });
-
-        // Read from channel and push to V8
-        while let Some(res) = rx.recv().await {
-            match res {
-                Ok(spanner_res) => {
-                    tsfn.call(
-                        Ok(Some(spanner_res)),
-                        ThreadsafeFunctionCallMode::NonBlocking
-                    );
-                }
-                Err(e) => {
-                    tsfn.call(
-                        Err(napi::Error::from_reason(format!("gRPC core error: {} (code: {})", e.message, e.code))),
-                        ThreadsafeFunctionCallMode::NonBlocking
-                    );
-                    return; // abort stream
+        execute_streaming_sql(
+            &core_client,
+            routing_key,
+            metadata,
+            req_bytes,
+            move |res| {
+                match res {
+                    Ok(spanner_res) => {
+                        tsfn.call(
+                            Ok(Some(spanner_res)),
+                            ThreadsafeFunctionCallMode::NonBlocking
+                        );
+                    }
+                    Err(e) => {
+                        tsfn.call(
+                            Err(napi::Error::from_reason(format!("gRPC core error: {} (code: {})", e.message, e.code))),
+                            ThreadsafeFunctionCallMode::NonBlocking
+                        );
+                    }
                 }
             }
-        }
+        ).await;
+
 
         // Signal stream end
         tsfn.call(

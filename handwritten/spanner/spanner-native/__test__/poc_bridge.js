@@ -10,6 +10,37 @@ const spannerProto = require('../../build/protos/protos.js').google.spanner.v1;
 // Spanner codec for parameter encoding
 const { codec } = require('../../build/src/codec.js');
 
+function decodeBinaryBatch(buffer) {
+    if (buffer.length === 0) return [];
+    const rowCount = buffer.readUInt32LE(0);
+    const colCount = buffer.readUInt32LE(4);
+    const rows = new Array(rowCount);
+    let offset = 8;
+    for (let i = 0; i < rowCount; i++) {
+        const row = new Array(colCount);
+        for (let j = 0; j < colCount; j++) {
+            const type = buffer.readUInt8(offset);
+            offset += 1;
+            if (type === 0) row[j] = null;
+            else if (type === 1) {
+                const len = buffer.readUInt32LE(offset);
+                offset += 4;
+                row[j] = buffer.toString('utf8', offset, offset + len);
+                offset += len;
+            } else if (type === 2) {
+                row[j] = buffer.readDoubleLE(offset);
+                offset += 8;
+            } else if (type === 3) {
+                row[j] = buffer.readUInt8(offset) !== 0;
+                offset += 1;
+            }
+        }
+        rows[i] = row;
+    }
+    return rows;
+}
+
+
 // ==============================================================================
 // LAYER 1: NODE LIBRARY LAYER (JavaScript/TypeScript)
 // Simulates the handwritten client library structure and types.
@@ -154,6 +185,9 @@ class NativeSpannerDatabase {
         if (batch === null) {
           partialResultStream.push(null);
         } else {
+          if (Buffer.isBuffer(batch)) {
+            batch = decodeBinaryBatch(batch);
+          }
           if (telemetry) {
             partialResultStream.emit('telemetry', telemetry);
           }
