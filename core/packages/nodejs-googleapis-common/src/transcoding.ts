@@ -118,6 +118,59 @@ function extractTemplateParams(urlTemplate: string): Array<{
   }));
 }
 
+function escapeRegExp(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function applyPattern(
+  pattern: string,
+  fieldValue: string,
+  propertyName = 'resource', // Used to provide precise error messages when path validation fails
+): string | undefined {
+  if (!pattern || pattern === '*') {
+    validateUriPathSegment(propertyName, fieldValue);
+    return encodeWithSlashes(fieldValue);
+  }
+
+  if (!pattern.includes('*') && pattern !== fieldValue) {
+    return undefined;
+  }
+
+  // since we're converting the pattern to a regex, make necessary precautions:
+  const regex = new RegExp(
+    '^' +
+      escapeRegExp(pattern)
+        .replace(/\\\*\\\*/g, '(.+)')
+        .replace(/\\\*/g, '([^/]+)') +
+      '$',
+  );
+
+  const match = fieldValue.match(regex);
+  if (!match) {
+    return undefined;
+  }
+
+  // Identify the segments and wildcards in pattern to perform validation in order of appearance
+  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
+
+  // Check the captured group values.
+  // Note: The loop below matches the validation loop in google-gax verbatim.
+  // TODO: Consider refactoring this in the future.
+  for (let i = 1; i < match.length; i++) {
+    const groupVal = match[i];
+    if (groupVal !== undefined && groupVal !== null) {
+      const wildcardType = wildcards[i - 1];
+      if (wildcardType === '*') {
+        validateUriPathSegment(propertyName, groupVal);
+      } else if (wildcardType === '**') {
+        validateUriPath(propertyName, groupVal);
+      }
+    }
+  }
+
+  return encodeWithoutSlashes(fieldValue);
+}
+
 /**
  * Modifies the pathParams array in-place to normalize / un-alias parameters
  * that have trailing underscores (e.g. 'resource_' -> 'resource') due to
@@ -162,31 +215,18 @@ export function validateAndEncodeParams(
     if (val === undefined || val === null) {
       continue;
     }
-    const isArray = Array.isArray(val);
-    const items: unknown[] = isArray ? val : [val];
-    const match = [null, ...items.map(String)];
-    const wildcards = items.map(() => wildcard);
-    const propertyName = param;
-
-    // Check the captured group values.
-    // Note: The loop below matches the validation loop in google-gax verbatim.
-    // TODO: Consider refactoring this in the future.
-    for (let i = 1; i < match.length; i++) {
-      const groupVal = match[i];
-      if (groupVal !== undefined && groupVal !== null) {
-        const wildcardType = wildcards[i - 1];
-        if (wildcardType === '*') {
-          validateUriPathSegment(propertyName, groupVal);
-        } else if (wildcardType === '**') {
-          validateUriPath(propertyName, groupVal);
-        }
+    if (Array.isArray(val)) {
+      const transformed = val.map(item =>
+        applyPattern(wildcard, String(item), param),
+      );
+      if (wildcard === '**') {
+        params[param] = transformed;
       }
-    }
-
-    if (wildcard === '**') {
-      params[param] = isArray
-        ? val.map(item => encodeWithoutSlashes(String(item)))
-        : encodeWithoutSlashes(String(val));
+    } else {
+      const transformed = applyPattern(wildcard, String(val), param);
+      if (wildcard === '**') {
+        params[param] = transformed;
+      }
     }
   }
 }
