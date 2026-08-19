@@ -19,7 +19,7 @@
     "@googleapis/iam": "^34.0.0",
     "google-auth-library": "^11.0.2",
     "dotenv": "^17.0.0",
-    "gaxios": "^7.3.1",
+    "gaxios": "^7.0.0",
     "node-fetch": "^2.3.0",
     "open": "^9.0.0",
     "server-destroy": "^1.0.1",

@@ -7,6 +7,9 @@
   "scripts": {
     "test": "mocha"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "gaxios": "^7.3.1"
