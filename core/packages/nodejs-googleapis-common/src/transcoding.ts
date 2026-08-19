@@ -168,7 +168,9 @@ export function validateAndEncodeParams(
     const wildcards = items.map(() => wildcard);
     const propertyName = param;
 
-    // Check the captured group values
+    // Check the captured group values.
+    // Note: The loop below matches the validation loop in google-gax verbatim.
+    // TODO: Consider refactoring this in the future.
     for (let i = 1; i < match.length; i++) {
       const groupVal = match[i];
       if (groupVal !== undefined && groupVal !== null) {
