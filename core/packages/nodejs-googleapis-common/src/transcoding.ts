@@ -153,39 +153,22 @@ export function normalizePathParams(pathParams?: string[]): void {
  * multi-segment parameters in params so that reserved characters (query params, fragments, etc.)
  * cannot be injected into the path. Modifies params in-place.
  *
- * @param urlTemplates List of URL templates associated with the request (e.g. url, mediaUrl)
+ * @param urlTemplate URL template associated with the request (e.g. url, mediaUrl)
  * @param params Request parameters dictionary (modified in-place)
  */
 export function validateAndEncodeParams(
-  urlTemplates: (string | undefined)[],
+  urlTemplate: string | undefined,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: Record<string, any>,
 ): void {
-  // Early return if params is undefined, null, or not an object
-  if (!params || typeof params !== 'object') {
+  // Early return if params is undefined, null, or not an object, or if urlTemplate is missing
+  if (!params || typeof params !== 'object' || !urlTemplate) {
     return;
   }
 
-  // Track which parameters are multi-segment ({+param}) vs single-segment ({param}).
-  // - Multi-segment parameters allow slashes ('/') for hierarchical resource paths,
-  //   requiring segment-by-segment traversal checks and strict percent-encoding with slashes preserved.
-  // - Single-segment parameters disallow slashes and are automatically percent-encoded by url-template,
-  //   requiring only direct '.' and '..' traversal validation.
-  const multiSegmentParams = new Set<string>();
-  const singleSegmentParams = new Set<string>();
-
-  // 1. Scan provided URL templates (options.url and parameters.mediaUrl) to extract parameter names
-  for (const tmpl of urlTemplates) {
-    if (tmpl) {
-      const extracted = extractTemplateParams(tmpl);
-      for (const p of extracted.multiSegmentParams) {
-        multiSegmentParams.add(p);
-      }
-      for (const p of extracted.singleSegmentParams) {
-        singleSegmentParams.add(p);
-      }
-    }
-  }
+  // 1. Scan provided URL template to extract parameter names
+  const {multiSegmentParams, singleSegmentParams} =
+    extractTemplateParams(urlTemplate);
 
   // 2. Process multi-segment parameters ({+param}):
   // - Validate that no individual path segment is '.' or '..' (rejecting path traversal while

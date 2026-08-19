@@ -227,7 +227,7 @@ describe('transcoding', () => {
         fileId: 'file-123',
       };
       validateAndEncodeParams(
-        ['https://example.com/v1/{+parent}/files/{fileId}'],
+        'https://example.com/v1/{+parent}/files/{fileId}',
         params,
       );
       assert.strictEqual(
@@ -242,7 +242,7 @@ describe('transcoding', () => {
         name: 'projects/p/locations/l/agents/a/sessions/agents/../subagent',
       };
       assert.throws(() => {
-        validateAndEncodeParams(['https://example.com/v1/{+name}'], params);
+        validateAndEncodeParams('https://example.com/v1/{+name}', params);
       }, /Value for name must not contain segments that are exactly \. or \.\./);
     });
 
@@ -252,7 +252,7 @@ describe('transcoding', () => {
       };
       assert.throws(() => {
         validateAndEncodeParams(
-          ['https://example.com/drive/v3/files/{fileId}'],
+          'https://example.com/drive/v3/files/{fileId}',
           params,
         );
       }, /Invalid value \.\. for fileId/);
@@ -262,7 +262,7 @@ describe('transcoding', () => {
       const params: Record<string, any> = {
         names: ['projects/p/loc/l/a/1?$foo=bar#', 'projects/p/loc/l/a/2'],
       };
-      validateAndEncodeParams(['https://example.com/v1/{+names}'], params);
+      validateAndEncodeParams('https://example.com/v1/{+names}', params);
       assert.deepStrictEqual(params.names, [
         'projects/p/loc/l/a/1%3F%24foo%3Dbar%23',
         'projects/p/loc/l/a/2',
@@ -276,7 +276,7 @@ describe('transcoding', () => {
       };
       assert.doesNotThrow(() => {
         validateAndEncodeParams(
-          ['https://example.com/v1/{+name}/files/{fileId}'],
+          'https://example.com/v1/{+name}/files/{fileId}',
           params,
         );
       });

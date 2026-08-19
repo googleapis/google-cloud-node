@@ -67,7 +67,7 @@ export async function request<T>(
   opts.validateStatus = opts.validateStatus || validateStatus;
   opts.responseType = opts.responseType || 'json';
 
-  const url = new URL(opts.url!);
+  const url = new URL(opts.url!.toString());
 
   // Check for an existing session to this host, or go create a new one.
   const sessionData = _getClient(url.host);
