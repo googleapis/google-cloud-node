@@ -37,7 +37,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "extend": "^3.0.2",
-    "gaxios": "^7.3.0",
+    "gaxios": "^7.3.1",
     "google-auth-library": "^11.0.0",
     "google-logging-utils": "^2.0.0",
     "qs": "^6.7.0",

@@ -45,7 +45,7 @@
     "google"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "author": "Google, LLC",
   "license": "Apache-2.0",
