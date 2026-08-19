@@ -78,7 +78,9 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
 		}
 
-		fmt.Fprintf(os.Stderr, "[spanner-go] Initialized GAPIC CoreClient for DirectPath (channels: %d)\n", limit)
+		if isDebugEnabled() {
+			fmt.Fprintf(os.Stderr, "[spanner-go] Initialized GAPIC CoreClient for DirectPath (channels: %d)\n", limit)
+		}
 		return &CoreClient{
 			gapicClient: gapicClient,
 			useGapic:    true,
@@ -125,7 +127,9 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		conns[i] = conn
 	}
 
-	fmt.Fprintf(os.Stderr, "[spanner-go] Initialized GFE CoreClient with connection pool (channels: %d)\n", limit)
+	if isDebugEnabled() {
+		fmt.Fprintf(os.Stderr, "[spanner-go] Initialized GFE CoreClient with connection pool (channels: %d)\n", limit)
+	}
 	return &CoreClient{
 		conns:       conns,
 		useGapic:    false,

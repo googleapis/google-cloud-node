@@ -91,8 +91,10 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         napi_get_null(env, &null_val);
 
         if (batch->error_msg != nullptr) {
-            std::cerr << "[spanner_go_napi] Error received from Go: " << batch->error_msg 
-                      << " (code: " << batch->error_code << ")" << std::endl;
+            if (getenv("DEBUG_SPANNER_NATIVE") != nullptr) {
+                std::cerr << "[spanner_go_napi] Error received from Go: " << batch->error_msg 
+                          << " (code: " << batch->error_code << ")" << std::endl;
+            }
             napi_value err_obj = nullptr, err_msg_val = nullptr, err_code_str = nullptr;
             napi_create_string_utf8(env, batch->error_msg, NAPI_AUTO_LENGTH, &err_msg_val);
             std::string code_str = std::to_string(batch->error_code);
