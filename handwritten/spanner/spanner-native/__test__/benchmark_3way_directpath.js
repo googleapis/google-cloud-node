@@ -286,6 +286,10 @@ async function runTest1(db, rustClient, goClient) {
     // const go = await runBenchmark(() => goClient.executeSqlNative(q.sql), 1, 5000);
 
     const rustSpeedup = (rust.qps / (js.qps || 1)).toFixed(2);
+    const rustLatImp = (((js.p95 - rust.p95) / (js.p95 || 1)) * 100).toFixed(1);
+
+    console.log(`    JavaScript Baseline    : ${js.qps.toFixed(1)} QPS | p50: ${js.p50.toFixed(2)}ms | p95: ${js.p95.toFixed(2)}ms | Lag: ${js.avgLagMs.toFixed(2)}ms`);
+    console.log(`    Rust Shared Core (1 Ch): ${rust.qps.toFixed(1)} QPS | p50: ${rust.p50.toFixed(2)}ms | p95: ${rust.p95.toFixed(2)}ms | Lag: ${rust.avgLagMs.toFixed(2)}ms (${rustSpeedup}x speedup, ${rustLatImp}% lat imp)`);
     
     results.push({
       query: q.label,
