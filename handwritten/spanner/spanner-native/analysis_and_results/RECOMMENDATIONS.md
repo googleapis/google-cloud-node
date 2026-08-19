@@ -8,11 +8,11 @@
 **Optimization**: We explicitly configured the `tonic::transport::Endpoint` to use 4MB stream windows and 16MB connection windows, matching the optimized defaults of the Go GFE client. This dramatically increases throughput for large datasets.
 
 ## 2. Rust: Remove Tokio Pipeline Task Overhead
-**Status**: Implemented.
+**Status**: Reverted (caused performance degradation).
 
 **Context**: The initial Rust prototype spawned a Tokio background task to process the gRPC stream, and then used a `tokio::sync::mpsc::channel` to pipe the parsed result batches back to the task holding the N-API Threadsafe Function (`tsfn`). This introduced unnecessary context switching and channel queueing overhead.
 
-**Optimization**: We removed the `mpsc::channel` entirely. The N-API Threadsafe Function callback is now passed directly into the core `execute_streaming_sql` loop, invoking the V8 bridge synchronously as soon as a batch is parsed, eliminating the pipeline hop.
+**Optimization**: We attempted to remove the `mpsc::channel`, passing the N-API Threadsafe Function callback directly into the core `execute_streaming_sql` loop. However, this caused a performance regression. By moving the V8 queuing directly into the gRPC socket polling loop, it blocked network I/O momentarily while queuing callbacks to the main thread. We reverted this change so the `mpsc::channel` handles the backpressure and keeps the network socket loop as hot as possible.
 
 ## 3. Rust: Eliminate N-API Thrashing via Binary IPC (Future Work)
 **Status**: Pending / Architectural Change.

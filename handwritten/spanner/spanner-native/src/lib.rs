@@ -126,31 +126,37 @@ pub fn execute_streaming_sql_native(
     // V8 thread returns immediately.
     // RUNTIME.spawn runs the task on the Tokio background threads.
     client_clone.runtime.clone().spawn(async move {
-        
+        let (tx, mut rx) = tokio::sync::mpsc::channel(100);
+
         let core_client = client_clone.clone();
-        execute_streaming_sql(
-            &core_client,
-            routing_key,
-            metadata,
-            req_bytes,
-            move |res| {
-                match res {
-                    Ok(spanner_res) => {
-                        tsfn.call(
-                            Ok(Some(spanner_res)),
-                            ThreadsafeFunctionCallMode::NonBlocking
-                        );
-                    }
-                    Err(e) => {
-                        tsfn.call(
-                            Err(napi::Error::from_reason(format!("gRPC core error: {} (code: {})", e.message, e.code))),
-                            ThreadsafeFunctionCallMode::NonBlocking
-                        );
-                    }
+        tokio::spawn(async move {
+            execute_streaming_sql(
+                &core_client,
+                routing_key,
+                metadata,
+                req_bytes,
+                tx
+            ).await;
+        });
+
+        // Read from channel and push to V8
+        while let Some(res) = rx.recv().await {
+            match res {
+                Ok(spanner_res) => {
+                    tsfn.call(
+                        Ok(Some(spanner_res)),
+                        ThreadsafeFunctionCallMode::NonBlocking
+                    );
+                }
+                Err(e) => {
+                    tsfn.call(
+                        Err(napi::Error::from_reason(format!("gRPC core error: {} (code: {})", e.message, e.code))),
+                        ThreadsafeFunctionCallMode::NonBlocking
+                    );
+                    return; // abort stream
                 }
             }
-        ).await;
-
+        }
 
         // Signal stream end
         tsfn.call(

@@ -174,7 +174,7 @@ pub async fn execute_streaming_sql(
     routing_key: String,
     metadata: Vec<(String, String)>,
     request_bytes: Vec<u8>,
-    on_batch: impl Fn(Result<SpannerResult, SpannerError>) + Send + Sync + 'static
+    sender: mpsc::Sender<Result<SpannerResult, SpannerError>>
 ) {
     let mut last_resume_token: Vec<u8> = Vec::new();
     let mut attempt_count = 0;
@@ -194,11 +194,11 @@ pub async fn execute_streaming_sql(
         let mut request = match ExecuteSqlRequest::decode(&request_bytes[..]) {
             Ok(req) => req,
             Err(e) => {
-                on_batch(Err(SpannerError {
+                let _ = sender.send(Err(SpannerError {
                     code: 3, // INVALID_ARGUMENT
                     message: format!("Failed to decode request bytes: {}", e),
                     details: vec![],
-                }));
+                })).await;
                 return;
             }
         };
@@ -226,11 +226,11 @@ pub async fn execute_streaming_sql(
                 }
             }
             Err(e) => {
-                on_batch(Err(SpannerError {
+                let _ = sender.send(Err(SpannerError {
                     code: 16, // UNAUTHENTICATED
                     message: format!("Failed to fetch GCP auth token: {}", e),
                     details: vec![],
-                }));
+                })).await;
                 return;
             }
         }
@@ -247,11 +247,11 @@ pub async fn execute_streaming_sql(
                 if (e.code() == tonic::Code::Unavailable || e.code() == tonic::Code::Internal) && !last_resume_token.is_empty() {
                     continue; // Retry loop entirely transparent to JS
                 }
-                on_batch(Err(SpannerError {
+                let _ = sender.send(Err(SpannerError {
                     code: e.code() as i32,
                     message: e.message().to_string(),
                     details: e.details().to_vec(),
-                }));
+                })).await;
                 return;
             }
         };
@@ -310,10 +310,10 @@ pub async fn execute_streaming_sql(
                                 let mut tel = Telemetry::default();
                                 tel.attempt_count = telemetry.attempt_count;
                                 tel.server_timing = telemetry.server_timing.clone();
-                                on_batch(Ok(SpannerResult {
+                                let _ = sender.send(Ok(SpannerResult {
                                     rows: {
                                         if batch_row_count > 0 {
-                                            let rc_bytes = batch_row_count.to_le_bytes();
+                                            let rc_bytes = batch_row_count.to_le_bytes().await;
                                             batch[0..4].copy_from_slice(&rc_bytes);
                                         }
                                         let out = std::mem::take(&mut batch);
@@ -337,11 +337,11 @@ pub async fn execute_streaming_sql(
                         break; // Break inner stream consumption loop, trigger outer loop retry
                     }
                     
-                    on_batch(Err(SpannerError {
+                    let _ = sender.send(Err(SpannerError {
                         code: e.code() as i32,
                         message: e.message().to_string(),
                         details: e.details().to_vec(),
-                    }));
+                    })).await;
                     return;
                 }
             }
@@ -373,10 +373,10 @@ pub async fn execute_streaming_sql(
         let mut tel = Telemetry::default();
         tel.attempt_count = telemetry.attempt_count;
         tel.server_timing = telemetry.server_timing.clone();
-        on_batch(Ok(SpannerResult {
+        let _ = sender.send(Ok(SpannerResult {
             rows: {
             if batch_row_count > 0 {
-                let rc_bytes = batch_row_count.to_le_bytes();
+                let rc_bytes = batch_row_count.to_le_bytes().await;
                 batch[0..4].copy_from_slice(&rc_bytes);
             }
             batch
