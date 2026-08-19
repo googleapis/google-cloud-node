@@ -164,12 +164,20 @@ export function validateAndEncodeParams(
     }
     const isArray = Array.isArray(val);
     const items: unknown[] = isArray ? val : [val];
+    const match = [null, ...items.map(String)];
+    const wildcards = items.map(() => wildcard);
+    const propertyName = param;
 
-    for (const item of items) {
-      if (wildcard === '*') {
-        validateUriPathSegment(param, String(item));
-      } else if (wildcard === '**') {
-        validateUriPath(param, String(item));
+    // Check the captured group values
+    for (let i = 1; i < match.length; i++) {
+      const groupVal = match[i];
+      if (groupVal !== undefined && groupVal !== null) {
+        const wildcardType = wildcards[i - 1];
+        if (wildcardType === '*') {
+          validateUriPathSegment(propertyName, groupVal);
+        } else if (wildcardType === '**') {
+          validateUriPath(propertyName, groupVal);
+        }
       }
     }
 
