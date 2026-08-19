@@ -93,10 +93,9 @@ function extractTemplateParams(urlTemplate: string): {
 } {
   const multiSegmentParams = new Set<string>();
   const singleSegmentParams = new Set<string>();
-  const regex = /\{([^}]+)\}/g;
-  let match: RegExpExecArray | null;
+  const matches = urlTemplate.matchAll(/\{([^}]+)\}/g);
 
-  while ((match = regex.exec(urlTemplate)) !== null) {
+  for (const match of matches) {
     const expression = match[1];
     if (expression.startsWith('+')) {
       const vars = expression.slice(1).split(',');
