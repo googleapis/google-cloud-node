@@ -83,44 +83,39 @@ function encodeWithoutSlashes(str: string): string {
 }
 
 /**
- * Extracts template parameter names and classifies them as multi-segment or single-segment.
+ * Extracts template parameters and their corresponding wildcard types ('*' or '**').
  *
  * @param urlTemplate The RFC 6570 URI template string
  */
-function extractTemplateParams(urlTemplate: string): {
-  multiSegmentParams: Set<string>;
-  singleSegmentParams: Set<string>;
-} {
-  const multiSegmentParams = new Set<string>();
-  const singleSegmentParams = new Set<string>();
+function extractTemplateParams(urlTemplate: string): Array<{
+  param: string;
+  wildcard: '*' | '**';
+}> {
+  const paramMap = new Map<string, '*' | '**'>();
   const matches = urlTemplate.matchAll(/\{([^}]+)\}/g);
 
   for (const match of matches) {
     const expression = match[1];
-    if (expression.startsWith('+')) {
-      const vars = expression.slice(1).split(',');
-      for (const v of vars) {
-        const paramName = v.replace(/^([^:*]+).*/, '$1').trim();
-        if (paramName) {
-          multiSegmentParams.add(paramName);
-        }
-      }
-    } else {
-      const firstChar = expression.charAt(0);
-      const rawExpr = ['#', '.', '/', ';', '?', '&'].includes(firstChar)
-        ? expression.slice(1)
-        : expression;
-      const vars = rawExpr.split(',');
-      for (const v of vars) {
-        const paramName = v.replace(/^([^:*]+).*/, '$1').trim();
-        if (paramName) {
-          singleSegmentParams.add(paramName);
+    const wildcard: '*' | '**' = expression.startsWith('+') ? '**' : '*';
+    const firstChar = expression.charAt(0);
+    const rawExpr = ['+', '#', '.', '/', ';', '?', '&'].includes(firstChar)
+      ? expression.slice(1)
+      : expression;
+    const vars = rawExpr.split(',');
+    for (const v of vars) {
+      const paramName = v.replace(/^([^:*]+).*/, '$1').trim();
+      if (paramName) {
+        if (!paramMap.has(paramName) || wildcard === '**') {
+          paramMap.set(paramName, wildcard);
         }
       }
     }
   }
 
-  return {multiSegmentParams, singleSegmentParams};
+  return Array.from(paramMap.entries()).map(([param, wildcard]) => ({
+    param,
+    wildcard,
+  }));
 }
 
 /**
@@ -159,35 +154,26 @@ export function validateAndEncodeParams(
     return;
   }
 
-  // 1. Scan provided URL template to extract parameter names
-  const {multiSegmentParams, singleSegmentParams} =
-    extractTemplateParams(urlTemplate);
+  // Identify the parameters and wildcards in the URL template
+  const templateParams = extractTemplateParams(urlTemplate);
 
-  // 2. Validate and encode parameters:
-  // - Multi-segment parameters ({+param}) allow slashes for hierarchical resource paths;
-  //   each slash-separated segment is validated against traversal ('.' or '..') and pre-encoded
-  //   with encodeWithoutSlashes to prevent query parameter/fragment injection.
-  // - Single-segment parameters ({param}) disallow '.' and '..'; url-template standard expansion
-  //   handles character percent-encoding automatically.
-  const allParams = new Set([...multiSegmentParams, ...singleSegmentParams]);
-  for (const param of allParams) {
+  for (const {param, wildcard} of templateParams) {
     const val = params[param];
     if (val === undefined || val === null) {
       continue;
     }
-    const isMultiSegment = multiSegmentParams.has(param);
     const isArray = Array.isArray(val);
     const items: unknown[] = isArray ? val : [val];
 
     for (const item of items) {
-      if (isMultiSegment) {
-        validateUriPath(param, String(item));
-      } else {
+      if (wildcard === '*') {
         validateUriPathSegment(param, String(item));
+      } else if (wildcard === '**') {
+        validateUriPath(param, String(item));
       }
     }
 
-    if (isMultiSegment) {
+    if (wildcard === '**') {
       params[param] = isArray
         ? val.map(item => encodeWithoutSlashes(String(item)))
         : encodeWithoutSlashes(String(val));
