@@ -55,7 +55,7 @@
     "@types/pretty-ms": "^5.0.0",
     "@types/sinon": "^17.0.0",
     "@types/tmp": "0.2.6",
-    "c8": "^10.1.2",
+    "c8": "^10.1.3",
     "codecov": "^3.0.0",
     "gts": "^5.0.0",
     "js-green-licenses": "^4.0.0",
