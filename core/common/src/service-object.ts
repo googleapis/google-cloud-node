@@ -567,6 +567,8 @@ class ServiceObject<T = any> extends EventEmitter {
     if (isAbsoluteUrl) {
       reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
     } else {
+      // Relative path components contain only path segments (no protocol or host),
+      // so we encode each segment directly and join them with '/'.
       reqOpts.uri = uriComponents
         .filter(x => x!.trim()) // Limit to non-empty strings.
         .map(uriComponent => {

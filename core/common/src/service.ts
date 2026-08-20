@@ -216,6 +216,8 @@ export class Service {
     if (isAbsoluteUrl) {
       reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
     } else {
+      // Relative path components contain only path segments (no protocol or host),
+      // so we encode each segment directly and join them with '/'.
       reqOpts.uri = uriComponents
         .map(uriComponent => {
           const trimSlashesRegex = /^\/*|\/*$/g;
