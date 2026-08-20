@@ -40,10 +40,6 @@ function tryRequire(moduleName: string) {
 const platformKey = `${process.platform}-${process.arch}`;
 const nativeModule = tryRequire(`@google-cloud/spannerlib-node-${platformKey}`);
 
-if (!nativeModule) {
-  throw new Error(`Platform ${platformKey} is not supported`);
-}
-
 export type Connection = IConnection;
 export type Pool = IPool;
 export type Rows = IRows;
@@ -51,9 +47,19 @@ export type SpannerLibError = ISpannerLibError;
 
 export const Pool: {
   create(dsn: string): Promise<Pool>;
-} = nativeModule.Pool;
+} = nativeModule?.Pool ?? {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create(_dsn: string): Promise<Pool> {
+    return Promise.reject(
+      new Error(
+        `Native Spanner driver addon (@google-cloud/spannerlib-node-${platformKey}) is not installed or supported on this platform.`,
+      ),
+    );
+  },
+};
 
-export const Connection: unknown = nativeModule.Connection;
-export const Rows: unknown = nativeModule.Rows;
+export const Connection: unknown = nativeModule?.Connection ?? class {};
+export const Rows: unknown = nativeModule?.Rows ?? class {};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const SpannerLibError: any = nativeModule.SpannerLibError;
+export const SpannerLibError: any =
+  nativeModule?.SpannerLibError ?? class extends Error {};
