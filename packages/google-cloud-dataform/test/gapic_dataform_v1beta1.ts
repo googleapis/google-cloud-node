@@ -3152,6 +3152,548 @@ describe('v1beta1.DataformClient', () => {
     });
   });
 
+  describe('syncWorkspaceRefs', () => {
+    it('invokes syncWorkspaceRefs without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse(),
+      );
+      client.innerApiCalls.syncWorkspaceRefs = stubSimpleCall(expectedResponse);
+      const [response] = await client.syncWorkspaceRefs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.syncWorkspaceRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.syncWorkspaceRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes syncWorkspaceRefs without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse(),
+      );
+      client.innerApiCalls.syncWorkspaceRefs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.syncWorkspaceRefs(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.syncWorkspaceRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.syncWorkspaceRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes syncWorkspaceRefs with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.syncWorkspaceRefs = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.syncWorkspaceRefs(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.syncWorkspaceRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.syncWorkspaceRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes syncWorkspaceRefs with closed client', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.syncWorkspaceRefs(request), expectedError);
+    });
+  });
+
+  describe('deleteBranch', () => {
+    it('invokes deleteBranch without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.DeleteBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.DeleteBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.DeleteBranchResponse(),
+      );
+      client.innerApiCalls.deleteBranch = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteBranch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBranch without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.DeleteBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.DeleteBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.DeleteBranchResponse(),
+      );
+      client.innerApiCalls.deleteBranch =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteBranch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBranch with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.DeleteBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.DeleteBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBranch = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteBranch(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBranch with closed client', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.DeleteBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.DeleteBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteBranch(request), expectedError);
+    });
+  });
+
+  describe('checkoutWorkspaceBranch', () => {
+    it('invokes checkoutWorkspaceBranch without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.checkoutWorkspaceBranch =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.checkoutWorkspaceBranch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.checkoutWorkspaceBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkoutWorkspaceBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkoutWorkspaceBranch without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.checkoutWorkspaceBranch =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.checkoutWorkspaceBranch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.checkoutWorkspaceBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkoutWorkspaceBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkoutWorkspaceBranch with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.checkoutWorkspaceBranch = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkoutWorkspaceBranch(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.checkoutWorkspaceBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkoutWorkspaceBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkoutWorkspaceBranch with closed client', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.checkoutWorkspaceBranch(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('fetchCurrentWorkspaceBranch', () => {
+    it('invokes fetchCurrentWorkspaceBranch without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse(),
+      );
+      client.innerApiCalls.fetchCurrentWorkspaceBranch =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchCurrentWorkspaceBranch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchCurrentWorkspaceBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCurrentWorkspaceBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchCurrentWorkspaceBranch without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse(),
+      );
+      client.innerApiCalls.fetchCurrentWorkspaceBranch =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchCurrentWorkspaceBranch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchCurrentWorkspaceBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCurrentWorkspaceBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchCurrentWorkspaceBranch with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchCurrentWorkspaceBranch = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchCurrentWorkspaceBranch(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCurrentWorkspaceBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCurrentWorkspaceBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchCurrentWorkspaceBranch with closed client', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchCurrentWorkspaceBranch(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('pushGitCommits', () => {
     it('invokes pushGitCommits without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
@@ -11157,6 +11699,361 @@ describe('v1beta1.DataformClient', () => {
           .args[2].otherArgs.headers[
             'x-goog-request-params'
           ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('fetchWorkspaceBranches', () => {
+    it('invokes fetchWorkspaceBranches without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+      ];
+      client.innerApiCalls.fetchWorkspaceBranches =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchWorkspaceBranches(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchWorkspaceBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchWorkspaceBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchWorkspaceBranches without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+      ];
+      client.innerApiCalls.fetchWorkspaceBranches =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchWorkspaceBranches(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.dataform.v1beta1.IBranchMetadata[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchWorkspaceBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchWorkspaceBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchWorkspaceBranches with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchWorkspaceBranches = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchWorkspaceBranches(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchWorkspaceBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchWorkspaceBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchWorkspaceBranchesStream without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+      ];
+      client.descriptors.page.fetchWorkspaceBranches.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.fetchWorkspaceBranchesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dataform.v1beta1.BranchMetadata[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dataform.v1beta1.BranchMetadata) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchWorkspaceBranches, request),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes fetchWorkspaceBranchesStream with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchWorkspaceBranches.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.fetchWorkspaceBranchesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dataform.v1beta1.BranchMetadata[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dataform.v1beta1.BranchMetadata) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchWorkspaceBranches, request),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchWorkspaceBranches without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.BranchMetadata(),
+        ),
+      ];
+      client.descriptors.page.fetchWorkspaceBranches.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dataform.v1beta1.IBranchMetadata[] =
+        [];
+      const iterable = client.fetchWorkspaceBranchesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchWorkspaceBranches with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchWorkspaceBranches.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.fetchWorkspaceBranchesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.dataform.v1beta1.IBranchMetadata[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceBranches
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.10.0...spanner-v8.11.0) (2026-08-19)
+
+
+### Features
+
+* **spanner:** Split handwritten spanner library from its gapics and protos ([#8927](https://github.com/googleapis/google-cloud-node/issues/8927)) ([f51ceac](https://github.com/googleapis/google-cloud-node/commit/f51ceac8b5bb56b71292602f8c45d967c3fe585d))
+
 ## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.9.0...spanner-v8.10.0) (2026-07-23)
 
 

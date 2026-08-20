@@ -8376,6 +8376,13 @@
                     "sessionsRequired": {
                       "type": "bool",
                       "id": 13
+                    },
+                    "microsecondTimestamp": {
+                      "type": "bool",
+                      "id": 14,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },

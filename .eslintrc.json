@@ -1,20 +1,80 @@
 {
   "extends": [
-    "./node_modules/gts",
+    "gts",
     "plugin:prettier/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:promise/recommended"
   ],
   "root": true,
-  // Note: All rules configured as "error" are blocking in the PR CI pipeline.
-  // Only rules configured as "warn" remain non-blocking.
   "rules": {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "error",
     "promise/catch-or-return": "error",
     "promise/always-return": "error"
   },
+  "overrides": [
+    // The overrides below were migrated from handwritten/firestore/.eslintrc.json
+    // during monorepo ESLint consolidation to maintain Firestore-specific rules.
+    {
+      "files": ["handwritten/firestore/dev/src/**/*.ts"],
+      "excludedFiles": ["handwritten/firestore/dev/src/v1/*.ts", "handwritten/firestore/dev/src/v1beta1/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": true
+          }
+        ],
+        "no-console": ["error", {"allow": ["error"]}],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["handwritten/firestore/dev/test/*.ts", "handwritten/firestore/dev/system-test/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "describe",
+            "property": "only"
+          },
+          {
+            "object": "it",
+            "property": "only"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/no-floating-promises": "warn"
+      }
+    },
+    {
+      "files": [
+        "handwritten/firestore/dev/src/v1/**/*.ts",
+        "handwritten/firestore/dev/src/v1beta1/**/*.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-floating-promises": ["off"]
+      }
+    }
+  ],
   "ignorePatterns": [
     "**/node_modules",
     "**/build",
