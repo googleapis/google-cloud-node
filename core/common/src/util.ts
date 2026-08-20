@@ -1007,6 +1007,9 @@ export class Util {
       ? [{} as T, optionsOrCallback as C]
       : [optionsOrCallback as T, cb as C];
   }
+  encodeWithSlashes = encodeWithSlashes;
+  encodeWithoutSlashes = encodeWithoutSlashes;
+  encodeURIPath = encodeURIPath;
 }
 
 /**
@@ -1022,6 +1025,59 @@ class ProgressStream extends Transform {
     this.push(chunk);
     callback();
   }
+}
+
+export function encodeWithSlashes(
+  str: string,
+  propertyName = 'resource ID field',
+): string {
+  const segments = str.split('/');
+  for (const segment of segments) {
+    if (segment === '.' || segment === '..') {
+      throw new Error(
+        `Value for ${propertyName} must not contain segments that are exactly . or .. .`,
+      );
+    }
+  }
+  return encodeURIComponent(str)
+    .replace(/%2F/gi, '/')
+    .replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
+}
+
+export function encodeWithoutSlashes(
+  str: string,
+  propertyName = 'resource ID field',
+): string {
+  if (str === '.' || str === '..') {
+    throw new Error(`Invalid value ${str} for ${propertyName}.`);
+  }
+  return encodeURIComponent(str).replace(
+    /[!'()*]/g,
+    c => '%' + c.charCodeAt(0).toString(16).toUpperCase(),
+  );
+}
+
+export function encodeURIPath(uri: string): string {
+  const parts = uri.split('/');
+  return parts
+    .map(part => {
+      if (part === '') {
+        return '';
+      }
+      if (part.includes(':')) {
+        const subparts = part.split(':');
+        return subparts
+          .map(subpart => {
+            if (subpart === '') {
+              return '';
+            }
+            return encodeWithoutSlashes(subpart, 'path segment');
+          })
+          .join(':');
+      }
+      return encodeWithoutSlashes(part, 'path segment');
+    })
+    .join('/');
 }
 
 const util = new Util();

@@ -214,6 +214,59 @@ describe('BigQuery/Table', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tableOverrides: any = {};
 
+  describe('security - URI encoding and path traversal protection', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let RealDataset: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let RealTable: any;
+    const fakeBQ = {
+      projectId: 'my-project',
+      createDataset: util.noop,
+      request: util.noop,
+      getRequestInterceptors: () => [],
+    };
+
+    before(() => {
+      RealDataset = proxyquire.noCallThru()('../src/dataset', {
+        '@google-cloud/paginator': fakePaginator,
+        '@google-cloud/promisify': fakePfy,
+      }).Dataset;
+      RealTable = proxyquire.noCallThru()('../src/table.js', {
+        crypto: fakeCrypto,
+        '@google-cloud/paginator': fakePaginator,
+        '@google-cloud/promisify': fakePfy,
+      }).Table;
+    });
+
+    it('should throw error when dataset or table ID segment is dot or dot-dot', () => {
+      assert.throws(() => {
+        const invalidDataset = new RealDataset(fakeBQ, '..');
+        const invalidTable = new RealTable(invalidDataset, 'kittens');
+        invalidTable.getMetadata(assert.ifError);
+      }, /Invalid value \.\. for path segment\./);
+
+      assert.throws(() => {
+        const validDataset = new RealDataset(fakeBQ, 'dataset-id');
+        const invalidTable = new RealTable(validDataset, '..');
+        invalidTable.getMetadata(assert.ifError);
+      }, /Invalid value \.\. for path segment\./);
+    });
+
+    it('should percent-encode query parameter injection payload in table name', done => {
+      const fakeDataset = new RealDataset(fakeBQ, 'dataset-id');
+      fakeDataset.request = (reqOpts: DecorateRequestOptions) => {
+        assert(
+          reqOpts.uri.includes('table_name%3F%24httpMethod%3DDELETE%23'),
+        );
+        assert(!reqOpts.uri.includes('?$httpMethod=DELETE#'));
+        done();
+      };
+      const maliciousTableName = 'table_name?$httpMethod=DELETE#';
+      const realTable = new RealTable(fakeDataset, maliciousTableName);
+      realTable.getMetadata(assert.ifError);
+    });
+  });
+
   describe('instantiation', () => {
     it('should extend the correct methods', () => {
       assert(extended); // See `fakePaginator.extend`

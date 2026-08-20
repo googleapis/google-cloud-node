@@ -111,6 +111,49 @@ describe('BigQuery/Dataset', () => {
     ds = new Dataset(BIGQUERY, DATASET_ID);
   });
 
+  describe('security - URI encoding and path traversal protection', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let RealDataset: any;
+
+    before(() => {
+      RealDataset = proxyquire.noCallThru()('../src/dataset', {
+        '@google-cloud/paginator': fakePaginator,
+        '@google-cloud/promisify': fakePfy,
+      }).Dataset;
+    });
+
+    it('should throw error when dataset ID segment is dot or dot-dot', () => {
+      const fakeBQ = {
+        projectId: 'my-project',
+        createDataset: util.noop,
+        request: util.noop,
+        getRequestInterceptors: () => [],
+      };
+      assert.throws(() => {
+        const invalidDataset = new RealDataset(fakeBQ, '..');
+        invalidDataset.getMetadata(assert.ifError);
+      }, /Invalid value \.\. for path segment\./);
+    });
+
+    it('should percent-encode query parameter injection payload in dataset name', done => {
+      const fakeBQ = {
+        projectId: 'my-project',
+        createDataset: util.noop,
+        request: (reqOpts: DecorateRequestOptions) => {
+          assert(
+            reqOpts.uri.includes('dataset_name%3F%24httpMethod%3DDELETE%23'),
+          );
+          assert(!reqOpts.uri.includes('?$httpMethod=DELETE#'));
+          done();
+        },
+        getRequestInterceptors: () => [],
+      };
+      const maliciousDatasetName = 'dataset_name?$httpMethod=DELETE#';
+      const realDataset = new RealDataset(fakeBQ, maliciousDatasetName);
+      realDataset.getMetadata(assert.ifError);
+    });
+  });
+
   describe('instantiation', () => {
     it('should extend the correct methods', () => {
       assert(extended); // See `fakePaginator.extend`
