@@ -1069,5 +1069,16 @@ export function encodeURIPath(uri: string): string {
     .join('/');
 }
 
+export function encodeAbsoluteURI(uri: string): string {
+  const url = new URL(uri);
+  const encodedPath = encodeURIPath(url.pathname);
+  url.pathname = encodedPath;
+  let res = url.toString();
+  if (!uri.endsWith('/') && res.endsWith('/')) {
+    res = res.slice(0, -1);
+  }
+  return res;
+}
+
 const util = new Util();
 export {util};

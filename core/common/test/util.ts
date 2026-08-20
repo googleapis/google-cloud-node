@@ -49,6 +49,7 @@ import {
   encodeWithSlashes,
   encodeWithoutSlashes,
   encodeURIPath,
+  encodeAbsoluteURI,
 } from '../src/util';
 import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
 
@@ -1955,6 +1956,34 @@ describe('common/util', () => {
       assert.throws(() => {
         encodeWithoutSlashes('..', 'testField');
       }, /Invalid value \.\. for testField\./);
+    });
+  });
+
+  describe('encodeAbsoluteURI', () => {
+    it('should handle absolute URLs with and without trailing slash', () => {
+      assert.strictEqual(
+        encodeAbsoluteURI('https://example.com/foo/bar'),
+        'https://example.com/foo/bar',
+      );
+      assert.strictEqual(
+        encodeAbsoluteURI('https://example.com/foo/bar/'),
+        'https://example.com/foo/bar/',
+      );
+      assert.strictEqual(
+        encodeAbsoluteURI('http://www.google.com'),
+        'http://www.google.com',
+      );
+    });
+
+    it('should encode path segments and handle colons in absolute URLs', () => {
+      assert.strictEqual(
+        encodeAbsoluteURI('https://example.com/projects:list'),
+        'https://example.com/projects:list',
+      );
+      assert.strictEqual(
+        encodeAbsoluteURI('https://example.com/foo/bar-123_~.baz'),
+        'https://example.com/foo/bar-123_~.baz',
+      );
     });
   });
 

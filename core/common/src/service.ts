@@ -27,6 +27,7 @@ import {
   DecorateRequestOptions,
   MakeAuthenticatedRequest,
   PackageJson,
+  encodeAbsoluteURI,
   encodeURIPath,
   util,
 } from './util';
@@ -213,14 +214,7 @@ export class Service {
     uriComponents.push(reqOpts.uri);
 
     if (isAbsoluteUrl) {
-      const url = new URL(reqOpts.uri);
-      const encodedPath = encodeURIPath(url.pathname);
-      url.pathname = encodedPath;
-      let res = url.toString();
-      if (!reqOpts.uri.endsWith('/') && res.endsWith('/')) {
-        res = res.slice(0, -1);
-      }
-      reqOpts.uri = res;
+      reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
     } else {
       reqOpts.uri = uriComponents
         .map(uriComponent => {

@@ -28,6 +28,7 @@ import {
   BodyResponseCallback,
   DecorateRequestOptions,
   ResponseBody,
+  encodeAbsoluteURI,
   encodeURIPath,
   util,
 } from './util';
@@ -564,14 +565,7 @@ class ServiceObject<T = any> extends EventEmitter {
     const uriComponents = [this.baseUrl, this.id || '', reqOpts.uri];
 
     if (isAbsoluteUrl) {
-      const url = new URL(reqOpts.uri);
-      const encodedPath = encodeURIPath(url.pathname);
-      url.pathname = encodedPath;
-      let res = url.toString();
-      if (!reqOpts.uri.endsWith('/') && res.endsWith('/')) {
-        res = res.slice(0, -1);
-      }
-      reqOpts.uri = res;
+      reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
     } else {
       reqOpts.uri = uriComponents
         .filter(x => x!.trim()) // Limit to non-empty strings.
