@@ -235,13 +235,13 @@ export function validateAndEncodeParams(
   const templateParams = extractTemplateParams(urlTemplate);
 
   for (const {param, wildcard} of templateParams) {
-    const val = params[param];
-    if (val === undefined || val === null) {
+    const parameterValue = params[param];
+    if (parameterValue === undefined || parameterValue === null) {
       continue;
     }
-    const transformed = Array.isArray(val)
-      ? val.map(item => applyPattern(wildcard, String(item), param))
-      : applyPattern(wildcard, String(val), param);
+    const transformed = Array.isArray(parameterValue)
+      ? parameterValue.map(item => applyPattern(wildcard, String(item), param))
+      : applyPattern(wildcard, String(parameterValue), param);
     if (wildcard === '**') {
       params[param] = transformed;
     }
