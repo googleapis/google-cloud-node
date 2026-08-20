@@ -17958,6 +17958,9 @@ export namespace google {
                     /** Instance pscInstanceConfig */
                     pscInstanceConfig?: (google.cloud.alloydb.v1alpha.Instance.IPscInstanceConfig|null);
 
+                    /** Instance pscInstanceInfo */
+                    pscInstanceInfo?: (google.cloud.alloydb.v1alpha.Instance.IPscInstanceInfo|null);
+
                     /** Instance networkConfig */
                     networkConfig?: (google.cloud.alloydb.v1alpha.Instance.IInstanceNetworkConfig|null);
 
@@ -18069,6 +18072,9 @@ export namespace google {
 
                     /** Instance pscInstanceConfig. */
                     public pscInstanceConfig?: (google.cloud.alloydb.v1alpha.Instance.IPscInstanceConfig|null);
+
+                    /** Instance pscInstanceInfo. */
+                    public pscInstanceInfo?: (google.cloud.alloydb.v1alpha.Instance.IPscInstanceInfo|null);
 
                     /** Instance networkConfig. */
                     public networkConfig?: (google.cloud.alloydb.v1alpha.Instance.IInstanceNetworkConfig|null);
@@ -19194,6 +19200,12 @@ export namespace google {
 
                         /** PscInstanceConfig pscAutoConnections */
                         pscAutoConnections?: (google.cloud.alloydb.v1alpha.Instance.IPscAutoConnectionConfig[]|null);
+
+                        /** PscInstanceConfig pscAutoDnsState */
+                        pscAutoDnsState?: (google.cloud.alloydb.v1alpha.Instance.PscAutoDnsState|keyof typeof google.cloud.alloydb.v1alpha.Instance.PscAutoDnsState|null);
+
+                        /** PscInstanceConfig pscAutoConnectionPolicyState */
+                        pscAutoConnectionPolicyState?: (google.cloud.alloydb.v1alpha.Instance.PscInstanceConfig.PscAutoConnectionPolicyState|keyof typeof google.cloud.alloydb.v1alpha.Instance.PscInstanceConfig.PscAutoConnectionPolicyState|null);
                     }
 
                     /** Represents a PscInstanceConfig. */
@@ -19219,6 +19231,12 @@ export namespace google {
 
                         /** PscInstanceConfig pscAutoConnections. */
                         public pscAutoConnections: google.cloud.alloydb.v1alpha.Instance.IPscAutoConnectionConfig[];
+
+                        /** PscInstanceConfig pscAutoDnsState. */
+                        public pscAutoDnsState: (google.cloud.alloydb.v1alpha.Instance.PscAutoDnsState|keyof typeof google.cloud.alloydb.v1alpha.Instance.PscAutoDnsState);
+
+                        /** PscInstanceConfig pscAutoConnectionPolicyState. */
+                        public pscAutoConnectionPolicyState: (google.cloud.alloydb.v1alpha.Instance.PscInstanceConfig.PscAutoConnectionPolicyState|keyof typeof google.cloud.alloydb.v1alpha.Instance.PscInstanceConfig.PscAutoConnectionPolicyState);
 
                         /**
                          * Creates a new PscInstanceConfig instance using the specified properties.
@@ -19292,6 +19310,131 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PscInstanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PscInstanceConfig {
+
+                        /** PscAutoConnectionPolicyState enum. */
+                        enum PscAutoConnectionPolicyState {
+                            PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED = 0,
+                            ENABLED = 1,
+                            DISABLED = 2
+                        }
+                    }
+
+                    /** Properties of a PscInstanceInfo. */
+                    interface IPscInstanceInfo {
+
+                        /** PscInstanceInfo effectivePscAutoDnsEnabled */
+                        effectivePscAutoDnsEnabled?: (boolean|null);
+
+                        /** PscInstanceInfo pscAutoDnsNames */
+                        pscAutoDnsNames?: (string[]|null);
+
+                        /** PscInstanceInfo effectivePscAutoConnectionPolicy */
+                        effectivePscAutoConnectionPolicy?: (boolean|null);
+
+                        /** PscInstanceInfo serviceConnectionPolicy */
+                        serviceConnectionPolicy?: (string|null);
+                    }
+
+                    /** Represents a PscInstanceInfo. */
+                    class PscInstanceInfo implements IPscInstanceInfo {
+
+                        /**
+                         * Constructs a new PscInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Instance.IPscInstanceInfo);
+
+                        /** PscInstanceInfo effectivePscAutoDnsEnabled. */
+                        public effectivePscAutoDnsEnabled: boolean;
+
+                        /** PscInstanceInfo pscAutoDnsNames. */
+                        public pscAutoDnsNames: string[];
+
+                        /** PscInstanceInfo effectivePscAutoConnectionPolicy. */
+                        public effectivePscAutoConnectionPolicy: boolean;
+
+                        /** PscInstanceInfo serviceConnectionPolicy. */
+                        public serviceConnectionPolicy: string;
+
+                        /**
+                         * Creates a new PscInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PscInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Instance.IPscInstanceInfo): google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo;
+
+                        /**
+                         * Encodes the specified PscInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo.verify|verify} messages.
+                         * @param message PscInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Instance.IPscInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PscInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo.verify|verify} messages.
+                         * @param message PscInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Instance.IPscInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PscInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PscInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo;
+
+                        /**
+                         * Decodes a PscInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PscInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo;
+
+                        /**
+                         * Verifies a PscInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PscInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PscInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo;
+
+                        /**
+                         * Creates a plain object from a PscInstanceInfo message. Also converts values to other types if specified.
+                         * @param message PscInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Instance.PscInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PscInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PscInstanceInfo
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -19656,6 +19799,13 @@ export namespace google {
                         REGIONAL = 2
                     }
 
+                    /** PscAutoDnsState enum. */
+                    enum PscAutoDnsState {
+                        PSC_AUTO_DNS_STATE_UNSPECIFIED = 0,
+                        PSC_AUTO_DNS_STATE_ENABLED = 1,
+                        PSC_AUTO_DNS_STATE_DISABLED = 2
+                    }
+
                     /** ActivationPolicy enum. */
                     enum ActivationPolicy {
                         ACTIVATION_POLICY_UNSPECIFIED = 0,
@@ -19684,6 +19834,9 @@ export namespace google {
 
                     /** ConnectionInfo pscDnsName */
                     pscDnsName?: (string|null);
+
+                    /** ConnectionInfo pscAutoDnsName */
+                    pscAutoDnsName?: (string|null);
                 }
 
                 /** Represents a ConnectionInfo. */
@@ -19712,6 +19865,9 @@ export namespace google {
 
                     /** ConnectionInfo pscDnsName. */
                     public pscDnsName: string;
+
+                    /** ConnectionInfo pscAutoDnsName. */
+                    public pscAutoDnsName: string;
 
                     /**
                      * Creates a new ConnectionInfo instance using the specified properties.
@@ -33427,6 +33583,9 @@ export namespace google {
                     /** Instance pscInstanceConfig */
                     pscInstanceConfig?: (google.cloud.alloydb.v1beta.Instance.IPscInstanceConfig|null);
 
+                    /** Instance pscInstanceInfo */
+                    pscInstanceInfo?: (google.cloud.alloydb.v1beta.Instance.IPscInstanceInfo|null);
+
                     /** Instance networkConfig */
                     networkConfig?: (google.cloud.alloydb.v1beta.Instance.IInstanceNetworkConfig|null);
 
@@ -33535,6 +33694,9 @@ export namespace google {
 
                     /** Instance pscInstanceConfig. */
                     public pscInstanceConfig?: (google.cloud.alloydb.v1beta.Instance.IPscInstanceConfig|null);
+
+                    /** Instance pscInstanceInfo. */
+                    public pscInstanceInfo?: (google.cloud.alloydb.v1beta.Instance.IPscInstanceInfo|null);
 
                     /** Instance networkConfig. */
                     public networkConfig?: (google.cloud.alloydb.v1beta.Instance.IInstanceNetworkConfig|null);
@@ -34660,6 +34822,12 @@ export namespace google {
 
                         /** PscInstanceConfig pscAutoConnections */
                         pscAutoConnections?: (google.cloud.alloydb.v1beta.Instance.IPscAutoConnectionConfig[]|null);
+
+                        /** PscInstanceConfig pscAutoDnsState */
+                        pscAutoDnsState?: (google.cloud.alloydb.v1beta.Instance.PscAutoDnsState|keyof typeof google.cloud.alloydb.v1beta.Instance.PscAutoDnsState|null);
+
+                        /** PscInstanceConfig pscAutoConnectionPolicyState */
+                        pscAutoConnectionPolicyState?: (google.cloud.alloydb.v1beta.Instance.PscInstanceConfig.PscAutoConnectionPolicyState|keyof typeof google.cloud.alloydb.v1beta.Instance.PscInstanceConfig.PscAutoConnectionPolicyState|null);
                     }
 
                     /** Represents a PscInstanceConfig. */
@@ -34685,6 +34853,12 @@ export namespace google {
 
                         /** PscInstanceConfig pscAutoConnections. */
                         public pscAutoConnections: google.cloud.alloydb.v1beta.Instance.IPscAutoConnectionConfig[];
+
+                        /** PscInstanceConfig pscAutoDnsState. */
+                        public pscAutoDnsState: (google.cloud.alloydb.v1beta.Instance.PscAutoDnsState|keyof typeof google.cloud.alloydb.v1beta.Instance.PscAutoDnsState);
+
+                        /** PscInstanceConfig pscAutoConnectionPolicyState. */
+                        public pscAutoConnectionPolicyState: (google.cloud.alloydb.v1beta.Instance.PscInstanceConfig.PscAutoConnectionPolicyState|keyof typeof google.cloud.alloydb.v1beta.Instance.PscInstanceConfig.PscAutoConnectionPolicyState);
 
                         /**
                          * Creates a new PscInstanceConfig instance using the specified properties.
@@ -34758,6 +34932,131 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PscInstanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PscInstanceConfig {
+
+                        /** PscAutoConnectionPolicyState enum. */
+                        enum PscAutoConnectionPolicyState {
+                            PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED = 0,
+                            ENABLED = 1,
+                            DISABLED = 2
+                        }
+                    }
+
+                    /** Properties of a PscInstanceInfo. */
+                    interface IPscInstanceInfo {
+
+                        /** PscInstanceInfo effectivePscAutoDnsEnabled */
+                        effectivePscAutoDnsEnabled?: (boolean|null);
+
+                        /** PscInstanceInfo pscAutoDnsNames */
+                        pscAutoDnsNames?: (string[]|null);
+
+                        /** PscInstanceInfo effectivePscAutoConnectionPolicy */
+                        effectivePscAutoConnectionPolicy?: (boolean|null);
+
+                        /** PscInstanceInfo serviceConnectionPolicy */
+                        serviceConnectionPolicy?: (string|null);
+                    }
+
+                    /** Represents a PscInstanceInfo. */
+                    class PscInstanceInfo implements IPscInstanceInfo {
+
+                        /**
+                         * Constructs a new PscInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Instance.IPscInstanceInfo);
+
+                        /** PscInstanceInfo effectivePscAutoDnsEnabled. */
+                        public effectivePscAutoDnsEnabled: boolean;
+
+                        /** PscInstanceInfo pscAutoDnsNames. */
+                        public pscAutoDnsNames: string[];
+
+                        /** PscInstanceInfo effectivePscAutoConnectionPolicy. */
+                        public effectivePscAutoConnectionPolicy: boolean;
+
+                        /** PscInstanceInfo serviceConnectionPolicy. */
+                        public serviceConnectionPolicy: string;
+
+                        /**
+                         * Creates a new PscInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PscInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Instance.IPscInstanceInfo): google.cloud.alloydb.v1beta.Instance.PscInstanceInfo;
+
+                        /**
+                         * Encodes the specified PscInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.PscInstanceInfo.verify|verify} messages.
+                         * @param message PscInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Instance.IPscInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PscInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.PscInstanceInfo.verify|verify} messages.
+                         * @param message PscInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Instance.IPscInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PscInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PscInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Instance.PscInstanceInfo;
+
+                        /**
+                         * Decodes a PscInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PscInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Instance.PscInstanceInfo;
+
+                        /**
+                         * Verifies a PscInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PscInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PscInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Instance.PscInstanceInfo;
+
+                        /**
+                         * Creates a plain object from a PscInstanceInfo message. Also converts values to other types if specified.
+                         * @param message PscInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Instance.PscInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PscInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PscInstanceInfo
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -35122,6 +35421,13 @@ export namespace google {
                         REGIONAL = 2
                     }
 
+                    /** PscAutoDnsState enum. */
+                    enum PscAutoDnsState {
+                        PSC_AUTO_DNS_STATE_UNSPECIFIED = 0,
+                        PSC_AUTO_DNS_STATE_ENABLED = 1,
+                        PSC_AUTO_DNS_STATE_DISABLED = 2
+                    }
+
                     /** ActivationPolicy enum. */
                     enum ActivationPolicy {
                         ACTIVATION_POLICY_UNSPECIFIED = 0,
@@ -35150,6 +35456,9 @@ export namespace google {
 
                     /** ConnectionInfo pscDnsName */
                     pscDnsName?: (string|null);
+
+                    /** ConnectionInfo pscAutoDnsName */
+                    pscAutoDnsName?: (string|null);
                 }
 
                 /** Represents a ConnectionInfo. */
@@ -35178,6 +35487,9 @@ export namespace google {
 
                     /** ConnectionInfo pscDnsName. */
                     public pscDnsName: string;
+
+                    /** ConnectionInfo pscAutoDnsName. */
+                    public pscAutoDnsName: string;
 
                     /**
                      * Creates a new ConnectionInfo instance using the specified properties.

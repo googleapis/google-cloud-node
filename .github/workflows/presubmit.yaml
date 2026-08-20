@@ -42,15 +42,17 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          fetch-depth: 300
+          fetch-depth: 2
           persist-credentials: false
       - name: Use Node.js 24
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
       - run: npm install
-      - run: npm run lint
+      - run: node ./bin/linter.mjs --strict
         name: Run monorepo linter
+        env:
+          GIT_DIFF_ARG: "HEAD^1...HEAD"
 
   # Consolidate shards into jobs representing aggregate status to simplify branch protection requirements
   units-status:

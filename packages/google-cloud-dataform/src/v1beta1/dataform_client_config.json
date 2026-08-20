@@ -156,6 +156,26 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "SyncWorkspaceRefs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchWorkspaceBranches": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteBranch": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CheckoutWorkspaceBranch": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchCurrentWorkspaceBranch": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "PushGitCommits": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

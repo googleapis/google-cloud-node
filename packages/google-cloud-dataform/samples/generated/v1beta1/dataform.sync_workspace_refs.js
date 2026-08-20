@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(readStream) {
-  // [START bigquerystorage_v1_generated_BigQueryRead_ReadRows_async]
+function main(name) {
+  // [START dataform_v1beta1_generated_Dataform_SyncWorkspaceRefs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,42 +29,42 @@ function main(readStream) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Stream to read rows from.
+   *  Required. The workspace resource name.
+   *  Format:
+   *  projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
    */
-  // const readStream = 'abc123'
+  // const name = 'abc123'
   /**
-   *  The offset requested must be less than the last row read from Read.
-   *  Requesting a larger offset is undefined. If not specified, start reading
-   *  from offset zero.
+   *  Optional. The name of the branch in the Git remote to which the refs should
+   *  be fetched for. If left unset, all remote branches will be fetched.
    */
-  // const offset = 1234
+  // const remoteBranchName = 'abc123'
   /**
-   *  Optional. Options specific to the Apache Arrow output format.
-   *  This feature is not yet available.
+   *  Optional. Can be used to deepen the commit history of shallow clones.
+   *  Git documentation:
+   *  https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth
    */
-  // const arrowSerializationOptions = {}
+  // const deepen = 1234
 
-  // Imports the Storage library
-  const {BigQueryReadClient} = require('@google-cloud/bigquery-storage-api').v1;
+  // Imports the Dataform library
+  const {DataformClient} = require('@google-cloud/dataform').v1beta1;
 
   // Instantiates a client
-  const storageClient = new BigQueryReadClient();
+  const dataformClient = new DataformClient();
 
-  async function callReadRows() {
+  async function callSyncWorkspaceRefs() {
     // Construct request
     const request = {
-      readStream,
+      name,
     };
 
     // Run request
-    const stream = await storageClient.readRows(request);
-    stream.on('data', (response) => { console.log(response) });
-    stream.on('error', (err) => { throw(err) });
-    stream.on('end', () => { /* API call completed */ });
+    const response = await dataformClient.syncWorkspaceRefs(request);
+    console.log(response);
   }
 
-  callReadRows();
-  // [END bigquerystorage_v1_generated_BigQueryRead_ReadRows_async]
+  callSyncWorkspaceRefs();
+  // [END dataform_v1beta1_generated_Dataform_SyncWorkspaceRefs_async]
 }
 
 process.on('unhandledRejection', err => {
