@@ -892,5 +892,26 @@ describe('createAPIRequest', () => {
       assert.ok(res.config.url?.toString().endsWith(p));
       scope.done();
     });
+
+    it('should percent-encode all reserved characters (including slashes) for single-segment (*) path parameters', async () => {
+      const p = '/drive/v3/files/folder%2Ffile%201%3F%24foo%3Dbar%23';
+      const scope = nock('https://example.com').get(p).reply(200, {});
+
+      const res = await createAPIRequest({
+        options: {
+          url: 'https://example.com/drive/v3/files/{fileId}',
+          method: 'GET',
+        },
+        params: {
+          fileId: 'folder/file 1?$foo=bar#',
+        },
+        requiredParams: [],
+        pathParams: ['fileId'],
+        context: fakeContext,
+      });
+
+      assert.ok(res.config.url?.toString().endsWith(p));
+      scope.done();
+    });
   });
 });
