@@ -565,6 +565,9 @@ class ServiceObject<T = any> extends EventEmitter {
     const uriComponents = [this.baseUrl, this.id || '', reqOpts.uri];
 
     if (isAbsoluteUrl) {
+      // Encode only the pathname to preserve protocol, host, and query params.
+      // We cannot pass uriComponents through encodeURIPath after splicing
+      // because it will percent-encode parts we do not want to encode.
       reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
     } else {
       // Relative path components contain only path segments (no protocol or host),
