@@ -86,7 +86,7 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(span.attributes['gcp.method.name'], 'GetObject');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
-      assert.strictEqual(span.exceptions.length, 0);
+      assert.strictEqual(span.events.length, 0);
     });
 
     it('records error attributes, exceptions, and rethrows when fn throws an Error', async () => {
@@ -111,8 +111,12 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.message'], 'RPC Failed');
       assert.strictEqual(span.attributes['error.type'], 'Error');
       assert.strictEqual(span.attributes['exception.type'], 'CustomRpcError');
-      assert.strictEqual(span.exceptions.length, 1);
-      assert.strictEqual(span.exceptions[0], error);
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.message'],
+        'RPC Failed'
+      );
     });
 
     it('handles missing optional static arguments gracefully', async () => {
