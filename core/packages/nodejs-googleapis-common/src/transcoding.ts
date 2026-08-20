@@ -222,11 +222,23 @@ export function validateAndEncodeParams(
     if (parameterValue === undefined || parameterValue === null) {
       continue;
     }
-    const transformed = Array.isArray(parameterValue)
-      ? parameterValue.map(item => applyPattern(wildcard, String(item), param))
-      : applyPattern(wildcard, String(parameterValue), param);
     if (wildcard === '**') {
-      params[param] = transformed;
+      params[param] = Array.isArray(parameterValue)
+        ? parameterValue.map(item =>
+            applyPattern(wildcard, String(item), param),
+          )
+        : applyPattern(wildcard, String(parameterValue), param);
+    } else {
+      // For single-segment parameters (*), only validation against path traversal (. and ..)
+      // is needed here. Character percent-encoding is handled automatically by url-template later
+      // when urlTemplate.parse(url).expand(params) is called in createAPIRequestAsync.
+      if (Array.isArray(parameterValue)) {
+        parameterValue.forEach(item =>
+          validateUriPathSegment(param, String(item)),
+        );
+      } else {
+        validateUriPathSegment(param, String(parameterValue));
+      }
     }
   }
 }
