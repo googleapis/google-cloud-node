@@ -36,40 +36,12 @@ function tryRequire(moduleName: string) {
 }
 
 // 1. Dynamic Platform Package Loading:
-// Attempts to load matching platform package (@google-cloud/spannerlib-node-<platform>-<arch>)
-// or fallback development package ('spannerlib-node').
+// Loads matching platform package (@google-cloud/spannerlib-node-<platform>-<arch>).
 const platformKey = `${process.platform}-${process.arch}`;
-const nativeModule =
-  tryRequire(`@google-cloud/spannerlib-node-${platformKey}`) ||
-  tryRequire('spannerlib-node');
+const nativeModule = tryRequire(`@google-cloud/spannerlib-node-${platformKey}`);
 
-let PoolValue: {create(dsn: string): Promise<IPool>};
-let ConnectionValue: unknown;
-let RowsValue: unknown;
-let SpannerLibErrorValue: typeof ISpannerLibError;
-
-if (nativeModule) {
-  PoolValue = nativeModule.Pool;
-  ConnectionValue = nativeModule.Connection;
-  RowsValue = nativeModule.Rows;
-  SpannerLibErrorValue = nativeModule.SpannerLibError;
-} else {
-  // 2. Unit Test / CI Fallback Stubs:
-  // When native package is absent in CI, stub classes allow unit tests to mock and run.
-  PoolValue = class {
-    static async create(dsn: string): Promise<IPool> {
-      throw new Error(
-        `Native Spanner driver addon (@google-cloud/spannerlib-node-${platformKey}) is not installed. ` +
-          `Failed to connect to Spanner database (DSN: ${dsn}).`,
-      );
-    }
-  };
-
-  ConnectionValue = class {};
-  RowsValue = class {};
-  SpannerLibErrorValue = class extends Error {
-    code?: number;
-  };
+if (!nativeModule) {
+  throw new Error(`Platform ${platformKey} is not supported`);
 }
 
 export type Connection = IConnection;
@@ -77,7 +49,11 @@ export type Pool = IPool;
 export type Rows = IRows;
 export type SpannerLibError = ISpannerLibError;
 
-export const Pool = PoolValue;
-export const Connection = ConnectionValue;
-export const Rows = RowsValue;
-export const SpannerLibError = SpannerLibErrorValue;
+export const Pool: {
+  create(dsn: string): Promise<Pool>;
+} = nativeModule.Pool;
+
+export const Connection: unknown = nativeModule.Connection;
+export const Rows: unknown = nativeModule.Rows;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const SpannerLibError: any = nativeModule.SpannerLibError;

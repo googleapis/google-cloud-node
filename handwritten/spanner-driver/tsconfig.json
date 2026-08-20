@@ -6,8 +6,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "types": ["node", "mocha"]
+    "skipLibCheck": true
   },
   "include": [
     "src/*.ts",
