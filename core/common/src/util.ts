@@ -1077,6 +1077,13 @@ export function encodeURIPath(uri: string): string {
     .join('/');
 }
 
+/**
+ * Encodes the pathname of an absolute URI string using `encodeURIPath`,
+ * preserving any query parameters, hash, or trailing slash formatting.
+ *
+ * @param {string} uri - The absolute URI string to encode.
+ * @return {string} The formatted and encoded absolute URI string.
+ */
 export function encodeAbsoluteURI(uri: string): string {
   const url = new URL(uri);
   const encodedPath = encodeURIPath(url.pathname);
