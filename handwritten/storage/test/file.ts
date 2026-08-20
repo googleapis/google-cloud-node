@@ -779,6 +779,150 @@ describe('File', () => {
       file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
 
+    it('should set destination KMS key name when source file is encrypted with CSEK', done => {
+      file.setEncryptionKey('sourceKey');
+
+      const newFile = new File(BUCKET, 'new-file');
+      newFile.kmsKeyName = 'kms-key-name';
+
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
+          'AES256'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key'],
+          file.encryptionKeyBase64
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
+          file.encryptionKeyHash
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-algorithm'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key-sha256'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.qs.destinationKmsKeyName,
+          newFile.kmsKeyName
+        );
+        assert.strictEqual(file.kmsKeyName, newFile.kmsKeyName);
+        assert.strictEqual(newFile.encryptionKey, undefined);
+        done();
+      };
+
+      file.copy(newFile, assert.ifError);
+    });
+
+    it('should set destination KMS key name from option when source file is encrypted with CSEK', done => {
+      file.setEncryptionKey('sourceKey');
+
+      const newFile = new File(BUCKET, 'new-file');
+      const destinationKmsKeyName = 'destination-kms-key-name';
+
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
+          'AES256'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key'],
+          file.encryptionKeyBase64
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
+          file.encryptionKeyHash
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-algorithm'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key-sha256'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.qs.destinationKmsKeyName,
+          destinationKmsKeyName
+        );
+        assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
+        assert.strictEqual(newFile.encryptionKey, undefined);
+        done();
+      };
+
+      file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
+    });
+
+    it('should set destination KMS key name from kmsKeyName option', done => {
+      const newFile = new File(BUCKET, 'new-file');
+      const kmsKeyName = 'kms-key-name';
+
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.destinationKmsKeyName, kmsKeyName);
+        assert.strictEqual(file.kmsKeyName, kmsKeyName);
+        assert.strictEqual(reqOpts.json.kmsKeyName, undefined);
+        done();
+      };
+
+      file.copy(newFile, {kmsKeyName}, assert.ifError);
+    });
+
+    it('should set destination KMS key name from kmsKeyName option when source file is encrypted with CSEK', done => {
+      file.setEncryptionKey('sourceKey');
+
+      const newFile = new File(BUCKET, 'new-file');
+      const kmsKeyName = 'kms-key-name';
+
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
+          'AES256'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key'],
+          file.encryptionKeyBase64
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
+          file.encryptionKeyHash
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-algorithm'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key-sha256'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.qs.destinationKmsKeyName,
+          kmsKeyName
+        );
+        assert.strictEqual(file.kmsKeyName, kmsKeyName);
+        assert.strictEqual(newFile.encryptionKey, undefined);
+        assert.strictEqual(reqOpts.json.kmsKeyName, undefined);
+        done();
+      };
+
+      file.copy(newFile, {kmsKeyName}, assert.ifError);
+    });
+
     it('should accept predefined Acl', done => {
       const options = {
         predefinedAcl: 'authenticatedRead',

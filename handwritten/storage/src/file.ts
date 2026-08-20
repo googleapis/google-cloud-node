@@ -453,6 +453,7 @@ export interface CopyOptions {
   contentType?: string;
   contentDisposition?: string;
   destinationKmsKeyName?: string;
+  kmsKeyName?: string;
   metadata?: {
     [key: string]: string | boolean | number | null;
   };
@@ -1270,6 +1271,8 @@ class File extends ServiceObject<File, FileMetadata> {
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
    *     that will be used to encrypt the object. Overwrites the object
    * metadata's `kms_key_name` value, if any.
+   * @property {string} [kmsKeyName] Resource name of the Cloud KMS key. Alias
+   *     for `destinationKmsKeyName`.
    * @property {Metadata} [metadata] Metadata to specify on the copied file.
    * @property {string} [predefinedAcl] Set the ACL for the new file.
    * @property {string} [token] A previously-returned `rewriteToken` from an
@@ -1461,10 +1464,15 @@ class File extends ServiceObject<File, FileMetadata> {
         this.encryptionKeyHash;
     }
 
+    const destinationKmsKeyName =
+      options.destinationKmsKeyName ||
+      options.kmsKeyName ||
+      newFile.kmsKeyName;
+
     if (
-      this.encryptionKey !== undefined &&
-      this.encryptionKey !== null &&
-      newFile.encryptionKey === undefined
+      this.encryptionKey &&
+      newFile.encryptionKey === undefined &&
+      !destinationKmsKeyName
     ) {
       newFile.setEncryptionKey(this.encryptionKey);
     }
@@ -1473,11 +1481,10 @@ class File extends ServiceObject<File, FileMetadata> {
       headers['x-goog-encryption-algorithm'] = 'AES256';
       headers['x-goog-encryption-key'] = newFile.encryptionKeyBase64;
       headers['x-goog-encryption-key-sha256'] = newFile.encryptionKeyHash;
-    } else if (options.destinationKmsKeyName !== undefined) {
-      query.destinationKmsKeyName = options.destinationKmsKeyName;
+    } else if (destinationKmsKeyName !== undefined) {
+      query.destinationKmsKeyName = destinationKmsKeyName;
       delete options.destinationKmsKeyName;
-    } else if (newFile.kmsKeyName !== undefined) {
-      query.destinationKmsKeyName = newFile.kmsKeyName;
+      delete options.kmsKeyName;
     }
 
     if (query.destinationKmsKeyName) {
