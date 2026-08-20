@@ -1085,7 +1085,7 @@ export function encodeURIPath(uri: string): string {
  * @return {string} The formatted and encoded absolute URI string.
  */
 export function encodeAbsoluteURI(uri: string): string {
-  const url = new URL(uri);
+  const url = new URL(uri); // Isolate pathname from protocol, host, and query.
   const encodedPath = encodeURIPath(url.pathname);
   url.pathname = encodedPath;
   let res = url.toString();
