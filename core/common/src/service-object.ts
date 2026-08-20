@@ -572,7 +572,7 @@ class ServiceObject<T = any> extends EventEmitter {
         .map(uriComponent => {
           const trimSlashesRegex = /^\/*|\/*$/g;
           const trimmed = uriComponent!.replace(trimSlashesRegex, '');
-          return encodeURIPath(trimmed);
+          return encodeURIPath(trimmed); // Encode and prevent path traversal.
         })
         .join('/');
     }

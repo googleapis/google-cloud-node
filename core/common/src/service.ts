@@ -220,7 +220,7 @@ export class Service {
         .map(uriComponent => {
           const trimSlashesRegex = /^\/*|\/*$/g;
           const trimmed = uriComponent.replace(trimSlashesRegex, '');
-          return encodeURIPath(trimmed);
+          return encodeURIPath(trimmed); // Encode and prevent path traversal.
         })
         .join('/')
         // Some URIs have colon separators.
