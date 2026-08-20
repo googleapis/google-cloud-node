@@ -1046,6 +1046,14 @@ export function encodeWithoutSlashes(str: string, propertyName = 'resource ID fi
     .replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
 }
 
+/**
+ * Encodes each path segment in a URI string while preserving slash (`/`) and
+ * colon (`:`) delimiters, and validates that no path segment is `.` or `..` to
+ * prevent path traversal.
+ *
+ * @param {string} uri - The URI path to encode.
+ * @return {string} The encoded URI path.
+ */
 export function encodeURIPath(uri: string): string {
   const parts = uri.split('/');
   return parts
