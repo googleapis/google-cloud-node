@@ -157,7 +157,6 @@ async function createAPIRequestAsync<T>(
     }
   });
 
-
   // Check for missing required parameters in the API request
   const missingParams = getMissingParams(params, parameters.requiredParams);
   if (missingParams) {
