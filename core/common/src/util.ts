@@ -913,10 +913,6 @@ export class Util {
     return dup;
   }
 
-  encodeWithSlashes = encodeWithSlashes;
-  encodeWithoutSlashes = encodeWithoutSlashes;
-  encodeURIPath = encodeURIPath;
-
   /**
    * Decorate the options about to be made in a request.
    *

@@ -28,6 +28,7 @@ import {
   BodyResponseCallback,
   DecorateRequestOptions,
   ResponseBody,
+  encodeURIPath,
   util,
 } from './util';
 
@@ -564,7 +565,7 @@ class ServiceObject<T = any> extends EventEmitter {
 
     if (isAbsoluteUrl) {
       const url = new URL(reqOpts.uri);
-      const encodedPath = util.encodeURIPath(url.pathname);
+      const encodedPath = encodeURIPath(url.pathname);
       url.pathname = encodedPath;
       let res = url.toString();
       if (!reqOpts.uri.endsWith('/') && res.endsWith('/')) {
@@ -577,7 +578,7 @@ class ServiceObject<T = any> extends EventEmitter {
         .map(uriComponent => {
           const trimSlashesRegex = /^\/*|\/*$/g;
           const trimmed = uriComponent!.replace(trimSlashesRegex, '');
-          return util.encodeURIPath(trimmed);
+          return encodeURIPath(trimmed);
         })
         .join('/');
     }

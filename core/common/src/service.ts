@@ -27,6 +27,7 @@ import {
   DecorateRequestOptions,
   MakeAuthenticatedRequest,
   PackageJson,
+  encodeURIPath,
   util,
 } from './util';
 
@@ -213,7 +214,7 @@ export class Service {
 
     if (isAbsoluteUrl) {
       const url = new URL(reqOpts.uri);
-      const encodedPath = util.encodeURIPath(url.pathname);
+      const encodedPath = encodeURIPath(url.pathname);
       url.pathname = encodedPath;
       let res = url.toString();
       if (!reqOpts.uri.endsWith('/') && res.endsWith('/')) {
@@ -225,7 +226,7 @@ export class Service {
         .map(uriComponent => {
           const trimSlashesRegex = /^\/*|\/*$/g;
           const trimmed = uriComponent.replace(trimSlashesRegex, '');
-          return util.encodeURIPath(trimmed);
+          return encodeURIPath(trimmed);
         })
         .join('/')
         // Some URIs have colon separators.
