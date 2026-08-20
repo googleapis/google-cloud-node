@@ -189,17 +189,10 @@ describe('File', () => {
   let File: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let file: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let activeFile: any = null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let originalCopy: any;
 
   const FILE_NAME = 'file-name.png';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let directoryFile: any;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let specialCharsFile: any;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let STORAGE: any;
@@ -232,18 +225,6 @@ describe('File', () => {
       './signer': fakeSigner,
       zlib: fakeZlib,
     }).File;
-
-    originalCopy = File.prototype.copy;
-    File.prototype.copy = function (dest: any, options: any, callback: any) {
-      activeFile = this;
-      return originalCopy.call(this, dest, options, callback);
-    };
-  });
-
-  after(() => {
-    if (originalCopy) {
-      File.prototype.copy = originalCopy;
-    }
   });
 
   beforeEach(() => {
@@ -285,23 +266,6 @@ describe('File', () => {
     file = new File(BUCKET, FILE_NAME);
 
     directoryFile = new File(BUCKET, 'directory/file.jpg');
-    directoryFile.request = util.noop;
-
-    specialCharsFile = new File(BUCKET, "special/azAZ!*'()*%/file.jpg");
-    specialCharsFile.request = util.noop;
-
-    activeFile = null;
-    BUCKET.request = function (reqOpts: any, callback: any) {
-      if (activeFile && typeof activeFile.request === 'function' && (activeFile.request as any) !== util.noop) {
-        const prefix = `/o/${encodeURIComponent(activeFile.name)}`;
-        const modifiedReqOpts = { ...reqOpts };
-        if (modifiedReqOpts.uri.startsWith(prefix)) {
-          modifiedReqOpts.uri = modifiedReqOpts.uri.substring(prefix.length);
-        }
-        return activeFile.request(modifiedReqOpts, callback);
-      }
-      return Bucket.prototype.request.call(this, reqOpts, callback);
-    };
 
     createGunzipOverride = null;
     handleRespOverride = null;
@@ -536,7 +500,6 @@ describe('File', () => {
   });
 
   describe('copy', () => {
-
     it('should throw if no destination is provided', () => {
       assert.throws(() => {
         file.copy();
@@ -546,11 +509,13 @@ describe('File', () => {
     it('should URI encode file names', done => {
       const newFile = new File(BUCKET, 'nested/file.jpg');
 
-      const expectedPath = `/rewriteTo/b/${
-        file.bucket.name
-      }/o/${encodeURIComponent(newFile.name)}`;
+      const expectedPath = `/o/${encodeURIComponent(
+        directoryFile.name
+      )}/rewriteTo/b/${newFile.bucket.name}/o/${encodeURIComponent(
+        newFile.name
+      )}`;
 
-      directoryFile.request = (reqOpts: DecorateRequestOptions) => {
+      directoryFile.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, expectedPath);
         done();
       };
@@ -564,7 +529,10 @@ describe('File', () => {
 
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      file.bucket.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
         callback(error, apiResponse);
       };
 
@@ -581,7 +549,7 @@ describe('File', () => {
       const versionedFile = new File(BUCKET, 'name', {generation: 1});
       const newFile = new File(BUCKET, 'new-file');
 
-      versionedFile.request = (reqOpts: DecorateRequestOptions) => {
+      versionedFile.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.sourceGeneration, 1);
         done();
       };
@@ -599,7 +567,7 @@ describe('File', () => {
         metadata: METADATA,
       };
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.json, options);
         assert.strictEqual(reqOpts.json.metadata, METADATA);
         done();
@@ -615,7 +583,7 @@ describe('File', () => {
       const originalOptions = Object.assign({}, options);
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         assert.strictEqual(reqOpts.json.userProject, undefined);
         assert.deepStrictEqual(options, originalOptions);
@@ -630,7 +598,7 @@ describe('File', () => {
 
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.headers, {
           'x-goog-copy-source-encryption-algorithm': 'AES256',
           'x-goog-copy-source-encryption-key': file.encryptionKeyBase64,
@@ -649,7 +617,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.setEncryptionKey('destinationKey');
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['x-goog-encryption-algorithm'],
           'AES256'
@@ -676,7 +644,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.setEncryptionKey(null);
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(newFile.encryptionKey, null);
         assert.strictEqual(newFile.encryptionKeyBase64, undefined);
         assert.strictEqual(newFile.encryptionKeyHash, undefined);
@@ -720,7 +688,7 @@ describe('File', () => {
 
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(newFile.encryptionKey, file.encryptionKey);
         assert.strictEqual(newFile.encryptionKeyBase64, file.encryptionKeyBase64);
         assert.strictEqual(newFile.encryptionKeyHash, file.encryptionKeyHash);
@@ -751,7 +719,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.kmsKeyName = 'kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationKmsKeyName,
           newFile.kmsKeyName
@@ -767,7 +735,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const destinationKmsKeyName = 'destination-kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationKmsKeyName,
           destinationKmsKeyName
@@ -785,7 +753,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.kmsKeyName = 'kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
           'AES256'
@@ -828,7 +796,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const destinationKmsKeyName = 'destination-kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
           'AES256'
@@ -869,7 +837,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const kmsKeyName = 'kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.destinationKmsKeyName, kmsKeyName);
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
         assert.strictEqual(reqOpts.json.kmsKeyName, undefined);
@@ -885,7 +853,7 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const kmsKeyName = 'kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
           'AES256'
@@ -928,7 +896,7 @@ describe('File', () => {
         predefinedAcl: 'authenticatedRead',
       };
       const newFile = new File(BUCKET, 'new-file');
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationPredefinedAcl,
           options.predefinedAcl
@@ -945,7 +913,7 @@ describe('File', () => {
       newFile.kmsKeyName = 'incorrect-kms-key-name';
       const destinationKmsKeyName = 'correct-kms-key-name';
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationKmsKeyName,
           destinationKmsKeyName
@@ -964,7 +932,7 @@ describe('File', () => {
       file.encryptionKeyInterceptor = {};
       file.interceptors = [{}, file.encryptionKeyInterceptor, {}];
 
-      file.request = () => {
+      file.bucket.request = () => {
         assert.strictEqual(file.interceptors.length, 2);
         assert(file.interceptors.indexOf(file.encryptionKeyInterceptor) === -1);
         done();
@@ -980,7 +948,7 @@ describe('File', () => {
         expectedPath: string,
         callback: Function
       ) {
-        file.request = (reqOpts: DecorateRequestOptions) => {
+        file.bucket.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.uri, expectedPath);
           callback();
         };
@@ -989,7 +957,9 @@ describe('File', () => {
       it('should allow a string', done => {
         const newFileName = 'new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
+        const expectedPath = `/o/${encodeURIComponent(
+          file.name
+        )}/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
@@ -997,8 +967,10 @@ describe('File', () => {
       it('should allow a string with leading slash.', done => {
         const newFileName = '/new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        // File uri encodes file name when calling this.request during copy
-        const expectedPath = `/rewriteTo/b/${
+        // File uri encodes file name when calling this.bucket.request during copy
+        const expectedPath = `/o/${encodeURIComponent(
+          file.name
+        )}/rewriteTo/b/${
           file.bucket.name
         }/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
@@ -1007,20 +979,26 @@ describe('File', () => {
 
       it('should allow a "gs://..." string', done => {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = '/rewriteTo/b/other-bucket/o/new-file-name.png';
+        const expectedPath = `/o/${encodeURIComponent(
+          file.name
+        )}/rewriteTo/b/other-bucket/o/new-file-name.png`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
 
       it('should allow a Bucket', done => {
-        const expectedPath = `/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
+        const expectedPath = `/o/${encodeURIComponent(
+          file.name
+        )}/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(BUCKET);
       });
 
       it('should allow a File', done => {
         const newFile = new File(BUCKET, 'new-file');
-        const expectedPath = `/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
+        const expectedPath = `/o/${encodeURIComponent(
+          file.name
+        )}/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFile);
       });
@@ -1038,7 +1016,7 @@ describe('File', () => {
       };
 
       beforeEach(() => {
-        file.request = (
+        file.bucket.request = (
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
@@ -1049,7 +1027,7 @@ describe('File', () => {
       it('should continue attempting to copy', done => {
         const newFile = new File(BUCKET, 'new-file');
 
-        file.request = (
+        file.bucket.request = (
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
@@ -1071,7 +1049,7 @@ describe('File', () => {
           userProject: 'grapce-spaceship-123',
         };
 
-        file.request = (
+        file.bucket.request = (
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
@@ -1094,7 +1072,7 @@ describe('File', () => {
           destinationKmsKeyName: 'kms-key-name',
         };
 
-        file.request = (
+        file.bucket.request = (
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
@@ -1116,7 +1094,7 @@ describe('File', () => {
       it('should make the subsequent correct API request', done => {
         const newFile = new File(BUCKET, 'new-file');
 
-        file.request = (reqOpts: DecorateRequestOptions) => {
+        file.bucket.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.qs.rewriteToken, apiResponse.rewriteToken);
           done();
         };
@@ -1128,7 +1106,7 @@ describe('File', () => {
     describe('returned File object', () => {
       beforeEach(() => {
         const resp = {success: true};
-        file.request = (
+        file.bucket.request = (
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
@@ -4737,7 +4715,7 @@ describe('File', () => {
       });
 
       it('should not delete the destination is same as origin', done => {
-        file.request = (config: {}, callback: Function) => {
+        file.bucket.request = (config: {}, callback: Function) => {
           callback(null, {});
         };
         const stub = sinon.stub(file, 'delete');
