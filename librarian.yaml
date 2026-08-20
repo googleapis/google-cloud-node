@@ -53,6 +53,12 @@ default:
     - .readme-partials.yaml
   output: packages
 libraries:
+  - name: backstory
+    version: 0.0.0
+    apis:
+      - path: backstory
+    copyright_year: "2026"
+    skip_generate: true
   - name: google-ads-admanager
     version: 0.9.0
     apis:

@@ -102,6 +102,7 @@
     "handwritten/pubsub": {
       "component": "pubsub"
     },
+    "packages/backstory": {},
     "packages/google-ads-admanager": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
