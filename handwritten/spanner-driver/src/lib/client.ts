@@ -18,7 +18,8 @@ import {DEFAULT_DIALECT, Dialect} from './constants.js';
 import {enrichError} from './errors.js';
 import {Query, QueryCallback} from './query.js';
 import {Codec} from './codec.js';
-import {ITypeOverrides, QueryConfig, QueryResult} from './types.js';
+import {ITypeOverrides, QueryConfig, QueryResult, TypeParser} from './types.js';
+import {TypeOverrides, types as defaultTypes} from './pg/types.js';
 import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
 import {Connection, Pool} from './native.js';
 
@@ -54,7 +55,7 @@ export class Client extends EventEmitter {
   readonly dialect: Dialect = DEFAULT_DIALECT;
 
   /** Type parser override registry configured on this client. */
-  readonly types?: ITypeOverrides;
+  public types: ITypeOverrides;
 
   /** Boolean indicating whether connection has been established. */
   public isConnected = false;
@@ -69,6 +70,44 @@ export class Client extends EventEmitter {
    */
   public txStatus: 'I' | 'T' | 'E' = 'I';
 
+  /**
+   * Returns the current transaction status code:
+   * - `'I'` (Idle): Outside transaction block.
+   * - `'T'` (Transaction): Active transaction block.
+   * - `'E'` (Error): Transaction failed due to query error inside transaction block.
+   *
+   * @returns Current transaction status code.
+   */
+  public getTransactionStatus(): 'I' | 'T' | 'E' {
+    return this.txStatus;
+  }
+
+  /**
+   * Registers a custom type parser on this client instance.
+   *
+   * @param typeId - Column type identifier (numeric OID for PostgreSQL, type string for GoogleSQL).
+   * @param formatOrFn - Format string ('text') or parser function.
+   * @param fn - Parser function if format string was passed as second argument.
+   */
+  public setTypeParser(
+    typeId: number | string,
+    formatOrFn: string | TypeParser,
+    fn?: TypeParser,
+  ): void {
+    this.types.setTypeParser(typeId, formatOrFn, fn);
+  }
+
+  /**
+   * Retrieves the active type parser for a column type ID on this client.
+   *
+   * @param typeId - Column type identifier (numeric OID for PostgreSQL, type string for GoogleSQL).
+   * @param format - Format string (defaults to 'text').
+   * @returns The resolved type parser function.
+   */
+  public getTypeParser(typeId: number | string, format?: string): TypeParser {
+    return this.types.getTypeParser(typeId, format);
+  }
+
   /** Internal task queue managing sequential query execution. */
   private queryQueue: QueryTask<unknown>[] = [];
 
@@ -76,7 +115,7 @@ export class Client extends EventEmitter {
   private isExecuting = false;
 
   /** Boolean flag tracking whether client has been explicitly closed via end(). */
-  private isEnded = false;
+  public isEnded = false;
 
   /** Cached Promise for in-flight connect() calls. */
   private connectPromise?: Promise<void>;
@@ -91,7 +130,7 @@ export class Client extends EventEmitter {
     this.config =
       typeof config === 'string' ? {connectionString: config} : config || {};
     this.dsn = this.config.connectionString || resolveDsn(this.config);
-    this.types = this.config.types;
+    this.types = this.config.types || new TypeOverrides(defaultTypes);
   }
 
   /**
@@ -106,11 +145,17 @@ export class Client extends EventEmitter {
     callback?: (err: Error | null, client?: this) => void,
   ): Promise<this> | void {
     if (this.isConnected) {
+      const alreadyConnectedErr = enrichError(
+        new Error(
+          'Client has already been connected. You cannot reuse a client.',
+        ),
+        this.dialect,
+      );
       if (callback) {
-        process.nextTick(() => callback(null, this));
+        process.nextTick(() => callback(alreadyConnectedErr));
         return;
       }
-      return Promise.resolve(this);
+      return Promise.reject(alreadyConnectedErr);
     }
 
     if (!this.connectPromise) {
@@ -212,8 +257,13 @@ export class Client extends EventEmitter {
 
     const validationError = this._validateQuery(query);
     if (validationError) {
-      dispatchQueryError(validationError, query, actualCallback);
-      query.reject(validationError);
+      process.nextTick(() => {
+        dispatchQueryError(validationError, query, actualCallback);
+        query.reject(validationError);
+        if (this.queryQueue.length === 0 && !this.isExecuting) {
+          this.emit('drain');
+        }
+      });
       return query;
     }
 
@@ -526,5 +576,7 @@ export class Client extends EventEmitter {
         task.cancel(closeError);
       }
     }
+
+    this.emit('end');
   }
 }

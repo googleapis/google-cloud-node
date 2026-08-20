@@ -146,7 +146,7 @@ export class Pool extends EventEmitter {
             void client.release(releaseErr);
           }),
         )
-        .catch(err => callback(err));
+        .catch(err => callback(err, undefined, () => {}));
       return;
     }
     return this._doConnect();
@@ -195,6 +195,11 @@ export class Pool extends EventEmitter {
         if (this.listenerCount('error') > 0) {
           this.emit('error', err, client);
         }
+      });
+
+      // Remove client if it is explicitly ended
+      client.on('end', () => {
+        this.removeClient(client);
       });
 
       try {
@@ -577,6 +582,12 @@ export class Pool extends EventEmitter {
 
     // 3. Graceful shutdown: If active queries are still running on checked-out clients,
     // pause and wait for all active clients to be released and removed (allClients.size === 0).
+    for (const client of [...this.allClients]) {
+      if (client.isEnded || !client.isConnected) {
+        this.removeClient(client);
+      }
+    }
+
     if (this.allClients.size > 0) {
       await new Promise<void>(resolve => {
         this.endResolvers.push(resolve);
