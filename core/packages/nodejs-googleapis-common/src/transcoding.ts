@@ -195,23 +195,6 @@ function applyPattern(
   return encodeWithoutSlashes(fieldValue);
 }
 
-/**
- * Modifies the pathParams array in-place to normalize / un-alias parameters
- * that have trailing underscores (e.g. 'resource_' -> 'resource') due to
- * conflicts with JavaScript reserved words.
- *
- * @param pathParams List of path parameter names to normalize in-place
- */
-export function normalizePathParams(pathParams?: string[]): void {
-  if (!pathParams || !Array.isArray(pathParams)) {
-    return;
-  }
-  for (let i = 0; i < pathParams.length; i++) {
-    if (pathParams[i].slice(-1) === '_') {
-      pathParams[i] = pathParams[i].slice(0, -1);
-    }
-  }
-}
 
 /**
  * Validates path parameters against traversal attacks ('.' and '..') and encodes
