@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v6.0.0...dialogflow-cx-v6.0.1) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in REST transcoder ([#9151](https://github.com/googleapis/google-cloud-node/issues/9151)) ([0152a8e](https://github.com/googleapis/google-cloud-node/commit/0152a8ee36592d90f435336fda95993c9cbd227a))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.2...dialogflow-cx-v6.0.0) (2026-08-04)
 
 
