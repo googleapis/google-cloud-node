@@ -600,6 +600,11 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/binary-authorization'
+  - name: google-cloud-blockchainnodeengine
+    version: 0.0.0
+    apis:
+      - path: google/cloud/blockchainnodeengine/v1
+    copyright_year: "2026"
   - name: google-cloud-capacityplanner
     version: 0.3.0
     apis:

@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.blockchainnodeengine.v1",
+  "libraryPackage": "@google-cloud/blockchainnodeengine",
+  "services": {
+    "BlockchainNodeEngine": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BlockchainNodeEngineClient",
+          "rpcs": {
+            "GetBlockchainNode": {
+              "methods": [
+                "getBlockchainNode"
+              ]
+            },
+            "CreateBlockchainNode": {
+              "methods": [
+                "createBlockchainNode"
+              ]
+            },
+            "UpdateBlockchainNode": {
+              "methods": [
+                "updateBlockchainNode"
+              ]
+            },
+            "DeleteBlockchainNode": {
+              "methods": [
+                "deleteBlockchainNode"
+              ]
+            },
+            "ListBlockchainNodes": {
+              "methods": [
+                "listBlockchainNodes",
+                "listBlockchainNodesStream",
+                "listBlockchainNodesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BlockchainNodeEngineClient",
+          "rpcs": {
+            "GetBlockchainNode": {
+              "methods": [
+                "getBlockchainNode"
+              ]
+            },
+            "CreateBlockchainNode": {
+              "methods": [
+                "createBlockchainNode"
+              ]
+            },
+            "UpdateBlockchainNode": {
+              "methods": [
+                "updateBlockchainNode"
+              ]
+            },
+            "DeleteBlockchainNode": {
+              "methods": [
+                "deleteBlockchainNode"
+              ]
+            },
+            "ListBlockchainNodes": {
+              "methods": [
+                "listBlockchainNodes",
+                "listBlockchainNodesStream",
+                "listBlockchainNodesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

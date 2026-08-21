@@ -87,6 +87,7 @@
   "packages/google-cloud-billing": "6.0.0",
   "packages/google-cloud-billing-budgets": "7.0.0",
   "packages/google-cloud-binaryauthorization": "5.0.0",
+  "packages/google-cloud-blockchainnodeengine": "0.0.0",
   "packages/google-cloud-capacityplanner": "0.3.0",
   "packages/google-cloud-certificatemanager": "3.0.0",
   "packages/google-cloud-ces": "0.8.0",

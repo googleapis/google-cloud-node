@@ -1,0 +1,13 @@
+{
+    "api_id": "blockchainnodeengine.googleapis.com",
+    "api_shortname": "blockchainnodeengine",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/blockchainnodeengine/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/blockchainnodeengine",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "blockchainnodeengine",
+    "name_pretty": "Blockchain Node Engine",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
+}
