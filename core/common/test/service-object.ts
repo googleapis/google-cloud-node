@@ -1096,6 +1096,26 @@ describe('ServiceObject', () => {
       });
     });
 
+    it('should throw error when id or uri contains path traversal segments', () => {
+      serviceObject.id = '..';
+      assert.throws(() => {
+        asInternal(serviceObject).request_(reqOpts, () => {});
+      }, /Invalid value \.\. for path segment/);
+    });
+
+    it('should percent-encode query parameter injection payloads in path components', done => {
+      const maliciousId = 'table_name?param=value#tag';
+      serviceObject.id = maliciousId;
+      serviceObject.parent.request = (reqOpts_, callback) => {
+        assert.strictEqual(
+          reqOpts_.uri,
+          `${serviceObject.baseUrl}/table_name%3Fparam%3Dvalue%23tag/${reqOpts.uri}`,
+        );
+        callback(null, null, {} as r.Response);
+      };
+      asInternal(serviceObject).request_(reqOpts, () => done());
+    });
+
     it('should extend interceptors from child ServiceObjects', async () => {
       const parent = new ServiceObject(CONFIG) as FakeServiceObject;
       parent.interceptors.push({
