@@ -159,6 +159,12 @@ export function validateAndEncodeParams(
       continue;
     }
     if (wildcard === '**') {
+      // This block applies the core logic of google-gax's applyPattern method,
+      // but is greatly simplified because the wildcard type ('**') is already known.
+      // As a result, we do not need to convert arbitrary patterns into regular
+      // expressions, match against field values, extract capture groups, or
+      // scan and dispatch validation for variable wildcard types. We can directly
+      // validate against traversal segments and encode with slashes preserved.
       const encodeParam = (val: string) => {
         validateUriPath(param, val);
         return encodeWithoutSlashes(val);
