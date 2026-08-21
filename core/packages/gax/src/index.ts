@@ -29,7 +29,7 @@ export * as loggingUtils from 'google-logging-utils';
 
 export {grpc};
 export {CancellablePromise, OngoingCall} from './call';
-export {createApiCall} from './createApiCall';
+export {createApiCall, checkTelemetryEnabled} from './createApiCall';
 export {
   BundleDescriptor,
   LongrunningDescriptor,

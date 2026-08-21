@@ -198,4 +198,75 @@ describe('gax construct settings', () => {
     assert.strictEqual(backoff.maxRetryDelayMillis, 1000);
     assert.deepStrictEqual(settings.retry.retryCodes, [RETRY_DICT.code_c]);
   });
+
+  describe('CallSettings telemetry fields', () => {
+    const mockTelemetryInfo = {
+      gcpClientService: 'test.googleapis.com',
+      gcpVersion: '1.0.0',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'google-cloud-test',
+    };
+
+    it('defaults enableTelemetryTracing and internalTelemetryInfo to undefined', () => {
+      const settings = new gax.CallSettings();
+      assert.strictEqual(settings.enableTelemetryTracing, undefined);
+      assert.strictEqual(settings.internalTelemetryInfo, undefined);
+    });
+
+    it('initializes enableTelemetryTracing and internalTelemetryInfo', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+        internalTelemetryInfo: mockTelemetryInfo,
+      });
+      assert.strictEqual(settings.enableTelemetryTracing, true);
+      assert.deepStrictEqual(settings.internalTelemetryInfo, mockTelemetryInfo);
+    });
+
+    it('merges enableTelemetryTracing and internalTelemetryInfo', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+        internalTelemetryInfo: mockTelemetryInfo,
+      });
+      const merged = settings.merge({
+        enableTelemetryTracing: false,
+      });
+      assert.strictEqual(merged.enableTelemetryTracing, false);
+      assert.deepStrictEqual(merged.internalTelemetryInfo, mockTelemetryInfo);
+    });
+
+    it('merges with new internalTelemetryInfo', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+        internalTelemetryInfo: mockTelemetryInfo,
+      });
+      const newTelemetryInfo = {
+        gcpClientService: 'updated.googleapis.com',
+      };
+      const merged = settings.merge({
+        internalTelemetryInfo: newTelemetryInfo,
+      });
+      assert.strictEqual(merged.enableTelemetryTracing, true);
+      assert.deepStrictEqual(merged.internalTelemetryInfo, newTelemetryInfo);
+    });
+
+    it('copies telemetry fields when merging with null/empty options', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+        internalTelemetryInfo: mockTelemetryInfo,
+      });
+      const mergedNull = settings.merge(null);
+      assert.strictEqual(mergedNull.enableTelemetryTracing, true);
+      assert.deepStrictEqual(
+        mergedNull.internalTelemetryInfo,
+        mockTelemetryInfo,
+      );
+
+      const mergedEmpty = settings.merge({});
+      assert.strictEqual(mergedEmpty.enableTelemetryTracing, true);
+      assert.deepStrictEqual(
+        mergedEmpty.internalTelemetryInfo,
+        mockTelemetryInfo,
+      );
+    });
+  });
 });
