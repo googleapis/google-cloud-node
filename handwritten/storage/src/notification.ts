@@ -212,6 +212,9 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        * });
        *
        * ```
+       * @example <caption>include:samples/deleteNotification.js</caption>
+       * region_tag:storage_delete_bucket_notification
+       * Another example:
        */
       delete: {
         reqOpts: {
@@ -288,6 +291,9 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        * });
        *
        * ```
+       * @example <caption>include:samples/getMetadataNotifications.js</caption>
+       * region_tag:storage_print_pubsub_bucket_notification
+       * Another example:
        */
       getMetadata: {
         reqOpts: {

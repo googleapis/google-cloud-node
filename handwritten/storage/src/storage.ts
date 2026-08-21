@@ -992,6 +992,9 @@ export class Storage extends Service {
    * });
    *
    * ```
+   * @example <caption>include:samples/buckets.js</caption>
+   * region_tag:storage_create_bucket
+   * Another example:
    */
   createBucket(
     name: string,
@@ -1310,6 +1313,9 @@ export class Storage extends Service {
    * });
    *
    * ```
+   * @example <caption>include:samples/buckets.js</caption>
+   * region_tag:storage_list_buckets
+   * Another example:
    */
   getBuckets(
     optionsOrCallback?: GetBucketsRequest | GetBucketsCallback,

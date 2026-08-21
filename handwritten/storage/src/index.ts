@@ -51,6 +51,10 @@
  * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  * ```
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:storage_quickstart
+ * Full quickstart example:
  */
 export {ApiError} from './nodejs-common/index.js';
 export {
