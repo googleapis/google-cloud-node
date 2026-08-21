@@ -42,13 +42,6 @@ import {FileExceptionMessages} from '../src/file.js';
 
 nock.disableNetConnect();
 
-class AbortController {
-  aborted = false;
-  signal = this;
-  abort() {
-    this.aborted = true;
-  }
-}
 
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 /** 256 KiB */
@@ -102,7 +95,6 @@ describe('resumable-upload', () => {
   const keyFile = path.join(getDirName(), '../../../test/fixtures/keys.json');
 
   before(() => {
-    mockery.registerMock('abort-controller', AbortController);
     mockery.enable({useCleanCache: true, warnOnUnregistered: false});
     upload = require('../src/resumable-upload').upload;
   });
@@ -2142,7 +2134,7 @@ describe('resumable-upload', () => {
     it('should pass a signal from the abort controller', done => {
       up.authClient = {
         request: (reqOpts: GaxiosOptions) => {
-          assert(reqOpts.signal instanceof AbortController);
+          assert(reqOpts.signal instanceof AbortSignal);
           done();
         },
       };
@@ -2152,11 +2144,11 @@ describe('resumable-upload', () => {
     it('should abort on an error', done => {
       up.on('error', () => {});
 
-      let abortController: AbortController;
+      let signal: AbortSignal;
       up.authClient = {
         request: (reqOpts: GaxiosOptions) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          abortController = reqOpts.signal as any;
+          signal = reqOpts.signal as any;
         },
       };
 
@@ -2164,7 +2156,7 @@ describe('resumable-upload', () => {
       up.emit('error', new Error('Error.'));
 
       setImmediate(() => {
-        assert.strictEqual(abortController.aborted, true);
+        assert.strictEqual(signal.aborted, true);
         done();
       });
     });
