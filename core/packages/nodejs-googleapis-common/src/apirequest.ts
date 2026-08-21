@@ -165,13 +165,10 @@ async function createAPIRequestAsync<T>(
     throw new Error('Missing required parameters: ' + missingParams.join(', '));
   }
 
-  // Validate and encode path params to prevent traversal and injection attacks
+  // Validate and encode path params to prevent traversal and injection attacks.
+  // Uses options.url (converting URL objects to string if possible) or falls back to mediaUrl.
   validateAndEncodeParams(
-    options.url !== undefined && options.url !== null
-      ? typeof options.url === 'object'
-        ? options.url.toString()
-        : options.url
-      : parameters.mediaUrl ?? undefined,
+    options.url?.toString() ?? parameters.mediaUrl ?? undefined,
     params,
   );
 
