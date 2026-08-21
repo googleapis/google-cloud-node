@@ -44,7 +44,9 @@ async function run() {
     ]);
 
     if (!eslintPassed || !typeSafetyPassed) {
-      throw new Error('Linter checks failed. Please fix. To rerun the linter, run: npm run lint');
+      throw new Error(
+        'Linter checks failed. Please fix. To rerun the linter, run: npm run lint',
+      );
     }
   } catch (err) {
     console.error('\nLinter failed:', err.message);
@@ -73,7 +75,7 @@ function getChangedFilesStrict() {
   if (!gitDiffArg) {
     throw new Error(
       'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
-      'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.'
+        'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.',
     );
   }
 
@@ -83,7 +85,9 @@ function getChangedFilesStrict() {
     gitDiffArg = `${gitDiffArg}...HEAD`;
   }
 
-  console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
+  console.log(
+    `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`,
+  );
 
   const args = gitDiffArg.trim().split(/\s+/);
 
@@ -104,8 +108,8 @@ function getChangedFilesStrict() {
     if (err.status !== 1) {
       throw new Error(
         `Strict mode error: git diff ${gitDiffArg} failed with exit code ${err.status}.\n` +
-        `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
-        `Details: ${String(err.stderr || err.message || '').trim()}`
+          `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
+          `Details: ${String(err.stderr || err.message || '').trim()}`,
       );
     }
   }
@@ -200,7 +204,9 @@ async function checkEslint(filesToCheck) {
         },
       });
 
-      const relativeFiles = files.map(f => path.relative(absPkgDir, path.resolve(f)));
+      const relativeFiles = files.map(f =>
+        path.relative(absPkgDir, path.resolve(f)),
+      );
       const results = await eslint.lintFiles(relativeFiles);
       const formatter = await eslint.loadFormatter('stylish');
       const resultText = formatter.format(results);
@@ -217,7 +223,10 @@ async function checkEslint(filesToCheck) {
         }
       }
     } catch (err) {
-      console.error(`\n[ERROR] Failed running ESLint in ${pkgDir}:`, err.message);
+      console.error(
+        `\n[ERROR] Failed running ESLint in ${pkgDir}:`,
+        err.message,
+      );
       hasBlockingErrors = true;
     }
   }
@@ -283,6 +292,19 @@ async function checkTypeSafety(filesToCheck) {
 
   const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
+      const packageJsonPath = path.join(pkg, 'package.json');
+      const nodeModulesPath = path.join(pkg, 'node_modules');
+      if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
+        console.log(`  Installing dependencies in ${pkg}...`);
+        const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+        await execFileAsync(
+          npmCmd,
+          ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
+          {
+            cwd: pkg,
+          },
+        );
+      }
       console.log(`  Type checking ${pkg}...`);
       await execFileAsync('node', [
         'node_modules/typescript/bin/tsc',
@@ -290,7 +312,7 @@ async function checkTypeSafety(filesToCheck) {
         '--project',
         path.join(pkg, 'tsconfig.json'),
       ]);
-      return { pkg, passed: true };
+      return {pkg, passed: true};
     } catch (err) {
       console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
       if (err.stdout) {
@@ -299,7 +321,7 @@ async function checkTypeSafety(filesToCheck) {
       if (err.stderr) {
         console.error(err.stderr);
       }
-      return { pkg, passed: false };
+      return {pkg, passed: false};
     }
   });
 
