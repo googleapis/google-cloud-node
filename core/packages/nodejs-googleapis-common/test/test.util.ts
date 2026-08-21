@@ -17,6 +17,7 @@ import {describe, it} from 'mocha';
 import {headersToClassicHeaders, marshallGaxiosResponse} from '../src/util';
 import {GaxiosResponse} from 'gaxios';
 
+// Add an experimental comment
 describe('headersToClassicHeaders', () => {
   it('should convert Headers to a plain object', () => {
     const plain = {a: 'b'};
