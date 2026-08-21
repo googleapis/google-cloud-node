@@ -53,7 +53,9 @@ export class OtelHarness {
       return spans.filter(
         span =>
           span.instrumentationScope?.name?.startsWith(tracerName) ||
-          (span as unknown as {instrumentationLibrary?: {name?: string}}).instrumentationLibrary?.name?.startsWith(tracerName)
+          (
+            span as unknown as {instrumentationLibrary?: {name?: string}}
+          ).instrumentationLibrary?.name?.startsWith(tracerName),
       );
     }
     return spans;
@@ -64,4 +66,3 @@ export class OtelHarness {
     return spans[spans.length - 1];
   }
 }
-

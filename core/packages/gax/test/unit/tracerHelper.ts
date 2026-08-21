@@ -73,16 +73,16 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.ended, true);
       assert.strictEqual(
         span.attributes['gcp.client.service'],
-        'storage.googleapis.com'
+        'storage.googleapis.com',
       );
       assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(
         span.attributes['gcp.repo'],
-        'googleapis/google-cloud-node'
+        'googleapis/google-cloud-node',
       );
       assert.strictEqual(
         span.attributes['gcp.artifact'],
-        '@google-cloud/storage'
+        '@google-cloud/storage',
       );
       assert.strictEqual(span.attributes['gcp.method.name'], 'GetObject');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
@@ -93,14 +93,17 @@ describe('TracerHelper', () => {
       const error = new Error('RPC Failed');
       error.name = 'CustomRpcError';
 
-      await assert.rejects(async () => {
-        await traceAttempt(dynamicArgs, staticArgs, async () => {
-          throw error;
-        });
-      }, (err: Error) => {
-        assert.strictEqual(err.message, 'RPC Failed');
-        return true;
-      });
+      await assert.rejects(
+        async () => {
+          await traceAttempt(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        },
+        (err: Error) => {
+          assert.strictEqual(err.message, 'RPC Failed');
+          return true;
+        },
+      );
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
@@ -115,15 +118,19 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.events[0].name, 'exception');
       assert.strictEqual(
         span.events[0].attributes?.['exception.message'],
-        'RPC Failed'
+        'RPC Failed',
       );
     });
 
     it('handles missing optional static arguments gracefully', async () => {
       const emptyStaticArgs: StaticTraceContext = {};
-      const result = await traceAttempt(dynamicArgs, emptyStaticArgs, async () => {
-        return 42;
-      });
+      const result = await traceAttempt(
+        dynamicArgs,
+        emptyStaticArgs,
+        async () => {
+          return 42;
+        },
+      );
 
       assert.strictEqual(result, 42);
 

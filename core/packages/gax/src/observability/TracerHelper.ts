@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Span, trace, Tracer } from '@opentelemetry/api';
+import {Span, trace, Tracer} from '@opentelemetry/api';
 
 export interface StaticTraceContext {
   gcpClientService?: string;
@@ -33,7 +33,11 @@ export function getGaxTracer(): Tracer {
   return trace.getTracer('google-gax');
 }
 
-export async function traceAttempt(dynamicArgs: DynamicTraceContext, staticArgs: StaticTraceContext, fn: () => Promise<any>): Promise<any> {
+export async function traceAttempt(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  fn: () => Promise<any>,
+): Promise<any> {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, async (span: Span) => {
     span.setAttributes({
@@ -62,5 +66,4 @@ export async function traceAttempt(dynamicArgs: DynamicTraceContext, staticArgs:
       span.end();
     }
   });
-
 }
