@@ -106,23 +106,16 @@ function extractTemplateParams(urlTemplate: string): Array<{
   wildcard: '*' | '**';
 }> {
   const paramMap = new Map<string, '*' | '**'>();
-  const matches = urlTemplate.matchAll(/\{([^}]+)\}/g);
+
+  // Natively skips {}, {#}, {?}, and {,} by demanding valid variable characters
+  const matches = urlTemplate.matchAll(/\{(\+?)([a-zA-Z0-9_$-]+)\}/g);
 
   for (const match of matches) {
-    const expression = match[1];
-    const wildcard: '*' | '**' = expression.startsWith('+') ? '**' : '*';
-    const firstChar = expression.charAt(0);
-    const rawExpr = ['+', '#', '.', '/', ';', '?', '&'].includes(firstChar)
-      ? expression.slice(1)
-      : expression;
-    const vars = rawExpr.split(',');
-    for (const v of vars) {
-      const paramName = v.replace(/^([^:*]+).*/, '$1').trim();
-      if (paramName) {
-        if (!paramMap.has(paramName) || wildcard === '**') {
-          paramMap.set(paramName, wildcard);
-        }
-      }
+    const wildcard = match[1] === '+' ? '**' : '*';
+    const paramName = match[2];
+
+    if (wildcard === '**' || !paramMap.has(paramName)) {
+      paramMap.set(paramName, wildcard);
     }
   }
 
