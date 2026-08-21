@@ -17,6 +17,10 @@ import {describe, it, before} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import {GoogleAuth} from 'google-auth-library';
 
+// TODO: Remove proxyquire and the local @google-cloud/common injection below
+// after the new version of @google-cloud/common is released to npm and bumped in package.json.
+// Once released, standard `import {BigQuery} from '../src'` can be used directly.
+
 // Load the local build of @google-cloud/common from this branch
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const common = require('../../../../core/common/build/src');
