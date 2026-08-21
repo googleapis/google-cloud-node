@@ -132,70 +132,6 @@ function extractTemplateParams(urlTemplate: string): Array<{
   }));
 }
 
-function escapeRegExp(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-/**
- * Matches the applyPattern method in google-gax verbatim.
- * Validates a field value against a wildcard pattern ('*' single-segment or '**' multi-segment)
- * to prevent path traversal attacks ('.' and '..') and percent-encodes the string.
- *
- * @param pattern The wildcard pattern ('*' or '**')
- * @param fieldValue The string value to validate and encode
- * @param propertyName Name of the parameter being validated (used for error reporting)
- * @returns The encoded string if the value matches the pattern, or undefined if it does not
- */
-function applyPattern(
-  pattern: string,
-  fieldValue: string,
-  propertyName = 'resource', // Used to provide precise error messages when path validation fails
-): string | undefined {
-  if (!pattern || pattern === '*') {
-    validateUriPathSegment(propertyName, fieldValue);
-    return encodeWithSlashes(fieldValue);
-  }
-
-  if (!pattern.includes('*') && pattern !== fieldValue) {
-    return undefined;
-  }
-
-  // since we're converting the pattern to a regex, make necessary precautions:
-  const regex = new RegExp(
-    '^' +
-      escapeRegExp(pattern)
-        .replace(/\\\*\\\*/g, '(.+)')
-        .replace(/\\\*/g, '([^/]+)') +
-      '$',
-  );
-
-  const match = fieldValue.match(regex);
-  if (!match) {
-    return undefined;
-  }
-
-  // Identify the segments and wildcards in pattern to perform validation in order of appearance
-  const wildcards: string[] = pattern.match(/\*\*|\*/g) || [];
-
-  // Check the captured group values.
-  // Note: The loop below matches the validation loop in google-gax verbatim.
-  // TODO: Consider refactoring this in the future.
-  for (let i = 1; i < match.length; i++) {
-    const groupVal = match[i];
-    if (groupVal !== undefined && groupVal !== null) {
-      const wildcardType = wildcards[i - 1];
-      if (wildcardType === '*') {
-        validateUriPathSegment(propertyName, groupVal);
-      } else if (wildcardType === '**') {
-        validateUriPath(propertyName, groupVal);
-      }
-    }
-  }
-
-  return encodeWithoutSlashes(fieldValue);
-}
-
-
 /**
  * Validates path parameters against traversal attacks ('.' and '..') and encodes
  * multi-segment parameters in params so that reserved characters (query params, fragments, etc.)
@@ -223,11 +159,13 @@ export function validateAndEncodeParams(
       continue;
     }
     if (wildcard === '**') {
+      const encodeParam = (val: string) => {
+        validateUriPath(param, val);
+        return encodeWithoutSlashes(val);
+      };
       params[param] = Array.isArray(parameterValue)
-        ? parameterValue.map(item =>
-            applyPattern(wildcard, String(item), param),
-          )
-        : applyPattern(wildcard, String(parameterValue), param);
+        ? parameterValue.map(item => encodeParam(String(item)))
+        : encodeParam(String(parameterValue));
     } else {
       // For single-segment parameters (*), only validation against path traversal (. and ..)
       // is needed here. Character percent-encoding is handled automatically by url-template later
