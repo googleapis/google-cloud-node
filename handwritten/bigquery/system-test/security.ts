@@ -13,28 +13,38 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import * as http from 'http';
-import * as net from 'net';
-import {describe, it, before, after} from 'mocha';
+import {describe, it, before} from 'mocha';
 import * as proxyquire from 'proxyquire';
-
-import * as common from '../src';
 import {GoogleAuth} from 'google-auth-library';
+
+// Load the local build of @google-cloud/common from this branch
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const common = require('../../../../core/common/build/src');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let BigQuery: any;
 
-describe('BigQuery System Integration (URI encoding and path traversal protection)', () => {
+describe('BigQuery System Security (URI encoding and path traversal protection)', () => {
   before(() => {
-    // Inject the local @google-cloud/common build into @google-cloud/bigquery
-    BigQuery = proxyquire('../../../../handwritten/bigquery/build/src', {
+    // Inject the local common build prototypes and utilities
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const oldCommon = require('@google-cloud/common');
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const oldUtil = require('@google-cloud/common/build/src/util');
+    Object.assign(oldCommon.ServiceObject.prototype, common.ServiceObject.prototype);
+    Object.assign(oldCommon.Service.prototype, common.Service.prototype);
+    Object.assign(oldCommon.util, common.util);
+    Object.assign(oldUtil, common.util);
+
+    BigQuery = proxyquire('../src', {
       '@google-cloud/common': common,
     }).BigQuery;
   });
 
   const fakeAuthClient = Object.assign(new GoogleAuth(), {
     getCredentials: async () => ({}),
-    authorizeRequest: async (reqOpts: common.DecorateRequestOptions) => reqOpts,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    authorizeRequest: async (reqOpts: any) => reqOpts,
     getProjectId: async () => 'test-project',
   });
 
@@ -78,7 +88,8 @@ describe('BigQuery System Integration (URI encoding and path traversal protectio
 
     let interceptedUri: string | undefined;
     bigquery.interceptors.push({
-      request(reqOpts: common.DecorateRequestOptions) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      request(reqOpts: any) {
         interceptedUri = reqOpts.uri;
         return reqOpts;
       },
@@ -86,7 +97,8 @@ describe('BigQuery System Integration (URI encoding and path traversal protectio
 
     // Mock makeAuthenticatedRequest to return mock metadata without network calls
     bigquery.makeAuthenticatedRequest = (
-      reqOpts: common.DecorateRequestOptions,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      reqOpts: any,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback?: any,
     ) => {
