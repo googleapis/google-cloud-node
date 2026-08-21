@@ -90,9 +90,13 @@ export function resolveDsn(config?: string | ClientConfig): string {
     return cfg.connectionString;
   }
 
-  const project = cfg?.project || process.env.GOOGLE_CLOUD_PROJECT;
-  const instance = cfg?.instance;
-  const database = cfg?.database;
+  const project =
+    cfg?.project ||
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    process.env.SPANNER_PROJECT;
+  const instance = cfg?.instance || process.env.SPANNER_INSTANCE;
+  const database = cfg?.database || process.env.SPANNER_DATABASE;
 
   if (project && instance && database) {
     const resourcePath = `projects/${project}/instances/${instance}/databases/${database}`;

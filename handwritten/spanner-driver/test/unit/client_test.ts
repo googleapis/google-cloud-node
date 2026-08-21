@@ -255,9 +255,11 @@ describe('Client Class', () => {
       });
       await client.connect();
       assert.strictEqual(client.isConnected, true);
-      // Redundant connect() call should resolve successfully as a no-op matching pg
-      const reconnected = await client.connect();
-      assert.strictEqual(reconnected, client);
+      // Calling connect() on an already connected client should reject matching node-postgres
+      await assert.rejects(
+        client.connect(),
+        /Client has already been connected/,
+      );
       assert.strictEqual(client.isConnected, true);
       await client.end();
       assert.strictEqual(client.isConnected, false);
@@ -535,10 +537,12 @@ describe('Client Class', () => {
       });
       await client.connect();
       assert.strictEqual(client.txStatus, 'I');
+      assert.strictEqual(client.getTransactionStatus(), 'I');
 
       // 1. BEGIN transaction -> 'T'
       await client.query('BEGIN');
       assert.strictEqual(client.txStatus, 'T');
+      assert.strictEqual(client.getTransactionStatus(), 'T');
 
       // 2. Query failure inside transaction -> 'E'
       try {
@@ -546,13 +550,60 @@ describe('Client Class', () => {
         assert.fail('Should have failed');
       } catch {
         assert.strictEqual(client.txStatus, 'E');
+        assert.strictEqual(client.getTransactionStatus(), 'E');
       }
 
       // 3. ROLLBACK aborted transaction -> 'I'
       await client.query('ROLLBACK');
       assert.strictEqual(client.txStatus, 'I');
+      assert.strictEqual(client.getTransactionStatus(), 'I');
 
       await client.end();
+    });
+
+    it('should support setTypeParser and getTypeParser on Client instance', () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      const customParser = (val: string) => `custom_${val}`;
+      client.setTypeParser(16, customParser);
+      assert.strictEqual(client.getTypeParser(16), customParser);
+    });
+
+    it('should emit end event when client.end() is called', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      await client.connect();
+      let endEmitted = false;
+      client.on('end', () => {
+        endEmitted = true;
+      });
+      await client.end();
+      assert.strictEqual(endEmitted, true);
+      assert.strictEqual(client.isEnded, true);
+    });
+
+    it('should treat client.end() on unconnected client as a no-op that emits end without permanently closing', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      let endEmitted = false;
+      client.on('end', () => {
+        endEmitted = true;
+      });
+      await client.end();
+      assert.strictEqual(endEmitted, true);
+      assert.strictEqual(client.isEnded, false);
+      await client.connect();
+      await client.end();
+      assert.strictEqual(client.isEnded, true);
     });
   });
 });

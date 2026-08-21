@@ -18,8 +18,8 @@ import {Codec} from '../../src/lib/codec.js';
 import {BuiltinOids} from '../../src/lib/pg/types.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import pkg from '@google-cloud/spanner/build/protos/protos.js';
-import type {google as GoogleProto} from '@google-cloud/spanner/build/protos/protos.js';
+import pkg from '@google-cloud/spanner-api/build/protos/protos.js';
+import type {google as GoogleProto} from '@google-cloud/spanner-api/build/protos/protos.js';
 
 const {google} = pkg as {google: typeof GoogleProto};
 
