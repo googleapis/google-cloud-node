@@ -47,7 +47,7 @@ function main(parent, range, windowSize) {
   // const range = {}
   /**
    *  Required. The size of the time window to group data points into before
-   *  applying the aggregation functions.
+   *  applying the aggregation functions. Must be at least 1 second.
    */
   // const windowSize = {}
   /**
@@ -68,10 +68,14 @@ function main(parent, range, windowSize) {
    *  If empty, data points from all available data sources will be rolled up.
    *  Format: `users/me/dataSourceFamilies/{data_source_family}`
    *  The supported values are:
-   *  - `users/me/dataSourceFamilies/all-sources` - default value
-   *  - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *  - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *    sources
+   *  - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *  from all available data sources.
+   *  - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *  Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *  Watch). Excludes manually logged data.
+   *  - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *  Google data, such as data from tracker devices, manually logged data, and
+   *  Health Connect.
    */
   // const dataSourceFamily = 'abc123'
 

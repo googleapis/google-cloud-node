@@ -38,6 +38,11 @@ function main(readStream) {
    *  from offset zero.
    */
   // const offset = 1234
+  /**
+   *  Optional. Options specific to the Apache Arrow output format.
+   *  This feature is not yet available.
+   */
+  // const arrowSerializationOptions = {}
 
   // Imports the Storage library
   const {BigQueryReadClient} = require('@google-cloud/bigquery-storage-api').v1;
