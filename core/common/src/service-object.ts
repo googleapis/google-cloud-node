@@ -29,7 +29,7 @@ import {
   DecorateRequestOptions,
   ResponseBody,
   encodeAbsoluteURI,
-  encodeURIPath,
+  joinURIComponents,
   util,
 } from './util';
 
@@ -572,14 +572,9 @@ class ServiceObject<T = any> extends EventEmitter {
     } else {
       // Relative path components contain only path segments (no protocol or host),
       // so we encode each segment directly and join them with '/'.
-      reqOpts.uri = uriComponents
-        .filter(x => x!.trim()) // Limit to non-empty strings.
-        .map(uriComponent => {
-          const trimSlashesRegex = /^\/*|\/*$/g;
-          const trimmed = uriComponent!.replace(trimSlashesRegex, '');
-          return encodeURIPath(trimmed); // Encode and prevent path traversal.
-        })
-        .join('/');
+      reqOpts.uri = joinURIComponents(
+        uriComponents.filter(x => x!.trim()) as string[],
+      );
     }
 
     const childInterceptors = (arrify as unknown as (arg1: any) => [])(

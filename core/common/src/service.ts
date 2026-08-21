@@ -28,7 +28,7 @@ import {
   MakeAuthenticatedRequest,
   PackageJson,
   encodeAbsoluteURI,
-  encodeURIPath,
+  joinURIComponents,
   util,
 } from './util';
 
@@ -221,13 +221,7 @@ export class Service {
     } else {
       // Relative path components contain only path segments (no protocol or host),
       // so we encode each segment directly and join them with '/'.
-      reqOpts.uri = uriComponents
-        .map(uriComponent => {
-          const trimSlashesRegex = /^\/*|\/*$/g;
-          const trimmed = uriComponent.replace(trimSlashesRegex, '');
-          return encodeURIPath(trimmed); // Encode and prevent path traversal.
-        })
-        .join('/')
+      reqOpts.uri = joinURIComponents(uriComponents)
         // Some URIs have colon separators.
         // Bad: https://.../projects/:list
         // Good: https://.../projects:list

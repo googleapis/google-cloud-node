@@ -50,6 +50,7 @@ import {
   encodeWithoutSlashes,
   encodeURIPath,
   encodeAbsoluteURI,
+  joinURIComponents,
 } from '../src/util';
 import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
 
@@ -1984,6 +1985,25 @@ describe('common/util', () => {
         encodeAbsoluteURI('https://example.com/foo/bar-123_~.baz'),
         'https://example.com/foo/bar-123_~.baz',
       );
+    });
+  });
+
+  describe('joinURIComponents', () => {
+    it('should trim slashes and join components', () => {
+      assert.strictEqual(
+        joinURIComponents(['/base/', '/id/', '/path/']),
+        'base/id/path',
+      );
+    });
+
+    it('should encode special characters and prevent path traversal in components', () => {
+      assert.strictEqual(
+        joinURIComponents(['datasets', 'my dataset', 'tables']),
+        'datasets/my%20dataset/tables',
+      );
+      assert.throws(() => {
+        joinURIComponents(['datasets', '..', 'tables']);
+      });
     });
   });
 

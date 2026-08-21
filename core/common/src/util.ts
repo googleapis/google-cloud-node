@@ -1095,5 +1095,22 @@ export function encodeAbsoluteURI(uri: string): string {
   return res;
 }
 
+/**
+ * Trims slashes, encodes path segments to prevent path traversal, and joins
+ * URI components into a single relative path.
+ *
+ * @param {string[]} components - URI components to encode and join.
+ * @return {string} The formatted and joined URI path.
+ */
+export function joinURIComponents(components: string[]): string {
+  return components
+    .map(uriComponent => {
+      const trimSlashesRegex = /^\/*|\/*$/g;
+      const trimmed = uriComponent.replace(trimSlashesRegex, '');
+      return encodeURIPath(trimmed); // Encode and prevent path traversal.
+    })
+    .join('/');
+}
+
 const util = new Util();
 export {util};
