@@ -46,6 +46,8 @@ import {
   ParsedHttpRespMessage,
   ParsedHttpResponseBody,
   Util,
+  validateUriPathSegment,
+  validateUriPath,
   encodeWithSlashes,
   encodeWithoutSlashes,
   encodeURIPath,
@@ -1908,36 +1910,60 @@ describe('common/util', () => {
     });
   });
 
+  describe('validateUriPathSegment & validateUriPath', () => {
+    it('validateUriPathSegment should throw if the value is . or ..', () => {
+      assert.throws(() => {
+        validateUriPathSegment('testField', '.');
+      }, /Invalid value \. for testField/);
+
+      assert.throws(() => {
+        validateUriPathSegment('testField', '..');
+      }, /Invalid value \.\. for testField/);
+    });
+
+    it('validateUriPath should throw if any segment is . or ..', () => {
+      assert.throws(() => {
+        validateUriPath('testField', 'foo/./bar');
+      }, /Value for testField must not contain segments that are exactly \. or \.\./);
+
+      assert.throws(() => {
+        validateUriPath('testField', 'foo/../bar');
+      }, /Value for testField must not contain segments that are exactly \. or \.\./);
+    });
+  });
+
   describe('encodeWithSlashes & encodeWithoutSlashes', () => {
-    it('encodeWithSlashes should allow valid path segments and encode special characters', () => {
+    it('encodeWithSlashes should percent-encode special characters and slashes', () => {
       assert.strictEqual(
-        encodeWithSlashes('foo/bar-123_~.baz'),
-        'foo/bar-123_~.baz',
+        encodeWithSlashes('foo/bar'),
+        'foo%2Fbar',
       );
       assert.strictEqual(
-        encodeWithSlashes('foo/bar baz'),
-        'foo/bar%20baz',
+        encodeWithSlashes('abc-123_.~'),
+        'abc-123_.~',
+      );
+      assert.strictEqual(
+        encodeWithSlashes("!'()*"),
+        '%21%27%28%29%2A',
+      );
+      assert.strictEqual(
+        encodeWithSlashes('photo_😀.png'),
+        'photo_%F0%9F%98%80.png',
       );
     });
 
-    it('encodeWithSlashes should throw if any segment is . or ..', () => {
-      assert.throws(() => {
-        encodeWithSlashes('foo/./bar', 'testField');
-      }, /Value for testField must not contain segments that are exactly \. or \.\. \./);
-
-      assert.throws(() => {
-        encodeWithSlashes('foo/../bar', 'testField');
-      }, /Value for testField must not contain segments that are exactly \. or \.\. \./);
-    });
-
-    it('encodeWithoutSlashes should allow valid characters and encode slashes and special characters', () => {
+    it('encodeWithoutSlashes should preserve slashes and encode special characters', () => {
       assert.strictEqual(
         encodeWithoutSlashes('foo-123_~.baz'),
         'foo-123_~.baz',
       );
       assert.strictEqual(
         encodeWithoutSlashes('foo/bar'),
-        'foo%2Fbar',
+        'foo/bar',
+      );
+      assert.strictEqual(
+        encodeWithoutSlashes('foo/bar baz'),
+        'foo/bar%20baz',
       );
       assert.strictEqual(
         encodeWithoutSlashes('photo_😀.png'),
@@ -1947,16 +1973,6 @@ describe('common/util', () => {
         encodeWithoutSlashes('test*file!'),
         'test%2Afile%21',
       );
-    });
-
-    it('encodeWithoutSlashes should throw if the value is . or ..', () => {
-      assert.throws(() => {
-        encodeWithoutSlashes('.', 'testField');
-      }, /Invalid value \. for testField\./);
-
-      assert.throws(() => {
-        encodeWithoutSlashes('..', 'testField');
-      }, /Invalid value \.\. for testField\./);
     });
   });
 

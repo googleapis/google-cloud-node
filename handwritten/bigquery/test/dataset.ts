@@ -1115,7 +1115,7 @@ describe('BigQuery/Dataset', () => {
       assert.throws(() => {
         const invalidDataset = new Dataset(bigqueryMock, '..');
         invalidDataset.getMetadata(assert.ifError);
-      }, /Invalid value \.\. for path segment\./);
+      }, /Invalid value \.\. for path segment/);
     });
 
     it('should percent-encode query parameter injection payload in table name', done => {
