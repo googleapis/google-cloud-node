@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Developers.DeveloperKnowledge.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/developers/knowledge/v1;knowledge",
+                    "go_package": "cloud.google.com/go/developerknowledge/apiv1/developerknowledgepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DeveloperKnowledgeProto",
                     "java_package": "com.google.developers.knowledge.v1",

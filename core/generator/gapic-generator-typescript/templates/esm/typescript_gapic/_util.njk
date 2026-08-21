@@ -98,7 +98,7 @@ limitations under the License.
 {%- set commentsMap = method.paramComment -%}
 {%- for oneComment in commentsMap -%}
 {%- set type = oneComment.paramType -%}
-{%- if type.startsWith('.') %}
+{%- if type and type.startsWith('.') %}
  {%- if method.maxResultsParameter 
   and method.pagingResponseType 
   and printRequestField(oneComment)=="request.maxResults"
@@ -246,7 +246,7 @@ request.{{ oneComment.paramName.toCamelCase() }}
 {%- if tsType.length > 0 -%}
 {{ tsType }}
 {%- else -%}
-{%- if type.startsWith('.') -%}
+{%- if type and type.startsWith('.') -%}
 {@link protos{{ type }}|{{ toMessageName(type) }}}
 {%- else -%}
 {@link protos.{{ type }}|{{ toMessageName(type) }}}

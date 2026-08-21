@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-v8.0.0...storage-v8.0.1) (2026-08-18)
+
+
+### Bug Fixes
+
+* Upgrade storage dependencies to corresponding Node 22 versions for core, handwritten and generated libraries ([#9135](https://github.com/googleapis/google-cloud-node/issues/9135)) ([a3d9092](https://github.com/googleapis/google-cloud-node/commit/a3d9092b3be2cc04fbe7838aba34d5f5235d56b5))
+
 ## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.22.0...storage-v8.0.0) (2026-08-13)
 
 

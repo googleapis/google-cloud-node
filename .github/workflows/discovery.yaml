@@ -9,6 +9,9 @@ name: Update Discovery Generated Types
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write # Added for creating issues on failure
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
@@ -41,3 +44,10 @@ jobs:
           git_dir: '.'
           fork: true
           force: true
+      - name: Create issue on failure
+        if: ${{ failure() }}
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@baf9b8078c5e98cb90b53088f284fb7b060e195b # main
+        with:
+          title: "Update Discovery Generated Types failed"
+          body: "The weekly scheduled task to update Discovery Generated Types failed."
+          mention: "@googleapis/cloud-sdk-nodejs-team" # Can be updated to @googleapis/bigquery-team if preferred
