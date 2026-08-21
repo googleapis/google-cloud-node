@@ -1090,26 +1090,27 @@ export function encodeWithoutSlashes(str: string): string {
  * @return {string} The encoded URI path.
  */
 export function encodeURIPath(uri: string): string {
+  const processSegment = (segment: string): string => {
+    if (segment === '') {
+      return '';
+    }
+    let decoded = segment;
+    try {
+      decoded = decodeURIComponent(segment);
+    } catch {
+      // Fallback to raw segment if decoding fails (e.g. malformed '%')
+    }
+    validateUriPathSegment('path segment', decoded);
+    return encodeWithSlashes(decoded);
+  };
+
   const parts = uri.split('/');
   return parts
     .map(part => {
-      if (part === '') {
-        return '';
-      }
       if (part.includes(':')) {
-        const subparts = part.split(':');
-        return subparts
-          .map(subpart => {
-            if (subpart === '') {
-              return '';
-            }
-            validateUriPathSegment('path segment', subpart);
-            return encodeWithSlashes(subpart);
-          })
-          .join(':');
+        return part.split(':').map(processSegment).join(':');
       }
-      validateUriPathSegment('path segment', part);
-      return encodeWithSlashes(part);
+      return processSegment(part);
     })
     .join('/');
 }
