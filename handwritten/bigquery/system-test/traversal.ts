@@ -64,12 +64,26 @@ describe('BigQuery URI path handling and traversal', () => {
       expectedError: /Invalid value \.\. for path segment/,
     },
     {
-      description: 'should reject percent-encoded dot-dot (%2e%2e)',
+      description:
+        'should reject percent-encoded dot (period . encoded as %2e)',
+      datasetId: '%2e',
+      expectedError: /Invalid value \. for path segment/,
+    },
+    {
+      description:
+        'should reject uppercase percent-encoded dot (period . encoded as %2E)',
+      datasetId: '%2E',
+      expectedError: /Invalid value \. for path segment/,
+    },
+    {
+      description:
+        'should reject percent-encoded dot-dot (.. encoded as %2e%2e)',
       datasetId: '%2e%2e',
       expectedError: /Invalid value \.\. for path segment/,
     },
     {
-      description: 'should reject uppercase percent-encoded dot-dot (%2E%2E)',
+      description:
+        'should reject uppercase percent-encoded dot-dot (.. encoded as %2E%2E)',
       datasetId: '%2E%2E',
       expectedError: /Invalid value \.\. for path segment/,
     },
@@ -80,14 +94,14 @@ describe('BigQuery URI path handling and traversal', () => {
     },
     {
       description:
-        'should attempt request and encode query parameter and fragment characters',
+        'should attempt request and encode query parameter (?) and fragment (#) characters',
       datasetId: 'dataset_name?param=value#tag',
       expectedError:
         /Not found: Dataset.*datasets\/dataset_name%3Fparam%3Dvalue%23tag/,
     },
     {
       description:
-        'should attempt request and preserve pre-encoded characters without double encoding',
+        'should attempt request and preserve pre-encoded space (space encoded as %20) without double encoding',
       datasetId: 'my%20dataset',
       expectedError: /Not found: Dataset.*datasets\/my%20dataset/,
     },
