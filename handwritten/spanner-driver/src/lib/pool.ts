@@ -422,6 +422,9 @@ export class Pool extends EventEmitter {
    * Permanently closes and removes a client from the pool.
    */
   private removeClient(client: Client): void {
+    if (!this.allClients.has(client)) {
+      return;
+    }
     this.allClients.delete(client);
     const idx = this.idleClients.findIndex(item => item.client === client);
     if (idx !== -1) {

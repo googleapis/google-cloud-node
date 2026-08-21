@@ -18,8 +18,14 @@ import {DEFAULT_DIALECT, Dialect} from './constants.js';
 import {enrichError} from './errors.js';
 import {Query, QueryCallback} from './query.js';
 import {Codec} from './codec.js';
-import {ITypeOverrides, QueryConfig, QueryResult, TypeParser} from './types.js';
-import {TypeOverrides, types as defaultTypes} from './pg/types.js';
+import {
+  getDefaultTypeOverrides,
+  ITypeOverrides,
+  QueryConfig,
+  QueryResult,
+  TypeParser,
+} from './types.js';
+import {TypeOverrides} from './pg/types.js';
 import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
 import {Connection, Pool} from './native.js';
 
@@ -55,7 +61,7 @@ export class Client extends EventEmitter {
   readonly dialect: Dialect = DEFAULT_DIALECT;
 
   /** Type parser override registry configured on this client. */
-  public types: ITypeOverrides;
+  public readonly types: ITypeOverrides;
 
   /** Boolean indicating whether connection has been established. */
   public isConnected = false;
@@ -115,7 +121,14 @@ export class Client extends EventEmitter {
   private isExecuting = false;
 
   /** Boolean flag tracking whether client has been explicitly closed via end(). */
-  public isEnded = false;
+  private _isEnded = false;
+
+  /**
+   * Returns true if this client has been explicitly closed via `end()`.
+   */
+  public get isEnded(): boolean {
+    return this._isEnded;
+  }
 
   /** Cached Promise for in-flight connect() calls. */
   private connectPromise?: Promise<void>;
@@ -130,7 +143,9 @@ export class Client extends EventEmitter {
     this.config =
       typeof config === 'string' ? {connectionString: config} : config || {};
     this.dsn = this.config.connectionString || resolveDsn(this.config);
-    this.types = this.config.types || new TypeOverrides(defaultTypes);
+    this.types =
+      this.config.types ||
+      new TypeOverrides(getDefaultTypeOverrides(this.dialect));
   }
 
   /**
@@ -531,6 +546,9 @@ export class Client extends EventEmitter {
   }
 
   private async _doEnd(): Promise<void> {
+    if (this._isEnded) {
+      return;
+    }
     if (
       !this.connectPromise &&
       !this.isConnected &&
@@ -538,9 +556,10 @@ export class Client extends EventEmitter {
       !this.nativePool &&
       this.queryQueue.length === 0
     ) {
+      this.emit('end');
       return;
     }
-    this.isEnded = true;
+    this._isEnded = true;
     this.isConnected = false;
     this.txStatus = 'I';
 

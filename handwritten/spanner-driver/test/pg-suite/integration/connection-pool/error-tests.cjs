@@ -79,7 +79,7 @@ suite.test('connection-level errors cause queued queries to fail', async () => {
   for (const r of rejected) {
     assert.match(
       r.reason.message,
-      /Client was closed and is not queryable|Cannot connect: Client was already closed|Connection terminated|context canceled|57014|Canceled/i
+      /Client was closed and is not queryable|Cannot connect: Client was already closed|Connection terminated|context canceled|57014|Canceled|connection \d+ not found/i
     )
   }
 

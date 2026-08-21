@@ -131,6 +131,34 @@ console.log(`Waiting Requests:  ${pool.waitingCount}`); // Queued queries waitin
 
 ---
 
+### Connection Configuration & Environment Variables
+
+`Client` and `Pool` resolve connection settings in the following priority order:
+1. **Explicit Connection String / DSN:**
+   ```typescript
+   const client = new Client('projects/my-project/instances/my-instance/databases/my-database');
+   ```
+2. **Configuration Object Properties:**
+   ```typescript
+   const pool = new Pool({
+     project: 'my-project',
+     instance: 'my-instance',
+     database: 'my-database',
+     host: 'spanner.googleapis.com', // Optional custom endpoint or emulator host
+     port: 443,                       // Optional port
+   });
+   ```
+3. **Environment Variable Fallbacks:**
+   When configuration properties are omitted (or when initializing `new Client()` / `new Pool()` with empty arguments), the driver automatically resolves missing properties from the following environment variables:
+
+| Setting | Supported Environment Variables (in priority order) |
+| :--- | :--- |
+| **GCP Project ID** | `GCLOUD_PROJECT`, `GOOGLE_CLOUD_PROJECT`, `SPANNER_PROJECT` |
+| **Spanner Instance ID** | `SPANNER_INSTANCE` |
+| **Spanner Database ID** | `SPANNER_DATABASE` |
+
+---
+
 ### 3. Row & Query Event Listeners
 
 `Query` instances extend `EventEmitter`, allowing you to listen to `row`, `fields`, `end`, and `error` events:

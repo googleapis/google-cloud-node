@@ -21,31 +21,25 @@ const Client = helper.Client
 
 const conInfo = helper.config
 
-suite.test('returns results as array', function () {
-  const client = new Client(conInfo)
-  const checkRow = function (row) {
-    assert(Array.isArray(row), 'row should be an array')
-    assert.equal(row.length, 4)
-    assert.equal(row[0].getFullYear(), new Date().getFullYear())
-    assert.strictEqual(row[1], 1)
-    assert.strictEqual(row[2], 'hai')
-    assert.strictEqual(row[3], null)
+suite.test('returns results as array', async function () {
+  const client = new Client()
+  await client.connect()
+
+  const config = {
+    text: 'SELECT CURRENT_TIMESTAMP, 1 as num, $1::text, null',
+    values: ['hai'],
+    rowMode: 'array',
   }
-  client.connect(
-    assert.success(function () {
-      const config = {
-        text: 'SELECT NOW(), 1::int, $1::text, null',
-        values: ['hai'],
-        rowMode: 'array',
-      }
-      client.query(
-        config,
-        assert.success(function (result) {
-          assert.equal(result.rows.length, 1)
-          checkRow(result.rows[0])
-          client.end()
-        })
-      )
-    })
-  )
+  const result = await client.query(config)
+  assert.strictEqual(result.rows.length, 1)
+
+  const row = result.rows[0]
+  assert(Array.isArray(row), 'row should be an array')
+  assert.strictEqual(row.length, 4)
+  assert.strictEqual(row[0].getFullYear(), new Date().getFullYear())
+  assert.strictEqual(row[1], '1')
+  assert.strictEqual(row[2], 'hai')
+  assert.strictEqual(row[3], null)
+
+  await client.end()
 })

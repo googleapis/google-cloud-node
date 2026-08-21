@@ -571,5 +571,39 @@ describe('Client Class', () => {
       client.setTypeParser(16, customParser);
       assert.strictEqual(client.getTypeParser(16), customParser);
     });
+
+    it('should emit end event when client.end() is called', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      await client.connect();
+      let endEmitted = false;
+      client.on('end', () => {
+        endEmitted = true;
+      });
+      await client.end();
+      assert.strictEqual(endEmitted, true);
+      assert.strictEqual(client.isEnded, true);
+    });
+
+    it('should treat client.end() on unconnected client as a no-op that emits end without permanently closing', async () => {
+      const client = new Client({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      let endEmitted = false;
+      client.on('end', () => {
+        endEmitted = true;
+      });
+      await client.end();
+      assert.strictEqual(endEmitted, true);
+      assert.strictEqual(client.isEnded, false);
+      await client.connect();
+      await client.end();
+      assert.strictEqual(client.isEnded, true);
+    });
   });
 });

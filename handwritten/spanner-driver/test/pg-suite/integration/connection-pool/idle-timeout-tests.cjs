@@ -16,14 +16,29 @@
 const helper = require('../../test-helper.cjs')
 const assert = require('assert')
 
-new helper.Suite().test('idle timeout', function () {
-  const config = Object.assign({}, helper.config, { idleTimeoutMillis: 50 })
-  const pool = new helper.pg.Pool(config)
-  pool.connect(
-    assert.calls(function (err, client, done) {
-      assert(!err)
-      client.query('SELECT NOW()')
-      done()
+new helper.Suite().test('idle timeout', async function () {
+  const pool = new helper.pg.Pool({ idleTimeoutMillis: 50 })
+  const client = await pool.connect()
+  const res = await client.query('SELECT CURRENT_TIMESTAMP AS now')
+  assert.ok(res.rows.length > 0)
+  assert.strictEqual(pool.totalCount, 1)
+
+  // Listen for client eviction when idle timer fires
+  const removedPromise = new Promise((resolve) => {
+    pool.once('remove', (removedClient) => {
+      resolve(removedClient)
     })
-  )
+  })
+
+  // Return client to pool
+  client.release()
+  assert.strictEqual(pool.idleCount, 1)
+
+  // Wait for idleTimeoutMillis (50ms) to evict the client
+  const removedClient = await removedPromise
+  assert.strictEqual(removedClient, client)
+  assert.strictEqual(pool.totalCount, 0)
+  assert.strictEqual(pool.idleCount, 0)
+
+  await pool.end()
 })

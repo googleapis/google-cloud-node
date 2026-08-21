@@ -58,10 +58,13 @@ if (targetArg && !targetArg.startsWith('-')) {
 }
 
 async function main() {
-  const projectId = process.env.GCLOUD_PROJECT;
+  const projectId =
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    process.env.SPANNER_PROJECT;
   if (!projectId) {
     console.error(
-      '[pg-suite] Error: Please set GCLOUD_PROJECT to run the test suite.'
+      '[pg-suite] Error: Please set GCLOUD_PROJECT (or GOOGLE_CLOUD_PROJECT / SPANNER_PROJECT) to run the test suite.'
     );
     process.exit(1);
   }
@@ -220,6 +223,10 @@ async function main() {
     console.log(`Failed Files:              ${totalFailedFiles}`);
     console.log('================================================================');
 
+
+    if (totalFailedFiles > 0) {
+      process.exit(1);
+    }
   }
 }
 
