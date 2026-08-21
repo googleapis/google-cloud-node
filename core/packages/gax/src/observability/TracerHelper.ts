@@ -33,11 +33,11 @@ export function getGaxTracer(): Tracer {
   return trace.getTracer('google-gax');
 }
 
-export async function traceAttempt(
+export async function traceAttempt<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => Promise<any>,
-): Promise<any> {
+  fn: () => Promise<T>,
+): Promise<T> {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, async (span: Span) => {
     span.setAttributes({
@@ -52,14 +52,15 @@ export async function traceAttempt(
     try {
       const result = await fn();
       return result;
-    } catch (e: any) {
+    } catch (e) {
+      const err = e as Error;
       span.setAttributes({
-        'error.message': e.message,
-        'error.type': e.constructor?.name ?? e.name,
+        'error.message': err.message,
+        'error.type': err.constructor?.name ?? err.name,
       });
-      span.recordException(e);
-      if (e.name) {
-        span.setAttribute('exception.type', e.name);
+      span.recordException(err);
+      if (err.name) {
+        span.setAttribute('exception.type', err.name);
       }
       throw e;
     } finally {
