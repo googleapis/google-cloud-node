@@ -1104,5 +1104,37 @@ describe('BigQuery/Dataset', () => {
       assert.strictEqual(table.location, location);
     });
   });
+
+  // Skipped for now: Waiting for the release of the updated @google-cloud/common
+  // library containing the path traversal validation and URI encoding fixes.
+  describe.skip('security - URI encoding and path traversal protection', () => {
+    it('should throw error when dataset id or path segment is dot or dot-dot', () => {
+      const bigqueryMock = {
+        projectId: 'my-project',
+        request: util.noop,
+      } as {} as _root.BigQuery;
+
+      assert.throws(() => {
+        const invalidDataset = new Dataset(bigqueryMock, '..');
+        invalidDataset.getMetadata(assert.ifError);
+      }, /Invalid value \.\. for path segment/);
+    });
+
+    it('should percent-encode query parameter injection payload in table name', done => {
+      const maliciousTableId = 'table_name?param=value#tag';
+      const table = ds.table(maliciousTableId);
+
+      ds.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.uri,
+          'tables/table_name%3Fparam%3Dvalue%23tag',
+        );
+        done();
+      };
+
+      table.getMetadata(assert.ifError);
+    });
+  });
 });
+
 
