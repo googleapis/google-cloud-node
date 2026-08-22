@@ -33,6 +33,13 @@ describe('Baseline tests: ESM', () => {
     format: 'esm',
   });
   runBaselineTest({
+    baselineName: 'resumable-upload-esm',
+    outputDir: '.test-out-resumable-upload-esm',
+    protoPath: 'google/samples/resumable/v1/resumable.proto',
+    useCommonProto: false,
+    format: 'esm',
+  });
+  runBaselineTest({
     baselineName: 'dlp-esm',
     outputDir: '.test-out-dlp-esm',
     protoPath: 'google/privacy/dlp/v2/*.proto',

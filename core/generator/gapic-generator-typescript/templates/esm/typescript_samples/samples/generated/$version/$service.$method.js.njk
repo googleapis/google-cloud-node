@@ -41,7 +41,9 @@ function main({%- for comment in filteredComments -%}
   {{ "\n" }}
   // Imports the {{ api.naming.productName }} library
   const { {{- service.name.toPascalCase() }}Client} = require('{{ api.publishName }}').{{ api.naming.version }};
-
+{% if method.resumableUpload %}
+  const fs = require('fs');
+{% endif %}
   // Instantiates a client
   const {{ (api.naming.productName).toCamelCase() }}Client = new {{ service.name.toPascalCase() }}Client();
 
@@ -93,6 +95,15 @@ function main({%- for comment in filteredComments -%}
     const stream = await {{ (api.naming.productName).toCamelCase() }}Client.{{ method.name.toCamelCase() }}((response) => console.log(response));
     stream.write(request);
     stream.end();
+  }
+{% elif method.resumableUpload %}
+    // Run request
+    const helper = await {{ (api.naming.productName).toCamelCase() }}Client.{{ method.name.toCamelCase() }}(request);
+    await helper.start({
+      uploadStream: fs.createReadStream('/path/to/file'),
+    });
+    const response = await helper.finished();
+    console.log(response);
   }
 {% else %}
     // Run request

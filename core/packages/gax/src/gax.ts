@@ -19,6 +19,7 @@
  */
 
 import type {Message} from 'protobufjs';
+import type {ResumableUploadContext} from './resumableUpload';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
@@ -170,6 +171,11 @@ export interface CallOptions {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  /**
+   * Internal context used by resumable upload methods. Populated by
+   * GAPIC-generated client libraries; do not set manually.
+   */
+  resumableUpload?: ResumableUploadContext;
 }
 
 export class CallSettings {
@@ -186,6 +192,7 @@ export class CallSettings {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  resumableUpload?: ResumableUploadContext;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -219,6 +226,8 @@ export class CallSettings {
       'longrunning' in settings ? settings.longrunning : undefined;
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
+    this.resumableUpload =
+      'resumableUpload' in settings ? settings.resumableUpload : undefined;
   }
 
   /**
@@ -242,6 +251,7 @@ export class CallSettings {
     let longrunning = this.longrunning;
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
+    let resumableUpload = this.resumableUpload;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -297,6 +307,9 @@ export class CallSettings {
     if ('retryRequestOptions' in options) {
       retryRequestOptions = options.retryRequestOptions;
     }
+    if ('resumableUpload' in options) {
+      resumableUpload = options.resumableUpload;
+    }
 
     return new CallSettings({
       timeout,
@@ -309,6 +322,7 @@ export class CallSettings {
       isBundling,
       apiName,
       retryRequestOptions,
+      resumableUpload,
     });
   }
 }

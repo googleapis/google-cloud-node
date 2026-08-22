@@ -79,6 +79,9 @@ export interface MethodDescriptorProto
   bundleConfig?: BundleConfig;
   toJSON: Function | undefined;
   isDiregapicLRO?: boolean;
+  // If set, the method opts into the resumable upload protocol
+  // via the google.api.media_upload method option.
+  resumableUpload?: {uploadPrefix: string} | undefined;
   // if wrappers are allowed and there is a maxResultsParamter, return true
   maxResultsParameter?: boolean;
 }
@@ -138,6 +141,7 @@ export interface ServiceDescriptorProto
   longRunningOperationsMixinFlags?: OperationsMixinConfig;
   protoFile: string;
   diregapicLRO?: MethodDescriptorProto[];
+  resumableUploads: MethodDescriptorProto[];
   httpRules?: protos.google.api.IHttpRule[];
   selectiveGapic: SelectiveGapicConfig;
 }
@@ -301,6 +305,26 @@ function streaming(method: MethodDescriptorProto) {
     return 'SERVER_STREAMING';
   }
   return undefined;
+}
+
+// Detect methods that opt into the resumable upload protocol via
+// the google.api.media_upload method option. The upload prefix defaults to
+// `/resumable/upload` and can be overridden by the annotation.
+function resumableUpload(method: MethodDescriptorProto): {
+  uploadPrefix: string;
+} | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mediaUpload = method.options?.['.google.api.mediaUpload'] as
+    | {
+        enabled?: boolean;
+        mediaUploadPaths?: string[];
+      }
+    | undefined;
+  if (!mediaUpload || mediaUpload.enabled === false) {
+    return undefined;
+  }
+  const paths = mediaUpload.mediaUploadPaths ?? [];
+  return {uploadPrefix: paths[0] ?? '/resumable/upload'};
 }
 
 // returns true if the method has wrappers for UInt32Value enabled
@@ -634,6 +658,7 @@ function augmentMethod(
         parameters.diregapic,
         wrappersAllowed,
       ),
+      resumableUpload: resumableUpload(method),
       ignoreMapPagingMethod: ignoreMapPagingMethod(
         parameters.allMessages,
         method,
@@ -1076,7 +1101,13 @@ export function augmentService(parameters: AugmentServiceParameters) {
   );
   augmentedService.simpleMethods = augmentedService.method.filter(
     method =>
-      !method.longRunning && !method.streaming && !method.pagingFieldName,
+      !method.longRunning &&
+      !method.streaming &&
+      !method.pagingFieldName &&
+      !method.resumableUpload,
+  );
+  augmentedService.resumableUploads = augmentedService.method.filter(
+    method => method.resumableUpload,
   );
   augmentedService.longRunning = augmentedService.method.filter(
     method => method.longRunning,

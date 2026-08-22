@@ -25,6 +25,7 @@ import {
   PageDescriptor,
   StreamDescriptor,
 } from './descriptor';
+import {ResumableUploadDescriptor} from './resumableUpload';
 import * as longrunning from './longRunningCalls/longrunning';
 import * as operationProtos from '../protos/operations';
 
@@ -49,6 +50,7 @@ export interface Descriptors {
   stream: {[name: string]: StreamDescriptor};
   longrunning: {[name: string]: LongrunningDescriptor};
   batching?: {[name: string]: BundleDescriptor};
+  resumableUpload?: {[name: string]: ResumableUploadDescriptor};
 }
 
 export interface Callback<

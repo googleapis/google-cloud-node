@@ -85,6 +85,9 @@ export class {{ service.name }}Client {
   private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax{% if not api.legacyProtoLoad %} | typeof gax.fallback{% endif %};
   private _gaxGrpc: gax.GrpcClient{% if not api.legacyProtoLoad %} | gax.fallback.GrpcClient{% endif %};
+{%- if not api.legacyProtoLoad and service.resumableUploads.length > 0 %}
+  private _fallbackRest?: gax.GrpcClient | gax.fallback.GrpcClient;
+{%- endif %}
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
@@ -96,6 +99,9 @@ export class {{ service.name }}Client {
     stream: {},
     longrunning: {},
     batching: {},
+{%- if not api.legacyProtoLoad and service.resumableUploads.length > 0 %}
+    resumableUpload: {},
+{%- endif %}
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
@@ -209,6 +215,15 @@ export class {{ service.name }}Client {
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+{%- if not api.legacyProtoLoad and service.resumableUploads.length > 0 %}
+
+    // This service contains resumable upload methods, which are HTTPS-only.
+    // Make sure the REST transport is available even when the client was
+    // configured for gRPC.
+    this._fallbackRest = opts.fallback
+      ? this._gaxGrpc
+      : new gaxInstance.fallback.GrpcClient({...opts, fallback: true});
+{%- endif %}
 
     // Save options to use in {{ id.get("initialize") }}() method.
     this._opts = opts;
@@ -401,6 +416,21 @@ export class {{ service.name }}Client {
 {%- endfor %}
 {%- endif %}
 
+{%- if not api.legacyProtoLoad and service.resumableUploads.length > 0 %}
+
+    // Some methods on this API support resumable uploads; provide
+    // descriptors for these methods.
+    this.descriptors.resumableUpload = {
+{%- set resumableUploadJoiner = joiner() %}
+{%- for method in service.resumableUploads %}
+      {{- resumableUploadJoiner() }}
+      {{ method.name.toCamelCase() }}: new this._gaxModule.ResumableUploadDescriptor(
+        '{{ method.resumableUpload.uploadPrefix }}'
+      )
+{%- endfor %}
+    };
+{%- endif %}
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
         '{{ api.naming.protoPackage }}.{{ service.name }}', gapicConfig as gax.ClientConfig,
@@ -449,10 +479,10 @@ export class {{ service.name }}Client {
           (this._protos as any).{{api.naming.protoPackage}}.{{ service.name }},
         this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
-     {%- set stubMethodsContent %}
+{%- set stubMethodsContent %}
 {%- set stubMethodsJoiner = joiner(', ') -%}
 {%- for method in service.method -%}
-      {%- if not method.ignoreMapPagingMethod %}
+      {%- if not method.ignoreMapPagingMethod and not method.resumableUpload %}
       {{- stubMethodsJoiner() -}}
       '{{ method.name.toCamelCase(true) }}'
       {%- endif %}
@@ -510,6 +540,20 @@ export class {{ service.name }}Client {
       this.innerApiCalls[methodName] = apiCall;
     }
 {%- endif -%}
+{%- if not api.legacyProtoLoad and service.resumableUploads.length > 0 %}
+
+    // Resumable upload methods do not use the gRPC/REST service stub; the
+    // ResumableUpload helper performs its own HTTP requests.
+{%- for method in service.resumableUploads %}
+    this.innerApiCalls['{{ method.name.toCamelCase() }}'] =
+      this._gaxModule.createApiCall(
+        this._gaxModule.resumableUploadStub,
+        this._defaults['{{ method.name.toCamelCase() }}'],
+        this.descriptors.resumableUpload['{{ method.name.toCamelCase() }}'],
+        this._opts.fallback
+      );
+{%- endfor %}
+{%- endif %}
     {%- if service.options and service.options.deprecated %}
     this.warn('DEP${{service.name}}', '{{service.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
     {%- endif %}
@@ -741,6 +785,51 @@ export class {{ service.name }}Client {
       });
     {%- endif %}
   }
+{%- endfor %}
+{%- for method in service.resumableUploads %}
+{%- if not api.legacyProtoLoad %}
+/**
+ {{- internalWarning(service, method, api) }}
+{{- util.printCommentsForMethod(method) }}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ * @param {object} [request] - The request object.
+ * @param {object} [options] - Optional parameters. The upload stream,
+ *   chunk size, progress callback, and resume URL are passed to
+ *   {@link gax.ResumableUpload#start} instead.
+ * @returns {Promise<gax.ResumableUpload>} A resumable upload helper. Call
+ *   `.start(uploadParams)` with the stream to upload, then await
+ *   `.finished()` for the final RPC response.
+ */
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions): Promise<gax.ResumableUpload> {
+    request = request || {};
+    options = options || {};
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} request %j', request);
+    return this.innerApiCalls['{{ method.name.toCamelCase() }}'](request, {
+      ...options,
+      resumableUpload: {
+        auth: this._fallbackRest!.auth as gax.GoogleAuth,
+        servicePath: this._opts.servicePath ?? this._servicePath,
+        servicePort: this._opts.port || 443,
+        protocol: this._opts.protocol || 'https',
+        rpc: this._gaxModule.protobuf.Root.fromJSON(jsonProtos)
+          .lookupService('{{api.naming.protoPackage}}.{{ service.name }}')
+          .methods['{{ method.name }}'],
+        request,
+        uploadPrefix: '{{ method.resumableUpload.uploadPrefix }}',
+        numericEnums: this._opts.numericEnums,
+        minifyJson: this._opts.minifyJson,
+      },
+    }).then(([helper]) => helper);
+  }
+{%- endif %}
 {%- endfor %}
 {% for method in service.streaming %}
 {%- if method.serverStreaming and method.clientStreaming %}
