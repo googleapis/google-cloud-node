@@ -501,7 +501,7 @@ describe('getErrorFromOAuthErrorResponse', () => {
     assert.strictEqual(actualError.stack, expectedError.stack);
   });
 
-  it('should keep the copied stack writable and non-enumerable', () => {
+  it('should keep the copied stack writable, configurable and non-enumerable', () => {
     const originalError = new Error('Original error message');
     const resp = {
       error: 'invalid_grant',
@@ -512,6 +512,7 @@ describe('getErrorFromOAuthErrorResponse', () => {
     const descriptor = Object.getOwnPropertyDescriptor(actualError, 'stack');
     assert.strictEqual(descriptor?.writable, true);
     assert.strictEqual(descriptor?.enumerable, false);
+    assert.strictEqual(descriptor?.configurable, true);
     // Consumers append causal context to error.stack; in strict mode that
     // throws a TypeError when the property is read-only.
     assert.doesNotThrow(() => {
