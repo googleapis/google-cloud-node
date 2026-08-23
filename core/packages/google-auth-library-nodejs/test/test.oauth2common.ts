@@ -500,4 +500,23 @@ describe('getErrorFromOAuthErrorResponse', () => {
     assert.strictEqual(actualError.name, expectedError.name);
     assert.strictEqual(actualError.stack, expectedError.stack);
   });
+
+  it('should keep the copied stack writable and non-enumerable', () => {
+    const originalError = new Error('Original error message');
+    const resp = {
+      error: 'invalid_grant',
+      error_description: 'ID Token is stale to sign-in.',
+    };
+
+    const actualError = getErrorFromOAuthErrorResponse(resp, originalError);
+    const descriptor = Object.getOwnPropertyDescriptor(actualError, 'stack');
+    assert.strictEqual(descriptor?.writable, true);
+    assert.strictEqual(descriptor?.enumerable, false);
+    // Consumers append causal context to error.stack; in strict mode that
+    // throws a TypeError when the property is read-only.
+    assert.doesNotThrow(() => {
+      actualError.stack += '\nCaused by: wrapped error';
+    });
+    assert.ok(actualError.stack?.endsWith('\nCaused by: wrapped error'));
+  });
 });

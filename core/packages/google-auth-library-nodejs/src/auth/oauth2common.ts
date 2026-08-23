@@ -255,8 +255,10 @@ export function getErrorFromOAuthErrorResponse(
       if (key !== 'message') {
         Object.defineProperty(newError, key, {
           value: (err as {} as {[index: string]: string})[key],
-          writable: false,
-          enumerable: true,
+          // Keep stack writable and non-enumerable, as on a regular Error, so
+          // callers can still append context to it.
+          writable: key === 'stack',
+          enumerable: key !== 'stack',
         });
       }
     });
