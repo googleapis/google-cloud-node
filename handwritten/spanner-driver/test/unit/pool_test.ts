@@ -1094,5 +1094,117 @@ describe('Pool Class', () => {
 
       await pool.end();
     });
+
+    it('should maintain strict FIFO acquisition order and prevent waitQueue displacement on client error', async () => {
+      const pool = new Pool({
+        project: 'test-project',
+        instance: 'test-instance',
+        database: 'test-database',
+        max: 1,
+      });
+
+      // 1. Check out the only available connection slot
+      const initialClient = await pool.connect();
+      assert.strictEqual(pool.totalCount, 1);
+
+      // 2. Queue Request A (index 0) and Request B (index 1) in FIFO order
+      const resolutionOrder: string[] = [];
+      const requestA = pool.connect().then(client => {
+        resolutionOrder.push('A');
+        return client;
+      });
+      const requestB = pool.connect().then(client => {
+        resolutionOrder.push('B');
+        return client;
+      });
+      assert.strictEqual(
+        pool.waitingCount,
+        2,
+        'Both requests should be queued',
+      );
+
+      // 3. initialClient encounters a fatal error and is destroyed.
+      // Exactly ONE client slot is freed, so only Request A should be dequeued to get the replacement connection.
+      const releasePromise = initialClient.release(
+        new Error('connection reset'),
+      );
+
+      // 4. Concurrently queue Request C while release is in flight
+      const requestC = pool.connect().then(client => {
+        resolutionOrder.push('C');
+        return client;
+      });
+
+      await releasePromise;
+      // Wait a short tick for asynchronous handlers to settle
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      // 5. Request A completes its work and returns the client to the pool
+      const clientA = await requestA;
+      await clientA.release();
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      // Request B was queued before Request C, so Request B MUST be resolved before Request C.
+      // Without the fix, re-entrant removeClient() prematurely pops Request B from waitQueue,
+      // causing Request C to jump ahead of Request B in the queue (resulting in ['A', 'C']).
+      assert.deepStrictEqual(
+        resolutionOrder,
+        ['A', 'B'],
+        `FIFO queue order was violated. Expected Request B before Request C, but got: [${resolutionOrder.join(', ')}]`,
+      );
+
+      // 6. Request B completes and frees the connection for Request C
+      const clientB = await requestB;
+      await clientB.release();
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      assert.deepStrictEqual(
+        resolutionOrder,
+        ['A', 'B', 'C'],
+        'All requests should eventually resolve in strict FIFO order',
+      );
+
+      const clientC = await requestC;
+      await clientC.release();
+      await pool.end();
+    });
+
+    it('should invoke connect callback with error and dummy done function when connection acquisition fails', done => {
+      const pool = new Pool({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      void pool.end(); // Closing pool causes _doConnect to reject
+      pool.connect((err, client, release) => {
+        assert.ok(err instanceof Error);
+        assert.strictEqual(client, undefined);
+        assert.strictEqual(typeof release, 'function');
+        assert.doesNotThrow(() => release!());
+        done();
+      });
+    });
+
+    it('should remove client from pool when client.end() is called directly on checked-out client', async () => {
+      const pool = new Pool({
+        project: 'p',
+        instance: 'i',
+        database: 'd',
+      });
+      const client = await pool.connect();
+      assert.strictEqual(pool.totalCount, 1);
+
+      let removeEmitted = false;
+      pool.on('remove', removedClient => {
+        if (removedClient === client) {
+          removeEmitted = true;
+        }
+      });
+
+      await client.end();
+      assert.strictEqual(removeEmitted, true);
+      assert.strictEqual(pool.totalCount, 0);
+      await pool.end();
+    });
   });
 });

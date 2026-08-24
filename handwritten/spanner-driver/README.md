@@ -131,6 +131,34 @@ console.log(`Waiting Requests:  ${pool.waitingCount}`); // Queued queries waitin
 
 ---
 
+### Connection Configuration & Environment Variables
+
+`Client` and `Pool` resolve connection settings in the following priority order:
+1. **Explicit Connection String / DSN:**
+   ```typescript
+   const client = new Client('projects/my-project/instances/my-instance/databases/my-database');
+   ```
+2. **Configuration Object Properties:**
+   ```typescript
+   const pool = new Pool({
+     project: 'my-project',
+     instance: 'my-instance',
+     database: 'my-database',
+     host: 'spanner.googleapis.com', // Optional custom endpoint or emulator host
+     port: 443,                       // Optional port
+   });
+   ```
+3. **Environment Variable Fallbacks:**
+   When configuration properties are omitted (or when initializing `new Client()` / `new Pool()` with empty arguments), the driver automatically resolves missing properties from the following environment variables:
+
+| Setting | Supported Environment Variables (in priority order) |
+| :--- | :--- |
+| **GCP Project ID** | `GCLOUD_PROJECT`, `GOOGLE_CLOUD_PROJECT`, `SPANNER_PROJECT` |
+| **Spanner Instance ID** | `SPANNER_INSTANCE` |
+| **Spanner Database ID** | `SPANNER_DATABASE` |
+
+---
+
 ### 3. Row & Query Event Listeners
 
 `Query` instances extend `EventEmitter`, allowing you to listen to `row`, `fields`, `end`, and `error` events:
@@ -291,6 +319,39 @@ When working with Cloud Spanner's PostgreSQL dialect, keep the following behavio
 | `TypeParser` | Type | Function type signature for parsing raw wire string into JavaScript value. |
 | `escapeIdentifier` | Function | Escapes PostgreSQL identifiers with double quotes (`"my_table"`). |
 | `escapeLiteral` | Function | Escapes PostgreSQL string literals with single quotes (`'val'`). |
+
+---
+
+## Unsupported Features & Dialect Differences
+
+While `@google-cloud/spanner-driver` provides drop-in compatibility with standard `node-postgres` (`pg`) workflows, certain PostgreSQL wire-protocol-specific features and server functions are not applicable to Cloud Spanner:
+
+### Protocol & Client Differences
+* **Named Queries / Prepared Statements (`name: 'stmt_name'`):** Client-side and server-side named prepared statement resolution without re-sending `text` is **not supported**. All queries must supply explicit SQL `text`.
+* **Server-Side Cursor Chunking (`rows: N`):** PostgreSQL `PortalSuspended` wire messages are not supported. Results are streamed natively over HTTP/2 gRPC channels.
+* **`LISTEN` / `NOTIFY` & Notice Messages:** PostgreSQL asynchronous pub/sub channels (`LISTEN`/`NOTIFY`) and procedural notices (`RAISE NOTICE` in PL/pgSQL blocks) are not supported by Cloud Spanner.
+* **`idle_in_transaction_session_timeout`:** PostgreSQL server-side transaction idle timeout configuration parameter is not supported by Cloud Spanner.
+* **Multi-Statement Command Tags (`QueryResult.command`):** When executing multiple semicolon-delimited SQL statements in a single query call, an array of `QueryResult` objects is returned. Currently, `.command` defaults to `'SELECT'` across all result sets rather than per-statement verbs (`'CREATE'`, `'INSERT'`, `'UPDATE'`).
+* **Query Modes (`queryMode`):** PostgreSQL TCP wire mode options (such as `queryMode: 'extended'`) are not applicable; all queries execute over HTTP/2 gRPC channels.
+
+### Unsupported PostgreSQL Functions & System Catalogs
+The following PostgreSQL-specific server administration functions and views are not supported by Cloud Spanner:
+* **`pg_sleep(seconds)`:** Server-side execution sleep functions are not supported.
+* **`pg_terminate_backend(pid)` & `pg_backend_pid()`:** Server process termination via SQL is not supported; Cloud Spanner manages distributed sessions automatically.
+* **`pg_stat_activity`:** Server process activity tables are not available; session and query metrics are exposed via Cloud Spanner `information_schema` views (e.g. `information_schema.spanner_statistics`).
+* **`generate_series()`:** Set-returning series generation functions are not supported in Cloud Spanner's PostgreSQL dialect.
+
+### Data Types & Precision Differences
+* **`NUMERIC` / `DECIMAL` Precision:** Open-source PostgreSQL supports arbitrary-precision numeric values (up to 131,072 digits). Cloud Spanner's PostgreSQL dialect supports fixed-precision `NUMERIC` with up to **29 integer digits and 9 fractional decimal digits** (38 total decimal digits, range `-9.9999999999999999999999999999e+28` to `+9.9999999999999999999999999999e+28`).
+* **`INT8` / `bigint` (64-bit Integer):** Like `node-postgres`, `INT8` (OID 20) values are returned as JavaScript strings (e.g. `'123'`) by default to prevent precision loss beyond `Number.MAX_SAFE_INTEGER` (`2^53 - 1`). Customers can register custom type parsers (via `pg.types.setTypeParser(20, BigInt)`) if needed.
+* **`TIMESTAMP WITH TIME ZONE` (`TIMESTAMPTZ`):** Cloud Spanner requires all timestamps to include time zone information (`TIMESTAMPTZ`) with fixed nanosecond precision (precision modifiers like `TIMESTAMPTZ(3)` are not supported). Unqualified `TIMESTAMP WITHOUT TIME ZONE`, `TIME`, and `TIMETZ` are unsupported in Cloud Spanner's PostgreSQL dialect.
+* **Integer Sizing & Casts:** In Cloud Spanner's PostgreSQL dialect, integer literals and expressions evaluate to `bigint` (`INT8`). Downcasting from `bigint` to `int4` (`$1::int4`) is not supported in Cloud Spanner SQL.
+* **1D Flat Arrays (Multi-Dimensional Arrays Unsupported):** Cloud Spanner supports 1D flat arrays (`text[]`, `bigint[]`, `bool[]`, `float8[]`, `timestamptz[]`, etc.). Multi-dimensional nested arrays (e.g. `integer[][]`, `text[][]`) are explicitly unsupported by Cloud Spanner.
+
+### Key Considerations When Migrating from `pg`
+* **Resource Teardown (`pool.end()` / `client.end()`):** In `node-postgres`, idle sockets can naturally exit when unreferenced. In `@google-cloud/spanner-driver`, clients and pools manage native Go gRPC channel sessions and CGO memory. Always call `await pool.end()` or `await client.end()` when terminating services, CLI scripts, or test suites to release native resources immediately.
+* **Authentication & Connection Configuration:** Rather than local Unix usernames, passwords, and TCP ports (`process.env.USER`, `port: 5432`), configure Google Cloud project, instance, and database parameters (or `GOOGLE_APPLICATION_CREDENTIALS` / Application Default Credentials).
+* **Protobuf Parameter Typing & Untyped Nulls:** Cloud Spanner validates parameter types strictly at the RPC boundary (e.g., distinguishing integer vs float values). Untyped parameters in expressions (such as `7 <> $1` with `[null]`) require an explicit SQL type cast (e.g. `7 <> $1::bigint`) for parameter type inference.
 
 ---
 

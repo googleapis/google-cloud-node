@@ -2051,6 +2051,7 @@ libraries:
   - name: google-maps-mapmanagement
     version: 0.2.0
     apis:
+      - path: google/maps/mapmanagement/v2
       - path: google/maps/mapmanagement/v2beta
     copyright_year: "2026"
     nodejs:

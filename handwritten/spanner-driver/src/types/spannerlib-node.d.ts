@@ -13,14 +13,13 @@
 // limitations under the License.
 
 /**
- * TODO(spannerlib-node-package): This is a temporary ambient type declaration file.
+ * TODO(spannerlib-node-package): This is an ambient type declaration file.
  *
  * It provides TypeScript compiler type definitions for the native `spannerlib-node` bridge
- * during development and CI compilation before the `@google-cloud/spannerlib-node-*`
- * platform packages are published to npm.
+ * during development and CI compilation before the unified `@google-cloud/spannerlib-node`
+ * package is published with bundled type declarations.
  *
- * Once the pre-compiled platform packages are published to npm with their own bundled
- * type declarations, this file should be removed.
+ * Once the unified package is published to npm, this file should be removed.
  */
 declare module 'spannerlib-node' {
   /**
