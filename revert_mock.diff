@@ -1,0 +1,14 @@
+--- handwritten/spanner/spanner-native/spanner-go/client.go
++++ handwritten/spanner/spanner-native/spanner-go/client.go
+@@ -168,7 +168,10 @@
+ 
+ // GetToken retrieves the cached OAuth2 bearer token.
+ func (c *CoreClient) GetToken() (*oauth2.Token, error) {
+-	return &oauth2.Token{AccessToken: "mock-token"}, nil
++	if c.tokenSource == nil {
++		return nil, fmt.Errorf("token source is not configured")
++	}
++	return c.tokenSource.Token()
+ }
+ 
+ // Close terminates all gRPC connections and cancels the background context.

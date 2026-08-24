@@ -93,8 +93,8 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         if (batch->error_msg != nullptr) {
             napi_value err_obj, err_msg_val, err_code_val;
             napi_create_string_utf8(env, batch->error_msg, NAPI_AUTO_LENGTH, &err_msg_val);
-            napi_create_error(env, nullptr, err_msg_val, &err_obj);
             napi_create_int32(env, batch->error_code, &err_code_val);
+            napi_create_error(env, nullptr, err_msg_val, &err_obj);
             napi_set_named_property(env, err_obj, "code", err_code_val);
 
             napi_value argv[3] = { err_obj, null_val, null_val };
@@ -104,17 +104,6 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
             napi_value argv[3] = { null_val, null_val, null_val };
             napi_call_function(env, global, js_cb, 3, argv, nullptr);
         } else {
-            static bool logged_deserialization_mode = false;
-            if (!logged_deserialization_mode) {
-                logged_deserialization_mode = true;
-                if (batch->format == 1) {
-                    printf("  [Go Native Bridge] Active Deserialization: DIRECT N-API NATIVE CELLS (Zero JSON.parse)\n");
-                } else {
-                    printf("  [Go Native Bridge] Active Deserialization: LEGACY JSON FORMATTER (JSON.parse)\n");
-                }
-                fflush(stdout);
-            }
-
             napi_value rows_val = null_val;
 
             if (batch->format == 1 && batch->cells != nullptr && batch->row_count > 0 && batch->col_count > 0) {
@@ -124,12 +113,6 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
                 const CSpannerCell* cells = batch->cells;
 
                 napi_create_array_with_length(env, row_count, &rows_val);
-
-                napi_value null_cell, true_cell, false_cell, empty_str_cell;
-                napi_get_null(env, &null_cell);
-                napi_get_boolean(env, true, &true_cell);
-                napi_get_boolean(env, false, &false_cell);
-                napi_create_string_utf8(env, "", 0, &empty_str_cell);
 
                 for (int r = 0; r < row_count; ++r) {
                     napi_value row_arr;
@@ -141,10 +124,10 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
 
                         switch (cell.kind) {
                             case CELL_KIND_NULL:
-                                js_cell = null_cell;
+                                napi_get_null(env, &js_cell);
                                 break;
                             case CELL_KIND_BOOL:
-                                js_cell = (cell.bool_val != 0) ? true_cell : false_cell;
+                                napi_get_boolean(env, cell.bool_val != 0, &js_cell);
                                 break;
                             case CELL_KIND_NUMBER:
                                 napi_create_double(env, cell.number_val, &js_cell);
@@ -153,11 +136,24 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
                                 if (cell.str_len > 0 && cell.str_val != nullptr) {
                                     napi_create_string_utf8(env, cell.str_val, cell.str_len, &js_cell);
                                 } else {
-                                    js_cell = empty_str_cell;
+                                    napi_create_string_utf8(env, "", 0, &js_cell);
                                 }
                                 break;
+                            case 4: { // CELL_KIND_JSON_BLOB
+                                napi_value json_str;
+                                if (cell.str_len > 0 && cell.str_val != nullptr) {
+                                    napi_create_string_utf8(env, cell.str_val, cell.str_len, &json_str);
+                                } else {
+                                    napi_create_string_utf8(env, "", 0, &json_str);
+                                }
+                                napi_value global_json, parse_func;
+                                napi_get_named_property(env, global, "JSON", &global_json);
+                                napi_get_named_property(env, global_json, "parse", &parse_func);
+                                napi_call_function(env, global_json, parse_func, 1, &json_str, &js_cell);
+                                break;
+                            }
                             default:
-                                js_cell = null_cell;
+                                napi_get_null(env, &js_cell);
                                 break;
                         }
                         napi_set_element(env, row_arr, c, js_cell);

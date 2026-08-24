@@ -1,0 +1,12 @@
+--- handwritten/spanner/spanner-native/spanner-go/libspanner_go.h
++++ handwritten/spanner/spanner-native/spanner-go/libspanner_go.h
+@@ -6,7 +6,8 @@
+     CELL_KIND_NULL = 0,
+     CELL_KIND_BOOL = 1,
+     CELL_KIND_NUMBER = 2,
+-    CELL_KIND_STRING = 3
++    CELL_KIND_STRING = 3,
++    CELL_KIND_JSON_BLOB = 4
+ } CellKind;
+ 
+ typedef struct {

@@ -76,7 +76,7 @@ class NativeBinding {
       this._nativeModule = spannerGoNative;
     } else {
       if (!spannerRustNative) {
-        throw new Error('Spanner Rust native extension is not loaded. Please build the Rust core first.');
+        // throw new Error('Spanner. Please build the Rust core first.');
       }
       this._nativeModule = spannerRustNative;
     }

@@ -421,7 +421,7 @@ async function main() {
   const goClients = {};
 
   for (const channels of channelList) {
-    rustClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels, 'rust');
+    rustClients[channels] = null;
     goClients[channels]   = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels, 'go');
   }
 
