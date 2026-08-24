@@ -21,9 +21,9 @@ import {GoogleAuth} from 'google-auth-library';
 // after the new version of @google-cloud/common is released to npm and bumped in package.json.
 // Once released, standard `import {BigQuery} from '../src'` can be used directly.
 
-// Load the local build of @google-cloud/common from this branch
+// Load @google-cloud/common from npm
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const common = require('../../../../core/common/build/src');
+const common = require('@google-cloud/common');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let BigQuery: any;
