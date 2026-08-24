@@ -1,6 +1,6 @@
 {
   "extends": [
-    "gts",
+    "./node_modules/gts",
     "plugin:prettier/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -18,7 +18,10 @@
     // during monorepo ESLint consolidation to maintain Firestore-specific rules.
     {
       "files": ["handwritten/firestore/dev/src/**/*.ts"],
-      "excludedFiles": ["handwritten/firestore/dev/src/v1/*.ts", "handwritten/firestore/dev/src/v1beta1/*.ts"],
+      "excludedFiles": [
+        "handwritten/firestore/dev/src/v1/*.ts",
+        "handwritten/firestore/dev/src/v1beta1/*.ts"
+      ],
       "parser": "@typescript-eslint/parser",
       "rules": {
         "@typescript-eslint/explicit-function-return-type": [
@@ -38,7 +41,10 @@
       }
     },
     {
-      "files": ["handwritten/firestore/dev/test/*.ts", "handwritten/firestore/dev/system-test/*.ts"],
+      "files": [
+        "handwritten/firestore/dev/test/*.ts",
+        "handwritten/firestore/dev/system-test/*.ts"
+      ],
       "parser": "@typescript-eslint/parser",
       "rules": {
         "no-restricted-properties": [
