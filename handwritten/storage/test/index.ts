@@ -1262,31 +1262,29 @@ describe('Storage', () => {
     it('should list buckets with ipFilter summary', done => {
       const bucketsResponse = [
         {
+          id: 'bucket-with-filter',
           name: 'bucket-with-filter',
-          metadata: {
-            ipFilter: {
-              mode: 'Enabled',
-              allowCrossOrgVpcs: true,
-              allowAllServiceAgentAccess: true
-            }
+          ipFilter: {
+            mode: 'Enabled',
+            allowCrossOrgVpcs: true,
+            allowAllServiceAgentAccess: true
           }
         },
         {
+          id: 'bucket-without-filter',
           name: 'bucket-without-filter',
-          metadata: {
-            location: 'US'
-          }
+          location: 'US'
         }
       ];
-
-      storage.getBuckets = () => {
-        return Promise.resolve([bucketsResponse]);
+      storage.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        callback(null, { items: bucketsResponse });
       };
 
-      storage.getBuckets().then((data: any) => {
-        const [buckets] = data;
-        const filteredBucket = buckets.find((b: any) => b.name === 'bucket-with-filter');
-        const normalBucket = buckets.find((b: any) => b.name === 'bucket-without-filter');
+      storage.getBuckets((err: Error | null, buckets: Bucket[]) => {
+        if (err) return done(err);
+
+        const filteredBucket = buckets.find((b: Bucket) => b.name === 'bucket-with-filter')!;
+        const normalBucket = buckets.find((b: Bucket) => b.name === 'bucket-without-filter')!;
 
         assert.ok(filteredBucket.metadata.ipFilter);
         assert.strictEqual(filteredBucket.metadata.ipFilter.mode, 'Enabled');
@@ -1295,9 +1293,6 @@ describe('Storage', () => {
         assert.strictEqual(normalBucket.metadata.ipFilter, undefined);
         
         done();
-      })
-      .catch((err: any) => {
-        done(err);
       });
     });
   });

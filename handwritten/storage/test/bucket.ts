@@ -3753,11 +3753,10 @@ describe('Bucket', () => {
           return Promise.resolve([{ipFilter}]);
         };
 
-        bucket.getMetadata().then((data: any) => {
-          const [metadata] = data;
+        bucket.getMetadata().then(([metadata]: [BucketMetadata]) => {
           assert.deepStrictEqual(metadata.ipFilter, ipFilter);
           done();
-        });
+        }).catch(done);
       });
 
       it('should clear allowedIpCidrRanges', done => {
@@ -3780,15 +3779,14 @@ describe('Bucket', () => {
           return Promise.resolve([{ipFilter: initialIpFilter}]);
         };
 
-        bucket.setMetadata = (metadata: any) => {
-          assert.deepStrictEqual(metadata.ipFilter.publicNetworkSource.allowedIpCidrRanges, []);
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.deepStrictEqual(metadata.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, []);
           
           return Promise.resolve([{ipFilter: updatedIpFilter}]);
         };
 
         bucket.getMetadata()
-          .then((data: any) => {
-            const [getMeta] = data;
+          .then(([getMeta]: [BucketMetadata]) => {
             assert.strictEqual(getMeta.ipFilter?.mode, 'Disabled');
             assert.deepStrictEqual(
               getMeta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
@@ -3807,16 +3805,13 @@ describe('Bucket', () => {
 
             return bucket.setMetadata(metadataUpdate);
           })
-          .then((data: any) => {
-            const [meta] = data;
+          .then(([meta]: [BucketMetadata]) => {
             assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
             assert.strictEqual(meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, undefined);
             assert.strictEqual(meta.ipFilter?.allowAllServiceAgentAccess, false);
             done();
           })
-          .catch((err: any) => {
-            done(err);
-          });
+          .catch(done);
       });
     });
   });

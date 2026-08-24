@@ -1356,6 +1356,7 @@ describe('storage', function () {
           ipFilter: {
             mode: 'Disabled',
             publicNetworkSource: {
+              // The API omits the field when the array is cleared.
               allowedIpCidrRanges: [],
             },
             allowAllServiceAgentAccess: false,
@@ -4664,7 +4665,15 @@ describe('storage', function () {
       setTimeout(resolve, RETENTION_DURATION_SECONDS * 1000),
     );
     return Promise.all(
-      buckets.map(bucket => limit(() => deleteBucketAsync(bucket).catch(() => {}))),
+      buckets.map(bucket =>
+        limit(() =>
+          deleteBucketAsync(bucket).catch((err: ApiError) => {
+            if (err.code !== 404) {
+              throw err;
+            }
+          })
+        )
+      )
     );
   }
 

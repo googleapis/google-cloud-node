@@ -167,6 +167,7 @@ export {
   UploadCallback,
   UploadOptions,
   UploadResponse,
+  IpFilter,
 } from './bucket.js';
 export * from './crc32c.js';
 export {Channel, StopCallback} from './channel.js';
