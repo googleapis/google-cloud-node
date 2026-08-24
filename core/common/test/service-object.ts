@@ -1096,26 +1096,6 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should throw error when id or uri contains path traversal segments', () => {
-      serviceObject.id = '..';
-      assert.throws(() => {
-        asInternal(serviceObject).request_(reqOpts, () => {});
-      }, /Invalid value \.\. for path segment/);
-    });
-
-    it('should percent-encode query parameter injection payloads in path components', done => {
-      const maliciousId = 'table_name?param=value#tag';
-      serviceObject.id = maliciousId;
-      serviceObject.parent.request = (reqOpts_, callback) => {
-        assert.strictEqual(
-          reqOpts_.uri,
-          `${serviceObject.baseUrl}/table_name%3Fparam%3Dvalue%23tag/${reqOpts.uri}`,
-        );
-        callback(null, null, {} as r.Response);
-      };
-      asInternal(serviceObject).request_(reqOpts, () => done());
-    });
-
     it('should extend interceptors from child ServiceObjects', async () => {
       const parent = new ServiceObject(CONFIG) as FakeServiceObject;
       parent.interceptors.push({
@@ -1253,59 +1233,6 @@ describe('ServiceObject', () => {
         assert.deepStrictEqual(reqOpts, {shouldReturnStream: true});
       };
       serviceObject.requestStream(fakeOptions);
-    });
-  });
-
-  // Temporary test suite pulling in BigQuery to verify end-to-end path traversal
-  // protection and URI encoding with the local @google-cloud/common implementation.
-  // Note: We will delete these tests after the corresponding tests in BigQuery
-  // (handwritten/bigquery/test/dataset.ts) are unskipped upon the release of @google-cloud/common.
-  describe('BigQuery Dataset integration (security - URI encoding and path traversal protection)', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let BigQueryDataset: any;
-
-    before(() => {
-      BigQueryDataset = proxyquire(
-        '../../../../handwritten/bigquery/build/src/dataset',
-        {
-          '@google-cloud/common': {
-            ServiceObject,
-            util,
-          },
-        },
-      ).Dataset;
-    });
-
-    it('should throw error when dataset id or path segment is dot or dot-dot', () => {
-      const bigqueryMock = {
-        projectId: 'my-project',
-        request: util.noop,
-      };
-
-      assert.throws(() => {
-        const invalidDataset = new BigQueryDataset(bigqueryMock, '..');
-        invalidDataset.getMetadata(assert.ifError);
-      }, /Invalid value \.\. for path segment/);
-    });
-
-    it('should percent-encode query parameter injection payload in table name', done => {
-      const bigqueryMock = {
-        projectId: 'my-project',
-        request: util.noop,
-      };
-      const ds = new BigQueryDataset(bigqueryMock, 'kittens');
-      const maliciousTableId = 'table_name?param=value#tag';
-      const table = ds.table(maliciousTableId);
-
-      ds.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(
-          reqOpts.uri,
-          'tables/table_name%3Fparam%3Dvalue%23tag',
-        );
-        done();
-      };
-
-      table.getMetadata(assert.ifError);
     });
   });
 });

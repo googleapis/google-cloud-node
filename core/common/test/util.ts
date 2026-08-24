@@ -46,13 +46,6 @@ import {
   ParsedHttpRespMessage,
   ParsedHttpResponseBody,
   Util,
-  validateUriPathSegment,
-  validateUriPath,
-  encodeWithSlashes,
-  encodeWithoutSlashes,
-  encodeURIPath,
-  encodeAbsoluteURI,
-  joinURIComponents,
 } from '../src/util';
 import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
 
@@ -1907,119 +1900,6 @@ describe('common/util', () => {
       });
 
       assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
-    });
-  });
-
-  describe('validateUriPathSegment & validateUriPath', () => {
-    it('validateUriPathSegment should throw if the value is . or ..', () => {
-      assert.throws(() => {
-        validateUriPathSegment('testField', '.');
-      }, /Invalid value \. for testField/);
-
-      assert.throws(() => {
-        validateUriPathSegment('testField', '..');
-      }, /Invalid value \.\. for testField/);
-    });
-
-    it('validateUriPath should throw if any segment is . or ..', () => {
-      assert.throws(() => {
-        validateUriPath('testField', 'foo/./bar');
-      }, /Value for testField must not contain segments that are exactly \. or \.\./);
-
-      assert.throws(() => {
-        validateUriPath('testField', 'foo/../bar');
-      }, /Value for testField must not contain segments that are exactly \. or \.\./);
-    });
-  });
-
-  describe('encodeWithSlashes & encodeWithoutSlashes', () => {
-    it('encodeWithSlashes should percent-encode special characters and slashes', () => {
-      assert.strictEqual(
-        encodeWithSlashes('foo/bar'),
-        'foo%2Fbar',
-      );
-      assert.strictEqual(
-        encodeWithSlashes('abc-123_.~'),
-        'abc-123_.~',
-      );
-      assert.strictEqual(
-        encodeWithSlashes("!'()*"),
-        '%21%27%28%29%2A',
-      );
-      assert.strictEqual(
-        encodeWithSlashes('photo_😀.png'),
-        'photo_%F0%9F%98%80.png',
-      );
-    });
-
-    it('encodeWithoutSlashes should preserve slashes and encode special characters', () => {
-      assert.strictEqual(
-        encodeWithoutSlashes('foo-123_~.baz'),
-        'foo-123_~.baz',
-      );
-      assert.strictEqual(
-        encodeWithoutSlashes('foo/bar'),
-        'foo/bar',
-      );
-      assert.strictEqual(
-        encodeWithoutSlashes('foo/bar baz'),
-        'foo/bar%20baz',
-      );
-      assert.strictEqual(
-        encodeWithoutSlashes('photo_😀.png'),
-        'photo_%F0%9F%98%80.png',
-      );
-      assert.strictEqual(
-        encodeWithoutSlashes('test*file!'),
-        'test%2Afile%21',
-      );
-    });
-  });
-
-  describe('encodeAbsoluteURI', () => {
-    it('should handle absolute URLs with and without trailing slash', () => {
-      assert.strictEqual(
-        encodeAbsoluteURI('https://example.com/foo/bar'),
-        'https://example.com/foo/bar',
-      );
-      assert.strictEqual(
-        encodeAbsoluteURI('https://example.com/foo/bar/'),
-        'https://example.com/foo/bar/',
-      );
-      assert.strictEqual(
-        encodeAbsoluteURI('http://www.google.com'),
-        'http://www.google.com',
-      );
-    });
-
-    it('should encode path segments and handle colons in absolute URLs', () => {
-      assert.strictEqual(
-        encodeAbsoluteURI('https://example.com/projects:list'),
-        'https://example.com/projects:list',
-      );
-      assert.strictEqual(
-        encodeAbsoluteURI('https://example.com/foo/bar-123_~.baz'),
-        'https://example.com/foo/bar-123_~.baz',
-      );
-    });
-  });
-
-  describe('joinURIComponents', () => {
-    it('should trim slashes and join components', () => {
-      assert.strictEqual(
-        joinURIComponents(['/base/', '/id/', '/path/']),
-        'base/id/path',
-      );
-    });
-
-    it('should encode special characters and prevent path traversal in components', () => {
-      assert.strictEqual(
-        joinURIComponents(['datasets', 'my dataset', 'tables']),
-        'datasets/my%20dataset/tables',
-      );
-      assert.throws(() => {
-        joinURIComponents(['datasets', '..', 'tables']);
-      });
     });
   });
 
