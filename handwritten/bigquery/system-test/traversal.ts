@@ -85,6 +85,20 @@ describe.skip('BigQuery URI path handling and traversal', () => {
       datasetId: 'valid_dataset_123',
       expectedError: /Not found: Dataset.*datasets\/valid_dataset_123/,
     },
+    {
+      description:
+        'should handle colon-separated segments without double decoding',
+      datasetId: 'domain.com:custom_dataset%20name',
+      expectedError:
+        /Not found: Dataset.*datasets\/domain\.com:custom_dataset%20name/,
+    },
+    {
+      description:
+        'should preserve literal percent-encoded sequences in colon-separated segments without decoding twice',
+      datasetId: 'project:item%2520name',
+      expectedError:
+        /Not found: Dataset.*datasets\/project:item%2520name/,
+    },
   ];
 
   for (const {description, datasetId, expectedError} of testCases) {
