@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
-const { v3 } = require('../../../../../../packages/google-cloud-dialogflow-cx');
+import {v3} from '@google-cloud/dialogflow-cx';
 
 const sinon = require('sinon');
 
