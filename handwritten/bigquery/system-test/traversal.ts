@@ -14,18 +14,16 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {GoogleAuth} from 'google-auth-library';
 import {ApiError} from '@google-cloud/common';
 import {BigQuery} from '../src';
 
 describe.skip('BigQuery URI path handling and traversal', () => {
-
-  const fakeAuthClient = Object.assign(new GoogleAuth(), {
+  const fakeAuthClient = {
     getCredentials: async () => ({}),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     authorizeRequest: async (reqOpts: any) => reqOpts,
     getProjectId: async () => 'test-project',
-  });
+  };
 
   const testCases = [
     {
