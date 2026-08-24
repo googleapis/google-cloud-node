@@ -125,6 +125,12 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
 
                 napi_create_array_with_length(env, row_count, &rows_val);
 
+                napi_value null_cell, true_cell, false_cell, empty_str_cell;
+                napi_get_null(env, &null_cell);
+                napi_get_boolean(env, true, &true_cell);
+                napi_get_boolean(env, false, &false_cell);
+                napi_create_string_utf8(env, "", 0, &empty_str_cell);
+
                 for (int r = 0; r < row_count; ++r) {
                     napi_value row_arr;
                     napi_create_array_with_length(env, col_count, &row_arr);
@@ -135,10 +141,10 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
 
                         switch (cell.kind) {
                             case CELL_KIND_NULL:
-                                napi_get_null(env, &js_cell);
+                                js_cell = null_cell;
                                 break;
                             case CELL_KIND_BOOL:
-                                napi_get_boolean(env, cell.bool_val != 0, &js_cell);
+                                js_cell = (cell.bool_val != 0) ? true_cell : false_cell;
                                 break;
                             case CELL_KIND_NUMBER:
                                 napi_create_double(env, cell.number_val, &js_cell);
@@ -147,11 +153,11 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
                                 if (cell.str_len > 0 && cell.str_val != nullptr) {
                                     napi_create_string_utf8(env, cell.str_val, cell.str_len, &js_cell);
                                 } else {
-                                    napi_create_string_utf8(env, "", 0, &js_cell);
+                                    js_cell = empty_str_cell;
                                 }
                                 break;
                             default:
-                                napi_get_null(env, &js_cell);
+                                js_cell = null_cell;
                                 break;
                         }
                         napi_set_element(env, row_arr, c, js_cell);
