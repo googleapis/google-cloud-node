@@ -82,6 +82,9 @@ async function runBenchmark(queryFn, concurrency, durationMs) {
         latencies.push(reqDuration);
       } catch (err) {
         errorCount++;
+        if (errorCount <= 3) {
+          console.error('\n[Benchmark Request Error]:', err.message || err);
+        }
       } finally {
         activeInFlight--;
       }
@@ -155,6 +158,9 @@ async function runCustomerReplication(queryFn, concurrency, targetCount) {
         latencies.push(performance.now() - reqStart);
       } catch (err) {
         errorCount++;
+        if (errorCount <= 3) {
+          console.error('\n[Customer Replication Error]:', err.message || err);
+        }
       }
     }
   };

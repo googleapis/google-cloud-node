@@ -93,8 +93,9 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         if (batch->error_msg != nullptr) {
             napi_value err_obj, err_msg_val, err_code_val;
             napi_create_string_utf8(env, batch->error_msg, NAPI_AUTO_LENGTH, &err_msg_val);
+            napi_create_error(env, nullptr, err_msg_val, &err_obj);
             napi_create_int32(env, batch->error_code, &err_code_val);
-            napi_create_error(env, err_code_val, err_msg_val, &err_obj);
+            napi_set_named_property(env, err_obj, "code", err_code_val);
 
             napi_value argv[3] = { err_obj, null_val, null_val };
             napi_call_function(env, global, js_cb, 3, argv, nullptr);
