@@ -23,8 +23,8 @@ import {
 } from './types.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import pkg from '@google-cloud/spanner/build/protos/protos.js';
-import type {google as GoogleProto} from '@google-cloud/spanner/build/protos/protos.js';
+import pkg from '@google-cloud/spanner-api/build/protos/protos.js';
+import type {google as GoogleProto} from '@google-cloud/spanner-api/build/protos/protos.js';
 
 const {google} = pkg as {google: typeof GoogleProto};
 const TypeCode = google.spanner.v1.TypeCode;
