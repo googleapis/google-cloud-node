@@ -13,38 +13,12 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it, before} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import {describe, it} from 'mocha';
 import {GoogleAuth} from 'google-auth-library';
-
-// TODO: Remove proxyquire and the local @google-cloud/common injection below
-// after the new version of @google-cloud/common is released to npm and bumped in package.json.
-// Once released, standard `import {BigQuery} from '../src'` can be used directly.
-
-// Load @google-cloud/common from npm
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const common = require('@google-cloud/common');
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let BigQuery: any;
+import {ApiError} from '@google-cloud/common';
+import {BigQuery} from '../src';
 
 describe.skip('BigQuery URI path handling and traversal', () => {
-  // Turn these tests back on after the common library has been released.
-  before(() => {
-    // Inject the local common build prototypes and utilities
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const oldCommon = require('@google-cloud/common');
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const oldUtil = require('@google-cloud/common/build/src/util');
-    Object.assign(oldCommon.ServiceObject.prototype, common.ServiceObject.prototype);
-    Object.assign(oldCommon.Service.prototype, common.Service.prototype);
-    Object.assign(oldCommon.util, common.util);
-    Object.assign(oldUtil, common.util);
-
-    BigQuery = proxyquire('../src', {
-      '@google-cloud/common': common,
-    }).BigQuery;
-  });
 
   const fakeAuthClient = Object.assign(new GoogleAuth(), {
     getCredentials: async () => ({}),
@@ -117,19 +91,18 @@ describe.skip('BigQuery URI path handling and traversal', () => {
     it(description, async () => {
       const bigquery = new BigQuery({
         projectId: 'test-project',
-        authClient: fakeAuthClient,
+        authClient: fakeAuthClient as any,
       });
 
       // Mock makeAuthenticatedRequest to return a 404 error containing the requested URI
-      bigquery.makeAuthenticatedRequest = (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (bigquery as any).makeAuthenticatedRequest = (
         reqOpts: any,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         callback?: any,
       ) => {
-        const notFoundError = new common.ApiError({
+        const notFoundError = new ApiError({
           message: `Not found: Dataset ${reqOpts.uri}`,
           code: 404,
+          response: {} as any,
         });
         if (typeof callback === 'function') {
           callback(notFoundError, null, null);
