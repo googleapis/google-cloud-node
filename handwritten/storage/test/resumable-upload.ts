@@ -1828,7 +1828,7 @@ describe('resumable-upload', () => {
       throw new Error() as GaxiosError;
     };
 
-    await up.getAndSetOffset().catch(() => {});
+    await up.getAndSetOffset();
     await destroyCalled;
   });
 
@@ -2515,9 +2515,9 @@ describe('resumable-upload', () => {
     it('should include correct details for custom errors with empty messages', done => {
       up.numRetries = 3;
       up.retryLimit = 3;
-      const customError = new Error('');
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (customError as any).code = 'ERR_SOMETHING_SPECIAL';
+      const customError = Object.assign(new Error(''), {
+        code: 'ERR_SOMETHING_SPECIAL',
+      });
 
       up.on('error', (err: Error) => {
         assert.strictEqual(
@@ -2542,16 +2542,14 @@ describe('resumable-upload', () => {
         {
           method: 'POST',
           url: 'https://example.com',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any,
+        },
         {
           status: 429,
           statusText: 'Too Many Requests',
           data: '',
           config: {},
           headers: {},
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any
+        } as GaxiosResponse
       );
 
       up.on('error', (err: Error) => {
@@ -2581,8 +2579,7 @@ describe('resumable-upload', () => {
         {
           method: 'POST',
           url: 'https://example.com',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any,
+        },
         {
           status: 400,
           statusText: 'Bad Request',
@@ -2594,8 +2591,7 @@ describe('resumable-upload', () => {
           },
           config: {},
           headers: {},
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any
+        } as GaxiosResponse
       );
 
       up.on('error', (err: Error) => {
