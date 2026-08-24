@@ -17,7 +17,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {Request, Response} from 'teeny-request';
+import * as r from 'teeny-request';
 
 import {Service, ServiceObject} from '../src';
 import {
@@ -64,8 +64,7 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
       expectedError: /Invalid value \.\. for path segment/,
     },
     {
-      description:
-        'should reject paths containing dot-dot segment (foo/../bar)',
+      description: 'should reject paths containing dot-dot segment (foo/../bar)',
       datasetId: 'foo/../bar',
       expectedError: /Invalid value \.\. for path segment/,
     },
@@ -98,7 +97,8 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
       description:
         'should preserve literal percent-encoded sequences in colon-separated segments without decoding twice',
       datasetId: 'project:item%2520name',
-      expectedError: /Not found: Dataset.*datasets\/project:item%2520name/,
+      expectedError:
+        /Not found: Dataset.*datasets\/project:item%2520name/,
     },
   ];
 
@@ -108,7 +108,7 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
       const fakeParent = {
         interceptors: [],
         getRequestInterceptors: () => [],
-        requestStream: () => ({}) as Request,
+        requestStream: () => ({} as r.Request),
         request: (
           reqOpts: DecorateRequestOptions,
           callback: BodyResponseCallback,
@@ -116,9 +116,9 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
           const notFoundError = new ApiError({
             message: `Not found: Dataset ${reqOpts.uri}`,
             code: 404,
-            response: {} as Response,
+            response: {} as r.Response,
           });
-          callback(notFoundError, null, {} as Response);
+          callback(notFoundError, null, {} as r.Response);
         },
       };
 
@@ -147,10 +147,10 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
         const notFoundError = new ApiError({
           message: `Not found: Dataset ${reqOpts.uri}`,
           code: 404,
-          response: {} as Response,
+          response: {} as r.Response,
         });
         if (typeof callback === 'function') {
-          callback(notFoundError, null, {} as Response);
+          callback(notFoundError, null, {} as r.Response);
         }
       }) as unknown as MakeAuthenticatedRequest;
 

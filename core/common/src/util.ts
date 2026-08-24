@@ -22,24 +22,12 @@ import {
 } from '@google-cloud/projectify';
 import * as htmlEntities from 'html-entities';
 import * as extend from 'extend';
-import {
-  AuthClient,
-  CredentialBody,
-  GoogleAuth,
-  GoogleAuthOptions,
-} from 'google-auth-library';
-import {
-  CoreOptions,
-  Options,
-  OptionsWithUri,
-  Request,
-  RequestCallback,
-  RequestPart,
-  Response,
-  teenyRequest,
-} from 'teeny-request';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {CredentialBody} from 'google-auth-library';
+import * as r from 'teeny-request';
 import * as retryRequest from 'retry-request';
 import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
+import {teenyRequest} from 'teeny-request';
 
 import {Interceptor} from './service-object';
 import {DEFAULT_PROJECT_ID_TOKEN} from './service';
@@ -106,7 +94,7 @@ export interface DuplexifyConstructor {
 }
 
 export interface ParsedHttpRespMessage {
-  resp: Response;
+  resp: r.Response;
   err?: ApiError;
 }
 
@@ -140,10 +128,8 @@ export interface PackageJson {
   version: string;
 }
 
-export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
-  GoogleAuthOptions,
-  'authClient'
-> {
+export interface MakeAuthenticatedRequestFactoryConfig
+  extends Omit<GoogleAuthOptions, 'authClient'> {
   /**
    * Automatically retry requests if the response is related to rate limits or
    * certain intermittent server errors. We will exponentially backoff
@@ -197,7 +183,7 @@ export interface OnAuthenticatedCallback {
 export interface GoogleErrorBody {
   code: number;
   errors?: GoogleInnerError[];
-  response: Response;
+  response: r.Response;
   message?: string;
 }
 
@@ -221,20 +207,20 @@ export interface MakeWritableStreamOptions {
   /**
    * Request object, in the format of a standard Node.js http.request() object.
    */
-  request?: Options;
+  request?: r.Options;
 
   makeAuthenticatedRequest(
-    reqOpts: OptionsWithUri,
+    reqOpts: r.OptionsWithUri,
     fnobj: {
       onAuthenticated(
         err: Error | null,
-        authenticatedReqOpts?: Options,
+        authenticatedReqOpts?: r.Options,
       ): void;
     },
   ): void;
 }
 
-export interface DecorateRequestOptions extends CoreOptions {
+export interface DecorateRequestOptions extends r.CoreOptions {
   autoPaginate?: boolean;
   autoPaginateVal?: boolean;
   objectMode?: boolean;
@@ -258,7 +244,7 @@ export interface ParsedHttpResponseBody {
 export class ApiError extends Error {
   code?: number;
   errors?: GoogleInnerError[];
-  response?: Response;
+  response?: r.Response;
   constructor(errorMessage: string);
   constructor(errorBody: GoogleErrorBody);
   constructor(errorBodyOrMessage?: GoogleErrorBody | string) {
@@ -331,7 +317,7 @@ export class ApiError extends Error {
  */
 export class PartialFailureError extends Error {
   errors?: GoogleInnerError[];
-  response?: Response;
+  response?: r.Response;
   constructor(b: GoogleErrorBody) {
     super();
     const errorObject = b;
@@ -345,7 +331,7 @@ export class PartialFailureError extends Error {
 }
 
 export interface BodyResponseCallback {
-  (err: Error | ApiError | null, body?: ResponseBody, res?: Response): void;
+  (err: Error | ApiError | null, body?: ResponseBody, res?: r.Response): void;
 }
 
 export interface RetryOptions {
@@ -377,7 +363,7 @@ export interface MakeRequestConfig {
 
   stream?: Duplexify;
 
-  shouldRetryFn?: (response?: Response) => boolean;
+  shouldRetryFn?: (response?: r.Response) => boolean;
 }
 
 export class Util {
@@ -404,7 +390,7 @@ export class Util {
    */
   handleResp(
     err: Error | null,
-    resp?: Response | null,
+    resp?: r.Response | null,
     body?: ResponseBody,
     callback?: BodyResponseCallback,
   ) {
@@ -438,7 +424,7 @@ export class Util {
    * @param {?error} parsedHttpRespMessage.err - An error detected.
    * @param {object} parsedHttpRespMessage.resp - The original response object.
    */
-  parseHttpRespMessage(httpRespMessage: Response) {
+  parseHttpRespMessage(httpRespMessage: r.Response) {
     const parsedHttpRespMessage = {
       resp: httpRespMessage,
     } as ParsedHttpRespMessage;
@@ -534,7 +520,7 @@ export class Util {
           body: writeStream,
         },
       ],
-    }) as OptionsWithUri;
+    }) as r.OptionsWithUri;
 
     options.makeAuthenticatedRequest(reqOpts, {
       onAuthenticated(err, authenticatedReqOpts) {
@@ -653,7 +639,7 @@ export class Util {
     function makeAuthenticatedRequest(
       reqOpts: DecorateRequestOptions,
       optionsOrCallback?:
-        MakeAuthenticatedRequestOptions
+        | MakeAuthenticatedRequestOptions
         | BodyResponseCallback,
     ): void | Abortable | Duplexify {
       let stream: Duplexify;
@@ -882,7 +868,7 @@ export class Util {
       request: teenyRequest.defaults(requestDefaults),
       retries: autoRetryValue !== false ? maxRetryValue : 0,
       noResponseRetries: autoRetryValue !== false ? maxRetryValue : 0,
-      shouldRetryFn(httpRespMessage: Response) {
+      shouldRetryFn(httpRespMessage: r.Response) {
         const err = util.parseHttpRespMessage(httpRespMessage).err;
         if (config.retryOptions?.retryableErrorFn) {
           return err && config.retryOptions?.retryableErrorFn(err);
@@ -900,7 +886,7 @@ export class Util {
 
     if (!config.stream) {
       return retryRequest(reqOpts, options, (err, response, body) => {
-        util.handleResp(err, response as {} as Response, body, callback!);
+        util.handleResp(err, response as {} as r.Response, body, callback!);
       });
     }
     const dup = config.stream as AbortableDuplex;
@@ -1047,10 +1033,7 @@ class ProgressStream extends Transform {
  * @param {string} propertyName - The name of the property being validated.
  * @param {string} value - The segment value to validate.
  */
-export function validateUriPathSegment(
-  propertyName: string,
-  value: string,
-): void {
+export function validateUriPathSegment(propertyName: string, value: string): void {
   if (value === '.' || value === '..') {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
   }

@@ -20,7 +20,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 const arrify = require('arrify');
 import {EventEmitter} from 'events';
 import * as extend from 'extend';
-import {Options, Request, Response} from 'teeny-request';
+import * as r from 'teeny-request';
 
 import {StreamRequestOptions} from '.';
 import {
@@ -33,12 +33,12 @@ import {
   util,
 } from './util';
 
-export type RequestResponse = [Metadata, Response];
+export type RequestResponse = [Metadata, r.Response];
 
 export interface ServiceObjectParent {
   interceptors: Interceptor[];
   getRequestInterceptors(): Function[];
-  requestStream(reqOpts: DecorateRequestOptions): Request;
+  requestStream(reqOpts: DecorateRequestOptions): r.Request;
   request(
     reqOpts: DecorateRequestOptions,
     callback: BodyResponseCallback,
@@ -46,18 +46,18 @@ export interface ServiceObjectParent {
 }
 
 export interface Interceptor {
-  request(opts: Options): DecorateRequestOptions;
+  request(opts: r.Options): DecorateRequestOptions;
 }
 
 export type GetMetadataOptions = object;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Metadata = any;
-export type MetadataResponse = [Metadata, Response];
+export type MetadataResponse = [Metadata, r.Response];
 export type MetadataCallback = (
   err: Error | null,
   metadata?: Metadata,
-  apiResponse?: Response,
+  apiResponse?: r.Response,
 ) => void;
 
 export type ExistsOptions = object;
@@ -108,17 +108,16 @@ export interface ServiceObjectConfig {
 }
 
 export interface Methods {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [methodName: string]: {reqOpts?: any} | boolean;
+  [methodName: string]: {reqOpts?: r.CoreOptions} | boolean;
 }
 
 export interface InstanceResponseCallback<T> {
-  (err: ApiError | null, instance?: T | null, apiResponse?: Response): void;
+  (err: ApiError | null, instance?: T | null, apiResponse?: r.Response): void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CreateOptions {}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CreateResponse<T> = any[];
 export interface CreateCallback<T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -127,7 +126,7 @@ export interface CreateCallback<T> {
 
 export type DeleteOptions = {ignoreNotFound?: boolean} & object;
 export interface DeleteCallback {
-  (err: Error | null, apiResponse?: Response): void;
+  (err: Error | null, apiResponse?: r.Response): void;
 }
 
 export interface GetConfig {
@@ -137,10 +136,10 @@ export interface GetConfig {
   autoCreate?: boolean;
 }
 type GetOrCreateOptions = GetConfig & CreateOptions;
-export type GetResponse<T> = [T, Response];
+export type GetResponse<T> = [T, r.Response];
 
 export interface ResponseCallback {
-  (err?: Error | null, apiResponse?: Response): void;
+  (err?: Error | null, apiResponse?: r.Response): void;
 }
 
 export type SetMetadataResponse = [Metadata];
@@ -278,13 +277,13 @@ class ServiceObject<T = any> extends EventEmitter {
    * @param {?error} callback.err - An error returned while making this request.
    * @param {object} callback.apiResponse - The full API response.
    */
-  delete(options?: DeleteOptions): Promise<[Response]>;
+  delete(options?: DeleteOptions): Promise<[r.Response]>;
   delete(options: DeleteOptions, callback: DeleteCallback): void;
   delete(callback: DeleteCallback): void;
   delete(
     optionsOrCallback?: DeleteOptions | DeleteCallback,
     cb?: DeleteCallback,
-  ): Promise<[Response]> | void {
+  ): Promise<[r.Response]> | void {
     const [options, callback] = util.maybeOptionsOrCallback<
       DeleteOptions,
       DeleteCallback
@@ -319,7 +318,6 @@ class ServiceObject<T = any> extends EventEmitter {
             err = null;
           }
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         callback(err, ...(args as any));
       },
     );
@@ -391,7 +389,7 @@ class ServiceObject<T = any> extends EventEmitter {
     function onCreate(
       err: ApiError | null,
       instance: T,
-      apiResponse: Response,
+      apiResponse: r.Response,
     ) {
       if (err) {
         if (err.code === 409) {
@@ -415,10 +413,10 @@ class ServiceObject<T = any> extends EventEmitter {
           void self.create(...args);
           return;
         }
-        callback!(err, null, metadata as Response);
+        callback!(err, null, metadata as r.Response);
         return;
       }
-      callback!(null, self as {} as T, metadata as Response);
+      callback!(null, self as {} as T, metadata as r.Response);
     });
   }
 
@@ -462,7 +460,7 @@ class ServiceObject<T = any> extends EventEmitter {
     ServiceObject.prototype.request.call(
       this,
       reqOpts,
-      (err: Error | null, body?: ResponseBody, res?: Response) => {
+      (err: Error | null, body?: ResponseBody, res?: r.Response) => {
         this.metadata = body;
         callback!(err, this.metadata, res);
       },
@@ -532,7 +530,7 @@ class ServiceObject<T = any> extends EventEmitter {
     ServiceObject.prototype.request.call(
       this,
       reqOpts,
-      (err: Error | null, body?: ResponseBody, res?: Response) => {
+      (err: Error | null, body?: ResponseBody, res?: r.Response) => {
         this.metadata = body;
         callback!(err, this.metadata, res);
       },
@@ -548,7 +546,7 @@ class ServiceObject<T = any> extends EventEmitter {
    * @param {string} reqOpts.uri - A URI relative to the baseUrl.
    * @param {function} callback - The callback function passed to `request`.
    */
-  private request_(reqOpts: StreamRequestOptions): Request;
+  private request_(reqOpts: StreamRequestOptions): r.Request;
   private request_(
     reqOpts: DecorateRequestOptions,
     callback: BodyResponseCallback,
@@ -556,7 +554,7 @@ class ServiceObject<T = any> extends EventEmitter {
   private request_(
     reqOpts: DecorateRequestOptions | StreamRequestOptions,
     callback?: BodyResponseCallback,
-  ): void | Request {
+  ): void | r.Request {
     reqOpts = extend(true, {}, reqOpts);
 
     if (this.projectId) {
@@ -579,7 +577,6 @@ class ServiceObject<T = any> extends EventEmitter {
       );
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const childInterceptors = (arrify as unknown as (arg1: any) => [])(
       reqOpts.interceptors_!,
     );
@@ -619,7 +616,7 @@ class ServiceObject<T = any> extends EventEmitter {
    * @param {object} reqOpts - Request options that are passed to `request`.
    * @param {string} reqOpts.uri - A URI relative to the baseUrl.
    */
-  requestStream(reqOpts: DecorateRequestOptions): Request {
+  requestStream(reqOpts: DecorateRequestOptions): r.Request {
     const opts = extend(true, reqOpts, {shouldReturnStream: true});
     return this.request_(opts as StreamRequestOptions);
   }
