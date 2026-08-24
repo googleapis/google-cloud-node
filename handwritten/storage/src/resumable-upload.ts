@@ -789,7 +789,9 @@ export class Upload extends Writable {
       return this.createURIAsync();
     }
     this.createURIAsync()
+      // eslint-disable-next-line promise/no-callback-in-promise
       .then(r => callback(null, r))
+      // eslint-disable-next-line promise/no-callback-in-promise
       .catch(callback);
   }
 
@@ -1468,7 +1470,16 @@ function buildRetryError(
   const err = resp.data;
   if (err !== undefined && err !== null) {
     if (typeof err === 'object') {
-      const gaxiosErrLike = err as any;
+      const gaxiosErrLike = err as {
+        message?: unknown;
+        status?: number;
+        response?: {
+          status?: number;
+          statusText?: string;
+          data?: unknown;
+        };
+        code?: string | number;
+      };
       const errParts: string[] = [];
       if (gaxiosErrLike.message) {
         errParts.push(String(gaxiosErrLike.message));
@@ -1541,7 +1552,9 @@ export function createURI(
     return up.createURI();
   }
   up.createURI()
+    // eslint-disable-next-line promise/no-callback-in-promise
     .then(r => callback(null, r))
+    // eslint-disable-next-line promise/no-callback-in-promise
     .catch(callback);
 }
 

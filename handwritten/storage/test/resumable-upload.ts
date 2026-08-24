@@ -1813,20 +1813,23 @@ describe('resumable-upload', () => {
     );
   });
 
-  it('currentInvocationId.checkUploadStatus should be the same on error', done => {
+  it('currentInvocationId.checkUploadStatus should be the same on error', async () => {
     const beforeCallInvocationId = up.currentInvocationId.checkUploadStatus;
-    up.destroy = () => {
-      assert.equal(
-        beforeCallInvocationId,
-        up.currentInvocationId.checkUploadStatus
-      );
-      done();
-    };
+    const destroyCalled = new Promise<void>(resolve => {
+      up.destroy = () => {
+        assert.equal(
+          beforeCallInvocationId,
+          up.currentInvocationId.checkUploadStatus
+        );
+        resolve();
+      };
+    });
     up.makeRequest = () => {
       throw new Error() as GaxiosError;
     };
 
-    up.getAndSetOffset().catch(done);
+    await up.getAndSetOffset().catch(() => {});
+    await destroyCalled;
   });
 
   describe('#getAndSetOffset', () => {
