@@ -317,16 +317,25 @@ func ExecuteStreamingSqlGo(
 			}
 
 			// 2. Prepare outgoing gRPC context with metadata headers
-			md := metadata.New(metaMap)
-
-			// Fetch OAuth2 bearer token from memory cache
-			token, err := client.GetToken()
-			if err != nil {
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
-				return
+			md := metadata.New(nil)
+			for k, v := range metaMap {
+				// If using GAPIC client (DirectPath), skip headers that GAPIC manages internally to prevent duplicate comma-joined header values
+				if client.useGapic && (k == "x-goog-user-project" || k == "x-goog-api-client" || k == "x-goog-request-params") {
+					continue
+				}
+				md.Set(k, v)
 			}
-			if token != nil && token.AccessToken != "" {
-				md.Set("authorization", "Bearer "+token.AccessToken)
+
+			// Fetch OAuth2 bearer token from memory cache (only for raw connection pool; GAPIC manages its own auth)
+			if !client.useGapic {
+				token, err := client.GetToken()
+				if err != nil {
+					sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
+					return
+				}
+				if token != nil && token.AccessToken != "" {
+					md.Set("authorization", "Bearer "+token.AccessToken)
+				}
 			}
 
 			ctx := metadata.NewOutgoingContext(client.ctx, md)
