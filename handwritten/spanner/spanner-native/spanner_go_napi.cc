@@ -104,6 +104,17 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
             napi_value argv[3] = { null_val, null_val, null_val };
             napi_call_function(env, global, js_cb, 3, argv, nullptr);
         } else {
+            static bool logged_deserialization_mode = false;
+            if (!logged_deserialization_mode) {
+                logged_deserialization_mode = true;
+                if (batch->format == 1) {
+                    printf("  [Go Native Bridge] Active Deserialization: DIRECT N-API NATIVE CELLS (Zero JSON.parse)\n");
+                } else {
+                    printf("  [Go Native Bridge] Active Deserialization: LEGACY JSON FORMATTER (JSON.parse)\n");
+                }
+                fflush(stdout);
+            }
+
             napi_value rows_val = null_val;
 
             if (batch->format == 1 && batch->cells != nullptr && batch->row_count > 0 && batch->col_count > 0) {

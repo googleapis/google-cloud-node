@@ -60,6 +60,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	}
 
 	if isDirectPathEnabled() {
+		fmt.Printf("  [Go Shared Core] Transport Config: DIRECTPATH ENABLED (ALTS gRPC, pool=%d)\n", limit)
 		// Enable gRPC DirectPath via GAPIC client with connection pooling matching channelCount
 		_ = os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
 		_ = os.Unsetenv("DISABLE_DIRECT_PATH")
