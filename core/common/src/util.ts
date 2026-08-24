@@ -1024,18 +1024,32 @@ class ProgressStream extends Transform {
   }
 }
 
-// Validates a single path segment matched by a single wildcard (*).
-// Checks that the segment is not exactly '.' or '..' (directory traversal indicators).
+/**
+ * Validates a single path segment matched by a single wildcard (*).
+ * Checks that the segment is not exactly '.' or '..' (directory traversal indicators).
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
+ * @param {string} propertyName - The name of the property being validated.
+ * @param {string} value - The segment value to validate.
+ */
 export function validateUriPathSegment(propertyName: string, value: string): void {
   if (value === '.' || value === '..') {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
   }
 }
 
-// Validates a multi-segment path matched by a double wildcard (**).
-// Splitting by slash, it checks that no individual segment is exactly '.' or '..'.
-// This segment-by-segment check prevents directory traversal while allowing
-// legitimate resource names containing dots (e.g., domain-scoped project IDs).
+/**
+ * Validates a multi-segment path matched by a double wildcard (**).
+ * Splitting by slash, it checks that no individual segment is exactly '.' or '..'.
+ * This segment-by-segment check prevents directory traversal while allowing
+ * legitimate resource names containing dots (e.g., domain-scoped project IDs).
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
+ * @param {string} propertyName - The name of the property being validated.
+ * @param {string} value - The path value to validate.
+ */
 export function validateUriPath(propertyName: string, value: string): void {
   if (value) {
     // Split by slash and check for exact segment matches of '.' or '..' rather
@@ -1059,6 +1073,8 @@ export function validateUriPath(propertyName: string, value: string): void {
  * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
  * To ensure strict compliance, we manually encode those preserved characters.
  *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
  * @param {string} str - The input string to encode.
  * @returns {string} The percent-encoded string.
  */
@@ -1073,6 +1089,8 @@ export function encodeWithSlashes(str: string): string {
  * Percent-encodes a string according to RFC 3986, preserving unreserved
  * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
  * characters are percent-encoded.
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
  *
  * @param {string} str - The input string to encode.
  * @returns {string} The percent-encoded string with slashes preserved.
