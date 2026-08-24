@@ -14,7 +14,11 @@
 
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {isPlainObject, tryGetPreferRestEnvironmentVariable} from '../src/util';
+import {
+  isPlainObject,
+  tryGetPreferRestEnvironmentVariable,
+  wrapError,
+} from '../src/util';
 import * as sinon from 'sinon';
 
 describe('isPlainObject()', () => {
@@ -100,5 +104,49 @@ describe('isPlainObject()', () => {
         /unsupported value.*FIRESTORE_PREFER_REST/,
       );
     });
+  });
+});
+
+describe('wrapError()', () => {
+  it('appends the callsite stack to the error stack', () => {
+    const err = new Error('Expected error');
+    const wrapped = wrapError(err, 'Error\n    at callsite');
+
+    expect(wrapped).to.equal(err);
+    expect(wrapped.stack).to.contain('Caused by: Error\n    at callsite');
+  });
+
+  it('appends the callsite stack when the error stack is not writable', () => {
+    // This is the shape produced by google-auth-library, which copies `stack`
+    // onto a new error with `writable: false` and leaves it configurable.
+    const err = new Error('Expected error');
+    Object.defineProperty(err, 'stack', {
+      value: 'Error: Expected error\n    at origin',
+      writable: false,
+      enumerable: true,
+    });
+
+    const wrapped = wrapError(err, 'Error\n    at callsite');
+
+    expect(wrapped).to.equal(err);
+    expect(wrapped.stack).to.equal(
+      'Error: Expected error\n    at origin\nCaused by: Error\n    at callsite',
+    );
+  });
+
+  it('returns the original error when its stack cannot be modified', () => {
+    const err = new Error('Expected error');
+    Object.defineProperty(err, 'stack', {
+      value: 'Error: Expected error\n    at origin',
+      writable: false,
+      configurable: false,
+      enumerable: true,
+    });
+
+    const wrapped = wrapError(err, 'Error\n    at callsite');
+
+    expect(wrapped).to.equal(err);
+    expect(wrapped.message).to.equal('Expected error');
+    expect(wrapped.stack).to.equal('Error: Expected error\n    at origin');
   });
 });

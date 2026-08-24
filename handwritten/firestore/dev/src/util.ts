@@ -229,12 +229,27 @@ export function silencePromise(promise: Promise<unknown>): Promise<void> {
 /**
  * Wraps the provided error in a new error that includes the provided stack.
  *
- * Used to preserve stack traces across async calls.
+ * Used to preserve stack traces across async calls. Errors whose `stack`
+ * property cannot be modified are returned unchanged.
  * @private
  * @internal
  */
 export function wrapError(err: Error, stack: string): Error {
-  err.stack += '\nCaused by: ' + stack;
+  const wrappedStack = err.stack + '\nCaused by: ' + stack;
+  try {
+    if (Object.getOwnPropertyDescriptor(err, 'stack')?.writable === false) {
+      // Some libraries define `stack` as a read only property, which makes a
+      // plain assignment throw. Redefining the property still preserves the
+      // callsite as long as the property stayed configurable.
+      Object.defineProperty(err, 'stack', {value: wrappedStack});
+    } else {
+      err.stack = wrappedStack;
+    }
+  } catch {
+    // The stack cannot be modified at all. Recording the callsite is best
+    // effort, so return the error we were asked to wrap rather than let the
+    // resulting TypeError take its place.
+  }
   return err;
 }
 
