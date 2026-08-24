@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"os"
+	"sync"
 	"sync/atomic"
 
 	gapic "cloud.google.com/go/spanner/apiv1"
@@ -14,7 +15,10 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/metadata"
 )
+
+var transportDiagnosticOnce sync.Once
 
 const (
 	spannerEndpoint = "spanner.googleapis.com:443"
@@ -25,6 +29,14 @@ const (
 func isDirectPathEnabled() bool {
 	return os.Getenv("GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS") == "true" ||
 		os.Getenv("GOOGLE_CLOUD_ENABLE_DIRECT_PATH") == "true"
+}
+
+func init() {
+	if !isDirectPathEnabled() {
+		// Force-disable gRPC DirectPath at module initialization time unless explicitly enabled
+		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
+		_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
+	}
 }
 
 // CoreClient manages multiplexed gRPC connections, authentication, and request routing.
@@ -60,28 +72,11 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	}
 
 	if isDirectPathEnabled() {
-		fmt.Printf("  [Go Shared Core] Transport Config: DIRECTPATH ENABLED (ALTS gRPC, pool=%d)\n", limit)
 		// Enable gRPC DirectPath via GAPIC client with connection pooling matching channelCount
-		_ = os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
-		_ = os.Unsetenv("DISABLE_DIRECT_PATH")
+		os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
+		os.Unsetenv("DISABLE_DIRECT_PATH")
 
-		dialOpts := []grpc.DialOption{
-			grpc.WithInitialWindowSize(4 * 1024 * 1024),      // 4MB per stream window
-			grpc.WithInitialConnWindowSize(16 * 1024 * 1024), // 16MB per connection window
-			grpc.WithDefaultCallOptions(
-				grpc.MaxCallRecvMsgSize(100 * 1024 * 1024),
-				grpc.MaxCallSendMsgSize(100 * 1024 * 1024),
-			),
-		}
-
-		clientOpts := []option.ClientOption{
-			option.WithGRPCConnectionPool(limit),
-		}
-		for _, opt := range dialOpts {
-			clientOpts = append(clientOpts, option.WithGRPCDialOption(opt))
-		}
-
-		gapicClient, err := gapic.NewClient(ctx, clientOpts...)
+		gapicClient, err := gapic.NewClient(ctx, option.WithGRPCConnectionPool(limit))
 		if err != nil {
 			cancel()
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
@@ -117,8 +112,8 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		grpc.WithInitialWindowSize(4 * 1024 * 1024),      // 4MB per stream window
 		grpc.WithInitialConnWindowSize(16 * 1024 * 1024), // 16MB per connection window
 		grpc.WithDefaultCallOptions(
-			grpc.MaxCallRecvMsgSize(100 * 1024 * 1024), // 100MB
-			grpc.MaxCallSendMsgSize(100 * 1024 * 1024),
+			grpc.MaxCallRecvMsgSize(100*1024*1024), // 100MB
+			grpc.MaxCallSendMsgSize(100*1024*1024),
 		),
 	}
 
@@ -132,6 +127,12 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		}
 		conns[i] = conn
 	}
+
+	transportDiagnosticOnce.Do(func() {
+		fmt.Fprintf(os.Stderr,
+			"SPANNER_GO_RUNTIME transport=gfe direct_path=false endpoint=%s codec=vtprotobuf-raw-values disable_direct_path=%s\n",
+			spannerEndpoint, os.Getenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH"))
+	})
 
 	return &CoreClient{
 		conns:       conns,
@@ -153,7 +154,52 @@ func (c *CoreClient) ExecuteStreamingSql(ctx context.Context, req *spannerpb.Exe
 		return nil, fmt.Errorf("no active gRPC connection available")
 	}
 	spannerClient := spannerpb.NewSpannerClient(conn)
-	return spannerClient.ExecuteStreamingSql(ctx, req)
+	return spannerClient.ExecuteStreamingSql(ctx, req, grpc.ForceCodecV2(vtSafeCodec{}))
+}
+
+type rawExecuteStreamingSQLClient interface {
+	Header() (metadata.MD, error)
+	Trailer() metadata.MD
+	RecvRaw() (rawPartialResultSet, error)
+}
+
+type rawExecuteStreamingSQLReceiver struct {
+	spannerpb.Spanner_ExecuteStreamingSqlClient
+	codec *rawVTCodec
+}
+
+func (r *rawExecuteStreamingSQLReceiver) RecvRaw() (rawPartialResultSet, error) {
+	if _, err := r.Spanner_ExecuteStreamingSqlClient.Recv(); err != nil {
+		_, _ = r.codec.take()
+		return rawPartialResultSet{}, err
+	}
+	raw, ok := r.codec.take()
+	if !ok {
+		return rawPartialResultSet{}, fmt.Errorf("raw PartialResultSet missing after successful gRPC receive")
+	}
+	return raw, nil
+}
+
+// ExecuteStreamingSqlRaw installs one raw codec per stream. DirectPath is
+// intentionally rejected: this experiment must use the explicit GFE path,
+// and the GAPIC-owned connection cannot carry the per-stream raw codec state.
+func (c *CoreClient) ExecuteStreamingSqlRaw(ctx context.Context, req *spannerpb.ExecuteSqlRequest) (rawExecuteStreamingSQLClient, error) {
+	if c.useGapic || c.gapicClient != nil {
+		return nil, fmt.Errorf("raw streaming decode requires DirectPath to be disabled")
+	}
+	conn := c.GetConn()
+	if conn == nil {
+		return nil, fmt.Errorf("no active gRPC connection available")
+	}
+	codec := new(rawVTCodec)
+	stream, err := spannerpb.NewSpannerClient(conn).ExecuteStreamingSql(ctx, req, grpc.ForceCodecV2(codec))
+	if err != nil {
+		return nil, err
+	}
+	return &rawExecuteStreamingSQLReceiver{
+		Spanner_ExecuteStreamingSqlClient: stream,
+		codec:                             codec,
+	}, nil
 }
 
 // GetConn returns a connection from the pool via round-robin distribution.
