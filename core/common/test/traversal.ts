@@ -24,9 +24,10 @@ import {
   ApiError,
   BodyResponseCallback,
   DecorateRequestOptions,
+  MakeAuthenticatedRequest,
 } from '../src/util';
 
-describe('ServiceObject URI path handling and traversal', () => {
+describe('URI path handling and traversal (ServiceObject & Service)', () => {
   const testCases = [
     {
       description: 'should reject dot segment (.)',
@@ -103,6 +104,7 @@ describe('ServiceObject URI path handling and traversal', () => {
 
   for (const {description, datasetId, expectedError} of testCases) {
     it(description, async () => {
+      // Test ServiceObject path handling
       const fakeParent = {
         interceptors: [],
         getRequestInterceptors: () => [],
@@ -128,6 +130,37 @@ describe('ServiceObject URI path handling and traversal', () => {
 
       await assert.rejects(async () => {
         await serviceObject.getMetadata();
+      }, expectedError);
+
+      // Test Service path handling
+      const service = new Service({
+        scopes: [],
+        baseUrl: 'datasets',
+        projectIdRequired: false,
+        apiEndpoint: 'datasets',
+        packageJson: {name: 'test', version: '1.0.0'},
+      });
+      service.makeAuthenticatedRequest = ((
+        reqOpts: DecorateRequestOptions,
+        callback?: BodyResponseCallback,
+      ) => {
+        const notFoundError = new ApiError({
+          message: `Not found: Dataset ${reqOpts.uri}`,
+          code: 404,
+          response: {} as r.Response,
+        });
+        if (typeof callback === 'function') {
+          callback(notFoundError, null, {} as r.Response);
+        }
+      }) as unknown as MakeAuthenticatedRequest;
+
+      await assert.rejects(async () => {
+        await new Promise((resolve, reject) => {
+          service.request({uri: datasetId}, (err, resp) => {
+            if (err) return reject(err);
+            resolve(resp);
+          });
+        });
       }, expectedError);
     });
   }
