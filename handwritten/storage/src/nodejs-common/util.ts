@@ -833,7 +833,7 @@ export class Util {
         }
       };
 
-      prepareRequest().catch(onAuthenticated);
+      void prepareRequest();
 
       if (stream!) {
         return stream!;

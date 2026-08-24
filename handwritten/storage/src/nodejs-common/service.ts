@@ -188,11 +188,8 @@ export class Service {
     if (!callback) {
       return this.getProjectIdAsync();
     }
-    this.getProjectIdAsync()
-      // eslint-disable-next-line promise/no-callback-in-promise
-      .then(p => callback(null, p))
-      // eslint-disable-next-line promise/no-callback-in-promise
-      .catch(callback);
+    // eslint-disable-next-line promise/no-callback-in-promise, promise/catch-or-return
+    this.getProjectIdAsync().then(p => callback(null, p), callback);
   }
 
   protected async getProjectIdAsync(): Promise<string> {

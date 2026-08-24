@@ -788,11 +788,8 @@ export class Upload extends Writable {
     if (!callback) {
       return this.createURIAsync();
     }
-    this.createURIAsync()
-      // eslint-disable-next-line promise/no-callback-in-promise
-      .then(r => callback(null, r))
-      // eslint-disable-next-line promise/no-callback-in-promise
-      .catch(callback);
+    // eslint-disable-next-line promise/no-callback-in-promise, promise/catch-or-return
+    this.createURIAsync().then(r => callback(null, r), callback);
   }
 
   protected async createURIAsync(): Promise<string> {
@@ -1551,11 +1548,8 @@ export function createURI(
   if (!callback) {
     return up.createURI();
   }
-  up.createURI()
-    // eslint-disable-next-line promise/no-callback-in-promise
-    .then(r => callback(null, r))
-    // eslint-disable-next-line promise/no-callback-in-promise
-    .catch(callback);
+  // eslint-disable-next-line promise/no-callback-in-promise, promise/catch-or-return
+  up.createURI().then(r => callback(null, r), callback);
 }
 
 /**
