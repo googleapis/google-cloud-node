@@ -7009,10 +7009,6 @@ describe('Spanner', () => {
     let pgQueueSupported = true;
 
     before(async () => {
-      if (IS_EMULATOR_ENABLED) {
-        return;
-      }
-
       try {
         const queueDdl = `CREATE QUEUE ${QUEUE_NAME} (
           Id INT64 NOT NULL,
@@ -7054,7 +7050,7 @@ describe('Spanner', () => {
     });
 
     it('should send and ack a message in GoogleSQL', async function () {
-      if (!gsqlQueueSupported) {
+      if (!gsqlQueueSupported || IS_EMULATOR_ENABLED) {
         this.skip();
       }
 
@@ -7084,7 +7080,7 @@ describe('Spanner', () => {
     });
 
     it('should send and ack a message in PostgreSQL', async function () {
-      if (!pgQueueSupported) {
+      if (!pgQueueSupported || IS_EMULATOR_ENABLED) {
         this.skip();
       }
 
