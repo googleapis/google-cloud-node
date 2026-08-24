@@ -94,8 +94,7 @@ describe.skip('BigQuery URI path handling and traversal', () => {
       description:
         'should preserve literal percent-encoded sequences in colon-separated segments without decoding twice',
       datasetId: 'project:item%2520name',
-      expectedError:
-        /Not found: Dataset.*datasets\/project:item%2520name/,
+      expectedError: /Not found: Dataset.*datasets\/project:item%2520name/,
     },
   ];
 
