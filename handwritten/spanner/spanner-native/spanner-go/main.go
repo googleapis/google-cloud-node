@@ -21,19 +21,12 @@ typedef struct {
 } CSpannerCell;
 
 typedef struct {
-    const char* wire_val;
-    uint32_t wire_len;
-} CSpannerRawValue;
-
-typedef struct {
     int format; // 0 = JSON string, 1 = Direct Native Cells
     char* json_rows;
     CSpannerCell* cells;
     int row_count;
     int col_count;
     char* string_arena;
-    CSpannerRawValue* raw_values;
-    char* raw_arena;
     char* server_timing;
     int attempt_count;
     char* error_msg;
@@ -73,7 +66,7 @@ import (
 
 var (
 	clientRegistryMutex sync.RWMutex
-	clientRegistry              = make(map[uintptr]*CoreClient)
+	clientRegistry      = make(map[uintptr]*CoreClient)
 	nextClientId        uintptr = 1
 )
 
@@ -261,86 +254,6 @@ func sendBatch(
 	C.bridge_callback(cb, userData, cBatch)
 }
 
-// sendRawBatch copies one flattened batch of protobuf Value wire messages into
-// C-owned memory. The asynchronous N-API callback never retains Go memory.
-func sendRawBatch(
-	cb C.StreamDataCallback,
-	userData unsafe.Pointer,
-	values [][]byte,
-	rowCount int,
-	colCount int,
-	serverTiming string,
-	attemptCount int,
-	isLast bool,
-) error {
-	if rowCount < 0 || colCount < 0 || len(values) != rowCount*colCount {
-		return fmt.Errorf("invalid raw batch shape: %d values for %dx%d", len(values), rowCount, colCount)
-	}
-
-	cBatch := (*C.CSpannerBatch)(C.malloc(C.size_t(unsafe.Sizeof(C.CSpannerBatch{}))))
-	if cBatch == nil {
-		return fmt.Errorf("failed to allocate raw batch")
-	}
-	*cBatch = C.CSpannerBatch{}
-	cBatch.format = 2 // Raw protobuf Value wire slices.
-	cBatch.row_count = C.int(rowCount)
-	cBatch.col_count = C.int(colCount)
-	cBatch.attempt_count = C.int(attemptCount)
-	if isLast {
-		cBatch.is_last = 1
-	}
-	if serverTiming != "" {
-		cBatch.server_timing = C.CString(serverTiming)
-	}
-
-	if len(values) > 0 {
-		descriptorBytes := C.size_t(len(values)) * C.size_t(unsafe.Sizeof(C.CSpannerRawValue{}))
-		cBatch.raw_values = (*C.CSpannerRawValue)(C.malloc(descriptorBytes))
-		if cBatch.raw_values == nil {
-			if cBatch.server_timing != nil {
-				C.free(unsafe.Pointer(cBatch.server_timing))
-			}
-			C.free(unsafe.Pointer(cBatch))
-			return fmt.Errorf("failed to allocate raw value descriptors")
-		}
-
-		totalWireBytes := 0
-		for _, value := range values {
-			totalWireBytes += len(value)
-		}
-		if totalWireBytes > 0 {
-			cBatch.raw_arena = (*C.char)(C.malloc(C.size_t(totalWireBytes)))
-			if cBatch.raw_arena == nil {
-				C.free(unsafe.Pointer(cBatch.raw_values))
-				if cBatch.server_timing != nil {
-					C.free(unsafe.Pointer(cBatch.server_timing))
-				}
-				C.free(unsafe.Pointer(cBatch))
-				return fmt.Errorf("failed to allocate raw value arena")
-			}
-		}
-
-		descriptors := unsafe.Slice(cBatch.raw_values, len(values))
-		var arena []byte
-		if totalWireBytes > 0 {
-			arena = unsafe.Slice((*byte)(unsafe.Pointer(cBatch.raw_arena)), totalWireBytes)
-		}
-		offset := 0
-		for i, value := range values {
-			descriptors[i].wire_len = C.uint32_t(len(value))
-			if len(value) == 0 {
-				continue
-			}
-			copy(arena[offset:offset+len(value)], value)
-			descriptors[i].wire_val = (*C.char)(unsafe.Pointer(&arena[offset]))
-			offset += len(value)
-		}
-	}
-
-	C.bridge_callback(cb, userData, cBatch)
-	return nil
-}
-
 //export ExecuteStreamingSqlGo
 func ExecuteStreamingSqlGo(
 	handle C.uintptr_t,
@@ -384,10 +297,9 @@ func ExecuteStreamingSqlGo(
 		attemptCount := 0
 
 		var rowType []*spannerpb.StructType_Field
-		var pendingValue []byte
-		currentRowValueCount := 0
-		batchRowCount := 0
-		batchValues := make([][]byte, 0, 100)
+		var pendingValue *structpb.Value
+		var currentRow []*structpb.Value
+		batch := make([][]*structpb.Value, 0, 100)
 
 		for {
 			attemptCount++
@@ -405,22 +317,31 @@ func ExecuteStreamingSqlGo(
 			}
 
 			// 2. Prepare outgoing gRPC context with metadata headers
-			md := metadata.New(metaMap)
-
-			// Fetch OAuth2 bearer token from memory cache
-			token, err := client.GetToken()
-			if err != nil {
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
-				return
+			md := metadata.New(nil)
+			for k, v := range metaMap {
+				// If using GAPIC client (DirectPath), skip headers that GAPIC manages internally to prevent duplicate comma-joined header values
+				if client.useGapic && (k == "x-goog-user-project" || k == "x-goog-api-client" || k == "x-goog-request-params") {
+					continue
+				}
+				md.Set(k, v)
 			}
-			if token != nil && token.AccessToken != "" {
-				md.Set("authorization", "Bearer "+token.AccessToken)
+
+			// Fetch OAuth2 bearer token from memory cache (only for raw connection pool; GAPIC manages its own auth)
+			if !client.useGapic {
+				token, err := client.GetToken()
+				if err != nil {
+					sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
+					return
+				}
+				if token != nil && token.AccessToken != "" {
+					md.Set("authorization", "Bearer "+token.AccessToken)
+				}
 			}
 
 			ctx := metadata.NewOutgoingContext(client.ctx, md)
 
 			// 3. Dispatch streaming SQL request
-			stream, err := client.ExecuteStreamingSqlRaw(ctx, &req)
+			stream, err := client.ExecuteStreamingSql(ctx, &req)
 			if err != nil {
 				st, _ := status.FromError(err)
 				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
@@ -442,7 +363,7 @@ func ExecuteStreamingSqlGo(
 
 			// 4. Stream consumption loop
 			for {
-				chunk, err := stream.RecvRaw()
+				chunk, err := stream.Recv()
 				if err == io.EOF {
 					break
 				}
@@ -456,75 +377,55 @@ func ExecuteStreamingSqlGo(
 					return
 				}
 
-				if len(chunk.resumeToken) > 0 {
-					lastResumeToken = chunk.resumeToken
+				if len(chunk.ResumeToken) > 0 {
+					lastResumeToken = chunk.ResumeToken
 				}
 
-				if rowType == nil && chunk.metadata != nil && chunk.metadata.RowType != nil {
-					rowType = chunk.metadata.RowType.Fields
-					if cap(batchValues) < 100*len(rowType) {
-						batchValues = make([][]byte, 0, 100*len(rowType))
-					}
+				if rowType == nil && chunk.Metadata != nil && chunk.Metadata.RowType != nil {
+					rowType = chunk.Metadata.RowType.Fields
 				}
 
 				numFields := len(rowType)
-				if numFields == 0 && chunk.valueCount > 0 {
-					sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, "received values before row metadata", int(codes.DataLoss), true)
-					return
-				}
+				vals := chunk.Values
 
-				appendCompleteValue := func(value []byte) error {
-					batchValues = append(batchValues, value)
-					currentRowValueCount++
-					if currentRowValueCount > numFields {
-						return fmt.Errorf("received more values than row fields")
-					}
-					if currentRowValueCount == numFields {
-						currentRowValueCount = 0
-						batchRowCount++
-						if batchRowCount == 100 {
-							if err := sendRawBatch(cb, userData, batchValues, batchRowCount, numFields, serverTiming, attemptCount, false); err != nil {
-								return err
-							}
-							batchValues = batchValues[:0]
-							batchRowCount = 0
-						}
-					}
-					return nil
-				}
-
-				var candidate []byte
-				firstValue := true
-				processingErr := chunk.forEachValue(func(value []byte) error {
-					if firstValue && pendingValue != nil {
-						merged, err := mergeRawProtoValues(pendingValue, value)
-						if err != nil {
-							return err
-						}
-						candidate = merged
+				// Merge pending chunked value from previous chunk if present
+				if pendingValue != nil {
+					if len(vals) > 0 {
+						first := vals[0]
+						vals = vals[1:]
+						merged := mergeProtoValues(pendingValue, first)
 						pendingValue = nil
-						firstValue = false
-						return nil
-					}
-					firstValue = false
-					if candidate != nil {
-						if err := appendCompleteValue(candidate); err != nil {
-							return err
+
+						currentRow = append(currentRow, merged)
+
+						if numFields > 0 && len(currentRow) == numFields {
+							batch = append(batch, currentRow)
+							currentRow = make([]*structpb.Value, 0, numFields)
+							if len(batch) >= 100 {
+								sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false)
+								batch = make([][]*structpb.Value, 0, 100)
+							}
 						}
 					}
-					candidate = value
-					return nil
-				})
-				if processingErr == nil && candidate != nil {
-					if chunk.chunkedValue {
-						pendingValue = candidate
-					} else {
-						processingErr = appendCompleteValue(candidate)
-					}
 				}
-				if processingErr != nil {
-					sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, processingErr.Error(), int(codes.DataLoss), true)
-					return
+
+				// If this chunk has a chunked value at the end, pop it
+				if chunk.ChunkedValue && len(vals) > 0 {
+					pendingValue = vals[len(vals)-1]
+					vals = vals[:len(vals)-1]
+				}
+
+				for _, val := range vals {
+					currentRow = append(currentRow, val)
+
+					if numFields > 0 && len(currentRow) == numFields {
+						batch = append(batch, currentRow)
+						currentRow = make([]*structpb.Value, 0, numFields)
+						if len(batch) >= 100 {
+							sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false)
+							batch = make([][]*structpb.Value, 0, 100)
+						}
+					}
 				}
 			}
 
@@ -541,23 +442,16 @@ func ExecuteStreamingSqlGo(
 
 			// Flush any pending value / row
 			if pendingValue != nil {
-				batchValues = append(batchValues, pendingValue)
-				currentRowValueCount++
-				if len(rowType) > 0 && currentRowValueCount == len(rowType) {
-					currentRowValueCount = 0
-					batchRowCount++
-				}
+				currentRow = append(currentRow, pendingValue)
 				pendingValue = nil
 			}
-			if currentRowValueCount != 0 {
-				sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, fmt.Sprintf("incomplete final row: %d of %d values", currentRowValueCount, len(rowType)), int(codes.DataLoss), true)
-				return
+			if len(currentRow) > 0 {
+				batch = append(batch, currentRow)
+				currentRow = nil
 			}
 
 			// Send final batch and EOF signal
-			if err := sendRawBatch(cb, userData, batchValues, batchRowCount, len(rowType), serverTiming, attemptCount, true); err != nil {
-				sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, err.Error(), int(codes.Internal), true)
-			}
+			sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, true)
 			break
 		}
 	}()
