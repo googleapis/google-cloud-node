@@ -27,14 +27,6 @@ func isDirectPathEnabled() bool {
 		os.Getenv("GOOGLE_CLOUD_ENABLE_DIRECT_PATH") == "true"
 }
 
-func init() {
-	if !isDirectPathEnabled() {
-		// Force-disable gRPC DirectPath at module initialization time unless explicitly enabled
-		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
-		_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
-	}
-}
-
 // CoreClient manages multiplexed gRPC connections, authentication, and request routing.
 type CoreClient struct {
 	conns       []*grpc.ClientConn
@@ -69,10 +61,26 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 
 	if isDirectPathEnabled() {
 		// Enable gRPC DirectPath via GAPIC client with connection pooling matching channelCount
-		os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
-		os.Unsetenv("DISABLE_DIRECT_PATH")
+		_ = os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
+		_ = os.Unsetenv("DISABLE_DIRECT_PATH")
 
-		gapicClient, err := gapic.NewClient(ctx, option.WithGRPCConnectionPool(limit))
+		dialOpts := []grpc.DialOption{
+			grpc.WithInitialWindowSize(4 * 1024 * 1024),      // 4MB per stream window
+			grpc.WithInitialConnWindowSize(16 * 1024 * 1024), // 16MB per connection window
+			grpc.WithDefaultCallOptions(
+				grpc.MaxCallRecvMsgSize(100 * 1024 * 1024),
+				grpc.MaxCallSendMsgSize(100 * 1024 * 1024),
+			),
+		}
+
+		clientOpts := []option.ClientOption{
+			option.WithGRPCConnectionPool(limit),
+		}
+		for _, opt := range dialOpts {
+			clientOpts = append(clientOpts, option.WithGRPCDialOption(opt))
+		}
+
+		gapicClient, err := gapic.NewClient(ctx, clientOpts...)
 		if err != nil {
 			cancel()
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)

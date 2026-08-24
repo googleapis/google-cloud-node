@@ -5,13 +5,13 @@
  * 2. Go DirectPath + Native Cells (DirectPath = true, SPANNER_GO_DIRECT_DESERIALIZATION = true)
  */
 
+process.env.SPANNER_GO_DIRECT_DESERIALIZATION = 'true';
+process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
+
 const { NativeSpannerDatabase } = require('./poc_bridge.js');
 const { performance } = require('perf_hooks');
 const os = require('os');
 const fs = require('fs');
-
-process.env.SPANNER_GO_DIRECT_DESERIALIZATION = 'true';
-process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
 
 const PROJECT = 'span-cloud-testing';
 const INSTANCE = 'suvham-testing';

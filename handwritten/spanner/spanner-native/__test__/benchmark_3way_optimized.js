@@ -9,19 +9,18 @@
  * ================================================================================================
  */
 
-const fs = require('fs');
-const os = require('os');
-const { performance } = require('perf_hooks');
-const { NativeSpannerDatabase } = require('./poc_bridge.js');
-
 // ════════════════════════════════════════════════════════════════
-// ENVIRONMENT CONFIGURATION FOR BEST PERFORMANCE
+// ENVIRONMENT CONFIGURATION FOR BEST PERFORMANCE (MUST BE SET FIRST)
 // ════════════════════════════════════════════════════════════════
-// Enable DirectPath routing and native cell deserialization for Go Shared Core
 process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'true';
 process.env.GOOGLE_CLOUD_ENABLE_DIRECT_PATH = 'true';
 process.env.SPANNER_GO_DIRECT_DESERIALIZATION = 'true';
 process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
+
+const fs = require('fs');
+const os = require('os');
+const { performance } = require('perf_hooks');
+const { NativeSpannerDatabase } = require('./poc_bridge.js');
 
 // ════════════════════════════════════════════════════════════════
 // BENCHMARK CONFIGURATION

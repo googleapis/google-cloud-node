@@ -5,13 +5,14 @@
  * against Spanner in span-cloud-testing.
  */
 
+process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'true';
+process.env.GOOGLE_CLOUD_ENABLE_DIRECT_PATH = 'true';
+process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
+
 const { NativeSpannerDatabase } = require('./poc_bridge.js');
 const { performance } = require('perf_hooks');
 const os = require('os');
 const fs = require('fs');
-
-process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'true';
-process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
 
 const PROJECT = 'span-cloud-testing';
 const INSTANCE = 'suvham-testing';
