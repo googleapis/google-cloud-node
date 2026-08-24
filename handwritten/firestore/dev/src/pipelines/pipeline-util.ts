@@ -264,15 +264,15 @@ export class ExecutionUtil {
           structuredPipeline: structuredPipeline._toProto(this._serializer),
         };
 
-        if (structuredPipeline.options?.atomic) {
-          request.newTransaction = {readWrite: {}};
-          request.autoCommitTransaction = true;
-        } else if (transactionOrReadTime instanceof Uint8Array) {
+        if (transactionOrReadTime instanceof Uint8Array) {
           request.transaction = transactionOrReadTime;
         } else if (transactionOrReadTime instanceof Timestamp) {
           request.readTime = transactionOrReadTime.toProto().timestampValue;
         } else if (transactionOrReadTime) {
           request.newTransaction = transactionOrReadTime;
+        } else if (structuredPipeline.options?.atomic) {
+          request.newTransaction = {readWrite: {}};
+          request.autoCommitTransaction = true;
         }
 
         let streamActive: Deferred<boolean>;

@@ -221,6 +221,43 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     );
   });
 
+  it('does not serialize atomic when atomic is false', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance({
+      executePipeline: spy,
+    });
+
+    await firestore
+      .pipeline()
+      .collection('foo')
+      .execute({
+        atomic: false,
+      });
+
+    const executePipelineRequest: IExecutePipelineRequest = {
+      database: 'projects/test-project/databases/(default)',
+      structuredPipeline: {
+        options: {},
+        pipeline: {
+          stages: [
+            {
+              args: [
+                {
+                  referenceValue: '/foo',
+                },
+              ],
+              name: 'collection',
+              options: {},
+            },
+          ],
+        },
+      },
+    };
+    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+      executePipelineRequest,
+    );
+  });
+
   it('serializes DML stages (delete, update, insert, upsert, literals)', async () => {
     const spy = sinon.fake.returns(stream());
     const firestore = await createInstance({
