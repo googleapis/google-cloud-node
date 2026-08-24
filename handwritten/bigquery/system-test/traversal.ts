@@ -28,7 +28,8 @@ const common = require('../../../../core/common/build/src');
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let BigQuery: any;
 
-describe('BigQuery URI path handling and traversal', () => {
+describe.skip('BigQuery URI path handling and traversal', () => {
+  // Turn these tests back on after the common library has been released.
   before(() => {
     // Inject the local common build prototypes and utilities
     // eslint-disable-next-line @typescript-eslint/no-var-requires
