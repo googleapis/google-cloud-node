@@ -183,13 +183,25 @@ func sendBatchFlat(
 			cBatch.cells = (*C.CSpannerCell)(C.malloc(C.size_t(totalCells) * C.size_t(unsafe.Sizeof(C.CSpannerCell{}))))
 			cellsSlice := (*[1 << 28]C.CSpannerCell)(unsafe.Pointer(cBatch.cells))[:totalCells:totalCells]
 
-			// Single pass over cells: accumulate string bytes into arena
-			arenaBuf := make([]byte, 0, totalCells*16)
-			type strFixup struct {
-				idx    int
-				offset int
+			// 2-pass allocation to eliminate Go GC over-allocations and avoid CBytes
+			totalStringBytes := 0
+			for idx, val := range values {
+				if idx >= totalCells {
+					break
+				}
+				if val != nil {
+					if strVal, ok := val.Kind.(*structpb.Value_StringValue); ok {
+						totalStringBytes += len(strVal.StringValue)
+					}
+				}
 			}
-			var fixups []strFixup
+
+			var arenaBytes []byte
+			if totalStringBytes > 0 {
+				cBatch.string_arena = (*C.char)(C.malloc(C.size_t(totalStringBytes)))
+				arenaBytes = (*[1 << 28]byte)(unsafe.Pointer(cBatch.string_arena))[:totalStringBytes:totalStringBytes]
+			}
+			arenaOffset := 0
 
 			for idx, val := range values {
 				if idx >= totalCells {
@@ -219,22 +231,14 @@ func sendBatchFlat(
 					strLen := len(k.StringValue)
 					cell.str_len = C.uint32_t(strLen)
 					if strLen > 0 {
-						offset := len(arenaBuf)
-						arenaBuf = append(arenaBuf, k.StringValue...)
-						fixups = append(fixups, strFixup{idx: idx, offset: offset})
+						copy(arenaBytes[arenaOffset:arenaOffset+strLen], k.StringValue)
+						cell.str_val = (*C.char)(unsafe.Pointer(&arenaBytes[arenaOffset]))
+						arenaOffset += strLen
 					} else {
 						cell.str_val = nil
 					}
 				default:
 					cell.kind = C.CELL_KIND_NULL
-				}
-			}
-
-			if len(arenaBuf) > 0 {
-				cBatch.string_arena = (*C.char)(C.CBytes(arenaBuf))
-				arenaPtr := uintptr(unsafe.Pointer(cBatch.string_arena))
-				for _, fixup := range fixups {
-					cellsSlice[fixup.idx].str_val = (*C.char)(unsafe.Pointer(arenaPtr + uintptr(fixup.offset)))
 				}
 			}
 		} else {
