@@ -28,6 +28,8 @@ import {
   BodyResponseCallback,
   DecorateRequestOptions,
   ResponseBody,
+  encodeAbsoluteURI,
+  joinURIComponents,
   util,
 } from './util';
 
@@ -563,16 +565,17 @@ class ServiceObject<T = any> extends EventEmitter {
     const uriComponents = [this.baseUrl, this.id || '', reqOpts.uri];
 
     if (isAbsoluteUrl) {
-      uriComponents.splice(0, uriComponents.indexOf(reqOpts.uri));
+      // Encode only the pathname to preserve protocol, host, and query params.
+      // We cannot pass uriComponents through encodeURIPath after splicing
+      // because it will percent-encode parts we do not want to encode.
+      reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
+    } else {
+      // Relative path components contain only path segments (no protocol or host),
+      // so we encode each segment directly and join them with '/'.
+      reqOpts.uri = joinURIComponents(
+        uriComponents.filter(x => x!.trim()) as string[],
+      );
     }
-
-    reqOpts.uri = uriComponents
-      .filter(x => x!.trim()) // Limit to non-empty strings.
-      .map(uriComponent => {
-        const trimSlashesRegex = /^\/*|\/*$/g;
-        return uriComponent!.replace(trimSlashesRegex, '');
-      })
-      .join('/');
 
     const childInterceptors = (arrify as unknown as (arg1: any) => [])(
       reqOpts.interceptors_!,
