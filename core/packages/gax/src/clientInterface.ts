@@ -55,11 +55,6 @@ export interface ClientOptions
    * Whether to enable telemetry tracing for the client.
    */
   enableTelemetryTracing?: boolean;
-  /**
-   * The static trace context is information about the Google Cloud client library that is
-   * used to generate telemetry tracing information.
-   */
-  internalTelemetryInfo?: StaticTraceContext;
 }
 
 export interface Descriptors {
