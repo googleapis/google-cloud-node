@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/precise-date-v6.0.0...precise-date-v6.0.1) (2026-08-21)
+
+
+### Bug Fixes
+
+* **precise-date:** Support TypeScript 7 ([#9115](https://github.com/googleapis/google-cloud-node/issues/9115)) ([1cdce29](https://github.com/googleapis/google-cloud-node/commit/1cdce29940718779f18099db4df717bf746310dc))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/precise-date-v5.2.0...precise-date-v6.0.0) (2026-07-29)
 
 

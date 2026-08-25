@@ -19,7 +19,7 @@ import {
   GoogleAuth,
   GoogleAuthOptions,
 } from 'google-auth-library';
-import * as r from 'teeny-request';
+import type {Request} from 'teeny-request';
 import * as crypto from 'crypto';
 
 import {Interceptor} from './service-object.js';
@@ -183,12 +183,19 @@ export class Service {
   getProjectId(): Promise<string>;
   getProjectId(callback: (err: Error | null, projectId?: string) => void): void;
   getProjectId(
-    callback?: (err: Error | null, projectId?: string) => void,
+    callback?: (err: Error | null, projectId?: string) => void
   ): Promise<string> | void {
     if (!callback) {
       return this.getProjectIdAsync();
     }
-    this.getProjectIdAsync().then(p => callback(null, p), callback);
+    void (async () => {
+      try {
+        const p = await this.getProjectIdAsync();
+        callback(null, p);
+      } catch (err) {
+        callback(err as Error);
+      }
+    })();
   }
 
   protected async getProjectIdAsync(): Promise<string> {
@@ -208,15 +215,15 @@ export class Service {
    * @param {string} reqOpts.uri - A URI relative to the baseUrl.
    * @param {function} callback - The callback function passed to `request`.
    */
-  private request_(reqOpts: StreamRequestOptions): r.Request;
+  private request_(reqOpts: StreamRequestOptions): Request;
   private request_(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void;
   private request_(
     reqOpts: DecorateRequestOptions | StreamRequestOptions,
-    callback?: BodyResponseCallback,
-  ): void | r.Request {
+    callback?: BodyResponseCallback
+  ): void | Request {
     reqOpts = {...reqOpts, timeout: this.timeout};
     const isAbsoluteUrl = reqOpts.uri.indexOf('http') === 0;
     const uriComponents = [this.baseUrl];
@@ -298,7 +305,7 @@ export class Service {
     }
 
     if (reqOpts.shouldReturnStream) {
-      return this.makeAuthenticatedRequest(reqOpts) as {} as r.Request;
+      return this.makeAuthenticatedRequest(reqOpts) as {} as Request;
     } else {
       this.makeAuthenticatedRequest(reqOpts, callback);
     }
@@ -313,7 +320,7 @@ export class Service {
    */
   request(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void {
     Service.prototype.request_.call(this, reqOpts, callback);
   }
@@ -324,7 +331,7 @@ export class Service {
    * @param {object} reqOpts - Request options that are passed to `request`.
    * @param {string} reqOpts.uri - A URI relative to the baseUrl.
    */
-  requestStream(reqOpts: DecorateRequestOptions): r.Request {
+  requestStream(reqOpts: DecorateRequestOptions): Request {
     const opts = {...reqOpts, shouldReturnStream: true};
     return (Service.prototype.request_ as Function).call(this, opts);
   }

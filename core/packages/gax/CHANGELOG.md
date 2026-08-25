@@ -6,6 +6,14 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.0.3](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.2...google-gax-v6.0.3) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in REST transcoder - tests relocated ([#9166](https://github.com/googleapis/google-cloud-node/issues/9166)) ([8a2b491](https://github.com/googleapis/google-cloud-node/commit/8a2b4911fafba437c436b86e7282d37f60de9374))
+* Validate path parameters and prevent traversal/injection in REST transcoder ([#9151](https://github.com/googleapis/google-cloud-node/issues/9151)) ([0152a8e](https://github.com/googleapis/google-cloud-node/commit/0152a8ee36592d90f435336fda95993c9cbd227a))
+
 ## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.1...google-gax-v6.0.2) (2026-08-12)
 
 
