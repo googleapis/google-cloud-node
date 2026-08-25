@@ -23,8 +23,12 @@ const (
 )
 
 func isDirectPathEnabled() bool {
-	return os.Getenv("GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS") == "true" ||
-		os.Getenv("GOOGLE_CLOUD_ENABLE_DIRECT_PATH") == "true"
+	if os.Getenv("GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS") == "false" ||
+		os.Getenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH") == "true" ||
+		os.Getenv("DISABLE_DIRECT_PATH") == "true" {
+		return false
+	}
+	return true
 }
 
 // CoreClient manages multiplexed gRPC connections, authentication, and request routing.

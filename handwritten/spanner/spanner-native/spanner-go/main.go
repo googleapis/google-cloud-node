@@ -50,10 +50,8 @@ static void bridge_callback(
 import "C"
 
 import (
-	"bytes"
 	"fmt"
 	"io"
-	"os"
 	"sync"
 	"unsafe"
 
@@ -62,37 +60,36 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
 var (
-	clientRegistryMutex sync.RWMutex
-	clientRegistry      = make(map[uintptr]*CoreClient)
-	nextClientId        uintptr = 1
+	clientRegistry sync.Map
+	nextClientId   uintptr = 1
+	clientIdMutex  sync.Mutex
 )
 
 func registerClient(client *CoreClient) uintptr {
-	clientRegistryMutex.Lock()
-	defer clientRegistryMutex.Unlock()
+	clientIdMutex.Lock()
+	defer clientIdMutex.Unlock()
 	id := nextClientId
 	nextClientId++
-	clientRegistry[id] = client
+	clientRegistry.Store(id, client)
 	return id
 }
 
 func getClient(id uintptr) *CoreClient {
-	clientRegistryMutex.RLock()
-	defer clientRegistryMutex.RUnlock()
-	return clientRegistry[id]
+	if val, ok := clientRegistry.Load(id); ok {
+		return val.(*CoreClient)
+	}
+	return nil
 }
 
 func unregisterClient(id uintptr) *CoreClient {
-	clientRegistryMutex.Lock()
-	defer clientRegistryMutex.Unlock()
-	client := clientRegistry[id]
-	delete(clientRegistry, id)
-	return client
+	if val, ok := clientRegistry.LoadAndDelete(id); ok {
+		return val.(*CoreClient)
+	}
+	return nil
 }
 
 //export InitGoCoreClient
@@ -113,44 +110,12 @@ func CloseGoCoreClient(handle C.uintptr_t) {
 	}
 }
 
-func isDirectDeserializationEnabled() bool {
-	// Defaults to true unless explicitly disabled with SPANNER_GO_DIRECT_DESERIALIZATION=false or 0
-	val := os.Getenv("SPANNER_GO_DIRECT_DESERIALIZATION")
-	return val != "false" && val != "0"
-}
-
-func writeBatchJson(batch [][]*structpb.Value, rowType []*spannerpb.StructType_Field) *C.char {
-	if len(batch) == 0 {
-		return nil
-	}
-	var buf bytes.Buffer
-	buf.WriteByte('[')
-	for i, row := range batch {
-		if i > 0 {
-			buf.WriteByte(',')
-		}
-		buf.WriteByte('[')
-		for j, cell := range row {
-			if j > 0 {
-				buf.WriteByte(',')
-			}
-			var fieldType *spannerpb.Type
-			if j < len(rowType) {
-				fieldType = rowType[j].Type
-			}
-			writeValueJson(&buf, cell, fieldType)
-		}
-		buf.WriteByte(']')
-	}
-	buf.WriteByte(']')
-	return C.CString(buf.String())
-}
-
-func sendBatch(
+func sendBatchNative(
 	cb C.StreamDataCallback,
 	userData unsafe.Pointer,
-	batch [][]*structpb.Value,
-	rowType []*spannerpb.StructType_Field,
+	values []*structpb.Value,
+	rowCount int,
+	colCount int,
 	serverTiming string,
 	attemptCount int,
 	errMsg string,
@@ -173,103 +138,68 @@ func sendBatch(
 		cBatch.server_timing = C.CString(serverTiming)
 	}
 
-	rowCount := len(batch)
 	cBatch.row_count = C.int(rowCount)
+	cBatch.col_count = C.int(colCount)
+	cBatch.format = 1 // ALWAYS Native Cells (Zero JSON)
 
-	if rowCount > 0 {
-		colCount := len(batch[0])
-		cBatch.col_count = C.int(colCount)
+	totalCells := rowCount * colCount
+	if totalCells > 0 {
+		cBatch.cells = (*C.CSpannerCell)(C.malloc(C.size_t(totalCells) * C.size_t(unsafe.Sizeof(C.CSpannerCell{}))))
+		cellsSlice := (*[1 << 28]C.CSpannerCell)(unsafe.Pointer(cBatch.cells))[:totalCells:totalCells]
 
-		if isDirectDeserializationEnabled() {
-			cBatch.format = 1 // Native cells
+		// Single pass over cells: accumulate string bytes into arena
+		arenaBuf := make([]byte, 0, totalCells*16)
+		type strFixup struct {
+			idx    int
+			offset int
+		}
+		var fixups []strFixup
 
-			totalCells := rowCount * colCount
-			totalStringBytes := 0
-			// Pre-allocate temporary slice to hold JSON encodings for complex types to avoid encoding twice
-			// Map [r*colCount + c] -> JSON bytes
-			complexJSONMap := make(map[int][]byte)
-
-			for r, row := range batch {
-				for c, cell := range row {
-					if cell != nil {
-						switch sv := cell.Kind.(type) {
-						case *structpb.Value_StringValue:
-							totalStringBytes += len(sv.StringValue)
-						case *structpb.Value_ListValue, *structpb.Value_StructValue:
-							b, _ := protojson.Marshal(cell)
-							complexJSONMap[r*colCount+c] = b
-							totalStringBytes += len(b)
-						}
-					}
-				}
+		for idx, val := range values {
+			if idx >= totalCells {
+				break
+			}
+			cell := &cellsSlice[idx]
+			if val == nil {
+				cell.kind = C.CELL_KIND_NULL
+				continue
 			}
 
-			if totalCells > 0 {
-				cBatch.cells = (*C.CSpannerCell)(C.malloc(C.size_t(totalCells) * C.size_t(unsafe.Sizeof(C.CSpannerCell{}))))
-				cellsSlice := (*[1 << 28]C.CSpannerCell)(unsafe.Pointer(cBatch.cells))[:totalCells:totalCells]
-
-				var arenaBytes []byte
-				if totalStringBytes > 0 {
-					cBatch.string_arena = (*C.char)(C.malloc(C.size_t(totalStringBytes)))
-					arenaBytes = (*[1 << 28]byte)(unsafe.Pointer(cBatch.string_arena))[:totalStringBytes:totalStringBytes]
+			switch k := val.Kind.(type) {
+			case *structpb.Value_NullValue:
+				cell.kind = C.CELL_KIND_NULL
+			case *structpb.Value_BoolValue:
+				cell.kind = C.CELL_KIND_BOOL
+				if k.BoolValue {
+					cell.bool_val = 1
+				} else {
+					cell.bool_val = 0
 				}
-				arenaOffset := 0
-
-				for r, row := range batch {
-					for c, val := range row {
-						idx := r*colCount + c
-						cell := &cellsSlice[idx]
-						if val == nil {
-							cell.kind = C.CELL_KIND_NULL
-							continue
-						}
-
-						switch k := val.Kind.(type) {
-						case *structpb.Value_NullValue:
-							cell.kind = C.CELL_KIND_NULL
-						case *structpb.Value_BoolValue:
-							cell.kind = C.CELL_KIND_BOOL
-							if k.BoolValue {
-								cell.bool_val = 1
-							} else {
-								cell.bool_val = 0
-							}
-						case *structpb.Value_NumberValue:
-							cell.kind = C.CELL_KIND_NUMBER
-							cell.number_val = C.double(k.NumberValue)
-						case *structpb.Value_StringValue:
-							cell.kind = C.CELL_KIND_STRING
-							strLen := len(k.StringValue)
-							cell.str_len = C.uint32_t(strLen)
-							if strLen > 0 {
-								copy(arenaBytes[arenaOffset:], k.StringValue)
-								cell.str_val = (*C.char)(unsafe.Pointer(&arenaBytes[arenaOffset]))
-								arenaOffset += strLen
-							} else {
-								cell.str_val = nil
-							}
-						case *structpb.Value_ListValue, *structpb.Value_StructValue:
-							b := complexJSONMap[idx]
-							cell.kind = C.CELL_KIND_JSON_BLOB
-							strLen := len(b)
-							cell.str_len = C.uint32_t(strLen)
-							if strLen > 0 {
-								copy(arenaBytes[arenaOffset:], b)
-								cell.str_val = (*C.char)(unsafe.Pointer(&arenaBytes[arenaOffset]))
-								arenaOffset += strLen
-							} else {
-								cell.str_val = nil
-							}
-						default:
-							cell.kind = C.CELL_KIND_NULL
-						}
-					}
+			case *structpb.Value_NumberValue:
+				cell.kind = C.CELL_KIND_NUMBER
+				cell.number_val = C.double(k.NumberValue)
+			case *structpb.Value_StringValue:
+				cell.kind = C.CELL_KIND_STRING
+				strLen := len(k.StringValue)
+				cell.str_len = C.uint32_t(strLen)
+				if strLen > 0 {
+					offset := len(arenaBuf)
+					arenaBuf = append(arenaBuf, k.StringValue...)
+					fixups = append(fixups, strFixup{idx: idx, offset: offset})
+				} else {
+					cell.str_val = nil
 				}
+			default:
+				cell.kind = C.CELL_KIND_NULL
 			}
-		} else {
-			// Legacy JSON serialization
-			cBatch.format = 0
-			cBatch.json_rows = writeBatchJson(batch, rowType)
+		}
+
+		if len(arenaBuf) > 0 {
+			cBatch.string_arena = (*C.char)(C.CBytes(arenaBuf))
+			arenaPtr := uintptr(unsafe.Pointer(cBatch.string_arena))
+			for _, fixup := range fixups {
+				cellsSlice[fixup.idx].str_val = (*C.char)(unsafe.Pointer(arenaPtr + uintptr(fixup.offset)))
+			}
 		}
 	}
 
@@ -290,7 +220,7 @@ func ExecuteStreamingSqlGo(
 ) {
 	client := getClient(uintptr(handle))
 	if client == nil {
-		sendBatch(cb, userData, nil, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true)
+		sendBatchNative(cb, userData, nil, 0, 0, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true)
 		return
 	}
 
@@ -320,8 +250,9 @@ func ExecuteStreamingSqlGo(
 
 		var rowType []*spannerpb.StructType_Field
 		var pendingValue *structpb.Value
-		var currentRow []*structpb.Value
-		batch := make([][]*structpb.Value, 0, 100)
+		currentRowValueCount := 0
+		batchRowCount := 0
+		batchValues := make([]*structpb.Value, 0, 500*16) // Flat reusable buffer
 
 		for {
 			attemptCount++
@@ -329,7 +260,7 @@ func ExecuteStreamingSqlGo(
 			// 1. Decode ExecuteSqlRequest protobuf bytes
 			var req spannerpb.ExecuteSqlRequest
 			if err := proto.Unmarshal(rawBytes, &req); err != nil {
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true)
+				sendBatchNative(cb, userData, nil, 0, 0, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true)
 				return
 			}
 
@@ -341,17 +272,18 @@ func ExecuteStreamingSqlGo(
 			// 2. Prepare outgoing gRPC context with metadata headers
 			md := metadata.New(nil)
 			for k, v := range metaMap {
+				// If using GAPIC client (DirectPath), skip headers that GAPIC manages internally
 				if client.useGapic && (k == "x-goog-user-project" || k == "x-goog-api-client" || k == "x-goog-request-params") {
 					continue
 				}
 				md.Set(k, v)
 			}
 
-			// Fetch OAuth2 bearer token from memory cache
+			// Fetch OAuth2 bearer token from memory cache (only for raw connection pool; GAPIC manages its own auth)
 			if !client.useGapic {
 				token, err := client.GetToken()
 				if err != nil {
-					sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
+					sendBatchNative(cb, userData, nil, 0, 0, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
 					return
 				}
 				if token != nil && token.AccessToken != "" {
@@ -368,7 +300,7 @@ func ExecuteStreamingSqlGo(
 				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
 					continue // Retry loop
 				}
-				sendBatch(cb, userData, nil, nil, "", attemptCount, st.Message(), int(st.Code()), true)
+				sendBatchNative(cb, userData, nil, 0, 0, "", attemptCount, st.Message(), int(st.Code()), true)
 				return
 			}
 
@@ -394,7 +326,7 @@ func ExecuteStreamingSqlGo(
 						shouldRetry = true
 						break
 					}
-					sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, st.Message(), int(st.Code()), true)
+					sendBatchNative(cb, userData, nil, 0, 0, serverTiming, attemptCount, st.Message(), int(st.Code()), true)
 					return
 				}
 
@@ -404,29 +336,27 @@ func ExecuteStreamingSqlGo(
 
 				if rowType == nil && chunk.Metadata != nil && chunk.Metadata.RowType != nil {
 					rowType = chunk.Metadata.RowType.Fields
+					numFields := len(rowType)
+					if numFields > 0 && cap(batchValues) < 500*numFields {
+						batchValues = make([]*structpb.Value, 0, 500*numFields)
+					}
 				}
 
 				numFields := len(rowType)
 				vals := chunk.Values
 
 				// Merge pending chunked value from previous chunk if present
-				if pendingValue != nil {
-					if len(vals) > 0 {
-						first := vals[0]
-						vals = vals[1:]
-						merged := mergeProtoValues(pendingValue, first)
-						pendingValue = nil
+				if pendingValue != nil && len(vals) > 0 {
+					first := vals[0]
+					vals = vals[1:]
+					merged := mergeProtoValues(pendingValue, first)
+					pendingValue = nil
 
-						currentRow = append(currentRow, merged)
-
-						if numFields > 0 && len(currentRow) == numFields {
-							batch = append(batch, currentRow)
-							currentRow = make([]*structpb.Value, 0, numFields)
-							if len(batch) >= 100 {
-								sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false)
-								batch = make([][]*structpb.Value, 0, 100)
-							}
-						}
+					batchValues = append(batchValues, merged)
+					currentRowValueCount++
+					if numFields > 0 && currentRowValueCount == numFields {
+						currentRowValueCount = 0
+						batchRowCount++
 					}
 				}
 
@@ -437,16 +367,19 @@ func ExecuteStreamingSqlGo(
 				}
 
 				for _, val := range vals {
-					currentRow = append(currentRow, val)
-
-					if numFields > 0 && len(currentRow) == numFields {
-						batch = append(batch, currentRow)
-						currentRow = make([]*structpb.Value, 0, numFields)
-						if len(batch) >= 100 {
-							sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false)
-							batch = make([][]*structpb.Value, 0, 100)
-						}
+					batchValues = append(batchValues, val)
+					currentRowValueCount++
+					if numFields > 0 && currentRowValueCount == numFields {
+						currentRowValueCount = 0
+						batchRowCount++
 					}
+				}
+
+				// Adaptive batch dispatch: flush on >= 500 rows
+				if batchRowCount >= 500 && numFields > 0 {
+					sendBatchNative(cb, userData, batchValues, batchRowCount, numFields, serverTiming, attemptCount, "", 0, false)
+					batchValues = batchValues[:0]
+					batchRowCount = 0
 				}
 			}
 
@@ -462,17 +395,19 @@ func ExecuteStreamingSqlGo(
 			}
 
 			// Flush any pending value / row
+			numFields := len(rowType)
 			if pendingValue != nil {
-				currentRow = append(currentRow, pendingValue)
+				batchValues = append(batchValues, pendingValue)
+				currentRowValueCount++
+				if numFields > 0 && currentRowValueCount == numFields {
+					currentRowValueCount = 0
+					batchRowCount++
+				}
 				pendingValue = nil
-			}
-			if len(currentRow) > 0 {
-				batch = append(batch, currentRow)
-				currentRow = nil
 			}
 
 			// Send final batch and EOF signal
-			sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, true)
+			sendBatchNative(cb, userData, batchValues, batchRowCount, numFields, serverTiming, attemptCount, "", 0, true)
 			break
 		}
 	}()

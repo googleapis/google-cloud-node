@@ -106,13 +106,19 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         } else {
             napi_value rows_val = null_val;
 
-            if (batch->format == 1 && batch->cells != nullptr && batch->row_count > 0 && batch->col_count > 0) {
+            if (batch->cells != nullptr && batch->row_count > 0 && batch->col_count > 0) {
                 // DIRECT N-API NATIVE CELLS INSTANTIATION (ZERO JSON.PARSE)
                 const int row_count = batch->row_count;
                 const int col_count = batch->col_count;
                 const CSpannerCell* cells = batch->cells;
 
                 napi_create_array_with_length(env, row_count, &rows_val);
+
+                napi_value null_cell, true_cell, false_cell, empty_str_cell;
+                napi_get_null(env, &null_cell);
+                napi_get_boolean(env, true, &true_cell);
+                napi_get_boolean(env, false, &false_cell);
+                napi_create_string_utf8(env, "", 0, &empty_str_cell);
 
                 for (int r = 0; r < row_count; ++r) {
                     napi_value row_arr;
@@ -124,10 +130,10 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
 
                         switch (cell.kind) {
                             case CELL_KIND_NULL:
-                                napi_get_null(env, &js_cell);
+                                js_cell = null_cell;
                                 break;
                             case CELL_KIND_BOOL:
-                                napi_get_boolean(env, cell.bool_val != 0, &js_cell);
+                                js_cell = (cell.bool_val != 0) ? true_cell : false_cell;
                                 break;
                             case CELL_KIND_NUMBER:
                                 napi_create_double(env, cell.number_val, &js_cell);
@@ -136,37 +142,17 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
                                 if (cell.str_len > 0 && cell.str_val != nullptr) {
                                     napi_create_string_utf8(env, cell.str_val, cell.str_len, &js_cell);
                                 } else {
-                                    napi_create_string_utf8(env, "", 0, &js_cell);
+                                    js_cell = empty_str_cell;
                                 }
                                 break;
-                            case 4: { // CELL_KIND_JSON_BLOB
-                                napi_value json_str;
-                                if (cell.str_len > 0 && cell.str_val != nullptr) {
-                                    napi_create_string_utf8(env, cell.str_val, cell.str_len, &json_str);
-                                } else {
-                                    napi_create_string_utf8(env, "", 0, &json_str);
-                                }
-                                napi_value global_json, parse_func;
-                                napi_get_named_property(env, global, "JSON", &global_json);
-                                napi_get_named_property(env, global_json, "parse", &parse_func);
-                                napi_call_function(env, global_json, parse_func, 1, &json_str, &js_cell);
-                                break;
-                            }
                             default:
-                                napi_get_null(env, &js_cell);
+                                js_cell = null_cell;
                                 break;
                         }
                         napi_set_element(env, row_arr, c, js_cell);
                     }
                     napi_set_element(env, rows_val, r, row_arr);
                 }
-            } else if (batch->format == 0 && batch->json_rows != nullptr) {
-                // LEGACY JSON.PARSE ROUTE (OPT-IN VIA SPANNER_GO_DIRECT_DESERIALIZATION=false)
-                napi_value json_global, parse_fn, json_str;
-                napi_get_named_property(env, global, "JSON", &json_global);
-                napi_get_named_property(env, json_global, "parse", &parse_fn);
-                napi_create_string_utf8(env, batch->json_rows, NAPI_AUTO_LENGTH, &json_str);
-                napi_call_function(env, json_global, parse_fn, 1, &json_str, &rows_val);
             }
 
             napi_value telemetry_obj;
