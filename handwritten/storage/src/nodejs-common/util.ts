@@ -977,17 +977,18 @@ export class Util {
       delete reqOpts.json.autoPaginateVal;
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
 
+      interface HeaderLike {
+        set(name: string, value: string): void;
+        has(name: string): boolean;
+      }
       const headers = reqOpts.headers || {};
+      const headerLike = headers as unknown as Partial<HeaderLike>;
       if (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        typeof (headers as any).set === 'function' &&
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        typeof (headers as any).has === 'function'
+        typeof headerLike.set === 'function' &&
+        typeof headerLike.has === 'function'
       ) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if (!(headers as any).has('content-type')) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (headers as any).set('Content-Type', 'application/json');
+        if (!headerLike.has('content-type')) {
+          headerLike.set('Content-Type', 'application/json');
         }
         reqOpts.headers = headers;
       } else {

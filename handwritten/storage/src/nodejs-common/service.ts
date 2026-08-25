@@ -188,8 +188,14 @@ export class Service {
     if (!callback) {
       return this.getProjectIdAsync();
     }
-    // eslint-disable-next-line promise/no-callback-in-promise, promise/catch-or-return
-    this.getProjectIdAsync().then(p => callback(null, p), callback);
+    void (async () => {
+      try {
+        const p = await this.getProjectIdAsync();
+        callback(null, p);
+      } catch (err) {
+        callback(err as Error);
+      }
+    })();
   }
 
   protected async getProjectIdAsync(): Promise<string> {
