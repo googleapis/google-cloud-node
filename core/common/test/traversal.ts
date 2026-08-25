@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO: Delete this test suite after the traversal tests in
-// handwritten/bigquery/system-test/traversal.ts are unskipped.
-
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as r from 'teeny-request';
