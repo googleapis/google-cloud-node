@@ -206,8 +206,10 @@ describe('util.ts', () => {
 
     const mockSettings = new CallSettings({
       enableTelemetryTracing: true,
-      internalTelemetryInfo: {
-        gcpClientService: 'test.googleapis.com',
+      otherArgs: {
+        internalTelemetryInfo: {
+          gcpClientService: 'test.googleapis.com',
+        },
       },
     });
 
@@ -228,8 +230,10 @@ describe('util.ts', () => {
     it('returns false when enableTelemetryTracing is not set on settings', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const noTracingSettings = new CallSettings({
-        internalTelemetryInfo: {
-          gcpClientService: 'test.googleapis.com',
+        otherArgs: {
+          internalTelemetryInfo: {
+            gcpClientService: 'test.googleapis.com',
+          },
         },
       });
       assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);

@@ -337,13 +337,15 @@ describe('createApiCall', () => {
 
     it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED and CallSettings field is set', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-      const mockCallSettings = {
+      const mockCallOptions: gax.CallOptions = {
         enableTelemetryTracing: true,
-        internalTelemetryInfo: {
-          gcpClientService: 'test.googleapis.com',
+        otherArgs: {
+          internalTelemetryInfo: {
+            gcpClientService: 'test.googleapis.com',
+          },
         },
       };
-      const apiCall = createApiCall(() => {}, {settings: mockCallSettings});
+      const apiCall = createApiCall(() => {}, {settings: mockCallOptions});
       assert.strictEqual(typeof apiCall, 'function');
     });
 

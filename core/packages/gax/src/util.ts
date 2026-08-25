@@ -31,7 +31,7 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
   const tracingEnabled =
     Boolean(settings?.enableTelemetryTracing) &&
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED === 'true' &&
-    settings?.internalTelemetryInfo !== undefined;
+    settings?.otherArgs?.internalTelemetryInfo !== undefined;
   return Boolean(tracingEnabled);
 }
 
