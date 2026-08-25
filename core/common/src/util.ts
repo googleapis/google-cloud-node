@@ -1035,7 +1035,7 @@ class ProgressStream extends Transform {
  */
 export function validateUriPathSegment(
   propertyName: string,
-  value: string
+  value: string,
 ): void {
   if (value === '.' || value === '..') {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
