@@ -510,14 +510,21 @@ export class Upload extends Writable {
       } else {
         this.createURI(err => {
           if (err) {
-            return this.destroy(err);
+            this.destroy(err);
+            return;
           }
-          // eslint-disable-next-line promise/no-promise-in-callback
-          this.startUploading().catch(e => this.destroy(e));
-          return;
+          this.handleStartUploading();
         });
       }
     });
+  }
+
+  /**
+   * Handle start uploading.
+   * @private
+   */
+  private handleStartUploading(): void {
+    this.startUploading().catch(err => this.destroy(err));
   }
 
   /**
@@ -788,8 +795,14 @@ export class Upload extends Writable {
     if (!callback) {
       return this.createURIAsync();
     }
-    // eslint-disable-next-line promise/no-callback-in-promise, promise/catch-or-return
-    this.createURIAsync().then(r => callback(null, r), callback);
+    void (async () => {
+      try {
+        const r = await this.createURIAsync();
+        callback(null, r);
+      } catch (err) {
+        callback(err as Error);
+      }
+    })();
   }
 
   protected async createURIAsync(): Promise<string> {
@@ -1548,8 +1561,14 @@ export function createURI(
   if (!callback) {
     return up.createURI();
   }
-  // eslint-disable-next-line promise/no-callback-in-promise, promise/catch-or-return
-  up.createURI().then(r => callback(null, r), callback);
+  void (async () => {
+    try {
+      const r = await up.createURI();
+      callback(null, r);
+    } catch (err) {
+      callback(err as Error);
+    }
+  })();
 }
 
 /**
