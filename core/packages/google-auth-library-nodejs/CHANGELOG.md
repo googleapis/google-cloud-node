@@ -5,6 +5,31 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.0.2](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.0.1...google-auth-library-v11.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [11.0.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.0.0...google-auth-library-v11.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [11.0.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.9.1...google-auth-library-v11.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update google-auth-library-nodejs to minimum Node version of 22. ([#8995](https://github.com/googleapis/google-cloud-node/issues/8995))
+
+### Features
+
+* Update google-auth-library-nodejs to minimum Node version of 22. ([#8995](https://github.com/googleapis/google-cloud-node/issues/8995)) ([152f686](https://github.com/googleapis/google-cloud-node/commit/152f68682850e30936597c732a62eca9c7a60eee)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [10.9.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.9.0...google-auth-library-v10.9.1) (2026-07-23)
 
 

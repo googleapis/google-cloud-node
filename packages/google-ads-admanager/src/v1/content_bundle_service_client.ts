@@ -265,8 +265,17 @@ export class ContentBundleServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
+      ),
+      creativeWrapperPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeWrappers/{creative_wrapper}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}',
@@ -276,6 +285,12 @@ export class ContentBundleServiceClient {
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
+      ),
+      daiAuthenticationKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}',
+      ),
+      daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
@@ -328,6 +343,9 @@ export class ContentBundleServiceClient {
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}',
       ),
+      partnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/partners/{partner}',
+      ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}',
       ),
@@ -352,6 +370,9 @@ export class ContentBundleServiceClient {
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
       ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
+      ),
       suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
       ),
@@ -369,6 +390,9 @@ export class ContentBundleServiceClient {
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
+      ),
+      viewabilityProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/viewabilityProviders/{viewability_provider}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
@@ -438,6 +462,8 @@ export class ContentBundleServiceClient {
     const contentBundleServiceStubMethods = [
       'getContentBundle',
       'listContentBundles',
+      'batchActivateContentBundles',
+      'batchDeactivateContentBundles',
     ];
     for (const methodName of contentBundleServiceStubMethods) {
       const callPromise = this.contentBundleServiceStub.then(
@@ -690,6 +716,301 @@ export class ContentBundleServiceClient {
         throw error;
       });
   }
+  /**
+   * Activate a list of `ContentBundle` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `ContentBundles` will be activated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the `ContentBundle`s to activate.
+   *   Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateContentBundlesResponse|BatchActivateContentBundlesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/content_bundle_service.batch_activate_content_bundles.js</caption>
+   * region_tag:admanager_v1_generated_ContentBundleService_BatchActivateContentBundles_async
+   */
+  batchActivateContentBundles(
+    request?: protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchActivateContentBundles(
+    request: protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateContentBundles(
+    request: protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateContentBundles(
+    request?: protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchActivateContentBundles request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchActivateContentBundles response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchActivateContentBundles(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchActivateContentBundlesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchActivateContentBundles response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deactivates a list of `ContentBundle` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `ContentBundles` will be
+   *   deactivated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the `ContentBundle`s to deactivate.
+   *   Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateContentBundlesResponse|BatchDeactivateContentBundlesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/content_bundle_service.batch_deactivate_content_bundles.js</caption>
+   * region_tag:admanager_v1_generated_ContentBundleService_BatchDeactivateContentBundles_async
+   */
+  batchDeactivateContentBundles(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchDeactivateContentBundles(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateContentBundles(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateContentBundles(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchDeactivateContentBundles request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeactivateContentBundles response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeactivateContentBundles(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeactivateContentBundles response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Lists `ContentBundle` objects.
@@ -715,13 +1036,12 @@ export class ContentBundleServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>displayName</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `displayName`
+   *   * `name`
+   *   * `status`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -866,13 +1186,12 @@ export class ContentBundleServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>displayName</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `displayName`
+   *   * `name`
+   *   * `status`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -940,13 +1259,12 @@ export class ContentBundleServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>displayName</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `displayName`
+   *   * `name`
+   *   * `status`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1751,6 +2069,81 @@ export class ContentBundleServiceClient {
   }
 
   /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
+  }
+
+  /**
    * Return a fully-qualified creativeTemplate resource name string.
    *
    * @param {string} network_code
@@ -1788,6 +2181,46 @@ export class ContentBundleServiceClient {
     return this.pathTemplates.creativeTemplatePathTemplate.match(
       creativeTemplateName,
     ).creative_template;
+  }
+
+  /**
+   * Return a fully-qualified creativeWrapper resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_wrapper
+   * @returns {string} Resource name string.
+   */
+  creativeWrapperPath(networkCode: string, creativeWrapper: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.render({
+      network_code: networkCode,
+      creative_wrapper: creativeWrapper,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the creative_wrapper from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the creative_wrapper.
+   */
+  matchCreativeWrapperFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).creative_wrapper;
   }
 
   /**
@@ -1912,6 +2345,92 @@ export class ContentBundleServiceClient {
     return this.pathTemplates.customTargetingValuePathTemplate.match(
       customTargetingValueName,
     ).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified daiAuthenticationKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_authentication_key
+   * @returns {string} Resource name string.
+   */
+  daiAuthenticationKeyPath(networkCode: string, daiAuthenticationKey: string) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.render({
+      network_code: networkCode,
+      dai_authentication_key: daiAuthenticationKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_authentication_key from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the dai_authentication_key.
+   */
+  matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).dai_authentication_key;
+  }
+
+  /**
+   * Return a fully-qualified daiEncodingProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_encoding_profile
+   * @returns {string} Resource name string.
+   */
+  daiEncodingProfilePath(networkCode: string, daiEncodingProfile: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.render({
+      network_code: networkCode,
+      dai_encoding_profile: daiEncodingProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiEncodingProfileName(daiEncodingProfileName: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_encoding_profile from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the dai_encoding_profile.
+   */
+  matchDaiEncodingProfileFromDaiEncodingProfileName(
+    daiEncodingProfileName: string,
+  ) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).dai_encoding_profile;
   }
 
   /**
@@ -2576,6 +3095,43 @@ export class ContentBundleServiceClient {
   }
 
   /**
+   * Return a fully-qualified partner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} partner
+   * @returns {string} Resource name string.
+   */
+  partnerPath(networkCode: string, partner: string) {
+    return this.pathTemplates.partnerPathTemplate.render({
+      network_code: networkCode,
+      partner: partner,
+    });
+  }
+
+  /**
+   * Parse the network_code from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the partner from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the partner.
+   */
+  matchPartnerFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).partner;
+  }
+
+  /**
    * Return a fully-qualified placement resource name string.
    *
    * @param {string} network_code
@@ -2888,6 +3444,42 @@ export class ContentBundleServiceClient {
   }
 
   /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
+  }
+
+  /**
    * Return a fully-qualified suggestedAdUnit resource name string.
    *
    * @param {string} network_code
@@ -3119,6 +3711,48 @@ export class ContentBundleServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified viewabilityProvider resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} viewability_provider
+   * @returns {string} Resource name string.
+   */
+  viewabilityProviderPath(networkCode: string, viewabilityProvider: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.render({
+      network_code: networkCode,
+      viewability_provider: viewabilityProvider,
+    });
+  }
+
+  /**
+   * Parse the network_code from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromViewabilityProviderName(viewabilityProviderName: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the viewability_provider from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the viewability_provider.
+   */
+  matchViewabilityProviderFromViewabilityProviderName(
+    viewabilityProviderName: string,
+  ) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).viewability_provider;
   }
 
   /**

@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.0.0...alloydb-v3.1.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.7.0...alloydb-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.6.0...alloydb-v2.7.0) (2026-06-25)
 
 

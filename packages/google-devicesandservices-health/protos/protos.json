@@ -9,7 +9,7 @@
                 "v4": {
                   "options": {
                     "csharp_namespace": "Google.DevicesAndServices.Health.V4",
-                    "go_package": "google.golang.org/genproto/googleapis/devicesandservices/health/apiv4main;healthpb",
+                    "go_package": "google.golang.org/genproto/googleapis/devicesandservices/health/apiv4;healthpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebhookNotificationCloudLogProto",
                     "java_package": "com.google.devicesandservices.health.v4",
@@ -278,6 +278,16 @@
                         "MILLILITER": 6,
                         "PINT_IMPERIAL": 7,
                         "PINT_US": 8
+                      }
+                    },
+                    "OvulationTestResult": {
+                      "values": {
+                        "OVULATION_TEST_RESULT_UNSPECIFIED": 0,
+                        "NEGATIVE": 1,
+                        "LUTEINIZING_HORMONE_SURGE": 2,
+                        "ESTROGEN_SURGE": 3,
+                        "POSITIVE": 4,
+                        "INDETERMINATE": 5
                       }
                     },
                     "ActiveZoneMinutes": {
@@ -1496,18 +1506,187 @@
                         "ExerciseType": {
                           "values": {
                             "EXERCISE_TYPE_UNSPECIFIED": 0,
-                            "RUNNING": 1,
-                            "WALKING": 2,
+                            "AEROBIC_WORKOUT": 13,
+                            "ARCHERY": 47,
+                            "ASSAULT_BIKE": 164,
+                            "BACKPACKING": 181,
+                            "BADMINTON": 48,
+                            "BALLET": 103,
+                            "BALLROOM_DANCE": 156,
+                            "BARRE_CLASS": 49,
+                            "BASEBALL": 50,
+                            "BASKETBALL": 51,
                             "BIKING": 3,
-                            "SWIMMING": 4,
-                            "HIKING": 5,
-                            "YOGA": 6,
-                            "PILATES": 7,
-                            "WORKOUT": 8,
+                            "BILLIARDS": 180,
+                            "BODY_WEIGHT": 149,
+                            "BOOTCAMP": 14,
+                            "BOWLING": 52,
+                            "BOXING": 53,
+                            "BREAKDANCING": 157,
+                            "CALISTHENICS": 54,
+                            "CANOEING": 15,
+                            "CARDIO_SCULPT": 129,
+                            "CARDIO_WORKOUT": 140,
+                            "CARPENTRY": 108,
+                            "CHEERLEADING": 165,
+                            "CIRCUIT_TRAINING": 16,
+                            "CLEANING": 105,
+                            "CLIMBING": 55,
+                            "CORE_TRAINING": 17,
+                            "CRICKET": 56,
+                            "CROQUET": 111,
+                            "CROSS_COUNTRY_SKI": 18,
+                            "CROSS_TRAINING": 57,
+                            "CROSSFIT": 19,
+                            "CURLING": 58,
+                            "DANCING": 20,
+                            "DIVING": 59,
+                            "ELECTRIC_BIKE": 152,
+                            "ELECTRIC_SCOOTER": 168,
+                            "ELLIPTICAL": 21,
+                            "EQUESTRIAN_SPORTS": 60,
+                            "EXERCISE_CLASS": 61,
+                            "FENCING": 62,
+                            "FIELD_HOCKEY": 113,
+                            "FISHING": 63,
+                            "FITNESS_GAMING": 64,
+                            "FOILING": 175,
+                            "FOOTBALL_AMERICAN": 65,
+                            "FOOTBALL_AUSTRALIAN": 66,
+                            "FREE_WEIGHTS": 148,
+                            "FRISBEE_PLAYING_GENERAL": 67,
+                            "FUNCTIONAL_STRENGTH_TRAINING": 68,
+                            "GARDENING": 107,
+                            "GOLF": 22,
+                            "GYMNASTICS": 69,
+                            "HANDBALL": 70,
+                            "HAND_CYCLING": 71,
                             "HIIT": 9,
-                            "WEIGHTLIFTING": 10,
+                            "HIKING": 5,
+                            "HIP_HOP": 158,
+                            "HOCKEY": 72,
+                            "HOEING": 109,
+                            "HOUSEHOLD_CHORES": 137,
+                            "HUNTING": 73,
+                            "ICE_SKATING": 127,
+                            "INCLINE_RUN": 142,
+                            "INCLINE_WALK": 146,
+                            "INDOOR_CLIMBING": 23,
+                            "INTERVAL_WORKOUT": 24,
+                            "JAZZ_DANCE": 154,
+                            "JIU_JITSU": 160,
+                            "JUMPING_ROPE": 74,
+                            "KARATE": 159,
+                            "KAYAKING": 25,
+                            "KICKBOXING": 26,
+                            "KITESURFING": 172,
+                            "LACROSSE": 75,
+                            "MARTIAL_ARTS": 27,
+                            "MEDITATE": 28,
+                            "MODERN_DANCE": 153,
+                            "MOTOCROSS": 114,
+                            "MOTORCYCLE": 121,
+                            "MOUNTAIN_BIKE": 128,
+                            "MOWING_LAWN": 106,
+                            "MUAY_THAI": 162,
+                            "MULTISPORT": 76,
+                            "MUSICAL_PERFORMANCE": 163,
+                            "NORDIC_WALKING": 145,
+                            "ORIENTEERING": 115,
+                            "OTHER": 12,
+                            "OUTDOOR_BIKE": 29,
+                            "OUTDOOR_WORKOUT": 30,
+                            "PADDLEBOARDING": 31,
+                            "PADEL": 176,
+                            "PAINTING": 170,
+                            "PARAGLIDING": 78,
+                            "PARKOUR": 166,
+                            "PICKELBALL": 79,
+                            "PILATES": 7,
+                            "POLO": 116,
+                            "POWERLIFTING": 32,
+                            "POWER_WALKING": 143,
+                            "RACKET_SPORTS": 169,
+                            "RACQUETBALL": 80,
+                            "RESISTANCE_BANDS": 151,
+                            "ROCK_CLIMBING": 123,
+                            "ROLLERBLADING": 33,
+                            "ROLLER_SKATING": 118,
+                            "ROWING": 81,
+                            "ROWING_MACHINE": 34,
+                            "RUCKING": 144,
+                            "RUGBY": 82,
+                            "RUNNING": 1,
+                            "SAILING": 83,
+                            "SCOOTERING": 167,
+                            "SCUBA_DIVING": 84,
+                            "SHOOTING": 104,
+                            "SHOVELING": 171,
+                            "SKATEBOARDING": 117,
+                            "SKATING": 35,
+                            "SKIING": 36,
+                            "SKYDIVING": 182,
+                            "SNORKELING": 37,
+                            "SNOWBOARDING": 38,
+                            "SNOWMOBILING": 179,
+                            "SNOWSHOEING": 85,
+                            "SNOW_SPORT": 86,
+                            "SOCCER": 87,
+                            "SOFTBALL": 88,
+                            "SPEED_SKATING": 178,
+                            "SPINNING": 39,
+                            "SPORT": 40,
+                            "SQUASH": 89,
+                            "STAIRCLIMBER": 41,
+                            "STATIONARY_BIKE": 139,
+                            "STEP_TRAINING": 90,
                             "STRENGTH_TRAINING": 11,
-                            "OTHER": 12
+                            "STRETCHING": 42,
+                            "STROLLER_WALK": 122,
+                            "SURFING": 43,
+                            "SWIMMING": 4,
+                            "SWIMMING_OPEN_WATER": 91,
+                            "SWIMMING_POOL": 101,
+                            "SYNCHRONIZED_SWIMMING": 177,
+                            "TABATA_WORKOUT": 130,
+                            "TABLE_TENNIS": 92,
+                            "TAEKWONDO": 161,
+                            "TAI_CHI": 93,
+                            "TANGO": 155,
+                            "TENNIS": 44,
+                            "TRACK_AND_FIELD": 94,
+                            "TRAIL_RUN": 141,
+                            "TRAMPOLINE": 119,
+                            "TREADMILL": 45,
+                            "TREADMILL_WALK": 138,
+                            "TRX": 131,
+                            "ULTIMATE_FRISBEE": 112,
+                            "UNICYCLING": 102,
+                            "VOLLEYBALL": 95,
+                            "VOLLEYBALL_BEACH": 120,
+                            "WAKEBOARDING": 173,
+                            "WALKING": 2,
+                            "WALK_WITH_WEIGHTS": 147,
+                            "WATER_AEROBICS": 96,
+                            "WATER_JOGGING": 126,
+                            "WATER_POLO": 97,
+                            "WATER_SKIING": 124,
+                            "WATER_SPORT": 98,
+                            "WATER_VOLLEYBALL": 125,
+                            "WEEDING": 110,
+                            "WEIGHTLIFTING": 10,
+                            "WEIGHT_MACHINES": 150,
+                            "WEIGHTS": 46,
+                            "WHEELCHAIR": 99,
+                            "WINDSURFING": 174,
+                            "WORKOUT": 8,
+                            "WRESTLING": 100,
+                            "YOGA": 6,
+                            "YOGA_BIKRAM": 132,
+                            "YOGA_HATHA": 133,
+                            "YOGA_POWER": 134,
+                            "YOGA_VINYASA": 135,
+                            "ZUMBA": 136
                           }
                         }
                       }
@@ -2443,7 +2622,7 @@
                           "type": "string",
                           "id": 15,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "health.googleapis.com/DataPoint"
                           }
                         },
@@ -2966,6 +3145,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "shortAwakenings": {
+                          "rule": "repeated",
+                          "type": "SleepStage",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3089,6 +3276,13 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "mainSleep": {
+                              "type": "bool",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           },
@@ -3700,6 +3894,231 @@
                         }
                       }
                     },
+                    "MenstrualPeriod": {
+                      "fields": {
+                        "interval": {
+                          "type": "ObservationTimeInterval",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "notes": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OvulationTest": {
+                      "fields": {
+                        "sampleTime": {
+                          "type": "ObservationSampleTime",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "result": {
+                          "type": "OvulationTestResult",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Symptoms": {
+                      "fields": {
+                        "sampleTime": {
+                          "type": "ObservationSampleTime",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "symptoms": {
+                          "rule": "repeated",
+                          "type": "SymptomValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SymptomValue": {
+                          "values": {
+                            "SYMPTOM_VALUE_UNSPECIFIED": 0,
+                            "CRAMPS": 1,
+                            "HEADACHE": 2,
+                            "TENDER_BREASTS": 3,
+                            "ACNE": 4,
+                            "SICK": 5,
+                            "BLOATED": 6,
+                            "HOT_FLASHES": 7,
+                            "PMS": 8,
+                            "COUGH": 9,
+                            "FEVER": 10,
+                            "DIFFICULTY_BREATHING": 11,
+                            "BACK_PAIN": 12,
+                            "SHAKINESS": 13,
+                            "HUNGER": 14,
+                            "SWEATING": 15,
+                            "ANXIETY": 16,
+                            "THIRST": 17,
+                            "FREQUENT_URINATION": 18,
+                            "BLURRED_VISION": 19,
+                            "OTHER": 20,
+                            "SEX_DRIVE_HIGH": 21,
+                            "SEX_DRIVE_MEDIUM": 22,
+                            "SEX_DRIVE_LOW": 23,
+                            "HEART_PALPITATIONS": 24,
+                            "FAINTING": 25,
+                            "CHEST_PAIN": 26,
+                            "FATIGUE": 27,
+                            "CONFUSION": 28,
+                            "DIZZINESS": 29,
+                            "ABDOMINAL_PAIN": 30,
+                            "BLADDER_LEAKS": 31,
+                            "BLEEDING_GUMS": 32,
+                            "BRAIN_FOG": 33,
+                            "BURNING_MOUTH": 34,
+                            "CONSTIPATION": 35,
+                            "CRAVINGS": 36,
+                            "DECREASED_APPETITE": 37,
+                            "DIARRHEA": 38,
+                            "DRAWING_PAIN": 39,
+                            "DRY_EYES": 40,
+                            "DRY_HAIR": 41,
+                            "DRY_SKIN": 42,
+                            "EXHAUSTION": 43,
+                            "FEEL_GOOD": 44,
+                            "FOOD_AVERSIONS": 45,
+                            "HAIR_LOSS": 46,
+                            "HEARTBURN": 47,
+                            "HYPERPIGMENTATION": 48,
+                            "INCREASED_APPETITE": 49,
+                            "INCREASED_APPETITE_V2": 50,
+                            "INSOMNIA": 51,
+                            "JOINT_PAIN": 52,
+                            "LEG_CRAMPS": 53,
+                            "MILKY_NIPPLE_DISCHARGE": 54,
+                            "NAUSEA": 55,
+                            "NIGHT_SWEATS": 56,
+                            "NORMAL_DIGESTION": 57,
+                            "NORMAL_STOOL": 58,
+                            "PERINEUM_PAIN": 59,
+                            "SLEEPINESS": 60,
+                            "STRETCH_MARKS": 61,
+                            "SWELLING": 62,
+                            "VAGINAL_DRYNESS": 63,
+                            "VAGINAL_ITCHING": 64,
+                            "VOMITING": 65
+                          }
+                        }
+                      }
+                    },
+                    "Moods": {
+                      "fields": {
+                        "sampleTime": {
+                          "type": "ObservationSampleTime",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "moods": {
+                          "rule": "repeated",
+                          "type": "Mood",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "valences": {
+                          "rule": "repeated",
+                          "type": "Valence",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mood": {
+                          "values": {
+                            "MOOD_UNSPECIFIED": 0,
+                            "AMAZED": 1,
+                            "AMUSED": 2,
+                            "ANGRY": 3,
+                            "ANNOYED": 4,
+                            "ANXIOUS": 5,
+                            "HAPPY": 6,
+                            "CONTENT": 7,
+                            "SAD": 8,
+                            "WORRIED": 9,
+                            "FRUSTRATED": 10,
+                            "EXCITED": 11,
+                            "CALM": 12,
+                            "STRESSED": 13,
+                            "ASHAMED": 14,
+                            "BRAVE": 15,
+                            "CONFIDENT": 16,
+                            "DISAPPOINTED": 17,
+                            "DISCOURAGED": 18,
+                            "DISGUSTED": 19,
+                            "DRAINED": 20,
+                            "EMBARRASSED": 21,
+                            "GRATEFUL": 22,
+                            "GUILTY": 23,
+                            "HOPEFUL": 24,
+                            "HOPELESS": 25,
+                            "INDIFFERENT": 26,
+                            "IRRITATED": 27,
+                            "JEALOUS": 28,
+                            "JOYFUL": 29,
+                            "LONELY": 30,
+                            "OVERWHELMED": 31,
+                            "PASSIONATE": 32,
+                            "PEACEFUL": 33,
+                            "PROUD": 34,
+                            "RELIEVED": 35,
+                            "SATISFIED": 36,
+                            "SCARED": 37,
+                            "SURPRISED": 38,
+                            "ENERGIZED": 39,
+                            "FATIGUED": 40,
+                            "VERY_CALM": 41,
+                            "VERY_STRESSED": 42,
+                            "NEUTRAL": 43,
+                            "AFRAID": 44,
+                            "HURTING": 45,
+                            "BORED": 46,
+                            "BITTER": 47,
+                            "ENVIOUS": 48,
+                            "CONFUSED": 49,
+                            "CURIOUS": 50,
+                            "AWESTRUCK": 51,
+                            "INSPIRED": 52,
+                            "LONGING": 53,
+                            "ACCOMPLISHED": 54,
+                            "LOVING": 55,
+                            "COMPASSIONATE": 56
+                          }
+                        },
+                        "Valence": {
+                          "values": {
+                            "VALENCE_UNSPECIFIED": 0,
+                            "UNPLEASANT": 1,
+                            "BASELINE": 2,
+                            "PLEASANT": 3
+                          }
+                        }
+                      }
+                    },
                     "MedicalDeviceInfo": {
                       "fields": {
                         "algorithmVersion": {
@@ -3742,7 +4161,7 @@
                     "DataPointsService": {
                       "options": {
                         "(google.api.default_host)": "health.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly,https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly,https://www.googleapis.com/auth/googlehealth.location.readonly,https://www.googleapis.com/auth/googlehealth.sleep.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly,https://www.googleapis.com/auth/googlehealth.activity_and_fitness.writeonly,https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly,https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.writeonly,https://www.googleapis.com/auth/googlehealth.location.readonly,https://www.googleapis.com/auth/googlehealth.logged_symptoms.readonly,https://www.googleapis.com/auth/googlehealth.logged_symptoms.writeonly,https://www.googleapis.com/auth/googlehealth.mindfulness.readonly,https://www.googleapis.com/auth/googlehealth.mindfulness.writeonly,https://www.googleapis.com/auth/googlehealth.nutrition.writeonly,https://www.googleapis.com/auth/googlehealth.reproductive_health.readonly,https://www.googleapis.com/auth/googlehealth.reproductive_health.writeonly,https://www.googleapis.com/auth/googlehealth.sleep.readonly,https://www.googleapis.com/auth/googlehealth.sleep.writeonly"
                       },
                       "methods": {
                         "GetDataPoint": {
@@ -3974,7 +4393,11 @@
                             "coreBodyTemperature",
                             "activeEnergyBurned",
                             "foodMeasurementUnit",
-                            "bloodGlucose"
+                            "bloodGlucose",
+                            "menstrualPeriod",
+                            "ovulationTest",
+                            "symptoms",
+                            "moods"
                           ]
                         }
                       },
@@ -4241,6 +4664,34 @@
                         "bloodGlucose": {
                           "type": "BloodGlucose",
                           "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "menstrualPeriod": {
+                          "type": "MenstrualPeriod",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ovulationTest": {
+                          "type": "OvulationTest",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "symptoms": {
+                          "type": "Symptoms",
+                          "id": 52,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "moods": {
+                          "type": "Moods",
+                          "id": 53,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5774,7 +6225,7 @@
                     "HealthProfileService": {
                       "options": {
                         "(google.api.default_host)": "health.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly,https://www.googleapis.com/auth/googlehealth.ecg.readonly,https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly,https://www.googleapis.com/auth/googlehealth.irn.readonly,https://www.googleapis.com/auth/googlehealth.profile.readonly,https://www.googleapis.com/auth/googlehealth.settings.readonly,https://www.googleapis.com/auth/googlehealth.sleep.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly,https://www.googleapis.com/auth/googlehealth.ecg.readonly,https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly,https://www.googleapis.com/auth/googlehealth.irn.readonly,https://www.googleapis.com/auth/googlehealth.logged_symptoms.readonly,https://www.googleapis.com/auth/googlehealth.mindfulness.readonly,https://www.googleapis.com/auth/googlehealth.profile.readonly,https://www.googleapis.com/auth/googlehealth.profile.writeonly,https://www.googleapis.com/auth/googlehealth.reproductive_health.readonly,https://www.googleapis.com/auth/googlehealth.settings.readonly,https://www.googleapis.com/auth/googlehealth.settings.writeonly,https://www.googleapis.com/auth/googlehealth.sleep.readonly"
                       },
                       "methods": {
                         "GetProfile": {
@@ -6867,6 +7318,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -6976,6 +7431,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -7033,6 +7492,79 @@
                 }
               }
             },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -7083,6 +7615,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -7277,6 +7811,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -7552,7 +8090,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -7612,7 +8153,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -7654,6 +8197,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -7726,6 +8273,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -7841,6 +8392,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -7920,6 +8475,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -7939,6 +8498,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -7977,6 +8540,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -8022,6 +8589,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -8048,6 +8619,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -8082,6 +8657,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -8223,8 +8802,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -8236,6 +8815,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -8313,7 +8903,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -8332,6 +8923,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -8545,7 +9148,6 @@
         },
         "type": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
             "java_multiple_files": true,
             "java_outer_classname": "IntervalProto",
@@ -8605,7 +9207,6 @@
         },
         "longrunning": {
           "options": {
-            "cc_enable_arenas": true,
             "csharp_namespace": "Google.LongRunning",
             "go_package": "cloud.google.com/go/longrunning/autogen/longrunningpb;longrunningpb",
             "java_multiple_files": true,
@@ -8762,6 +9363,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 3
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -8775,6 +9380,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -8822,7 +9435,6 @@
         },
         "rpc": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/rpc/http;http",
             "java_multiple_files": true,
             "java_outer_classname": "HttpProto",

@@ -20,6 +20,11 @@
                 "getPrivateOffer"
               ]
             },
+            "ResolveAmendmentTarget": {
+              "methods": [
+                "resolveAmendmentTarget"
+              ]
+            },
             "CreatePrivateOffer": {
               "methods": [
                 "createPrivateOffer"
@@ -135,6 +140,11 @@
             "GetPrivateOffer": {
               "methods": [
                 "getPrivateOffer"
+              ]
+            },
+            "ResolveAmendmentTarget": {
+              "methods": [
+                "resolveAmendmentTarget"
               ]
             },
             "CreatePrivateOffer": {

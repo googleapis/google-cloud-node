@@ -769,6 +769,296 @@ describe('v1.TargetingPresetServiceClient', () => {
     });
   });
 
+  describe('updateTargetingPreset', () => {
+    it('invokes updateTargetingPreset without error', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateTargetingPresetRequest(),
+      );
+      request.targetingPreset ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateTargetingPresetRequest',
+        ['targetingPreset', 'name'],
+      );
+      request.targetingPreset.name = defaultValue1;
+      const expectedHeaderRequestParams = `targeting_preset.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.TargetingPreset(),
+      );
+      client.innerApiCalls.updateTargetingPreset =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTargetingPreset(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTargetingPreset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetingPreset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTargetingPreset without error using callback', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateTargetingPresetRequest(),
+      );
+      request.targetingPreset ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateTargetingPresetRequest',
+        ['targetingPreset', 'name'],
+      );
+      request.targetingPreset.name = defaultValue1;
+      const expectedHeaderRequestParams = `targeting_preset.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.TargetingPreset(),
+      );
+      client.innerApiCalls.updateTargetingPreset =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTargetingPreset(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.ITargetingPreset | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTargetingPreset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetingPreset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTargetingPreset with error', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateTargetingPresetRequest(),
+      );
+      request.targetingPreset ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateTargetingPresetRequest',
+        ['targetingPreset', 'name'],
+      );
+      request.targetingPreset.name = defaultValue1;
+      const expectedHeaderRequestParams = `targeting_preset.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTargetingPreset = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateTargetingPreset(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateTargetingPreset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetingPreset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTargetingPreset with closed client', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateTargetingPresetRequest(),
+      );
+      request.targetingPreset ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateTargetingPresetRequest',
+        ['targetingPreset', 'name'],
+      );
+      request.targetingPreset.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateTargetingPreset(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchUpdateTargetingPresets', () => {
+    it('invokes batchUpdateTargetingPresets without error', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsResponse(),
+      );
+      client.innerApiCalls.batchUpdateTargetingPresets =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchUpdateTargetingPresets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateTargetingPresets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateTargetingPresets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateTargetingPresets without error using callback', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsResponse(),
+      );
+      client.innerApiCalls.batchUpdateTargetingPresets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateTargetingPresets(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateTargetingPresets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateTargetingPresets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateTargetingPresets with error', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateTargetingPresets = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchUpdateTargetingPresets(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateTargetingPresets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateTargetingPresets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateTargetingPresets with closed client', async () => {
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateTargetingPresetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchUpdateTargetingPresets(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('batchDeactivateTargetingPresets', () => {
     it('invokes batchDeactivateTargetingPresets without error', async () => {
       const client =
@@ -2272,6 +2562,109 @@ describe('v1.TargetingPresetServiceClient', () => {
       });
     });
 
+    describe('creative', async () => {
+      const fakePath = '/rendered/path/creative';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative: 'creativeValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativePath', () => {
+        const result = client.creativePath('networkCodeValue', 'creativeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeName', () => {
+        const result = client.matchNetworkCodeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromCreativeName', () => {
+        const result = client.matchCreativeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeSet', async () => {
+      const fakePath = '/rendered/path/creativeSet';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_set: 'creativeSetValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativeSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeSetPath', () => {
+        const result = client.creativeSetPath(
+          'networkCodeValue',
+          'creativeSetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeSetName', () => {
+        const result = client.matchNetworkCodeFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeSetFromCreativeSetName', () => {
+        const result = client.matchCreativeSetFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'creativeSetValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('creativeTemplate', async () => {
       const fakePath = '/rendered/path/creativeTemplate';
       const expectedParameters = {
@@ -2324,6 +2717,60 @@ describe('v1.TargetingPresetServiceClient', () => {
         assert.strictEqual(result, 'creativeTemplateValue');
         assert(
           (client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeWrapper', async () => {
+      const fakePath = '/rendered/path/creativeWrapper';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_wrapper: 'creativeWrapperValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.creativeWrapperPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeWrapperPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeWrapperPath', () => {
+        const result = client.creativeWrapperPath(
+          'networkCodeValue',
+          'creativeWrapperValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeWrapperName', () => {
+        const result = client.matchNetworkCodeFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeWrapperFromCreativeWrapperName', () => {
+        const result =
+          client.matchCreativeWrapperFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'creativeWrapperValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -2505,6 +2952,136 @@ describe('v1.TargetingPresetServiceClient', () => {
         assert(
           (
             client.pathTemplates.customTargetingValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiAuthenticationKey', async () => {
+      const fakePath = '/rendered/path/daiAuthenticationKey';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_authentication_key: 'daiAuthenticationKeyValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiAuthenticationKeyPath', () => {
+        const result = client.daiAuthenticationKeyPath(
+          'networkCodeValue',
+          'daiAuthenticationKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiAuthenticationKeyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiAuthenticationKeyFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'daiAuthenticationKeyValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiEncodingProfile', async () => {
+      const fakePath = '/rendered/path/daiEncodingProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_encoding_profile: 'daiEncodingProfileValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.daiEncodingProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiEncodingProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiEncodingProfilePath', () => {
+        const result = client.daiEncodingProfilePath(
+          'networkCodeValue',
+          'daiEncodingProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiEncodingProfileFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchDaiEncodingProfileFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'daiEncodingProfileValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -3449,6 +4026,56 @@ describe('v1.TargetingPresetServiceClient', () => {
       });
     });
 
+    describe('partner', async () => {
+      const fakePath = '/rendered/path/partner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        partner: 'partnerValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.partnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.partnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('partnerPath', () => {
+        const result = client.partnerPath('networkCodeValue', 'partnerValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.partnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromPartnerName', () => {
+        const result = client.matchNetworkCodeFromPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPartnerFromPartnerName', () => {
+        const result = client.matchPartnerFromPartnerName(fakePath);
+        assert.strictEqual(result, 'partnerValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('placement', async () => {
       const fakePath = '/rendered/path/placement';
       const expectedParameters = {
@@ -3898,6 +4525,56 @@ describe('v1.TargetingPresetServiceClient', () => {
       });
     });
 
+    describe('slate', async () => {
+      const fakePath = '/rendered/path/slate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        slate: 'slateValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.slatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.slatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('slatePath', () => {
+        const result = client.slatePath('networkCodeValue', 'slateValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.slatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSlateName', () => {
+        const result = client.matchNetworkCodeFromSlateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSlateFromSlateName', () => {
+        const result = client.matchSlateFromSlateName(fakePath);
+        assert.strictEqual(result, 'slateValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('suggestedAdUnit', async () => {
       const fakePath = '/rendered/path/suggestedAdUnit';
       const expectedParameters = {
@@ -4222,6 +4899,70 @@ describe('v1.TargetingPresetServiceClient', () => {
         assert.strictEqual(result, 'userValue');
         assert(
           (client.pathTemplates.userPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('viewabilityProvider', async () => {
+      const fakePath = '/rendered/path/viewabilityProvider';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        viewability_provider: 'viewabilityProviderValue',
+      };
+      const client =
+        new targetingpresetserviceModule.v1.TargetingPresetServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.viewabilityProviderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.viewabilityProviderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('viewabilityProviderPath', () => {
+        const result = client.viewabilityProviderPath(
+          'networkCodeValue',
+          'viewabilityProviderValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromViewabilityProviderName', () => {
+        const result =
+          client.matchNetworkCodeFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchViewabilityProviderFromViewabilityProviderName', () => {
+        const result =
+          client.matchViewabilityProviderFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'viewabilityProviderValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

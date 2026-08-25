@@ -6,6 +6,39 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.0.3](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.2...google-gax-v6.0.3) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in REST transcoder - tests relocated ([#9166](https://github.com/googleapis/google-cloud-node/issues/9166)) ([8a2b491](https://github.com/googleapis/google-cloud-node/commit/8a2b4911fafba437c436b86e7282d37f60de9374))
+* Validate path parameters and prevent traversal/injection in REST transcoder ([#9151](https://github.com/googleapis/google-cloud-node/issues/9151)) ([0152a8e](https://github.com/googleapis/google-cloud-node/commit/0152a8ee36592d90f435336fda95993c9cbd227a))
+
+## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.1...google-gax-v6.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.0...google-gax-v6.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v5.0.8...google-gax-v6.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gax to minimum Node version of 22. ([#8989](https://github.com/googleapis/google-cloud-node/issues/8989))
+
+### Features
+
+* Update gax to minimum Node version of 22. ([#8989](https://github.com/googleapis/google-cloud-node/issues/8989)) ([792ffaf](https://github.com/googleapis/google-cloud-node/commit/792ffaf7389e601b906ad9870707f89326af4257)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [5.0.8](https://github.com/googleapis/google-cloud-node/compare/google-gax-v5.0.7...google-gax-v5.0.8) (2026-07-23)
 
 

@@ -1,5 +1,37 @@
 # Changelog
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v7.1.0...aiplatform-v7.2.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v7.0.0...aiplatform-v7.1.0) (2026-08-10)
+
+
+### Features
+
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.11.0...aiplatform-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.10.0...aiplatform-v6.11.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
 ## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.9.0...aiplatform-v6.10.0) (2026-07-21)
 
 

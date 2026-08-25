@@ -2,247 +2,171 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.spanner.admin.instance.v1",
+  "protoPackage": "google.spanner.v1",
   "libraryPackage": "@google-cloud/spanner-api",
   "services": {
-    "InstanceAdmin": {
+    "Spanner": {
       "clients": {
         "grpc": {
-          "libraryClient": "InstanceAdminClient",
+          "libraryClient": "SpannerClient",
           "rpcs": {
-            "GetInstanceConfig": {
+            "CreateSession": {
               "methods": [
-                "getInstanceConfig"
+                "createSession"
               ]
             },
-            "DeleteInstanceConfig": {
+            "BatchCreateSessions": {
               "methods": [
-                "deleteInstanceConfig"
+                "batchCreateSessions"
               ]
             },
-            "GetInstance": {
+            "GetSession": {
               "methods": [
-                "getInstance"
+                "getSession"
               ]
             },
-            "DeleteInstance": {
+            "DeleteSession": {
               "methods": [
-                "deleteInstance"
+                "deleteSession"
               ]
             },
-            "SetIamPolicy": {
+            "ExecuteSql": {
               "methods": [
-                "setIamPolicy"
+                "executeSql"
               ]
             },
-            "GetIamPolicy": {
+            "ExecuteBatchDml": {
               "methods": [
-                "getIamPolicy"
+                "executeBatchDml"
               ]
             },
-            "TestIamPermissions": {
+            "Read": {
               "methods": [
-                "testIamPermissions"
+                "read"
               ]
             },
-            "GetInstancePartition": {
+            "BeginTransaction": {
               "methods": [
-                "getInstancePartition"
+                "beginTransaction"
               ]
             },
-            "DeleteInstancePartition": {
+            "Commit": {
               "methods": [
-                "deleteInstancePartition"
+                "commit"
               ]
             },
-            "CreateInstanceConfig": {
+            "Rollback": {
               "methods": [
-                "createInstanceConfig"
+                "rollback"
               ]
             },
-            "UpdateInstanceConfig": {
+            "PartitionQuery": {
               "methods": [
-                "updateInstanceConfig"
+                "partitionQuery"
               ]
             },
-            "CreateInstance": {
+            "PartitionRead": {
               "methods": [
-                "createInstance"
+                "partitionRead"
               ]
             },
-            "UpdateInstance": {
+            "ExecuteStreamingSql": {
               "methods": [
-                "updateInstance"
+                "executeStreamingSql"
               ]
             },
-            "CreateInstancePartition": {
+            "StreamingRead": {
               "methods": [
-                "createInstancePartition"
+                "streamingRead"
               ]
             },
-            "UpdateInstancePartition": {
+            "BatchWrite": {
               "methods": [
-                "updateInstancePartition"
+                "batchWrite"
               ]
             },
-            "MoveInstance": {
+            "FetchCacheUpdate": {
               "methods": [
-                "moveInstance"
+                "fetchCacheUpdate"
               ]
             },
-            "ListInstanceConfigs": {
+            "ListSessions": {
               "methods": [
-                "listInstanceConfigs",
-                "listInstanceConfigsStream",
-                "listInstanceConfigsAsync"
-              ]
-            },
-            "ListInstanceConfigOperations": {
-              "methods": [
-                "listInstanceConfigOperations",
-                "listInstanceConfigOperationsStream",
-                "listInstanceConfigOperationsAsync"
-              ]
-            },
-            "ListInstances": {
-              "methods": [
-                "listInstances",
-                "listInstancesStream",
-                "listInstancesAsync"
-              ]
-            },
-            "ListInstancePartitions": {
-              "methods": [
-                "listInstancePartitions",
-                "listInstancePartitionsStream",
-                "listInstancePartitionsAsync"
-              ]
-            },
-            "ListInstancePartitionOperations": {
-              "methods": [
-                "listInstancePartitionOperations",
-                "listInstancePartitionOperationsStream",
-                "listInstancePartitionOperationsAsync"
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
         },
         "grpc-fallback": {
-          "libraryClient": "InstanceAdminClient",
+          "libraryClient": "SpannerClient",
           "rpcs": {
-            "GetInstanceConfig": {
+            "CreateSession": {
               "methods": [
-                "getInstanceConfig"
+                "createSession"
               ]
             },
-            "DeleteInstanceConfig": {
+            "BatchCreateSessions": {
               "methods": [
-                "deleteInstanceConfig"
+                "batchCreateSessions"
               ]
             },
-            "GetInstance": {
+            "GetSession": {
               "methods": [
-                "getInstance"
+                "getSession"
               ]
             },
-            "DeleteInstance": {
+            "DeleteSession": {
               "methods": [
-                "deleteInstance"
+                "deleteSession"
               ]
             },
-            "SetIamPolicy": {
+            "ExecuteSql": {
               "methods": [
-                "setIamPolicy"
+                "executeSql"
               ]
             },
-            "GetIamPolicy": {
+            "ExecuteBatchDml": {
               "methods": [
-                "getIamPolicy"
+                "executeBatchDml"
               ]
             },
-            "TestIamPermissions": {
+            "Read": {
               "methods": [
-                "testIamPermissions"
+                "read"
               ]
             },
-            "GetInstancePartition": {
+            "BeginTransaction": {
               "methods": [
-                "getInstancePartition"
+                "beginTransaction"
               ]
             },
-            "DeleteInstancePartition": {
+            "Commit": {
               "methods": [
-                "deleteInstancePartition"
+                "commit"
               ]
             },
-            "CreateInstanceConfig": {
+            "Rollback": {
               "methods": [
-                "createInstanceConfig"
+                "rollback"
               ]
             },
-            "UpdateInstanceConfig": {
+            "PartitionQuery": {
               "methods": [
-                "updateInstanceConfig"
+                "partitionQuery"
               ]
             },
-            "CreateInstance": {
+            "PartitionRead": {
               "methods": [
-                "createInstance"
+                "partitionRead"
               ]
             },
-            "UpdateInstance": {
+            "ListSessions": {
               "methods": [
-                "updateInstance"
-              ]
-            },
-            "CreateInstancePartition": {
-              "methods": [
-                "createInstancePartition"
-              ]
-            },
-            "UpdateInstancePartition": {
-              "methods": [
-                "updateInstancePartition"
-              ]
-            },
-            "MoveInstance": {
-              "methods": [
-                "moveInstance"
-              ]
-            },
-            "ListInstanceConfigs": {
-              "methods": [
-                "listInstanceConfigs",
-                "listInstanceConfigsStream",
-                "listInstanceConfigsAsync"
-              ]
-            },
-            "ListInstanceConfigOperations": {
-              "methods": [
-                "listInstanceConfigOperations",
-                "listInstanceConfigOperationsStream",
-                "listInstanceConfigOperationsAsync"
-              ]
-            },
-            "ListInstances": {
-              "methods": [
-                "listInstances",
-                "listInstancesStream",
-                "listInstancesAsync"
-              ]
-            },
-            "ListInstancePartitions": {
-              "methods": [
-                "listInstancePartitions",
-                "listInstancePartitionsStream",
-                "listInstancePartitionsAsync"
-              ]
-            },
-            "ListInstancePartitionOperations": {
-              "methods": [
-                "listInstancePartitionOperations",
-                "listInstancePartitionOperationsStream",
-                "listInstancePartitionOperationsAsync"
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }

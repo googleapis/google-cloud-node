@@ -40,7 +40,8 @@ import * as gapicConfig from './company_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides methods for handling `Company` objects.
+ *  Provides methods for handling {@link protos.google.ads.admanager.v1.Company|Company}
+ *  objects.
  * @class
  * @memberof v1
  */
@@ -265,8 +266,17 @@ export class CompanyServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
+      ),
+      creativeWrapperPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeWrappers/{creative_wrapper}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}',
@@ -276,6 +286,12 @@ export class CompanyServiceClient {
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
+      ),
+      daiAuthenticationKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}',
+      ),
+      daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
@@ -328,6 +344,9 @@ export class CompanyServiceClient {
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}',
       ),
+      partnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/partners/{partner}',
+      ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}',
       ),
@@ -352,6 +371,9 @@ export class CompanyServiceClient {
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
       ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
+      ),
       suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
       ),
@@ -369,6 +391,9 @@ export class CompanyServiceClient {
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
+      ),
+      viewabilityProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/viewabilityProviders/{viewability_provider}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
@@ -435,7 +460,14 @@ export class CompanyServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const companyServiceStubMethods = ['getCompany', 'listCompanies'];
+    const companyServiceStubMethods = [
+      'getCompany',
+      'listCompanies',
+      'createCompany',
+      'batchCreateCompanies',
+      'updateCompany',
+      'batchUpdateCompanies',
+    ];
     for (const methodName of companyServiceStubMethods) {
       const callPromise = this.companyServiceStub.then(
         (stub) =>
@@ -553,7 +585,7 @@ export class CompanyServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * API to retrieve a `Company` object.
+   * Retrieves a {@link protos.google.ads.admanager.v1.Company|Company} object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -677,47 +709,597 @@ export class CompanyServiceClient {
         throw error;
       });
   }
-
   /**
-   * API to retrieve a list of `Company` objects.
+   * Creates a {@link protos.google.ads.admanager.v1.Company|Company} object.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Companies.
+   *   Required. The parent resource where this
+   *   {@link protos.google.ads.admanager.v1.Company|Company} will be created. Format:
+   *   `networks/{network_code}`
+   * @param {google.ads.admanager.v1.Company} request.company
+   *   Required. The {@link protos.google.ads.admanager.v1.Company|Company} to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Company|Company}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/company_service.create_company.js</caption>
+   * region_tag:admanager_v1_generated_CompanyService_CreateCompany_async
+   */
+  createCompany(
+    request?: protos.google.ads.admanager.v1.ICreateCompanyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.ICreateCompanyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createCompany(
+    request: protos.google.ads.admanager.v1.ICreateCompanyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.ICreateCompanyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompany(
+    request: protos.google.ads.admanager.v1.ICreateCompanyRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.ICreateCompanyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompany(
+    request?: protos.google.ads.admanager.v1.ICreateCompanyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ICompany,
+          | protos.google.ads.admanager.v1.ICreateCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.ICreateCompanyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.ICreateCompanyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createCompany request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ICompany,
+          | protos.google.ads.admanager.v1.ICreateCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCompany response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCompany(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ICompany,
+          protos.google.ads.admanager.v1.ICreateCompanyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCompany response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates {@link protos.google.ads.admanager.v1.Company|Company} objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where {@link protos.|Companies} will be created.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the CreateCompanyRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The {@link protos.google.ads.admanager.v1.Company|Company} objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateCompaniesResponse|BatchCreateCompaniesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/company_service.batch_create_companies.js</caption>
+   * region_tag:admanager_v1_generated_CompanyService_BatchCreateCompanies_async
+   */
+  batchCreateCompanies(
+    request?: protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCreateCompanies(
+    request: protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateCompanies(
+    request: protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateCompanies(
+    request?: protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+      protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchCreateCompanies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateCompanies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateCompanies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchCreateCompaniesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateCompanies response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a {@link protos.google.ads.admanager.v1.Company|Company} object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.Company} request.company
+   *   Required. The {@link protos.google.ads.admanager.v1.Company|Company} to update.
+   *
+   *   The {@link protos.google.ads.admanager.v1.Company|Company}'s `name` is used to identify
+   *   the {@link protos.google.ads.admanager.v1.Company|Company} to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Company|Company}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/company_service.update_company.js</caption>
+   * region_tag:admanager_v1_generated_CompanyService_UpdateCompany_async
+   */
+  updateCompany(
+    request?: protos.google.ads.admanager.v1.IUpdateCompanyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.IUpdateCompanyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateCompany(
+    request: protos.google.ads.admanager.v1.IUpdateCompanyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.IUpdateCompanyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCompany(
+    request: protos.google.ads.admanager.v1.IUpdateCompanyRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.IUpdateCompanyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCompany(
+    request?: protos.google.ads.admanager.v1.IUpdateCompanyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ICompany,
+          | protos.google.ads.admanager.v1.IUpdateCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.IUpdateCompanyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ICompany,
+      protos.google.ads.admanager.v1.IUpdateCompanyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'company.name': request.company!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateCompany request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ICompany,
+          | protos.google.ads.admanager.v1.IUpdateCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCompany response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCompany(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ICompany,
+          protos.google.ads.admanager.v1.IUpdateCompanyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCompany response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates {@link protos.google.ads.admanager.v1.Company|Company} objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where {@link protos.|Companies} will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the UpdateCompanyRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The {@link protos.google.ads.admanager.v1.Company|Company} objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateCompaniesResponse|BatchUpdateCompaniesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/company_service.batch_update_companies.js</caption>
+   * region_tag:admanager_v1_generated_CompanyService_BatchUpdateCompanies_async
+   */
+  batchUpdateCompanies(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchUpdateCompanies(
+    request: protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateCompanies(
+    request: protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateCompanies(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchUpdateCompanies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateCompanies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateCompanies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateCompaniesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateCompanies response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Lists {@link protos.google.ads.admanager.v1.Company|Company} objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of {@link protos.|Companies}.
    *   Format: `networks/{network_code}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Companies` to return. The service may
-   *   return fewer than this value. If unspecified, at most 50 `Companies` will
+   *   Optional. The maximum number of {@link protos.|Companies} to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 {@link protos.|Companies} will
    *   be returned. The maximum value is 1000; values greater than 1000 will be
    *   coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCompanies` call.
+   *   Optional. A page token, received from a previous {@link protos.|ListCompanies} call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListCompanies` must
+   *   When paginating, all other parameters provided to {@link protos.|ListCompanies} must
    *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Expression to filter the response.
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>address</code></li>
-   *     <li><code>comment</code></li>
-   *     <li><code>companyId</code></li>
-   *     <li><code>creditStatus</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>email</code></li>
-   *     <li><code>externalId</code></li>
-   *     <li><code>fax</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>phone</code></li>
-   *     <li><code>thirdPartyCompanyId</code></li>
-   *     <li><code>type</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `address`
+   *   * `comment`
+   *   * `companyId`
+   *   * `creditStatus`
+   *   * `displayName`
+   *   * `email`
+   *   * `externalId`
+   *   * `fax`
+   *   * `name`
+   *   * `phone`
+   *   * `thirdPartyCompanyId`
+   *   * `type`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -838,40 +1420,39 @@ export class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Companies.
+   *   Required. The parent, which owns this collection of {@link protos.|Companies}.
    *   Format: `networks/{network_code}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Companies` to return. The service may
-   *   return fewer than this value. If unspecified, at most 50 `Companies` will
+   *   Optional. The maximum number of {@link protos.|Companies} to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 {@link protos.|Companies} will
    *   be returned. The maximum value is 1000; values greater than 1000 will be
    *   coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCompanies` call.
+   *   Optional. A page token, received from a previous {@link protos.|ListCompanies} call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListCompanies` must
+   *   When paginating, all other parameters provided to {@link protos.|ListCompanies} must
    *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Expression to filter the response.
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>address</code></li>
-   *     <li><code>comment</code></li>
-   *     <li><code>companyId</code></li>
-   *     <li><code>creditStatus</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>email</code></li>
-   *     <li><code>externalId</code></li>
-   *     <li><code>fax</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>phone</code></li>
-   *     <li><code>thirdPartyCompanyId</code></li>
-   *     <li><code>type</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `address`
+   *   * `comment`
+   *   * `companyId`
+   *   * `creditStatus`
+   *   * `displayName`
+   *   * `email`
+   *   * `externalId`
+   *   * `fax`
+   *   * `name`
+   *   * `phone`
+   *   * `thirdPartyCompanyId`
+   *   * `type`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -921,40 +1502,39 @@ export class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Companies.
+   *   Required. The parent, which owns this collection of {@link protos.|Companies}.
    *   Format: `networks/{network_code}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Companies` to return. The service may
-   *   return fewer than this value. If unspecified, at most 50 `Companies` will
+   *   Optional. The maximum number of {@link protos.|Companies} to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 {@link protos.|Companies} will
    *   be returned. The maximum value is 1000; values greater than 1000 will be
    *   coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCompanies` call.
+   *   Optional. A page token, received from a previous {@link protos.|ListCompanies} call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListCompanies` must
+   *   When paginating, all other parameters provided to {@link protos.|ListCompanies} must
    *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Expression to filter the response.
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>address</code></li>
-   *     <li><code>comment</code></li>
-   *     <li><code>companyId</code></li>
-   *     <li><code>creditStatus</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>email</code></li>
-   *     <li><code>externalId</code></li>
-   *     <li><code>fax</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>phone</code></li>
-   *     <li><code>thirdPartyCompanyId</code></li>
-   *     <li><code>type</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `address`
+   *   * `comment`
+   *   * `companyId`
+   *   * `creditStatus`
+   *   * `displayName`
+   *   * `email`
+   *   * `externalId`
+   *   * `fax`
+   *   * `name`
+   *   * `phone`
+   *   * `thirdPartyCompanyId`
+   *   * `type`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1759,6 +2339,81 @@ export class CompanyServiceClient {
   }
 
   /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
+  }
+
+  /**
    * Return a fully-qualified creativeTemplate resource name string.
    *
    * @param {string} network_code
@@ -1796,6 +2451,46 @@ export class CompanyServiceClient {
     return this.pathTemplates.creativeTemplatePathTemplate.match(
       creativeTemplateName,
     ).creative_template;
+  }
+
+  /**
+   * Return a fully-qualified creativeWrapper resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_wrapper
+   * @returns {string} Resource name string.
+   */
+  creativeWrapperPath(networkCode: string, creativeWrapper: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.render({
+      network_code: networkCode,
+      creative_wrapper: creativeWrapper,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the creative_wrapper from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the creative_wrapper.
+   */
+  matchCreativeWrapperFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).creative_wrapper;
   }
 
   /**
@@ -1920,6 +2615,92 @@ export class CompanyServiceClient {
     return this.pathTemplates.customTargetingValuePathTemplate.match(
       customTargetingValueName,
     ).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified daiAuthenticationKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_authentication_key
+   * @returns {string} Resource name string.
+   */
+  daiAuthenticationKeyPath(networkCode: string, daiAuthenticationKey: string) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.render({
+      network_code: networkCode,
+      dai_authentication_key: daiAuthenticationKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_authentication_key from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the dai_authentication_key.
+   */
+  matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).dai_authentication_key;
+  }
+
+  /**
+   * Return a fully-qualified daiEncodingProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_encoding_profile
+   * @returns {string} Resource name string.
+   */
+  daiEncodingProfilePath(networkCode: string, daiEncodingProfile: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.render({
+      network_code: networkCode,
+      dai_encoding_profile: daiEncodingProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiEncodingProfileName(daiEncodingProfileName: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_encoding_profile from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the dai_encoding_profile.
+   */
+  matchDaiEncodingProfileFromDaiEncodingProfileName(
+    daiEncodingProfileName: string,
+  ) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).dai_encoding_profile;
   }
 
   /**
@@ -2584,6 +3365,43 @@ export class CompanyServiceClient {
   }
 
   /**
+   * Return a fully-qualified partner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} partner
+   * @returns {string} Resource name string.
+   */
+  partnerPath(networkCode: string, partner: string) {
+    return this.pathTemplates.partnerPathTemplate.render({
+      network_code: networkCode,
+      partner: partner,
+    });
+  }
+
+  /**
+   * Parse the network_code from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the partner from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the partner.
+   */
+  matchPartnerFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).partner;
+  }
+
+  /**
    * Return a fully-qualified placement resource name string.
    *
    * @param {string} network_code
@@ -2896,6 +3714,42 @@ export class CompanyServiceClient {
   }
 
   /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
+  }
+
+  /**
    * Return a fully-qualified suggestedAdUnit resource name string.
    *
    * @param {string} network_code
@@ -3127,6 +3981,48 @@ export class CompanyServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified viewabilityProvider resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} viewability_provider
+   * @returns {string} Resource name string.
+   */
+  viewabilityProviderPath(networkCode: string, viewabilityProvider: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.render({
+      network_code: networkCode,
+      viewability_provider: viewabilityProvider,
+    });
+  }
+
+  /**
+   * Parse the network_code from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromViewabilityProviderName(viewabilityProviderName: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the viewability_provider from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the viewability_provider.
+   */
+  matchViewabilityProviderFromViewabilityProviderName(
+    viewabilityProviderName: string,
+  ) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).viewability_provider;
   }
 
   /**

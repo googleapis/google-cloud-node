@@ -1,7 +1,7 @@
 {
   "name": "pack-n-play",
   "description": "Ensure your library installs and compiles",
-  "version": "4.2.3",
+  "version": "5.1.0",
   "author": "Google LLC",
   "license": "Apache-2.0",
   "repository": {
@@ -53,7 +53,7 @@
     "tmp": "^0.2.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "c8": {
     "exclude": [

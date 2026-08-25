@@ -14,11 +14,10 @@
 
 import * as assert from 'assert';
 import {describe} from 'mocha';
-import * as protos from '../../protos/protos';
+import {protos, google} from '../../src/protos';
 import {getInitializedDatastoreClient} from './get-initialized-datastore-client';
 import type {CallOptions} from 'google-gax';
 import {Entities} from '../../src/entity';
-import {google} from '../../protos/protos';
 import IValue = google.datastore.v1.IValue;
 import {complexCaseEntities} from '../fixtures/complexCaseLargeStrings';
 

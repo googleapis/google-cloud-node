@@ -150,9 +150,6 @@ export class InstancesClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
-
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -1309,6 +1306,8 @@ export class InstancesClient {
    *   The request object that will be sent.
    * @param {string} request.instance
    *   Name of the instance resource to delete.
+   * @param {boolean} request.noGracefulShutdown
+   *   If set to true, Graceful Shutdown is skipped.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -7083,6 +7082,8 @@ export class InstancesClient {
    *   If true, the contents of any attached Local SSD disks will be discarded.
    * @param {string} request.instance
    *   Name of the instance resource to stop.
+   * @param {boolean} request.noGracefulShutdown
+   *   If set to true, Graceful Shutdown is skipped.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

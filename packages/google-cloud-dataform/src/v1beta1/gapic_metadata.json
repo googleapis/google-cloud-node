@@ -115,6 +115,26 @@
                 "pullGitCommits"
               ]
             },
+            "SyncWorkspaceRefs": {
+              "methods": [
+                "syncWorkspaceRefs"
+              ]
+            },
+            "DeleteBranch": {
+              "methods": [
+                "deleteBranch"
+              ]
+            },
+            "CheckoutWorkspaceBranch": {
+              "methods": [
+                "checkoutWorkspaceBranch"
+              ]
+            },
+            "FetchCurrentWorkspaceBranch": {
+              "methods": [
+                "fetchCurrentWorkspaceBranch"
+              ]
+            },
             "PushGitCommits": {
               "methods": [
                 "pushGitCommits"
@@ -354,6 +374,13 @@
                 "listWorkspaces",
                 "listWorkspacesStream",
                 "listWorkspacesAsync"
+              ]
+            },
+            "FetchWorkspaceBranches": {
+              "methods": [
+                "fetchWorkspaceBranches",
+                "fetchWorkspaceBranchesStream",
+                "fetchWorkspaceBranchesAsync"
               ]
             },
             "QueryDirectoryContents": {
@@ -522,6 +549,26 @@
                 "pullGitCommits"
               ]
             },
+            "SyncWorkspaceRefs": {
+              "methods": [
+                "syncWorkspaceRefs"
+              ]
+            },
+            "DeleteBranch": {
+              "methods": [
+                "deleteBranch"
+              ]
+            },
+            "CheckoutWorkspaceBranch": {
+              "methods": [
+                "checkoutWorkspaceBranch"
+              ]
+            },
+            "FetchCurrentWorkspaceBranch": {
+              "methods": [
+                "fetchCurrentWorkspaceBranch"
+              ]
+            },
             "PushGitCommits": {
               "methods": [
                 "pushGitCommits"
@@ -761,6 +808,13 @@
                 "listWorkspaces",
                 "listWorkspacesStream",
                 "listWorkspacesAsync"
+              ]
+            },
+            "FetchWorkspaceBranches": {
+              "methods": [
+                "fetchWorkspaceBranches",
+                "fetchWorkspaceBranchesStream",
+                "fetchWorkspaceBranchesAsync"
               ]
             },
             "QueryDirectoryContents": {

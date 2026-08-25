@@ -5,6 +5,38 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.0.3](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.2...gcp-metadata-v9.0.3) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.1...gcp-metadata-v9.0.2) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.0...gcp-metadata-v9.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **core:** Discovery url handling, error code review helper, and pack-n-play test timeouts ([#9061](https://github.com/googleapis/google-cloud-node/issues/9061)) ([340364f](https://github.com/googleapis/google-cloud-node/commit/340364f8fab67adaf4e684fb3241de499394bf6b))
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v8.1.4...gcp-metadata-v9.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gcp-metadata to minimum Node version of 22. ([#8991](https://github.com/googleapis/google-cloud-node/issues/8991))
+
+### Features
+
+* Update gcp-metadata to minimum Node version of 22. ([#8991](https://github.com/googleapis/google-cloud-node/issues/8991)) ([91e17a1](https://github.com/googleapis/google-cloud-node/commit/91e17a1ab4bc4c19a50547fa6e28ee262efc43f9)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [8.1.4](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v8.1.3...gcp-metadata-v8.1.4) (2026-07-23)
 
 

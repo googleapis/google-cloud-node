@@ -31,25 +31,73 @@ fi
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
 
-if [ ${BUILD_TYPE} == "presubmit" ]; then
-    # For presubmit build, we want to know the difference from the
-    # common commit in origin/main.
-    GIT_DIFF_ARG="origin/main..."
+if [[ "$(node -v)" == v22* ]]; then
+  export NODE_OPTIONS="${NODE_OPTIONS} --no-warnings=DEP0040"
+  export NODE_OPTIONS="${NODE_OPTIONS} --no-experimental-require-module"
+fi
 
-    # Then fetch enough history for finding the common commit.
-    git fetch origin main --deepen=300
+for arg in "$@"; do
+    case "${arg}" in
+        --strict)
+            STRICT=true
+            ;;
+    esac
+done
 
-elif [ ${BUILD_TYPE} == "continuous" ]; then
-    # For continuous build, we want to know the difference in the last
-    # commit. This assumes we use squash commit when merging PRs.
-    GIT_DIFF_ARG="HEAD~.."
-
-    # Then fetch one last commit for getting the diff.
-    git fetch origin main --deepen=1
-
+if [[ "${STRICT}" == "true" || "${STRICT}" == "1" ]]; then
+    if [ -z "${GIT_DIFF_ARG}" ]; then
+        echo "Error: STRICT mode requires GIT_DIFF_ARG to be set." >&2
+        exit 1
+    fi
+    if [[ -z "${RUN_TESTS_MODE}" ]]; then
+        echo "Error: STRICT mode requires RUN_TESTS_MODE to be set." >&2
+        exit 1
+    fi
+    set +e
+    git diff --quiet ${GIT_DIFF_ARG}
+    diff_status=$?
+    set -e
+    if [[ ${diff_status} -ne 0 && ${diff_status} -ne 1 ]]; then
+        echo "Error: STRICT mode git diff ${GIT_DIFF_ARG} failed with exit code ${diff_status}." >&2
+        exit 1
+    fi
 else
-    # Run everything.
-    GIT_DIFF_ARG=""
+    if [ -z "${GIT_DIFF_ARG}" ]; then
+        if [ "${BUILD_TYPE}" == "presubmit" ]; then
+            # For presubmit build, we want to know the difference from the
+            # common commit in origin/main.
+            GIT_DIFF_ARG="origin/main..."
+
+            # Then fetch enough history for finding the common commit.
+            git fetch origin main --deepen=300
+
+        elif [ "${BUILD_TYPE}" == "continuous" ]; then
+            # For continuous build, we want to know the difference in the last
+            # commit. This assumes we use squash commit when merging PRs.
+            GIT_DIFF_ARG="HEAD~.."
+
+            # Then fetch one last commit for getting the diff.
+            git fetch origin main --deepen=1
+
+        else
+            # Run everything.
+            GIT_DIFF_ARG=""
+        fi
+    fi
+fi
+
+if [[ -n "${RUN_TESTS_MODE}" ]]; then
+    if [[ "${RUN_TESTS_MODE}" != "CALCULATE_SHARD_MATRIX" && "${RUN_TESTS_MODE}" != "RUN_UNIT_TESTS" ]]; then
+        echo "Error: RUN_TESTS_MODE must be either CALCULATE_SHARD_MATRIX or RUN_UNIT_TESTS." >&2
+        exit 1
+    fi
+fi
+
+if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
+    if [[ -z "${SHARD_TOTAL}" || -z "${SHARD_INDEX}" ]]; then
+        echo "Error: SHARD_TOTAL and SHARD_INDEX must be set when RUN_TESTS_MODE is RUN_UNIT_TESTS." >&2
+        exit 1
+    fi
 fi
 
 # Then detect changes in the test scripts.
@@ -81,7 +129,7 @@ subdirs=(
 )
 
 RETVAL=0
-# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
+# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo).
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 
 tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
@@ -89,9 +137,12 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # Some packages are only used by our bots and automation. These packages do not need to run on Windows and
 # often employ platform specific code like file system interaction. Some packages may also fail
 # on Windows due to incompatible npm scripts.
-# 
+#
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
 windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/ handwritten/cloud-profiler/"
+
+# Gather all test directories into an array
+test_dirs=()
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
@@ -115,7 +166,7 @@ for subdir in ${subdirs[@]}; do
         # System tests for packages are broken and blocking PRs.
         # See https://github.com/googleapis/google-cloud-node/issues/7976.
         #
-        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921,
         # we are likely to permanently remove these tests in the near future.
         if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "system" ]]; then
             echo "Skipping ${TEST_TYPE} test for packages: ${d}"
@@ -125,7 +176,7 @@ for subdir in ${subdirs[@]}; do
         # Sample tests for packages are broken/flaky and blocking PRs.
         # See https://github.com/googleapis/google-cloud-node/issues/7976#issuecomment-4210458096.
         #
-        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921,
         # we are likely to permanently remove these tests in the near future.
         if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "samples" ]]; then
             echo "Skipping ${TEST_TYPE} test for packages: ${d}"
@@ -203,21 +254,51 @@ for subdir in ${subdirs[@]}; do
             fi
         fi
         if [ "${should_test}" = true ]; then
-            echo "running test in ${d}"
-            pushd ${d}
-            # Temporarily allow failure.
-            set +e
-            ${test_script}
-            ret=$?
-            set -e
-            if [ ${ret} -ne 0 ]; then
-                RETVAL=${ret}
-                # Since there are so many APIs, we should exit early if there's an error
-                exit ${RETVAL}
-            fi
-            popd
+            test_dirs+=("${d}")
         fi
     done
 done
+# If RUN_TESTS_MODE is CALCULATE_SHARD_MATRIX, output dynamic matrix values to GitHub Actions and exit
+if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
+    count=${#test_dirs[@]}
+    if [[ $count -gt 15 ]]; then
+        matrix="[0, 1, 2, 3, 4]"
+        total="5"
+    else
+        matrix="[0]"
+        total="1"
+    fi
+    if [[ -n "${GITHUB_OUTPUT}" ]]; then
+        echo "shard_matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+        echo "shard_total=${total}" >> "${GITHUB_OUTPUT}"
+    else
+        echo "shard_matrix=${matrix}"
+        echo "shard_total=${total}"
+    fi
+    exit 0
+fi
 
-exit ${RETVAL}
+# If SHARD_TOTAL and SHARD_INDEX are provided, we will only run a subset of the tests.
+for i in "${!test_dirs[@]}"; do
+    d="${test_dirs[$i]}"
+
+    if [[ -n "${SHARD_TOTAL}" && -n "${SHARD_INDEX}" ]]; then
+        if (( SHARD_TOTAL > 0 && i % SHARD_TOTAL != SHARD_INDEX )); then
+            continue
+        fi
+    fi
+
+    echo "running test in ${d}"
+    pushd "${d}" >/dev/null
+    # Temporarily allow failure.
+    set +e
+    "${test_script}"
+    ret=$?
+    set -e
+    if [ ${ret} -ne 0 ]; then
+        exit ${ret}
+    fi
+    popd >/dev/null
+done
+
+exit 0

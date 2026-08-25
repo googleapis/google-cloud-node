@@ -32,6 +32,11 @@ function main(name) {
    *  Required. Name of the resource.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If set to true, the response will bypass any caches and return
+   *  the freshest possible data.
+   */
+  // const skipCache = true
 
   // Imports the Networkconnectivity library
   const {TransportManagerClient} = require('@google-cloud/network-connectivity').v1beta;

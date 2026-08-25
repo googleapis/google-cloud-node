@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.5.0...health-v0.6.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.4.0...health-v0.5.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.3.0...health-v0.4.0) (2026-07-21)
 
 

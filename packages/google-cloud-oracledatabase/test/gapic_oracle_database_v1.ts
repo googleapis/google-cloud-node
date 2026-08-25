@@ -906,6 +906,144 @@ describe('v1.OracleDatabaseClient', () => {
     });
   });
 
+  describe('getAutonomousDatabaseRefreshableClones', () => {
+    it('invokes getAutonomousDatabaseRefreshableClones without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones(),
+      );
+      client.innerApiCalls.getAutonomousDatabaseRefreshableClones =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.getAutonomousDatabaseRefreshableClones(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutonomousDatabaseRefreshableClones as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutonomousDatabaseRefreshableClones as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutonomousDatabaseRefreshableClones without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones(),
+      );
+      client.innerApiCalls.getAutonomousDatabaseRefreshableClones =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAutonomousDatabaseRefreshableClones(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutonomousDatabaseRefreshableClones as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutonomousDatabaseRefreshableClones as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutonomousDatabaseRefreshableClones with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAutonomousDatabaseRefreshableClones =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getAutonomousDatabaseRefreshableClones(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getAutonomousDatabaseRefreshableClones as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutonomousDatabaseRefreshableClones as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutonomousDatabaseRefreshableClones with closed client', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getAutonomousDatabaseRefreshableClones(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('getOdbNetwork', () => {
     it('invokes getOdbNetwork without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -5156,6 +5294,204 @@ describe('v1.OracleDatabaseClient', () => {
       );
       await assert.rejects(
         client.checkFailoverAutonomousDatabaseProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('refreshAutonomousDatabase', () => {
+    it('invokes refreshAutonomousDatabase without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.refreshAutonomousDatabase =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.refreshAutonomousDatabase(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes refreshAutonomousDatabase without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.refreshAutonomousDatabase =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.refreshAutonomousDatabase(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes refreshAutonomousDatabase with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.refreshAutonomousDatabase = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.refreshAutonomousDatabase(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes refreshAutonomousDatabase with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.RefreshAutonomousDatabaseRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.refreshAutonomousDatabase = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.refreshAutonomousDatabase(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshAutonomousDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRefreshAutonomousDatabaseProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkRefreshAutonomousDatabaseProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRefreshAutonomousDatabaseProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkRefreshAutonomousDatabaseProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

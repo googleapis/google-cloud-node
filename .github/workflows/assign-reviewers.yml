@@ -45,13 +45,40 @@ jobs:
               return;
             }
 
+            const KNOWN_BOTS = new Set([
+              'gcf-owl-bot[bot]',
+              'gcf-owl-bot',
+              'release-please[bot]',
+              'release-please',
+              'dependabot[bot]',
+              'dependabot',
+              'renovate-bot',
+              'renovate',
+              'yoshi-code-bot',
+              'gemini-code-assist[bot]',
+              'gemini-code-assist',
+              'google-cla[bot]',
+              'google-cla',
+              'github-actions[bot]',
+              'github-actions',
+            ]);
+
+            const isBot = (user) => {
+              if (!user) return false;
+              if (user.type === 'Bot') return true;
+              if (user.login && user.login.endsWith('[bot]')) return true;
+              if (user.login && KNOWN_BOTS.has(user.login)) return true;
+              return false;
+            };
+
             const requestedReviewers = context.payload.pull_request.requested_reviewers || [];
             const requestedTeams = context.payload.pull_request.requested_teams || [];
 
+            const humanRequestedReviewers = requestedReviewers.filter(r => !isBot(r));
             const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
             const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
 
-            // Check if PR has already been reviewed
+            // Check if PR has already been reviewed by human reviewers (excluding bots and author)
             let hasReviews = false;
             try {
               const { data: reviews } = await github.rest.pulls.listReviews({
@@ -59,8 +86,14 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
               });
-              if (reviews.length > 0) {
-                console.log("PR already has reviews.");
+              const humanReviews = reviews.filter(review => {
+                if (!review.user) return false;
+                if (isBot(review.user)) return false;
+                if (review.user.login === author) return false;
+                return true;
+              });
+              if (humanReviews.length > 0) {
+                console.log(`PR already has reviews from: ${humanReviews.map(r => r.user.login).join(', ')}.`);
                 hasReviews = true;
               }
             } catch (err) {
@@ -68,8 +101,8 @@ jobs:
             }
 
             let shouldExit = false;
-            if (requestedReviewers.length > 0) {
-              console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}.`);
+            if (humanRequestedReviewers.length > 0) {
+              console.log(`PR already has requested reviewers: ${humanRequestedReviewers.map(r => r.login).join(', ')}.`);
               shouldExit = true;
             } else if (hasRouteSpecificTeam) {
               console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}.`);
@@ -111,6 +144,7 @@ jobs:
               { prefix: 'handwritten/storage/', team: 'gcs-team' },
               { prefix: 'handwritten/firestore/', team: 'firestore-team' },
               { prefix: 'handwritten/spanner/', team: 'spanner-team' },
+              { prefix: 'handwritten/spanner-driver/', team: 'spanner-team' },
               { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team' },
               { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team' }
             ];

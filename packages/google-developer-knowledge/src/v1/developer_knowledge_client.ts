@@ -830,7 +830,7 @@ export class DeveloperKnowledgeClient {
    * Searches for developer knowledge across Google's developer documentation.
    * Returns {@link protos.google.developers.knowledge.v1.DocumentChunk|DocumentChunk}s
    * based on the user's query. There may be many chunks from the same
-   * {@link protos.google.developers.knowledge.v1.Document|Document}.  To retrieve full
+   * {@link protos.google.developers.knowledge.v1.Document|Document}. To retrieve full
    * documents, use
    * {@link protos.google.developers.knowledge.v1.DeveloperKnowledge.GetDocument|DeveloperKnowledge.GetDocument}
    * or
@@ -865,8 +865,6 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
-   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
-   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -877,8 +875,6 @@ export class DeveloperKnowledgeClient {
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
    *
-   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
-   *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
    *   regexp match are not supported.
@@ -886,14 +882,16 @@ export class DeveloperKnowledgeClient {
    *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
    *
+   *   Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *   the right-hand side of filtering expressions must be string literals
+   *   enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+   *
    *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *   operators. `OR` has higher precedence than `AND`. Use parentheses for
    *   explicit precedence grouping.
    *
    *   Examples:
    *
-   *   * Filter by `Document.content_length_bytes`:
-   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -1042,8 +1040,6 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
-   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
-   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1054,8 +1050,6 @@ export class DeveloperKnowledgeClient {
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
    *
-   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
-   *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
    *   regexp match are not supported.
@@ -1063,14 +1057,16 @@ export class DeveloperKnowledgeClient {
    *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
    *
+   *   Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *   the right-hand side of filtering expressions must be string literals
+   *   enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+   *
    *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *   operators. `OR` has higher precedence than `AND`. Use parentheses for
    *   explicit precedence grouping.
    *
    *   Examples:
    *
-   *   * Filter by `Document.content_length_bytes`:
-   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -1142,8 +1138,6 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
-   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
-   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1154,8 +1148,6 @@ export class DeveloperKnowledgeClient {
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
    *
-   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
-   *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
    *   regexp match are not supported.
@@ -1163,14 +1155,16 @@ export class DeveloperKnowledgeClient {
    *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
    *
+   *   Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *   the right-hand side of filtering expressions must be string literals
+   *   enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+   *
    *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *   operators. `OR` has higher precedence than `AND`. Use parentheses for
    *   explicit precedence grouping.
    *
    *   Examples:
    *
-   *   * Filter by `Document.content_length_bytes`:
-   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`

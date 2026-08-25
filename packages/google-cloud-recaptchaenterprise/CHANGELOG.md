@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v7.0.0...recaptcha-enterprise-v7.1.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.4.2...recaptcha-enterprise-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [6.4.2](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.4.1...recaptcha-enterprise-v6.4.2) (2026-06-01)
 
 
