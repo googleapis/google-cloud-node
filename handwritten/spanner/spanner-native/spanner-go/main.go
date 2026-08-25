@@ -68,6 +68,7 @@ var (
 	clientRegistryMutex sync.RWMutex
 	clientRegistry      = make(map[uintptr]*CoreClient)
 	nextClientId        uintptr = 1
+	logEncodingOnce     sync.Once
 )
 
 func registerClient(client *CoreClient) uintptr {
@@ -114,7 +115,15 @@ func CloseGoCoreClient(handle C.uintptr_t) {
 func isDirectDeserializationEnabled() bool {
 	// Defaults to true unless explicitly disabled with SPANNER_GO_DIRECT_DESERIALIZATION=false or 0
 	val := os.Getenv("SPANNER_GO_DIRECT_DESERIALIZATION")
-	return val != "false" && val != "0"
+	enabled := val != "false" && val != "0"
+	logEncodingOnce.Do(func() {
+		if enabled {
+			fmt.Println("[Spanner-Go] Direct native cells encoding is ACTIVE (bypassing JSON parsing)")
+		} else {
+			fmt.Println("[Spanner-Go] Legacy JSON parsing is ACTIVE")
+		}
+	})
+	return enabled
 }
 
 func writeBatchJson(batch [][]*structpb.Value, rowType []*spannerpb.StructType_Field) *C.char {
