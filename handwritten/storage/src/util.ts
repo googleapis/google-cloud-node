@@ -19,7 +19,7 @@ import * as url from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
-import {Contexts} from './file.js';
+import {FileMetadata, Contexts} from './file';
 
 // Done to avoid a problem with mangling of identifiers when using esModuleInterop
 const fileURLToPath = url.fileURLToPath;
