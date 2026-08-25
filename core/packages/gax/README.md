@@ -32,7 +32,7 @@ Contributions to this library are always welcome and highly encouraged.  See the
 For detailed documentation of the modules in gax-nodejs, please check out the [docs][docs].
 
 ## License
-BSD - See [LICENSE][license] for more information.
+Apache 2.0 - See [LICENSE][license] for more information.
 
 [contributing]: https://github.com/googleapis/gax-nodejs/blob/main/CONTRIBUTING.md
 [docs]: http://googleapis.github.io/gax-nodejs/
