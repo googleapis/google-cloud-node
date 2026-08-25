@@ -37,10 +37,15 @@ async function run() {
       return;
     }
 
+    const packagesToCheck = getPackageDirs(changedTsFiles);
+
+    // Install missing package dependencies upfront before running linters or type checkers
+    await ensurePackageDependencies(packagesToCheck);
+
     // Run ESLint and Type checks in parallel to optimize CPU utilization
     const [eslintPassed, typeSafetyPassed] = await Promise.all([
       checkEslint(changedTsFiles),
-      checkTypeSafety(changedTsFiles),
+      checkTypeSafety(packagesToCheck),
     ]);
 
     if (!eslintPassed || !typeSafetyPassed) {
@@ -266,22 +271,45 @@ function findTsconfigDir(filePath) {
 }
 
 /**
- * Performs concurrent TypeScript type checking for changed packages.
+ * Maps a list of changed files to their unique containing package directories.
  */
-async function checkTypeSafety(filesToCheck) {
-  if (filesToCheck.length === 0) {
-    return true;
-  }
-
-  // Map files to their package directories (by walking up to the nearest tsconfig.json)
-  const packagesToCheck = new Set();
-  for (const file of filesToCheck) {
+function getPackageDirs(files) {
+  const packages = new Set();
+  for (const file of files) {
     const tsconfigDir = findTsconfigDir(file);
     if (tsconfigDir) {
-      packagesToCheck.add(tsconfigDir);
+      packages.add(tsconfigDir);
     }
   }
+  return packages;
+}
 
+/**
+ * Ensures all changed packages have node_modules installed before running linting or type checking.
+ */
+async function ensurePackageDependencies(packages) {
+  const installs = Array.from(packages).map(async pkg => {
+    const packageJsonPath = path.join(pkg, 'package.json');
+    const nodeModulesPath = path.join(pkg, 'node_modules');
+    if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
+      console.log(`  Installing dependencies in ${pkg}...`);
+      const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+      await execFileAsync(
+        npmCmd,
+        ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
+        {
+          cwd: pkg,
+        },
+      );
+    }
+  });
+  await Promise.all(installs);
+}
+
+/**
+ * Performs concurrent TypeScript type checking for changed packages.
+ */
+async function checkTypeSafety(packagesToCheck) {
   if (packagesToCheck.size === 0) {
     return true;
   }
@@ -292,19 +320,6 @@ async function checkTypeSafety(filesToCheck) {
 
   const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
-      const packageJsonPath = path.join(pkg, 'package.json');
-      const nodeModulesPath = path.join(pkg, 'node_modules');
-      if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
-        console.log(`  Installing dependencies in ${pkg}...`);
-        const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-        await execFileAsync(
-          npmCmd,
-          ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
-          {
-            cwd: pkg,
-          },
-        );
-      }
       console.log(`  Type checking ${pkg}...`);
       await execFileAsync('node', [
         'node_modules/typescript/bin/tsc',

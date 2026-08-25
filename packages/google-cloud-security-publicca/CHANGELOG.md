@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/publicca-v3.0.0...publicca-v3.1.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/publicca-v2.3.0...publicca-v3.0.0) (2026-08-04)
 
 
