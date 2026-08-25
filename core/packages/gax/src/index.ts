@@ -29,7 +29,7 @@ export * as loggingUtils from 'google-logging-utils';
 
 export {grpc};
 export {CancellablePromise, OngoingCall} from './call';
-export {createApiCall, checkTelemetryEnabled} from './createApiCall';
+export {createApiCall} from './createApiCall';
 export {
   BundleDescriptor,
   LongrunningDescriptor,
@@ -113,7 +113,12 @@ export {
   PaginationResponse,
 } from './clientInterface';
 
-export {makeUUID, decodeAnyProtosInArray, decodeProtobufAny} from './util';
+export {
+  makeUUID,
+  decodeAnyProtosInArray,
+  decodeProtobufAny,
+  checkTelemetryEnabled,
+} from './util';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';

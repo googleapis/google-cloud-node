@@ -21,7 +21,6 @@ import * as sinon from 'sinon';
 
 import {RequestType} from '../../src/apitypes';
 import * as gax from '../../src/gax';
-import {checkTelemetryEnabled} from '../../src/createApiCall';
 import {GoogleError} from '../../src/googleError';
 import * as utils from './utils';
 import * as retries from '../../src/normalCalls/retries';
@@ -334,52 +333,6 @@ describe('createApiCall', () => {
   describe('in regards to OpenTelemetry Tracing', () => {
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
-    });
-
-    describe('checkTelemetryEnabled', () => {
-      const mockSettings = new gax.CallSettings({
-        enableTelemetryTracing: true,
-        internalTelemetryInfo: {
-          gcpClientService: 'test.googleapis.com',
-        },
-      });
-
-      it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED=true and settings are configured', () => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-        assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
-      });
-
-      it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set', () => {
-        assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
-      });
-
-      it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not "true"', () => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
-        assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
-      });
-
-      it('returns false when enableTelemetryTracing is not set on settings', () => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-        const noTracingSettings = new gax.CallSettings({
-          internalTelemetryInfo: {
-            gcpClientService: 'test.googleapis.com',
-          },
-        });
-        assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
-      });
-
-      it('returns false when internalTelemetryInfo is not set on settings', () => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-        const noInfoSettings = new gax.CallSettings({
-          enableTelemetryTracing: true,
-        });
-        assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
-      });
-
-      it('returns false when settings is undefined', () => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-        assert.strictEqual(checkTelemetryEnabled(undefined), false);
-      });
     });
 
     it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED and CallSettings field is set', () => {

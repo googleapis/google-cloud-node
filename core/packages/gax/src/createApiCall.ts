@@ -35,19 +35,6 @@ import {StreamingApiCaller} from './streamingCalls/streamingApiCaller';
 import {warn} from './warnings';
 
 /**
- * Checks if telemetry tracing is enabled
- * @param settings
- * @returns true if telemetry tracing is enabled, false otherwise
- */
-export function checkTelemetryEnabled(settings?: CallSettings): boolean {
-  const tracingEnabled =
-    Boolean(settings?.enableTelemetryTracing) &&
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED === 'true' &&
-    settings?.internalTelemetryInfo !== undefined;
-  return Boolean(tracingEnabled);
-}
-
-/**
  * Converts an rpc call into an API call governed by the settings.
  *
  * In typical usage, `func` will be a promise to a callable used to make an rpc

@@ -14,11 +14,26 @@
  * limitations under the License.
  */
 
+import {CallSettings} from './gax';
+
 const PROTO_TYPE_PREFIX = 'type.googleapis.com/';
 const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
 
 const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
+
+/**
+ * Checks if telemetry tracing is enabled
+ * @param settings
+ * @returns true if telemetry tracing is enabled, false otherwise
+ */
+export function checkTelemetryEnabled(settings?: CallSettings): boolean {
+  const tracingEnabled =
+    Boolean(settings?.enableTelemetryTracing) &&
+    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED === 'true' &&
+    settings?.internalTelemetryInfo !== undefined;
+  return Boolean(tracingEnabled);
+}
 
 function words(str: string, normalize = false) {
   if (normalize) {

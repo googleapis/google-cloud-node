@@ -15,7 +15,7 @@
  */
 
 import assert from 'assert';
-import {describe, it} from 'mocha';
+import {afterEach, describe, it} from 'mocha';
 import {
   toCamelCase as snakeToCamelCase,
   camelToSnakeCase,
@@ -24,7 +24,9 @@ import {
   getProtoNameFromFullName,
   decodeProtobufAny,
   decodeAnyProtosInArray,
+  checkTelemetryEnabled,
 } from '../../src/util';
+import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
 import protosJson from '../../protos/status.json';
 
@@ -195,5 +197,55 @@ describe('util.ts', () => {
       ),
       JSON.stringify([{reason: 'SERVICE_DISABLED'}]),
     );
+  });
+
+  describe('checkTelemetryEnabled', () => {
+    afterEach(() => {
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+    });
+
+    const mockSettings = new CallSettings({
+      enableTelemetryTracing: true,
+      internalTelemetryInfo: {
+        gcpClientService: 'test.googleapis.com',
+      },
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED=true and settings are configured', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set', () => {
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not "true"', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('returns false when enableTelemetryTracing is not set on settings', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const noTracingSettings = new CallSettings({
+        internalTelemetryInfo: {
+          gcpClientService: 'test.googleapis.com',
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
+    });
+
+    it('returns false when internalTelemetryInfo is not set on settings', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const noInfoSettings = new CallSettings({
+        enableTelemetryTracing: true,
+      });
+      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
+    });
+
+    it('returns false when settings is undefined', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      assert.strictEqual(checkTelemetryEnabled(undefined), false);
+    });
   });
 });
