@@ -111,7 +111,17 @@ async function keepNInFlight(executeFn, concurrency, durationMs) {
     }
 
     for (let i = 0; i < concurrency; i++) launchOne();
-    setTimeout(() => { stopped = true; }, durationMs);
+    setTimeout(() => {
+      stopped = true;
+      if (inFlight === 0) {
+        resolve({ latencies, errors });
+      } else {
+        // Safety watchdog: if in-flight requests don't finish within 4s, resolve to prevent process hang
+        setTimeout(() => {
+          resolve({ latencies, errors: errors + inFlight });
+        }, 4000);
+      }
+    }, durationMs);
   });
 }
 
@@ -426,12 +436,15 @@ async function main() {
   }
 
   console.log('Warming up connection pools, JIT compiler, and OAuth2 token caches...');
-  await runBenchmark(() => db.executeSqlJs(SQL), 2, WARMUP_MS);
+  console.log('  [Warmup 1/3] JavaScript baseline...');
+  await runBenchmark(() => db.executeSqlJs(SQL), 2, 2000);
 
-  for (const ch of [1, 4, 8, 16, 32, 50]) {
-    if (goClients[ch])   await runBenchmark(() => goClients[ch].executeSqlNative(SQL), 2, WARMUP_MS);
-    if (rustClients[ch]) await runBenchmark(() => rustClients[ch].executeSqlNative(SQL), 2, WARMUP_MS);
-  }
+  console.log('  [Warmup 2/3] Go Shared Core (DirectPath+Native)...');
+  await runBenchmark(() => goClients[1].executeSqlNative(SQL), 2, 2000);
+
+  console.log('  [Warmup 3/3] Rust Shared Core (GFE Native)...');
+  await runBenchmark(() => rustClients[1].executeSqlNative(SQL), 2, 2000);
+
   console.log('Warmup complete.');
 
   // Run Systems Verification Plan Tests (Test 1, 2, 4)
