@@ -134,6 +134,26 @@ describe('wrapError()', () => {
     );
   });
 
+  it('appends the callsite stack when the error stack is a getter with no setter', () => {
+    const err = new Error('Expected error');
+    // `set: undefined` is load bearing here. V8 installs `stack` as an accessor
+    // with both a getter and a setter, and a partial descriptor only overrides
+    // the attributes it names, so defining `get` alone would leave that setter
+    // in place and the plain assignment would succeed.
+    Object.defineProperty(err, 'stack', {
+      get: () => 'Error: Expected error\n    at origin',
+      set: undefined,
+      configurable: true,
+    });
+
+    const wrapped = wrapError(err, 'Error\n    at callsite');
+
+    expect(wrapped).to.equal(err);
+    expect(wrapped.stack).to.equal(
+      'Error: Expected error\n    at origin\nCaused by: Error\n    at callsite',
+    );
+  });
+
   it('returns the original error when its stack cannot be modified', () => {
     const err = new Error('Expected error');
     Object.defineProperty(err, 'stack', {

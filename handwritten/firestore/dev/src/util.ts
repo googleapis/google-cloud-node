@@ -237,18 +237,23 @@ export function silencePromise(promise: Promise<unknown>): Promise<void> {
 export function wrapError(err: Error, stack: string): Error {
   const wrappedStack = err.stack + '\nCaused by: ' + stack;
   try {
-    if (Object.getOwnPropertyDescriptor(err, 'stack')?.writable === false) {
-      // Some libraries define `stack` as a read only property, which makes a
-      // plain assignment throw. Redefining the property still preserves the
-      // callsite as long as the property stayed configurable.
-      Object.defineProperty(err, 'stack', {value: wrappedStack});
-    } else {
-      err.stack = wrappedStack;
-    }
+    err.stack = wrappedStack;
   } catch {
-    // The stack cannot be modified at all. Recording the callsite is best
-    // effort, so return the error we were asked to wrap rather than let the
-    // resulting TypeError take its place.
+    try {
+      // Some libraries define `stack` as a read only property, or as a getter
+      // with no setter, either of which makes a plain assignment throw.
+      // Redefining the property still preserves the callsite as long as it
+      // stayed configurable.
+      Object.defineProperty(err, 'stack', {
+        value: wrappedStack,
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // The stack cannot be modified at all. Recording the callsite is best
+      // effort, so return the error we were asked to wrap rather than let the
+      // resulting TypeError take its place.
+    }
   }
   return err;
 }
