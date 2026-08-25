@@ -2036,6 +2036,61 @@ describe('v1.LinkedDeviceServiceClient', () => {
       });
     });
 
+    describe('creativeWrapper', async () => {
+      const fakePath = '/rendered/path/creativeWrapper';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_wrapper: 'creativeWrapperValue',
+      };
+      const client = new linkeddeviceserviceModule.v1.LinkedDeviceServiceClient(
+        {
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.creativeWrapperPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeWrapperPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeWrapperPath', () => {
+        const result = client.creativeWrapperPath(
+          'networkCodeValue',
+          'creativeWrapperValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeWrapperName', () => {
+        const result = client.matchNetworkCodeFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeWrapperFromCreativeWrapperName', () => {
+        const result =
+          client.matchCreativeWrapperFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'creativeWrapperValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('customField', async () => {
       const fakePath = '/rendered/path/customField';
       const expectedParameters = {
@@ -2214,6 +2269,138 @@ describe('v1.LinkedDeviceServiceClient', () => {
         assert(
           (
             client.pathTemplates.customTargetingValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiAuthenticationKey', async () => {
+      const fakePath = '/rendered/path/daiAuthenticationKey';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_authentication_key: 'daiAuthenticationKeyValue',
+      };
+      const client = new linkeddeviceserviceModule.v1.LinkedDeviceServiceClient(
+        {
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiAuthenticationKeyPath', () => {
+        const result = client.daiAuthenticationKeyPath(
+          'networkCodeValue',
+          'daiAuthenticationKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiAuthenticationKeyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiAuthenticationKeyFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'daiAuthenticationKeyValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiEncodingProfile', async () => {
+      const fakePath = '/rendered/path/daiEncodingProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_encoding_profile: 'daiEncodingProfileValue',
+      };
+      const client = new linkeddeviceserviceModule.v1.LinkedDeviceServiceClient(
+        {
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.daiEncodingProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiEncodingProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiEncodingProfilePath', () => {
+        const result = client.daiEncodingProfilePath(
+          'networkCodeValue',
+          'daiEncodingProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiEncodingProfileFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchDaiEncodingProfileFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'daiEncodingProfileValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -3175,6 +3362,57 @@ describe('v1.LinkedDeviceServiceClient', () => {
       });
     });
 
+    describe('partner', async () => {
+      const fakePath = '/rendered/path/partner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        partner: 'partnerValue',
+      };
+      const client = new linkeddeviceserviceModule.v1.LinkedDeviceServiceClient(
+        {
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.partnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.partnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('partnerPath', () => {
+        const result = client.partnerPath('networkCodeValue', 'partnerValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.partnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromPartnerName', () => {
+        const result = client.matchNetworkCodeFromPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPartnerFromPartnerName', () => {
+        const result = client.matchPartnerFromPartnerName(fakePath);
+        assert.strictEqual(result, 'partnerValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('placement', async () => {
       const fakePath = '/rendered/path/placement';
       const expectedParameters = {
@@ -4013,6 +4251,71 @@ describe('v1.LinkedDeviceServiceClient', () => {
         assert.strictEqual(result, 'userValue');
         assert(
           (client.pathTemplates.userPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('viewabilityProvider', async () => {
+      const fakePath = '/rendered/path/viewabilityProvider';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        viewability_provider: 'viewabilityProviderValue',
+      };
+      const client = new linkeddeviceserviceModule.v1.LinkedDeviceServiceClient(
+        {
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.viewabilityProviderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.viewabilityProviderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('viewabilityProviderPath', () => {
+        const result = client.viewabilityProviderPath(
+          'networkCodeValue',
+          'viewabilityProviderValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromViewabilityProviderName', () => {
+        const result =
+          client.matchNetworkCodeFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchViewabilityProviderFromViewabilityProviderName', () => {
+        const result =
+          client.matchViewabilityProviderFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'viewabilityProviderValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

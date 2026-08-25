@@ -17651,6 +17651,9 @@ export namespace google {
 
                 /** Message accessoryWidgets */
                 accessoryWidgets?: (google.chat.v1.IAccessoryWidget[]|null);
+
+                /** Message markupSyntax */
+                markupSyntax?: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax|null);
             }
 
             /** Represents a Message. */
@@ -17742,6 +17745,9 @@ export namespace google {
 
                 /** Message accessoryWidgets. */
                 public accessoryWidgets: google.chat.v1.IAccessoryWidget[];
+
+                /** Message markupSyntax. */
+                public markupSyntax: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax);
 
                 /**
                  * Creates a new Message instance using the specified properties.
@@ -18813,6 +18819,9 @@ export namespace google {
 
                 /** GetMessageRequest name */
                 name?: (string|null);
+
+                /** GetMessageRequest markupSyntax */
+                markupSyntax?: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax|null);
             }
 
             /** Represents a GetMessageRequest. */
@@ -18826,6 +18835,9 @@ export namespace google {
 
                 /** GetMessageRequest name. */
                 public name: string;
+
+                /** GetMessageRequest markupSyntax. */
+                public markupSyntax: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax);
 
                 /**
                  * Creates a new GetMessageRequest instance using the specified properties.
@@ -19387,6 +19399,9 @@ export namespace google {
 
                 /** ListMessagesRequest showDeleted */
                 showDeleted?: (boolean|null);
+
+                /** ListMessagesRequest markupSyntax */
+                markupSyntax?: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax|null);
             }
 
             /** Represents a ListMessagesRequest. */
@@ -19415,6 +19430,9 @@ export namespace google {
 
                 /** ListMessagesRequest showDeleted. */
                 public showDeleted: boolean;
+
+                /** ListMessagesRequest markupSyntax. */
+                public markupSyntax: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax);
 
                 /**
                  * Creates a new ListMessagesRequest instance using the specified properties.
@@ -19921,6 +19939,9 @@ export namespace google {
                 /** SearchMessagesRequest orderBy */
                 orderBy?: (string|null);
 
+                /** SearchMessagesRequest markupSyntax */
+                markupSyntax?: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax|null);
+
                 /** SearchMessagesRequest view */
                 view?: (google.chat.v1.SearchMessagesRequest.SearchMessagesView|keyof typeof google.chat.v1.SearchMessagesRequest.SearchMessagesView|null);
             }
@@ -19948,6 +19969,9 @@ export namespace google {
 
                 /** SearchMessagesRequest orderBy. */
                 public orderBy: string;
+
+                /** SearchMessagesRequest markupSyntax. */
+                public markupSyntax: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax);
 
                 /** SearchMessagesRequest view. */
                 public view: (google.chat.v1.SearchMessagesRequest.SearchMessagesView|keyof typeof google.chat.v1.SearchMessagesRequest.SearchMessagesView);
@@ -22151,6 +22175,13 @@ export namespace google {
                     SPACE_OWNER_VIA_APP = 6,
                     SPACE_MEMBER = 7
                 }
+            }
+
+            /** MarkupSyntax enum. */
+            enum MarkupSyntax {
+                MARKUP_SYNTAX_UNSPECIFIED = 0,
+                MARKUP_SYNTAX_CHAT = 1,
+                MARKUP_SYNTAX_MARKDOWN = 2
             }
 
             /** Properties of a MatchedUrl. */

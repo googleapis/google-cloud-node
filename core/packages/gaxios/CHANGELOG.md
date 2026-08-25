@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.3.1...gaxios-v8.0.0) (2026-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gaxios to minimum Node version of 22. ([#9172](https://github.com/googleapis/google-cloud-node/issues/9172))
+
+### Features
+
+* Update gaxios to minimum Node version of 22. ([#9172](https://github.com/googleapis/google-cloud-node/issues/9172)) ([20f9fbd](https://github.com/googleapis/google-cloud-node/commit/20f9fbdc27104dce8e22e09ccd941a8f8f1443b5))
+
+## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.3.0...gaxios-v7.3.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
 ## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.2.0...gaxios-v7.3.0) (2026-07-23)
 
 

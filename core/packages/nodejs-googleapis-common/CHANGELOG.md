@@ -5,6 +5,20 @@
 
 [1]: https://www.npmjs.com/package/nodejs-googleapis-common?activeTab=versions
 
+## [9.0.4](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.0.3...googleapis-common-v9.0.4) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in apiary request encodings ([#9181](https://github.com/googleapis/google-cloud-node/issues/9181)) ([b5b5afb](https://github.com/googleapis/google-cloud-node/commit/b5b5afb9e053744ff7c3f6334aa2a60f86466c84))
+
+## [9.0.3](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.0.2...googleapis-common-v9.0.3) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
 ## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.0.1...googleapis-common-v9.0.2) (2026-08-10)
 
 

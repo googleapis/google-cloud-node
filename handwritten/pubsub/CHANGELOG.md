@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.0.0...pubsub-v6.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+* **pubsub:** Upgrade @opentelemetry/core to ^2.8.0 to resolve CVE-2026-54285 ([#8792](https://github.com/googleapis/google-cloud-node/issues/8792)) ([#9092](https://github.com/googleapis/google-cloud-node/issues/9092)) ([004850f](https://github.com/googleapis/google-cloud-node/commit/004850f426dc1eb7a1e1ae577a5605bd12dee418))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v5.3.1...pubsub-v6.0.0) (2026-08-04)
 
 

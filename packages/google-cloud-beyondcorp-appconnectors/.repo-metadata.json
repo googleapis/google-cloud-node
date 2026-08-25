@@ -7,7 +7,7 @@
     "distribution_name": "@google-cloud/appconnectors",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "beyondcorp",
+    "name": "appconnectors",
     "name_pretty": "BeyondCorp",
     "product_documentation": "https://cloud.google.com/beyondcorp/docs",
     "release_level": "stable",

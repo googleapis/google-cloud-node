@@ -830,7 +830,7 @@ export class DeveloperKnowledgeClient {
    * Searches for developer knowledge across Google's developer documentation.
    * Returns {@link protos.google.developers.knowledge.v1.DocumentChunk|DocumentChunk}s
    * based on the user's query. There may be many chunks from the same
-   * {@link protos.google.developers.knowledge.v1.Document|Document}.  To retrieve full
+   * {@link protos.google.developers.knowledge.v1.Document|Document}. To retrieve full
    * documents, use
    * {@link protos.google.developers.knowledge.v1.DeveloperKnowledge.GetDocument|DeveloperKnowledge.GetDocument}
    * or

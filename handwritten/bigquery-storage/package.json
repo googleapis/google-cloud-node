@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-storage",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Client for the BigQuery Storage API",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prepare": "npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "c8 mocha build/system-test --timeout 600000",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "precompile": "gts clean"

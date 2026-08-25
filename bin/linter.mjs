@@ -17,30 +17,41 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
-import ts from 'typescript';
 
-// --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
 
 // --- Main Runner (Entry Point) ---
 async function run() {
   try {
-    const changedTsFiles = getChangedFiles();
+    const isStrict = Boolean(process.argv.includes('--strict'));
+    let changedTsFiles;
+    if (isStrict) {
+      changedTsFiles = getChangedFilesStrict();
+    } else {
+      changedTsFiles = getChangedFiles();
+    }
 
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
       return;
     }
 
+    const packagesToCheck = getPackageDirs(changedTsFiles);
+
+    // Install missing package dependencies upfront before running linters or type checkers
+    await ensurePackageDependencies(packagesToCheck);
+
     // Run ESLint and Type checks in parallel to optimize CPU utilization
     const [eslintPassed, typeSafetyPassed] = await Promise.all([
       checkEslint(changedTsFiles),
-      checkTypeSafety(changedTsFiles),
+      checkTypeSafety(packagesToCheck),
     ]);
 
     if (!eslintPassed || !typeSafetyPassed) {
-      throw new Error('Linter checks failed. Please fix. To rerun the linter, run: npm run lint');
+      throw new Error(
+        'Linter checks failed. Please fix. To rerun the linter, run: npm run lint',
+      );
     }
   } catch (err) {
     console.error('\nLinter failed:', err.message);
@@ -63,6 +74,52 @@ function runGit(args, options = {}) {
   });
 }
 
+function getChangedFilesStrict() {
+  let gitDiffArg = process.env.GIT_DIFF_ARG;
+
+  if (!gitDiffArg) {
+    throw new Error(
+      'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
+        'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.',
+    );
+  }
+
+  // If a single ref is provided (e.g. "HEAD^1" or "origin/main"), convert to three-dot diff ("ref...HEAD")
+  // to compare against the merge-base and avoid listing files modified on the base branch.
+  if (!gitDiffArg.includes('..')) {
+    gitDiffArg = `${gitDiffArg}...HEAD`;
+  }
+
+  console.log(
+    `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`,
+  );
+
+  const args = gitDiffArg.trim().split(/\s+/);
+
+  try {
+    const output = runGit([
+      'diff',
+      '--name-only',
+      '--diff-filter=ACMRT',
+      ...args,
+      '--',
+      '*.ts',
+    ]);
+    return output
+      .split('\n')
+      .map(f => f.trim())
+      .filter(f => f.length > 0 && existsSync(f));
+  } catch (err) {
+    if (err.status !== 1) {
+      throw new Error(
+        `Strict mode error: git diff ${gitDiffArg} failed with exit code ${err.status}.\n` +
+          `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
+          `Details: ${String(err.stderr || err.message || '').trim()}`,
+      );
+    }
+  }
+}
+
 /**
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
@@ -79,11 +136,12 @@ function getChangedFiles() {
 
   for (const ref of refsToTry) {
     try {
+      const diffRef = ref.includes('..') ? ref : `${ref}...HEAD`;
       const output = runGit([
         'diff',
         '--name-only',
         '--diff-filter=ACMRT',
-        ref,
+        diffRef,
         '--',
         '*.ts',
       ]);
@@ -126,37 +184,64 @@ async function checkEslint(filesToCheck) {
     return true;
   }
 
-  try {
-    const eslint = new ESLint();
-    const results = await eslint.lintFiles(filesToCheck);
-    const formatter = await eslint.loadFormatter('stylish');
-    const resultText = formatter.format(results);
-
-    if (resultText) {
-      console.log(resultText);
+  // Group files by package directory to set tsconfigRootDir properly for typescript-eslint
+  const filesByPkg = new Map();
+  for (const file of filesToCheck) {
+    const pkgDir = findTsconfigDir(file) || process.cwd();
+    if (!filesByPkg.has(pkgDir)) {
+      filesByPkg.set(pkgDir, []);
     }
+    filesByPkg.get(pkgDir).push(file);
+  }
 
-    let hasBlockingErrors = false;
+  let hasBlockingErrors = false;
 
-    for (const fileResult of results) {
-      for (const message of fileResult.messages) {
-        // message.severity === 2 indicates an error-level rule configuration.
-        if (message.severity === 2) {
-          hasBlockingErrors = true;
+  for (const [pkgDir, files] of filesByPkg.entries()) {
+    try {
+      const absPkgDir = path.resolve(pkgDir);
+      const eslint = new ESLint({
+        cwd: absPkgDir,
+        resolvePluginsRelativeTo: process.cwd(),
+        overrideConfig: {
+          parserOptions: {
+            tsconfigRootDir: absPkgDir,
+          },
+        },
+      });
+
+      const relativeFiles = files.map(f =>
+        path.relative(absPkgDir, path.resolve(f)),
+      );
+      const results = await eslint.lintFiles(relativeFiles);
+      const formatter = await eslint.loadFormatter('stylish');
+      const resultText = formatter.format(results);
+
+      if (resultText) {
+        console.log(resultText);
+      }
+
+      for (const fileResult of results) {
+        for (const message of fileResult.messages) {
+          if (message.severity === 2) {
+            hasBlockingErrors = true;
+          }
         }
       }
+    } catch (err) {
+      console.error(
+        `\n[ERROR] Failed running ESLint in ${pkgDir}:`,
+        err.message,
+      );
+      hasBlockingErrors = true;
     }
+  }
 
-    if (hasBlockingErrors) {
-      console.error('\n[ERROR] ESLint violations were detected.');
-      return false;
-    }
-
-    return true;
-  } catch (err) {
-    console.error('\n[ERROR] Failed running ESLint:', err.message);
+  if (hasBlockingErrors) {
+    console.error('\n[ERROR] ESLint violations were detected.');
     return false;
   }
+
+  return true;
 }
 
 // --- TypeScript Type Checker ---
@@ -166,33 +251,65 @@ async function checkEslint(filesToCheck) {
  * Caches directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
-  const dir = path.dirname(filePath);
-  if (tsconfigCache.has(dir)) {
-    return tsconfigCache.get(dir);
+  let currentDir = path.resolve(path.dirname(filePath));
+  const root = path.parse(currentDir).root;
+
+  while (currentDir && currentDir !== root) {
+    if (tsconfigCache.has(currentDir)) {
+      return tsconfigCache.get(currentDir);
+    }
+    const candidate = path.join(currentDir, 'tsconfig.json');
+    if (existsSync(candidate)) {
+      tsconfigCache.set(path.dirname(filePath), currentDir);
+      return currentDir;
+    }
+    currentDir = path.dirname(currentDir);
   }
-  const configPath = ts.findConfigFile(dir, ts.sys.fileExists);
-  const result = configPath ? path.dirname(configPath) : null;
-  tsconfigCache.set(dir, result);
-  return result;
+
+  tsconfigCache.set(path.dirname(filePath), null);
+  return null;
+}
+
+/**
+ * Maps a list of changed files to their unique containing package directories.
+ */
+function getPackageDirs(files) {
+  const packages = new Set();
+  for (const file of files) {
+    const tsconfigDir = findTsconfigDir(file);
+    if (tsconfigDir) {
+      packages.add(tsconfigDir);
+    }
+  }
+  return packages;
+}
+
+/**
+ * Ensures all changed packages have node_modules installed before running linting or type checking.
+ */
+async function ensurePackageDependencies(packages) {
+  const installs = Array.from(packages).map(async pkg => {
+    const packageJsonPath = path.join(pkg, 'package.json');
+    const nodeModulesPath = path.join(pkg, 'node_modules');
+    if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
+      console.log(`  Installing dependencies in ${pkg}...`);
+      const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+      await execFileAsync(
+        npmCmd,
+        ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
+        {
+          cwd: pkg,
+        },
+      );
+    }
+  });
+  await Promise.all(installs);
 }
 
 /**
  * Performs concurrent TypeScript type checking for changed packages.
  */
-async function checkTypeSafety(filesToCheck) {
-  if (filesToCheck.length === 0) {
-    return true;
-  }
-
-  // Map files to their package directories (by walking up to the nearest tsconfig.json)
-  const packagesToCheck = new Set();
-  for (const file of filesToCheck) {
-    const tsconfigDir = findTsconfigDir(file);
-    if (tsconfigDir) {
-      packagesToCheck.add(tsconfigDir);
-    }
-  }
-
+async function checkTypeSafety(packagesToCheck) {
   if (packagesToCheck.size === 0) {
     return true;
   }
@@ -210,7 +327,7 @@ async function checkTypeSafety(filesToCheck) {
         '--project',
         path.join(pkg, 'tsconfig.json'),
       ]);
-      return { pkg, passed: true };
+      return {pkg, passed: true};
     } catch (err) {
       console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
       if (err.stdout) {
@@ -219,7 +336,7 @@ async function checkTypeSafety(filesToCheck) {
       if (err.stderr) {
         console.error(err.stderr);
       }
-      return { pkg, passed: false };
+      return {pkg, passed: false};
     }
   });
 

@@ -204,6 +204,13 @@
                       }
                     },
                     "SourceConfig": {
+                      "oneofs": {
+                        "_autoRefreshPointLagSeconds": {
+                          "oneof": [
+                            "autoRefreshPointLagSeconds"
+                          ]
+                        }
+                      },
                       "fields": {
                         "autonomousDatabase": {
                           "type": "string",
@@ -218,6 +225,97 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sourceType": {
+                          "type": "SourceType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cloneType": {
+                          "type": "CloneType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "refreshableMode": {
+                          "type": "RefreshableMode",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoRefreshFrequencySeconds": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoRefreshPointLagSeconds": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoRefreshStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autonomousDatabaseBackup": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/AutonomousDatabaseBackup"
+                          }
+                        },
+                        "backupTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "useLatestAvailableBackup": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RefreshableMode": {
+                          "values": {
+                            "REFRESHABLE_MODE_UNSPECIFIED": 0,
+                            "AUTOMATIC": 1,
+                            "MANUAL": 2
+                          }
+                        },
+                        "SourceType": {
+                          "values": {
+                            "SOURCE_TYPE_UNSPECIFIED": 0,
+                            "CLONE_DATABASE": 1,
+                            "CROSS_REGION_DISASTER_RECOVERY": 2,
+                            "CLONE_TO_REFRESHABLE": 3,
+                            "BACKUP_FROM_ID": 4,
+                            "BACKUP_FROM_TIMESTAMP": 5
+                          }
+                        },
+                        "CloneType": {
+                          "values": {
+                            "CLONE_TYPE_UNSPECIFIED": 0,
+                            "FULL": 1,
+                            "METADATA": 2
                           }
                         }
                       }
@@ -237,6 +335,11 @@
                         "_localAdgAutoFailoverMaxDataLossLimitDuration": {
                           "oneof": [
                             "localAdgAutoFailoverMaxDataLossLimitDuration"
+                          ]
+                        },
+                        "_refreshableClone": {
+                          "oneof": [
+                            "refreshableClone"
                           ]
                         }
                       },
@@ -707,6 +810,14 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "refreshableClone": {
+                          "type": "bool",
+                          "id": 73,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -1169,6 +1280,25 @@
                         "stopTime": {
                           "type": "google.type.TimeOfDay",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AutonomousDatabaseRefreshableClone": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/AutonomousDatabase"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2803,6 +2933,11 @@
                           }
                         },
                         "ComputeModel": {
+                          "valuesOptions": {
+                            "OCPU": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "COMPUTE_MODEL_UNSPECIFIED": 0,
                             "ECPU": 1,
@@ -3223,6 +3358,27 @@
                         "minDbNodeStoragePerNodeGb": {
                           "type": "int32",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minimumCoreCount": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "availableCoreCount": {
+                          "type": "int32",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "coreCountIncrement": {
+                          "type": "int32",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3694,14 +3850,14 @@
                           "type": "string",
                           "id": 29,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "storageServerType": {
                           "type": "string",
                           "id": 30,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "exascaleConfig": {
@@ -3739,6 +3895,20 @@
                         "availableStorageSizeGb": {
                           "type": "int32",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalVmStorageSizeGb": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "availableVmStorageSizeGb": {
+                          "type": "int32",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3849,6 +4019,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "totalVmStorageSizeGb": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "requestId": {
                           "type": "string",
                           "id": 3,
@@ -3937,6 +4114,13 @@
                         "entitlementId": {
                           "type": "string",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "identityConnector": {
+                          "type": "IdentityConnector",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -10562,6 +10746,52 @@
                             }
                           ]
                         },
+                        "RefreshAutonomousDatabase": {
+                          "requestType": "RefreshAutonomousDatabaseRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/autonomousDatabases/*}:refresh",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,refresh_cutoff_time",
+                            "(google.longrunning.operation_info).response_type": "AutonomousDatabase",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/autonomousDatabases/*}:refresh",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,refresh_cutoff_time"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AutonomousDatabase",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetAutonomousDatabaseRefreshableClones": {
+                          "requestType": "GetAutonomousDatabaseRefreshableClonesRequest",
+                          "responseType": "AutonomousDatabaseRefreshableClones",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/autonomousDatabases/*}:getRefreshableClones",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/autonomousDatabases/*}:getRefreshableClones"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "ListOdbNetworks": {
                           "requestType": "ListOdbNetworksRequest",
                           "responseType": "ListOdbNetworksResponse",
@@ -12383,6 +12613,46 @@
                         }
                       }
                     },
+                    "GetAutonomousDatabaseRefreshableClonesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/AutonomousDatabase"
+                          }
+                        }
+                      }
+                    },
+                    "AutonomousDatabaseRefreshableClones": {
+                      "fields": {
+                        "autonomousDatabaseRefreshableClones": {
+                          "rule": "repeated",
+                          "type": "AutonomousDatabaseRefreshableClone",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RefreshAutonomousDatabaseRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/AutonomousDatabase"
+                          }
+                        },
+                        "refreshCutoffTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GenerateAutonomousDatabaseWalletRequest": {
                       "fields": {
                         "name": {
@@ -13100,6 +13370,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "vmFileSystemStorageType": {
+                          "type": "VmFileSystemStorageType",
+                          "id": 39,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vmBackupStorageType": {
+                          "type": "VmBackupStorageType",
+                          "id": 40,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -13134,6 +13418,20 @@
                             "STORAGE_MANAGEMENT_TYPE_UNSPECIFIED": 0,
                             "ASM": 1,
                             "EXASCALE": 2
+                          }
+                        },
+                        "VmFileSystemStorageType": {
+                          "values": {
+                            "VM_FILE_SYSTEM_STORAGE_TYPE_UNSPECIFIED": 0,
+                            "VM_FILE_SYSTEM_STORAGE_TYPE_LOCAL": 1,
+                            "VM_FILE_SYSTEM_STORAGE_TYPE_EXASCALE": 2
+                          }
+                        },
+                        "VmBackupStorageType": {
+                          "values": {
+                            "VM_BACKUP_STORAGE_TYPE_UNSPECIFIED": 0,
+                            "VM_BACKUP_STORAGE_TYPE_LOCAL": 1,
+                            "VM_BACKUP_STORAGE_TYPE_EXASCALE": 2
                           }
                         }
                       }

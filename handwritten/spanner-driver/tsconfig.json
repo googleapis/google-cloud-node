@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
+  "extends": "gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build/esm",
@@ -7,7 +7,14 @@
     "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": ["node", "mocha"]
+    "typeRoots": ["./node_modules/@types", "../../node_modules/@types"]
   },
-  "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"]
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts",
+    "system-test/*.ts",
+    "system-test/**/*.ts"
+  ]
 }
