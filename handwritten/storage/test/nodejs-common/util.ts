@@ -1817,13 +1817,11 @@ describe('common/util', () => {
         json: {},
         headers: {},
       };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      replaceProjectIdTokenOverride = (x: any) => x;
+      replaceProjectIdTokenOverride = (x: unknown) => x;
 
       const decoratedRequest = util.decorateRequest(reqOpts, projectId);
       assert.strictEqual(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (decoratedRequest.headers as any)['Content-Type'],
+        (decoratedRequest.headers as Record<string, string>)['Content-Type'],
         'application/json'
       );
     });
@@ -1839,14 +1837,11 @@ describe('common/util', () => {
         json: {},
         headers: headersInstance,
       };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      replaceProjectIdTokenOverride = (x: any) => x;
+      replaceProjectIdTokenOverride = (x: unknown) => x;
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const decoratedRequest = util.decorateRequest(reqOpts as any, projectId);
+      const decoratedRequest = util.decorateRequest(reqOpts, projectId);
       assert.strictEqual(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (decoratedRequest.headers as any).get('Content-Type'),
+        (decoratedRequest.headers as Headers).get('Content-Type'),
         'application/json'
       );
     });
@@ -1860,18 +1855,15 @@ describe('common/util', () => {
           'content-type': 'application/x-protobuf',
         },
       };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      replaceProjectIdTokenOverride = (x: any) => x;
+      replaceProjectIdTokenOverride = (x: unknown) => x;
 
       const decoratedRequest = util.decorateRequest(reqOpts, projectId);
       assert.strictEqual(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (decoratedRequest.headers as any)['content-type'],
+        (decoratedRequest.headers as Record<string, string>)['content-type'],
         'application/x-protobuf'
       );
       assert.strictEqual(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (decoratedRequest.headers as any)['Content-Type'],
+        (decoratedRequest.headers as Record<string, string>)['Content-Type'],
         undefined
       );
     });
