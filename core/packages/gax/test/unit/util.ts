@@ -25,6 +25,7 @@ import {
   decodeProtobufAny,
   decodeAnyProtosInArray,
   checkTelemetryEnabled,
+  StaticTraceContext,
 } from '../../src/util';
 import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
@@ -204,12 +205,17 @@ describe('util.ts', () => {
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
 
+    const mockTelemetryInfo: StaticTraceContext = {
+      gcpClientService: 'test.googleapis.com',
+      gcpVersion: '1.0.0',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'google-cloud-test',
+    };
+
     const mockSettings = new CallSettings({
       enableTelemetryTracing: true,
       otherArgs: {
-        internalTelemetryInfo: {
-          gcpClientService: 'test.googleapis.com',
-        },
+        internalTelemetryInfo: mockTelemetryInfo,
       },
     });
 

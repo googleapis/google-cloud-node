@@ -28,17 +28,6 @@ import {
 import * as longrunning from './longRunningCalls/longrunning';
 import * as operationProtos from '../protos/operations';
 
-/**
- * The static trace context is information about the Google Cloud client library that is
- * used to generate telemetry tracing information.
- */
-export interface StaticTraceContext {
-  gcpClientService?: string;
-  gcpVersion?: string;
-  gcpRepo?: string;
-  gcpArtifact?: string;
-}
-
 export interface ClientOptions
   extends GrpcClientOptions, GoogleAuthOptions, ClientStubOptions {
   libName?: string;

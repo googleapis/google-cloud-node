@@ -118,6 +118,7 @@ export {
   decodeAnyProtosInArray,
   decodeProtobufAny,
   checkTelemetryEnabled,
+  StaticTraceContext,
 } from './util';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';

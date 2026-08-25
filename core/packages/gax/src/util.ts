@@ -23,6 +23,17 @@ const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
 
 /**
+ * The static trace context is information about the Google Cloud client library that is
+ * used to generate telemetry tracing information.
+ */
+export interface StaticTraceContext {
+  gcpClientService?: string;
+  gcpVersion?: string;
+  gcpRepo?: string;
+  gcpArtifact?: string;
+}
+
+/**
  * Checks if telemetry tracing is enabled
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
