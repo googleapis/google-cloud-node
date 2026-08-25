@@ -77,7 +77,7 @@ export function getGaxTracer(): Tracer {
  * @param {() => Promise<T>} fn - The asynchronous operation to trace.
  * @returns {Promise<T>} The result of the traced operation.
  */
-export async function traceAttempt<T>(
+export async function traceAttempt<T = unknown>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: () => Promise<T>,
