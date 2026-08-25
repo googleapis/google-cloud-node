@@ -7,4 +7,4 @@ node_modules/
 *.h
 index.js
 index.d.ts
-benchmark_results*.json
+!benchmark_results_go_vs_rust.json
