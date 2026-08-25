@@ -1033,7 +1033,10 @@ class ProgressStream extends Transform {
  * @param {string} propertyName - The name of the property being validated.
  * @param {string} value - The segment value to validate.
  */
-export function validateUriPathSegment(propertyName: string, value: string): void {
+export function validateUriPathSegment(
+  propertyName: string,
+  value: string
+): void {
   if (value === '.' || value === '..') {
     throw new Error(`Invalid value ${value} for ${propertyName}`);
   }
