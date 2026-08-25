@@ -214,20 +214,20 @@ export function generateRandomFileName(baseName: string): string {
 export function generateRandomFile(
   fileName: string,
   fileSizeLowerBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).low,
   fileSizeUpperBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).high,
-  currentDirectory: string = mkdtempSync(randomString()),
+  currentDirectory: string = mkdtempSync(randomString())
 ): number {
   const fileSizeBytes = randomInteger(
     fileSizeLowerBoundBytes,
-    fileSizeUpperBoundBytes,
+    fileSizeUpperBoundBytes
   );
 
   execSync(
-    `head --bytes=${fileSizeBytes} /dev/urandom > ${currentDirectory}/${fileName}`,
+    `head --bytes=${fileSizeBytes} /dev/urandom > ${currentDirectory}/${fileName}`
   );
 
   return fileSizeBytes;
@@ -247,12 +247,12 @@ export function generateRandomDirectoryStructure(
   maxObjects: number,
   baseName: string,
   fileSizeLowerBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).low,
   fileSizeUpperBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).high,
-  directoryProbability: number = DEFAULT_DIRECTORY_PROBABILITY,
+  directoryProbability: number = DEFAULT_DIRECTORY_PROBABILITY
 ): RandomDirectoryCreationInformation {
   let curPath = baseName;
   const creationInfo: RandomDirectoryCreationInformation = {
@@ -272,7 +272,7 @@ export function generateRandomDirectoryStructure(
         randomName,
         fileSizeLowerBoundBytes,
         fileSizeUpperBoundBytes,
-        curPath,
+        curPath
       );
       creationInfo.paths.push(path.join(curPath, randomName));
     }
@@ -288,7 +288,7 @@ export function generateRandomDirectoryStructure(
  */
 export function cleanupFile(
   fileName: string,
-  directoryName: string = getDirName(),
+  directoryName: string = getDirName()
 ): void {
   unlinkSync(`${directoryName}/${fileName}`);
 }
@@ -302,7 +302,7 @@ export function cleanupFile(
  */
 export async function performanceTestSetup(
   projectId: string,
-  bucketName: string,
+  bucketName: string
 ): Promise<PerformanceTestSetupResults> {
   const storage = new Storage({projectId});
   const bucket = storage.bucket(bucketName, {
@@ -346,7 +346,7 @@ export function getValidationType(): 'md5' | 'crc32c' | boolean | undefined {
  * @returns {AsyncGenerator<string>} A string containing the results of the conversion to cloud monitoring format.
  */
 export async function* convertToCloudMonitoringFormat(
-  results: TestResult[],
+  results: TestResult[]
 ): AsyncGenerator<string> {
   for (const curResult of results) {
     const throughput =
@@ -384,7 +384,7 @@ export async function* convertToCloudMonitoringFormat(
 export function log(
   messageOrError: string | Error,
   shouldLog: boolean,
-  isError = false,
+  isError = false
 ): void {
   if (shouldLog) {
     isError ? console.error(messageOrError) : console.log(messageOrError);

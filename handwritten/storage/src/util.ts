@@ -27,7 +27,7 @@ const isEsm = true;
 
 export function normalize<T = {}, U = Function>(
   optionsOrCallback?: T | U,
-  cb?: U,
+  cb?: U
 ) {
   const options = (
     typeof optionsOrCallback === 'object' ? optionsOrCallback : {}
@@ -59,7 +59,7 @@ export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
 export function fixedEncodeURIComponent(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g,
-    c => '%' + c.charCodeAt(0).toString(16).toUpperCase(),
+    c => '%' + c.charCodeAt(0).toString(16).toUpperCase()
   );
 }
 
@@ -111,7 +111,7 @@ export function unicodeJSONStringify(obj: object) {
   return JSON.stringify(obj).replace(
     /[\u0080-\uFFFF]/g,
     (char: string) =>
-      '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4),
+      '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4)
   );
 }
 
@@ -155,7 +155,7 @@ export function formatAsUTCISO(
   dateTimeToFormat: Date,
   includeTime = false,
   dateDelimiter = '',
-  timeDelimiter = '',
+  timeDelimiter = ''
 ): string {
   const year = dateTimeToFormat.getUTCFullYear();
   const month = dateTimeToFormat.getUTCMonth() + 1;
@@ -247,7 +247,7 @@ export class PassThroughShim extends PassThrough {
   _write(
     chunk: never,
     encoding: BufferEncoding,
-    callback: (error?: Error | null | undefined) => void,
+    callback: (error?: Error | null | undefined) => void
   ): void {
     if (this.shouldEmitWriting) {
       this.emit('writing');
@@ -288,12 +288,12 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
   for (const [key, context] of Object.entries(custom)) {
     if (key.includes('"')) {
       throw new Error(
-        `Invalid context key "${key}": Forbidden character (") detected.`,
+        `Invalid context key "${key}": Forbidden character (") detected.`
       );
     }
     if (context?.value && context.value.includes('"')) {
       throw new Error(
-        `Invalid context value for key "${key}": Forbidden character (") detected.`,
+        `Invalid context value for key "${key}": Forbidden character (") detected.`
       );
     }
   }
@@ -306,7 +306,7 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
  */
 export function handleContextValidation(
   contexts?: FileMetadata['contexts'],
-  callback?: Function,
+  callback?: Function
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> | void {
   try {

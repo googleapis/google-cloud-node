@@ -540,7 +540,7 @@ describe('Storage', () => {
   describe('bucket', () => {
     it('should throw if no name was provided', () => {
       assert.throws(() => {
-        storage.bucket(), StorageExceptionMessages.BUCKET_NAME_REQUIRED;
+        (storage.bucket(), StorageExceptionMessages.BUCKET_NAME_REQUIRED);
       });
     });
 
@@ -588,7 +588,7 @@ describe('Storage', () => {
 
     it('should throw if accessId is not provided', () => {
       assert.throws(() => {
-        storage.hmacKey(), StorageExceptionMessages.HMAC_ACCESS_ID;
+        (storage.hmacKey(), StorageExceptionMessages.HMAC_ACCESS_ID);
       });
     });
 
@@ -656,16 +656,17 @@ describe('Storage', () => {
 
     it('should throw without a serviceAccountEmail', () => {
       assert.throws(() => {
-        storage.createHmacKey(), StorageExceptionMessages.HMAC_SERVICE_ACCOUNT;
+        (storage.createHmacKey(),
+          StorageExceptionMessages.HMAC_SERVICE_ACCOUNT);
       });
     });
 
     it('should throw when first argument is not a string', () => {
       assert.throws(() => {
-        storage.createHmacKey({
+        (storage.createHmacKey({
           userProject: 'my-project',
         }),
-          StorageExceptionMessages.HMAC_SERVICE_ACCOUNT;
+          StorageExceptionMessages.HMAC_SERVICE_ACCOUNT);
       });
     });
 
@@ -808,8 +809,8 @@ describe('Storage', () => {
 
     it('should throw if no name is provided', () => {
       assert.throws(() => {
-        storage.createBucket(),
-          StorageExceptionMessages.BUCKET_NAME_REQUIRED_CREATE;
+        (storage.createBucket(),
+          StorageExceptionMessages.BUCKET_NAME_REQUIRED_CREATE);
       });
     });
 
