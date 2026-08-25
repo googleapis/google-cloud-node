@@ -50,12 +50,8 @@ export class OtelHarness {
   getSpans(tracerName?: string): ReadableSpan[] {
     const spans = this.exporter.getFinishedSpans();
     if (tracerName) {
-      return spans.filter(
-        span =>
-          span.instrumentationScope?.name?.startsWith(tracerName) ||
-          (
-            span as unknown as {instrumentationLibrary?: {name?: string}}
-          ).instrumentationLibrary?.name?.startsWith(tracerName),
+      return spans.filter(span =>
+        span.instrumentationScope?.name?.startsWith(tracerName),
       );
     }
     return spans;

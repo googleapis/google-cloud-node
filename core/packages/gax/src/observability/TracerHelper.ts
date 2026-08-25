@@ -16,23 +16,67 @@
 
 import {Span, trace, Tracer} from '@opentelemetry/api';
 
+/**
+ * Static metadata about the Google Cloud client library used to populate
+ * telemetry span attributes.
+ */
 export interface StaticTraceContext {
+  /**
+   * The target GCP service endpoint or domain (e.g. 'storage.googleapis.com').
+   */
   gcpClientService?: string;
+  /**
+   * The version of the client library (e.g. '1.2.3').
+   */
   gcpVersion?: string;
+  /**
+   * The GitHub repository name hosting the client library (e.g. 'googleapis/google-cloud-node').
+   */
   gcpRepo?: string;
+  /**
+   * The NPM package name of the client library (e.g. '@google-cloud/storage').
+   */
   gcpArtifact?: string;
 }
 
+/**
+ * Dynamic metadata specific to the individual RPC invocation used to populate
+ * telemetry span attributes.
+ */
 export interface DynamicTraceContext {
+  /**
+   * The name of the client class making the call (e.g. 'StorageClient').
+   */
   clientName: string;
+  /**
+   * The name of the API method or RPC being invoked (e.g. 'GetObject').
+   */
   methodName: string;
+  /**
+   * The transport protocol used for the RPC ('grpc' or 'http').
+   */
   rpcType: 'grpc' | 'http';
 }
 
+/**
+ * Returns the OpenTelemetry Tracer instance for google-gax.
+ *
+ * @returns {Tracer} The OpenTelemetry Tracer.
+ */
 export function getGaxTracer(): Tracer {
   return trace.getTracer('google-gax');
 }
 
+/**
+ * Executes a function within an active OpenTelemetry span, populating standard
+ * GCP telemetry attributes and recording errors/exceptions if thrown.
+ *
+ * @template T
+ * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
+ * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
+ * @param {() => Promise<T>} fn - The asynchronous operation to trace.
+ * @returns {Promise<T>} The result of the traced operation.
+ */
 export async function traceAttempt<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
