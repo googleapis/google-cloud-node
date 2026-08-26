@@ -122,8 +122,8 @@ describe('storage/iam', () => {
   describe('setPolicy', () => {
     it('should throw an error if a policy is not supplied', () => {
       assert.throws(() => {
-        (iam.setPolicy(util.noop), IAMExceptionMessages.POLICY_OBJECT_REQUIRED);
-      });
+        iam.setPolicy(util.noop);
+      }, new RegExp(IAMExceptionMessages.POLICY_OBJECT_REQUIRED));
     });
 
     it('should make the correct API request', done => {
@@ -172,9 +172,8 @@ describe('storage/iam', () => {
   describe('testPermissions', () => {
     it('should throw an error if permissions are missing', () => {
       assert.throws(() => {
-        (iam.testPermissions(util.noop),
-          IAMExceptionMessages.PERMISSIONS_REQUIRED);
-      });
+        iam.testPermissions(util.noop);
+      }, new RegExp(IAMExceptionMessages.PERMISSIONS_REQUIRED));
     });
 
     it('should make the correct API request', done => {

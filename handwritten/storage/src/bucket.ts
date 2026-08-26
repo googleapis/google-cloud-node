@@ -3332,14 +3332,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       );
     }
 
-    void (async () => {
-      try {
-        const signedUrl = await this.signer!.getSignedUrl(signConfig);
-        callback!(null, signedUrl);
-      } catch (err) {
-        callback!(err as Error);
-      }
-    })();
+    void this.signer!.getSignedUrl(signConfig).then(
+      signedUrl => callback!(null, signedUrl),
+      callback!
+    );
   }
 
   lock(metageneration: number | string): Promise<BucketLockResponse>;

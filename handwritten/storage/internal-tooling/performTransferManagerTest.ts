@@ -87,8 +87,7 @@ async function performTestCleanup(fileOrFiles: File[] | File | string[]) {
     if (typeof f === 'string') {
       fileToDelete = bucket.file(f);
     }
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    (fileToDelete as File).delete({ignoreNotFound: true});
+    return (fileToDelete as File).delete({ignoreNotFound: true});
   });
   return Promise.all(promises);
 }

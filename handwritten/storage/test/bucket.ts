@@ -671,19 +671,18 @@ describe('Bucket', () => {
   describe('combine', () => {
     it('should throw if invalid sources are provided', () => {
       assert.throws(() => {
-        (bucket.combine(), BucketExceptionMessages.PROVIDE_SOURCE_FILE);
-      });
+        bucket.combine();
+      }, new RegExp(BucketExceptionMessages.PROVIDE_SOURCE_FILE));
 
       assert.throws(() => {
-        (bucket.combine([]), BucketExceptionMessages.PROVIDE_SOURCE_FILE);
-      });
+        bucket.combine([]);
+      }, new RegExp(BucketExceptionMessages.PROVIDE_SOURCE_FILE));
     });
 
     it('should throw if a destination is not provided', () => {
       assert.throws(() => {
-        (bucket.combine(['1', '2']),
-          BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED);
-      });
+        bucket.combine(['1', '2']);
+      }, new RegExp(BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED));
     });
 
     it('should accept string or file input for sources', done => {
@@ -1099,8 +1098,8 @@ describe('Bucket', () => {
 
     it('should throw if an ID is not provided', () => {
       assert.throws(() => {
-        (bucket.createChannel(), BucketExceptionMessages.CHANNEL_ID_REQUIRED);
-      });
+        bucket.createChannel();
+      }, new RegExp(BucketExceptionMessages.CHANNEL_ID_REQUIRED));
     });
 
     it('should make the correct request', done => {
@@ -1225,9 +1224,8 @@ describe('Bucket', () => {
 
     it('should throw an error if a valid topic is not provided', () => {
       assert.throws(() => {
-        (bucket.createNotification(),
-          BucketExceptionMessages.TOPIC_NAME_REQUIRED);
-      });
+        bucket.createNotification();
+      }, new RegExp(BucketExceptionMessages.TOPIC_NAME_REQUIRED));
     });
 
     it('should make the correct request', done => {
@@ -1710,28 +1708,25 @@ describe('Bucket', () => {
 
     it('should throw if a config object is not provided', () => {
       assert.throws(() => {
-        (bucket.enableLogging(),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED);
-      });
+        bucket.enableLogging();
+      }, new RegExp(BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED));
     });
 
     it('should throw if config is a function', () => {
       assert.throws(() => {
-        (bucket.enableLogging(assert.ifError),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED);
-      });
+        bucket.enableLogging(assert.ifError);
+      }, new RegExp(BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED));
     });
 
     it('should throw if a prefix is not provided', () => {
       assert.throws(() => {
-        (bucket.enableLogging(
+        bucket.enableLogging(
           {
             bucket: 'bucket-name',
           },
           assert.ifError
-        ),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED);
-      });
+        );
+      }, new RegExp(BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED));
     });
 
     it('should add IAM permissions', done => {
@@ -1913,8 +1908,8 @@ describe('Bucket', () => {
 
     it('should throw if no name is provided', () => {
       assert.throws(() => {
-        (bucket.file(), BucketExceptionMessages.SPECIFY_FILE_NAME);
-      });
+        bucket.file();
+      }, new RegExp(BucketExceptionMessages.SPECIFY_FILE_NAME));
     });
 
     it('should return a File object', () => {
@@ -2458,9 +2453,8 @@ describe('Bucket', () => {
   describe('lock', () => {
     it('should throw if a metageneration is not provided', () => {
       assert.throws(() => {
-        (bucket.lock(assert.ifError),
-          BucketExceptionMessages.METAGENERATION_NOT_PROVIDED);
-      });
+        bucket.lock(assert.ifError);
+      }, new RegExp(BucketExceptionMessages.METAGENERATION_NOT_PROVIDED));
     });
 
     it('should make the correct request', done => {
@@ -2655,8 +2649,8 @@ describe('Bucket', () => {
   describe('notification', () => {
     it('should throw an error if an id is not provided', () => {
       assert.throws(() => {
-        (bucket.notification(), BucketExceptionMessages.SUPPLY_NOTIFICATION_ID);
-      });
+        bucket.notification();
+      }, new RegExp(BucketExceptionMessages.SUPPLY_NOTIFICATION_ID));
     });
 
     it('should return a Notification object', () => {

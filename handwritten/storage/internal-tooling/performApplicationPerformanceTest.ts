@@ -188,5 +188,4 @@ async function performReadTest(): Promise<TestResult> {
   return result;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-main();
+void main();

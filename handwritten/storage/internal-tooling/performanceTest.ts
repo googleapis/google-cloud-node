@@ -98,8 +98,7 @@ function createWorker() {
 
   w.on('message', data => {
     log('Successfully completed iteration.', argv.debug as boolean);
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    recordResult(data);
+    void recordResult(data);
     if (iterationsRemaining > 0) {
       createWorker();
     }
