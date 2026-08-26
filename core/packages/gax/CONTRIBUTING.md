@@ -5,7 +5,6 @@
 * [Contributor License Agreements](#contributor-license-agreements)
 * [Contributing a patch](#contributing-a-patch)
 * [Running the tests](#running-the-tests)
-* [Releasing the library](#releasing-the-library)
 
 ## Contributor License Agreements
 
@@ -56,6 +55,9 @@ accept your pull requests.
 
         # Run unit tests.
         npm test
+
+        # Run sample integration tests.
+        npm run samples-test
 
         # Run all system tests.
         npm run system-test
