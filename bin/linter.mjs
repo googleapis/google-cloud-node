@@ -175,6 +175,7 @@ function getChangedFiles() {
 
 // --- ESLint Checker ---
 
+// LINT.IfChange(ignored_path_segments)
 const IGNORED_PATH_SEGMENTS = [
   'node_modules',
   'build',
@@ -190,6 +191,7 @@ const IGNORED_PATH_SEGMENTS = [
   '.nyc_output',
   'protos',
 ];
+// LINT.ThenChange(.eslintrc.json:ignorePatterns)
 
 /**
  * Determines whether a file should undergo ESLint checks.

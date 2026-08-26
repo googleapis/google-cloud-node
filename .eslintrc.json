@@ -88,6 +88,7 @@
       }
     }
   ],
+  // LINT.IfChange(ignorePatterns)
   "ignorePatterns": [
     "**/node_modules",
     "**/build",
@@ -105,4 +106,5 @@
     "**/protos",
     "**/*.d.ts"
   ]
+  // LINT.ThenChange(bin/linter.mjs:ignored_path_segments)
 }
