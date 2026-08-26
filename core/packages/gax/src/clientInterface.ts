@@ -29,9 +29,7 @@ import * as longrunning from './longRunningCalls/longrunning';
 import * as operationProtos from '../protos/operations';
 
 export interface ClientOptions
-  extends GrpcClientOptions,
-    GoogleAuthOptions,
-    ClientStubOptions {
+  extends GrpcClientOptions, GoogleAuthOptions, ClientStubOptions {
   libName?: string;
   libVersion?: string;
   clientConfig?: gax.ClientConfig;
@@ -42,6 +40,10 @@ export interface ClientOptions
   // No preference; exception will be thrown if both are set to different values.
   universeDomain?: string;
   universe_domain?: string;
+  /**
+   * Whether to enable telemetry tracing for the client.
+   */
+  enableTelemetryTracing?: boolean;
 }
 
 export interface Descriptors {
