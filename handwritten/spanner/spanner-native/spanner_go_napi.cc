@@ -35,6 +35,7 @@ typedef struct {
     char* error_msg;
     int error_code;
     int is_last;
+    uintptr_t go_handle;
 } CSpannerBatch;
 
 typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
@@ -43,6 +44,7 @@ typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
 extern "C" {
     uintptr_t InitGoCoreClient(int channel_count);
     void CloseGoCoreClient(uintptr_t handle);
+    void FreeGoBatchHandle(uintptr_t handle);
     void ExecuteStreamingSqlGo(
         uintptr_t handle,
         const char* routing_key,
@@ -65,6 +67,7 @@ extern "C" void OnGoStreamData(void* user_data, CSpannerBatch* batch) {
     StreamCallbackContext* ctx = static_cast<StreamCallbackContext*>(user_data);
     if (!ctx || !ctx->tsfn) {
         if (batch) {
+            if (batch->go_handle != 0) FreeGoBatchHandle(batch->go_handle);
             if (batch->cells) free(batch->cells);
             if (batch->string_arena) free(batch->string_arena);
             if (batch->json_rows) free(batch->json_rows);
@@ -178,6 +181,10 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
     }
 
     if (batch != nullptr) {
+        if (batch->go_handle != 0) {
+            FreeGoBatchHandle(batch->go_handle);
+            batch->go_handle = 0;
+        }
         if (batch->cells != nullptr) free(batch->cells);
         if (batch->string_arena != nullptr) free(batch->string_arena);
         if (batch->json_rows != nullptr) free(batch->json_rows);

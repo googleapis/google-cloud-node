@@ -4,4 +4,6 @@ node_modules/
 *.so
 *.dylib
 *.dll
+*.h
+libspanner_go.h
 benchmark_results.json

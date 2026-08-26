@@ -1,639 +1,397 @@
-const fs = require('fs');
-const os = require('os');
 const { performance } = require('perf_hooks');
-const { NativeSpannerDatabase } = require('./poc_bridge.js');
+const fs = require('fs');
 
-// Enable multiplexed sessions for the benchmark to maximize performance scaling
-process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
+const PROJECT = process.env.SPANNER_PROJECT || 'span-cloud-testing';
+const INSTANCE = process.env.SPANNER_INSTANCE || 'suvham-testing';
+const DATABASE = process.env.SPANNER_DATABASE || 'benchmark_db_async';
 
-// ════════════════════════════════════════════════════════════════
-// BENCHMARK CONFIGURATION — USER TO UPDATE
-// ════════════════════════════════════════════════════════════════
-const PROJECT  = 'span-cloud-testing';
-const INSTANCE = 'suvham-testing';
-const DATABASE = 'benchmark_db_async';
-const TABLE    = 'AsyncBenchmarkTable';
+const { NativeBinding } = require('./native_binding');
 
-const SQL = `SELECT 1 as col_int, 'CONSTANT' as col_const`;
-const WARMUP_MS = 10_000;
-const DURATION_MS = 30_000;
-const CONCURRENCY_LEVELS = [1, 8, 12, 32];
-const CHANNELS_TEST = process.env.LOCAL_MOCK_TEST ? [4] : [1, 4, 8, 10, 12, 16, 20];
-
-class CPUMonitor {
-  constructor() {
-    this.startUsage = null;
+class NativeSpannerDatabase {
+  constructor(project, instance, database, channelCount = 1, engine = 'rust') {
+    this.sessionName = `projects/${project}/instances/${instance}/databases/${database}/sessions/benchmark-session-${Math.random().toString(36).substring(7)}`;
+    this.binding = new NativeBinding(channelCount, engine);
   }
-  start() {
-    this.startUsage = this.getCPUUsage();
-  }
-  getCPUUsage() {
-    const cpus = os.cpus();
-    let totalUser = 0;
-    let totalSystem = 0;
-    let totalIdle = 0;
-    for (const cpu of cpus) {
-      totalUser += cpu.times.user;
-      totalSystem += cpu.times.sys;
-      totalIdle += cpu.times.idle;
-    }
-    const total = totalUser + totalSystem + totalIdle;
-    return { user: totalUser, system: totalSystem, idle: totalIdle, total };
-  }
-  stop() {
-    const endUsage = this.getCPUUsage();
-    const userDiff = endUsage.user - this.startUsage.user;
-    const sysDiff = endUsage.system - this.startUsage.system;
-    const idleDiff = endUsage.idle - this.startUsage.idle;
-    const totalDiff = endUsage.total - this.startUsage.total;
 
-    const activeDiff = userDiff + sysDiff;
-    return totalDiff > 0 ? (activeDiff / totalDiff) * 100 : 0.0;
-  }
-}
+  executeSqlNative(sql, metadata = {}, gaxOptions = {}) {
+    return new Promise((resolve, reject) => {
+      const allRows = [];
+      let finalTelemetry = null;
 
-/**
- * Maintains exactly N requests in flight simultaneously to model sustained load.
- */
-async function keepNInFlight(executeFn, concurrency, durationMs) {
-  const latencies = [];
-  let errors = 0;
-  let stopped = false;
-  let inFlight = 0;
-
-  return new Promise((resolve) => {
-    function launchOne() {
-      if (stopped && inFlight === 0) {
-        resolve({ latencies, errors });
-        return;
-      }
-      if (stopped) return;
-
-      inFlight++;
-      const start = performance.now();
-
-      executeFn()
-        .then(() => {
-          latencies.push(performance.now() - start);
-        })
-        .catch((err) => {
-          errors++;
-          // Console logs limited to avoid flood
-          if (errors <= 5) {
-            console.error('\n[Request Error]:', err);
-            if (err.statusDetails) {
-              console.error('Status Details:', JSON.stringify(err.statusDetails, null, 2));
-            }
+      this.binding.executeStreamingSql(
+        this.sessionName,
+        metadata,
+        Buffer.from(sql, 'utf8'),
+        gaxOptions,
+        (err, rows, telemetry) => {
+          if (err) return reject(err);
+          if (telemetry) finalTelemetry = telemetry;
+          if (rows === null) {
+            resolve({ rows: allRows, telemetry: finalTelemetry });
+          } else if (rows && rows.length > 0) {
+            allRows.push(...rows);
           }
-        })
-        .finally(() => {
-          inFlight--;
-          launchOne();
-          if (stopped && inFlight === 0) {
-            resolve({ latencies, errors });
-          }
-        });
-    }
-
-    for (let i = 0; i < concurrency; i++) launchOne();
-    setTimeout(() => { stopped = true; }, durationMs);
-  });
-}
-
-/**
- * Measures event loop lag (delay in processing callback queues) to verify V8 thread health.
- */
-async function measureEventLoopLag(durationMs) {
-  const lags = [];
-  let stopped = false;
-
-  const measure = () => {
-    if (stopped) return;
-    const before = performance.now();
-    setImmediate(() => {
-      const lag = performance.now() - before;
-      lags.push(lag);
-      setTimeout(measure, 10);
+        }
+      );
     });
-  };
-
-  measure();
-
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      stopped = true;
-      const maxLag = Math.max(...lags, 0);
-      const avgLag = lags.reduce((a, b) => a + b, 0) / (lags.length || 1);
-      resolve({ maxLag, avgLag });
-    }, durationMs);
-  });
-}
-
-/**
- * Runs benchmark and logs metrics.
- */
-async function runBenchmark(executeFn, concurrency, durationMs) {
-  const cpuMonitor = new CPUMonitor();
-  cpuMonitor.start();
-
-  // Run event loop lag monitor and keep-in-flight request loops concurrently
-  const [{ latencies, errors }, lagStats] = await Promise.all([
-    keepNInFlight(executeFn, concurrency, durationMs),
-    measureEventLoopLag(durationMs),
-  ]);
-
-  const cpuUtil = cpuMonitor.stop();
-
-  if (latencies.length === 0) {
-    return {
-      qps: 0.0,
-      p50: 0.0,
-      p95: 0.0,
-      p99: 0.0,
-      errorRate: 1.0,
-      total: errors,
-      maxLagMs: lagStats.maxLag,
-      avgLagMs: lagStats.avgLag,
-      cpuUtil: cpuUtil,
-    };
   }
 
-  latencies.sort((a, b) => a - b);
-  const getPercentile = (p) => {
-    const idx = Math.ceil((p / 100) * latencies.length) - 1;
-    return latencies[Math.max(0, idx)];
-  };
+  close() {
+    this.binding.close();
+  }
+}
 
-  const total = latencies.length + errors;
+function calculatePercentiles(latencies) {
+  if (!latencies || latencies.length === 0) {
+    return { p50: 0, p90: 0, p95: 0, p99: 0, avg: 0 };
+  }
+  latencies.sort((a, b) => a - b);
+  const p = (pct) => latencies[Math.min(latencies.length - 1, Math.floor(latencies.length * pct))];
+  const sum = latencies.reduce((acc, val) => acc + val, 0);
+  return {
+    p50: p(0.50),
+    p90: p(0.90),
+    p95: p(0.95),
+    p99: p(0.99),
+    avg: sum / latencies.length
+  };
+}
+
+function getCpuUsage() {
+  return process.cpuUsage();
+}
+
+function calculateCpuPercent(startUsage, durationMs) {
+  const diff = process.cpuUsage(startUsage);
+  const totalMicroSec = diff.user + diff.system;
+  const totalMs = totalMicroSec / 1000;
+  return (totalMs / durationMs) * 100;
+}
+
+function measureEventLoopLag() {
+  let maxLag = 0;
+  let totalLag = 0;
+  let checks = 0;
+  let last = performance.now();
+  const interval = setInterval(() => {
+    const now = performance.now();
+    const lag = Math.max(0, now - last - 10);
+    if (lag > maxLag) maxLag = lag;
+    totalLag += lag;
+    checks++;
+    last = now;
+  }, 10);
 
   return {
-    qps: latencies.length / (durationMs / 1000),
-    p50: getPercentile(50),
-    p95: getPercentile(95),
-    p99: getPercentile(99),
-    errorRate: errors / total,
-    total,
-    maxLagMs: lagStats.maxLag,
-    avgLagMs: lagStats.avgLag,
-    cpuUtil: cpuUtil,
+    stop: () => {
+      clearInterval(interval);
+      return {
+        maxLagMs: maxLag,
+        avgLagMs: checks > 0 ? totalLag / checks : 0
+      };
+    }
   };
 }
 
-/**
- * Runs a fixed-request count benchmark (to replicate customer-specific comparative cases).
- */
-async function runFixedCountBenchmark(executeFn, concurrency, totalRequests) {
+async function runTimedBenchmark(queryFn, concurrency = 1, durationMs = 5000) {
   const latencies = [];
-  let errors = 0;
-  let launched = 0;
-  let completed = 0;
-  const startBench = performance.now();
+  let errorCount = 0;
+  let running = true;
 
-  const cpuMonitor = new CPUMonitor();
-  cpuMonitor.start();
+  const lagTracker = measureEventLoopLag();
+  const startCpu = getCpuUsage();
+  const startTime = performance.now();
 
-  const lags = [];
-  let lagStopped = false;
-  const measureLag = () => {
-    if (lagStopped) return;
-    const before = performance.now();
-    setImmediate(() => {
-      lags.push(performance.now() - before);
-      setTimeout(measureLag, 10);
-    });
-  };
-  measureLag();
-
-  return new Promise((resolve) => {
-    function launchOne() {
-      if (completed >= totalRequests) {
-        lagStopped = true;
-        const elapsed = performance.now() - startBench;
-        const cpuUtil = cpuMonitor.stop();
-
-        const maxLag = Math.max(...lags, 0);
-        const avgLag = lags.reduce((a, b) => a + b, 0) / (lags.length || 1);
-
-        latencies.sort((a, b) => a - b);
-        const getPercentile = (p) => {
-          const idx = Math.ceil((p / 100) * latencies.length) - 1;
-          return latencies[Math.max(0, idx)];
-        };
-
-        resolve({
-          totalTimeMs: elapsed,
-          qps: latencies.length / (elapsed / 1000),
-          p50: getPercentile(50),
-          p90: getPercentile(90),
-          p95: getPercentile(95),
-          p99: getPercentile(99),
-          avgDuration: latencies.reduce((a, b) => a + b, 0) / (latencies.length || 1),
-          minDuration: latencies.length > 0 ? latencies[0] : 0.0,
-          maxDuration: latencies.length > 0 ? latencies[latencies.length - 1] : 0.0,
-          errorRate: errors / totalRequests,
-          total: totalRequests,
-          maxLagMs: maxLag,
-          avgLagMs: avgLag,
-          cpuUtil: cpuUtil
-        });
-        return;
+  const worker = async () => {
+    while (running) {
+      const reqStart = performance.now();
+      try {
+        await queryFn();
+        latencies.push(performance.now() - reqStart);
+      } catch (err) {
+        errorCount++;
       }
-
-      if (launched >= totalRequests) return;
-      launched++;
-
-      const start = performance.now();
-      executeFn()
-        .then(() => {
-          latencies.push(performance.now() - start);
-        })
-        .catch((err) => {
-          errors++;
-          if (errors <= 5) {
-            console.error('\n[Fixed Count Err]:', err);
-          }
-        })
-        .finally(() => {
-          completed++;
-          launchOne();
-        });
     }
+  };
 
-    for (let i = 0; i < Math.min(concurrency, totalRequests); i++) {
-      launchOne();
-    }
-  });
-}
-
-/**
- * Runs advanced verification plan tests (Test 1 to Test 4) under multiplexed sessions.
- */
-async function runVerificationPlanTests(db, rustClients, goClients) {
-  console.log('\n' + '='.repeat(100));
-  console.log('STARTING ADVANCED SYSTEMS VERIFICATION PLAN SUITE (JS vs RUST vs GO)');
-  console.log('='.repeat(100));
-
-  // ------------------------------------------------------------------
-  // TEST 1: Varying Result Set Size (Read Volume Scaling)
-  // ------------------------------------------------------------------
-  console.log('\n[TEST 1: Varying Result Set Size (Read Volume Scaling)]');
-  console.log('Goal: Profile V8 N-API object allocation limits under growing payloads across native cores.');
-  
-  const t1Queries = [
-    { label: 'Small (LIMIT 1, ~100B)', sql: `SELECT * FROM ${TABLE} LIMIT 1` },
-    { label: 'Medium (LIMIT 100, ~10KB)', sql: `SELECT * FROM ${TABLE} LIMIT 100` },
-    { label: 'Large (LIMIT 1000, ~100KB)', sql: `SELECT * FROM ${TABLE} LIMIT 1000` }
-  ];
-
-  for (const q of t1Queries) {
-    console.log(`  Executing: ${q.label}...`);
-    const js = await runBenchmark(() => db.executeSqlJs(q.sql), 1, 5000);
-    const rust = await runBenchmark(() => rustClients[1].executeSqlNative(q.sql), 1, 5000);
-    const go = await runBenchmark(() => goClients[1].executeSqlNative(q.sql), 1, 5000);
-
-    console.log(`    JavaScript QPS / Lag : ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Rust (1 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Go   (1 Ch) QPS / Lag: ${go.qps.toFixed(1)} QPS / ${go.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Rust Speedup / Lat Imp: ${(rust.qps / (js.qps || 1)).toFixed(2)}x / ${(((js.p95 - rust.p95) / (js.p95 || 1)) * 100).toFixed(1)}%`);
-    console.log(`    Go   Speedup / Lat Imp: ${(go.qps / (js.qps || 1)).toFixed(2)}x / ${(((js.p95 - go.p95) / (js.p95 || 1)) * 100).toFixed(1)}%`);
+  const workers = [];
+  for (let i = 0; i < concurrency; i++) {
+    workers.push(worker());
   }
 
-  // ------------------------------------------------------------------
-  // TEST 2: Wide Rows with Mixed Spanner Types
-  // ------------------------------------------------------------------
-  console.log('\n[TEST 2: Wide Rows with Mixed Spanner Types]');
-  console.log('Goal: Verify correctness and performance of Spanner-specific primitive types across all engines.');
-  
-  const typeQuery = `
-    SELECT 
-      CAST(9223372036854775807 AS INT64) AS max_int64,
-      CAST(123.456 AS FLOAT64) AS float_col,
-      'hello spanner string' AS string_col,
-      true AS bool_col,
-      CURRENT_TIMESTAMP() AS timestamp_col,
-      CURRENT_DATE() AS date_col,
-      CAST('base64bytes' AS BYTES) AS bytes_col,
-      JSON '{"spanner_key": "spanner_val"}' AS json_col,
-      CAST(123456789.123456789 AS NUMERIC) AS numeric_col,
-      ['arr1', 'arr2', 'arr3'] AS array_col
-  `;
+  await new Promise(r => setTimeout(r, durationMs));
+  running = false;
+  await Promise.all(workers);
 
-  console.log('  Verifying data type correctness across JavaScript, Rust, and Go...');
-  const [jsRows] = await db.database.run({ sql: typeQuery });
-  const jsMapped = jsRows.map(row => {
-    const json = row.toJSON({ wrapNumbers: true });
-    return Object.values(json).map(v => String(v ?? 'null'));
-  });
+  const totalTimeMs = performance.now() - startTime;
+  const lagStats = lagTracker.stop();
+  const cpuUtil = calculateCpuPercent(startCpu, totalTimeMs);
+  const percentiles = calculatePercentiles(latencies);
 
-  const rustMapped = await rustClients[4].executeSqlNative(typeQuery);
-  const goMapped = await goClients[4].executeSqlNative(typeQuery);
-  
-  console.log('    JavaScript returned :', JSON.stringify(jsMapped[0]));
-  console.log('    Rust Native returned:', JSON.stringify(rustMapped[0]));
-  console.log('    Go Native returned  :', JSON.stringify(goMapped[0]));
-  
-  const isRustCorrect = JSON.stringify(jsMapped[0]) === JSON.stringify(rustMapped[0]);
-  const isGoCorrect = JSON.stringify(jsMapped[0]) === JSON.stringify(goMapped[0]);
+  return {
+    totalTimeMs,
+    qps: (latencies.length / (totalTimeMs / 1000)),
+    p50: percentiles.p50,
+    p90: percentiles.p90,
+    p95: percentiles.p95,
+    p99: percentiles.p99,
+    avgDuration: percentiles.avg,
+    errorRate: latencies.length + errorCount > 0 ? (errorCount / (latencies.length + errorCount)) * 100 : 0,
+    total: latencies.length,
+    maxLagMs: lagStats.maxLagMs,
+    avgLagMs: lagStats.avgLagMs,
+    cpuUtil
+  };
+}
 
-  console.log(`    Rust Correctness: ${isRustCorrect ? '\x1b[32mPASS (Identical Output)\x1b[0m' : '\x1b[31mFAIL (Type Mismatch)\x1b[0m'}`);
-  console.log(`    Go   Correctness: ${isGoCorrect ? '\x1b[32mPASS (Identical Output)\x1b[0m' : '\x1b[31mFAIL (Type Mismatch)\x1b[0m'}`);
+async function runCustomerReplication(queryFn, concurrency = 110, targetCount = 1000) {
+  const latencies = [];
+  let errorCount = 0;
+  let remaining = targetCount;
 
-  // ------------------------------------------------------------------
-  // TEST 3: Read with Parameters (Parameterized Queries)
-  // ------------------------------------------------------------------
-  console.log('\n[TEST 3: Read with Parameters (Parameterized Queries)]');
-  console.log('Goal: Profile request parameter encoding path.');
-  console.log('  Verification Status: \x1b[33mSKIPPED (Planned for Production)\x1b[0m');
+  const lagTracker = measureEventLoopLag();
+  const startCpu = getCpuUsage();
+  const startTime = performance.now();
 
-  // ------------------------------------------------------------------
-  // TEST 4: High Concurrency with Session Pool Pressure
-  // ------------------------------------------------------------------
-  console.log('\n[TEST 4: High Concurrency with Session Pool Pressure]');
-  console.log('Goal: Compare standard session pool locks against lock-free cached multiplexed sessions.');
-  
-  const stressConcurrency = 64;
+  const worker = async () => {
+    while (true) {
+      if (remaining <= 0) break;
+      remaining--;
+      const reqStart = performance.now();
+      try {
+        await queryFn();
+        latencies.push(performance.now() - reqStart);
+      } catch (err) {
+        errorCount++;
+      }
+    }
+  };
 
-  // Scenario 4a: Standard Session Pool (Disabled Multiplexing)
-  console.log('  Running Scenario 4a: Standard Session Pool (Multiplexing: OFF)...');
-  process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-  const standardDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
-  await runBenchmark(() => standardDb.executeSqlJs(SQL), 4, 3000);
-  const poolJs = await runBenchmark(() => standardDb.executeSqlJs(SQL), stressConcurrency, 5000);
-  const poolRust = await runBenchmark(() => rustClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
-  const poolGo = await runBenchmark(() => goClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
-  await standardDb.close();
+  const workers = [];
+  for (let i = 0; i < concurrency; i++) {
+    workers.push(worker());
+  }
 
-  // Scenario 4b: Multiplexed Session (Enabled Multiplexing)
-  console.log('  Running Scenario 4b: Multiplexed Session (Multiplexing: ON)...');
-  process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
-  const multiJs = await runBenchmark(() => db.executeSqlJs(SQL), stressConcurrency, 5000);
-  const multiRust = await runBenchmark(() => rustClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
-  const multiGo = await runBenchmark(() => goClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
+  await Promise.all(workers);
 
-  console.log('\n  [Test 4 Results Comparison]');
-  console.log(`    Standard Pool (OFF) QPS: JS ${poolJs.qps.toFixed(1)} / Rust ${poolRust.qps.toFixed(1)} / Go ${poolGo.qps.toFixed(1)}`);
-  console.log(`    Multiplexed (ON) QPS   : JS ${multiJs.qps.toFixed(1)} / Rust ${multiRust.qps.toFixed(1)} / Go ${multiGo.qps.toFixed(1)}`);
-  
-  console.log('='.repeat(100) + '\n');
+  const totalTimeMs = performance.now() - startTime;
+  const lagStats = lagTracker.stop();
+  const cpuUtil = calculateCpuPercent(startCpu, totalTimeMs);
+  const percentiles = calculatePercentiles(latencies);
+
+  return {
+    totalTimeMs,
+    qps: (latencies.length / (totalTimeMs / 1000)),
+    p50: percentiles.p50,
+    p90: percentiles.p90,
+    p95: percentiles.p95,
+    p99: percentiles.p99,
+    avgDuration: percentiles.avg,
+    errorRate: latencies.length + errorCount > 0 ? (errorCount / (latencies.length + errorCount)) * 100 : 0,
+    total: latencies.length,
+    maxLagMs: lagStats.maxLagMs,
+    avgLagMs: lagStats.avgLagMs,
+    cpuUtil
+  };
 }
 
 async function main() {
-  if (
-    [PROJECT, INSTANCE, DATABASE, TABLE].some((v) =>
-      ['your-project', 'your-instance', 'your-database', 'your-table'].includes(v)
-    )
-  ) {
-    console.error('ERROR: Please configure your real GCP Spanner details at the top of benchmark.js!');
-    process.exit(1);
-  }
+  const outputFile = process.argv[2] || 'benchmark_results_3way.json';
+  const os = require('os');
+  const POINT_SQL = "SELECT 1 as col_int, 'CONSTANT' as col_const";
 
-  console.log('='.repeat(120));
-  console.log('GOOGLE CLOUD SPANNER: NODE.JS BASELINE vs RUST SHARED CORE vs GO SHARED CORE BENCHMARK');
-  console.log('='.repeat(120));
+  console.log('='.repeat(80));
+  console.log('  3-WAY BENCHMARK SUITE: RUST vs. GO (GFE) vs. GO (DIRECTPATH)');
+  console.log('='.repeat(80));
   console.log(`Node.js Version: ${process.version}`);
-  console.log(`CPU Cores      : ${os.cpus().length}`);
-  console.log(`System Platform: ${os.platform()} (${os.arch()})`);
-  console.log(`Target Query   : ${SQL}`);
-  console.log(`Warmup Duration: ${WARMUP_MS}ms`);
-  console.log(`Run Duration   : ${DURATION_MS}ms`);
-  console.log('-'.repeat(160));
+  console.log(`OS Platform    : ${os.platform()} (${os.arch()})`);
+  console.log(`CPU Cores      : ${os.cpus().length} core(s)`);
+  console.log(`Target Database: projects/${PROJECT}/instances/${INSTANCE}/databases/${DATABASE}\n`);
 
-  console.log('Initializing Spanner connections...');
-  const db = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
+  const channelList = [1, 4, 8, 16, 32, 50];
 
-  // Pre-initialize matrix clients for Rust and Go
-  const channelList = [1, 4, 8, 10, 12, 16, 20, 32, 50];
+  console.log('1. Initializing Rust clients...');
   const rustClients = {};
-  const goClients = {};
-
-  for (const channels of channelList) {
-    rustClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels, 'rust');
-    goClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels, 'go');
+  for (const ch of channelList) {
+    rustClients[ch] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, ch, 'rust');
   }
 
-  console.log('Warming up connection pools, auth tokens, and JIT compiler...');
-  await runBenchmark(() => db.executeSqlJs(SQL), 4, WARMUP_MS);
-
-  // Warmup Rust clients
-  for (const ch of [1, 4, 8, 16, 32, 50]) {
-    if (rustClients[ch]) await runBenchmark(() => rustClients[ch].executeSqlNative(SQL), 4, WARMUP_MS);
+  console.log('2. Initializing Go (GFE) clients (DirectPath=false)...');
+  process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'false';
+  process.env.GOOGLE_CLOUD_ENABLE_DIRECT_PATH = 'false';
+  const goGfeClients = {};
+  for (const ch of channelList) {
+    goGfeClients[ch] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, ch, 'go');
   }
-  // Warmup Go clients
-  for (const ch of [1, 4, 8, 16, 32, 50]) {
-    if (goClients[ch]) await runBenchmark(() => goClients[ch].executeSqlNative(SQL), 4, WARMUP_MS);
+
+  console.log('3. Initializing Go (DirectPath) clients (DirectPath=true)...');
+  process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = 'true';
+  process.env.GOOGLE_CLOUD_ENABLE_DIRECT_PATH = 'true';
+  const goDpClients = {};
+  for (const ch of channelList) {
+    goDpClients[ch] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, ch, 'go');
   }
-  console.log('Warmup complete.');
 
-  // Run Advanced Systems Verification Plan tests (Test 1 to 4)
-  await runVerificationPlanTests(db, rustClients, goClients);
+  console.log('\nExecuting eager warmup across all channel configurations (Rust, Go GFE, Go DP)...');
+  for (const ch of channelList) {
+    await runTimedBenchmark(() => rustClients[ch].executeSqlNative(POINT_SQL), 4, 1500);
+    await runTimedBenchmark(() => goGfeClients[ch].executeSqlNative(POINT_SQL), 4, 1500);
+    await runTimedBenchmark(() => goDpClients[ch].executeSqlNative(POINT_SQL), 4, 1500);
+  }
+  console.log('Warmup complete for all clients.\n');
 
-  console.log('Executing customer replication benchmark cases (110 Concurrency, 1000 Total Requests)...');
-  console.log('='.repeat(100));
-
-  // 1. JS Baseline Customer Case
-  console.log('Running JavaScript baseline...');
-  const custJs = await runFixedCountBenchmark(() => db.executeSqlJs(SQL), 110, 1000);
-
-  // 2. Rust Multi-Channel Customer Cases
-  console.log('Running Rust (16 Channels) extension...');
-  const custRust16 = await runFixedCountBenchmark(() => rustClients[16].executeSqlNative(SQL), 110, 1000);
-  console.log('Running Rust (32 Channels) extension...');
-  const custRust32 = await runFixedCountBenchmark(() => rustClients[32].executeSqlNative(SQL), 110, 1000);
-  console.log('Running Rust (50 Channels) extension...');
-  const custRust50 = await runFixedCountBenchmark(() => rustClients[50].executeSqlNative(SQL), 110, 1000);
-
-  // 3. Go Multi-Channel Customer Cases
-  console.log('Running Go (16 Channels) extension...');
-  const custGo16 = await runFixedCountBenchmark(() => goClients[16].executeSqlNative(SQL), 110, 1000);
-  console.log('Running Go (32 Channels) extension...');
-  const custGo32 = await runFixedCountBenchmark(() => goClients[32].executeSqlNative(SQL), 110, 1000);
-  console.log('Running Go (50 Channels) extension...');
-  const custGo50 = await runFixedCountBenchmark(() => goClients[50].executeSqlNative(SQL), 110, 1000);
-
-  console.log('\n' + '='.repeat(100));
-  console.log('CUSTOMER BENCHMARK REPLICATION SUMMARY');
-  console.log('='.repeat(100));
-  
-  const printCustRes = (label, r, base = null) => {
-    console.log(`\n  [${label}]`);
-    console.log(`  Total Time          : ${r.totalTimeMs.toFixed(2)}ms`);
-    console.log(`  Queries/Second (QPS): ${r.qps.toFixed(2)}`);
-    console.log(`  Avg Batch Duration  : ${r.avgDuration.toFixed(2)}ms`);
-    console.log(`  Min Batch Duration  : ${r.minDuration.toFixed(2)}ms`);
-    console.log(`  Max Batch Duration  : ${r.maxDuration.toFixed(2)}ms`);
-    console.log(`  P50                 : ${r.p50.toFixed(2)}ms`);
-    console.log(`  P90                 : ${r.p90.toFixed(2)}ms`);
-    console.log(`  P95                 : ${r.p95.toFixed(2)}ms`);
-    console.log(`  P99                 : ${r.p99.toFixed(2)}ms`);
-    console.log(`  Event Loop Lag (Avg): ${r.avgLagMs.toFixed(2)}ms (Max: ${r.maxLagMs.toFixed(2)}ms)`);
-    console.log(`  CPU Utilization     : ${r.cpuUtil.toFixed(1)}%`);
-    if (base) {
-      const speedup = r.qps / (base.qps || 1);
-      const latImp = ((base.p95 - r.p95) / (base.p95 || 1)) * 100;
-      console.log(`  Throughput Speedup  : \x1b[32m${speedup.toFixed(2)}x\x1b[0m`);
-      console.log(`  p95 Latency Imp. %  : \x1b[32m${latImp.toFixed(1)}%\x1b[0m`);
-    }
+  const fullReport = {
+    systemInfo: {
+      node: process.version,
+      cores: os.cpus().length,
+      platform: os.platform(),
+      arch: os.arch()
+    },
+    test1_readVolumeScaling: [],
+    test2_customerReplication: {},
+    test3_matrix: [],
+    test4_mixedTypes: {}
   };
 
-  printCustRes('JavaScript Baseline', custJs);
-  printCustRes('Rust (16 Channels)', custRust16, custJs);
-  printCustRes('Rust (32 Channels)', custRust32, custJs);
-  printCustRes('Rust (50 Channels)', custRust50, custJs);
-  printCustRes('Go   (16 Channels)', custGo16, custJs);
-  printCustRes('Go   (32 Channels)', custGo32, custJs);
-  printCustRes('Go   (50 Channels)', custGo50, custJs);
-  console.log('='.repeat(100) + '\n');
+  // =========================================================================
+  // TEST 1: Read Volume Scaling (Payload Sizes)
+  // =========================================================================
+  console.log('='.repeat(80));
+  console.log('[TEST 1: Read Volume Scaling (LIMIT 1, 100, 1000 Rows)]');
+  console.log('Concurrency: 1 | Channels: 1');
+  console.log('='.repeat(80) + '\n');
 
-  const customerResults = {
-    concurrency: 110,
-    total: 1000,
-    javascript: custJs,
-    rust_16ch: custRust16,
-    rust_32ch: custRust32,
-    rust_50ch: custRust50,
-    go_16ch: custGo16,
-    go_32ch: custGo32,
-    go_50ch: custGo50
-  };
-
-  console.log('Continuing to standard comparative matrix tests...\n');
-
-  // Comparative table header
-  const columns = [
-    { text: 'Concurrency', width: 12 },
-    { text: 'Method', width: 18 },
-    { text: 'QPS / p95', width: 18 },
-    { text: 'p50 (ms)', width: 10 },
-    { text: 'p99 (ms)', width: 10 },
-    { text: 'Avg EL Lag', width: 12 },
-    { text: 'Max EL Lag', width: 12 },
-    { text: 'CPU Util', width: 10 },
-    { text: 'Speedup', width: 10 },
-    { text: 'Lat Imp', width: 10 }
+  const payloads = [
+    { label: 'Small (LIMIT 1, ~100B)', sql: 'SELECT * FROM AsyncBenchmarkTable LIMIT 1', dur: 10000 },
+    { label: 'Medium (LIMIT 100, ~10KB)', sql: 'SELECT * FROM AsyncBenchmarkTable LIMIT 100', dur: 10000 },
+    { label: 'Large (LIMIT 1000, ~100KB)', sql: 'SELECT * FROM AsyncBenchmarkTable LIMIT 1000', dur: 15000 }
   ];
 
-  const formatHeader = () => columns.map(c => c.text.padEnd(c.width)).join(' | ');
-  const formatDivider = () => columns.map(c => '-'.repeat(c.width)).join(' |-|');
+  for (const p of payloads) {
+    console.log(`Executing: ${p.label}...`);
+    const rustRes = await runTimedBenchmark(() => rustClients[1].executeSqlNative(p.sql), 1, p.dur);
+    const goGfeRes = await runTimedBenchmark(() => goGfeClients[1].executeSqlNative(p.sql), 1, p.dur);
+    const goDpRes = await runTimedBenchmark(() => goDpClients[1].executeSqlNative(p.sql), 1, p.dur);
 
-  console.log(formatHeader());
-  console.log(formatDivider());
+    console.log(`  Rust (GFE) : QPS=${rustRes.qps.toFixed(1)} | p50=${rustRes.p50.toFixed(2)}ms | p95=${rustRes.p95.toFixed(2)}ms | CPU=${rustRes.cpuUtil.toFixed(1)}%`);
+    console.log(`  Go   (GFE) : QPS=${goGfeRes.qps.toFixed(1)} | p50=${goGfeRes.p50.toFixed(2)}ms | p95=${goGfeRes.p95.toFixed(2)}ms | CPU=${goGfeRes.cpuUtil.toFixed(1)}%`);
+    console.log(`  Go   (DP)  : QPS=${goDpRes.qps.toFixed(1)} | p50=${goDpRes.p50.toFixed(2)}ms | p95=${goDpRes.p95.toFixed(2)}ms | CPU=${goDpRes.cpuUtil.toFixed(1)}%\n`);
 
-  const matrixResults = [];
-
-  for (const concurrency of CONCURRENCY_LEVELS) {
-    // 1. JS Baseline Execution
-    const jsRes = await runBenchmark(() => db.executeSqlJs(SQL), concurrency, DURATION_MS);
-    const jsQpsP95 = `${jsRes.qps.toFixed(1)} / ${jsRes.p95.toFixed(1)}`;
-    
-    console.log([
-      String(concurrency).padEnd(12),
-      'JavaScript'.padEnd(18),
-      jsQpsP95.padEnd(18),
-      jsRes.p50.toFixed(1).padEnd(10),
-      jsRes.p99.toFixed(1).padEnd(10),
-      `${jsRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
-      `${jsRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
-      `${jsRes.cpuUtil.toFixed(1)}%`.padEnd(10),
-      '-'.padEnd(10),
-      '-'.padEnd(10)
-    ].join(' | '));
-
-    const levelResult = {
-      concurrency,
-      javascript: jsRes,
-    };
-
-    // 2. Rust Native Dynamic Connection Channels Execution
-    for (const channels of CHANNELS_TEST) {
-      const rustRes = await runBenchmark(() => rustClients[channels].executeSqlNative(SQL), concurrency, DURATION_MS);
-      const speedup = jsRes.qps > 0 ? rustRes.qps / jsRes.qps : 0.0;
-      const latImp = jsRes.p95 > 0 ? ((jsRes.p95 - rustRes.p95) / jsRes.p95) * 100 : 0.0;
-      
-      const rustQpsP95 = `${rustRes.qps.toFixed(1)} / ${rustRes.p95.toFixed(1)}`;
-      const speedupStr = `${speedup.toFixed(2)}x`;
-      const latImpStr = `${latImp.toFixed(1)}%`;
-
-      console.log([
-        String(concurrency).padEnd(12),
-        `Rust (${channels} Ch)`.padEnd(18),
-        rustQpsP95.padEnd(18),
-        rustRes.p50.toFixed(1).padEnd(10),
-        rustRes.p99.toFixed(1).padEnd(10),
-        `${rustRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
-        `${rustRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
-        `${rustRes.cpuUtil.toFixed(1)}%`.padEnd(10),
-        speedupStr.padEnd(10),
-        latImpStr.padEnd(10)
-      ].join(' | '));
-
-      levelResult[`rust_${channels}ch`] = rustRes;
-      levelResult[`speedup_rust_${channels}ch`] = speedup;
-      levelResult[`latImp_rust_${channels}ch`] = latImp;
-    }
-
-    // 3. Go Native Dynamic Connection Channels Execution
-    for (const channels of CHANNELS_TEST) {
-      const goRes = await runBenchmark(() => goClients[channels].executeSqlNative(SQL), concurrency, DURATION_MS);
-      const speedup = jsRes.qps > 0 ? goRes.qps / jsRes.qps : 0.0;
-      const latImp = jsRes.p95 > 0 ? ((jsRes.p95 - goRes.p95) / jsRes.p95) * 100 : 0.0;
-      
-      const goQpsP95 = `${goRes.qps.toFixed(1)} / ${goRes.p95.toFixed(1)}`;
-      const speedupStr = `${speedup.toFixed(2)}x`;
-      const latImpStr = `${latImp.toFixed(1)}%`;
-
-      console.log([
-        String(concurrency).padEnd(12),
-        `Go (${channels} Ch)`.padEnd(18),
-        goQpsP95.padEnd(18),
-        goRes.p50.toFixed(1).padEnd(10),
-        goRes.p99.toFixed(1).padEnd(10),
-        `${goRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
-        `${goRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
-        `${goRes.cpuUtil.toFixed(1)}%`.padEnd(10),
-        speedupStr.padEnd(10),
-        latImpStr.padEnd(10)
-      ].join(' | '));
-
-      levelResult[`go_${channels}ch`] = goRes;
-      levelResult[`speedup_go_${channels}ch`] = speedup;
-      levelResult[`latImp_go_${channels}ch`] = latImp;
-    }
-
-    console.log('-'.repeat(160));
-    matrixResults.push(levelResult);
+    fullReport.test1_readVolumeScaling.push({
+      label: p.label,
+      sql: p.sql,
+      rust: rustRes,
+      go_gfe: goGfeRes,
+      go_dp: goDpRes
+    });
   }
 
-  // Write full comparative data JSON to file
-  fs.writeFileSync(
-    'benchmark_results.json',
-    JSON.stringify(
-      {
-        systemInfo: {
-          node: process.version,
-          cores: os.cpus().length,
-          platform: os.platform(),
-          arch: os.arch(),
-        },
-        config: {
-          sql: SQL,
-          durationMs: DURATION_MS,
-          channels: CHANNELS_TEST,
-          concurrency: CONCURRENCY_LEVELS,
-        },
-        customerReplication: customerResults,
-        matrixRuns: matrixResults,
-      },
-      null,
-      2
-    )
-  );
-  console.log('\nFull comparative report successfully saved to benchmark_results.json.');
+  // =========================================================================
+  // TEST 2: Customer Case Replication
+  // =========================================================================
+  console.log('='.repeat(80));
+  console.log('[TEST 2: Customer Case Replication (110 Concurrency, 1000 Total Requests)]');
+  console.log('Query: SELECT 1 as col_int, \'CONSTANT\' as col_const');
+  console.log('='.repeat(80) + '\n');
 
-  // Explicitly exit process to kill background keep-alive timers cleanly
-  process.exit(0);
+  for (const ch of [16, 32, 50]) {
+    console.log(`Executing Customer Replication (${ch} Channels)...`);
+    const rustRes = await runCustomerReplication(() => rustClients[ch].executeSqlNative(POINT_SQL), 110, 1000);
+    const goGfeRes = await runCustomerReplication(() => goGfeClients[ch].executeSqlNative(POINT_SQL), 110, 1000);
+    const goDpRes = await runCustomerReplication(() => goDpClients[ch].executeSqlNative(POINT_SQL), 110, 1000);
+
+    console.log(`  Rust (GFE) : Time=${rustRes.totalTimeMs.toFixed(0)}ms | QPS=${rustRes.qps.toFixed(1)} | p50=${rustRes.p50.toFixed(2)}ms | p95=${rustRes.p95.toFixed(2)}ms | CPU=${rustRes.cpuUtil.toFixed(1)}%`);
+    console.log(`  Go   (GFE) : Time=${goGfeRes.totalTimeMs.toFixed(0)}ms | QPS=${goGfeRes.qps.toFixed(1)} | p50=${goGfeRes.p50.toFixed(2)}ms | p95=${goGfeRes.p95.toFixed(2)}ms | CPU=${goGfeRes.cpuUtil.toFixed(1)}%`);
+    console.log(`  Go   (DP)  : Time=${goDpRes.totalTimeMs.toFixed(0)}ms | QPS=${goDpRes.qps.toFixed(1)} | p50=${goDpRes.p50.toFixed(2)}ms | p95=${goDpRes.p95.toFixed(2)}ms | CPU=${goDpRes.cpuUtil.toFixed(1)}%\n`);
+
+    fullReport.test2_customerReplication[`${ch}ch`] = {
+      rust: rustRes,
+      go_gfe: goGfeRes,
+      go_dp: goDpRes
+    };
+  }
+
+  // =========================================================================
+  // TEST 3: Concurrency x Channels Scaling Matrix
+  // =========================================================================
+  console.log('='.repeat(80));
+  console.log('[TEST 3: Concurrency x Channels Scaling Matrix (5s per test point)]');
+  console.log('='.repeat(80));
+  console.log('Concurrency  | Engine (Channels)        | QPS / p95 (ms)     | p50 (ms)   | p99 (ms)   | CPU %     ');
+  console.log('-'.repeat(85));
+
+  const concurrencies = [1, 8, 12, 32];
+  const matrixChannels = [1, 4, 8, 16];
+
+  for (const conc of concurrencies) {
+    const rowObj = {
+      concurrency: conc,
+      channels: {}
+    };
+
+    for (const ch of matrixChannels) {
+      const rustRes = await runTimedBenchmark(() => rustClients[ch].executeSqlNative(POINT_SQL), conc, 5000);
+      const goGfeRes = await runTimedBenchmark(() => goGfeClients[ch].executeSqlNative(POINT_SQL), conc, 5000);
+      const goDpRes = await runTimedBenchmark(() => goDpClients[ch].executeSqlNative(POINT_SQL), conc, 5000);
+
+      const fmt = (eng, res) => `${String(conc).padEnd(12)} | ${eng.padEnd(24)} | ${res.qps.toFixed(1).padStart(7)} / ${res.p95.toFixed(1).padEnd(5)} | ${res.p50.toFixed(1).padEnd(10)} | ${res.p99.toFixed(1).padEnd(10)} | ${res.cpuUtil.toFixed(1)}%`;
+      console.log(fmt(`Rust (${ch} Ch)`, rustRes));
+      console.log(fmt(`Go GFE (${ch} Ch)`, goGfeRes));
+      console.log(fmt(`Go DP (${ch} Ch)`, goDpRes));
+      console.log('-'.repeat(85));
+
+      rowObj.channels[`${ch}ch`] = {
+        rust: { qps: rustRes.qps, p50: rustRes.p50, p90: rustRes.p90, p95: rustRes.p95, p99: rustRes.p99, avgLagMs: rustRes.avgLagMs, maxLagMs: rustRes.maxLagMs, cpuUtil: rustRes.cpuUtil },
+        go_gfe: { qps: goGfeRes.qps, p50: goGfeRes.p50, p90: goGfeRes.p90, p95: goGfeRes.p95, p99: goGfeRes.p99, avgLagMs: goGfeRes.avgLagMs, maxLagMs: goGfeRes.maxLagMs, cpuUtil: goGfeRes.cpuUtil },
+        go_dp: { qps: goDpRes.qps, p50: goDpRes.p50, p90: goDpRes.p90, p95: goDpRes.p95, p99: goDpRes.p99, avgLagMs: goDpRes.avgLagMs, maxLagMs: goDpRes.maxLagMs, cpuUtil: goDpRes.cpuUtil }
+      };
+    }
+
+    fullReport.test3_matrix.push(rowObj);
+  }
+
+  // =========================================================================
+  // TEST 4: Wide Rows with Mixed Spanner Types
+  // =========================================================================
+  console.log('\n' + '='.repeat(80));
+  console.log('[TEST 4: Wide Rows with Mixed Spanner Types]');
+  console.log('='.repeat(80));
+  const WIDE_SQL = `
+    SELECT 
+      CAST(123456 AS INT64) as col_int,
+      CAST(3.1415926535 AS FLOAT64) as col_float,
+      'The quick brown fox jumps over the lazy dog' as col_str,
+      true as col_bool,
+      TIMESTAMP '2026-08-25T12:00:00Z' as col_timestamp,
+      DATE '2026-08-25' as col_date,
+      BYTES 'U3Bhbm5lck5hdGl2ZUJ5dGVzVGVzdA==' as col_bytes,
+      JSON '{"key":"value","nested":{"count":42,"valid":true}}' as col_json,
+      NUMERIC '99999999999999999999999999999.999999999' as col_numeric,
+      ARRAY['apple', 'banana', 'cherry', 'date', 'elderberry'] as col_array
+  `;
+
+  console.log('Verifying mixed types execution across Rust, Go GFE, and Go DP (5s run)...');
+  const rustWide = await runTimedBenchmark(() => rustClients[1].executeSqlNative(WIDE_SQL), 1, 5000);
+  const goGfeWide = await runTimedBenchmark(() => goGfeClients[1].executeSqlNative(WIDE_SQL), 1, 5000);
+  const goDpWide = await runTimedBenchmark(() => goDpClients[1].executeSqlNative(WIDE_SQL), 1, 5000);
+
+  console.log(`  Rust (GFE) : QPS=${rustWide.qps.toFixed(1)} | p50=${rustWide.p50.toFixed(2)}ms | p95=${rustWide.p95.toFixed(2)}ms | CPU=${rustWide.cpuUtil.toFixed(1)}%`);
+  console.log(`  Go   (GFE) : QPS=${goGfeWide.qps.toFixed(1)} | p50=${goGfeWide.p50.toFixed(2)}ms | p95=${goGfeWide.p95.toFixed(2)}ms | CPU=${goGfeWide.cpuUtil.toFixed(1)}%`);
+  console.log(`  Go   (DP)  : QPS=${goDpWide.qps.toFixed(1)} | p50=${goDpWide.p50.toFixed(2)}ms | p95=${goDpWide.p95.toFixed(2)}ms | CPU=${goDpWide.cpuUtil.toFixed(1)}%\n`);
+
+  fullReport.test4_mixedTypes = {
+    rust: { qps: rustWide.qps, p50: rustWide.p50, p95: rustWide.p95, cpuUtil: rustWide.cpuUtil },
+    go_gfe: { qps: goGfeWide.qps, p50: goGfeWide.p50, p95: goGfeWide.p95, cpuUtil: goGfeWide.cpuUtil },
+    go_dp: { qps: goDpWide.qps, p50: goDpWide.p50, p95: goDpWide.p95, cpuUtil: goDpWide.cpuUtil }
+  };
+
+  fs.writeFileSync(outputFile, JSON.stringify(fullReport, null, 2));
+  console.log('='.repeat(80));
+  console.log(`FULL 3-WAY BENCHMARK COMPLETE! Results saved to ${outputFile}`);
+  console.log('='.repeat(80) + '\n');
 }
 
-main().catch((err) => {
-  console.error('Critical benchmark failure:', err);
+main().catch(err => {
+  console.error('Benchmark execution error:', err);
   process.exit(1);
 });
