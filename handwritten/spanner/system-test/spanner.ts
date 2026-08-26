@@ -7108,6 +7108,80 @@ describe('Spanner', () => {
         }
       }
     });
+
+    it('should fail to send without payload and handle ignoreNotFound properly for non-existing key in GoogleSQL', async function () {
+      if (!gsqlQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueSend(QUEUE_NAME, [789]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: false});
+            await transaction.commit();
+          });
+        });
+
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should fail to send without payload and handle ignoreNotFound properly for non-existing key in PostgreSQL', async function () {
+      if (!pgQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueSend(QUEUE_NAME, [790]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: false});
+            await transaction.commit();
+          });
+        });
+
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
   });
 
   describe('Transactions', () => {
