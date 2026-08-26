@@ -42,12 +42,9 @@ async function run() {
     // Install missing package dependencies upfront before running linters or type checkers
     await ensurePackageDependencies(packagesToCheck);
 
-    // Filter out declaration files (*.d.ts), auto-generated files, and fixtures from ESLint
-    const filesToLint = changedTsFiles.filter(shouldLintFile);
-
     // Run ESLint and Type checks in parallel to optimize CPU utilization
     const [eslintPassed, typeSafetyPassed] = await Promise.all([
-      checkEslint(filesToLint),
+      checkEslint(changedTsFiles),
       checkTypeSafety(packagesToCheck),
     ]);
 
