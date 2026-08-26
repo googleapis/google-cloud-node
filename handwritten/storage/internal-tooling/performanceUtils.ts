@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import {execSync} from 'child_process';
 import {mkdirSync, mkdtempSync, unlinkSync} from 'fs';
 import * as path from 'path';
 import * as yargs from 'yargs';
 import {Bucket, Storage, TransferManager} from '../src/index.js';
 import {getDirName} from '../src/util.js';
+import * as crypto from 'crypto';
+import * as fs from 'fs';
 
 export const NODE_DEFAULT_HIGHWATER_MARK_BYTES = 16384;
 export const DEFAULT_DIRECTORY_PROBABILITY = 0.1;
@@ -156,7 +157,7 @@ export interface PerformanceTestSetupResults {
 }
 
 /**
- * Create a uniformly distributed random integer beween the inclusive min and max provided.
+ * Create a uniformly distributed random integer between the inclusive min and max provided.
  *
  * @param {number} minInclusive lower bound (inclusive) of the range of random integer to return.
  * @param {number} maxInclusive upper bound (inclusive) of the range of random integer to return.
@@ -172,12 +173,12 @@ export function randomInteger(minInclusive: number, maxInclusive: number) {
 /**
  * Returns a boolean value with the provided probability
  *
- * @param {number} trueProbablity the probability the value will be true
+ * @param {number} trueProbability the probability the value will be true
  *
- * @returns {boolean} a boolean value with the probablity provided.
+ * @returns {boolean} a boolean value with the probability provided.
  */
-export function weightedRandomBoolean(trueProbablity: number): boolean {
-  return Math.random() <= trueProbablity ? true : false;
+export function weightedRandomBoolean(trueProbability: number): boolean {
+  return Math.random() <= trueProbability ? true : false;
 }
 
 /**
@@ -226,9 +227,9 @@ export function generateRandomFile(
     fileSizeUpperBoundBytes
   );
 
-  execSync(
-    `head --bytes=${fileSizeBytes} /dev/urandom > ${currentDirectory}/${fileName}`
-  );
+  const filePath = path.join(currentDirectory, fileName);
+  const randomBuffer = crypto.randomBytes(fileSizeBytes);
+  fs.writeFileSync(filePath, randomBuffer);
 
   return fileSizeBytes;
 }

@@ -98,7 +98,7 @@ function createWorker() {
 
   w.on('message', data => {
     log('Successfully completed iteration.', argv.debug as boolean);
-    void recordResult(data);
+    recordResult(data).catch(err => log(err, argv.debug as boolean, true));
     if (iterationsRemaining > 0) {
       createWorker();
     }
