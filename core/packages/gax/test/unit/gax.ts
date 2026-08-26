@@ -198,4 +198,39 @@ describe('gax construct settings', () => {
     assert.strictEqual(backoff.maxRetryDelayMillis, 1000);
     assert.deepStrictEqual(settings.retry.retryCodes, [RETRY_DICT.code_c]);
   });
+
+  describe('CallSettings telemetry fields', () => {
+    it('defaults enableTelemetryTracing to undefined', () => {
+      const settings = new gax.CallSettings();
+      assert.strictEqual(settings.enableTelemetryTracing, undefined);
+    });
+
+    it('initializes enableTelemetryTracing', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+      });
+      assert.strictEqual(settings.enableTelemetryTracing, true);
+    });
+
+    it('merges enableTelemetryTracing', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+      });
+      const merged = settings.merge({
+        enableTelemetryTracing: false,
+      });
+      assert.strictEqual(merged.enableTelemetryTracing, false);
+    });
+
+    it('copies enableTelemetryTracing when merging with null/empty options', () => {
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+      });
+      const mergedNull = settings.merge(null);
+      assert.strictEqual(mergedNull.enableTelemetryTracing, true);
+
+      const mergedEmpty = settings.merge({});
+      assert.strictEqual(mergedEmpty.enableTelemetryTracing, true);
+    });
+  });
 });
