@@ -2383,14 +2383,16 @@ class File extends ServiceObject<File, FileMetadata> {
     );
 
     void (async () => {
+      let resp;
       try {
-        const resp = await super.delete(options);
-        cb!(null, ...resp);
+        resp = await super.delete(options);
       } catch (err) {
         cb!(err as Error);
+        return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
+      cb!(null, ...resp);
     })();
   }
 
@@ -2522,12 +2524,14 @@ class File extends ServiceObject<File, FileMetadata> {
         });
     } else {
       void (async () => {
+        let contents;
         try {
-          const contents = await this.getBufferFromReadable(fileStream);
-          callback?.(null, contents);
+          contents = await this.getBufferFromReadable(fileStream);
         } catch (err) {
           (callback as (err: RequestError) => void)?.(err as RequestError);
+          return;
         }
+        callback?.(null, contents);
       })();
     }
   }
@@ -2902,19 +2906,21 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
     void (async () => {
+      let signature;
       try {
-        const signature = await this.storage.authClient.sign(
+        signature = await this.storage.authClient.sign(
           policyBase64,
           options.signingEndpoint
         );
-        callback(null, {
-          string: policyString,
-          base64: policyBase64,
-          signature,
-        });
       } catch (err) {
         callback(new SigningError((err as Error).message));
+        return;
       }
+      callback(null, {
+        string: policyString,
+        base64: policyBase64,
+        signature,
+      });
     })();
   }
 
@@ -3121,12 +3127,14 @@ class File extends ServiceObject<File, FileMetadata> {
     };
 
     void (async () => {
+      let res;
       try {
-        const res = await sign();
-        callback!(null, res);
+        res = await sign();
       } catch (err) {
         callback!(err as Error);
+        return;
       }
+      callback!(null, res);
     })();
   }
 
@@ -3364,12 +3372,14 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     void (async () => {
+      let signedUrl;
       try {
-        const signedUrl = await this.signer!.getSignedUrl(signConfig);
-        callback!(null, signedUrl);
+        signedUrl = await this.signer!.getSignedUrl(signConfig);
       } catch (err) {
         callback!(err as Error);
+        return;
       }
+      callback!(null, signedUrl);
     })();
   }
 
@@ -4374,10 +4384,11 @@ class File extends ServiceObject<File, FileMetadata> {
     void (async () => {
       try {
         await returnValue;
-        callback();
       } catch (err) {
         callback(err as Error);
+        return;
       }
+      callback();
     })();
     return;
   }
@@ -4418,14 +4429,16 @@ class File extends ServiceObject<File, FileMetadata> {
     );
 
     void (async () => {
+      let resp;
       try {
-        const resp = await super.setMetadata(metadata, options);
-        cb!(null, ...resp);
+        resp = await super.setMetadata(metadata, options);
       } catch (err) {
         cb!(err as Error);
+        return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
+      cb!(null, ...resp);
     })();
   }
 

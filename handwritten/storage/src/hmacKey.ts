@@ -402,14 +402,16 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
         : cb;
 
     void (async () => {
+      let resp;
       try {
-        const resp = await super.setMetadata(metadata, options);
-        cb!(null, ...resp);
+        resp = await super.setMetadata(metadata, options);
       } catch (err) {
         cb!(err as Error);
+        return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
+      cb!(null, ...resp);
     })();
   }
 }

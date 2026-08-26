@@ -2263,11 +2263,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         }
 
         await Promise.all(promises);
-        callback!(errors.length > 0 ? errors : null);
       } catch (e) {
         callback!(e as Error);
         return;
       }
+      callback!(errors.length > 0 ? errors : null);
     })();
   }
 
@@ -3572,17 +3572,18 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         return;
       }
       void (async () => {
+        let files: File[] = [];
         try {
-          let files: File[] = [];
           if (options.includeFiles) {
             files = await promisify<MakeAllFilesPublicPrivateOptions, File[]>(
               this.makeAllFilesPublicPrivate_
             ).call(this, options);
           }
-          callback!(null, files);
         } catch (callErr) {
           callback!(callErr as Error);
+          return;
         }
+        callback!(null, files);
       })();
     });
   }
@@ -3700,6 +3701,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     const req = {public: true, ...options};
 
     void (async () => {
+      let files: File[] = [];
       try {
         await this.acl.add({
           entity: 'allUsers',
@@ -3709,16 +3711,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           entity: 'allUsers',
           role: 'READER',
         });
-        let files: File[] = [];
         if (req.includeFiles) {
           files = await promisify<MakeAllFilesPublicPrivateOptions, File[]>(
             this.makeAllFilesPublicPrivate_
           ).call(this, req);
         }
-        callback!(null, files);
       } catch (err) {
         callback!(err as Error);
+        return;
       }
+      callback!(null, files);
     })();
   }
 
@@ -3931,14 +3933,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     );
 
     void (async () => {
+      let resp;
       try {
-        const resp = await super.setMetadata(metadata, options);
-        cb!(null, ...resp);
+        resp = await super.setMetadata(metadata, options);
       } catch (err) {
         cb!(err as Error);
+        return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
+      cb!(null, ...resp);
     })();
   }
 
@@ -4528,10 +4532,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       void (async () => {
         try {
           await returnValue;
-          callback!(null, newFile, newFile.metadata);
         } catch (err) {
           callback!(err as Error);
+          return;
         }
+        callback!(null, newFile, newFile.metadata);
       })();
       return;
     };
@@ -4679,10 +4684,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           return limit(() => processFile(file));
         });
         await Promise.all(promises);
-        callback!(errors.length > 0 ? errors : null, updatedFiles);
       } catch (err) {
         callback!(err as Error, updatedFiles);
+        return;
       }
+      callback!(errors.length > 0 ? errors : null, updatedFiles);
     })();
   }
 
