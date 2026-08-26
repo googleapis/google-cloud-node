@@ -344,7 +344,8 @@
                             "KINESIS_PERMISSION_DENIED": 2,
                             "PUBLISH_PERMISSION_DENIED": 3,
                             "STREAM_NOT_FOUND": 4,
-                            "CONSUMER_NOT_FOUND": 5
+                            "CONSUMER_NOT_FOUND": 5,
+                            "CONFLICTING_REGION_CONSTRAINTS": 6
                           }
                         }
                       }
@@ -418,7 +419,8 @@
                             "CLOUD_STORAGE_PERMISSION_DENIED": 2,
                             "PUBLISH_PERMISSION_DENIED": 3,
                             "BUCKET_NOT_FOUND": 4,
-                            "TOO_MANY_OBJECTS": 5
+                            "TOO_MANY_OBJECTS": 5,
+                            "CONFLICTING_REGION_CONSTRAINTS": 8
                           }
                         },
                         "TextFormat": {
@@ -517,7 +519,8 @@
                             "NAMESPACE_NOT_FOUND": 4,
                             "EVENT_HUB_NOT_FOUND": 5,
                             "SUBSCRIPTION_NOT_FOUND": 6,
-                            "RESOURCE_GROUP_NOT_FOUND": 7
+                            "RESOURCE_GROUP_NOT_FOUND": 7,
+                            "CONFLICTING_REGION_CONSTRAINTS": 8
                           }
                         }
                       }
@@ -569,7 +572,8 @@
                             "MSK_PERMISSION_DENIED": 2,
                             "PUBLISH_PERMISSION_DENIED": 3,
                             "CLUSTER_NOT_FOUND": 4,
-                            "TOPIC_NOT_FOUND": 5
+                            "TOPIC_NOT_FOUND": 5,
+                            "CONFLICTING_REGION_CONSTRAINTS": 6
                           }
                         }
                       }
@@ -628,7 +632,8 @@
                             "PUBLISH_PERMISSION_DENIED": 3,
                             "UNREACHABLE_BOOTSTRAP_SERVER": 4,
                             "CLUSTER_NOT_FOUND": 5,
-                            "TOPIC_NOT_FOUND": 6
+                            "TOPIC_NOT_FOUND": 6,
+                            "CONFLICTING_REGION_CONSTRAINTS": 7
                           }
                         }
                       }
@@ -1059,6 +1064,39 @@
                     }
                   }
                 },
+                "Compression": {
+                  "fields": {
+                    "compressionAlgorithm": {
+                      "type": "CompressionAlgorithm",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "compressionMode": {
+                      "type": "CompressionMode",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "CompressionAlgorithm": {
+                      "values": {
+                        "COMPRESSION_ALGORITHM_UNSPECIFIED": 0,
+                        "ZLIB": 1
+                      }
+                    },
+                    "CompressionMode": {
+                      "values": {
+                        "COMPRESSION_MODE_UNSPECIFIED": 0,
+                        "COMPRESS": 1,
+                        "DECOMPRESS": 2
+                      }
+                    }
+                  }
+                },
                 "AIInference": {
                   "oneofs": {
                     "inferenceMode": {
@@ -1109,6 +1147,7 @@
                     "transform": {
                       "oneof": [
                         "javascriptUdf",
+                        "compression",
                         "aiInference"
                       ]
                     }
@@ -1117,6 +1156,13 @@
                     "javascriptUdf": {
                       "type": "JavaScriptUDF",
                       "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "compression": {
+                      "type": "Compression",
+                      "id": 7,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
@@ -3184,6 +3230,13 @@
                     "(google.api.resource).type": "pubsub.googleapis.com/Schema",
                     "(google.api.resource).pattern": "projects/{project}/schemas/{schema}"
                   },
+                  "oneofs": {
+                    "configuration": {
+                      "oneof": [
+                        "compiledProtoSchema"
+                      ]
+                    }
+                  },
                   "fields": {
                     "name": {
                       "type": "string",
@@ -3199,6 +3252,13 @@
                     "definition": {
                       "type": "string",
                       "id": 3
+                    },
+                    "compiledProtoSchema": {
+                      "type": "CompiledProtoSchema",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "revisionId": {
                       "type": "string",
@@ -3478,6 +3538,24 @@
                 },
                 "ValidateMessageResponse": {
                   "fields": {}
+                },
+                "CompiledProtoSchema": {
+                  "fields": {
+                    "rootMessage": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "compiledBytes": {
+                      "type": "bytes",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
                 },
                 "Encoding": {
                   "values": {

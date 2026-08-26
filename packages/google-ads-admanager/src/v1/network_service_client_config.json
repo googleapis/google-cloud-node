@@ -27,6 +27,18 @@
         "ListNetworks": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "UpdateNetwork": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ProvisionTestNetwork": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDefaultThirdPartyDataDeclaration": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

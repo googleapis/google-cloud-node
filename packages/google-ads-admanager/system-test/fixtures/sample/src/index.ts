@@ -57,6 +57,7 @@ import {
   MobileCarrierServiceClient,
   MobileDeviceServiceClient,
   MobileDeviceSubmodelServiceClient,
+  NativeStyleServiceClient,
   NetworkServiceClient,
   OperatingSystemServiceClient,
   OperatingSystemVersionServiceClient,
@@ -245,6 +246,9 @@ function doStuffWithMobileDeviceServiceClient(
 function doStuffWithMobileDeviceSubmodelServiceClient(
   client: MobileDeviceSubmodelServiceClient,
 ) {
+  client.close();
+}
+function doStuffWithNativeStyleServiceClient(client: NativeStyleServiceClient) {
   client.close();
 }
 function doStuffWithNetworkServiceClient(client: NetworkServiceClient) {
@@ -466,6 +470,9 @@ function main() {
   doStuffWithMobileDeviceSubmodelServiceClient(
     mobileDeviceSubmodelServiceClient,
   );
+  // check that the client instance can be created
+  const nativeStyleServiceClient = new NativeStyleServiceClient();
+  doStuffWithNativeStyleServiceClient(nativeStyleServiceClient);
   // check that the client instance can be created
   const networkServiceClient = new NetworkServiceClient();
   doStuffWithNetworkServiceClient(networkServiceClient);

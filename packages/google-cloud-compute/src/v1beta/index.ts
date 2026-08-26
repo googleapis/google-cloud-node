@@ -61,6 +61,7 @@ export { LicenseCodesClient } from './license_codes_client';
 export { LicensesClient } from './licenses_client';
 export { MachineImagesClient } from './machine_images_client';
 export { MachineTypesClient } from './machine_types_client';
+export { ManagedRulesetsClient } from './managed_rulesets_client';
 export { NetworkAttachmentsClient } from './network_attachments_client';
 export { NetworkEdgeSecurityServicesClient } from './network_edge_security_services_client';
 export { NetworkEndpointGroupsClient } from './network_endpoint_groups_client';
