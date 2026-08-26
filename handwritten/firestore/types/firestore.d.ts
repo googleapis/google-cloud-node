@@ -16,6 +16,16 @@
 // We deliberately use `any` in the external API to not impose type-checking
 // on end users.
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// Declare ambient Temporal namespace for ECMAScript Temporal API
+declare namespace Temporal {
+  interface Instant {
+    readonly epochMilliseconds: number;
+    readonly epochNanoseconds: bigint;
+    toString(): string;
+  }
+}
+
 // Declare a global (ambient) namespace
 // (used when not using import statement, but just script include).
 declare namespace FirebaseFirestore {
@@ -2907,6 +2917,14 @@ declare namespace FirebaseFirestore {
      */
     static fromMillis(milliseconds: number): Timestamp;
     /**
+     * Creates a new timestamp from the given Temporal Instant.
+     *
+     * @param instant The `Temporal.Instant` to initialize the `Timestamp` from.
+     * @returns A new `Timestamp` representing the same point in time as the
+     * given instant.
+     */
+    static fromInstant(instant: Temporal.Instant): Timestamp;
+    /**
      * Creates a new timestamp.
      *
      * @param seconds The number of seconds of UTC time since Unix epoch
@@ -2924,6 +2942,13 @@ declare namespace FirebaseFirestore {
     readonly seconds: number;
     /** The non-negative fractions of a second at nanosecond resolution. */
     readonly nanoseconds: number;
+    /**
+     * Converts a `Timestamp` to a `Temporal.Instant` object.
+     *
+     * @returns `Temporal.Instant` object representing the same point in time as
+     * this `Timestamp`, with nanosecond precision.
+     */
+    toInstant(): Temporal.Instant;
     /**
      * Returns a new `Date` corresponding to this timestamp. This may lose
      * precision.
