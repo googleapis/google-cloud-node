@@ -118,7 +118,7 @@ const fakePromisify = {
 };
 
 const fsCached = fs;
-const safeFs: any = {};
+const safeFs: Record<string, unknown> = {};
 const descriptors = Object.getOwnPropertyDescriptors(fsCached);
 for (const key of Object.keys(descriptors)) {
   const desc = descriptors[key];
@@ -3916,7 +3916,7 @@ describe('File', () => {
         optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
         cb: MetadataCallback<FileMetadata>
       ) => {
-        Promise.resolve([apiResponse]).then(resp => cb(null, ...resp));
+        process.nextTick(() => cb(null, apiResponse));
       };
 
       file.makePrivate((err: Error, apiResponse_: {}) => {

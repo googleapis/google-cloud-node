@@ -15,6 +15,7 @@
 import {
   BaseMetadata,
   DecorateRequestOptions,
+  DeleteOptions,
   ServiceObject,
   ServiceObjectConfig,
   util,
@@ -47,10 +48,11 @@ import {
   BucketExceptionMessages,
   BucketMetadata,
   LifecycleRule,
+  ComposeCleanupError,
 } from '../src/bucket.js';
 import {AddAclOptions} from '../src/acl.js';
 import {Policy} from '../src/iam.js';
-import sinon from 'sinon';
+import sinon, {createSandbox} from 'sinon';
 import {Transform} from 'stream';
 import {IdempotencyStrategy} from '../src/storage.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
@@ -940,14 +942,14 @@ describe('Bucket', () => {
       sources[0].generation = 12345;
 
       let deletedCount = 0;
-      sources[0].delete = async (opts?: any) => {
+      sources[0].delete = async (opts?: DeleteOptions) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
         assert.strictEqual(opts?.ignoreNotFound, true);
         assert.strictEqual(opts?.ifGenerationMatch, 12345);
         deletedCount++;
         return [{}];
       };
-      sources[1].delete = async (opts?: any) => {
+      sources[1].delete = async (opts?: DeleteOptions) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
         assert.strictEqual(opts?.ignoreNotFound, true);
         assert.strictEqual(opts?.ifGenerationMatch, undefined);
@@ -969,7 +971,7 @@ describe('Bucket', () => {
         sources,
         destination,
         {deleteSourceObjects: true, userProject: 'user-project-id'},
-        (err: any) => {
+        (err: Error | null) => {
           assert.ifError(err);
           assert.strictEqual(deletedCount, 2);
           done();
@@ -997,7 +999,7 @@ describe('Bucket', () => {
         callback(null, {});
       };
 
-      bucket.combine(sources, destination, (err: any) => {
+      bucket.combine(sources, destination, (err: Error | null) => {
         assert.ifError(err);
         assert.strictEqual(deletedCount, 0);
         done();
@@ -1029,7 +1031,7 @@ describe('Bucket', () => {
         sources,
         destination,
         {deleteSourceObjects: true},
-        (err: any) => {
+        (err: Error | null) => {
           assert.strictEqual(err, composeError);
           assert.strictEqual(deletedCount, 0);
           done();
@@ -1042,12 +1044,12 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.foo');
       const deleteError = new Error('Delete failed.');
 
-      sources[0].delete = async (opts?: any) => {
+      sources[0].delete = async (opts?: DeleteOptions) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
         assert.strictEqual(opts?.ignoreNotFound, true);
         throw deleteError;
       };
-      sources[1].delete = async (opts?: any) => {
+      sources[1].delete = async (opts?: DeleteOptions) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
         assert.strictEqual(opts?.ignoreNotFound, true);
         return [{}];
@@ -1065,13 +1067,17 @@ describe('Bucket', () => {
         sources,
         destination,
         {deleteSourceObjects: true, userProject: 'user-project-id'},
-        (err: any, newFile: any, apiResponse: any) => {
+        (
+          err: ComposeCleanupError | null,
+          newFile?: File | null,
+          apiResponse?: unknown
+        ) => {
           try {
             assert.ok(err instanceof ComposeCleanupError);
-            assert.strictEqual(err.name, 'ComposeCleanupError');
-            assert.deepStrictEqual((err as any).errors, [deleteError]);
-            assert.strictEqual((err as any).newFile, destination);
-            assert.deepStrictEqual((err as any).apiResponse, {success: true});
+            assert.strictEqual(err!.name, 'ComposeCleanupError');
+            assert.deepStrictEqual(err!.errors, [deleteError]);
+            assert.strictEqual(err!.newFile, destination);
+            assert.deepStrictEqual(err!.apiResponse, {success: true});
 
             // Also check callback arguments
             assert.strictEqual(newFile, destination);
@@ -1661,7 +1667,7 @@ describe('Bucket', () => {
             requesterPays: false,
           },
         });
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.disableRequesterPays(done);
@@ -1682,7 +1688,7 @@ describe('Bucket', () => {
 
     it('should set autoRetry to false when ifMetagenerationMatch is undefined', done => {
       bucket.setMetadata = () => {
-        Promise.resolve().then(() => {
+        process.nextTick(() => {
           assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
           done();
         });
@@ -1837,9 +1843,7 @@ describe('Bucket', () => {
         optionsOrCallback: {},
         callback: Function
       ) => {
-        Promise.resolve([setMetadataResponse]).then(resp =>
-          callback(null, ...resp)
-        );
+        process.nextTick(() => callback(null, setMetadataResponse));
       };
 
       bucket.enableLogging(
@@ -1878,7 +1882,7 @@ describe('Bucket', () => {
             requesterPays: true,
           },
         });
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.enableRequesterPays(done);
@@ -2397,7 +2401,7 @@ describe('Bucket', () => {
     let SIGNED_URL_CONFIG: GetBucketSignedUrlConfig;
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
+      sandbox = createSandbox();
 
       signerGetSignedUrlStub = sandbox.stub().resolves(EXPECTED_SIGNED_URL);
 
@@ -2676,7 +2680,7 @@ describe('Bucket', () => {
           retentionPolicy: null,
         });
 
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.removeRetentionPeriod(done);
@@ -2784,7 +2788,7 @@ describe('Bucket', () => {
         callback: Function
       ) => {
         assert.strictEqual(metadata.labels, labels);
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
       bucket.setLabels(labels, done);
     });
@@ -2815,7 +2819,7 @@ describe('Bucket', () => {
           },
         });
 
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.setRetentionPeriod(duration, done);
@@ -2835,7 +2839,7 @@ describe('Bucket', () => {
           cors: corsConfiguration,
         });
 
-        return Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.setCorsConfiguration(corsConfiguration, done);
@@ -2873,7 +2877,7 @@ describe('Bucket', () => {
       ) => {
         assert.deepStrictEqual(metadata, {storageClass: STORAGE_CLASS});
         assert.strictEqual(options, OPTIONS);
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.setStorageClass(STORAGE_CLASS, OPTIONS, CALLBACK);
@@ -3264,12 +3268,15 @@ describe('Bucket', () => {
       const options = {destination: fakeFile, resumable: false};
       const originalCreateReadStream = fs.createReadStream;
       let readStream: fs.ReadStream;
-      fsCreateReadStreamOverride = (path: string, opts: any) => {
+      fsCreateReadStreamOverride = (
+        path: fs.PathLike,
+        opts?: Parameters<typeof fs.createReadStream>[1]
+      ) => {
         readStream = originalCreateReadStream(path, opts);
         return readStream;
       };
 
-      fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+      fakeFile.createWriteStream = () => {
         const ws = new stream.Writable({
           write(chunk, encoding, callback) {
             callback(new Error('write error'));

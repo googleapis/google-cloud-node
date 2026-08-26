@@ -24,7 +24,12 @@ import {
   SetMetadataResponse,
   util,
 } from './nodejs-common/index.js';
-import {RequestResponse} from './nodejs-common/service-object.js';
+import {
+  BaseMetadata,
+  DeleteOptions,
+  RequestResponse,
+  SetMetadataOptions,
+} from './nodejs-common/service-object.js';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as fs from 'fs';
@@ -65,11 +70,6 @@ import {
 import {Readable} from 'stream';
 import {CRC32CValidatorGenerator} from './crc32c.js';
 import {URL} from 'url';
-import {
-  BaseMetadata,
-  DeleteOptions,
-  SetMetadataOptions,
-} from './nodejs-common/service-object.js';
 
 interface SourceObject {
   name: string;
@@ -1535,7 +1535,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     // The default behavior appends the previously-defined lifecycle rules with
     // the new ones just passed in by the user.
-    this.getMetadata((err: ApiError | null, metadata: BucketMetadata) => {
+    void this.getMetadata((err: ApiError | null, metadata: BucketMetadata) => {
       if (err) {
         callback!(err);
         return;
@@ -1778,7 +1778,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
               .catch(deleteErr => deleteErr as Error);
           });
 
-          Promise.all(deletePromises).then(results => {
+          void (async () => {
+            // eslint-disable-next-line promise/no-promise-in-callback
+            const results = await Promise.all(deletePromises);
             const errors = results.filter(
               (res): res is Error => res instanceof Error
             );
@@ -1795,7 +1797,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             }
 
             callback!(null, destinationFile, resp);
-          });
+          })();
         } else {
           callback!(null, destinationFile, resp);
         }
@@ -2241,7 +2243,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       });
     };
 
-    (async () => {
+    void (async () => {
       try {
         let promises = [];
         const limit = pLimit(MAX_PARALLEL_LIMIT);
@@ -2555,7 +2557,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     if (config?.ifMetagenerationNotMatch) {
       options.ifMetagenerationNotMatch = config.ifMetagenerationNotMatch;
     }
-    (async () => {
+    void (async () => {
       try {
         const [policy] = await this.iam.getPolicy();
         policy.bindings.push({
@@ -3330,9 +3332,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       );
     }
 
-    this.signer
-      .getSignedUrl(signConfig)
-      .then(signedUrl => callback!(null, signedUrl), callback!);
+    void (async () => {
+      try {
+        const signedUrl = await this.signer!.getSignedUrl(signConfig);
+        callback!(null, signedUrl);
+      } catch (err) {
+        callback!(err as Error);
+      }
+    })();
   }
 
   lock(metageneration: number | string): Promise<BucketLockResponse>;
@@ -3566,18 +3573,21 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     this.setMetadata(metadata, query, (err: Error | null | undefined) => {
       if (err) {
         callback!(err);
+        return;
       }
-      const internalCall = () => {
-        if (options.includeFiles) {
-          return promisify<MakeAllFilesPublicPrivateOptions, File[]>(
-            this.makeAllFilesPublicPrivate_
-          ).call(this, options);
+      void (async () => {
+        try {
+          let files: File[] = [];
+          if (options.includeFiles) {
+            files = await promisify<MakeAllFilesPublicPrivateOptions, File[]>(
+              this.makeAllFilesPublicPrivate_
+            ).call(this, options);
+          }
+          callback!(null, files);
+        } catch (callErr) {
+          callback!(callErr as Error);
         }
-        return Promise.resolve([] as File[]);
-      };
-      internalCall()
-        .then(files => callback!(null, files))
-        .catch(callback!);
+      })();
     });
   }
 
@@ -3693,26 +3703,27 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     const req = {public: true, ...options};
 
-    this.acl
-      .add({
-        entity: 'allUsers',
-        role: 'READER',
-      })
-      .then(() => {
-        return this.acl.default!.add({
+    void (async () => {
+      try {
+        await this.acl.add({
           entity: 'allUsers',
           role: 'READER',
         });
-      })
-      .then(() => {
+        await this.acl.default!.add({
+          entity: 'allUsers',
+          role: 'READER',
+        });
+        let files: File[] = [];
         if (req.includeFiles) {
-          return promisify<MakeAllFilesPublicPrivateOptions, File[]>(
+          files = await promisify<MakeAllFilesPublicPrivateOptions, File[]>(
             this.makeAllFilesPublicPrivate_
           ).call(this, req);
         }
-        return [];
-      })
-      .then(files => callback!(null, files), callback);
+        callback!(null, files);
+      } catch (err) {
+        callback!(err as Error);
+      }
+    })();
   }
 
   /**
@@ -3923,13 +3934,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       options
     );
 
-    super
-      .setMetadata(metadata, options)
-      .then(resp => cb!(null, ...resp))
-      .catch(cb!)
-      .finally(() => {
+    void (async () => {
+      try {
+        const resp = await super.setMetadata(metadata, options);
+        cb!(null, ...resp);
+      } catch (err) {
+        cb!(err as Error);
+      } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      }
+    })();
   }
 
   setRetentionPeriod(
@@ -4514,15 +4528,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
       if (!callback) {
         return returnValue;
-      } else {
-        return returnValue
-          .then(() => {
-            if (callback) {
-              return callback!(null, newFile, newFile.metadata);
-            }
-          })
-          .catch(callback);
       }
+      void (async () => {
+        try {
+          await returnValue;
+          callback!(null, newFile, newFile.metadata);
+        } catch (err) {
+          callback!(err as Error);
+        }
+      })();
+      return;
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -4579,7 +4594,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       });
     }
 
-    upload(maxRetries);
+    return upload(maxRetries) as Promise<UploadResponse> | void;
   }
 
   makeAllFilesPublicPrivate_(
@@ -4660,18 +4675,19 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       }
     };
 
-    this.getFiles(options)
-      .then(([files]) => {
+    void (async () => {
+      try {
+        const [files] = await this.getFiles(options);
         const limit = pLimit(MAX_PARALLEL_LIMIT);
         const promises = files.map(file => {
           return limit(() => processFile(file));
         });
-        return Promise.all(promises);
-      })
-      .then(
-        () => callback!(errors.length > 0 ? errors : null, updatedFiles),
-        err => callback!(err, updatedFiles)
-      );
+        await Promise.all(promises);
+        callback!(errors.length > 0 ? errors : null, updatedFiles);
+      } catch (err) {
+        callback!(err as Error, updatedFiles);
+      }
+    })();
   }
 
   getId(): string {

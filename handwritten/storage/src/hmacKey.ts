@@ -401,13 +401,16 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
         ? (optionsOrCallback as MetadataCallback<HmacKeyMetadata>)
         : cb;
 
-    super
-      .setMetadata(metadata, options)
-      .then(resp => cb!(null, ...resp))
-      .catch(cb!)
-      .finally(() => {
+    void (async () => {
+      try {
+        const resp = await super.setMetadata(metadata, options);
+        cb!(null, ...resp);
+      } catch (err) {
+        cb!(err as Error);
+      } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      }
+    })();
   }
 }
 

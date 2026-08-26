@@ -77,7 +77,10 @@ import {
   RequestResponse,
   SetMetadataOptions,
 } from './nodejs-common/service-object.js';
-import * as r from 'teeny-request';
+import type {
+  Request as TeenyRequest,
+  Response as TeenyResponse,
+} from 'teeny-request';
 
 export type GetExpirationDateResponse = [Date];
 export interface GetExpirationDateCallback {
@@ -1630,7 +1633,7 @@ class File extends ServiceObject<File, FileMetadata> {
     const tailRequest = options.end! < 0;
 
     let validateStream: HashStreamValidator | undefined = undefined;
-    let request: r.Request | undefined = undefined;
+    let request: TeenyRequest | undefined = undefined;
 
     const throughStream = new PassThroughShim();
 
@@ -1687,15 +1690,23 @@ class File extends ServiceObject<File, FileMetadata> {
     ) => {
       if (err) {
         // Get error message from the body.
-        this.getBufferFromReadable(rawResponseStream as Readable).then(body => {
-          err.message = body.toString('utf8');
-          throughStream.destroy(err);
-        });
+        void (async () => {
+          try {
+            const body = await this.getBufferFromReadable(
+              rawResponseStream as Readable
+            );
+            err.message = body.toString('utf8');
+          } catch {
+            // Ignore error getting body
+          } finally {
+            throughStream.destroy(err);
+          }
+        })();
 
         return;
       }
 
-      request = (rawResponseStream as r.Response).request;
+      request = (rawResponseStream as TeenyResponse).request;
       const headers = (rawResponseStream as ResponseBody).toJSON().headers;
       const isCompressed = headers['content-encoding'] === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
@@ -2275,9 +2286,8 @@ class File extends ServiceObject<File, FileMetadata> {
           fileWriteStream.removeListener('error', onError);
           if (!callbackCalled) {
             callbackCalled = true;
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const err =
-              (fileWriteStream as any).errored ||
+              (fileWriteStream as Writable & {errored?: Error}).errored ||
               new Error('Write stream destroyed');
             pipelineCallback(err);
           }
@@ -2353,13 +2363,13 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {?error} callback.err - An error returned while making this request.
    * @param {object} callback.apiResponse - The full API response.
    */
-  delete(options?: DeleteOptions): Promise<[r.Response]>;
+  delete(options?: DeleteOptions): Promise<[TeenyResponse]>;
   delete(options: DeleteOptions, callback: DeleteCallback): void;
   delete(callback: DeleteCallback): void;
   delete(
     optionsOrCallback?: DeleteOptions | DeleteCallback,
     cb?: DeleteCallback
-  ): Promise<[r.Response]> | void {
+  ): Promise<[TeenyResponse]> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     cb = typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
@@ -2370,13 +2380,16 @@ class File extends ServiceObject<File, FileMetadata> {
       options
     );
 
-    super
-      .delete(options)
-      .then(resp => cb!(null, ...resp))
-      .catch(cb!)
-      .finally(() => {
+    void (async () => {
+      try {
+        const resp = await super.delete(options);
+        cb!(null, ...resp);
+      } catch (err) {
+        cb!(err as Error);
+      } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      }
+    })();
   }
 
   download(options?: DownloadOptions): Promise<DownloadResponse>;
@@ -2506,9 +2519,14 @@ class File extends ServiceObject<File, FileMetadata> {
           }
         });
     } else {
-      this.getBufferFromReadable(fileStream)
-        .then(contents => callback?.(null, contents))
-        .catch(callback as (err: RequestError) => void);
+      void (async () => {
+        try {
+          const contents = await this.getBufferFromReadable(fileStream);
+          callback?.(null, contents);
+        } catch (err) {
+          (callback as (err: RequestError) => void)?.(err as RequestError);
+        }
+      })();
     }
   }
 
@@ -2669,7 +2687,7 @@ class File extends ServiceObject<File, FileMetadata> {
   getExpirationDate(
     callback?: GetExpirationDateCallback
   ): void | Promise<GetExpirationDateResponse> {
-    this.getMetadata(
+    void this.getMetadata(
       (err: ApiError | null, metadata: FileMetadata, apiResponse: unknown) => {
         if (err) {
           callback!(err, null, apiResponse);
@@ -2881,18 +2899,21 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyString = JSON.stringify(policy);
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
-    this.storage.authClient.sign(policyBase64, options.signingEndpoint).then(
-      signature => {
+    void (async () => {
+      try {
+        const signature = await this.storage.authClient.sign(
+          policyBase64,
+          options.signingEndpoint
+        );
         callback(null, {
           string: policyString,
           base64: policyBase64,
           signature,
         });
-      },
-      err => {
-        callback(new SigningError(err.message));
+      } catch (err) {
+        callback(new SigningError((err as Error).message));
       }
-    );
+    })();
   }
 
   generateSignedPostPolicyV4(
@@ -3097,7 +3118,14 @@ class File extends ServiceObject<File, FileMetadata> {
       }
     };
 
-    sign().then(res => callback!(null, res), callback!);
+    void (async () => {
+      try {
+        const res = await sign();
+        callback!(null, res);
+      } catch (err) {
+        callback!(err as Error);
+      }
+    })();
   }
 
   getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedUrlResponse>;
@@ -3333,9 +3361,14 @@ class File extends ServiceObject<File, FileMetadata> {
       );
     }
 
-    this.signer
-      .getSignedUrl(signConfig)
-      .then(signedUrl => callback!(null, signedUrl), callback!);
+    void (async () => {
+      try {
+        const signedUrl = await this.signer!.getSignedUrl(signConfig);
+        callback!(null, signedUrl);
+      } catch (err) {
+        callback!(err as Error);
+      }
+    })();
   }
 
   isPublic(): Promise<IsPublicResponse>;
@@ -4264,7 +4297,7 @@ class File extends ServiceObject<File, FileMetadata> {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
     const validationError = handleContextValidation(
-      options.metadata?.contexts,
+      options.metadata?.contexts as FileMetadata['contexts'],
       callback
     );
     if (validationError) return validationError;
@@ -4335,15 +4368,16 @@ class File extends ServiceObject<File, FileMetadata> {
     );
     if (!callback) {
       return returnValue;
-    } else {
-      return returnValue
-        .then(() => {
-          if (callback) {
-            return callback();
-          }
-        })
-        .catch(callback);
     }
+    void (async () => {
+      try {
+        await returnValue;
+        callback();
+      } catch (err) {
+        callback(err as Error);
+      }
+    })();
+    return;
   }
 
   setMetadata(
@@ -4381,13 +4415,16 @@ class File extends ServiceObject<File, FileMetadata> {
       options
     );
 
-    super
-      .setMetadata(metadata, options)
-      .then(resp => cb!(null, ...resp))
-      .catch(cb!)
-      .finally(() => {
+    void (async () => {
+      try {
+        const resp = await super.setMetadata(metadata, options);
+        cb!(null, ...resp);
+      } catch (err) {
+        cb!(err as Error);
+      } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      }
+    })();
   }
 
   setStorageClass(
