@@ -202,7 +202,7 @@ function shouldLintFile(filePath) {
   if (filePath.endsWith('.d.ts')) {
     return false;
   }
-  const segments = filePath.split(path.sep);
+  const segments = filePath.split(/[\\/]/);
   return !segments.some(seg => IGNORED_PATH_SEGMENTS.includes(seg));
 }
 
