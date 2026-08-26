@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/promisify",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "A simple utility for promisifying functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -41,8 +41,8 @@
     "gts": "^6.0.2",
     "hard-rejection": "^2.1.0",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
-    "jsdoc-region-tag": "^3.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "mocha": "^11.1.0",
     "sinon": "^19.0.2",
     "typescript": "^5.8.2"

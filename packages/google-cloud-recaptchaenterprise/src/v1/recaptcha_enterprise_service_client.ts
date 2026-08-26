@@ -215,6 +215,9 @@ export class RecaptchaEnterpriseServiceClient {
       metricsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/keys/{key}/metrics',
       ),
+      policyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/keys/{key}/policy',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
@@ -327,6 +330,8 @@ export class RecaptchaEnterpriseServiceClient {
       'removeIpOverride',
       'listIpOverrides',
       'getMetrics',
+      'getPolicy',
+      'updatePolicy',
       'createFirewallPolicy',
       'listFirewallPolicies',
       'getFirewallPolicy',
@@ -2031,6 +2036,291 @@ export class RecaptchaEnterpriseServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getMetrics response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Get the policy for a key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the policy to get, in the format
+   *   `projects/{project}/keys/{key}/policy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_policy.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetPolicy_async
+   */
+  getPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IGetPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates the policy for a key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.recaptchaenterprise.v1.Policy} request.policy
+   *   Required. The Policy's name is used to identify the policy to update, in
+   *   the format `projects/{project}/keys/{key}/policy`.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields of the policy get updated. If
+   *   the mask is not present, all fields are updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_policy.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdatePolicy_async
+   */
+  updatePolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updatePolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updatePolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updatePolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'policy.name': request.policy!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updatePolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IPolicy,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IUpdatePolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4413,6 +4703,42 @@ export class RecaptchaEnterpriseServiceClient {
    */
   matchKeyFromMetricsName(metricsName: string) {
     return this.pathTemplates.metricsPathTemplate.match(metricsName).key;
+  }
+
+  /**
+   * Return a fully-qualified policy resource name string.
+   *
+   * @param {string} project
+   * @param {string} key
+   * @returns {string} Resource name string.
+   */
+  policyPath(project: string, key: string) {
+    return this.pathTemplates.policyPathTemplate.render({
+      project: project,
+      key: key,
+    });
+  }
+
+  /**
+   * Parse the project from Policy resource.
+   *
+   * @param {string} policyName
+   *   A fully-qualified path representing Policy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPolicyName(policyName: string) {
+    return this.pathTemplates.policyPathTemplate.match(policyName).project;
+  }
+
+  /**
+   * Parse the key from Policy resource.
+   *
+   * @param {string} policyName
+   *   A fully-qualified path representing Policy resource.
+   * @returns {string} A string representing the key.
+   */
+  matchKeyFromPolicyName(policyName: string) {
+    return this.pathTemplates.policyPathTemplate.match(policyName).key;
   }
 
   /**

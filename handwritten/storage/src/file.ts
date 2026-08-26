@@ -570,6 +570,12 @@ export interface ContextValue {
   readonly updateTime?: string;
 }
 
+export interface Contexts {
+  custom: {
+    [key: string]: ContextValue | null;
+  } | null;
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -584,11 +590,7 @@ export interface FileMetadata extends BaseMetadata {
     encryptionAlgorithm?: string;
     keySha256?: string;
   };
-  contexts?: {
-    custom: {
-      [key: string]: ContextValue | null;
-    } | null;
-  };
+  contexts?: Contexts;
   customTime?: string;
   eventBasedHold?: boolean | null;
   readonly eventBasedHoldReleaseTime?: string;

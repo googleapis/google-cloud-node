@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dns",
   "description": "Cloud DNS Client Library for Node.js",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -46,12 +46,12 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/common": "^6.0.0",
-    "@google-cloud/paginator": "^6.0.0",
-    "@google-cloud/promisify": "^5.0.0",
+    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/paginator": "^7.0.0",
+    "@google-cloud/promisify": "^6.0.0",
     "arrify": "^2.0.0",
     "dns-zonefile": "0.2.10",
-    "google-gax": "^5.0.0",
+    "google-gax": "^6.0.0",
     "lodash.groupby": "^4.6.0",
     "string-format-obj": "^1.1.1"
   },
@@ -66,8 +66,8 @@
     "codecov": "^3.8.3",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^4.0.0",
-    "jsdoc-region-tag": "^3.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "proxyquire": "^2.1.3",

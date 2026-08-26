@@ -39,6 +39,7 @@ import {
   GlobalPublicDelegatedPrefixesClient,
   GlobalVmExtensionPoliciesClient,
   HealthChecksClient,
+  HostsClient,
   ImageFamilyViewsClient,
   ImagesClient,
   InstanceGroupManagerResizeRequestsClient,
@@ -107,6 +108,7 @@ import {
   RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   RegionZonesClient,
+  ReliabilityRisksClient,
   ReservationBlocksClient,
   ReservationsClient,
   ReservationSlotsClient,
@@ -219,6 +221,9 @@ function doStuffWithGlobalVmExtensionPoliciesClient(
   client.close();
 }
 function doStuffWithHealthChecksClient(client: HealthChecksClient) {
+  client.close();
+}
+function doStuffWithHostsClient(client: HostsClient) {
   client.close();
 }
 function doStuffWithImageFamilyViewsClient(client: ImageFamilyViewsClient) {
@@ -495,6 +500,9 @@ function doStuffWithRegionUrlMapsClient(client: RegionUrlMapsClient) {
 function doStuffWithRegionZonesClient(client: RegionZonesClient) {
   client.close();
 }
+function doStuffWithReliabilityRisksClient(client: ReliabilityRisksClient) {
+  client.close();
+}
 function doStuffWithReservationBlocksClient(client: ReservationBlocksClient) {
   client.close();
 }
@@ -677,6 +685,9 @@ function main() {
   // check that the client instance can be created
   const healthChecksClient = new HealthChecksClient();
   doStuffWithHealthChecksClient(healthChecksClient);
+  // check that the client instance can be created
+  const hostsClient = new HostsClient();
+  doStuffWithHostsClient(hostsClient);
   // check that the client instance can be created
   const imageFamilyViewsClient = new ImageFamilyViewsClient();
   doStuffWithImageFamilyViewsClient(imageFamilyViewsClient);
@@ -920,6 +931,9 @@ function main() {
   // check that the client instance can be created
   const regionZonesClient = new RegionZonesClient();
   doStuffWithRegionZonesClient(regionZonesClient);
+  // check that the client instance can be created
+  const reliabilityRisksClient = new ReliabilityRisksClient();
+  doStuffWithReliabilityRisksClient(reliabilityRisksClient);
   // check that the client instance can be created
   const reservationBlocksClient = new ReservationBlocksClient();
   doStuffWithReservationBlocksClient(reservationBlocksClient);

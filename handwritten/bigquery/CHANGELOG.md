@@ -5,6 +5,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [9.0.3](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.2...bigquery-v9.0.3) (2026-08-26)
+
+
+### Bug Fixes
+
+* Patch the vulnerability for Bigquery and other REST based clients ([#9188](https://github.com/googleapis/google-cloud-node/issues/9188)) ([94aac1e](https://github.com/googleapis/google-cloud-node/commit/94aac1eb121d6bbfbd92007befe8b8f159b4d379))
+
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.1...bigquery-v9.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
 ## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.0...bigquery-v9.0.1) (2026-08-05)
 
 

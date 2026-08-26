@@ -3914,7 +3914,7 @@
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.memberships.readonly,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.app.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.availability,https://www.googleapis.com/auth/chat.users.availability.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.sections,https://www.googleapis.com/auth/chat.users.sections.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.all.memberships.readonly,https://www.googleapis.com/auth/chat.app.all.messages.readonly,https://www.googleapis.com/auth/chat.app.all.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.memberships.readonly,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.app.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.availability,https://www.googleapis.com/auth/chat.users.availability.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.sections,https://www.googleapis.com/auth/chat.users.sections.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -4050,6 +4050,26 @@
                         },
                         {
                           "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "SearchMessages": {
+                      "requestType": "SearchMessagesRequest",
+                      "responseType": "SearchMessagesResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=spaces/*}/messages:search",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "parent,filter"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=spaces/*}/messages:search",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,filter"
                         }
                       ]
                     },
@@ -5258,6 +5278,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "markupSyntax": {
+                      "type": "MarkupSyntax",
+                      "id": 47,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -5504,6 +5531,13 @@
                         "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Message"
                       }
+                    },
+                    "markupSyntax": {
+                      "type": "MarkupSyntax",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -5676,6 +5710,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "markupSyntax": {
+                      "type": "MarkupSyntax",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -5737,6 +5778,108 @@
                     "card": {
                       "type": "google.apps.card.v1.Card",
                       "id": 2
+                    }
+                  }
+                },
+                "SearchMessagesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Space"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "orderBy": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "markupSyntax": {
+                      "type": "MarkupSyntax",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "view": {
+                      "type": "SearchMessagesView",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "SearchMessagesView": {
+                      "values": {
+                        "SEARCH_MESSAGES_VIEW_UNSPECIFIED": 0,
+                        "SEARCH_MESSAGES_VIEW_BASIC": 1,
+                        "SEARCH_MESSAGES_VIEW_FULL": 2
+                      }
+                    }
+                  }
+                },
+                "SearchMessagesResponse": {
+                  "fields": {
+                    "results": {
+                      "rule": "repeated",
+                      "type": "SearchMessageResult",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "SearchMessageResult": {
+                  "oneofs": {
+                    "_read": {
+                      "oneof": [
+                        "read"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "message": {
+                      "type": "Message",
+                      "id": 1
+                    },
+                    "read": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "spaceMuteSetting": {
+                      "type": "SpaceNotificationSetting.MuteSetting",
+                      "id": 4
                     }
                   }
                 },
@@ -6098,6 +6241,13 @@
                         "SPACE_MEMBER": 7
                       }
                     }
+                  }
+                },
+                "MarkupSyntax": {
+                  "values": {
+                    "MARKUP_SYNTAX_UNSPECIFIED": 0,
+                    "MARKUP_SYNTAX_CHAT": 1,
+                    "MARKUP_SYNTAX_MARKDOWN": 2
                   }
                 },
                 "MatchedUrl": {
@@ -6769,7 +6919,10 @@
                     "spaces": {
                       "rule": "repeated",
                       "type": "Space",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "nextPageToken": {
                       "type": "string",
@@ -6778,6 +6931,27 @@
                     "totalSize": {
                       "type": "int32",
                       "id": 3
+                    },
+                    "results": {
+                      "rule": "repeated",
+                      "type": "SearchSpaceResult",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "SearchSpaceResult": {
+                      "fields": {
+                        "space": {
+                          "type": "Space",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -6832,6 +7006,96 @@
                     "HISTORY_STATE_UNSPECIFIED": 0,
                     "HISTORY_OFF": 1,
                     "HISTORY_ON": 2
+                  }
+                },
+                "SpaceNotificationSetting": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/SpaceNotificationSetting",
+                    "(google.api.resource).pattern": "users/{user}/spaces/{space}/spaceNotificationSetting",
+                    "(google.api.resource).singular": "spaceNotificationSetting"
+                  },
+                  "oneofs": {
+                    "_notificationSetting": {
+                      "oneof": [
+                        "notificationSetting"
+                      ]
+                    },
+                    "_muteSetting": {
+                      "oneof": [
+                        "muteSetting"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "notificationSetting": {
+                      "type": "NotificationSetting",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "muteSetting": {
+                      "type": "MuteSetting",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "NotificationSetting": {
+                      "values": {
+                        "NOTIFICATION_SETTING_UNSPECIFIED": 0,
+                        "ALL": 1,
+                        "MAIN_CONVERSATIONS": 2,
+                        "FOR_YOU": 3,
+                        "OFF": 4
+                      }
+                    },
+                    "MuteSetting": {
+                      "values": {
+                        "MUTE_SETTING_UNSPECIFIED": 0,
+                        "UNMUTED": 1,
+                        "MUTED": 2
+                      }
+                    }
+                  }
+                },
+                "GetSpaceNotificationSettingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/SpaceNotificationSetting"
+                      }
+                    }
+                  }
+                },
+                "UpdateSpaceNotificationSettingRequest": {
+                  "fields": {
+                    "spaceNotificationSetting": {
+                      "type": "SpaceNotificationSetting",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
                   }
                 },
                 "Section": {
@@ -7449,96 +7713,6 @@
                       "rule": "repeated",
                       "type": "ReactionDeletedEventData",
                       "id": 1
-                    }
-                  }
-                },
-                "SpaceNotificationSetting": {
-                  "options": {
-                    "(google.api.resource).type": "chat.googleapis.com/SpaceNotificationSetting",
-                    "(google.api.resource).pattern": "users/{user}/spaces/{space}/spaceNotificationSetting",
-                    "(google.api.resource).singular": "spaceNotificationSetting"
-                  },
-                  "oneofs": {
-                    "_notificationSetting": {
-                      "oneof": [
-                        "notificationSetting"
-                      ]
-                    },
-                    "_muteSetting": {
-                      "oneof": [
-                        "muteSetting"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "IDENTIFIER"
-                      }
-                    },
-                    "notificationSetting": {
-                      "type": "NotificationSetting",
-                      "id": 2,
-                      "options": {
-                        "proto3_optional": true
-                      }
-                    },
-                    "muteSetting": {
-                      "type": "MuteSetting",
-                      "id": 3,
-                      "options": {
-                        "proto3_optional": true
-                      }
-                    }
-                  },
-                  "nested": {
-                    "NotificationSetting": {
-                      "values": {
-                        "NOTIFICATION_SETTING_UNSPECIFIED": 0,
-                        "ALL": 1,
-                        "MAIN_CONVERSATIONS": 2,
-                        "FOR_YOU": 3,
-                        "OFF": 4
-                      }
-                    },
-                    "MuteSetting": {
-                      "values": {
-                        "MUTE_SETTING_UNSPECIFIED": 0,
-                        "UNMUTED": 1,
-                        "MUTED": 2
-                      }
-                    }
-                  }
-                },
-                "GetSpaceNotificationSettingRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).type": "chat.googleapis.com/SpaceNotificationSetting"
-                      }
-                    }
-                  }
-                },
-                "UpdateSpaceNotificationSettingRequest": {
-                  "fields": {
-                    "spaceNotificationSetting": {
-                      "type": "SpaceNotificationSetting",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    },
-                    "updateMask": {
-                      "type": "google.protobuf.FieldMask",
-                      "id": 2,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
                     }
                   }
                 },

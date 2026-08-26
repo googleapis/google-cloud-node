@@ -51,16 +51,14 @@ function main(parent) {
    *  Optional. Expression to filter the response.
    *   See syntax details at
    *   https://developers.google.com/ad-manager/api/beta/filters
-   *  <b>Filterable fields:</b>
-   *  <ul style="list-style-type:none">
-   *    <li><code>description</code></li>
-   *    <li><code>displayName</code></li>
-   *    <li><code>name</code></li>
-   *    <li><code>placementCode</code></li>
-   *    <li><code>status</code></li>
-   *    <li><code>targetedAdUnits</code></li>
-   *    <li><code>updateTime</code></li>
-   *  </ul>
+   *  **Filterable fields:**
+   *  * `description`
+   *  * `displayName`
+   *  * `name`
+   *  * `placementCode`
+   *  * `status`
+   *  * `targetedAdUnits`
+   *  * `updateTime`
    */
   // const filter = 'abc123'
   /**

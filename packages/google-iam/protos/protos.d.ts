@@ -4874,6 +4874,1486 @@ export namespace google {
         /** Namespace v3. */
         namespace v3 {
 
+            /** Represents an AccessPolicies */
+            class AccessPolicies extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new AccessPolicies service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Creates new AccessPolicies service using the specified rpc implementation.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 * @returns RPC service. Useful where requests and/or responses are streamed.
+                 */
+                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AccessPolicies;
+
+                /**
+                 * Calls CreateAccessPolicy.
+                 * @param request CreateAccessPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public createAccessPolicy(request: google.iam.v3.ICreateAccessPolicyRequest, callback: google.iam.v3.AccessPolicies.CreateAccessPolicyCallback): void;
+
+                /**
+                 * Calls CreateAccessPolicy.
+                 * @param request CreateAccessPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public createAccessPolicy(request: google.iam.v3.ICreateAccessPolicyRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls GetAccessPolicy.
+                 * @param request GetAccessPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and AccessPolicy
+                 */
+                public getAccessPolicy(request: google.iam.v3.IGetAccessPolicyRequest, callback: google.iam.v3.AccessPolicies.GetAccessPolicyCallback): void;
+
+                /**
+                 * Calls GetAccessPolicy.
+                 * @param request GetAccessPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public getAccessPolicy(request: google.iam.v3.IGetAccessPolicyRequest): Promise<google.iam.v3.AccessPolicy>;
+
+                /**
+                 * Calls UpdateAccessPolicy.
+                 * @param request UpdateAccessPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public updateAccessPolicy(request: google.iam.v3.IUpdateAccessPolicyRequest, callback: google.iam.v3.AccessPolicies.UpdateAccessPolicyCallback): void;
+
+                /**
+                 * Calls UpdateAccessPolicy.
+                 * @param request UpdateAccessPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateAccessPolicy(request: google.iam.v3.IUpdateAccessPolicyRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls DeleteAccessPolicy.
+                 * @param request DeleteAccessPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public deleteAccessPolicy(request: google.iam.v3.IDeleteAccessPolicyRequest, callback: google.iam.v3.AccessPolicies.DeleteAccessPolicyCallback): void;
+
+                /**
+                 * Calls DeleteAccessPolicy.
+                 * @param request DeleteAccessPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteAccessPolicy(request: google.iam.v3.IDeleteAccessPolicyRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls ListAccessPolicies.
+                 * @param request ListAccessPoliciesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListAccessPoliciesResponse
+                 */
+                public listAccessPolicies(request: google.iam.v3.IListAccessPoliciesRequest, callback: google.iam.v3.AccessPolicies.ListAccessPoliciesCallback): void;
+
+                /**
+                 * Calls ListAccessPolicies.
+                 * @param request ListAccessPoliciesRequest message or plain object
+                 * @returns Promise
+                 */
+                public listAccessPolicies(request: google.iam.v3.IListAccessPoliciesRequest): Promise<google.iam.v3.ListAccessPoliciesResponse>;
+
+                /**
+                 * Calls SearchAccessPolicyBindings.
+                 * @param request SearchAccessPolicyBindingsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and SearchAccessPolicyBindingsResponse
+                 */
+                public searchAccessPolicyBindings(request: google.iam.v3.ISearchAccessPolicyBindingsRequest, callback: google.iam.v3.AccessPolicies.SearchAccessPolicyBindingsCallback): void;
+
+                /**
+                 * Calls SearchAccessPolicyBindings.
+                 * @param request SearchAccessPolicyBindingsRequest message or plain object
+                 * @returns Promise
+                 */
+                public searchAccessPolicyBindings(request: google.iam.v3.ISearchAccessPolicyBindingsRequest): Promise<google.iam.v3.SearchAccessPolicyBindingsResponse>;
+            }
+
+            namespace AccessPolicies {
+
+                /**
+                 * Callback as used by {@link google.iam.v3.AccessPolicies|createAccessPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type CreateAccessPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v3.AccessPolicies|getAccessPolicy}.
+                 * @param error Error, if any
+                 * @param [response] AccessPolicy
+                 */
+                type GetAccessPolicyCallback = (error: (Error|null), response?: google.iam.v3.AccessPolicy) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v3.AccessPolicies|updateAccessPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type UpdateAccessPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v3.AccessPolicies|deleteAccessPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type DeleteAccessPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v3.AccessPolicies|listAccessPolicies}.
+                 * @param error Error, if any
+                 * @param [response] ListAccessPoliciesResponse
+                 */
+                type ListAccessPoliciesCallback = (error: (Error|null), response?: google.iam.v3.ListAccessPoliciesResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v3.AccessPolicies|searchAccessPolicyBindings}.
+                 * @param error Error, if any
+                 * @param [response] SearchAccessPolicyBindingsResponse
+                 */
+                type SearchAccessPolicyBindingsCallback = (error: (Error|null), response?: google.iam.v3.SearchAccessPolicyBindingsResponse) => void;
+            }
+
+            /** Properties of a CreateAccessPolicyRequest. */
+            interface ICreateAccessPolicyRequest {
+
+                /** CreateAccessPolicyRequest parent */
+                parent?: (string|null);
+
+                /** CreateAccessPolicyRequest accessPolicyId */
+                accessPolicyId?: (string|null);
+
+                /** CreateAccessPolicyRequest accessPolicy */
+                accessPolicy?: (google.iam.v3.IAccessPolicy|null);
+
+                /** CreateAccessPolicyRequest validateOnly */
+                validateOnly?: (boolean|null);
+            }
+
+            /** Represents a CreateAccessPolicyRequest. */
+            class CreateAccessPolicyRequest implements ICreateAccessPolicyRequest {
+
+                /**
+                 * Constructs a new CreateAccessPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.ICreateAccessPolicyRequest);
+
+                /** CreateAccessPolicyRequest parent. */
+                public parent: string;
+
+                /** CreateAccessPolicyRequest accessPolicyId. */
+                public accessPolicyId: string;
+
+                /** CreateAccessPolicyRequest accessPolicy. */
+                public accessPolicy?: (google.iam.v3.IAccessPolicy|null);
+
+                /** CreateAccessPolicyRequest validateOnly. */
+                public validateOnly: boolean;
+
+                /**
+                 * Creates a new CreateAccessPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateAccessPolicyRequest instance
+                 */
+                public static create(properties?: google.iam.v3.ICreateAccessPolicyRequest): google.iam.v3.CreateAccessPolicyRequest;
+
+                /**
+                 * Encodes the specified CreateAccessPolicyRequest message. Does not implicitly {@link google.iam.v3.CreateAccessPolicyRequest.verify|verify} messages.
+                 * @param message CreateAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.ICreateAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.CreateAccessPolicyRequest.verify|verify} messages.
+                 * @param message CreateAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.ICreateAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateAccessPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.CreateAccessPolicyRequest;
+
+                /**
+                 * Decodes a CreateAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.CreateAccessPolicyRequest;
+
+                /**
+                 * Verifies a CreateAccessPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateAccessPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.CreateAccessPolicyRequest;
+
+                /**
+                 * Creates a plain object from a CreateAccessPolicyRequest message. Also converts values to other types if specified.
+                 * @param message CreateAccessPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.CreateAccessPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateAccessPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateAccessPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetAccessPolicyRequest. */
+            interface IGetAccessPolicyRequest {
+
+                /** GetAccessPolicyRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetAccessPolicyRequest. */
+            class GetAccessPolicyRequest implements IGetAccessPolicyRequest {
+
+                /**
+                 * Constructs a new GetAccessPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IGetAccessPolicyRequest);
+
+                /** GetAccessPolicyRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetAccessPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetAccessPolicyRequest instance
+                 */
+                public static create(properties?: google.iam.v3.IGetAccessPolicyRequest): google.iam.v3.GetAccessPolicyRequest;
+
+                /**
+                 * Encodes the specified GetAccessPolicyRequest message. Does not implicitly {@link google.iam.v3.GetAccessPolicyRequest.verify|verify} messages.
+                 * @param message GetAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IGetAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.GetAccessPolicyRequest.verify|verify} messages.
+                 * @param message GetAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IGetAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetAccessPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.GetAccessPolicyRequest;
+
+                /**
+                 * Decodes a GetAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.GetAccessPolicyRequest;
+
+                /**
+                 * Verifies a GetAccessPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetAccessPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.GetAccessPolicyRequest;
+
+                /**
+                 * Creates a plain object from a GetAccessPolicyRequest message. Also converts values to other types if specified.
+                 * @param message GetAccessPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.GetAccessPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetAccessPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetAccessPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateAccessPolicyRequest. */
+            interface IUpdateAccessPolicyRequest {
+
+                /** UpdateAccessPolicyRequest accessPolicy */
+                accessPolicy?: (google.iam.v3.IAccessPolicy|null);
+
+                /** UpdateAccessPolicyRequest validateOnly */
+                validateOnly?: (boolean|null);
+            }
+
+            /** Represents an UpdateAccessPolicyRequest. */
+            class UpdateAccessPolicyRequest implements IUpdateAccessPolicyRequest {
+
+                /**
+                 * Constructs a new UpdateAccessPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IUpdateAccessPolicyRequest);
+
+                /** UpdateAccessPolicyRequest accessPolicy. */
+                public accessPolicy?: (google.iam.v3.IAccessPolicy|null);
+
+                /** UpdateAccessPolicyRequest validateOnly. */
+                public validateOnly: boolean;
+
+                /**
+                 * Creates a new UpdateAccessPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateAccessPolicyRequest instance
+                 */
+                public static create(properties?: google.iam.v3.IUpdateAccessPolicyRequest): google.iam.v3.UpdateAccessPolicyRequest;
+
+                /**
+                 * Encodes the specified UpdateAccessPolicyRequest message. Does not implicitly {@link google.iam.v3.UpdateAccessPolicyRequest.verify|verify} messages.
+                 * @param message UpdateAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IUpdateAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.UpdateAccessPolicyRequest.verify|verify} messages.
+                 * @param message UpdateAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IUpdateAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateAccessPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.UpdateAccessPolicyRequest;
+
+                /**
+                 * Decodes an UpdateAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.UpdateAccessPolicyRequest;
+
+                /**
+                 * Verifies an UpdateAccessPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateAccessPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.UpdateAccessPolicyRequest;
+
+                /**
+                 * Creates a plain object from an UpdateAccessPolicyRequest message. Also converts values to other types if specified.
+                 * @param message UpdateAccessPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.UpdateAccessPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateAccessPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateAccessPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DeleteAccessPolicyRequest. */
+            interface IDeleteAccessPolicyRequest {
+
+                /** DeleteAccessPolicyRequest name */
+                name?: (string|null);
+
+                /** DeleteAccessPolicyRequest etag */
+                etag?: (string|null);
+
+                /** DeleteAccessPolicyRequest validateOnly */
+                validateOnly?: (boolean|null);
+
+                /** DeleteAccessPolicyRequest force */
+                force?: (boolean|null);
+            }
+
+            /** Represents a DeleteAccessPolicyRequest. */
+            class DeleteAccessPolicyRequest implements IDeleteAccessPolicyRequest {
+
+                /**
+                 * Constructs a new DeleteAccessPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IDeleteAccessPolicyRequest);
+
+                /** DeleteAccessPolicyRequest name. */
+                public name: string;
+
+                /** DeleteAccessPolicyRequest etag. */
+                public etag: string;
+
+                /** DeleteAccessPolicyRequest validateOnly. */
+                public validateOnly: boolean;
+
+                /** DeleteAccessPolicyRequest force. */
+                public force: boolean;
+
+                /**
+                 * Creates a new DeleteAccessPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteAccessPolicyRequest instance
+                 */
+                public static create(properties?: google.iam.v3.IDeleteAccessPolicyRequest): google.iam.v3.DeleteAccessPolicyRequest;
+
+                /**
+                 * Encodes the specified DeleteAccessPolicyRequest message. Does not implicitly {@link google.iam.v3.DeleteAccessPolicyRequest.verify|verify} messages.
+                 * @param message DeleteAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IDeleteAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.DeleteAccessPolicyRequest.verify|verify} messages.
+                 * @param message DeleteAccessPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IDeleteAccessPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteAccessPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.DeleteAccessPolicyRequest;
+
+                /**
+                 * Decodes a DeleteAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteAccessPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.DeleteAccessPolicyRequest;
+
+                /**
+                 * Verifies a DeleteAccessPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteAccessPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.DeleteAccessPolicyRequest;
+
+                /**
+                 * Creates a plain object from a DeleteAccessPolicyRequest message. Also converts values to other types if specified.
+                 * @param message DeleteAccessPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.DeleteAccessPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteAccessPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteAccessPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListAccessPoliciesRequest. */
+            interface IListAccessPoliciesRequest {
+
+                /** ListAccessPoliciesRequest parent */
+                parent?: (string|null);
+
+                /** ListAccessPoliciesRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListAccessPoliciesRequest pageToken */
+                pageToken?: (string|null);
+            }
+
+            /** Represents a ListAccessPoliciesRequest. */
+            class ListAccessPoliciesRequest implements IListAccessPoliciesRequest {
+
+                /**
+                 * Constructs a new ListAccessPoliciesRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IListAccessPoliciesRequest);
+
+                /** ListAccessPoliciesRequest parent. */
+                public parent: string;
+
+                /** ListAccessPoliciesRequest pageSize. */
+                public pageSize: number;
+
+                /** ListAccessPoliciesRequest pageToken. */
+                public pageToken: string;
+
+                /**
+                 * Creates a new ListAccessPoliciesRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListAccessPoliciesRequest instance
+                 */
+                public static create(properties?: google.iam.v3.IListAccessPoliciesRequest): google.iam.v3.ListAccessPoliciesRequest;
+
+                /**
+                 * Encodes the specified ListAccessPoliciesRequest message. Does not implicitly {@link google.iam.v3.ListAccessPoliciesRequest.verify|verify} messages.
+                 * @param message ListAccessPoliciesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IListAccessPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListAccessPoliciesRequest message, length delimited. Does not implicitly {@link google.iam.v3.ListAccessPoliciesRequest.verify|verify} messages.
+                 * @param message ListAccessPoliciesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IListAccessPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListAccessPoliciesRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListAccessPoliciesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.ListAccessPoliciesRequest;
+
+                /**
+                 * Decodes a ListAccessPoliciesRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListAccessPoliciesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.ListAccessPoliciesRequest;
+
+                /**
+                 * Verifies a ListAccessPoliciesRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListAccessPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListAccessPoliciesRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.ListAccessPoliciesRequest;
+
+                /**
+                 * Creates a plain object from a ListAccessPoliciesRequest message. Also converts values to other types if specified.
+                 * @param message ListAccessPoliciesRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.ListAccessPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListAccessPoliciesRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListAccessPoliciesRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListAccessPoliciesResponse. */
+            interface IListAccessPoliciesResponse {
+
+                /** ListAccessPoliciesResponse accessPolicies */
+                accessPolicies?: (google.iam.v3.IAccessPolicy[]|null);
+
+                /** ListAccessPoliciesResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListAccessPoliciesResponse. */
+            class ListAccessPoliciesResponse implements IListAccessPoliciesResponse {
+
+                /**
+                 * Constructs a new ListAccessPoliciesResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IListAccessPoliciesResponse);
+
+                /** ListAccessPoliciesResponse accessPolicies. */
+                public accessPolicies: google.iam.v3.IAccessPolicy[];
+
+                /** ListAccessPoliciesResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListAccessPoliciesResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListAccessPoliciesResponse instance
+                 */
+                public static create(properties?: google.iam.v3.IListAccessPoliciesResponse): google.iam.v3.ListAccessPoliciesResponse;
+
+                /**
+                 * Encodes the specified ListAccessPoliciesResponse message. Does not implicitly {@link google.iam.v3.ListAccessPoliciesResponse.verify|verify} messages.
+                 * @param message ListAccessPoliciesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IListAccessPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListAccessPoliciesResponse message, length delimited. Does not implicitly {@link google.iam.v3.ListAccessPoliciesResponse.verify|verify} messages.
+                 * @param message ListAccessPoliciesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IListAccessPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListAccessPoliciesResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListAccessPoliciesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.ListAccessPoliciesResponse;
+
+                /**
+                 * Decodes a ListAccessPoliciesResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListAccessPoliciesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.ListAccessPoliciesResponse;
+
+                /**
+                 * Verifies a ListAccessPoliciesResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListAccessPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListAccessPoliciesResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.ListAccessPoliciesResponse;
+
+                /**
+                 * Creates a plain object from a ListAccessPoliciesResponse message. Also converts values to other types if specified.
+                 * @param message ListAccessPoliciesResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.ListAccessPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListAccessPoliciesResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListAccessPoliciesResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SearchAccessPolicyBindingsRequest. */
+            interface ISearchAccessPolicyBindingsRequest {
+
+                /** SearchAccessPolicyBindingsRequest name */
+                name?: (string|null);
+
+                /** SearchAccessPolicyBindingsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** SearchAccessPolicyBindingsRequest pageToken */
+                pageToken?: (string|null);
+            }
+
+            /** Represents a SearchAccessPolicyBindingsRequest. */
+            class SearchAccessPolicyBindingsRequest implements ISearchAccessPolicyBindingsRequest {
+
+                /**
+                 * Constructs a new SearchAccessPolicyBindingsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.ISearchAccessPolicyBindingsRequest);
+
+                /** SearchAccessPolicyBindingsRequest name. */
+                public name: string;
+
+                /** SearchAccessPolicyBindingsRequest pageSize. */
+                public pageSize: number;
+
+                /** SearchAccessPolicyBindingsRequest pageToken. */
+                public pageToken: string;
+
+                /**
+                 * Creates a new SearchAccessPolicyBindingsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchAccessPolicyBindingsRequest instance
+                 */
+                public static create(properties?: google.iam.v3.ISearchAccessPolicyBindingsRequest): google.iam.v3.SearchAccessPolicyBindingsRequest;
+
+                /**
+                 * Encodes the specified SearchAccessPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.SearchAccessPolicyBindingsRequest.verify|verify} messages.
+                 * @param message SearchAccessPolicyBindingsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.ISearchAccessPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchAccessPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.SearchAccessPolicyBindingsRequest.verify|verify} messages.
+                 * @param message SearchAccessPolicyBindingsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.ISearchAccessPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchAccessPolicyBindingsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchAccessPolicyBindingsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.SearchAccessPolicyBindingsRequest;
+
+                /**
+                 * Decodes a SearchAccessPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchAccessPolicyBindingsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.SearchAccessPolicyBindingsRequest;
+
+                /**
+                 * Verifies a SearchAccessPolicyBindingsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchAccessPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchAccessPolicyBindingsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.SearchAccessPolicyBindingsRequest;
+
+                /**
+                 * Creates a plain object from a SearchAccessPolicyBindingsRequest message. Also converts values to other types if specified.
+                 * @param message SearchAccessPolicyBindingsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.SearchAccessPolicyBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchAccessPolicyBindingsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchAccessPolicyBindingsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SearchAccessPolicyBindingsResponse. */
+            interface ISearchAccessPolicyBindingsResponse {
+
+                /** SearchAccessPolicyBindingsResponse policyBindings */
+                policyBindings?: (google.iam.v3.IPolicyBinding[]|null);
+
+                /** SearchAccessPolicyBindingsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a SearchAccessPolicyBindingsResponse. */
+            class SearchAccessPolicyBindingsResponse implements ISearchAccessPolicyBindingsResponse {
+
+                /**
+                 * Constructs a new SearchAccessPolicyBindingsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.ISearchAccessPolicyBindingsResponse);
+
+                /** SearchAccessPolicyBindingsResponse policyBindings. */
+                public policyBindings: google.iam.v3.IPolicyBinding[];
+
+                /** SearchAccessPolicyBindingsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new SearchAccessPolicyBindingsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchAccessPolicyBindingsResponse instance
+                 */
+                public static create(properties?: google.iam.v3.ISearchAccessPolicyBindingsResponse): google.iam.v3.SearchAccessPolicyBindingsResponse;
+
+                /**
+                 * Encodes the specified SearchAccessPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.SearchAccessPolicyBindingsResponse.verify|verify} messages.
+                 * @param message SearchAccessPolicyBindingsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.ISearchAccessPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchAccessPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.SearchAccessPolicyBindingsResponse.verify|verify} messages.
+                 * @param message SearchAccessPolicyBindingsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.ISearchAccessPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchAccessPolicyBindingsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchAccessPolicyBindingsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.SearchAccessPolicyBindingsResponse;
+
+                /**
+                 * Decodes a SearchAccessPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchAccessPolicyBindingsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.SearchAccessPolicyBindingsResponse;
+
+                /**
+                 * Verifies a SearchAccessPolicyBindingsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchAccessPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchAccessPolicyBindingsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.SearchAccessPolicyBindingsResponse;
+
+                /**
+                 * Creates a plain object from a SearchAccessPolicyBindingsResponse message. Also converts values to other types if specified.
+                 * @param message SearchAccessPolicyBindingsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.SearchAccessPolicyBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchAccessPolicyBindingsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchAccessPolicyBindingsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AccessPolicy. */
+            interface IAccessPolicy {
+
+                /** AccessPolicy name */
+                name?: (string|null);
+
+                /** AccessPolicy uid */
+                uid?: (string|null);
+
+                /** AccessPolicy etag */
+                etag?: (string|null);
+
+                /** AccessPolicy displayName */
+                displayName?: (string|null);
+
+                /** AccessPolicy annotations */
+                annotations?: ({ [k: string]: string }|null);
+
+                /** AccessPolicy createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
+                /** AccessPolicy updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** AccessPolicy details */
+                details?: (google.iam.v3.IAccessPolicyDetails|null);
+            }
+
+            /** Represents an AccessPolicy. */
+            class AccessPolicy implements IAccessPolicy {
+
+                /**
+                 * Constructs a new AccessPolicy.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IAccessPolicy);
+
+                /** AccessPolicy name. */
+                public name: string;
+
+                /** AccessPolicy uid. */
+                public uid: string;
+
+                /** AccessPolicy etag. */
+                public etag: string;
+
+                /** AccessPolicy displayName. */
+                public displayName: string;
+
+                /** AccessPolicy annotations. */
+                public annotations: { [k: string]: string };
+
+                /** AccessPolicy createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
+
+                /** AccessPolicy updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** AccessPolicy details. */
+                public details?: (google.iam.v3.IAccessPolicyDetails|null);
+
+                /**
+                 * Creates a new AccessPolicy instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AccessPolicy instance
+                 */
+                public static create(properties?: google.iam.v3.IAccessPolicy): google.iam.v3.AccessPolicy;
+
+                /**
+                 * Encodes the specified AccessPolicy message. Does not implicitly {@link google.iam.v3.AccessPolicy.verify|verify} messages.
+                 * @param message AccessPolicy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IAccessPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AccessPolicy message, length delimited. Does not implicitly {@link google.iam.v3.AccessPolicy.verify|verify} messages.
+                 * @param message AccessPolicy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IAccessPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AccessPolicy message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AccessPolicy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.AccessPolicy;
+
+                /**
+                 * Decodes an AccessPolicy message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AccessPolicy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.AccessPolicy;
+
+                /**
+                 * Verifies an AccessPolicy message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AccessPolicy message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AccessPolicy
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.AccessPolicy;
+
+                /**
+                 * Creates a plain object from an AccessPolicy message. Also converts values to other types if specified.
+                 * @param message AccessPolicy
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.AccessPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AccessPolicy to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AccessPolicy
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AccessPolicyDetails. */
+            interface IAccessPolicyDetails {
+
+                /** AccessPolicyDetails rules */
+                rules?: (google.iam.v3.IAccessPolicyRule[]|null);
+            }
+
+            /** Represents an AccessPolicyDetails. */
+            class AccessPolicyDetails implements IAccessPolicyDetails {
+
+                /**
+                 * Constructs a new AccessPolicyDetails.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IAccessPolicyDetails);
+
+                /** AccessPolicyDetails rules. */
+                public rules: google.iam.v3.IAccessPolicyRule[];
+
+                /**
+                 * Creates a new AccessPolicyDetails instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AccessPolicyDetails instance
+                 */
+                public static create(properties?: google.iam.v3.IAccessPolicyDetails): google.iam.v3.AccessPolicyDetails;
+
+                /**
+                 * Encodes the specified AccessPolicyDetails message. Does not implicitly {@link google.iam.v3.AccessPolicyDetails.verify|verify} messages.
+                 * @param message AccessPolicyDetails message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IAccessPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AccessPolicyDetails message, length delimited. Does not implicitly {@link google.iam.v3.AccessPolicyDetails.verify|verify} messages.
+                 * @param message AccessPolicyDetails message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IAccessPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AccessPolicyDetails message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AccessPolicyDetails
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.AccessPolicyDetails;
+
+                /**
+                 * Decodes an AccessPolicyDetails message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AccessPolicyDetails
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.AccessPolicyDetails;
+
+                /**
+                 * Verifies an AccessPolicyDetails message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AccessPolicyDetails message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AccessPolicyDetails
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.AccessPolicyDetails;
+
+                /**
+                 * Creates a plain object from an AccessPolicyDetails message. Also converts values to other types if specified.
+                 * @param message AccessPolicyDetails
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.AccessPolicyDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AccessPolicyDetails to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AccessPolicyDetails
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AccessPolicyRule. */
+            interface IAccessPolicyRule {
+
+                /** AccessPolicyRule description */
+                description?: (string|null);
+
+                /** AccessPolicyRule effect */
+                effect?: (google.iam.v3.AccessPolicyRule.Effect|keyof typeof google.iam.v3.AccessPolicyRule.Effect|null);
+
+                /** AccessPolicyRule principals */
+                principals?: (string[]|null);
+
+                /** AccessPolicyRule excludedPrincipals */
+                excludedPrincipals?: (string[]|null);
+
+                /** AccessPolicyRule operation */
+                operation?: (google.iam.v3.AccessPolicyRule.IOperation|null);
+
+                /** AccessPolicyRule conditions */
+                conditions?: ({ [k: string]: google.type.IExpr }|null);
+            }
+
+            /** Represents an AccessPolicyRule. */
+            class AccessPolicyRule implements IAccessPolicyRule {
+
+                /**
+                 * Constructs a new AccessPolicyRule.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v3.IAccessPolicyRule);
+
+                /** AccessPolicyRule description. */
+                public description?: (string|null);
+
+                /** AccessPolicyRule effect. */
+                public effect?: (google.iam.v3.AccessPolicyRule.Effect|keyof typeof google.iam.v3.AccessPolicyRule.Effect|null);
+
+                /** AccessPolicyRule principals. */
+                public principals: string[];
+
+                /** AccessPolicyRule excludedPrincipals. */
+                public excludedPrincipals: string[];
+
+                /** AccessPolicyRule operation. */
+                public operation?: (google.iam.v3.AccessPolicyRule.IOperation|null);
+
+                /** AccessPolicyRule conditions. */
+                public conditions: { [k: string]: google.type.IExpr };
+
+                /**
+                 * Creates a new AccessPolicyRule instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AccessPolicyRule instance
+                 */
+                public static create(properties?: google.iam.v3.IAccessPolicyRule): google.iam.v3.AccessPolicyRule;
+
+                /**
+                 * Encodes the specified AccessPolicyRule message. Does not implicitly {@link google.iam.v3.AccessPolicyRule.verify|verify} messages.
+                 * @param message AccessPolicyRule message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v3.IAccessPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AccessPolicyRule message, length delimited. Does not implicitly {@link google.iam.v3.AccessPolicyRule.verify|verify} messages.
+                 * @param message AccessPolicyRule message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v3.IAccessPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AccessPolicyRule message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AccessPolicyRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.AccessPolicyRule;
+
+                /**
+                 * Decodes an AccessPolicyRule message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AccessPolicyRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.AccessPolicyRule;
+
+                /**
+                 * Verifies an AccessPolicyRule message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AccessPolicyRule message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AccessPolicyRule
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v3.AccessPolicyRule;
+
+                /**
+                 * Creates a plain object from an AccessPolicyRule message. Also converts values to other types if specified.
+                 * @param message AccessPolicyRule
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v3.AccessPolicyRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AccessPolicyRule to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AccessPolicyRule
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AccessPolicyRule {
+
+                /** Properties of an Operation. */
+                interface IOperation {
+
+                    /** Operation permissions */
+                    permissions?: (string[]|null);
+
+                    /** Operation excludedPermissions */
+                    excludedPermissions?: (string[]|null);
+                }
+
+                /** Represents an Operation. */
+                class Operation implements IOperation {
+
+                    /**
+                     * Constructs a new Operation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.iam.v3.AccessPolicyRule.IOperation);
+
+                    /** Operation permissions. */
+                    public permissions: string[];
+
+                    /** Operation excludedPermissions. */
+                    public excludedPermissions: string[];
+
+                    /**
+                     * Creates a new Operation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Operation instance
+                     */
+                    public static create(properties?: google.iam.v3.AccessPolicyRule.IOperation): google.iam.v3.AccessPolicyRule.Operation;
+
+                    /**
+                     * Encodes the specified Operation message. Does not implicitly {@link google.iam.v3.AccessPolicyRule.Operation.verify|verify} messages.
+                     * @param message Operation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.iam.v3.AccessPolicyRule.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.iam.v3.AccessPolicyRule.Operation.verify|verify} messages.
+                     * @param message Operation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.iam.v3.AccessPolicyRule.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Operation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Operation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.AccessPolicyRule.Operation;
+
+                    /**
+                     * Decodes an Operation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Operation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.AccessPolicyRule.Operation;
+
+                    /**
+                     * Verifies an Operation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Operation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.iam.v3.AccessPolicyRule.Operation;
+
+                    /**
+                     * Creates a plain object from an Operation message. Also converts values to other types if specified.
+                     * @param message Operation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.iam.v3.AccessPolicyRule.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Operation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Operation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Effect enum. */
+                enum Effect {
+                    EFFECT_UNSPECIFIED = 0,
+                    DENY = 1,
+                    ALLOW = 2
+                }
+            }
+
             /** Properties of an OperationMetadata. */
             interface IOperationMetadata {
 
@@ -5177,6 +6657,9 @@ export namespace google {
 
                     /** Target principalSet */
                     principalSet?: (string|null);
+
+                    /** Target resource */
+                    resource?: (string|null);
                 }
 
                 /** Represents a Target. */
@@ -5191,8 +6674,11 @@ export namespace google {
                     /** Target principalSet. */
                     public principalSet?: (string|null);
 
+                    /** Target resource. */
+                    public resource?: (string|null);
+
                     /** Target target. */
-                    public target?: "principalSet";
+                    public target?: ("principalSet"|"resource");
 
                     /**
                      * Creates a new Target instance using the specified properties.
@@ -5275,7 +6761,8 @@ export namespace google {
                 /** PolicyKind enum. */
                 enum PolicyKind {
                     POLICY_KIND_UNSPECIFIED = 0,
-                    PRINCIPAL_ACCESS_BOUNDARY = 1
+                    PRINCIPAL_ACCESS_BOUNDARY = 1,
+                    ACCESS = 2
                 }
             }
 
@@ -6091,6 +7578,9 @@ export namespace google {
 
                 /** SearchTargetPolicyBindingsRequest parent */
                 parent?: (string|null);
+
+                /** SearchTargetPolicyBindingsRequest filter */
+                filter?: (string|null);
             }
 
             /** Represents a SearchTargetPolicyBindingsRequest. */
@@ -6113,6 +7603,9 @@ export namespace google {
 
                 /** SearchTargetPolicyBindingsRequest parent. */
                 public parent: string;
+
+                /** SearchTargetPolicyBindingsRequest filter. */
+                public filter: string;
 
                 /**
                  * Creates a new SearchTargetPolicyBindingsRequest instance using the specified properties.

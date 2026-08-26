@@ -364,6 +364,13 @@
                           }
                         },
                         "ReadRowsRequest": {
+                          "oneofs": {
+                            "outputFormatSerializationOptions": {
+                              "oneof": [
+                                "arrowSerializationOptions"
+                              ]
+                            }
+                          },
                           "fields": {
                             "readStream": {
                               "type": "string",
@@ -376,6 +383,13 @@
                             "offset": {
                               "type": "int64",
                               "id": 2
+                            },
+                            "arrowSerializationOptions": {
+                              "type": "ArrowSerializationOptions",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -427,6 +441,11 @@
                               "oneof": [
                                 "uncompressedByteSize"
                               ]
+                            },
+                            "_totalEstimatedRowCount": {
+                              "oneof": [
+                                "totalEstimatedRowCount"
+                              ]
                             }
                           },
                           "fields": {
@@ -469,6 +488,14 @@
                               "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "totalEstimatedRowCount": {
+                              "type": "int64",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "proto3_optional": true
                               }
                             }
@@ -563,6 +590,13 @@
                             "defaultMissingValueInterpretation": {
                               "type": "MissingValueInterpretation",
                               "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "clientStats": {
+                              "type": "ClientStats",
+                              "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -795,6 +829,168 @@
                               "values": {
                                 "ROW_ERROR_CODE_UNSPECIFIED": 0,
                                 "FIELDS_ERROR": 1
+                              }
+                            }
+                          }
+                        },
+                        "ClientStats": {
+                          "fields": {
+                            "requestStats": {
+                              "type": "RequestStats",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "windowStats": {
+                              "type": "WindowStats",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RequestStats": {
+                              "oneofs": {
+                                "_sendTimeMillis": {
+                                  "oneof": [
+                                    "sendTimeMillis"
+                                  ]
+                                },
+                                "_queuedRequestsCount": {
+                                  "oneof": [
+                                    "queuedRequestsCount"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "sendTimeMillis": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "queuedRequestsCount": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "WindowStats": {
+                              "oneofs": {
+                                "_maxResponseLatencyMillis": {
+                                  "oneof": [
+                                    "maxResponseLatencyMillis"
+                                  ]
+                                },
+                                "_avgResponseLatencyMillis": {
+                                  "oneof": [
+                                    "avgResponseLatencyMillis"
+                                  ]
+                                },
+                                "_longestWaitNoResponseMillis": {
+                                  "oneof": [
+                                    "longestWaitNoResponseMillis"
+                                  ]
+                                },
+                                "_requestsSentCount": {
+                                  "oneof": [
+                                    "requestsSentCount"
+                                  ]
+                                },
+                                "_responsesReceivedCount": {
+                                  "oneof": [
+                                    "responsesReceivedCount"
+                                  ]
+                                },
+                                "_bytesSentCount": {
+                                  "oneof": [
+                                    "bytesSentCount"
+                                  ]
+                                },
+                                "_windowStartTimeEpochMillis": {
+                                  "oneof": [
+                                    "windowStartTimeEpochMillis"
+                                  ]
+                                },
+                                "_windowMillis": {
+                                  "oneof": [
+                                    "windowMillis"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "maxResponseLatencyMillis": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "avgResponseLatencyMillis": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "longestWaitNoResponseMillis": {
+                                  "type": "int64",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "requestsSentCount": {
+                                  "type": "int64",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "responsesReceivedCount": {
+                                  "type": "int64",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "bytesSentCount": {
+                                  "type": "int64",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "windowStartTimeEpochMillis": {
+                                  "type": "int64",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "windowMillis": {
+                                  "type": "int64",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
                               }
                             }
                           }

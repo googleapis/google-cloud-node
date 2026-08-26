@@ -3372,6 +3372,9 @@ export namespace google {
 
                         /** GitSourceDependency destPath */
                         destPath?: (string|null);
+
+                        /** GitSourceDependency fetchTags */
+                        fetchTags?: (boolean|null);
                     }
 
                     /** Represents a GitSourceDependency. */
@@ -3397,6 +3400,9 @@ export namespace google {
 
                         /** GitSourceDependency destPath. */
                         public destPath: string;
+
+                        /** GitSourceDependency fetchTags. */
+                        public fetchTags: boolean;
 
                         /**
                          * Creates a new GitSourceDependency instance using the specified properties.

@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v3.1.0...dataform-v3.2.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v3.0.0...dataform-v3.1.0) (2026-08-10)
+
+
+### Features
+
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.5.0...dataform-v3.0.0) (2026-08-04)
 
 

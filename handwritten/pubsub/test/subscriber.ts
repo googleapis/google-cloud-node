@@ -452,7 +452,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -470,7 +470,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -946,7 +946,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -1200,7 +1200,10 @@ describe('Subscriber', () => {
       assert.strictEqual(spans[0].events.length, 2);
       const firstSpan = spans.pop();
       assert.ok(firstSpan);
-      assert.strictEqual(firstSpan.parentSpanId, parentSpanContext.spanId);
+      assert.strictEqual(
+        firstSpan.parentSpanContext?.spanId,
+        parentSpanContext.spanId,
+      );
       assert.strictEqual(
         firstSpan.name,
         `${subId} subscribe`,

@@ -14342,7 +14342,8 @@ export namespace google {
                     /** TimestampGranularity enum. */
                     enum TimestampGranularity {
                         TIMESTAMP_GRANULARITY_UNSPECIFIED = 0,
-                        MILLIS = 1
+                        MILLIS = 1,
+                        MICROS = 2
                     }
 
                     /** View enum. */
@@ -25304,6 +25305,9 @@ export namespace google {
 
                 /** Mutation deleteFromRow */
                 deleteFromRow?: (google.bigtable.v2.Mutation.IDeleteFromRow|null);
+
+                /** Mutation timestampOrigin */
+                timestampOrigin?: (google.bigtable.v2.Mutation.TimestampOrigin|keyof typeof google.bigtable.v2.Mutation.TimestampOrigin|null);
             }
 
             /** Represents a Mutation. */
@@ -25332,6 +25336,9 @@ export namespace google {
 
                 /** Mutation deleteFromRow. */
                 public deleteFromRow?: (google.bigtable.v2.Mutation.IDeleteFromRow|null);
+
+                /** Mutation timestampOrigin. */
+                public timestampOrigin: (google.bigtable.v2.Mutation.TimestampOrigin|keyof typeof google.bigtable.v2.Mutation.TimestampOrigin);
 
                 /** Mutation mutation. */
                 public mutation?: ("setCell"|"addToCell"|"mergeToCell"|"deleteFromColumn"|"deleteFromFamily"|"deleteFromRow");
@@ -26056,6 +26063,13 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** TimestampOrigin enum. */
+                enum TimestampOrigin {
+                    TIMESTAMP_ORIGIN_UNSPECIFIED = 0,
+                    USER_SPECIFIED = 1,
+                    CLIENT_AUTO_GENERATED = 2
                 }
             }
 
@@ -36131,6 +36145,9 @@ export namespace google {
 
                 /** FeatureFlags sessionsRequired */
                 sessionsRequired?: (boolean|null);
+
+                /** FeatureFlags microsecondTimestamp */
+                microsecondTimestamp?: (boolean|null);
             }
 
             /** Represents a FeatureFlags. */
@@ -36177,6 +36194,9 @@ export namespace google {
 
                 /** FeatureFlags sessionsRequired. */
                 public sessionsRequired: boolean;
+
+                /** FeatureFlags microsecondTimestamp. */
+                public microsecondTimestamp: boolean;
 
                 /**
                  * Creates a new FeatureFlags instance using the specified properties.

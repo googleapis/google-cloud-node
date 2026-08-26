@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import type {Client} from './client.js';
+import type {ITypeOverrides} from './types.js';
 
 /**
  * Configuration options for establishing a connection to Google Spanner.
@@ -31,7 +32,7 @@ export interface ClientConfig {
   /** Spanner Database ID. */
   database?: string;
   /** Custom type parsers registry. */
-  types?: unknown;
+  types?: ITypeOverrides;
 }
 
 /**
@@ -89,9 +90,13 @@ export function resolveDsn(config?: string | ClientConfig): string {
     return cfg.connectionString;
   }
 
-  const project = cfg?.project || process.env.GOOGLE_CLOUD_PROJECT;
-  const instance = cfg?.instance;
-  const database = cfg?.database;
+  const project =
+    cfg?.project ||
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    process.env.SPANNER_PROJECT;
+  const instance = cfg?.instance || process.env.SPANNER_INSTANCE;
+  const database = cfg?.database || process.env.SPANNER_DATABASE;
 
   if (project && instance && database) {
     const resourcePath = `projects/${project}/instances/${instance}/databases/${database}`;

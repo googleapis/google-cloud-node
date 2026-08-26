@@ -5966,6 +5966,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "pscInstanceInfo": {
+                          "type": "PscInstanceInfo",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "networkConfig": {
                           "type": "InstanceNetworkConfig",
                           "id": 29,
@@ -6355,6 +6362,62 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "pscAutoDnsState": {
+                              "type": "PscAutoDnsState",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscAutoConnectionPolicyState": {
+                              "type": "PscAutoConnectionPolicyState",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PscAutoConnectionPolicyState": {
+                              "values": {
+                                "PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED": 0,
+                                "ENABLED": 1,
+                                "DISABLED": 2
+                              }
+                            }
+                          }
+                        },
+                        "PscInstanceInfo": {
+                          "fields": {
+                            "effectivePscAutoDnsEnabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "pscAutoDnsNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "effectivePscAutoConnectionPolicy": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "serviceConnectionPolicy": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -6466,6 +6529,13 @@
                             "REGIONAL": 2
                           }
                         },
+                        "PscAutoDnsState": {
+                          "values": {
+                            "PSC_AUTO_DNS_STATE_UNSPECIFIED": 0,
+                            "PSC_AUTO_DNS_STATE_ENABLED": 1,
+                            "PSC_AUTO_DNS_STATE_DISABLED": 2
+                          }
+                        },
                         "ActivationPolicy": {
                           "values": {
                             "ACTIVATION_POLICY_UNSPECIFIED": 0,
@@ -6521,6 +6591,13 @@
                         "pscDnsName": {
                           "type": "string",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pscAutoDnsName": {
+                          "type": "string",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -11083,6 +11160,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "pscInstanceInfo": {
+                          "type": "PscInstanceInfo",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "networkConfig": {
                           "type": "InstanceNetworkConfig",
                           "id": 29,
@@ -11472,6 +11556,62 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "pscAutoDnsState": {
+                              "type": "PscAutoDnsState",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscAutoConnectionPolicyState": {
+                              "type": "PscAutoConnectionPolicyState",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PscAutoConnectionPolicyState": {
+                              "values": {
+                                "PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED": 0,
+                                "ENABLED": 1,
+                                "DISABLED": 2
+                              }
+                            }
+                          }
+                        },
+                        "PscInstanceInfo": {
+                          "fields": {
+                            "effectivePscAutoDnsEnabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "pscAutoDnsNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "effectivePscAutoConnectionPolicy": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "serviceConnectionPolicy": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -11583,6 +11723,13 @@
                             "REGIONAL": 2
                           }
                         },
+                        "PscAutoDnsState": {
+                          "values": {
+                            "PSC_AUTO_DNS_STATE_UNSPECIFIED": 0,
+                            "PSC_AUTO_DNS_STATE_ENABLED": 1,
+                            "PSC_AUTO_DNS_STATE_DISABLED": 2
+                          }
+                        },
                         "ActivationPolicy": {
                           "values": {
                             "ACTIVATION_POLICY_UNSPECIFIED": 0,
@@ -11638,6 +11785,13 @@
                         "pscDnsName": {
                           "type": "string",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pscAutoDnsName": {
+                          "type": "string",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

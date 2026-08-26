@@ -5,6 +5,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+## [8.0.2](https://github.com/googleapis/google-cloud-node/compare/common-v8.0.1...common-v8.0.2) (2026-08-26)
+
+
+### Bug Fixes
+
+* Patch the vulnerability for Bigquery and other REST based clients ([#9188](https://github.com/googleapis/google-cloud-node/issues/9188)) ([94aac1e](https://github.com/googleapis/google-cloud-node/commit/94aac1eb121d6bbfbd92007befe8b8f159b4d379))
+
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/common-v8.0.0...common-v8.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
 ## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/common-v7.0.0...common-v8.0.0) (2026-08-04)
 
 

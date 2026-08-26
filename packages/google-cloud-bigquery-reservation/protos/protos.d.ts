@@ -3676,6 +3676,12 @@ export namespace google {
 
                         /** Assignment principal */
                         principal?: (string|null);
+
+                        /** Assignment precedence */
+                        precedence?: (number|Long|string|null);
+
+                        /** Assignment condition */
+                        condition?: (google.type.IExpr|null);
                     }
 
                     /** Represents an Assignment. */
@@ -3707,6 +3713,12 @@ export namespace google {
 
                         /** Assignment principal. */
                         public principal: string;
+
+                        /** Assignment precedence. */
+                        public precedence: (number|Long|string);
+
+                        /** Assignment condition. */
+                        public condition?: (google.type.IExpr|null);
 
                         /**
                          * Creates a new Assignment instance using the specified properties.
