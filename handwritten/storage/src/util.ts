@@ -19,7 +19,7 @@ import * as url from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
-import {FileMetadata, Contexts} from './file';
+import {Contexts} from './file';
 
 // Done to avoid a problem with mangling of identifiers when using esModuleInterop
 const fileURLToPath = url.fileURLToPath;
@@ -306,7 +306,7 @@ export function validateContexts(contexts?: Contexts): void {
  */
 export function handleContextValidation(
   contexts?: Contexts,
-  callback?: Function,
+  callback?: Function
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> | void {
   try {
