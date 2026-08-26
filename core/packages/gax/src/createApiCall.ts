@@ -66,8 +66,7 @@ export function createApiCall(
   const funcPromise = typeof func === 'function' ? Promise.resolve(func) : func;
   // the following apiCaller will be used for all calls of this function...
   const apiCaller = createAPICaller(settings, descriptor);
-
-  return (
+  const invokeCall = (
     request: RequestType,
     callOptions?: CallOptions,
     callback?: APICallback,
@@ -154,7 +153,12 @@ export function createApiCall(
       .then((apiCall: SimpleCallbackFunction) => {
         // After adding retries / timeouts, the call function becomes simpler:
         // it only accepts request and callback.
-        currentApiCaller.call(apiCall, request, thisSettings, ongoingCall);
+        return currentApiCaller.call(
+          apiCall,
+          request,
+          thisSettings,
+          ongoingCall,
+        );
       })
       .catch(err => {
         currentApiCaller.fail(ongoingCall, err);
@@ -164,4 +168,5 @@ export function createApiCall(
     // or to cancel the ongoing call.
     return currentApiCaller.result(ongoingCall);
   };
+  return invokeCall;
 }
