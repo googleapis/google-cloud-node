@@ -11,7 +11,14 @@
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "error",
     "promise/catch-or-return": "error",
-    "promise/always-return": "error"
+    "promise/always-return": "error",
+    // Enforces the standard on handwritten code, but permits class/interface extensions
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": true
+      }
+    ]
   },
   "overrides": [
     // The overrides below were migrated from handwritten/firestore/.eslintrc.json
@@ -84,10 +91,18 @@
   "ignorePatterns": [
     "**/node_modules",
     "**/build",
+    "**/dist",
     "**/system-test",
     "**/test/fixtures",
+    "**/test-fixtures",
+    "**/fixtures",
+    "**/baselines",
+    "**/baselines-esm",
     "**/samples/generated",
     "**/.coverage",
-    "**/coverage"
+    "**/coverage",
+    "**/.nyc_output",
+    "**/protos",
+    "**/*.d.ts"
   ]
 }
