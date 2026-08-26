@@ -1917,7 +1917,7 @@ libraries:
     nodejs:
       package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
-    version: 0.6.0
+    version: 0.6.1
     apis:
       - path: google/devicesandservices/health/v4
     copyright_year: "2026"
