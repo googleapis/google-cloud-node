@@ -300,10 +300,10 @@ apis:
           {name: 'google/cloud/test/v1/test.proto'},
           {name: 'google/cloud/test/v1/other.proto'},
         ],
-      } as unknown as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
       generator.response = {
         file: [],
-      } as unknown as protos.google.protobuf.compiler.CodeGeneratorResponse;
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
 
       getTestGenerator(generator).addProtosToResponse();
 
@@ -367,6 +367,208 @@ apis:
         await generator.processTemplates(api);
       }, /Template directory .* does not exist\./);
     });
+
+    it('should generate telemetry tracing configuration in service client when enableTelemetryTracing is true (CJS)', async () => {
+      generator.request = {
+        protoFile: [
+          {
+            name: 'google/cloud/test/v1/test.proto',
+            package: 'google.cloud.test.v1',
+            messageType: [{name: 'TestRequest'}, {name: 'TestResponse'}],
+            service: [
+              {
+                name: 'TestService',
+                options: {
+                  '.google.api.defaultHost': 'test.googleapis.com',
+                },
+                method: [
+                  {
+                    name: 'TestMethod',
+                    inputType: '.google.cloud.test.v1.TestRequest',
+                    outputType: '.google.cloud.test.v1.TestResponse',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        fileToGenerate: ['google/cloud/test/v1/test.proto'],
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      generator.templates = ['typescript_gapic'];
+      generator.enableTelemetryTracing = true;
+      generator.publishName = '@google-cloud/test';
+      generator.response = {
+        file: [],
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+
+      const api = getTestGenerator(generator).buildAPIObject();
+      await generator.processTemplates(api);
+
+      const clientFile = generator.response.file.find(f =>
+        f.name?.includes('test_service_client.ts'),
+      );
+      assert.ok(clientFile);
+      assert.ok(
+        clientFile.content?.includes('if (opts.enableTelemetryTracing) {'),
+      );
+      assert.ok(clientFile.content?.includes('internalTelemetryInfo'));
+      assert.ok(clientFile.content?.includes("gcpClientService: 'test',"));
+      assert.ok(clientFile.content?.includes("gcpVersion: 'v1',"));
+      assert.ok(
+        clientFile.content?.includes(
+          "gcpRepo: 'googleapis/google-cloud-node',",
+        ),
+      );
+      assert.ok(
+        clientFile.content?.includes("gcpArtifact: '@google-cloud/test',"),
+      );
+      assert.ok(
+        clientFile.content?.includes(
+          'this._defaults[methodName].enableTelemetryTracing =',
+        ),
+      );
+      assert.ok(clientFile.content?.includes('opts.enableTelemetryTracing;'));
+      assert.ok(
+        clientFile.content?.includes('this._defaults[methodName].otherArgs ='),
+      );
+      assert.ok(
+        clientFile.content?.includes(
+          'this._defaults[methodName].otherArgs || {};',
+        ),
+      );
+      assert.ok(
+        clientFile.content?.includes(
+          'this._defaults[methodName].otherArgs.internalTelemetryInfo =',
+        ),
+      );
+      assert.ok(clientFile.content?.includes('internalTelemetryInfo;'));
+    });
+
+    it('should generate telemetry tracing configuration in service client when enableTelemetryTracing is true (ESM)', async () => {
+      generator.request = {
+        protoFile: [
+          {
+            name: 'google/cloud/test/v1/test.proto',
+            package: 'google.cloud.test.v1',
+            messageType: [{name: 'TestRequest'}, {name: 'TestResponse'}],
+            service: [
+              {
+                name: 'TestService',
+                options: {
+                  '.google.api.defaultHost': 'test.googleapis.com',
+                },
+                method: [
+                  {
+                    name: 'TestMethod',
+                    inputType: '.google.cloud.test.v1.TestRequest',
+                    outputType: '.google.cloud.test.v1.TestResponse',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        fileToGenerate: ['google/cloud/test/v1/test.proto'],
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      generator.templates = ['typescript_gapic'];
+      generator.format = ['esm'];
+      generator.enableTelemetryTracing = true;
+      generator.publishName = '@google-cloud/test';
+      generator.response = {
+        file: [],
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+
+      const api = getTestGenerator(generator).buildAPIObject();
+      await generator.processTemplates(api);
+
+      const clientFile = generator.response.file.find(f =>
+        f.name?.includes('test_service_client.ts'),
+      );
+      assert.ok(clientFile);
+      assert.ok(
+        clientFile.content?.includes('if (opts.enableTelemetryTracing) {'),
+      );
+      assert.ok(clientFile.content?.includes('internalTelemetryInfo'));
+      assert.ok(clientFile.content?.includes("gcpClientService: 'test',"));
+      assert.ok(clientFile.content?.includes("gcpVersion: 'v1',"));
+      assert.ok(
+        clientFile.content?.includes(
+          "gcpRepo: 'googleapis/google-cloud-node',",
+        ),
+      );
+      assert.ok(
+        clientFile.content?.includes("gcpArtifact: '@google-cloud/test',"),
+      );
+      assert.ok(
+        clientFile.content?.includes(
+          'this._defaults[methodName].enableTelemetryTracing =',
+        ),
+      );
+      assert.ok(clientFile.content?.includes('opts.enableTelemetryTracing;'));
+      assert.ok(
+        clientFile.content?.includes('this._defaults[methodName].otherArgs ='),
+      );
+      assert.ok(
+        clientFile.content?.includes(
+          'this._defaults[methodName].otherArgs || {};',
+        ),
+      );
+      assert.ok(
+        clientFile.content?.includes(
+          'this._defaults[methodName].otherArgs.internalTelemetryInfo =',
+        ),
+      );
+      assert.ok(clientFile.content?.includes('internalTelemetryInfo;'));
+    });
+
+    it('should not generate telemetry tracing configuration when enableTelemetryTracing is false', async () => {
+      generator.request = {
+        protoFile: [
+          {
+            name: 'google/cloud/test/v1/test.proto',
+            package: 'google.cloud.test.v1',
+            messageType: [{name: 'TestRequest'}, {name: 'TestResponse'}],
+            service: [
+              {
+                name: 'TestService',
+                options: {
+                  '.google.api.defaultHost': 'test.googleapis.com',
+                },
+                method: [
+                  {
+                    name: 'TestMethod',
+                    inputType: '.google.cloud.test.v1.TestRequest',
+                    outputType: '.google.cloud.test.v1.TestResponse',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        fileToGenerate: ['google/cloud/test/v1/test.proto'],
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      generator.templates = ['typescript_gapic'];
+      generator.enableTelemetryTracing = false;
+      generator.response = {
+        file: [],
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+
+      const api = getTestGenerator(generator).buildAPIObject();
+      await generator.processTemplates(api);
+
+      const clientFile = generator.response.file.find(f =>
+        f.name?.includes('test_service_client.ts'),
+      );
+      assert.ok(clientFile);
+      assert.strictEqual(
+        clientFile.content?.includes('if (opts.enableTelemetryTracing) {'),
+        false,
+      );
+      assert.strictEqual(
+        clientFile.content?.includes('internalTelemetryInfo'),
+        false,
+      );
+    });
   });
 
   describe('generate', () => {
@@ -382,7 +584,7 @@ apis:
       try {
         generator.request = {
           protoFile: [],
-        } as unknown as protos.google.protobuf.compiler.CodeGeneratorRequest;
+        } as protos.google.protobuf.compiler.CodeGeneratorRequest;
 
         await generator.generate();
 
