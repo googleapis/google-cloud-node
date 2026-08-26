@@ -19,7 +19,7 @@ import * as url from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
-import {FileMetadata} from './file';
+import {FileMetadata, Contexts} from './file';
 
 // Done to avoid a problem with mangling of identifiers when using esModuleInterop
 const fileURLToPath = url.fileURLToPath;
@@ -279,10 +279,10 @@ export class PassThroughShim extends PassThrough {
  * Double quotes (") are forbidden in context keys and values as they
  * interfere with GCS filter string syntax.
  *
- * @param {FileMetadata['contexts']} contexts The contexts object to validate.
+ * @param {Contexts} [contexts] The contexts object to validate.
  * @returns {void} Throws an error if validation fails.
  */
-export function validateContexts(contexts?: FileMetadata['contexts']): void {
+export function validateContexts(contexts?: Contexts): void {
   const custom = contexts?.custom;
   if (!custom) return;
   for (const [key, context] of Object.entries(custom)) {
@@ -301,12 +301,12 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
 
 /**
  * Helper to validate contexts and route errors to either a callback or a Promise.
- * @param contexts The contexts to validate.
- * @param callback The optional user-provided callback.
+ * @param {Contexts} [contexts] The contexts to validate.
+ * @param {Function} [callback] The optional user-provided callback.
  */
 export function handleContextValidation(
-  contexts?: FileMetadata['contexts'],
-  callback?: Function
+  contexts?: Contexts,
+  callback?: Function,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> | void {
   try {
