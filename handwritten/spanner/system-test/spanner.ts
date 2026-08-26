@@ -7063,7 +7063,7 @@ describe('Spanner', () => {
         });
 
         await DATABASE.runTransactionAsync(async transaction => {
-          transaction.queueAck(QUEUE_NAME, [123], {ignoreNotFound: true});
+          transaction.queueAck(QUEUE_NAME, [123]);
           await transaction.commit();
         });
       } catch (err: any) {
@@ -7093,7 +7093,7 @@ describe('Spanner', () => {
         });
 
         await PG_DATABASE.runTransactionAsync(async transaction => {
-          transaction.queueAck(QUEUE_NAME, [456], {ignoreNotFound: true});
+          transaction.queueAck(QUEUE_NAME, [456]);
           await transaction.commit();
         });
       } catch (err: any) {
@@ -7118,6 +7118,13 @@ describe('Spanner', () => {
         await assert.rejects(async () => {
           await DATABASE.runTransactionAsync(async transaction => {
             transaction.queueSend(QUEUE_NAME, [789]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999]);
             await transaction.commit();
           });
         });
@@ -7155,6 +7162,13 @@ describe('Spanner', () => {
         await assert.rejects(async () => {
           await PG_DATABASE.runTransactionAsync(async transaction => {
             transaction.queueSend(QUEUE_NAME, [790]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999]);
             await transaction.commit();
           });
         });
