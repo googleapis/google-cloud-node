@@ -329,6 +329,31 @@ describe('createApiCall', () => {
       );
     }
   });
+
+  describe('in regards to OpenTelemetry Tracing', () => {
+    afterEach(() => {
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+    });
+
+    it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED and CallSettings field is set', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const mockCallOptions: gax.CallOptions = {
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: {
+            gcpClientService: 'test.googleapis.com',
+          },
+        },
+      };
+      const apiCall = createApiCall(() => {}, {settings: mockCallOptions});
+      assert.strictEqual(typeof apiCall, 'function');
+    });
+
+    it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set', () => {
+      const apiCall = createApiCall(() => {});
+      assert.strictEqual(typeof apiCall, 'function');
+    });
+  });
 });
 
 describe('Promise', () => {
@@ -350,7 +375,7 @@ describe('Promise', () => {
         assert.ok(Array.isArray(response));
         assert.strictEqual(response[0], 42);
         assert.ok(deadlineArg);
-        done();
+        return done();
       })
       .catch(done);
   });
@@ -380,7 +405,7 @@ describe('Promise', () => {
     const promise = (apiCall as any)(null);
     promise
       .then(() => {
-        done(new Error('should not reach'));
+        return done(new Error('should not reach'));
       })
       .catch((err: {code: number}) => {
         assert(err instanceof GoogleError);
@@ -420,7 +445,7 @@ describe('Promise', () => {
     const promise = (apiCall as any)(null);
     promise
       .then(() => {
-        done(new Error('should not reach'));
+        return done(new Error('should not reach'));
       })
       .catch(() => {
         assert(callCount < 4);
@@ -509,7 +534,7 @@ describe('retryable', () => {
         assert.strictEqual(resp[0], 1729);
         assert.strictEqual(toAttempt, 0);
         assert.ok(deadlineArg);
-        done();
+        return done();
       })
       .catch(done);
   });
@@ -534,7 +559,7 @@ describe('retryable', () => {
     const promise = apiCall({}, undefined);
     promise
       .then(() => {
-        done(new Error('should not reach'));
+        return done(new Error('should not reach'));
       })
       .catch((err: Error) => {
         assert(err instanceof Error);
@@ -795,6 +820,7 @@ describe('retryable', () => {
       })
       .then(() => {
         mockBuilder.verify();
+        return;
       });
   });
 
@@ -821,9 +847,9 @@ describe('retryable', () => {
       try {
         assert.strictEqual(gotHeaders.h1, 'val1');
         assert.strictEqual(gotHeaders.h2, 'val2');
-        done();
+        return done();
       } catch (err) {
-        done(err);
+        return done(err);
       }
     });
   });
