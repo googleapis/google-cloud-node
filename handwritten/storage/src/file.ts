@@ -84,7 +84,7 @@ export interface GetExpirationDateCallback {
   (
     err: Error | null,
     expirationDate?: Date | null,
-    apiResponse?: unknown,
+    apiResponse?: unknown
   ): void;
 }
 
@@ -95,10 +95,7 @@ export interface PolicyDocument {
 }
 
 export type SaveData =
-  | string
-  | Buffer
-  | Uint8Array
-  | PipelineSource<string | Buffer | Uint8Array>;
+  string | Buffer | Uint8Array | PipelineSource<string | Buffer | Uint8Array>;
 
 export type GenerateSignedPostPolicyV2Response = [PolicyDocument];
 
@@ -148,8 +145,10 @@ export interface SignedPostPolicyV4Output {
   url: string;
   fields: PolicyFields;
 }
-export interface GetSignedUrlConfig
-  extends Pick<SignerGetSignedUrlConfig, 'host' | 'signingEndpoint'> {
+export interface GetSignedUrlConfig extends Pick<
+  SignerGetSignedUrlConfig,
+  'host' | 'signingEndpoint'
+> {
   /**
    * The action to permit with the signed URL.
    * - `'read'`: Allows downloading/viewing the file (HTTP GET).
@@ -304,8 +303,10 @@ type PublicResumableUploadOptions =
   | 'uri'
   | 'userProject';
 
-export interface CreateResumableUploadOptions
-  extends Pick<resumableUpload.UploadConfig, PublicResumableUploadOptions> {
+export interface CreateResumableUploadOptions extends Pick<
+  resumableUpload.UploadConfig,
+  PublicResumableUploadOptions
+> {
   /**
    * A CRC32C to resume from when continuing a previous upload. It is recommended
    * to capture the `crc32c` event from previous upload sessions to provide in
@@ -370,7 +371,7 @@ export interface MoveCallback {
   (
     err: Error | null,
     destinationFile?: File | null,
-    apiResponse?: unknown,
+    apiResponse?: unknown
   ): void;
 }
 
@@ -434,7 +435,7 @@ const COMPRESSIBLE_MIME_REGEX = new RegExp(
   ]
     .map(r => r.source)
     .join(''),
-  'i',
+  'i'
 );
 
 export interface FileOptions {
@@ -493,7 +494,7 @@ export enum SkipReason {
 
 export type DownloadCallback = (
   err: RequestError | null,
-  contents: Buffer,
+  contents: Buffer
 ) => void;
 
 export interface DownloadOptions extends CreateReadStreamOptions {
@@ -1224,7 +1225,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * - if `idempotencyStrategy` is set to `RetryNever`
    */
   private shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-    options?: PreconditionOptions,
+    options?: PreconditionOptions
   ): boolean {
     return !(
       (options?.ifGenerationMatch === undefined &&
@@ -1238,13 +1239,13 @@ class File extends ServiceObject<File, FileMetadata> {
 
   copy(
     destination: string | Bucket | File,
-    options?: CopyOptions,
+    options?: CopyOptions
   ): Promise<CopyResponse>;
   copy(destination: string | Bucket | File, callback: CopyCallback): void;
   copy(
     destination: string | Bucket | File,
     options: CopyOptions,
-    callback: CopyCallback,
+    callback: CopyCallback
   ): void;
   /**
    * @typedef {array} CopyResponse
@@ -1381,10 +1382,10 @@ class File extends ServiceObject<File, FileMetadata> {
   copy(
     destination: string | Bucket | File,
     optionsOrCallback?: CopyOptions | CopyCallback,
-    callback?: CopyCallback,
+    callback?: CopyCallback
   ): Promise<CopyResponse> | void {
     const noDestinationError = new Error(
-      FileExceptionMessages.DESTINATION_NO_NAME,
+      FileExceptionMessages.DESTINATION_NO_NAME
     );
 
     if (!destination) {
@@ -1401,7 +1402,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback,
+        callback
       );
       if (validationError) return validationError;
     }
@@ -1472,7 +1473,7 @@ class File extends ServiceObject<File, FileMetadata> {
       this.kmsKeyName = query.destinationKmsKeyName;
 
       const keyIndex = this.interceptors.indexOf(
-        this.encryptionKeyInterceptor!,
+        this.encryptionKeyInterceptor!
       );
       if (keyIndex > -1) {
         this.interceptors.splice(keyIndex, 1);
@@ -1481,7 +1482,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts,
+        options?.preconditionOpts
       )
     ) {
       this.storage.retryOptions.autoRetry = false;
@@ -1496,7 +1497,7 @@ class File extends ServiceObject<File, FileMetadata> {
       {
         method: 'POST',
         uri: `/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(
-          newFile.name,
+          newFile.name
         )}`,
         qs: query,
         json: options,
@@ -1527,7 +1528,7 @@ class File extends ServiceObject<File, FileMetadata> {
         }
 
         callback!(null, newFile, resp);
-      },
+      }
     );
   }
 
@@ -1682,7 +1683,7 @@ class File extends ServiceObject<File, FileMetadata> {
     const onResponse = (
       err: Error | null,
       _body: ResponseBody,
-      rawResponseStream: unknown,
+      rawResponseStream: unknown
     ) => {
       if (err) {
         // Get error message from the body.
@@ -1734,7 +1735,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       if (md5 && !hashes.md5) {
         const hashError = new RequestError(
-          FileExceptionMessages.MD5_NOT_AVAILABLE,
+          FileExceptionMessages.MD5_NOT_AVAILABLE
         );
         hashError.code = 'MD5_NOT_AVAILABLE';
         throughStream.destroy(hashError);
@@ -1753,7 +1754,7 @@ class File extends ServiceObject<File, FileMetadata> {
         rawResponseStream as Readable,
         ...(transformStreams as [Transform]),
         throughStream,
-        onComplete,
+        onComplete
       );
     };
 
@@ -1812,11 +1813,11 @@ class File extends ServiceObject<File, FileMetadata> {
   }
 
   createResumableUpload(
-    options?: CreateResumableUploadOptions,
+    options?: CreateResumableUploadOptions
   ): Promise<CreateResumableUploadResponse>;
   createResumableUpload(
     options: CreateResumableUploadOptions,
-    callback: CreateResumableUploadCallback,
+    callback: CreateResumableUploadCallback
   ): void;
   createResumableUpload(callback: CreateResumableUploadCallback): void;
   /**
@@ -1905,9 +1906,8 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   createResumableUpload(
     optionsOrCallback?:
-      | CreateResumableUploadOptions
-      | CreateResumableUploadCallback,
-    callback?: CreateResumableUploadCallback,
+      CreateResumableUploadOptions | CreateResumableUploadCallback,
+    callback?: CreateResumableUploadCallback
   ): void | Promise<CreateResumableUploadResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -1933,7 +1933,7 @@ class File extends ServiceObject<File, FileMetadata> {
         bucket: this.bucket.name,
         customRequestOptions: this.getRequestInterceptors().reduce(
           (reqOpts, interceptorFn) => interceptorFn(reqOpts),
-          {},
+          {}
         ),
         file: this.name,
         generation: this.generation,
@@ -1952,7 +1952,7 @@ class File extends ServiceObject<File, FileMetadata> {
         useAuthWithCustomEndpoint: this.storage.useAuthWithCustomEndpoint,
         [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
       },
-      callback!,
+      callback!
     );
     this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
@@ -2167,7 +2167,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       if (crc32c && !options.isPartialUpload && !options.resumeCRC32C) {
         throw new RangeError(
-          FileExceptionMessages.MISSING_RESUME_CRC32C_FINAL_UPLOAD,
+          FileExceptionMessages.MISSING_RESUME_CRC32C_FINAL_UPLOAD
         );
       }
     }
@@ -2276,7 +2276,9 @@ class File extends ServiceObject<File, FileMetadata> {
           if (!callbackCalled) {
             callbackCalled = true;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const err = (fileWriteStream as any).errored || new Error('Write stream destroyed');
+            const err =
+              (fileWriteStream as any).errored ||
+              new Error('Write stream destroyed');
             pipelineCallback(err);
           }
         });
@@ -2337,7 +2339,7 @@ class File extends ServiceObject<File, FileMetadata> {
           } catch (e) {
             pipelineCallback(e as Error);
           }
-        },
+        }
       );
     });
 
@@ -2356,7 +2358,7 @@ class File extends ServiceObject<File, FileMetadata> {
   delete(callback: DeleteCallback): void;
   delete(
     optionsOrCallback?: DeleteOptions | DeleteCallback,
-    cb?: DeleteCallback,
+    cb?: DeleteCallback
   ): Promise<[r.Response]> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -2365,7 +2367,7 @@ class File extends ServiceObject<File, FileMetadata> {
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.delete,
       AvailableServiceObjectMethods.delete,
-      options,
+      options
     );
 
     super
@@ -2446,7 +2448,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   download(
     optionsOrCallback?: DownloadOptions | DownloadCallback,
-    cb?: DownloadCallback,
+    cb?: DownloadCallback
   ): Promise<DownloadResponse> | void {
     let options: DownloadOptions;
     if (typeof optionsOrCallback === 'function') {
@@ -2558,7 +2560,7 @@ class File extends ServiceObject<File, FileMetadata> {
   setEncryptionKey(encryptionKey: string | Buffer) {
     this.encryptionKey = encryptionKey;
     this.encryptionKeyBase64 = Buffer.from(encryptionKey as string).toString(
-      'base64',
+      'base64'
     );
     this.encryptionKeyHash = crypto
       .createHash('sha256')
@@ -2593,7 +2595,7 @@ class File extends ServiceObject<File, FileMetadata> {
   static from(
     publicUrlOrGsUrl: string,
     storageInstance: Storage,
-    options?: FileOptions,
+    options?: FileOptions
   ): File {
     const gsMatches = [...publicUrlOrGsUrl.matchAll(GS_UTIL_URL_REGEX)];
     const httpsMatches = [...publicUrlOrGsUrl.matchAll(HTTPS_PUBLIC_URL_REGEX)];
@@ -2606,7 +2608,7 @@ class File extends ServiceObject<File, FileMetadata> {
       return new File(bucket, httpsMatches[0][4], options);
     } else {
       throw new Error(
-        'URL string must be of format gs://bucket/file or https://storage.googleapis.com/bucket/file',
+        'URL string must be of format gs://bucket/file or https://storage.googleapis.com/bucket/file'
       );
     }
   }
@@ -2616,7 +2618,7 @@ class File extends ServiceObject<File, FileMetadata> {
   get(options: GetFileOptions, callback: InstanceResponseCallback<File>): void;
   get(
     optionsOrCallback?: GetFileOptions | InstanceResponseCallback<File>,
-    cb?: InstanceResponseCallback<File>,
+    cb?: InstanceResponseCallback<File>
   ): Promise<GetResponse<File>> | void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any =
@@ -2665,7 +2667,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * ```
    */
   getExpirationDate(
-    callback?: GetExpirationDateCallback,
+    callback?: GetExpirationDateCallback
   ): void | Promise<GetExpirationDateResponse> {
     this.getMetadata(
       (err: ApiError | null, metadata: FileMetadata, apiResponse: unknown) => {
@@ -2683,21 +2685,21 @@ class File extends ServiceObject<File, FileMetadata> {
         callback!(
           null,
           new Date(metadata.retentionExpirationTime),
-          apiResponse,
+          apiResponse
         );
-      },
+      }
     );
   }
 
   generateSignedPostPolicyV2(
-    options: GenerateSignedPostPolicyV2Options,
+    options: GenerateSignedPostPolicyV2Options
   ): Promise<GenerateSignedPostPolicyV2Response>;
   generateSignedPostPolicyV2(
     options: GenerateSignedPostPolicyV2Options,
-    callback: GenerateSignedPostPolicyV2Callback,
+    callback: GenerateSignedPostPolicyV2Callback
   ): void;
   generateSignedPostPolicyV2(
-    callback: GenerateSignedPostPolicyV2Callback,
+    callback: GenerateSignedPostPolicyV2Callback
   ): void;
   /**
    * @typedef {array} GenerateSignedPostPolicyV2Response
@@ -2790,18 +2792,17 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   generateSignedPostPolicyV2(
     optionsOrCallback?:
-      | GenerateSignedPostPolicyV2Options
-      | GenerateSignedPostPolicyV2Callback,
-    cb?: GenerateSignedPostPolicyV2Callback,
+      GenerateSignedPostPolicyV2Options | GenerateSignedPostPolicyV2Callback,
+    cb?: GenerateSignedPostPolicyV2Callback
   ): void | Promise<GenerateSignedPostPolicyV2Response> {
     const args = normalize<GenerateSignedPostPolicyV2Options>(
       optionsOrCallback,
-      cb,
+      cb
     );
     let options = args.options;
     const callback = args.callback;
     const expires = new Date(
-      (options as GenerateSignedPostPolicyV2Options).expires,
+      (options as GenerateSignedPostPolicyV2Options).expires
     );
 
     if (isNaN(expires.getTime())) {
@@ -2890,19 +2891,19 @@ class File extends ServiceObject<File, FileMetadata> {
       },
       err => {
         callback(new SigningError(err.message));
-      },
+      }
     );
   }
 
   generateSignedPostPolicyV4(
-    options: GenerateSignedPostPolicyV4Options,
+    options: GenerateSignedPostPolicyV4Options
   ): Promise<GenerateSignedPostPolicyV4Response>;
   generateSignedPostPolicyV4(
     options: GenerateSignedPostPolicyV4Options,
-    callback: GenerateSignedPostPolicyV4Callback,
+    callback: GenerateSignedPostPolicyV4Callback
   ): void;
   generateSignedPostPolicyV4(
-    callback: GenerateSignedPostPolicyV4Callback,
+    callback: GenerateSignedPostPolicyV4Callback
   ): void;
   /**
    * @typedef {object} SignedPostPolicyV4Output
@@ -2994,9 +2995,8 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   generateSignedPostPolicyV4(
     optionsOrCallback?:
-      | GenerateSignedPostPolicyV4Options
-      | GenerateSignedPostPolicyV4Callback,
-    cb?: GenerateSignedPostPolicyV4Callback,
+      GenerateSignedPostPolicyV4Options | GenerateSignedPostPolicyV4Callback,
+    cb?: GenerateSignedPostPolicyV4Callback
   ): void | Promise<GenerateSignedPostPolicyV4Response> {
     const args = normalize<
       GenerateSignedPostPolicyV4Options,
@@ -3005,7 +3005,7 @@ class File extends ServiceObject<File, FileMetadata> {
     let options = args.options;
     const callback = args.callback;
     const expires = new Date(
-      (options as GenerateSignedPostPolicyV4Options).expires,
+      (options as GenerateSignedPostPolicyV4Options).expires
     );
 
     if (isNaN(expires.getTime())) {
@@ -3018,7 +3018,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (expires.valueOf() - Date.now() > SEVEN_DAYS * 1000) {
       throw new Error(
-        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`,
+        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`
       );
     }
 
@@ -3065,7 +3065,7 @@ class File extends ServiceObject<File, FileMetadata> {
       try {
         const signature = await this.storage.authClient.sign(
           policyBase64,
-          options.signingEndpoint,
+          options.signingEndpoint
         );
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
         const universe = this.parent.storage.universeDomain;
@@ -3277,7 +3277,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   getSignedUrl(
     cfg: GetSignedUrlConfig,
-    callback?: GetSignedUrlCallback,
+    callback?: GetSignedUrlCallback
   ): void | Promise<GetSignedUrlResponse> {
     const method = ActionToHTTPMethod[cfg.action];
     const extensionHeaders = objectKeyToLowercase(cfg.extensionHeaders || {});
@@ -3329,7 +3329,7 @@ class File extends ServiceObject<File, FileMetadata> {
         this.storage.authClient,
         this.bucket,
         this,
-        this.storage,
+        this.storage
       );
     }
 
@@ -3427,17 +3427,17 @@ class File extends ServiceObject<File, FileMetadata> {
         } else {
           callback!(null, true);
         }
-      },
+      }
     );
   }
 
   makePrivate(
-    options?: MakeFilePrivateOptions,
+    options?: MakeFilePrivateOptions
   ): Promise<MakeFilePrivateResponse>;
   makePrivate(callback: MakeFilePrivateCallback): void;
   makePrivate(
     options: MakeFilePrivateOptions,
-    callback: MakeFilePrivateCallback,
+    callback: MakeFilePrivateCallback
   ): void;
   /**
    * @typedef {object} MakeFilePrivateOptions Configuration options for File#makePrivate().
@@ -3495,7 +3495,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   makePrivate(
     optionsOrCallback?: MakeFilePrivateOptions | MakeFilePrivateCallback,
-    callback?: MakeFilePrivateCallback,
+    callback?: MakeFilePrivateCallback
   ): Promise<MakeFilePrivateResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3567,7 +3567,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * Another example:
    */
   makePublic(
-    callback?: MakeFilePublicCallback,
+    callback?: MakeFilePublicCallback
   ): Promise<MakeFilePublicResponse> | void {
     callback = callback || util.noop;
     this.acl.add(
@@ -3577,7 +3577,7 @@ class File extends ServiceObject<File, FileMetadata> {
       },
       (err, acl, resp) => {
         callback!(err, resp);
-      },
+      }
     );
   }
 
@@ -3606,16 +3606,16 @@ class File extends ServiceObject<File, FileMetadata> {
 
   moveFileAtomic(
     destination: string | File,
-    options?: MoveFileAtomicOptions,
+    options?: MoveFileAtomicOptions
   ): Promise<MoveFileAtomicResponse>;
   moveFileAtomic(
     destination: string | File,
-    callback: MoveFileAtomicCallback,
+    callback: MoveFileAtomicCallback
   ): void;
   moveFileAtomic(
     destination: string | File,
     options: MoveFileAtomicOptions,
-    callback: MoveFileAtomicCallback,
+    callback: MoveFileAtomicCallback
   ): void;
   /**
    * @typedef {array} MoveFileAtomicResponse
@@ -3715,10 +3715,10 @@ class File extends ServiceObject<File, FileMetadata> {
   moveFileAtomic(
     destination: string | File,
     optionsOrCallback?: MoveFileAtomicOptions | MoveFileAtomicCallback,
-    callback?: MoveFileAtomicCallback,
+    callback?: MoveFileAtomicCallback
   ): Promise<MoveFileAtomicResponse> | void {
     const noDestinationError = new Error(
-      FileExceptionMessages.DESTINATION_NO_NAME,
+      FileExceptionMessages.DESTINATION_NO_NAME
     );
 
     if (!destination) {
@@ -3755,7 +3755,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts,
+        options?.preconditionOpts
       )
     ) {
       this.storage.retryOptions.autoRetry = false;
@@ -3785,19 +3785,19 @@ class File extends ServiceObject<File, FileMetadata> {
         }
 
         callback!(null, newFile, resp);
-      },
+      }
     );
   }
 
   move(
     destination: string | Bucket | File,
-    options?: MoveOptions,
+    options?: MoveOptions
   ): Promise<MoveResponse>;
   move(destination: string | Bucket | File, callback: MoveCallback): void;
   move(
     destination: string | Bucket | File,
     options: MoveOptions,
-    callback: MoveCallback,
+    callback: MoveCallback
   ): void;
   /**
    * @typedef {array} MoveResponse
@@ -3932,7 +3932,7 @@ class File extends ServiceObject<File, FileMetadata> {
   move(
     destination: string | Bucket | File,
     optionsOrCallback?: MoveOptions | MoveCallback,
-    callback?: MoveCallback,
+    callback?: MoveCallback
   ): Promise<MoveResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3968,13 +3968,13 @@ class File extends ServiceObject<File, FileMetadata> {
 
   rename(
     destinationFile: string | File,
-    options?: RenameOptions,
+    options?: RenameOptions
   ): Promise<RenameResponse>;
   rename(destinationFile: string | File, callback: RenameCallback): void;
   rename(
     destinationFile: string | File,
     options: RenameOptions,
-    callback: RenameCallback,
+    callback: RenameCallback
   ): void;
   /**
    * @typedef {array} RenameResponse
@@ -4063,7 +4063,7 @@ class File extends ServiceObject<File, FileMetadata> {
   rename(
     destinationFile: string | File,
     optionsOrCallback?: RenameOptions | RenameCallback,
-    callback?: RenameCallback,
+    callback?: RenameCallback
   ): Promise<RenameResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -4113,7 +4113,7 @@ class File extends ServiceObject<File, FileMetadata> {
   request(reqOpts: DecorateRequestOptions): Promise<RequestResponse>;
   request(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void;
   /**
    * Makes request and applies userProject query parameter if necessary.
@@ -4125,18 +4125,18 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   request(
     reqOpts: DecorateRequestOptions,
-    callback?: BodyResponseCallback,
+    callback?: BodyResponseCallback
   ): void | Promise<RequestResponse> {
     return this.parent.request.call(this, reqOpts, callback!);
   }
 
   rotateEncryptionKey(
-    options?: RotateEncryptionKeyOptions,
+    options?: RotateEncryptionKeyOptions
   ): Promise<RotateEncryptionKeyResponse>;
   rotateEncryptionKey(callback: RotateEncryptionKeyCallback): void;
   rotateEncryptionKey(
     options: RotateEncryptionKeyOptions,
-    callback: RotateEncryptionKeyCallback,
+    callback: RotateEncryptionKeyCallback
   ): void;
   /**
    * @callback RotateEncryptionKeyCallback
@@ -4172,9 +4172,8 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   rotateEncryptionKey(
     optionsOrCallback?:
-      | RotateEncryptionKeyOptions
-      | RotateEncryptionKeyCallback,
-    callback?: RotateEncryptionKeyCallback,
+      RotateEncryptionKeyOptions | RotateEncryptionKeyCallback,
+    callback?: RotateEncryptionKeyCallback
   ): Promise<RotateEncryptionKeyResponse> | void {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
@@ -4257,7 +4256,7 @@ class File extends ServiceObject<File, FileMetadata> {
   save(
     data: SaveData,
     optionsOrCallback?: SaveOptions | SaveCallback,
-    callback?: SaveCallback,
+    callback?: SaveCallback
   ): Promise<void> | void {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
@@ -4266,14 +4265,14 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const validationError = handleContextValidation(
       options.metadata?.contexts,
-      callback,
+      callback
     );
     if (validationError) return validationError;
 
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts,
+        options?.preconditionOpts
       )
     ) {
       maxRetries = 0;
@@ -4332,7 +4331,7 @@ class File extends ServiceObject<File, FileMetadata> {
         factor: this.storage.retryOptions.retryDelayMultiplier,
         maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
-      },
+      }
     );
     if (!callback) {
       return returnValue;
@@ -4349,21 +4348,21 @@ class File extends ServiceObject<File, FileMetadata> {
 
   setMetadata(
     metadata: FileMetadata,
-    options?: SetMetadataOptions,
+    options?: SetMetadataOptions
   ): Promise<SetMetadataResponse<FileMetadata>>;
   setMetadata(
     metadata: FileMetadata,
-    callback: MetadataCallback<FileMetadata>,
+    callback: MetadataCallback<FileMetadata>
   ): void;
   setMetadata(
     metadata: FileMetadata,
     options: SetMetadataOptions,
-    callback: MetadataCallback<FileMetadata>,
+    callback: MetadataCallback<FileMetadata>
   ): void;
   setMetadata(
     metadata: FileMetadata,
     optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
-    cb?: MetadataCallback<FileMetadata>,
+    cb?: MetadataCallback<FileMetadata>
   ): Promise<SetMetadataResponse<FileMetadata>> | void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any =
@@ -4379,7 +4378,7 @@ class File extends ServiceObject<File, FileMetadata> {
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,
       AvailableServiceObjectMethods.setMetadata,
-      options,
+      options
     );
 
     super
@@ -4393,16 +4392,16 @@ class File extends ServiceObject<File, FileMetadata> {
 
   setStorageClass(
     storageClass: string,
-    options?: SetStorageClassOptions,
+    options?: SetStorageClassOptions
   ): Promise<SetStorageClassResponse>;
   setStorageClass(
     storageClass: string,
     options: SetStorageClassOptions,
-    callback: SetStorageClassCallback,
+    callback: SetStorageClassCallback
   ): void;
   setStorageClass(
     storageClass: string,
-    callback?: SetStorageClassCallback,
+    callback?: SetStorageClassCallback
   ): void;
   /**
    * @typedef {array} SetStorageClassResponse
@@ -4453,7 +4452,7 @@ class File extends ServiceObject<File, FileMetadata> {
   setStorageClass(
     storageClass: string,
     optionsOrCallback?: SetStorageClassOptions | SetStorageClassCallback,
-    callback?: SetStorageClassCallback,
+    callback?: SetStorageClassCallback
   ): Promise<SetStorageClassResponse> | void {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
@@ -4513,14 +4512,14 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startResumableUpload_(
     dup: Duplexify,
-    options: CreateResumableUploadOptions = {},
+    options: CreateResumableUploadOptions = {}
   ): void {
     options.metadata ??= {};
 
     const retryOptions = this.storage.retryOptions;
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options.preconditionOpts,
+        options.preconditionOpts
       )
     ) {
       retryOptions.autoRetry = false;
@@ -4531,7 +4530,7 @@ class File extends ServiceObject<File, FileMetadata> {
       bucket: this.bucket.name,
       customRequestOptions: this.getRequestInterceptors().reduce(
         (reqOpts, interceptorFn) => interceptorFn(reqOpts),
-        {},
+        {}
       ),
       file: this.name,
       generation: this.generation,
@@ -4595,7 +4594,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startSimpleUpload_(
     dup: Duplexify,
-    options: CreateWriteStreamOptions = {},
+    options: CreateWriteStreamOptions = {}
   ): void {
     options.metadata ??= {};
 
@@ -4638,7 +4637,7 @@ class File extends ServiceObject<File, FileMetadata> {
     Object.assign(
       reqOpts.qs,
       this.instancePreconditionOpts,
-      options.preconditionOpts,
+      options.preconditionOpts
     );
 
     util.makeWritableStream(dup, {
@@ -4664,7 +4663,7 @@ class File extends ServiceObject<File, FileMetadata> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     coreOpts: any,
     methodType: AvailableServiceObjectMethods,
-    localPreconditionOptions?: PreconditionOptions,
+    localPreconditionOptions?: PreconditionOptions
   ): void {
     if (
       (typeof coreOpts === 'object' &&
@@ -4710,7 +4709,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   async #validateIntegrity(
     hashCalculatingStream: HashStreamValidator,
-    verify: {crc32c?: boolean; md5?: boolean} = {},
+    verify: {crc32c?: boolean; md5?: boolean} = {}
   ) {
     const metadata = this.metadata;
 

@@ -306,7 +306,7 @@ class CRC32C implements CRC32CValidator {
   }
 
   /**
-   * Generates a `CRC32C` from a variety of compatable types.
+   * Generates a `CRC32C` from a variety of compatible types.
    * Note: strings are treated as input, not as file paths to read from.
    *
    * @param value A number, 4-byte `ArrayBufferView`/`Buffer`/`TypedArray`, or 4-byte base64-encoded data (string)

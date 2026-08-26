@@ -38,8 +38,7 @@ import {GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
-import fs from 'fs';
-import {promises as fsp, Stats} from 'fs';
+import fs, {promises as fsp, Stats} from 'fs';
 import * as sinon from 'sinon';
 import {DownloadResponseWithStatus, SkipReason} from '../src/file.js';
 

@@ -106,7 +106,10 @@ const fakeFs = {
   stat: (filePath: string, callback: Function) => {
     return (fsStatOverride || fs.stat)(filePath, callback);
   },
-  createReadStream: (filePath: string, options?: Parameters<typeof fs.createReadStream>[1]) => {
+  createReadStream: (
+    filePath: string,
+    options?: Parameters<typeof fs.createReadStream>[1]
+  ) => {
     return (fsCreateReadStreamOverride || fs.createReadStream)(
       filePath,
       options
@@ -666,18 +669,18 @@ describe('Bucket', () => {
   describe('combine', () => {
     it('should throw if invalid sources are provided', () => {
       assert.throws(() => {
-        bucket.combine(), BucketExceptionMessages.PROVIDE_SOURCE_FILE;
+        (bucket.combine(), BucketExceptionMessages.PROVIDE_SOURCE_FILE);
       });
 
       assert.throws(() => {
-        bucket.combine([]), BucketExceptionMessages.PROVIDE_SOURCE_FILE;
+        (bucket.combine([]), BucketExceptionMessages.PROVIDE_SOURCE_FILE);
       });
     });
 
     it('should throw if a destination is not provided', () => {
       assert.throws(() => {
-        bucket.combine(['1', '2']),
-          BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED;
+        (bucket.combine(['1', '2']),
+          BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED);
       });
     });
 
@@ -952,7 +955,10 @@ describe('Bucket', () => {
         return [{}];
       };
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
         assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         assert.strictEqual(reqOpts.json.sourceObjects[0].generation, 12345);
@@ -983,7 +989,10 @@ describe('Bucket', () => {
         };
       });
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(null, {});
       };
@@ -1008,16 +1017,24 @@ describe('Bucket', () => {
         };
       });
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(composeError);
       };
 
-      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
-        assert.strictEqual(err, composeError);
-        assert.strictEqual(deletedCount, 0);
-        done();
-      });
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true},
+        (err: any) => {
+          assert.strictEqual(err, composeError);
+          assert.strictEqual(deletedCount, 0);
+          done();
+        }
+      );
     });
 
     it('should return ComposeCleanupError if deleting source objects fails', done => {
@@ -1036,7 +1053,10 @@ describe('Bucket', () => {
         return [{}];
       };
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(null, {success: true});
       };
@@ -1073,7 +1093,7 @@ describe('Bucket', () => {
 
     it('should throw if an ID is not provided', () => {
       assert.throws(() => {
-        bucket.createChannel(), BucketExceptionMessages.CHANNEL_ID_REQUIRED;
+        (bucket.createChannel(), BucketExceptionMessages.CHANNEL_ID_REQUIRED);
       });
     });
 
@@ -1199,8 +1219,8 @@ describe('Bucket', () => {
 
     it('should throw an error if a valid topic is not provided', () => {
       assert.throws(() => {
-        bucket.createNotification(),
-          BucketExceptionMessages.TOPIC_NAME_REQUIRED;
+        (bucket.createNotification(),
+          BucketExceptionMessages.TOPIC_NAME_REQUIRED);
       });
     });
 
@@ -1684,27 +1704,27 @@ describe('Bucket', () => {
 
     it('should throw if a config object is not provided', () => {
       assert.throws(() => {
-        bucket.enableLogging(),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
+        (bucket.enableLogging(),
+          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED);
       });
     });
 
     it('should throw if config is a function', () => {
       assert.throws(() => {
-        bucket.enableLogging(assert.ifError),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
+        (bucket.enableLogging(assert.ifError),
+          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED);
       });
     });
 
     it('should throw if a prefix is not provided', () => {
       assert.throws(() => {
-        bucket.enableLogging(
+        (bucket.enableLogging(
           {
             bucket: 'bucket-name',
           },
           assert.ifError
         ),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
+          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED);
       });
     });
 
@@ -1889,7 +1909,7 @@ describe('Bucket', () => {
 
     it('should throw if no name is provided', () => {
       assert.throws(() => {
-        bucket.file(), BucketExceptionMessages.SPECIFY_FILE_NAME;
+        (bucket.file(), BucketExceptionMessages.SPECIFY_FILE_NAME);
       });
     });
 
@@ -2434,8 +2454,8 @@ describe('Bucket', () => {
   describe('lock', () => {
     it('should throw if a metageneration is not provided', () => {
       assert.throws(() => {
-        bucket.lock(assert.ifError),
-          BucketExceptionMessages.METAGENERATION_NOT_PROVIDED;
+        (bucket.lock(assert.ifError),
+          BucketExceptionMessages.METAGENERATION_NOT_PROVIDED);
       });
     });
 
@@ -2631,7 +2651,7 @@ describe('Bucket', () => {
   describe('notification', () => {
     it('should throw an error if an id is not provided', () => {
       assert.throws(() => {
-        bucket.notification(), BucketExceptionMessages.SUPPLY_NOTIFICATION_ID;
+        (bucket.notification(), BucketExceptionMessages.SUPPLY_NOTIFICATION_ID);
       });
     });
 

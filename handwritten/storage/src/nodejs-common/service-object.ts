@@ -34,7 +34,7 @@ export interface ServiceObjectParent {
   requestStream(reqOpts: DecorateRequestOptions): r.Request;
   request(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void;
 }
 
@@ -48,7 +48,7 @@ export type MetadataResponse<K> = [K, r.Response];
 export type MetadataCallback<K> = (
   err: Error | null,
   metadata?: K,
-  apiResponse?: r.Response,
+  apiResponse?: r.Response
 ) => void;
 
 export type ExistsOptions = object;
@@ -238,7 +238,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   create(callback: CreateCallback<T>): void;
   create(
     optionsOrCallback?: CreateOptions | CreateCallback<T>,
-    callback?: CreateCallback<T>,
+    callback?: CreateCallback<T>
   ): void | Promise<CreateResponse<T>> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
@@ -283,7 +283,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   delete(callback: DeleteCallback): void;
   delete(
     optionsOrCallback?: DeleteOptions | DeleteCallback,
-    cb?: DeleteCallback,
+    cb?: DeleteCallback
   ): Promise<[r.Response]> | void {
     const [options, callback] = util.maybeOptionsOrCallback<
       DeleteOptions,
@@ -318,7 +318,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           }
         }
         callback(err, res);
-      },
+      }
     );
   }
 
@@ -334,7 +334,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   exists(callback: ExistsCallback): void;
   exists(
     optionsOrCallback?: ExistsOptions | ExistsCallback,
-    cb?: ExistsCallback,
+    cb?: ExistsCallback
   ): void | Promise<[boolean]> {
     const [options, callback] = util.maybeOptionsOrCallback<
       ExistsOptions,
@@ -371,7 +371,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   get(options: GetOrCreateOptions, callback: InstanceResponseCallback<T>): void;
   get(
     optionsOrCallback?: GetOrCreateOptions | InstanceResponseCallback<T>,
-    cb?: InstanceResponseCallback<T>,
+    cb?: InstanceResponseCallback<T>
   ): Promise<GetResponse<T>> | void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
@@ -388,7 +388,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     function onCreate(
       err: ApiError | null,
       instance: T,
-      apiResponse: r.Response,
+      apiResponse: r.Response
     ) {
       if (err) {
         if (err.code === 409) {
@@ -432,7 +432,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   getMetadata(callback: MetadataCallback<K>): void;
   getMetadata(
     optionsOrCallback: GetMetadataOptions | MetadataCallback<K>,
-    cb?: MetadataCallback<K>,
+    cb?: MetadataCallback<K>
   ): Promise<MetadataResponse<K>> | void {
     const [options, callback] = util.maybeOptionsOrCallback<
       GetMetadataOptions,
@@ -460,7 +460,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       (err: Error | null, body?: ResponseBody, res?: r.Response) => {
         this.metadata = body;
         callback!(err, this.metadata, res);
-      },
+      }
     );
   }
 
@@ -486,18 +486,18 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
    */
   setMetadata(
     metadata: K,
-    options?: SetMetadataOptions,
+    options?: SetMetadataOptions
   ): Promise<SetMetadataResponse<K>>;
   setMetadata(metadata: K, callback: MetadataCallback<K>): void;
   setMetadata(
     metadata: K,
     options: SetMetadataOptions,
-    callback: MetadataCallback<K>,
+    callback: MetadataCallback<K>
   ): void;
   setMetadata(
     metadata: K,
     optionsOrCallback: SetMetadataOptions | MetadataCallback<K>,
-    cb?: MetadataCallback<K>,
+    cb?: MetadataCallback<K>
   ): Promise<SetMetadataResponse<K>> | void {
     const [options, callback] = util.maybeOptionsOrCallback<
       SetMetadataOptions,
@@ -530,7 +530,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       (err: Error | null, body?: ResponseBody, res?: r.Response) => {
         this.metadata = body;
         callback!(err, this.metadata, res);
-      },
+      }
     );
   }
 
@@ -546,11 +546,11 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   private request_(reqOpts: StreamRequestOptions): r.Request;
   private request_(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void;
   private request_(
     reqOpts: DecorateRequestOptions | StreamRequestOptions,
-    callback?: BodyResponseCallback,
+    callback?: BodyResponseCallback
   ): void | r.Request {
     reqOpts = {...reqOpts};
 
@@ -596,11 +596,11 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   request(reqOpts: DecorateRequestOptions): Promise<RequestResponse>;
   request(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void;
   request(
     reqOpts: DecorateRequestOptions,
-    callback?: BodyResponseCallback,
+    callback?: BodyResponseCallback
   ): void | Promise<RequestResponse> {
     this.request_(reqOpts, callback!);
   }
