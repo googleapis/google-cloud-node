@@ -383,7 +383,7 @@ export class ZoneVmExtensionPoliciesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Deletes a specified zone VM extension policy.
+   * Deletes a specified zone VM extension policy within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -551,7 +551,7 @@ export class ZoneVmExtensionPoliciesClient {
       });
   }
   /**
-   * Retrieves details of a specific zone VM extension policy.
+   * Retrieves details of a specific zone VM extension policy within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -867,7 +867,7 @@ export class ZoneVmExtensionPoliciesClient {
       });
   }
   /**
-   * Modifies an existing zone VM extension policy.
+   * Modifies an existing zone VM extension policy within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.

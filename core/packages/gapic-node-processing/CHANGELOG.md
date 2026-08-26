@@ -1,0 +1,113 @@
+# Changelog
+
+## [0.2.2](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.1...gapic-node-processing-v0.2.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.0...gapic-node-processing-v0.2.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.11...gapic-node-processing-v0.2.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990))
+
+### Features
+
+* Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990)) ([ec833e1](https://github.com/googleapis/google-cloud-node/commit/ec833e18a70397baef6c52e82c4237a275ba8ce6)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [0.1.11](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.10...gapic-node-processing-v0.1.11) (2026-07-24)
+
+
+### Bug Fixes
+
+* **gapic-node-processing:** Move typescript to dependencies for AST runtime execution ([#8962](https://github.com/googleapis/google-cloud-node/issues/8962)) ([c2f5136](https://github.com/googleapis/google-cloud-node/commit/c2f51364b47c40e6793c55d3020329e1fa4a9f74))
+
+## [0.1.10](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.9...gapic-node-processing-v0.1.10) (2026-07-23)
+
+
+### Bug Fixes
+
+* **gapic-node-processing:** Preserve index.ts exports and merge clients across multi-api staging subdirectories ([#8953](https://github.com/googleapis/google-cloud-node/issues/8953)) ([fee5a15](https://github.com/googleapis/google-cloud-node/commit/fee5a15dc99d8055f7b316c4b7630d044821f235))
+
+## [0.1.9](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.8...gapic-node-processing-v0.1.9) (2026-06-18)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
+## [0.1.8](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.7...gapic-node-processing-v0.1.8) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
+## [0.1.7](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.6...gapic-node-processing-v0.1.7) (2026-03-02)
+
+
+### Bug Fixes
+
+* Bug preventing apiPath generation when apiId includes letter v ([f1456f9](https://github.com/googleapis/google-cloud-node/commit/f1456f9e8bdd5c2b2d579d6a451036d98b8ee26e))
+* Bug preventing apiPath generation when apiId includes letter v ([6d705f4](https://github.com/googleapis/google-cloud-node/commit/6d705f413ead1e2adfe3dc1d703d4637ab36b6d9))
+* Bug preventing apiPath generation when apiId includes letter v ([76baebb](https://github.com/googleapis/google-cloud-node/commit/76baebbdc05758953af5550b71f3144a7eafbfb4))
+
+## [0.1.6](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.5...gapic-node-processing-v0.1.6) (2025-10-24)
+
+
+### Bug Fixes
+
+* Bug in system test deletion logic ([#6845](https://github.com/googleapis/google-cloud-node/issues/6845)) ([468c233](https://github.com/googleapis/google-cloud-node/commit/468c23374a64c1dbdbfb52707d43169fc8fda2dc))
+
+## [0.1.5](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.4...gapic-node-processing-v0.1.5) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+* Make sure we are only generating default version system tests ([#6795](https://github.com/googleapis/google-cloud-node/issues/6795)) ([e0f29f6](https://github.com/googleapis/google-cloud-node/commit/e0f29f6c87a158e68ce7be53aad9e8fe237d0877))
+
+## [0.1.4](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.3...gapic-node-processing-v0.1.4) (2025-10-01)
+
+
+### Bug Fixes
+
+* Add 'esm' to src path for esm-specific structure ([#6768](https://github.com/googleapis/google-cloud-node/issues/6768)) ([88c89f4](https://github.com/googleapis/google-cloud-node/commit/88c89f456af4d6347e46d2919cbb757733bd7e19))
+
+## [0.1.3](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.2...gapic-node-processing-v0.1.3) (2025-09-30)
+
+
+### Bug Fixes
+
+* Reexport templates ([#6766](https://github.com/googleapis/google-cloud-node/issues/6766)) ([4742ae8](https://github.com/googleapis/google-cloud-node/commit/4742ae83ff00974e2677935fd7fe6ae13b9f7715))
+
+## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.1...gapic-node-processing-v0.1.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* [gapic-node-processing] remove hardlinks ([#6699](https://github.com/googleapis/google-cloud-node/issues/6699)) ([3478080](https://github.com/googleapis/google-cloud-node/commit/3478080d2c37b236c90feb1ad4a7643b4cb04aa4))
+
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.0...gapic-node-processing-v0.1.1) (2025-08-29)
+
+
+### Bug Fixes
+
+* Make sure we are not overwriting the README when generating it ([#6632](https://github.com/googleapis/google-cloud-node/issues/6632)) ([64d3018](https://github.com/googleapis/google-cloud-node/commit/64d301886c7ed320ba1b03d850363e54bdd4657e))
+
+## 0.1.0 (2025-08-28)
+
+
+### Features
+
+* Create gapic-node-processing library ([#6604](https://github.com/googleapis/google-cloud-node/issues/6604)) ([5267f25](https://github.com/googleapis/google-cloud-node/commit/5267f25145ef5605daa1bd1140c3320e5f3b5b66))

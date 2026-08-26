@@ -214,6 +214,12 @@ export class OrderServiceClient {
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
+      adRulePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adRules/{ad_rule}',
+      ),
+      adSpotPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adSpots/{ad_spot}',
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
@@ -231,6 +237,9 @@ export class OrderServiceClient {
       ),
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}',
+      ),
+      cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cdnConfigs/{cdn_config}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -256,8 +265,17 @@ export class OrderServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
+      ),
+      creativeWrapperPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeWrappers/{creative_wrapper}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}',
@@ -267,6 +285,12 @@ export class OrderServiceClient {
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
+      ),
+      daiAuthenticationKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}',
+      ),
+      daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
@@ -292,6 +316,9 @@ export class OrderServiceClient {
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
       ),
+      liveStreamPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreams/{live_stream}',
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}',
       ),
@@ -315,6 +342,9 @@ export class OrderServiceClient {
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}',
+      ),
+      partnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/partners/{partner}',
       ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}',
@@ -340,14 +370,29 @@ export class OrderServiceClient {
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
       ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
+      ),
+      suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
+      ),
+      targetingPresetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/targetingPresets/{targeting_preset}',
+      ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/taxonomyCategories/{taxonomy_category}',
       ),
       teamPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/teams/{team}',
       ),
+      thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
+      ),
+      viewabilityProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/viewabilityProviders/{viewability_provider}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
@@ -414,7 +459,28 @@ export class OrderServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const orderServiceStubMethods = ['getOrder', 'listOrders'];
+    const orderServiceStubMethods = [
+      'getOrder',
+      'listOrders',
+      'batchCreateOrders',
+      'batchUpdateOrders',
+      'batchApproveOrders',
+      'batchApproveAndOverbookOrders',
+      'batchSubmitOrdersForApproval',
+      'batchSubmitOrdersForApprovalAndOverbook',
+      'batchSubmitOrdersForApprovalWithoutReservationChanges',
+      'batchPauseOrders',
+      'batchResumeOrders',
+      'batchResumeAndOverbookOrders',
+      'batchApproveOrdersWithoutReservation',
+      'batchArchiveOrders',
+      'batchUnarchiveOrders',
+      'batchDeleteOrders',
+      'batchDisapproveOrders',
+      'batchDisapproveOrdersWithoutReservationChanges',
+      'batchRetractOrders',
+      'batchRetractOrdersWithoutReservationChanges',
+    ];
     for (const methodName of orderServiceStubMethods) {
       const callPromise = this.orderServiceStub.then(
         (stub) =>
@@ -532,7 +598,7 @@ export class OrderServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * API to retrieve an Order object.
+   * Retrieves an `Order` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -656,9 +722,2645 @@ export class OrderServiceClient {
         throw error;
       });
   }
+  /**
+   * Creates `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `Orders` will be created.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the CreateOrderRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `Order` objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateOrdersResponse|BatchCreateOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_create_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchCreateOrders_async
+   */
+  batchCreateOrders(
+    request?: protos.google.ads.admanager.v1.IBatchCreateOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchCreateOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCreateOrders(
+    request: protos.google.ads.admanager.v1.IBatchCreateOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateOrders(
+    request: protos.google.ads.admanager.v1.IBatchCreateOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateOrders(
+    request?: protos.google.ads.admanager.v1.IBatchCreateOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchCreateOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchCreateOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchCreateOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `Orders` will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the UpdateOrderRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `Order` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateOrdersResponse|BatchUpdateOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_update_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchUpdateOrders_async
+   */
+  batchUpdateOrders(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchUpdateOrders(
+    request: protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateOrders(
+    request: protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateOrders(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchUpdateOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Approves a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to approve.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {boolean} [request.skipInventoryCheck]
+   *   Optional. Indicates whether the inventory check should be skipped when
+   *   performing this action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchApproveOrdersResponse|BatchApproveOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_approve_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchApproveOrders_async
+   */
+  batchApproveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchApproveOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchApproveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchApproveOrders(
+    request: protos.google.ads.admanager.v1.IBatchApproveOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveOrders(
+    request: protos.google.ads.admanager.v1.IBatchApproveOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchApproveOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchApproveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchApproveOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchApproveOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchApproveOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchApproveOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchApproveOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Approves and overbooks a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to approve and overbook.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {boolean} [request.skipInventoryCheck]
+   *   Optional. Indicates whether the inventory check should be skipped when
+   *   performing this action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersResponse|BatchApproveAndOverbookOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_approve_and_overbook_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchApproveAndOverbookOrders_async
+   */
+  batchApproveAndOverbookOrders(
+    request?: protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchApproveAndOverbookOrders(
+    request: protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveAndOverbookOrders(
+    request: protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveAndOverbookOrders(
+    request?: protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchApproveAndOverbookOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchApproveAndOverbookOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchApproveAndOverbookOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchApproveAndOverbookOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Submits a list of `Order` objects for approval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to submit for approval.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {boolean} [request.skipInventoryCheck]
+   *   Optional. Indicates whether the inventory check should be skipped when
+   *   performing this action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalResponse|BatchSubmitOrdersForApprovalResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_submit_orders_for_approval.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchSubmitOrdersForApproval_async
+   */
+  batchSubmitOrdersForApproval(
+    request?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchSubmitOrdersForApproval(
+    request: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchSubmitOrdersForApproval(
+    request: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchSubmitOrdersForApproval(
+    request?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+          | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchSubmitOrdersForApproval request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+          | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchSubmitOrdersForApproval response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchSubmitOrdersForApproval(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchSubmitOrdersForApproval response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Submits and overbooks a list of `Order` objects for approval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to submit for approval and
+   *   overbook. Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookResponse|BatchSubmitOrdersForApprovalAndOverbookResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_submit_orders_for_approval_and_overbook.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchSubmitOrdersForApprovalAndOverbook_async
+   */
+  batchSubmitOrdersForApprovalAndOverbook(
+    request?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchSubmitOrdersForApprovalAndOverbook(
+    request: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchSubmitOrdersForApprovalAndOverbook(
+    request: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchSubmitOrdersForApprovalAndOverbook(
+    request?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+          | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'batchSubmitOrdersForApprovalAndOverbook request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+          | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchSubmitOrdersForApprovalAndOverbook response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchSubmitOrdersForApprovalAndOverbook(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchSubmitOrdersForApprovalAndOverbook response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Submits a list of `Order` objects for approval without changing reservation
+   * status.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to submit for approval.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesResponse|BatchSubmitOrdersForApprovalWithoutReservationChangesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_submit_orders_for_approval_without_reservation_changes.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchSubmitOrdersForApprovalWithoutReservationChanges_async
+   */
+  batchSubmitOrdersForApprovalWithoutReservationChanges(
+    request?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchSubmitOrdersForApprovalWithoutReservationChanges(
+    request: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchSubmitOrdersForApprovalWithoutReservationChanges(
+    request: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchSubmitOrdersForApprovalWithoutReservationChanges(
+    request?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+          | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'batchSubmitOrdersForApprovalWithoutReservationChanges request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+          | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchSubmitOrdersForApprovalWithoutReservationChanges response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchSubmitOrdersForApprovalWithoutReservationChanges(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchSubmitOrdersForApprovalWithoutReservationChanges response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Pauses a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to pause.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchPauseOrdersResponse|BatchPauseOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_pause_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchPauseOrders_async
+   */
+  batchPauseOrders(
+    request?: protos.google.ads.admanager.v1.IBatchPauseOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchPauseOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchPauseOrders(
+    request: protos.google.ads.admanager.v1.IBatchPauseOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchPauseOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchPauseOrders(
+    request: protos.google.ads.admanager.v1.IBatchPauseOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchPauseOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchPauseOrders(
+    request?: protos.google.ads.admanager.v1.IBatchPauseOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchPauseOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchPauseOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchPauseOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchPauseOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchPauseOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchPauseOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchPauseOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchPauseOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchPauseOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Resumes a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to resume.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {boolean} [request.skipInventoryCheck]
+   *   Optional. Indicates whether the inventory check should be skipped when
+   *   performing this action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchResumeOrdersResponse|BatchResumeOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_resume_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchResumeOrders_async
+   */
+  batchResumeOrders(
+    request?: protos.google.ads.admanager.v1.IBatchResumeOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchResumeOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchResumeOrders(
+    request: protos.google.ads.admanager.v1.IBatchResumeOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeOrders(
+    request: protos.google.ads.admanager.v1.IBatchResumeOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeOrders(
+    request?: protos.google.ads.admanager.v1.IBatchResumeOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchResumeOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchResumeOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchResumeOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchResumeOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchResumeOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchResumeOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Resumes and overbooks a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to resume and overbook.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersResponse|BatchResumeAndOverbookOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_resume_and_overbook_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchResumeAndOverbookOrders_async
+   */
+  batchResumeAndOverbookOrders(
+    request?: protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchResumeAndOverbookOrders(
+    request: protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeAndOverbookOrders(
+    request: protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeAndOverbookOrders(
+    request?: protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchResumeAndOverbookOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchResumeAndOverbookOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchResumeAndOverbookOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchResumeAndOverbookOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Approves a list of `Order` objects without changing reservation status.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to approve.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationResponse|BatchApproveOrdersWithoutReservationResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_approve_orders_without_reservation.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchApproveOrdersWithoutReservation_async
+   */
+  batchApproveOrdersWithoutReservation(
+    request?: protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchApproveOrdersWithoutReservation(
+    request: protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveOrdersWithoutReservation(
+    request: protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveOrdersWithoutReservation(
+    request?: protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchApproveOrdersWithoutReservation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchApproveOrdersWithoutReservation response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchApproveOrdersWithoutReservation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchApproveOrdersWithoutReservation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Archives a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to archive.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchArchiveOrdersResponse|BatchArchiveOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_archive_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchArchiveOrders_async
+   */
+  batchArchiveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchArchiveOrders(
+    request: protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchArchiveOrders(
+    request: protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchArchiveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchArchiveOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchArchiveOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchArchiveOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchArchiveOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Unarchives a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to extract.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUnarchiveOrdersResponse|BatchUnarchiveOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_unarchive_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchUnarchiveOrders_async
+   */
+  batchUnarchiveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchUnarchiveOrders(
+    request: protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUnarchiveOrders(
+    request: protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUnarchiveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchUnarchiveOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUnarchiveOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUnarchiveOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUnarchiveOrdersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUnarchiveOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to delete.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeleteOrdersResponse|BatchDeleteOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_delete_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchDeleteOrders_async
+   */
+  batchDeleteOrders(
+    request?: protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDeleteOrders(
+    request: protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteOrders(
+    request: protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteOrders(
+    request?: protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchDeleteOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Disapproves a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to disapprove.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDisapproveOrdersResponse|BatchDisapproveOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_disapprove_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchDisapproveOrders_async
+   */
+  batchDisapproveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDisapproveOrders(
+    request: protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDisapproveOrders(
+    request: protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDisapproveOrders(
+    request?: protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchDisapproveOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDisapproveOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDisapproveOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDisapproveOrdersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDisapproveOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Disapproves a list of `Order` objects without changing reservation status.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to disapprove without
+   *   reservation changes. Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesResponse|BatchDisapproveOrdersWithoutReservationChangesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_disapprove_orders_without_reservation_changes.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchDisapproveOrdersWithoutReservationChanges_async
+   */
+  batchDisapproveOrdersWithoutReservationChanges(
+    request?: protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchDisapproveOrdersWithoutReservationChanges(
+    request: protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDisapproveOrdersWithoutReservationChanges(
+    request: protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDisapproveOrdersWithoutReservationChanges(
+    request?: protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+          | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'batchDisapproveOrdersWithoutReservationChanges request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+          | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchDisapproveOrdersWithoutReservationChanges response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDisapproveOrdersWithoutReservationChanges(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchDisapproveOrdersWithoutReservationChanges response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Retracts a list of `Order` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to retract.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchRetractOrdersResponse|BatchRetractOrdersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_retract_orders.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchRetractOrders_async
+   */
+  batchRetractOrders(
+    request?: protos.google.ads.admanager.v1.IBatchRetractOrdersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchRetractOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchRetractOrders(
+    request: protos.google.ads.admanager.v1.IBatchRetractOrdersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchRetractOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchRetractOrders(
+    request: protos.google.ads.admanager.v1.IBatchRetractOrdersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchRetractOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchRetractOrders(
+    request?: protos.google.ads.admanager.v1.IBatchRetractOrdersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchRetractOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+      | protos.google.ads.admanager.v1.IBatchRetractOrdersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+      protos.google.ads.admanager.v1.IBatchRetractOrdersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchRetractOrders request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+          | protos.google.ads.admanager.v1.IBatchRetractOrdersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchRetractOrders response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchRetractOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
+          protos.google.ads.admanager.v1.IBatchRetractOrdersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchRetractOrders response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Retracts a list of `Order` objects without changing reservation status.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Orders.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the orders to retract.
+   *   Format: `networks/{network_code}/orders/{order_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesResponse|BatchRetractOrdersWithoutReservationChangesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/order_service.batch_retract_orders_without_reservation_changes.js</caption>
+   * region_tag:admanager_v1_generated_OrderService_BatchRetractOrdersWithoutReservationChanges_async
+   */
+  batchRetractOrdersWithoutReservationChanges(
+    request?: protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchRetractOrdersWithoutReservationChanges(
+    request: protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchRetractOrdersWithoutReservationChanges(
+    request: protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchRetractOrdersWithoutReservationChanges(
+    request?: protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+          | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+      | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'batchRetractOrdersWithoutReservationChanges request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+          | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchRetractOrdersWithoutReservationChanges response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchRetractOrdersWithoutReservationChanges(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchRetractOrdersWithoutReservationChanges response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
-   * API to retrieve a list of `Order` objects.
+   * Lists `Order` objects.
    *
    * Fields used for literal matching in filter string:
    * * `order_id`
@@ -686,28 +3388,30 @@ export class OrderServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>advertiser</code></li>
-   *     <li><code>agency</code></li>
-   *     <li><code>appliedTeams</code></li>
-   *     <li><code>archived</code></li>
-   *     <li><code>creator</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>externalOrderId</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>orderId</code></li>
-   *     <li><code>poNumber</code></li>
-   *     <li><code>programmatic</code></li>
-   *     <li><code>salesperson</code></li>
-   *     <li><code>secondarySalespeople</code></li>
-   *     <li><code>secondaryTraffickers</code></li>
-   *     <li><code>startTime</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>trafficker</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `advertiser`
+   *   * `agency`
+   *   * `appliedTeams`
+   *   * `archived`
+   *   * `creator`
+   *   * `displayName`
+   *   * `endTime`
+   *   * `externalOrderId`
+   *   * `impressionsDelivered`
+   *   * `name`
+   *   * `orderId`
+   *   * `poNumber`
+   *   * `programmatic`
+   *   * `salesperson`
+   *   * `secondarySalespeople`
+   *   * `secondaryTraffickers`
+   *   * `startTime`
+   *   * `status`
+   *   * `totalClicksDelivered`
+   *   * `totalViewableImpressionsDelivered`
+   *   * `trafficker`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -842,28 +3546,30 @@ export class OrderServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>advertiser</code></li>
-   *     <li><code>agency</code></li>
-   *     <li><code>appliedTeams</code></li>
-   *     <li><code>archived</code></li>
-   *     <li><code>creator</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>externalOrderId</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>orderId</code></li>
-   *     <li><code>poNumber</code></li>
-   *     <li><code>programmatic</code></li>
-   *     <li><code>salesperson</code></li>
-   *     <li><code>secondarySalespeople</code></li>
-   *     <li><code>secondaryTraffickers</code></li>
-   *     <li><code>startTime</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>trafficker</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `advertiser`
+   *   * `agency`
+   *   * `appliedTeams`
+   *   * `archived`
+   *   * `creator`
+   *   * `displayName`
+   *   * `endTime`
+   *   * `externalOrderId`
+   *   * `impressionsDelivered`
+   *   * `name`
+   *   * `orderId`
+   *   * `poNumber`
+   *   * `programmatic`
+   *   * `salesperson`
+   *   * `secondarySalespeople`
+   *   * `secondaryTraffickers`
+   *   * `startTime`
+   *   * `status`
+   *   * `totalClicksDelivered`
+   *   * `totalViewableImpressionsDelivered`
+   *   * `trafficker`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -931,28 +3637,30 @@ export class OrderServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>advertiser</code></li>
-   *     <li><code>agency</code></li>
-   *     <li><code>appliedTeams</code></li>
-   *     <li><code>archived</code></li>
-   *     <li><code>creator</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>externalOrderId</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>orderId</code></li>
-   *     <li><code>poNumber</code></li>
-   *     <li><code>programmatic</code></li>
-   *     <li><code>salesperson</code></li>
-   *     <li><code>secondarySalespeople</code></li>
-   *     <li><code>secondaryTraffickers</code></li>
-   *     <li><code>startTime</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>trafficker</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `advertiser`
+   *   * `agency`
+   *   * `appliedTeams`
+   *   * `archived`
+   *   * `creator`
+   *   * `displayName`
+   *   * `endTime`
+   *   * `externalOrderId`
+   *   * `impressionsDelivered`
+   *   * `name`
+   *   * `orderId`
+   *   * `poNumber`
+   *   * `programmatic`
+   *   * `salesperson`
+   *   * `secondarySalespeople`
+   *   * `secondaryTraffickers`
+   *   * `startTime`
+   *   * `status`
+   *   * `totalClicksDelivered`
+   *   * `totalViewableImpressionsDelivered`
+   *   * `trafficker`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1106,6 +3814,78 @@ export class OrderServiceClient {
     return this.pathTemplates.adReviewCenterAdPathTemplate.match(
       adReviewCenterAdName,
     ).ad_review_center_ad;
+  }
+
+  /**
+   * Return a fully-qualified adRule resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_rule
+   * @returns {string} Resource name string.
+   */
+  adRulePath(networkCode: string, adRule: string) {
+    return this.pathTemplates.adRulePathTemplate.render({
+      network_code: networkCode,
+      ad_rule: adRule,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).network_code;
+  }
+
+  /**
+   * Parse the ad_rule from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the ad_rule.
+   */
+  matchAdRuleFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).ad_rule;
+  }
+
+  /**
+   * Return a fully-qualified adSpot resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_spot
+   * @returns {string} Resource name string.
+   */
+  adSpotPath(networkCode: string, adSpot: string) {
+    return this.pathTemplates.adSpotPathTemplate.render({
+      network_code: networkCode,
+      ad_spot: adSpot,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).network_code;
+  }
+
+  /**
+   * Parse the ad_spot from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the ad_spot.
+   */
+  matchAdSpotFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).ad_spot;
   }
 
   /**
@@ -1337,6 +4117,44 @@ export class OrderServiceClient {
     return this.pathTemplates.browserLanguagePathTemplate.match(
       browserLanguageName,
     ).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified cdnConfig resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cdn_config
+   * @returns {string} Resource name string.
+   */
+  cdnConfigPath(networkCode: string, cdnConfig: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.render({
+      network_code: networkCode,
+      cdn_config: cdnConfig,
+    });
+  }
+
+  /**
+   * Parse the network_code from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .network_code;
+  }
+
+  /**
+   * Parse the cdn_config from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the cdn_config.
+   */
+  matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .cdn_config;
   }
 
   /**
@@ -1647,6 +4465,81 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
+  }
+
+  /**
    * Return a fully-qualified creativeTemplate resource name string.
    *
    * @param {string} network_code
@@ -1684,6 +4577,46 @@ export class OrderServiceClient {
     return this.pathTemplates.creativeTemplatePathTemplate.match(
       creativeTemplateName,
     ).creative_template;
+  }
+
+  /**
+   * Return a fully-qualified creativeWrapper resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_wrapper
+   * @returns {string} Resource name string.
+   */
+  creativeWrapperPath(networkCode: string, creativeWrapper: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.render({
+      network_code: networkCode,
+      creative_wrapper: creativeWrapper,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the creative_wrapper from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the creative_wrapper.
+   */
+  matchCreativeWrapperFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).creative_wrapper;
   }
 
   /**
@@ -1808,6 +4741,92 @@ export class OrderServiceClient {
     return this.pathTemplates.customTargetingValuePathTemplate.match(
       customTargetingValueName,
     ).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified daiAuthenticationKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_authentication_key
+   * @returns {string} Resource name string.
+   */
+  daiAuthenticationKeyPath(networkCode: string, daiAuthenticationKey: string) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.render({
+      network_code: networkCode,
+      dai_authentication_key: daiAuthenticationKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_authentication_key from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the dai_authentication_key.
+   */
+  matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).dai_authentication_key;
+  }
+
+  /**
+   * Return a fully-qualified daiEncodingProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_encoding_profile
+   * @returns {string} Resource name string.
+   */
+  daiEncodingProfilePath(networkCode: string, daiEncodingProfile: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.render({
+      network_code: networkCode,
+      dai_encoding_profile: daiEncodingProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiEncodingProfileName(daiEncodingProfileName: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_encoding_profile from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the dai_encoding_profile.
+   */
+  matchDaiEncodingProfileFromDaiEncodingProfileName(
+    daiEncodingProfileName: string,
+  ) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).dai_encoding_profile;
   }
 
   /**
@@ -2127,6 +5146,44 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified liveStream resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} live_stream
+   * @returns {string} Resource name string.
+   */
+  liveStreamPath(networkCode: string, liveStream: string) {
+    return this.pathTemplates.liveStreamPathTemplate.render({
+      network_code: networkCode,
+      live_stream: liveStream,
+    });
+  }
+
+  /**
+   * Parse the network_code from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .network_code;
+  }
+
+  /**
+   * Parse the live_stream from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the live_stream.
+   */
+  matchLiveStreamFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .live_stream;
+  }
+
+  /**
    * Return a fully-qualified liveStreamEvent resource name string.
    *
    * @param {string} network_code
@@ -2431,6 +5488,43 @@ export class OrderServiceClient {
    */
   matchOrderFromOrderName(orderName: string) {
     return this.pathTemplates.orderPathTemplate.match(orderName).order;
+  }
+
+  /**
+   * Return a fully-qualified partner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} partner
+   * @returns {string} Resource name string.
+   */
+  partnerPath(networkCode: string, partner: string) {
+    return this.pathTemplates.partnerPathTemplate.render({
+      network_code: networkCode,
+      partner: partner,
+    });
+  }
+
+  /**
+   * Parse the network_code from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the partner from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the partner.
+   */
+  matchPartnerFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).partner;
   }
 
   /**
@@ -2746,6 +5840,122 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
+  }
+
+  /**
+   * Return a fully-qualified suggestedAdUnit resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} suggested_ad_unit
+   * @returns {string} Resource name string.
+   */
+  suggestedAdUnitPath(networkCode: string, suggestedAdUnit: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.render({
+      network_code: networkCode,
+      suggested_ad_unit: suggestedAdUnit,
+    });
+  }
+
+  /**
+   * Parse the network_code from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the suggested_ad_unit from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the suggested_ad_unit.
+   */
+  matchSuggestedAdUnitFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).suggested_ad_unit;
+  }
+
+  /**
+   * Return a fully-qualified targetingPreset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} targeting_preset
+   * @returns {string} Resource name string.
+   */
+  targetingPresetPath(networkCode: string, targetingPreset: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.render({
+      network_code: networkCode,
+      targeting_preset: targetingPreset,
+    });
+  }
+
+  /**
+   * Parse the network_code from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the targeting_preset from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the targeting_preset.
+   */
+  matchTargetingPresetFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).targeting_preset;
+  }
+
+  /**
    * Return a fully-qualified taxonomyCategory resource name string.
    *
    * @param {string} network_code
@@ -2822,6 +6032,48 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified thirdPartyCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} third_party_company
+   * @returns {string} Resource name string.
+   */
+  thirdPartyCompanyPath(networkCode: string, thirdPartyCompany: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.render({
+      network_code: networkCode,
+      third_party_company: thirdPartyCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromThirdPartyCompanyName(thirdPartyCompanyName: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the third_party_company from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the third_party_company.
+   */
+  matchThirdPartyCompanyFromThirdPartyCompanyName(
+    thirdPartyCompanyName: string,
+  ) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).third_party_company;
+  }
+
+  /**
    * Return a fully-qualified user resource name string.
    *
    * @param {string} network_code
@@ -2855,6 +6107,48 @@ export class OrderServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified viewabilityProvider resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} viewability_provider
+   * @returns {string} Resource name string.
+   */
+  viewabilityProviderPath(networkCode: string, viewabilityProvider: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.render({
+      network_code: networkCode,
+      viewability_provider: viewabilityProvider,
+    });
+  }
+
+  /**
+   * Parse the network_code from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromViewabilityProviderName(viewabilityProviderName: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the viewability_provider from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the viewability_provider.
+   */
+  matchViewabilityProviderFromViewabilityProviderName(
+    viewabilityProviderName: string,
+  ) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).viewability_provider;
   }
 
   /**

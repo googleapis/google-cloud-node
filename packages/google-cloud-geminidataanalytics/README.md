@@ -57,6 +57,23 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| create data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.create_data_agent.js) |
+| create data agent sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.create_data_agent_sync.js) |
+| delete data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.delete_data_agent.js) |
+| delete data agent sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.delete_data_agent_sync.js) |
+| get data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.get_data_agent.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.get_iam_policy.js) |
+| list accessible data agents | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.list_accessible_data_agents.js) |
+| list data agents | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.list_data_agents.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.set_iam_policy.js) |
+| update data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.update_data_agent.js) |
+| update data agent sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_agent_service.update_data_agent_sync.js) |
+| chat | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_chat_service.chat.js) |
+| create conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_chat_service.create_conversation.js) |
+| delete conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_chat_service.delete_conversation.js) |
+| get conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_chat_service.get_conversation.js) |
+| list conversations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_chat_service.list_conversations.js) |
+| list messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1/data_chat_service.list_messages.js) |
 | create data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/data_agent_service.create_data_agent.js) |
 | create data agent sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/data_agent_service.create_data_agent_sync.js) |
 | delete data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/data_agent_service.delete_data_agent.js) |
@@ -75,7 +92,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list conversations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/data_chat_service.list_conversations.js) |
 | list messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/data_chat_service.list_messages.js) |
 | query data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/data_chat_service.query_data.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1alpha/snippet_metadata_google.cloud.geminidataanalytics.v1alpha.json) |
 | create data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_agent_service.create_data_agent.js) |
 | create data agent sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_agent_service.create_data_agent_sync.js) |
 | delete data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_agent_service.delete_data_agent.js) |
@@ -94,7 +110,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list conversations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_conversations.js) |
 | list messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_messages.js) |
 | query data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.query_data.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/snippet_metadata_google.cloud.geminidataanalytics.v1beta.json) |
 
 
 ## Supported Node.js Versions

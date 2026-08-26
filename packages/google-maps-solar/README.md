@@ -77,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/snippet_metadata_google.maps.solar.v1.json) |
 | find closest building insights | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js) |
 | get data layers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js) |
 | get geo tiff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js) |

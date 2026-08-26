@@ -93,6 +93,11 @@ function main(parent) {
    *  unavailable.
    */
   // const showDeleted = true
+  /**
+   *  Optional. Specifies the desired output syntax for the Chat message
+   *  `formatted_text` field.
+   */
+  // const markupSyntax = {}
 
   // Imports the Chat library
   const {ChatServiceClient} = require('@google-apps/chat').v1;

@@ -57,7 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| area120 | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/snippet_metadata_google.area120.tables.v1alpha1.json) |
 | batch create rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js) |
 | batch delete rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js) |
 | batch update rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js) |
@@ -103,7 +102,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -113,7 +112,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

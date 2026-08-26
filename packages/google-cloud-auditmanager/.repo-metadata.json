@@ -1,17 +1,16 @@
 {
-  "name": "auditmanager",
-  "name_pretty": "Audit Manager API",
-  "product_documentation": "https://cloud.google.com/audit-manager/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/auditmanager/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/auditmanager",
-  "api_id": "auditmanager.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "auditmanager"
+    "api_description": "The Audit Manager API allows customers to manage compliance audits.",
+    "api_id": "auditmanager.googleapis.com",
+    "api_shortname": "auditmanager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/auditmanager/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/auditmanager",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1335397&template=0",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "auditmanager",
+    "name_pretty": "Audit Manager",
+    "product_documentation": "https://cloud.google.com/audit-manager/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

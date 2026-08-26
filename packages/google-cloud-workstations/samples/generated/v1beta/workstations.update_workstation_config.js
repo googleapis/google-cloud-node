@@ -29,7 +29,7 @@ function main(workstationConfig, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Config to update.
+   *  Required. Workstation configuration to update.
    */
   // const workstationConfig = {}
   /**
@@ -38,7 +38,7 @@ function main(workstationConfig, updateMask) {
    */
   // const updateMask = {}
   /**
-   *  Optional. If set, validate the request and preview the review, but do not
+   *  Optional. If set, validate the request and preview the result, but do not
    *  actually apply it.
    */
   // const validateOnly = true

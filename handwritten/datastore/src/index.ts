@@ -72,7 +72,7 @@ import {
 } from './request';
 import {Transaction} from './transaction';
 import {promisifyAll} from '@google-cloud/promisify';
-import {google} from '../protos/protos';
+import {google} from './protos';
 import {AggregateQuery} from './aggregate';
 import {SaveEntity} from './interfaces/save';
 import {extendExcludeFromIndexes} from './utils/entity/extendExcludeFromIndexes';
@@ -130,9 +130,7 @@ export interface ImportEntitiesConfig
 }
 
 // Import the clients for each version supported by this package.
-const gapic = Object.freeze({
-  v1: require('./v1'),
-});
+import * as v1 from './v1';
 
 const urlSafeKey = new entity.URLSafeKey();
 
@@ -505,8 +503,8 @@ class Datastore extends DatastoreRequest {
 
     const scopes: string[] = Array.from(
       new Set([
-        ...gapic.v1.DatastoreClient.scopes,
-        ...gapic.v1.DatastoreAdminClient.scopes,
+        ...v1.DatastoreClient.scopes,
+        ...v1.DatastoreAdminClient.scopes,
       ]),
     );
 
@@ -1924,7 +1922,7 @@ export {Datastore};
  * @property {constructor} DatastoreClient
  *     Reference to {@link v1.DatastoreClient}.
  */
-module.exports.v1 = gapic.v1;
+module.exports.v1 = v1;
 
 export interface TransactionOptions {
   id?: string;
@@ -1944,7 +1942,6 @@ export interface DatastoreOptions extends GoogleAuthOptions {
 export interface KeyToLegacyUrlSafeCallback {
   (err?: Error | null, urlSafeKey?: string): void;
 }
-const v1 = gapic.v1;
 export {v1};
 
 export {DatastoreClient, DatastoreAdminClient} from './v1';

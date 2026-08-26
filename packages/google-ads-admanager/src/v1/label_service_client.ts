@@ -214,6 +214,12 @@ export class LabelServiceClient {
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
+      adRulePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adRules/{ad_rule}',
+      ),
+      adSpotPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adSpots/{ad_spot}',
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
@@ -231,6 +237,9 @@ export class LabelServiceClient {
       ),
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}',
+      ),
+      cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cdnConfigs/{cdn_config}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -256,8 +265,17 @@ export class LabelServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
+      ),
+      creativeWrapperPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeWrappers/{creative_wrapper}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}',
@@ -267,6 +285,12 @@ export class LabelServiceClient {
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
+      ),
+      daiAuthenticationKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}',
+      ),
+      daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
@@ -292,6 +316,9 @@ export class LabelServiceClient {
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
       ),
+      liveStreamPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreams/{live_stream}',
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}',
       ),
@@ -315,6 +342,9 @@ export class LabelServiceClient {
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}',
+      ),
+      partnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/partners/{partner}',
       ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}',
@@ -340,14 +370,29 @@ export class LabelServiceClient {
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
       ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
+      ),
+      suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
+      ),
+      targetingPresetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/targetingPresets/{targeting_preset}',
+      ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/taxonomyCategories/{taxonomy_category}',
       ),
       teamPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/teams/{team}',
       ),
+      thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
+      ),
+      viewabilityProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/viewabilityProviders/{viewability_provider}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
@@ -541,7 +586,7 @@ export class LabelServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * API to retrieve a `Label` object.
+   * Retrieves a `Label` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -666,7 +711,7 @@ export class LabelServiceClient {
       });
   }
   /**
-   * API to create a `Label` object.
+   * Creates a `Label` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -793,7 +838,7 @@ export class LabelServiceClient {
       });
   }
   /**
-   * API to batch create `Label` objects.
+   * Creates `Label` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -933,7 +978,7 @@ export class LabelServiceClient {
       });
   }
   /**
-   * API to update a `Label` object.
+   * Updates a `Label` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1061,7 +1106,7 @@ export class LabelServiceClient {
       });
   }
   /**
-   * API to batch update `Label` objects.
+   * Batch updates `Label` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1201,7 +1246,7 @@ export class LabelServiceClient {
       });
   }
   /**
-   * API to activate `Label` objects.
+   * Activates `Label` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1341,7 +1386,7 @@ export class LabelServiceClient {
       });
   }
   /**
-   * API to deactivate `Label` objects.
+   * Deactivates `Label` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1482,7 +1527,7 @@ export class LabelServiceClient {
   }
 
   /**
-   * API to retrieve a list of `Label` objects.
+   * Lists `Label` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1505,14 +1550,13 @@ export class LabelServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>active</code></li>
-   *     <li><code>description</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>types</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `active`
+   *   * `description`
+   *   * `displayName`
+   *   * `name`
+   *   * `types`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1647,14 +1691,13 @@ export class LabelServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>active</code></li>
-   *     <li><code>description</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>types</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `active`
+   *   * `description`
+   *   * `displayName`
+   *   * `name`
+   *   * `types`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1722,14 +1765,13 @@ export class LabelServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>active</code></li>
-   *     <li><code>description</code></li>
-   *     <li><code>displayName</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>types</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `active`
+   *   * `description`
+   *   * `displayName`
+   *   * `name`
+   *   * `types`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1883,6 +1925,78 @@ export class LabelServiceClient {
     return this.pathTemplates.adReviewCenterAdPathTemplate.match(
       adReviewCenterAdName,
     ).ad_review_center_ad;
+  }
+
+  /**
+   * Return a fully-qualified adRule resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_rule
+   * @returns {string} Resource name string.
+   */
+  adRulePath(networkCode: string, adRule: string) {
+    return this.pathTemplates.adRulePathTemplate.render({
+      network_code: networkCode,
+      ad_rule: adRule,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).network_code;
+  }
+
+  /**
+   * Parse the ad_rule from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the ad_rule.
+   */
+  matchAdRuleFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).ad_rule;
+  }
+
+  /**
+   * Return a fully-qualified adSpot resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_spot
+   * @returns {string} Resource name string.
+   */
+  adSpotPath(networkCode: string, adSpot: string) {
+    return this.pathTemplates.adSpotPathTemplate.render({
+      network_code: networkCode,
+      ad_spot: adSpot,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).network_code;
+  }
+
+  /**
+   * Parse the ad_spot from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the ad_spot.
+   */
+  matchAdSpotFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).ad_spot;
   }
 
   /**
@@ -2114,6 +2228,44 @@ export class LabelServiceClient {
     return this.pathTemplates.browserLanguagePathTemplate.match(
       browserLanguageName,
     ).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified cdnConfig resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cdn_config
+   * @returns {string} Resource name string.
+   */
+  cdnConfigPath(networkCode: string, cdnConfig: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.render({
+      network_code: networkCode,
+      cdn_config: cdnConfig,
+    });
+  }
+
+  /**
+   * Parse the network_code from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .network_code;
+  }
+
+  /**
+   * Parse the cdn_config from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the cdn_config.
+   */
+  matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .cdn_config;
   }
 
   /**
@@ -2424,6 +2576,81 @@ export class LabelServiceClient {
   }
 
   /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
+  }
+
+  /**
    * Return a fully-qualified creativeTemplate resource name string.
    *
    * @param {string} network_code
@@ -2461,6 +2688,46 @@ export class LabelServiceClient {
     return this.pathTemplates.creativeTemplatePathTemplate.match(
       creativeTemplateName,
     ).creative_template;
+  }
+
+  /**
+   * Return a fully-qualified creativeWrapper resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_wrapper
+   * @returns {string} Resource name string.
+   */
+  creativeWrapperPath(networkCode: string, creativeWrapper: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.render({
+      network_code: networkCode,
+      creative_wrapper: creativeWrapper,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the creative_wrapper from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the creative_wrapper.
+   */
+  matchCreativeWrapperFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).creative_wrapper;
   }
 
   /**
@@ -2585,6 +2852,92 @@ export class LabelServiceClient {
     return this.pathTemplates.customTargetingValuePathTemplate.match(
       customTargetingValueName,
     ).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified daiAuthenticationKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_authentication_key
+   * @returns {string} Resource name string.
+   */
+  daiAuthenticationKeyPath(networkCode: string, daiAuthenticationKey: string) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.render({
+      network_code: networkCode,
+      dai_authentication_key: daiAuthenticationKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_authentication_key from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the dai_authentication_key.
+   */
+  matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).dai_authentication_key;
+  }
+
+  /**
+   * Return a fully-qualified daiEncodingProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_encoding_profile
+   * @returns {string} Resource name string.
+   */
+  daiEncodingProfilePath(networkCode: string, daiEncodingProfile: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.render({
+      network_code: networkCode,
+      dai_encoding_profile: daiEncodingProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiEncodingProfileName(daiEncodingProfileName: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_encoding_profile from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the dai_encoding_profile.
+   */
+  matchDaiEncodingProfileFromDaiEncodingProfileName(
+    daiEncodingProfileName: string,
+  ) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).dai_encoding_profile;
   }
 
   /**
@@ -2904,6 +3257,44 @@ export class LabelServiceClient {
   }
 
   /**
+   * Return a fully-qualified liveStream resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} live_stream
+   * @returns {string} Resource name string.
+   */
+  liveStreamPath(networkCode: string, liveStream: string) {
+    return this.pathTemplates.liveStreamPathTemplate.render({
+      network_code: networkCode,
+      live_stream: liveStream,
+    });
+  }
+
+  /**
+   * Parse the network_code from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .network_code;
+  }
+
+  /**
+   * Parse the live_stream from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the live_stream.
+   */
+  matchLiveStreamFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .live_stream;
+  }
+
+  /**
    * Return a fully-qualified liveStreamEvent resource name string.
    *
    * @param {string} network_code
@@ -3208,6 +3599,43 @@ export class LabelServiceClient {
    */
   matchOrderFromOrderName(orderName: string) {
     return this.pathTemplates.orderPathTemplate.match(orderName).order;
+  }
+
+  /**
+   * Return a fully-qualified partner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} partner
+   * @returns {string} Resource name string.
+   */
+  partnerPath(networkCode: string, partner: string) {
+    return this.pathTemplates.partnerPathTemplate.render({
+      network_code: networkCode,
+      partner: partner,
+    });
+  }
+
+  /**
+   * Parse the network_code from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the partner from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the partner.
+   */
+  matchPartnerFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).partner;
   }
 
   /**
@@ -3523,6 +3951,122 @@ export class LabelServiceClient {
   }
 
   /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
+  }
+
+  /**
+   * Return a fully-qualified suggestedAdUnit resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} suggested_ad_unit
+   * @returns {string} Resource name string.
+   */
+  suggestedAdUnitPath(networkCode: string, suggestedAdUnit: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.render({
+      network_code: networkCode,
+      suggested_ad_unit: suggestedAdUnit,
+    });
+  }
+
+  /**
+   * Parse the network_code from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the suggested_ad_unit from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the suggested_ad_unit.
+   */
+  matchSuggestedAdUnitFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).suggested_ad_unit;
+  }
+
+  /**
+   * Return a fully-qualified targetingPreset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} targeting_preset
+   * @returns {string} Resource name string.
+   */
+  targetingPresetPath(networkCode: string, targetingPreset: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.render({
+      network_code: networkCode,
+      targeting_preset: targetingPreset,
+    });
+  }
+
+  /**
+   * Parse the network_code from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the targeting_preset from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the targeting_preset.
+   */
+  matchTargetingPresetFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).targeting_preset;
+  }
+
+  /**
    * Return a fully-qualified taxonomyCategory resource name string.
    *
    * @param {string} network_code
@@ -3599,6 +4143,48 @@ export class LabelServiceClient {
   }
 
   /**
+   * Return a fully-qualified thirdPartyCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} third_party_company
+   * @returns {string} Resource name string.
+   */
+  thirdPartyCompanyPath(networkCode: string, thirdPartyCompany: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.render({
+      network_code: networkCode,
+      third_party_company: thirdPartyCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromThirdPartyCompanyName(thirdPartyCompanyName: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the third_party_company from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the third_party_company.
+   */
+  matchThirdPartyCompanyFromThirdPartyCompanyName(
+    thirdPartyCompanyName: string,
+  ) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).third_party_company;
+  }
+
+  /**
    * Return a fully-qualified user resource name string.
    *
    * @param {string} network_code
@@ -3632,6 +4218,48 @@ export class LabelServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified viewabilityProvider resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} viewability_provider
+   * @returns {string} Resource name string.
+   */
+  viewabilityProviderPath(networkCode: string, viewabilityProvider: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.render({
+      network_code: networkCode,
+      viewability_provider: viewabilityProvider,
+    });
+  }
+
+  /**
+   * Parse the network_code from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromViewabilityProviderName(viewabilityProviderName: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the viewability_provider from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the viewability_provider.
+   */
+  matchViewabilityProviderFromViewabilityProviderName(
+    viewabilityProviderName: string,
+  ) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).viewability_provider;
   }
 
   /**

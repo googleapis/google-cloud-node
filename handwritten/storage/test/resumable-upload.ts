@@ -694,8 +694,8 @@ describe('resumable-upload', () => {
     });
 
     it('should wait for `wroteToChunkBuffer` if !`writeBuffers.length` && !`upstreamEnded`', async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('wroteToChunkBuffer');
       });
 
@@ -703,15 +703,15 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' if !`writeBuffers.length` && !`upstreamEnded`", async () => {
-      await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
     });
 
     it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
 
@@ -719,7 +719,7 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
-      const result = await new Promise(resolve => {
+      const result = await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             // Update the `writeBuffers` before emitting 'upstreamFinished'
@@ -729,22 +729,22 @@ describe('resumable-upload', () => {
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(result, true);
     });
 
     it("should wait for 'upstreamFinished' if !`writeBuffers.length` && !`upstreamEnded`", async () => {
-      await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
     });
 
     it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
 
@@ -752,7 +752,7 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
-      const result = await new Promise(resolve => {
+      const result = await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             // Update the `writeBuffers` before emitting 'upstreamFinished'
@@ -762,7 +762,7 @@ describe('resumable-upload', () => {
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(result, true);
@@ -772,14 +772,14 @@ describe('resumable-upload', () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
       assert.equal(up.listenerCount('upstreamFinished'), 0);
 
-      await new Promise(resolve => {
+      await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'wroteToChunkBuffer') {
             process.nextTick(() => up.emit('wroteToChunkBuffer'));
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
@@ -790,14 +790,14 @@ describe('resumable-upload', () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
       assert.equal(up.listenerCount('upstreamFinished'), 0);
 
-      await new Promise(resolve => {
+      await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             process.nextTick(() => up.emit('upstreamFinished'));
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
@@ -1813,20 +1813,23 @@ describe('resumable-upload', () => {
     );
   });
 
-  it('currentInvocationId.checkUploadStatus should be the same on error', done => {
+  it('currentInvocationId.checkUploadStatus should be the same on error', async () => {
     const beforeCallInvocationId = up.currentInvocationId.checkUploadStatus;
-    up.destroy = () => {
-      assert.equal(
-        beforeCallInvocationId,
-        up.currentInvocationId.checkUploadStatus
-      );
-      done();
-    };
+    const destroyCalled = new Promise<void>(resolve => {
+      up.destroy = () => {
+        assert.equal(
+          beforeCallInvocationId,
+          up.currentInvocationId.checkUploadStatus
+        );
+        resolve();
+      };
+    });
     up.makeRequest = () => {
       throw new Error() as GaxiosError;
     };
 
-    up.getAndSetOffset().catch(done);
+    await up.getAndSetOffset();
+    await destroyCalled;
   });
 
   describe('#getAndSetOffset', () => {
@@ -2287,7 +2290,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            `Retry limit exceeded - ${JSON.stringify(RESP.data)}`
+            `Retry limit exceeded - status: 500 - error message from server`
           );
           done();
         };
@@ -2328,7 +2331,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              `Retry limit exceeded - ${JSON.stringify(RESP.data)}`
+              `Retry limit exceeded - status: 500 - error message from server`
             );
             done();
           });
@@ -2363,7 +2366,6 @@ describe('resumable-upload', () => {
           return err.code === 1000;
         };
         up.retryOptions.retryableErrorFn = customHandlerFunction;
-
         assert.strictEqual(up.onResponse(RESP), false);
       });
     });
@@ -2489,6 +2491,125 @@ describe('resumable-upload', () => {
       up.retryLimit = 3;
 
       up.attemptDelayedRetry({});
+    });
+
+    it('should include correct details for standard native Errors', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+      const nativeError = new Error('native connection issue');
+
+      up.on('error', (err: Error) => {
+        assert.strictEqual(
+          err.message,
+          'Retry limit exceeded - native connection issue'
+        );
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: nativeError,
+      });
+    });
+
+    it('should include correct details for custom errors with empty messages', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+      const customError = Object.assign(new Error(''), {
+        code: 'ERR_SOMETHING_SPECIAL',
+      });
+
+      up.on('error', (err: Error) => {
+        assert.strictEqual(
+          err.message,
+          'Retry limit exceeded - code: ERR_SOMETHING_SPECIAL'
+        );
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: customError,
+      });
+    });
+
+    it('should include correct details for GaxiosErrors with empty/missing response bodies', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+
+      const gaxiosError = new GaxiosError(
+        'Request failed with status code 429',
+        {
+          method: 'POST',
+          url: 'https://example.com',
+        },
+        {
+          status: 429,
+          statusText: 'Too Many Requests',
+          data: '',
+          config: {},
+          headers: {},
+        } as GaxiosResponse
+      );
+
+      up.on('error', (err: Error) => {
+        // Assert that the formatted error message includes key HTTP details from the GaxiosError.
+        assert(err.message.includes('Retry limit exceeded'));
+        assert(err.message.includes('Request failed with status code 429'));
+        assert(
+          err.message.includes('status: 429') ||
+            err.message.includes('code: 429')
+        );
+        assert(err.message.includes('statusText: Too Many Requests'));
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: gaxiosError,
+      });
+    });
+
+    it('should include correct details for GaxiosErrors with populated error responses', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+
+      const gaxiosError = new GaxiosError(
+        'Request failed with status code 400',
+        {
+          method: 'POST',
+          url: 'https://example.com',
+        },
+        {
+          status: 400,
+          statusText: 'Bad Request',
+          data: {
+            error: {
+              message: 'Invalid query parameter value',
+              code: 400,
+            },
+          },
+          config: {},
+          headers: {},
+        } as GaxiosResponse
+      );
+
+      up.on('error', (err: Error) => {
+        // Assert that the formatted error message includes key HTTP details and the inner API error message.
+        assert(err.message.includes('Retry limit exceeded'));
+        assert(err.message.includes('Request failed with status code 400'));
+        assert(
+          err.message.includes('status: 400') ||
+            err.message.includes('code: 400')
+        );
+        assert(err.message.includes('Invalid query parameter value'));
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: gaxiosError,
+      });
     });
   });
 

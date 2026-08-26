@@ -1,17 +1,16 @@
 {
-  "name": "rapidmigrationassessment",
-  "name_pretty": "Rapid Migration Assessment API",
-  "product_documentation": "https://cloud.google.com/migration-center/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/rapidmigrationassessment/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/rapidmigrationassessment",
-  "api_id": "rapidmigrationassessment.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "rapidmigrationassessment"
+    "api_description": "The Rapid Migration Assessment service is our first-party migration\nassessment and planning tool.",
+    "api_id": "rapidmigrationassessment.googleapis.com",
+    "api_shortname": "rapidmigrationassessment",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/rapidmigrationassessment/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/rapidmigrationassessment",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1360914",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "rapidmigrationassessment",
+    "name_pretty": "Rapid Migration Assessment",
+    "product_documentation": "https://cloud.google.com/migration-center/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

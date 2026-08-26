@@ -19,7 +19,7 @@ import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
 import {CallOptions, GoogleError, loggingUtils, Status} from 'google-gax';
 import * as sinon from 'sinon';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import defer = require('p-defer');
 
 import * as messageTypes from '../src/message-queues';
@@ -55,7 +55,7 @@ class FakeSubscriber extends EventEmitter {
   constructor() {
     super();
 
-    this.name = `projects/test/subscriptions/${uuid.v4()}`;
+    this.name = `projects/test/subscriptions/${crypto.randomUUID()}`;
     this.client = new FakeClient();
     this.iEOS = false;
   }
@@ -70,7 +70,7 @@ class FakeSubscriber extends EventEmitter {
 class FakeMessage {
   ackId: string;
   constructor() {
-    this.ackId = uuid.v4();
+    this.ackId = crypto.randomUUID();
   }
 }
 
@@ -420,7 +420,7 @@ describe('MessageQueues', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1] as string, 'logtest');
     });
@@ -681,7 +681,7 @@ describe('MessageQueues', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1] as string, 'logtest');
     });

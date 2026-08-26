@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {PassThrough, Transform} from 'stream';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as P from '../src';
 import {paginator, ParsedArguments} from '../src';
 
@@ -58,7 +58,7 @@ function createFakeStream<T = any>() {
 }
 
 describe('paginator', () => {
-  const UUID = uuid.v1();
+  const UUID = crypto.randomUUID();
   const FakeClass = function (this: any) {
     // do nothing
   } as any;
@@ -133,7 +133,7 @@ describe('paginator', () => {
       };
 
       const cls = new (FakeClass as any)();
-      cls.uuid = uuid.v1();
+      cls.uuid = crypto.randomUUID();
 
       jest.spyOn(paginator, 'run_').mockImplementation((_, originalMethod) => {
         try {

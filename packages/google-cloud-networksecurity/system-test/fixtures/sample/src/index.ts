@@ -16,10 +16,15 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DnsThreatDetectorServiceClient, NetworkSecurityClient} from '@google-cloud/network-security';
+import {
+  DnsThreatDetectorServiceClient,
+  NetworkSecurityClient,
+} from '@google-cloud/network-security';
 
 // check that the client class type name can be used
-function doStuffWithDnsThreatDetectorServiceClient(client: DnsThreatDetectorServiceClient) {
+function doStuffWithDnsThreatDetectorServiceClient(
+  client: DnsThreatDetectorServiceClient,
+) {
   client.close();
 }
 function doStuffWithNetworkSecurityClient(client: NetworkSecurityClient) {

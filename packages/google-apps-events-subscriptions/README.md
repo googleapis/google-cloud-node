@@ -57,14 +57,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| apps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/snippet_metadata_google.apps.events.subscriptions.v1.json) |
 | create subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/subscriptions_service.create_subscription.js) |
 | delete subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/subscriptions_service.delete_subscription.js) |
 | get subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/subscriptions_service.get_subscription.js) |
 | list subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/subscriptions_service.list_subscriptions.js) |
 | reactivate subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/subscriptions_service.reactivate_subscription.js) |
 | update subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1/subscriptions_service.update_subscription.js) |
-| apps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1beta/snippet_metadata_google.apps.events.subscriptions.v1beta.json) |
 | create subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1beta/subscriptions_service.create_subscription.js) |
 | delete subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1beta/subscriptions_service.delete_subscription.js) |
 | get subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/samples/generated/v1beta/subscriptions_service.get_subscription.js) |
@@ -104,7 +102,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -114,7 +112,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-events-subscriptions/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent, dataScan, dataScanId) {
+function main(parent, dataScan) {
   // [START dataplex_v1_generated_DataScanService_CreateDataScan_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -40,7 +40,8 @@ function main(parent, dataScan, dataScanId) {
    */
   // const dataScan = {}
   /**
-   *  Required. DataScan identifier.
+   *  Optional. DataScan identifier. If not provided, a unique ID will be
+   *  generated with the prefix "data-scan-".
    *  * Must contain only lowercase letters, numbers and hyphens.
    *  * Must start with a letter.
    *  * Must end with a number or a letter.
@@ -65,7 +66,6 @@ function main(parent, dataScan, dataScanId) {
     const request = {
       parent,
       dataScan,
-      dataScanId,
     };
 
     // Run request

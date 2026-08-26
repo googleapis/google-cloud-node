@@ -37,7 +37,7 @@ service LineItemService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `LineItem` object.
+  // Retrieves a `LineItem` object.
   rpc GetLineItem(GetLineItemRequest) returns (LineItem) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/lineItems/*}"
@@ -45,7 +45,7 @@ service LineItemService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `LineItem` objects.
+  // Lists `LineItem` objects.
   rpc ListLineItems(ListLineItemsRequest) returns (ListLineItemsResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=networks/*}/lineItems"
@@ -94,16 +94,42 @@ message ListLineItemsRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>endTime</code></li>
-  //   <li><code>goal.units</code></li>
-  //   <li><code>lineItemType</code></li>
-  //   <li><code>name</code></li>
-  //   <li><code>order</code></li>
-  //   <li><code>startTime</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `archived`
+  // * `contractedUnitsBought`
+  // * `costType`
+  // * `createTime`
+  // * `creativePlaceholders.size.canonicalName`
+  // * `dealInfo.externalDealId`
+  // * `deliveryRateType`
+  // * `displayName`
+  // * `endTime`
+  // * `environmentType`
+  // * `externalLineItemId`
+  // * `goal.units`
+  // * `grpSettings.growbirdNielsenEnabled`
+  // * `grpSettings.inTargetRatioEstimateMilliPercent`
+  // * `lineItemType`
+  // * `missingCreatives`
+  // * `name`
+  // * `notes`
+  // * `order`
+  // * `orderDisplayName`
+  // * `priority`
+  // * `roadblockingType`
+  // * `startTime`
+  // * `stats.clickThroughRate`
+  // * `stats.clicksDelivered`
+  // * `stats.impressionsDelivered`
+  // * `stats.viewableImpressionsDelivered`
+  // * `status`
+  // * `targeting.inventoryTargeting.targetedAdUnits.adUnit`
+  // * `targeting.inventoryTargeting.targetedPlacements`
+  // * `targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications`
+  // * `updateSource`
+  // * `updateTime`
+  // * `webPropertyCode`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

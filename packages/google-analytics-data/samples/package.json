@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "files": [
     "*.js"
@@ -13,9 +13,9 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-analytics/data": "^6.0.0",
-    "google-auth-library": "^10.0.0",
-    "google-gax": "^5.0.0",
+    "@google-analytics/data": "^7.0.0",
+    "google-auth-library": "^11.0.0",
+    "google-gax": "^6.0.0",
     "http": "^0.0.1-security",
     "lint": "^0.8.0",
     "open": "^8.0.0",

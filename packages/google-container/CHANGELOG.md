@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.10.0...container-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.9.0...container-v6.10.0) (2026-06-01)
+
+
+### Features
+
+* [container] add custom node image configuration ([#8370](https://github.com/googleapis/google-cloud-node/issues/8370)) ([7f56135](https://github.com/googleapis/google-cloud-node/commit/7f561350167d26dfa718ac70d5c23d7abe825116))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.8.0...container-v6.9.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.7.1...container-v6.8.0) (2026-05-14)
 
 

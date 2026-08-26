@@ -18,7 +18,8 @@ import {CallOptions, LROperation, Operation, ServiceError} from 'google-gax';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pumpify = require('pumpify');
 
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {Bigtable} from '.';
 import {Instance} from './instance';
 import {ClusterUtils} from './utils/cluster';

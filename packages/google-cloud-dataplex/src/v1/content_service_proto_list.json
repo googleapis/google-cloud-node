@@ -1,5 +1,6 @@
 [
   "../../protos/google/cloud/dataplex/v1/analyze.proto",
+  "../../protos/google/cloud/dataplex/v1/approval_workflow.proto",
   "../../protos/google/cloud/dataplex/v1/business_glossary.proto",
   "../../protos/google/cloud/dataplex/v1/catalog.proto",
   "../../protos/google/cloud/dataplex/v1/cmek.proto",
@@ -9,6 +10,7 @@
   "../../protos/google/cloud/dataplex/v1/data_products.proto",
   "../../protos/google/cloud/dataplex/v1/data_profile.proto",
   "../../protos/google/cloud/dataplex/v1/data_quality.proto",
+  "../../protos/google/cloud/dataplex/v1/data_quality_rule_template.proto",
   "../../protos/google/cloud/dataplex/v1/data_taxonomy.proto",
   "../../protos/google/cloud/dataplex/v1/datascans.proto",
   "../../protos/google/cloud/dataplex/v1/datascans_common.proto",

@@ -63,7 +63,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list app connectors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.list_app_connectors.js) |
 | report status | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.report_status.js) |
 | update app connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.update_app_connector.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/snippet_metadata_google.cloud.beyondcorp.appconnectors.v1.json) |
 
 
 ## Supported Node.js Versions

@@ -412,6 +412,310 @@ describe('v1.LicenseCodesClient', () => {
     });
   });
 
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Policy(),
+      );
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Policy(),
+      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy with error', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
+  });
+
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Policy(),
+      );
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Policy(),
+      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy with error', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new licensecodesModule.v1.LicenseCodesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseCodeRequest',
+        ['resource'],
+      );
+      request.resource = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
+  });
+
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({

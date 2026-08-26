@@ -61,7 +61,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | geocode address | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-geocode/samples/generated/v4/geocode_service.geocode_address.js) |
 | geocode location | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-geocode/samples/generated/v4/geocode_service.geocode_location.js) |
 | geocode place | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-geocode/samples/generated/v4/geocode_service.geocode_place.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-geocode/samples/generated/v4/snippet_metadata_google.maps.geocode.v4.json) |
 
 
 ## Supported Node.js Versions

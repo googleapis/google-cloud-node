@@ -148,21 +148,94 @@ export interface SignedPostPolicyV4Output {
   url: string;
   fields: PolicyFields;
 }
-
 export interface GetSignedUrlConfig
   extends Pick<SignerGetSignedUrlConfig, 'host' | 'signingEndpoint'> {
+  /**
+   * The action to permit with the signed URL.
+   * - `'read'`: Allows downloading/viewing the file (HTTP GET).
+   * - `'write'`: Allows uploading/overwriting the file (HTTP PUT).
+   * - `'delete'`: Allows removing the file (HTTP DELETE).
+   * - `'resumable'`: Allows resumable uploads (HTTP POST).
+   * Note: When using `'resumable'`, the header `X-Goog-Resumable: start` must be sent in the client request.
+   */
   action: 'read' | 'write' | 'delete' | 'resumable';
+
+  /**
+   * The signing version to use.
+   * @default 'v2'
+   */
   version?: 'v2' | 'v4';
+
+  /**
+   * Determines the URL structure for accessing bucket resources.
+   * - `true`: Uses virtual hosted-style URLs (e.g., `https://mybucket.storage.googleapis.com/...`)
+   * - `false`: Uses path-style URLs (e.g., `https://storage.googleapis.com/mybucket/...`).
+   * Virtual hosted-style URLs are generally preferred.
+   * @default false
+   */
   virtualHostedStyle?: boolean;
+
+  /**
+   * The custom domain name (CNAME) mapped to this bucket (e.g., `"https://cdn.example.com"`).
+   */
   cname?: string;
+
+  /**
+   * The MD5 digest value in base64. If provided, the client request **must**
+   * include an identical `Content-MD5` HTTP header.
+   * If omitted, the client request must not include this header.
+   */
   contentMd5?: string;
+
+  /**
+   * The expected Content-Type of the file. If provided, the client request **must**
+   * include an identical `Content-Type` HTTP header.
+   * If omitted, the client request must not include this header.
+   */
   contentType?: string;
+
+  /**
+   * The expiration timestamp for the link. Any provided value is passed directly to `new Date()`.
+   * @throws {Error} If an expiration timestamp from the past is given.
+   * Note: `'v4'` signing supports a maximum duration of 7 days (604,800 seconds) from the creation time.
+   */
   expires: string | number | Date;
+
+  /**
+   * The timestamp when this link becomes usable. Any provided value is passed directly to `new Date()`.
+   * @default Date.now()
+   * Note: Only supported/applicable when `version` is set to `'v4'`.
+   */
   accessibleAt?: string | number | Date;
+
+  /**
+   * Canonical extension headers that the server will validate against the client's request.
+   * Requirements:
+   * - Header names must be prefixed with `x-goog-` and must be entirely lowercase.
+   * - Multi-valued headers passed as an array are converted into a comma-separated string (no spaces).
+   * The client must format them identically to prevent signature mismatches.
+   */
   extensionHeaders?: http.OutgoingHttpHeaders;
+
+  /**
+   * The filename to prompt the browser/user to save the file as upon access.
+   * Note: This option is ignored if `responseDisposition` is explicitly set.
+   */
   promptSaveAs?: string;
+
+  /**
+   * Maps to the `response-content-disposition` query parameter in the signed URL.
+   */
   responseDisposition?: string;
+
+  /**
+   * Maps to the `response-content-type` query parameter in the signed URL.
+   */
   responseType?: string;
+
+  /**
+   * Additional query parameters to include natively in the generated signed URL.
+   */
   queryParams?: Query;
 }
 
@@ -497,6 +570,12 @@ export interface ContextValue {
   readonly updateTime?: string;
 }
 
+export interface Contexts {
+  custom: {
+    [key: string]: ContextValue | null;
+  } | null;
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -511,11 +590,7 @@ export interface FileMetadata extends BaseMetadata {
     encryptionAlgorithm?: string;
     keySha256?: string;
   };
-  contexts?: {
-    custom: {
-      [key: string]: ContextValue | null;
-    } | null;
-  };
+  contexts?: Contexts;
   customTime?: string;
   eventBasedHold?: boolean | null;
   readonly eventBasedHoldReleaseTime?: string;
@@ -2187,6 +2262,29 @@ class File extends ServiceObject<File, FileMetadata> {
       // remove temporary noop listener as we now create a pipeline that handles the errors
       emitStream.removeListener('error', noop);
 
+      if (fileWriteStream.destroyed) {
+        let callbackCalled = false;
+        const onError = (err: Error) => {
+          if (!callbackCalled) {
+            callbackCalled = true;
+            pipelineCallback(err);
+          }
+        };
+        fileWriteStream.once('error', onError);
+        emitStream.destroy();
+
+        process.nextTick(() => {
+          fileWriteStream.removeListener('error', onError);
+          if (!callbackCalled) {
+            callbackCalled = true;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const err = (fileWriteStream as any).errored || new Error('Write stream destroyed');
+            pipelineCallback(err);
+          }
+        });
+        return;
+      }
+
       pipeline(
         emitStream,
         ...(transformStreams as [Transform]),
@@ -3213,6 +3311,7 @@ class File extends ServiceObject<File, FileMetadata> {
       contentMd5: cfg.contentMd5,
       contentType: cfg.contentType,
       host: cfg.host,
+      signingEndpoint: cfg.signingEndpoint,
     };
 
     if (cfg.cname) {

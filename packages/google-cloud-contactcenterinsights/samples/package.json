@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "files": [
     "*.js"
@@ -13,14 +13,13 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/bigquery": "^8.0.0",
-    "@google-cloud/contact-center-insights": "^4.1.2",
-    "@google-cloud/pubsub": "^5.0.0"
+    "@google-cloud/bigquery": "^9.0.1",
+    "@google-cloud/contact-center-insights": "^5.0.1",
+    "@google-cloud/pubsub": "^6.0.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",
     "chai": "^4.2.0",
-    "mocha": "^9.0.0",
-    "uuid": "^9.0.0"
+    "mocha": "^9.0.0"
   }
 }

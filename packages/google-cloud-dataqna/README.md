@@ -63,7 +63,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js) |
 | get user feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js) |
 | update user feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/snippet_metadata_google.cloud.dataqna.v1alpha.json) |
 
 
 ## Supported Node.js Versions

@@ -1,3 +1,5 @@
+import {protos} from '@google-cloud/firestore-api';
+export {protos};
 /*!
  * Copyright 2017 Google Inc. All Rights Reserved.
  *
@@ -75,7 +77,7 @@ import {
 } from './validate';
 import {WriteBatch} from './write-batch';
 
-import {interfaces} from './v1/firestore_client_config.json';
+import {interfaces} from '@google-cloud/firestore-api/build/src/v1/firestore_client_config.json';
 const serviceConfig = interfaces['google.firestore.v1.Firestore'];
 
 import api = google.firestore.v1;
@@ -636,32 +638,29 @@ export class Firestore implements firestore.Firestore {
           }
         }
 
+        const grpcOptions = Object.assign(
+          {
+            'grpc-node.flow_control_window': 256 * 1024,
+          },
+          this._settings.grpcOptions,
+        );
+
+        let settings: ClientOptions = {
+          ...this._settings,
+          grpcOptions,
+          fallback: useFallback,
+        };
+
         if (this._settings.ssl === false) {
           const grpcModule = this._settings.grpc ?? require('google-gax').grpc;
-          const sslCreds = grpcModule.credentials.createInsecure();
-
-          const settings: ClientOptions = {
-            sslCreds,
-            ...this._settings,
-            fallback: useFallback,
-          };
-
-          // Since `ssl === false`, if we're using the GAX fallback then
-          // also set the `protocol` option for GAX fallback to force http
+          settings.sslCreds = grpcModule.credentials.createInsecure();
           if (useFallback) {
             settings.protocol = 'http';
           }
-
-          client = new module.exports.v1(settings, gax);
-        } else {
-          client = new module.exports.v1(
-            {
-              ...this._settings,
-              fallback: useFallback,
-            },
-            gax,
-          );
         }
+
+        const v1Client = (module.exports.v1 && module.exports.v1.FirestoreClient) || module.exports.v1;
+        client = new v1Client(settings, gax);
 
         logger(
           'clientFactory',
@@ -1374,7 +1373,7 @@ export class Firestore implements firestore.Firestore {
         const tag = requestTag();
 
         // Capture the error stack to preserve stack tracing across async calls.
-        const stack = Error().stack!;
+        const callsiteError = Error();
 
         return this.initializeIfNeeded(tag)
           .then(() => {
@@ -1382,7 +1381,7 @@ export class Firestore implements firestore.Firestore {
             return reader.get(tag);
           })
           .catch(err => {
-            throw wrapError(err, stack);
+            throw wrapError(err, callsiteError.stack!);
           });
       },
     );
@@ -2025,11 +2024,22 @@ module.exports = Object.assign(module.exports, existingExports);
  * @internal
  * @name Firestore.v1beta1
  * @type {function}
+ * @deprecated Prefer the v1 client instead of the v1beta1 client. If your use case requires the v1beta1 client, it is published as part of the standalone @google-cloud/firestore-api package.
  */
+let cachedV1beta1: any;
 Object.defineProperty(module.exports, 'v1beta1', {
   // The v1beta1 module is very large. To avoid pulling it in from static
-  // scope, we lazy-load the module.
-  get: () => require('./v1beta1'),
+  // scope, we lazy-load the module and cache the evaluated wrapper.
+  get: () => {
+    if (!cachedV1beta1) {
+      const api = require('@google-cloud/firestore-api').v1beta1;
+      const fn = function(this: any, ...args: any[]) {
+        return new (api.FirestoreClient as any)(...args);
+      };
+      cachedV1beta1 = Object.assign(fn, api);
+    }
+    return cachedV1beta1;
+  },
 });
 
 /**
@@ -2039,12 +2049,24 @@ Object.defineProperty(module.exports, 'v1beta1', {
  * @internal
  * @name Firestore.v1
  * @type {function}
+ * @deprecated Prefer the top-level Firestore client instead of the Firestore.v1 client. If your use case requires the Firestore.v1 client, this is now being published as a separate package at @google-cloud/firestore-api.
  */
+let cachedV1: any;
 Object.defineProperty(module.exports, 'v1', {
   // The v1 module is very large. To avoid pulling it in from static
-  // scope, we lazy-load  the module.
-  get: () => require('./v1'),
+  // scope, we lazy-load the module and cache the evaluated wrapper.
+  get: () => {
+    if (!cachedV1) {
+      const api = require('@google-cloud/firestore-api').v1;
+      const fn = function(this: any, ...args: any[]) {
+        return new (api.FirestoreClient as any)(...args);
+      };
+      cachedV1 = Object.assign(fn, api);
+    }
+    return cachedV1;
+  },
 });
+
 
 /**
  * {@link Status} factory function.

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/paginator",
-  "version": "6.0.1",
+  "version": "7.0.1",
   "description": "A result paging utility used by Google node.js modules",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -19,8 +19,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "samples-test": "echo 'no samples test'",
     "system-test": "echo 'no system test'",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "clean": "gts clean",
     "precompile": "gts clean"
   },
@@ -51,7 +49,7 @@
     "extend": "^3.0.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/paginator"
 }

@@ -58,6 +58,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| get attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_attachment_service.get_attachment.js) |
 | list attachments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_attachment_service.list_attachments.js) |
 | close case | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.close_case.js) |
 | create case | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.create_case.js) |
@@ -68,8 +69,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search cases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.search_cases.js) |
 | update case | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/case_service.update_case.js) |
 | create comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/comment_service.create_comment.js) |
+| get comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/comment_service.get_comment.js) |
 | list comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/comment_service.list_comments.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2/snippet_metadata_google.cloud.support.v2.json) |
 | get attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.get_attachment.js) |
 | list attachments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.list_attachments.js) |
 | close case | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.close_case.js) |
@@ -84,7 +85,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/comment_service.get_comment.js) |
 | list comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/comment_service.list_comments.js) |
 | show feed | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/feed_service.show_feed.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/snippet_metadata_google.cloud.support.v2beta.json) |
 
 
 ## Supported Node.js Versions
@@ -118,7 +118,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -128,7 +128,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

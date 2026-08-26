@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +57,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -57,12 +70,14 @@ export class OrganizationSecurityProfileGroupServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  organizationSecurityProfileGroupServiceStub?: Promise<{[name: string]: Function}>;
+  organizationSecurityProfileGroupServiceStub?: Promise<{
+    [name: string]: Function;
+  }>;
 
   /**
    * Construct an instance of OrganizationSecurityProfileGroupServiceClient.
@@ -103,21 +118,43 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *     const client = new OrganizationSecurityProfileGroupServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof OrganizationSecurityProfileGroupServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof OrganizationSecurityProfileGroupServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networksecurity.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +179,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,18 +192,14 @@ export class OrganizationSecurityProfileGroupServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -188,91 +221,106 @@ export class OrganizationSecurityProfileGroupServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}',
       ),
       authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}',
       ),
       backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}',
       ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}',
       ),
       dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}',
       ),
       firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}',
       ),
       gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}',
       ),
       gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}',
       ),
       interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}',
       ),
       interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}',
       ),
       interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}',
       ),
-      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
-      ),
+      interceptEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}',
+        ),
       mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}',
       ),
       mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}',
       ),
       mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}',
       ),
-      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
-      ),
+      mirroringEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}',
+        ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}'
+        'organizations/{organization}',
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}'
+        'organizations/{organization}/locations/{location}',
       ),
-      organizationLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/addressGroups/{address_group}'
-      ),
-      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      organizationLocationAddressGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/addressGroups/{address_group}',
+        ),
+      organizationLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      organizationLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      organizationLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       projectLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/addressGroups/{address_group}'
+        'projects/{project}/locations/{location}/addressGroups/{address_group}',
       ),
-      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
+      projectLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      projectLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      projectLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
+      sACAttachmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}',
       ),
-      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
+      sACRealmPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sacRealms/{sac_realm}',
       ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}',
       ),
       tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}',
       ),
       urlListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/urlLists/{url_list}'
+        'projects/{project}/locations/{location}/urlLists/{url_list}',
       ),
     };
 
@@ -280,10 +328,16 @@ export class OrganizationSecurityProfileGroupServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSecurityProfileGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'securityProfileGroups'),
-      listSecurityProfiles:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'securityProfiles')
+      listSecurityProfileGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'securityProfileGroups',
+      ),
+      listSecurityProfiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'securityProfiles',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -292,78 +346,231 @@ export class OrganizationSecurityProfileGroupServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
-      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}' },
+          ],
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*}/locations' },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createSecurityProfileGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.SecurityProfileGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.SecurityProfileGroup',
+    ) as gax.protobuf.Type;
     const createSecurityProfileGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateSecurityProfileGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.SecurityProfileGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.SecurityProfileGroup',
+    ) as gax.protobuf.Type;
     const updateSecurityProfileGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteSecurityProfileGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteSecurityProfileGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createSecurityProfileResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.SecurityProfile') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.SecurityProfile',
+    ) as gax.protobuf.Type;
     const createSecurityProfileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateSecurityProfileResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.SecurityProfile') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.SecurityProfile',
+    ) as gax.protobuf.Type;
     const updateSecurityProfileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteSecurityProfileResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteSecurityProfileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createSecurityProfileGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createSecurityProfileGroupResponse.decode.bind(createSecurityProfileGroupResponse),
-        createSecurityProfileGroupMetadata.decode.bind(createSecurityProfileGroupMetadata)),
+        createSecurityProfileGroupResponse.decode.bind(
+          createSecurityProfileGroupResponse,
+        ),
+        createSecurityProfileGroupMetadata.decode.bind(
+          createSecurityProfileGroupMetadata,
+        ),
+      ),
       updateSecurityProfileGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateSecurityProfileGroupResponse.decode.bind(updateSecurityProfileGroupResponse),
-        updateSecurityProfileGroupMetadata.decode.bind(updateSecurityProfileGroupMetadata)),
+        updateSecurityProfileGroupResponse.decode.bind(
+          updateSecurityProfileGroupResponse,
+        ),
+        updateSecurityProfileGroupMetadata.decode.bind(
+          updateSecurityProfileGroupMetadata,
+        ),
+      ),
       deleteSecurityProfileGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteSecurityProfileGroupResponse.decode.bind(deleteSecurityProfileGroupResponse),
-        deleteSecurityProfileGroupMetadata.decode.bind(deleteSecurityProfileGroupMetadata)),
+        deleteSecurityProfileGroupResponse.decode.bind(
+          deleteSecurityProfileGroupResponse,
+        ),
+        deleteSecurityProfileGroupMetadata.decode.bind(
+          deleteSecurityProfileGroupMetadata,
+        ),
+      ),
       createSecurityProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createSecurityProfileResponse.decode.bind(createSecurityProfileResponse),
-        createSecurityProfileMetadata.decode.bind(createSecurityProfileMetadata)),
+        createSecurityProfileResponse.decode.bind(
+          createSecurityProfileResponse,
+        ),
+        createSecurityProfileMetadata.decode.bind(
+          createSecurityProfileMetadata,
+        ),
+      ),
       updateSecurityProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateSecurityProfileResponse.decode.bind(updateSecurityProfileResponse),
-        updateSecurityProfileMetadata.decode.bind(updateSecurityProfileMetadata)),
+        updateSecurityProfileResponse.decode.bind(
+          updateSecurityProfileResponse,
+        ),
+        updateSecurityProfileMetadata.decode.bind(
+          updateSecurityProfileMetadata,
+        ),
+      ),
       deleteSecurityProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteSecurityProfileResponse.decode.bind(deleteSecurityProfileResponse),
-        deleteSecurityProfileMetadata.decode.bind(deleteSecurityProfileMetadata))
+        deleteSecurityProfileResponse.decode.bind(
+          deleteSecurityProfileResponse,
+        ),
+        deleteSecurityProfileMetadata.decode.bind(
+          deleteSecurityProfileMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -394,28 +601,45 @@ export class OrganizationSecurityProfileGroupServiceClient {
     // Put together the "service stub" for
     // google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.
     this.organizationSecurityProfileGroupServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networksecurity.v1
+            .OrganizationSecurityProfileGroupService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const organizationSecurityProfileGroupServiceStubMethods =
-        ['listSecurityProfileGroups', 'getSecurityProfileGroup', 'createSecurityProfileGroup', 'updateSecurityProfileGroup', 'deleteSecurityProfileGroup', 'listSecurityProfiles', 'getSecurityProfile', 'createSecurityProfile', 'updateSecurityProfile', 'deleteSecurityProfile'];
+    const organizationSecurityProfileGroupServiceStubMethods = [
+      'listSecurityProfileGroups',
+      'getSecurityProfileGroup',
+      'createSecurityProfileGroup',
+      'updateSecurityProfileGroup',
+      'deleteSecurityProfileGroup',
+      'listSecurityProfiles',
+      'getSecurityProfile',
+      'createSecurityProfile',
+      'updateSecurityProfile',
+      'deleteSecurityProfile',
+    ];
     for (const methodName of organizationSecurityProfileGroupServiceStubMethods) {
       const callPromise = this.organizationSecurityProfileGroupServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -425,7 +649,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -440,8 +664,14 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -452,8 +682,14 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -484,9 +720,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -495,8 +729,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -507,960 +742,1455 @@ export class OrganizationSecurityProfileGroupServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single SecurityProfileGroup.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the SecurityProfileGroup to get. Must be in the format
- *   `projects|organizations/* /locations/{location}/securityProfileGroups/{security_profile_group}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.get_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_GetSecurityProfileGroup_async
- */
+  /**
+   * Gets details of a single SecurityProfileGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the SecurityProfileGroup to get. Must be in the format
+   *   `projects|organizations/* /locations/{location}/securityProfileGroups/{security_profile_group}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.get_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_GetSecurityProfileGroup_async
+   */
   getSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+      (
+        | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+      | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+      | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+      | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+      (
+        | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSecurityProfileGroup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+          | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSecurityProfileGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSecurityProfileGroup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSecurityProfileGroup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSecurityProfileGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+          (
+            | protos.google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecurityProfileGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single SecurityProfile.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the SecurityProfile to get. Must be in the format
- *   `projects|organizations/* /locations/{location}/securityProfiles/{security_profile_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.get_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_GetSecurityProfile_async
- */
+  /**
+   * Gets details of a single SecurityProfile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the SecurityProfile to get. Must be in the format
+   *   `projects|organizations/* /locations/{location}/securityProfiles/{security_profile_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.get_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_GetSecurityProfile_async
+   */
   getSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfile,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfile,
+      (
+        | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1.ISecurityProfile,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1.ISecurityProfile,
+      | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1.ISecurityProfile,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1.ISecurityProfile,
+      | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1.ISecurityProfile,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1.ISecurityProfile,
-          protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfile,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1.ISecurityProfile,
+      | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfile,
+      (
+        | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSecurityProfile request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1.ISecurityProfile,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1.ISecurityProfile,
+          | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSecurityProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSecurityProfile(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1.ISecurityProfile,
-        protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSecurityProfile response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSecurityProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1.ISecurityProfile,
+          (
+            | protos.google.cloud.networksecurity.v1.IGetSecurityProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecurityProfile response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new SecurityProfileGroup in a given organization and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the SecurityProfileGroup. Must be in the
- *   format `projects|organizations/* /locations/{location}`.
- * @param {string} request.securityProfileGroupId
- *   Required. Short name of the SecurityProfileGroup resource to be created.
- *   This value should be 1-63 characters long, containing only
- *   letters, numbers, hyphens, and underscores, and should not start
- *   with a number. E.g. "security_profile_group1".
- * @param {google.cloud.networksecurity.v1.SecurityProfileGroup} request.securityProfileGroup
- *   Required. SecurityProfileGroup resource to be created.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfileGroup_async
- */
+  /**
+   * Creates a new SecurityProfileGroup in a given organization and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the SecurityProfileGroup. Must be in the
+   *   format `projects|organizations/* /locations/{location}`.
+   * @param {string} request.securityProfileGroupId
+   *   Required. Short name of the SecurityProfileGroup resource to be created.
+   *   This value should be 1-63 characters long, containing only
+   *   letters, numbers, hyphens, and underscores, and should not start
+   *   with a number. E.g. "security_profile_group1".
+   * @param {google.cloud.networksecurity.v1.SecurityProfileGroup} request.securityProfileGroup
+   *   Required. SecurityProfileGroup resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfileGroup_async
+   */
   createSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSecurityProfileGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSecurityProfileGroup request %j', request);
-    return this.innerApiCalls.createSecurityProfileGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createSecurityProfileGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createSecurityProfileGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSecurityProfileGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createSecurityProfileGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfileGroup_async
- */
-  async checkCreateSecurityProfileGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.SecurityProfileGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createSecurityProfileGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfileGroup_async
+   */
+  async checkCreateSecurityProfileGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfileGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('createSecurityProfileGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSecurityProfileGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.SecurityProfileGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createSecurityProfileGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfileGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single SecurityProfileGroup.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
- *   SecurityProfileGroup resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- * @param {google.cloud.networksecurity.v1.SecurityProfileGroup} request.securityProfileGroup
- *   Required. Updated SecurityProfileGroup resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfileGroup_async
- */
+  /**
+   * Updates the parameters of a single SecurityProfileGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   SecurityProfileGroup resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   * @param {google.cloud.networksecurity.v1.SecurityProfileGroup} request.securityProfileGroup
+   *   Required. Updated SecurityProfileGroup resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfileGroup_async
+   */
   updateSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'security_profile_group.name': request.securityProfileGroup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'security_profile_group.name': request.securityProfileGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSecurityProfileGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSecurityProfileGroup request %j', request);
-    return this.innerApiCalls.updateSecurityProfileGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateSecurityProfileGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateSecurityProfileGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfileGroup,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecurityProfileGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateSecurityProfileGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfileGroup_async
- */
-  async checkUpdateSecurityProfileGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.SecurityProfileGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateSecurityProfileGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfileGroup_async
+   */
+  async checkUpdateSecurityProfileGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfileGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateSecurityProfileGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSecurityProfileGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.SecurityProfileGroup, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateSecurityProfileGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfileGroup,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single SecurityProfileGroup.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the SecurityProfileGroup to delete. Must be in the
- *   format
- *   `projects|organizations/* /locations/{location}/securityProfileGroups/{security_profile_group}`.
- * @param {string} [request.etag]
- *   Optional. If client provided etag is out of date, delete will return
- *   FAILED_PRECONDITION error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfileGroup_async
- */
+  /**
+   * Deletes a single SecurityProfileGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the SecurityProfileGroup to delete. Must be in the
+   *   format
+   *   `projects|organizations/* /locations/{location}/securityProfileGroups/{security_profile_group}`.
+   * @param {string} [request.etag]
+   *   Optional. If client provided etag is out of date, delete will return
+   *   FAILED_PRECONDITION error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfileGroup_async
+   */
   deleteSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSecurityProfileGroup(
-      request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSecurityProfileGroup(
-      request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSecurityProfileGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSecurityProfileGroup request %j', request);
-    return this.innerApiCalls.deleteSecurityProfileGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteSecurityProfileGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteSecurityProfileGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSecurityProfileGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteSecurityProfileGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile_group.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfileGroup_async
- */
-  async checkDeleteSecurityProfileGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteSecurityProfileGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile_group.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfileGroup_async
+   */
+  async checkDeleteSecurityProfileGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteSecurityProfileGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSecurityProfileGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSecurityProfileGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new SecurityProfile in a given organization and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the SecurityProfile. Must be in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {string} request.securityProfileId
- *   Required. Short name of the SecurityProfile resource to be created. This
- *   value should be 1-63 characters long, containing only letters, numbers,
- *   hyphens, and underscores, and should not start with a number. E.g.
- *   "security_profile1".
- * @param {google.cloud.networksecurity.v1.SecurityProfile} request.securityProfile
- *   Required. SecurityProfile resource to be created.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfile_async
- */
+  /**
+   * Creates a new SecurityProfile in a given organization and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the SecurityProfile. Must be in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {string} request.securityProfileId
+   *   Required. Short name of the SecurityProfile resource to be created. This
+   *   value should be 1-63 characters long, containing only letters, numbers,
+   *   hyphens, and underscores, and should not start with a number. E.g.
+   *   "security_profile1".
+   * @param {google.cloud.networksecurity.v1.SecurityProfile} request.securityProfile
+   *   Required. SecurityProfile resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfile_async
+   */
   createSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.ICreateSecurityProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfile,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfile,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSecurityProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSecurityProfile request %j', request);
-    return this.innerApiCalls.createSecurityProfile(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createSecurityProfile response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createSecurityProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfile,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSecurityProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createSecurityProfile()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfile_async
- */
-  async checkCreateSecurityProfileProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.SecurityProfile, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createSecurityProfile()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.create_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfile_async
+   */
+  async checkCreateSecurityProfileProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfile,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('createSecurityProfile long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSecurityProfile, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.SecurityProfile, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createSecurityProfile,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfile,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single SecurityProfile.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
- *   SecurityProfile resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- * @param {google.cloud.networksecurity.v1.SecurityProfile} request.securityProfile
- *   Required. Updated SecurityProfile resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfile_async
- */
+  /**
+   * Updates the parameters of a single SecurityProfile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   SecurityProfile resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   * @param {google.cloud.networksecurity.v1.SecurityProfile} request.securityProfile
+   *   Required. Updated SecurityProfile resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfile_async
+   */
   updateSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfile,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1.ISecurityProfile,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'security_profile.name': request.securityProfile!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'security_profile.name': request.securityProfile!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfile,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSecurityProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSecurityProfile request %j', request);
-    return this.innerApiCalls.updateSecurityProfile(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1.ISecurityProfile, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateSecurityProfile response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateSecurityProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.ISecurityProfile,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecurityProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateSecurityProfile()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfile_async
- */
-  async checkUpdateSecurityProfileProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1.SecurityProfile, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateSecurityProfile()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.update_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfile_async
+   */
+  async checkUpdateSecurityProfileProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfile,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateSecurityProfile long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSecurityProfile, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1.SecurityProfile, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateSecurityProfile,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1.SecurityProfile,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single SecurityProfile.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the SecurityProfile to delete. Must be in the format
- *   `projects|organizations/* /locations/{location}/securityProfiles/{security_profile_id}`.
- * @param {string} [request.etag]
- *   Optional. If client provided etag is out of date, delete will return
- *   FAILED_PRECONDITION error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfile_async
- */
+  /**
+   * Deletes a single SecurityProfile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the SecurityProfile to delete. Must be in the format
+   *   `projects|organizations/* /locations/{location}/securityProfiles/{security_profile_id}`.
+   * @param {string} [request.etag]
+   *   Optional. If client provided etag is out of date, delete will return
+   *   FAILED_PRECONDITION error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfile_async
+   */
   deleteSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSecurityProfile(
-      request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSecurityProfile(
-      request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSecurityProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSecurityProfile request %j', request);
-    return this.innerApiCalls.deleteSecurityProfile(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteSecurityProfile response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteSecurityProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSecurityProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteSecurityProfile()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfile_async
- */
-  async checkDeleteSecurityProfileProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteSecurityProfile()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.delete_security_profile.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfile_async
+   */
+  async checkDeleteSecurityProfileProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteSecurityProfile long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSecurityProfile, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSecurityProfile,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
+    >;
   }
- /**
- * Lists SecurityProfileGroups in a given organization and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project or organization and location from which the
- *   SecurityProfileGroups should be listed, specified in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of SecurityProfileGroups to return per call.
- * @param {string} [request.pageToken]
- *   Optional. The value returned by the last
- *   `ListSecurityProfileGroupsResponse` Indicates that this is a
- *   continuation of a prior `ListSecurityProfileGroups` call, and
- *   that the system should return the next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSecurityProfileGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists SecurityProfileGroups in a given organization and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project or organization and location from which the
+   *   SecurityProfileGroups should be listed, specified in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of SecurityProfileGroups to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListSecurityProfileGroupsResponse` Indicates that this is a
+   *   continuation of a prior `ListSecurityProfileGroups` call, and
+   *   that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecurityProfileGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityProfileGroups(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup[],
-        protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup[],
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse,
+    ]
+  >;
   listSecurityProfileGroups(
-      request: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>): void;
+    request: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+      | protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup
+    >,
+  ): void;
   listSecurityProfileGroups(
-      request: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>): void;
+    request: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+      | protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup
+    >,
+  ): void;
   listSecurityProfileGroups(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup[],
-        protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+      | protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup[],
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+          | protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSecurityProfileGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1469,204 +2199,233 @@ export class OrganizationSecurityProfileGroupServiceClient {
     this._log.info('listSecurityProfileGroups request %j', request);
     return this.innerApiCalls
       .listSecurityProfileGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1.ISecurityProfileGroup[],
-        protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse
-      ]) => {
-        this._log.info('listSecurityProfileGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.ISecurityProfileGroup[],
+          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest | null,
+          protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsResponse,
+        ]) => {
+          this._log.info('listSecurityProfileGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSecurityProfileGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project or organization and location from which the
- *   SecurityProfileGroups should be listed, specified in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of SecurityProfileGroups to return per call.
- * @param {string} [request.pageToken]
- *   Optional. The value returned by the last
- *   `ListSecurityProfileGroupsResponse` Indicates that this is a
- *   continuation of a prior `ListSecurityProfileGroups` call, and
- *   that the system should return the next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSecurityProfileGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSecurityProfileGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project or organization and location from which the
+   *   SecurityProfileGroups should be listed, specified in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of SecurityProfileGroups to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListSecurityProfileGroupsResponse` Indicates that this is a
+   *   continuation of a prior `ListSecurityProfileGroups` call, and
+   *   that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSecurityProfileGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityProfileGroupsStream(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSecurityProfileGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSecurityProfileGroups stream %j', request);
     return this.descriptors.page.listSecurityProfileGroups.createStream(
       this.innerApiCalls.listSecurityProfileGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSecurityProfileGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project or organization and location from which the
- *   SecurityProfileGroups should be listed, specified in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of SecurityProfileGroups to return per call.
- * @param {string} [request.pageToken]
- *   Optional. The value returned by the last
- *   `ListSecurityProfileGroupsResponse` Indicates that this is a
- *   continuation of a prior `ListSecurityProfileGroups` call, and
- *   that the system should return the next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.list_security_profile_groups.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_ListSecurityProfileGroups_async
- */
+  /**
+   * Equivalent to `listSecurityProfileGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project or organization and location from which the
+   *   SecurityProfileGroups should be listed, specified in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of SecurityProfileGroups to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListSecurityProfileGroupsResponse` Indicates that this is a
+   *   continuation of a prior `ListSecurityProfileGroups` call, and
+   *   that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1.SecurityProfileGroup|SecurityProfileGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.list_security_profile_groups.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_ListSecurityProfileGroups_async
+   */
   listSecurityProfileGroupsAsync(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>{
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSecurityProfileGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSecurityProfileGroups iterate %j', request);
     return this.descriptors.page.listSecurityProfileGroups.asyncIterate(
       this.innerApiCalls['listSecurityProfileGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1.ISecurityProfileGroup>;
   }
- /**
- * Lists SecurityProfiles in a given organization and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project or organization and location from which the
- *   SecurityProfiles should be listed, specified in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of SecurityProfiles to return per call.
- * @param {string} [request.pageToken]
- *   Optional. The value returned by the last
- *   `ListSecurityProfilesResponse` Indicates that this is a continuation of a
- *   prior `ListSecurityProfiles` call, and that the system should return the
- *   next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSecurityProfilesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists SecurityProfiles in a given organization and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project or organization and location from which the
+   *   SecurityProfiles should be listed, specified in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of SecurityProfiles to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListSecurityProfilesResponse` Indicates that this is a continuation of a
+   *   prior `ListSecurityProfiles` call, and that the system should return the
+   *   next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecurityProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityProfiles(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfile[],
-        protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest|null,
-        protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfile[],
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse,
+    ]
+  >;
   listSecurityProfiles(
-      request: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfile>): void;
+    request: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+      | protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ISecurityProfile
+    >,
+  ): void;
   listSecurityProfiles(
-      request: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfile>): void;
+    request: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+      | protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ISecurityProfile
+    >,
+  ): void;
   listSecurityProfiles(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfile>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-          protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1.ISecurityProfile>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1.ISecurityProfile[],
-        protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest|null,
-        protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.ISecurityProfile
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+      | protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1.ISecurityProfile
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1.ISecurityProfile[],
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1.ISecurityProfile>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+          | protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.ISecurityProfile
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSecurityProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1675,143 +2434,147 @@ export class OrganizationSecurityProfileGroupServiceClient {
     this._log.info('listSecurityProfiles request %j', request);
     return this.innerApiCalls
       .listSecurityProfiles(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1.ISecurityProfile[],
-        protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest|null,
-        protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse
-      ]) => {
-        this._log.info('listSecurityProfiles values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.ISecurityProfile[],
+          protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest | null,
+          protos.google.cloud.networksecurity.v1.IListSecurityProfilesResponse,
+        ]) => {
+          this._log.info('listSecurityProfiles values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSecurityProfiles`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project or organization and location from which the
- *   SecurityProfiles should be listed, specified in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of SecurityProfiles to return per call.
- * @param {string} [request.pageToken]
- *   Optional. The value returned by the last
- *   `ListSecurityProfilesResponse` Indicates that this is a continuation of a
- *   prior `ListSecurityProfiles` call, and that the system should return the
- *   next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSecurityProfilesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSecurityProfiles`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project or organization and location from which the
+   *   SecurityProfiles should be listed, specified in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of SecurityProfiles to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListSecurityProfilesResponse` Indicates that this is a continuation of a
+   *   prior `ListSecurityProfiles` call, and that the system should return the
+   *   next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSecurityProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSecurityProfilesStream(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSecurityProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSecurityProfiles stream %j', request);
     return this.descriptors.page.listSecurityProfiles.createStream(
       this.innerApiCalls.listSecurityProfiles as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSecurityProfiles`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project or organization and location from which the
- *   SecurityProfiles should be listed, specified in the format
- *   `projects|organizations/* /locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of SecurityProfiles to return per call.
- * @param {string} [request.pageToken]
- *   Optional. The value returned by the last
- *   `ListSecurityProfilesResponse` Indicates that this is a continuation of a
- *   prior `ListSecurityProfiles` call, and that the system should return the
- *   next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.list_security_profiles.js</caption>
- * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_ListSecurityProfiles_async
- */
+  /**
+   * Equivalent to `listSecurityProfiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project or organization and location from which the
+   *   SecurityProfiles should be listed, specified in the format
+   *   `projects|organizations/* /locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of SecurityProfiles to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListSecurityProfilesResponse` Indicates that this is a continuation of a
+   *   prior `ListSecurityProfiles` call, and that the system should return the
+   *   next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1.SecurityProfile|SecurityProfile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/organization_security_profile_group_service.list_security_profiles.js</caption>
+   * region_tag:networksecurity_v1_generated_OrganizationSecurityProfileGroupService_ListSecurityProfiles_async
+   */
   listSecurityProfilesAsync(
-      request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1.ISecurityProfile>{
+    request?: protos.google.cloud.networksecurity.v1.IListSecurityProfilesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.ISecurityProfile> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSecurityProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSecurityProfiles iterate %j', request);
     return this.descriptors.page.listSecurityProfiles.asyncIterate(
       this.innerApiCalls['listSecurityProfiles'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1.ISecurityProfile>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1825,40 +2588,40 @@ export class OrganizationSecurityProfileGroupServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1872,41 +2635,41 @@ export class OrganizationSecurityProfileGroupServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1920,12 +2683,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1960,12 +2723,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1998,12 +2760,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2046,22 +2808,22 @@ export class OrganizationSecurityProfileGroupServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2096,15 +2858,15 @@ export class OrganizationSecurityProfileGroupServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2138,7 +2900,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2151,25 +2913,24 @@ export class OrganizationSecurityProfileGroupServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2208,22 +2969,22 @@ export class OrganizationSecurityProfileGroupServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2239,7 +3000,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} authorization_policy
    * @returns {string} Resource name string.
    */
-  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+  authorizationPolicyPath(
+    project: string,
+    location: string,
+    authorizationPolicy: string,
+  ) {
     return this.pathTemplates.authorizationPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2255,7 +3020,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).project;
   }
 
   /**
@@ -2266,7 +3033,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).location;
   }
 
   /**
@@ -2276,8 +3045,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing AuthorizationPolicy resource.
    * @returns {string} A string representing the authorization_policy.
    */
-  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  matchAuthorizationPolicyFromAuthorizationPolicyName(
+    authorizationPolicyName: string,
+  ) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).authorization_policy;
   }
 
   /**
@@ -2288,7 +3061,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} authz_policy
    * @returns {string} Resource name string.
    */
-  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+  authzPolicyPath(project: string, location: string, authzPolicy: string) {
     return this.pathTemplates.authzPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2304,7 +3077,8 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .project;
   }
 
   /**
@@ -2315,7 +3089,8 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .location;
   }
 
   /**
@@ -2326,7 +3101,8 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the authz_policy.
    */
   matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .authz_policy;
   }
 
   /**
@@ -2337,7 +3113,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} backend_authentication_config
    * @returns {string} Resource name string.
    */
-  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+  backendAuthenticationConfigPath(
+    project: string,
+    location: string,
+    backendAuthenticationConfig: string,
+  ) {
     return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2352,8 +3132,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  matchProjectFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).project;
   }
 
   /**
@@ -2363,8 +3147,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  matchLocationFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).location;
   }
 
   /**
@@ -2374,8 +3162,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the backend_authentication_config.
    */
-  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).backend_authentication_config;
   }
 
   /**
@@ -2386,7 +3178,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} client_tls_policy
    * @returns {string} Resource name string.
    */
-  clientTlsPolicyPath(project:string,location:string,clientTlsPolicy:string) {
+  clientTlsPolicyPath(
+    project: string,
+    location: string,
+    clientTlsPolicy: string,
+  ) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2402,7 +3198,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).project;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -2413,7 +3211,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).location;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -2424,7 +3224,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the client_tls_policy.
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).client_tls_policy;
   }
 
   /**
@@ -2435,7 +3237,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} dns_threat_detector
    * @returns {string} Resource name string.
    */
-  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+  dnsThreatDetectorPath(
+    project: string,
+    location: string,
+    dnsThreatDetector: string,
+  ) {
     return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
       project: project,
       location: location,
@@ -2451,7 +3257,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).project;
   }
 
   /**
@@ -2462,7 +3270,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).location;
   }
 
   /**
@@ -2472,8 +3282,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing DnsThreatDetector resource.
    * @returns {string} A string representing the dns_threat_detector.
    */
-  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  matchDnsThreatDetectorFromDnsThreatDetectorName(
+    dnsThreatDetectorName: string,
+  ) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).dns_threat_detector;
   }
 
   /**
@@ -2484,7 +3298,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} firewall_endpoint_association
    * @returns {string} Resource name string.
    */
-  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+  firewallEndpointAssociationPath(
+    project: string,
+    location: string,
+    firewallEndpointAssociation: string,
+  ) {
     return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
       project: project,
       location: location,
@@ -2499,8 +3317,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  matchProjectFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).project;
   }
 
   /**
@@ -2510,8 +3332,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  matchLocationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).location;
   }
 
   /**
@@ -2521,8 +3347,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the firewall_endpoint_association.
    */
-  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).firewall_endpoint_association;
   }
 
   /**
@@ -2533,7 +3363,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} gateway_security_policy
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+  gatewaySecurityPolicyPath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2549,7 +3383,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).project;
   }
 
   /**
@@ -2559,8 +3395,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  matchLocationFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).location;
   }
 
   /**
@@ -2570,8 +3410,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -2583,7 +3427,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+  gatewaySecurityPolicyRulePath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+    rule: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
       project: project,
       location: location,
@@ -2599,8 +3448,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  matchProjectFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).project;
   }
 
   /**
@@ -2610,8 +3463,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  matchLocationFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).location;
   }
 
   /**
@@ -2621,8 +3478,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -2632,8 +3493,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the rule.
    */
-  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  matchRuleFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).rule;
   }
 
   /**
@@ -2644,7 +3509,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} intercept_deployment
    * @returns {string} Resource name string.
    */
-  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+  interceptDeploymentPath(
+    project: string,
+    location: string,
+    interceptDeployment: string,
+  ) {
     return this.pathTemplates.interceptDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -2660,7 +3529,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).project;
   }
 
   /**
@@ -2671,7 +3542,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).location;
   }
 
   /**
@@ -2681,8 +3554,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptDeployment resource.
    * @returns {string} A string representing the intercept_deployment.
    */
-  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  matchInterceptDeploymentFromInterceptDeploymentName(
+    interceptDeploymentName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).intercept_deployment;
   }
 
   /**
@@ -2693,7 +3570,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} intercept_deployment_group
    * @returns {string} Resource name string.
    */
-  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+  interceptDeploymentGroupPath(
+    project: string,
+    location: string,
+    interceptDeploymentGroup: string,
+  ) {
     return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2708,8 +3589,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  matchProjectFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -2719,8 +3604,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  matchLocationFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -2730,8 +3619,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the intercept_deployment_group.
    */
-  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).intercept_deployment_group;
   }
 
   /**
@@ -2742,7 +3635,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} intercept_endpoint_group
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+  interceptEndpointGroupPath(
+    project: string,
+    location: string,
+    interceptEndpointGroup: string,
+  ) {
     return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2757,8 +3654,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  matchProjectFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -2768,8 +3669,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  matchLocationFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -2779,8 +3684,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the intercept_endpoint_group.
    */
-  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).intercept_endpoint_group;
   }
 
   /**
@@ -2791,12 +3700,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} intercept_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
-    });
+  interceptEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    interceptEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -2806,8 +3721,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  matchProjectFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -2817,8 +3736,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  matchLocationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -2828,8 +3751,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the intercept_endpoint_group_association.
    */
-  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).intercept_endpoint_group_association;
   }
 
   /**
@@ -2840,7 +3767,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} mirroring_deployment
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+  mirroringDeploymentPath(
+    project: string,
+    location: string,
+    mirroringDeployment: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -2856,7 +3787,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).project;
   }
 
   /**
@@ -2867,7 +3800,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).location;
   }
 
   /**
@@ -2877,8 +3812,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringDeployment resource.
    * @returns {string} A string representing the mirroring_deployment.
    */
-  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  matchMirroringDeploymentFromMirroringDeploymentName(
+    mirroringDeploymentName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).mirroring_deployment;
   }
 
   /**
@@ -2889,7 +3828,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} mirroring_deployment_group
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+  mirroringDeploymentGroupPath(
+    project: string,
+    location: string,
+    mirroringDeploymentGroup: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2904,8 +3847,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  matchProjectFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -2915,8 +3862,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  matchLocationFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -2926,8 +3877,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the mirroring_deployment_group.
    */
-  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).mirroring_deployment_group;
   }
 
   /**
@@ -2938,7 +3893,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} mirroring_endpoint_group
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+  mirroringEndpointGroupPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroup: string,
+  ) {
     return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2953,8 +3912,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  matchProjectFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -2964,8 +3927,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  matchLocationFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -2975,8 +3942,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the mirroring_endpoint_group.
    */
-  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).mirroring_endpoint_group;
   }
 
   /**
@@ -2987,12 +3958,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} mirroring_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
-    });
+  mirroringEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -3002,8 +3979,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  matchProjectFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -3013,8 +3994,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  matchLocationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -3024,8 +4009,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the mirroring_endpoint_group_association.
    */
-  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).mirroring_endpoint_group_association;
   }
 
   /**
@@ -3034,7 +4023,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization:string) {
+  organizationPath(organization: string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -3048,7 +4037,8 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
@@ -3058,7 +4048,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization:string,location:string) {
+  organizationLocationPath(organization: string, location: string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -3072,8 +4062,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
+  matchOrganizationFromOrganizationLocationName(
+    organizationLocationName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).organization;
   }
 
   /**
@@ -3084,7 +4078,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).location;
   }
 
   /**
@@ -3095,12 +4091,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} address_group
    * @returns {string} Resource name string.
    */
-  organizationLocationAddressGroupPath(organization:string,location:string,addressGroup:string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      address_group: addressGroup,
-    });
+  organizationLocationAddressGroupPath(
+    organization: string,
+    location: string,
+    addressGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        address_group: addressGroup,
+      },
+    );
   }
 
   /**
@@ -3110,8 +4112,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_address_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).organization;
+  matchOrganizationFromOrganizationLocationAddressGroupName(
+    organizationLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(
+      organizationLocationAddressGroupName,
+    ).organization;
   }
 
   /**
@@ -3121,8 +4127,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_address_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).location;
+  matchLocationFromOrganizationLocationAddressGroupName(
+    organizationLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(
+      organizationLocationAddressGroupName,
+    ).location;
   }
 
   /**
@@ -3132,8 +4142,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_address_group resource.
    * @returns {string} A string representing the address_group.
    */
-  matchAddressGroupFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
-    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).address_group;
+  matchAddressGroupFromOrganizationLocationAddressGroupName(
+    organizationLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(
+      organizationLocationAddressGroupName,
+    ).address_group;
   }
 
   /**
@@ -3144,12 +4158,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
-      organization: organization,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  organizationLocationFirewallEndpointsPath(
+    organization: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -3159,8 +4179,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).organization;
   }
 
   /**
@@ -3170,8 +4194,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  matchLocationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -3181,8 +4209,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -3193,12 +4225,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile: securityProfile,
-    });
+  organizationLocationSecurityProfilePath(
+    organization: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -3208,8 +4246,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).organization;
   }
 
   /**
@@ -3219,8 +4261,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  matchLocationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -3230,8 +4276,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -3242,12 +4292,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  organizationLocationSecurityProfileGroupPath(
+    organization: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -3257,8 +4313,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).organization;
   }
 
   /**
@@ -3268,8 +4328,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -3279,8 +4343,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -3291,7 +4359,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} address_group
    * @returns {string} Resource name string.
    */
-  projectLocationAddressGroupPath(project:string,location:string,addressGroup:string) {
+  projectLocationAddressGroupPath(
+    project: string,
+    location: string,
+    addressGroup: string,
+  ) {
     return this.pathTemplates.projectLocationAddressGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3306,8 +4378,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_address_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
-    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).project;
+  matchProjectFromProjectLocationAddressGroupName(
+    projectLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(
+      projectLocationAddressGroupName,
+    ).project;
   }
 
   /**
@@ -3317,8 +4393,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_address_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
-    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).location;
+  matchLocationFromProjectLocationAddressGroupName(
+    projectLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(
+      projectLocationAddressGroupName,
+    ).location;
   }
 
   /**
@@ -3328,8 +4408,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_address_group resource.
    * @returns {string} A string representing the address_group.
    */
-  matchAddressGroupFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
-    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).address_group;
+  matchAddressGroupFromProjectLocationAddressGroupName(
+    projectLocationAddressGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(
+      projectLocationAddressGroupName,
+    ).address_group;
   }
 
   /**
@@ -3340,12 +4424,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
-      project: project,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  projectLocationFirewallEndpointsPath(
+    project: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -3355,8 +4445,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  matchProjectFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).project;
   }
 
   /**
@@ -3366,8 +4460,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  matchLocationFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -3377,8 +4475,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -3389,12 +4491,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
-      project: project,
-      location: location,
-      security_profile: securityProfile,
-    });
+  projectLocationSecurityProfilePath(
+    project: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -3404,8 +4512,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  matchProjectFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).project;
   }
 
   /**
@@ -3415,8 +4527,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  matchLocationFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -3426,8 +4542,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -3438,12 +4558,18 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
-      project: project,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  projectLocationSecurityProfileGroupPath(
+    project: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -3453,8 +4579,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  matchProjectFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).project;
   }
 
   /**
@@ -3464,8 +4594,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  matchLocationFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -3475,8 +4609,114 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).security_profile_group;
+  }
+
+  /**
+   * Return a fully-qualified sACAttachment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sac_attachment
+   * @returns {string} Resource name string.
+   */
+  sACAttachmentPath(project: string, location: string, sacAttachment: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.render({
+      project: project,
+      location: location,
+      sac_attachment: sacAttachment,
+    });
+  }
+
+  /**
+   * Parse the project from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .location;
+  }
+
+  /**
+   * Parse the sac_attachment from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the sac_attachment.
+   */
+  matchSacAttachmentFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .sac_attachment;
+  }
+
+  /**
+   * Return a fully-qualified sACRealm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sac_realm
+   * @returns {string} Resource name string.
+   */
+  sACRealmPath(project: string, location: string, sacRealm: string) {
+    return this.pathTemplates.sACRealmPathTemplate.render({
+      project: project,
+      location: location,
+      sac_realm: sacRealm,
+    });
+  }
+
+  /**
+   * Parse the project from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).project;
+  }
+
+  /**
+   * Parse the location from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).location;
+  }
+
+  /**
+   * Parse the sac_realm from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the sac_realm.
+   */
+  matchSacRealmFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName)
+      .sac_realm;
   }
 
   /**
@@ -3487,7 +4727,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} server_tls_policy
    * @returns {string} Resource name string.
    */
-  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+  serverTlsPolicyPath(
+    project: string,
+    location: string,
+    serverTlsPolicy: string,
+  ) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3503,7 +4747,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -3514,7 +4760,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -3525,7 +4773,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the server_tls_policy.
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).server_tls_policy;
   }
 
   /**
@@ -3536,7 +4786,11 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} tls_inspection_policy
    * @returns {string} Resource name string.
    */
-  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+  tlsInspectionPolicyPath(
+    project: string,
+    location: string,
+    tlsInspectionPolicy: string,
+  ) {
     return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3552,7 +4806,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).project;
   }
 
   /**
@@ -3563,7 +4819,9 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).location;
   }
 
   /**
@@ -3573,8 +4831,12 @@ export class OrganizationSecurityProfileGroupServiceClient {
    *   A fully-qualified path representing TlsInspectionPolicy resource.
    * @returns {string} A string representing the tls_inspection_policy.
    */
-  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(
+    tlsInspectionPolicyName: string,
+  ) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).tls_inspection_policy;
   }
 
   /**
@@ -3585,7 +4847,7 @@ export class OrganizationSecurityProfileGroupServiceClient {
    * @param {string} url_list
    * @returns {string} Resource name string.
    */
-  urlListPath(project:string,location:string,urlList:string) {
+  urlListPath(project: string, location: string, urlList: string) {
     return this.pathTemplates.urlListPathTemplate.render({
       project: project,
       location: location,
@@ -3634,12 +4896,16 @@ export class OrganizationSecurityProfileGroupServiceClient {
    */
   close(): Promise<void> {
     if (this.organizationSecurityProfileGroupServiceStub && !this._terminated) {
-      return this.organizationSecurityProfileGroupServiceStub.then(stub => {
+      return this.organizationSecurityProfileGroupServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

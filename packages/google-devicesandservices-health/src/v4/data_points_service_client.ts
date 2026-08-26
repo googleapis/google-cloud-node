@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class DataPointsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('health');
@@ -58,10 +67,10 @@ export class DataPointsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  dataPointsServiceStub?: Promise<{[name: string]: Function}>;
+  dataPointsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataPointsServiceClient.
@@ -102,21 +111,42 @@ export class DataPointsServiceClient {
    *     const client = new DataPointsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataPointsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'health.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +171,7 @@ export class DataPointsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,10 +185,7 @@ export class DataPointsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -180,32 +207,54 @@ export class DataPointsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       dataPointPathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/dataTypes/{data_type}/dataPoints/{data_point}'
+        'users/{user}/dataTypes/{data_type}/dataPoints/{data_point}',
       ),
       dataTypePathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/dataTypes/{data_type}'
+        'users/{user}/dataTypes/{data_type}',
       ),
       identityPathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/identity'
+        'users/{user}/identity',
+      ),
+      irnProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/irnProfile',
+      ),
+      pairedDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/pairedDevices/{paired_device}',
       ),
       profilePathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/profile'
+        'users/{user}/profile',
       ),
       settingsPathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/settings'
+        'users/{user}/settings',
       ),
+      subscriberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/subscribers/{subscriber}',
+      ),
+      subscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/subscribers/{subscriber}/subscriptions/{subscription}',
+      ),
+      userPathTemplate: new this._gaxModule.PathTemplate('users/{user}'),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDataPoints:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataPoints'),
-      reconcileDataPoints:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataPoints'),
-      rollUpDataPoints:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rollupDataPoints')
+      listDataPoints: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataPoints',
+      ),
+      reconcileDataPoints: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataPoints',
+      ),
+      rollUpDataPoints: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rollupDataPoints',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -214,45 +263,63 @@ export class DataPointsServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createDataPointResponse = protoFilesRoot.lookup(
-      '.google.devicesandservices.health.v4.DataPoint') as gax.protobuf.Type;
+      '.google.devicesandservices.health.v4.DataPoint',
+    ) as gax.protobuf.Type;
     const createDataPointMetadata = protoFilesRoot.lookup(
-      '.google.devicesandservices.health.v4.CreateDataPointOperationMetadata') as gax.protobuf.Type;
+      '.google.devicesandservices.health.v4.CreateDataPointOperationMetadata',
+    ) as gax.protobuf.Type;
     const updateDataPointResponse = protoFilesRoot.lookup(
-      '.google.devicesandservices.health.v4.DataPoint') as gax.protobuf.Type;
+      '.google.devicesandservices.health.v4.DataPoint',
+    ) as gax.protobuf.Type;
     const updateDataPointMetadata = protoFilesRoot.lookup(
-      '.google.devicesandservices.health.v4.UpdateDataPointOperationMetadata') as gax.protobuf.Type;
+      '.google.devicesandservices.health.v4.UpdateDataPointOperationMetadata',
+    ) as gax.protobuf.Type;
     const batchDeleteDataPointsResponse = protoFilesRoot.lookup(
-      '.google.devicesandservices.health.v4.BatchDeleteDataPointsResponse') as gax.protobuf.Type;
+      '.google.devicesandservices.health.v4.BatchDeleteDataPointsResponse',
+    ) as gax.protobuf.Type;
     const batchDeleteDataPointsMetadata = protoFilesRoot.lookup(
-      '.google.devicesandservices.health.v4.BatchDeleteDataPointsOperationMetadata') as gax.protobuf.Type;
+      '.google.devicesandservices.health.v4.BatchDeleteDataPointsOperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataPoint: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDataPointResponse.decode.bind(createDataPointResponse),
-        createDataPointMetadata.decode.bind(createDataPointMetadata)),
+        createDataPointMetadata.decode.bind(createDataPointMetadata),
+      ),
       updateDataPoint: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDataPointResponse.decode.bind(updateDataPointResponse),
-        updateDataPointMetadata.decode.bind(updateDataPointMetadata)),
+        updateDataPointMetadata.decode.bind(updateDataPointMetadata),
+      ),
       batchDeleteDataPoints: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        batchDeleteDataPointsResponse.decode.bind(batchDeleteDataPointsResponse),
-        batchDeleteDataPointsMetadata.decode.bind(batchDeleteDataPointsMetadata))
+        batchDeleteDataPointsResponse.decode.bind(
+          batchDeleteDataPointsResponse,
+        ),
+        batchDeleteDataPointsMetadata.decode.bind(
+          batchDeleteDataPointsMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.devicesandservices.health.v4.DataPointsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.devicesandservices.health.v4.DataPointsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -283,28 +350,44 @@ export class DataPointsServiceClient {
     // Put together the "service stub" for
     // google.devicesandservices.health.v4.DataPointsService.
     this.dataPointsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.devicesandservices.health.v4.DataPointsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.devicesandservices.health.v4.DataPointsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.devicesandservices.health.v4.DataPointsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.devicesandservices.health.v4
+            .DataPointsService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataPointsServiceStubMethods =
-        ['getDataPoint', 'listDataPoints', 'createDataPoint', 'updateDataPoint', 'batchDeleteDataPoints', 'reconcileDataPoints', 'rollUpDataPoints', 'dailyRollUpDataPoints', 'exportExerciseTcx'];
+    const dataPointsServiceStubMethods = [
+      'getDataPoint',
+      'listDataPoints',
+      'createDataPoint',
+      'updateDataPoint',
+      'batchDeleteDataPoints',
+      'reconcileDataPoints',
+      'rollUpDataPoints',
+      'dailyRollUpDataPoints',
+      'exportExerciseTcx',
+    ];
     for (const methodName of dataPointsServiceStubMethods) {
       const callPromise = this.dataPointsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -314,7 +397,7 @@ export class DataPointsServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -329,8 +412,14 @@ export class DataPointsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'health.googleapis.com';
   }
@@ -341,8 +430,14 @@ export class DataPointsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'health.googleapis.com';
   }
@@ -375,9 +470,19 @@ export class DataPointsServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly',
+      'https://www.googleapis.com/auth/googlehealth.activity_and_fitness.writeonly',
       'https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly',
+      'https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.writeonly',
       'https://www.googleapis.com/auth/googlehealth.location.readonly',
-      'https://www.googleapis.com/auth/googlehealth.sleep.readonly'
+      'https://www.googleapis.com/auth/googlehealth.logged_symptoms.readonly',
+      'https://www.googleapis.com/auth/googlehealth.logged_symptoms.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.mindfulness.readonly',
+      'https://www.googleapis.com/auth/googlehealth.mindfulness.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.nutrition.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.reproductive_health.readonly',
+      'https://www.googleapis.com/auth/googlehealth.reproductive_health.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.sleep.readonly',
+      'https://www.googleapis.com/auth/googlehealth.sleep.writeonly',
     ];
   }
 
@@ -387,8 +492,9 @@ export class DataPointsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -399,888 +505,1269 @@ export class DataPointsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Get a single identifyable data point.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the data point to retrieve.
- *
- *   Format: `users/{user}/dataTypes/{data_type}/dataPoints/{data_point}`
- *
- *   See
- *   {@link protos.google.devicesandservices.health.v4.DataPoint.name|DataPoint.name}
- *   for examples and possible values.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.get_data_point.js</caption>
- * region_tag:health_v4_generated_DataPointsService_GetDataPoint_async
- */
+  /**
+   * Get a single identifyable data point.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the data point to retrieve.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}/dataPoints/{data_point}`
+   *
+   *   See
+   *   {@link protos.google.devicesandservices.health.v4.DataPoint.name|DataPoint.name}
+   *   for examples and possible values.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.get_data_point.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_GetDataPoint_async
+   */
   getDataPoint(
-      request?: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IDataPoint,
-        protos.google.devicesandservices.health.v4.IGetDataPointRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IDataPoint,
+      (
+        | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDataPoint(
-      request: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.devicesandservices.health.v4.IDataPoint,
-          protos.google.devicesandservices.health.v4.IGetDataPointRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.IDataPoint,
+      | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataPoint(
-      request: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
-      callback: Callback<
-          protos.google.devicesandservices.health.v4.IDataPoint,
-          protos.google.devicesandservices.health.v4.IGetDataPointRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.IDataPoint,
+      | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataPoint(
-      request?: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.devicesandservices.health.v4.IGetDataPointRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.devicesandservices.health.v4.IDataPoint,
-          protos.google.devicesandservices.health.v4.IGetDataPointRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.devicesandservices.health.v4.IDataPoint,
-          protos.google.devicesandservices.health.v4.IGetDataPointRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IDataPoint,
-        protos.google.devicesandservices.health.v4.IGetDataPointRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devicesandservices.health.v4.IDataPoint,
+      | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IDataPoint,
+      (
+        | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDataPoint request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.devicesandservices.health.v4.IDataPoint,
-        protos.google.devicesandservices.health.v4.IGetDataPointRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.devicesandservices.health.v4.IDataPoint,
+          | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataPoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDataPoint(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.devicesandservices.health.v4.IDataPoint,
-        protos.google.devicesandservices.health.v4.IGetDataPointRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDataPoint response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDataPoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devicesandservices.health.v4.IDataPoint,
+          (
+            | protos.google.devicesandservices.health.v4.IGetDataPointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataPoint response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Roll up data points over civil time intervals for supported data types.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/distance`
- *
- *   For a list of the supported data types see the [DailyRollupDataPoint
- *   value][google.devicesandservices.health.v4.DailyRollupDataPoint]
- *   union field.
- * @param {google.devicesandservices.health.v4.CivilTimeInterval} request.range
- *   Required. Closed-open range of data points that will be rolled up.
- *   The start time must be aligned with the aggregation window.
- *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
- *   `active-minutes` and `total-calories` is 14 days.
- *   The maximum range for all other data types is 90 days.
- * @param {number} [request.windowSizeDays]
- *   Optional. Aggregation window size, in number of days. Defaults to 1 if not
- *   specified.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- *   All other request fields need to be the same as in the initial request
- *   when the page token is specified.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to roll up.
- *   If empty, data points from all available data sources will be rolled up.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.DailyRollUpDataPointsResponse|DailyRollUpDataPointsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.daily_roll_up_data_points.js</caption>
- * region_tag:health_v4_generated_DataPointsService_DailyRollUpDataPoints_async
- */
+  /**
+   * Roll up data points over civil time intervals for supported data types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *
+   *   For a list of the supported data types see the [DailyRollupDataPoint
+   *   value][google.devicesandservices.health.v4.DailyRollupDataPoint]
+   *   union field.
+   * @param {google.devicesandservices.health.v4.CivilTimeInterval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The start time must be aligned with the aggregation window.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {number} [request.windowSizeDays]
+   *   Optional. Aggregation window size, in number of days. Defaults to 1 if not
+   *   specified.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   The supported values are:
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.DailyRollUpDataPointsResponse|DailyRollUpDataPointsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.daily_roll_up_data_points.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_DailyRollUpDataPoints_async
+   */
   dailyRollUpDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+      (
+        | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   dailyRollUpDataPoints(
-      request: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+      | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   dailyRollUpDataPoints(
-      request: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
-      callback: Callback<
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+      | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   dailyRollUpDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+      | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+      (
+        | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('dailyRollUpDataPoints request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+          | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('dailyRollUpDataPoints response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.dailyRollUpDataPoints(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
-        protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('dailyRollUpDataPoints response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .dailyRollUpDataPoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse,
+          (
+            | protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('dailyRollUpDataPoints response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Exports exercise data in TCX format.
- *
- *
- * Note: While the Authorization section below states that any one of the
- * listed scopes is accepted, this specific method requires the user to
- * provide both one of the `activity_and_fitness` scopes (`normal` or
- * `readonly`) AND one of the `location` scopes (`normal` or `readonly`) in
- * their access token to succeed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the exercise data point to export.
- *
- *   Format: `users/{user}/dataTypes/exercise/dataPoints/{data_point}`
- *   Example: `users/me/dataTypes/exercise/dataPoints/2026443605080188808`
- *
- *   The `{user}` is the alias `"me"` currently. Future versions may support
- *   user IDs.
- *   The `{data_point}` ID maps to the exercise ID, which is a long integer.
- * @param {boolean} [request.partialData]
- *   Optional. Indicates whether to include the TCX data points when the GPS
- *   data is not available. If not specified, defaults to `false` and partial
- *   data will not be included.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.ExportExerciseTcxResponse|ExportExerciseTcxResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.export_exercise_tcx.js</caption>
- * region_tag:health_v4_generated_DataPointsService_ExportExerciseTcx_async
- */
+  /**
+   * Exports exercise data in TCX format.
+   *
+   * **IMPORTANT:** HTTP clients must append `?alt=media` to the
+   * request URL to download the raw TCX file.
+   *
+   * Example:
+   * `https://health.googleapis.com/v4/users/me/dataTypes/exercise/dataPoints/EXERCISE_ID:exportExerciseTcx?alt=media`
+   *
+   * Without `alt=media`, the server returns a JSON response
+   * (`ExportExerciseTcxResponse`)
+   * which is intended primarily for gRPC clients.
+   *
+   * **Note:** While the Authorization section below states that any one of the
+   * listed scopes is accepted, this specific method requires the user to
+   * provide both one of the `activity_and_fitness` scopes (`normal` or
+   * `readonly`) AND one of the `location` scopes (`normal` or `readonly`) in
+   * their access token to succeed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the exercise data point to export.
+   *
+   *   Format: `users/{user}/dataTypes/exercise/dataPoints/{data_point}`
+   *   Example: `users/me/dataTypes/exercise/dataPoints/2026443605080188808`
+   *
+   *   The `{user}` is the alias `"me"` currently. Future versions may support
+   *   user IDs.
+   *   The `{data_point}` ID maps to the exercise ID, which is a long integer.
+   * @param {boolean} [request.partialData]
+   *   Optional. Indicates whether to include the TCX data points when the GPS
+   *   data is not available. If not specified, defaults to `false` and partial
+   *   data will not be included.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4.ExportExerciseTcxResponse|ExportExerciseTcxResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.export_exercise_tcx.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_ExportExerciseTcx_async
+   */
   exportExerciseTcx(
-      request?: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+      (
+        | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   exportExerciseTcx(
-      request: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+      | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportExerciseTcx(
-      request: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
-      callback: Callback<
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
+    callback: Callback<
+      protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+      | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportExerciseTcx(
-      request?: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-          protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+      | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+      (
+        | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('exportExerciseTcx request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+          | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('exportExerciseTcx response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.exportExerciseTcx(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
-        protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('exportExerciseTcx response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .exportExerciseTcx(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse,
+          (
+            | protos.google.devicesandservices.health.v4.IExportExerciseTcxRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportExerciseTcx response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a single identifiable data point.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name where the data point will be created.
- *   Format: `users/{user}/dataTypes/{data_type}`
- * @param {google.devicesandservices.health.v4.DataPoint} request.dataPoint
- *   Required. The data point to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.create_data_point.js</caption>
- * region_tag:health_v4_generated_DataPointsService_CreateDataPoint_async
- */
+  /**
+   * Creates a single identifiable data point.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name where the data point will be created.
+   *   Format: `users/{user}/dataTypes/{data_type}`
+   * @param {google.devicesandservices.health.v4.DataPoint} request.dataPoint
+   *   Required. The data point to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.create_data_point.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_CreateDataPoint_async
+   */
   createDataPoint(
-      request?: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createDataPoint(
-      request: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataPoint(
-      request: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
-      callback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataPoint(
-      request?: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.devicesandservices.health.v4.ICreateDataPointRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devicesandservices.health.v4.IDataPoint,
+            protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devicesandservices.health.v4.IDataPoint,
+            protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDataPoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDataPoint request %j', request);
-    return this.innerApiCalls.createDataPoint(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createDataPoint response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createDataPoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devicesandservices.health.v4.IDataPoint,
+            protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataPoint response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createDataPoint()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.create_data_point.js</caption>
- * region_tag:health_v4_generated_DataPointsService_CreateDataPoint_async
- */
-  async checkCreateDataPointProgress(name: string): Promise<LROperation<protos.google.devicesandservices.health.v4.DataPoint, protos.google.devicesandservices.health.v4.CreateDataPointOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createDataPoint()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.create_data_point.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_CreateDataPoint_async
+   */
+  async checkCreateDataPointProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.devicesandservices.health.v4.DataPoint,
+      protos.google.devicesandservices.health.v4.CreateDataPointOperationMetadata
+    >
+  > {
     this._log.info('createDataPoint long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDataPoint, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.devicesandservices.health.v4.DataPoint, protos.google.devicesandservices.health.v4.CreateDataPointOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDataPoint,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.devicesandservices.health.v4.DataPoint,
+      protos.google.devicesandservices.health.v4.CreateDataPointOperationMetadata
+    >;
   }
-/**
- * Updates a single identifiable data point. If a data point with the
- * specified `name` is not found, the request will fail.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.devicesandservices.health.v4.DataPoint} request.dataPoint
- *   Required. The data point to update
- *
- *   The data point's `name` field is used to identify the data point to update.
- *
- *   Format: `users/{user}/dataTypes/{data_type}/dataPoints/{data_point}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.update_data_point.js</caption>
- * region_tag:health_v4_generated_DataPointsService_UpdateDataPoint_async
- */
+  /**
+   * Updates a single identifiable data point. If a data point with the
+   * specified `name` is not found, the request will fail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devicesandservices.health.v4.DataPoint} request.dataPoint
+   *   Required. The data point to update
+   *
+   *   The data point's `name` field is used to identify the data point to update.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}/dataPoints/{data_point}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.update_data_point.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_UpdateDataPoint_async
+   */
   updateDataPoint(
-      request?: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateDataPoint(
-      request: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataPoint(
-      request: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
-      callback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataPoint(
-      request?: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.devicesandservices.health.v4.IUpdateDataPointRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devicesandservices.health.v4.IDataPoint,
+            protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'data_point.name': request.dataPoint!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'data_point.name': request.dataPoint!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devicesandservices.health.v4.IDataPoint,
+            protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDataPoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDataPoint request %j', request);
-    return this.innerApiCalls.updateDataPoint(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateDataPoint response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateDataPoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devicesandservices.health.v4.IDataPoint,
+            protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataPoint response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateDataPoint()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.update_data_point.js</caption>
- * region_tag:health_v4_generated_DataPointsService_UpdateDataPoint_async
- */
-  async checkUpdateDataPointProgress(name: string): Promise<LROperation<protos.google.devicesandservices.health.v4.DataPoint, protos.google.devicesandservices.health.v4.UpdateDataPointOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateDataPoint()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.update_data_point.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_UpdateDataPoint_async
+   */
+  async checkUpdateDataPointProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.devicesandservices.health.v4.DataPoint,
+      protos.google.devicesandservices.health.v4.UpdateDataPointOperationMetadata
+    >
+  > {
     this._log.info('updateDataPoint long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDataPoint, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.devicesandservices.health.v4.DataPoint, protos.google.devicesandservices.health.v4.UpdateDataPointOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDataPoint,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.devicesandservices.health.v4.DataPoint,
+      protos.google.devicesandservices.health.v4.UpdateDataPointOperationMetadata
+    >;
   }
-/**
- * Delete a batch of identifyable data points.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} [request.parent]
- *   Optional. Parent (data type) for the Data Point collection
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/-`
- *
- *   For a list of the supported data types see the
- *   [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- *
- *   Deleting data points across multiple data type collections is supported
- *   following https://aip.dev/159.
- *
- *   If this is set, the parent of all of the data points specified in `names`
- *   must match this field.
- * @param {string[]} request.names
- *   Required. The names of the DataPoints to delete.
- *   A maximum of 10000 data points can be deleted in a single request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.batch_delete_data_points.js</caption>
- * region_tag:health_v4_generated_DataPointsService_BatchDeleteDataPoints_async
- */
+  /**
+   * Delete a batch of identifyable data points.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.parent]
+   *   Optional. Parent (data type) for the Data Point collection
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/-`
+   *
+   *   For a list of the supported data types see the
+   *   [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   *
+   *   Deleting data points across multiple data type collections is supported
+   *   following https://aip.dev/159.
+   *
+   *   If this is set, the parent of all of the data points specified in `names`
+   *   must match this field.
+   * @param {string[]} request.names
+   *   Required. The names of the DataPoints to delete.
+   *   A maximum of 10000 data points can be deleted in a single request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.batch_delete_data_points.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_BatchDeleteDataPoints_async
+   */
   batchDeleteDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   batchDeleteDataPoints(
-      request: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeleteDataPoints(
-      request: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
-      callback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeleteDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+            protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+            protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchDeleteDataPoints response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchDeleteDataPoints request %j', request);
-    return this.innerApiCalls.batchDeleteDataPoints(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('batchDeleteDataPoints response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .batchDeleteDataPoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+            protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteDataPoints response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `batchDeleteDataPoints()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.batch_delete_data_points.js</caption>
- * region_tag:health_v4_generated_DataPointsService_BatchDeleteDataPoints_async
- */
-  async checkBatchDeleteDataPointsProgress(name: string): Promise<LROperation<protos.google.devicesandservices.health.v4.BatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.BatchDeleteDataPointsOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `batchDeleteDataPoints()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.batch_delete_data_points.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_BatchDeleteDataPoints_async
+   */
+  async checkBatchDeleteDataPointsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.devicesandservices.health.v4.BatchDeleteDataPointsResponse,
+      protos.google.devicesandservices.health.v4.BatchDeleteDataPointsOperationMetadata
+    >
+  > {
     this._log.info('batchDeleteDataPoints long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteDataPoints, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.devicesandservices.health.v4.BatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.BatchDeleteDataPointsOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteDataPoints,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.devicesandservices.health.v4.BatchDeleteDataPointsResponse,
+      protos.google.devicesandservices.health.v4.BatchDeleteDataPointsOperationMetadata
+    >;
   }
- /**
- * Query user health and fitness data points.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/weight`
- *
- *   For a list of the supported data types see the [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- *   For `exercise` and `sleep` the default page size is 25.
- *   The maximum page size for `exercise` and `sleep` is 25.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- * @param {string} [request.filter]
- *   Optional. Filter expression following https://google.aip.dev/160.
- *
- *   A time range (either physical or civil) can be specified.
- *
- *   The supported filter fields are:
- *
- *
- *   - Interval start time:
- *       - Pattern: `{interval_data_type}.interval.start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `steps.interval.start_time >= "2023-11-24T00:00:00Z" AND
- *           steps.interval.start_time < "2023-11-25T00:00:00Z"`
- *           - `distance.interval.start_time >= "2024-08-14T12:34:56Z"`
- *
- *   - Interval civil start time:
- *       - Pattern: `{interval_data_type}.interval.civil_start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `steps.interval.civil_start_time >= "2023-11-24" AND
- *           steps.interval.civil_start_time < "2023-11-25"`
- *           - `distance.interval.civil_start_time >= "2024-08-14T12:34:56"`
- *
- *   - Sample observation physical time:
- *       - Pattern: `{sample_data_type}.sample_time.physical_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `weight.sample_time.physical_time >= "2023-11-24T00:00:00Z"
- *           AND weight.sample_time.physical_time < "2023-11-25T00:00:00Z"`
- *           - `weight.sample_time.physical_time >=
- *           "2024-08-14T12:34:56Z"`
- *
- *   - Sample observation civil time:
- *       - Pattern: `{sample_data_type}.sample_time.civil_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `weight.sample_time.civil_time >= "2023-11-24" AND
- *          weight.sample_time.civil_time < "2023-11-25"`
- *          - `weight.sample_time.civil_time >= "2024-08-14T12:34:56"`
- *
- *   - Daily summary date:
- *       - Pattern: `{daily_summary_data_type}.date`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date literal expected in ISO 8601 `YYYY-MM-DD` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `daily_resting_heart_rate.date >= "2024-08-14"`
- *          - `daily_heart_rate_variability.date < "2024-08-15"`
- *
- *
- *   - Session civil start time (**Excluding Sleep**):
- *       - Pattern: `{session_data_type}.interval.civil_start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
- *          exercise.interval.civil_start_time < "2023-11-25"`
- *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
- *
- *   - Session end time (**Sleep specific**):
- *       - Pattern: `sleep.interval.end_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`, `OR`
- *       - Example:
- *           - `sleep.interval.end_time >= "2023-11-24T00:00:00Z" AND
- *           sleep.interval.end_time < "2023-11-25T00:00:00Z"`
- *
- *   - Session civil end time (**Sleep specific**):
- *       - Pattern: `sleep.interval.civil_end_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`, `OR`
- *       - Example:
- *          - `sleep.interval.civil_end_time >= "2023-11-24" AND
- *          sleep.interval.civil_end_time < "2023-11-25"`
- *
- *
- *   Data points in the response will be ordered by the interval start time in
- *   descending order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDataPointsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Query user health and fitness data points.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/weight`
+   *
+   *   For a list of the supported data types see the [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   *   For `exercise` and `sleep` the default page size is 25.
+   *   The maximum page size for `exercise` and `sleep` is 25.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression following https://google.aip.dev/160.
+   *
+   *   A time range (either physical or civil) can be specified.
+   *
+   *   The supported filter fields are:
+   *
+   *
+   *   - Interval start time:
+   *       - Pattern: `{interval_data_type}.interval.start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `steps.interval.start_time >= "2023-11-24T00:00:00Z" AND
+   *           steps.interval.start_time < "2023-11-25T00:00:00Z"`
+   *           - `distance.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *
+   *   - Interval civil start time:
+   *       - Pattern: `{interval_data_type}.interval.civil_start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `steps.interval.civil_start_time >= "2023-11-24" AND
+   *           steps.interval.civil_start_time < "2023-11-25"`
+   *           - `distance.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Sample observation physical time:
+   *       - Pattern: `{sample_data_type}.sample_time.physical_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `weight.sample_time.physical_time >= "2023-11-24T00:00:00Z"
+   *           AND weight.sample_time.physical_time < "2023-11-25T00:00:00Z"`
+   *           - `weight.sample_time.physical_time >=
+   *           "2024-08-14T12:34:56Z"`
+   *
+   *   - Sample observation civil time:
+   *       - Pattern: `{sample_data_type}.sample_time.civil_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `weight.sample_time.civil_time >= "2023-11-24" AND
+   *          weight.sample_time.civil_time < "2023-11-25"`
+   *          - `weight.sample_time.civil_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Daily summary date:
+   *       - Pattern: `{daily_summary_data_type}.date`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date literal expected in ISO 8601 `YYYY-MM-DD` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `daily_heart_rate_variability.date < "2024-08-15"`
+   *
+   *
+   *
+   *   - Session civil start time (**Excluding Sleep and ECG**):
+   *       - Pattern: `{session_data_type}.interval.civil_start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
+   *          exercise.interval.civil_start_time < "2023-11-25"`
+   *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Session start time (**ECG specific**):
+   *       - Pattern: `electrocardiogram.interval.start_time`
+   *       - Supported comparison operators: `>=`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Example:
+   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *       - Note: Only filtering by start time is supported for ECG. Filtering
+   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
+   *         supported.
+   *
+   *   - Session end time (**Sleep specific**):
+   *       - Pattern: `sleep.interval.end_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`, `OR`
+   *       - Example:
+   *           - `sleep.interval.end_time >= "2023-11-24T00:00:00Z" AND
+   *           sleep.interval.end_time < "2023-11-25T00:00:00Z"`
+   *
+   *   - Session civil end time (**Sleep specific**):
+   *       - Pattern: `sleep.interval.civil_end_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`, `OR`
+   *       - Example:
+   *          - `sleep.interval.civil_end_time >= "2023-11-24" AND
+   *          sleep.interval.civil_end_time < "2023-11-25"`
+   *
+   *
+   *   Data points in the response will be ordered by the interval start time in
+   *   descending order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IDataPoint[],
-        protos.google.devicesandservices.health.v4.IListDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IListDataPointsResponse
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IDataPoint[],
+      protos.google.devicesandservices.health.v4.IListDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4.IListDataPointsResponse,
+    ]
+  >;
   listDataPoints(
-      request: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IListDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IDataPoint>): void;
+    request: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IListDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IDataPoint
+    >,
+  ): void;
   listDataPoints(
-      request: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      callback: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IListDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IDataPoint>): void;
+    request: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IListDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IDataPoint
+    >,
+  ): void;
   listDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IListDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IDataPoint>,
-      callback?: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IListDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IDataPoint>):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IDataPoint[],
-        protos.google.devicesandservices.health.v4.IListDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IListDataPointsResponse
-      ]>|void {
+          | protos.google.devicesandservices.health.v4.IListDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.IDataPoint
+        >,
+    callback?: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IListDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IDataPoint
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IDataPoint[],
+      protos.google.devicesandservices.health.v4.IListDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4.IListDataPointsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      protos.google.devicesandservices.health.v4.IListDataPointsResponse|null|undefined,
-      protos.google.devicesandservices.health.v4.IDataPoint>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+          | protos.google.devicesandservices.health.v4.IListDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.IDataPoint
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1289,440 +1776,491 @@ export class DataPointsServiceClient {
     this._log.info('listDataPoints request %j', request);
     return this.innerApiCalls
       .listDataPoints(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.devicesandservices.health.v4.IDataPoint[],
-        protos.google.devicesandservices.health.v4.IListDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IListDataPointsResponse
-      ]) => {
-        this._log.info('listDataPoints values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devicesandservices.health.v4.IDataPoint[],
+          protos.google.devicesandservices.health.v4.IListDataPointsRequest | null,
+          protos.google.devicesandservices.health.v4.IListDataPointsResponse,
+        ]) => {
+          this._log.info('listDataPoints values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDataPoints`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/weight`
- *
- *   For a list of the supported data types see the [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- *   For `exercise` and `sleep` the default page size is 25.
- *   The maximum page size for `exercise` and `sleep` is 25.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- * @param {string} [request.filter]
- *   Optional. Filter expression following https://google.aip.dev/160.
- *
- *   A time range (either physical or civil) can be specified.
- *
- *   The supported filter fields are:
- *
- *
- *   - Interval start time:
- *       - Pattern: `{interval_data_type}.interval.start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `steps.interval.start_time >= "2023-11-24T00:00:00Z" AND
- *           steps.interval.start_time < "2023-11-25T00:00:00Z"`
- *           - `distance.interval.start_time >= "2024-08-14T12:34:56Z"`
- *
- *   - Interval civil start time:
- *       - Pattern: `{interval_data_type}.interval.civil_start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `steps.interval.civil_start_time >= "2023-11-24" AND
- *           steps.interval.civil_start_time < "2023-11-25"`
- *           - `distance.interval.civil_start_time >= "2024-08-14T12:34:56"`
- *
- *   - Sample observation physical time:
- *       - Pattern: `{sample_data_type}.sample_time.physical_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `weight.sample_time.physical_time >= "2023-11-24T00:00:00Z"
- *           AND weight.sample_time.physical_time < "2023-11-25T00:00:00Z"`
- *           - `weight.sample_time.physical_time >=
- *           "2024-08-14T12:34:56Z"`
- *
- *   - Sample observation civil time:
- *       - Pattern: `{sample_data_type}.sample_time.civil_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `weight.sample_time.civil_time >= "2023-11-24" AND
- *          weight.sample_time.civil_time < "2023-11-25"`
- *          - `weight.sample_time.civil_time >= "2024-08-14T12:34:56"`
- *
- *   - Daily summary date:
- *       - Pattern: `{daily_summary_data_type}.date`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date literal expected in ISO 8601 `YYYY-MM-DD` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `daily_resting_heart_rate.date >= "2024-08-14"`
- *          - `daily_heart_rate_variability.date < "2024-08-15"`
- *
- *
- *   - Session civil start time (**Excluding Sleep**):
- *       - Pattern: `{session_data_type}.interval.civil_start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
- *          exercise.interval.civil_start_time < "2023-11-25"`
- *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
- *
- *   - Session end time (**Sleep specific**):
- *       - Pattern: `sleep.interval.end_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`, `OR`
- *       - Example:
- *           - `sleep.interval.end_time >= "2023-11-24T00:00:00Z" AND
- *           sleep.interval.end_time < "2023-11-25T00:00:00Z"`
- *
- *   - Session civil end time (**Sleep specific**):
- *       - Pattern: `sleep.interval.civil_end_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`, `OR`
- *       - Example:
- *          - `sleep.interval.civil_end_time >= "2023-11-24" AND
- *          sleep.interval.civil_end_time < "2023-11-25"`
- *
- *
- *   Data points in the response will be ordered by the interval start time in
- *   descending order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDataPointsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDataPoints`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/weight`
+   *
+   *   For a list of the supported data types see the [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   *   For `exercise` and `sleep` the default page size is 25.
+   *   The maximum page size for `exercise` and `sleep` is 25.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression following https://google.aip.dev/160.
+   *
+   *   A time range (either physical or civil) can be specified.
+   *
+   *   The supported filter fields are:
+   *
+   *
+   *   - Interval start time:
+   *       - Pattern: `{interval_data_type}.interval.start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `steps.interval.start_time >= "2023-11-24T00:00:00Z" AND
+   *           steps.interval.start_time < "2023-11-25T00:00:00Z"`
+   *           - `distance.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *
+   *   - Interval civil start time:
+   *       - Pattern: `{interval_data_type}.interval.civil_start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `steps.interval.civil_start_time >= "2023-11-24" AND
+   *           steps.interval.civil_start_time < "2023-11-25"`
+   *           - `distance.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Sample observation physical time:
+   *       - Pattern: `{sample_data_type}.sample_time.physical_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `weight.sample_time.physical_time >= "2023-11-24T00:00:00Z"
+   *           AND weight.sample_time.physical_time < "2023-11-25T00:00:00Z"`
+   *           - `weight.sample_time.physical_time >=
+   *           "2024-08-14T12:34:56Z"`
+   *
+   *   - Sample observation civil time:
+   *       - Pattern: `{sample_data_type}.sample_time.civil_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `weight.sample_time.civil_time >= "2023-11-24" AND
+   *          weight.sample_time.civil_time < "2023-11-25"`
+   *          - `weight.sample_time.civil_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Daily summary date:
+   *       - Pattern: `{daily_summary_data_type}.date`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date literal expected in ISO 8601 `YYYY-MM-DD` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `daily_heart_rate_variability.date < "2024-08-15"`
+   *
+   *
+   *
+   *   - Session civil start time (**Excluding Sleep and ECG**):
+   *       - Pattern: `{session_data_type}.interval.civil_start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
+   *          exercise.interval.civil_start_time < "2023-11-25"`
+   *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Session start time (**ECG specific**):
+   *       - Pattern: `electrocardiogram.interval.start_time`
+   *       - Supported comparison operators: `>=`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Example:
+   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *       - Note: Only filtering by start time is supported for ECG. Filtering
+   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
+   *         supported.
+   *
+   *   - Session end time (**Sleep specific**):
+   *       - Pattern: `sleep.interval.end_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`, `OR`
+   *       - Example:
+   *           - `sleep.interval.end_time >= "2023-11-24T00:00:00Z" AND
+   *           sleep.interval.end_time < "2023-11-25T00:00:00Z"`
+   *
+   *   - Session civil end time (**Sleep specific**):
+   *       - Pattern: `sleep.interval.civil_end_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`, `OR`
+   *       - Example:
+   *          - `sleep.interval.civil_end_time >= "2023-11-24" AND
+   *          sleep.interval.civil_end_time < "2023-11-25"`
+   *
+   *
+   *   Data points in the response will be ordered by the interval start time in
+   *   descending order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataPointsStream(
-      request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataPoints stream %j', request);
     return this.descriptors.page.listDataPoints.createStream(
       this.innerApiCalls.listDataPoints as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDataPoints`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/weight`
- *
- *   For a list of the supported data types see the [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- *   For `exercise` and `sleep` the default page size is 25.
- *   The maximum page size for `exercise` and `sleep` is 25.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- * @param {string} [request.filter]
- *   Optional. Filter expression following https://google.aip.dev/160.
- *
- *   A time range (either physical or civil) can be specified.
- *
- *   The supported filter fields are:
- *
- *
- *   - Interval start time:
- *       - Pattern: `{interval_data_type}.interval.start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `steps.interval.start_time >= "2023-11-24T00:00:00Z" AND
- *           steps.interval.start_time < "2023-11-25T00:00:00Z"`
- *           - `distance.interval.start_time >= "2024-08-14T12:34:56Z"`
- *
- *   - Interval civil start time:
- *       - Pattern: `{interval_data_type}.interval.civil_start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `steps.interval.civil_start_time >= "2023-11-24" AND
- *           steps.interval.civil_start_time < "2023-11-25"`
- *           - `distance.interval.civil_start_time >= "2024-08-14T12:34:56"`
- *
- *   - Sample observation physical time:
- *       - Pattern: `{sample_data_type}.sample_time.physical_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`
- *       - Example:
- *           - `weight.sample_time.physical_time >= "2023-11-24T00:00:00Z"
- *           AND weight.sample_time.physical_time < "2023-11-25T00:00:00Z"`
- *           - `weight.sample_time.physical_time >=
- *           "2024-08-14T12:34:56Z"`
- *
- *   - Sample observation civil time:
- *       - Pattern: `{sample_data_type}.sample_time.civil_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `weight.sample_time.civil_time >= "2023-11-24" AND
- *          weight.sample_time.civil_time < "2023-11-25"`
- *          - `weight.sample_time.civil_time >= "2024-08-14T12:34:56"`
- *
- *   - Daily summary date:
- *       - Pattern: `{daily_summary_data_type}.date`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date literal expected in ISO 8601 `YYYY-MM-DD` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `daily_resting_heart_rate.date >= "2024-08-14"`
- *          - `daily_heart_rate_variability.date < "2024-08-15"`
- *
- *
- *   - Session civil start time (**Excluding Sleep**):
- *       - Pattern: `{session_data_type}.interval.civil_start_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`
- *       - Example:
- *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
- *          exercise.interval.civil_start_time < "2023-11-25"`
- *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
- *
- *   - Session end time (**Sleep specific**):
- *       - Pattern: `sleep.interval.end_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Timestamp literal expected in RFC-3339 format
- *       - Supported logical operators: `AND`, `OR`
- *       - Example:
- *           - `sleep.interval.end_time >= "2023-11-24T00:00:00Z" AND
- *           sleep.interval.end_time < "2023-11-25T00:00:00Z"`
- *
- *   - Session civil end time (**Sleep specific**):
- *       - Pattern: `sleep.interval.civil_end_time`
- *       - Supported comparison operators: `>=`, `<`
- *       - Date with optional time literal expected in ISO 8601
- *       `YYYY-MM-DD[THH:mm:ss]` format
- *       - Supported logical operators: `AND`, `OR`
- *       - Example:
- *          - `sleep.interval.civil_end_time >= "2023-11-24" AND
- *          sleep.interval.civil_end_time < "2023-11-25"`
- *
- *
- *   Data points in the response will be ordered by the interval start time in
- *   descending order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.list_data_points.js</caption>
- * region_tag:health_v4_generated_DataPointsService_ListDataPoints_async
- */
+  /**
+   * Equivalent to `listDataPoints`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/weight`
+   *
+   *   For a list of the supported data types see the [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   *   For `exercise` and `sleep` the default page size is 25.
+   *   The maximum page size for `exercise` and `sleep` is 25.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression following https://google.aip.dev/160.
+   *
+   *   A time range (either physical or civil) can be specified.
+   *
+   *   The supported filter fields are:
+   *
+   *
+   *   - Interval start time:
+   *       - Pattern: `{interval_data_type}.interval.start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `steps.interval.start_time >= "2023-11-24T00:00:00Z" AND
+   *           steps.interval.start_time < "2023-11-25T00:00:00Z"`
+   *           - `distance.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *
+   *   - Interval civil start time:
+   *       - Pattern: `{interval_data_type}.interval.civil_start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `steps.interval.civil_start_time >= "2023-11-24" AND
+   *           steps.interval.civil_start_time < "2023-11-25"`
+   *           - `distance.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Sample observation physical time:
+   *       - Pattern: `{sample_data_type}.sample_time.physical_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *           - `weight.sample_time.physical_time >= "2023-11-24T00:00:00Z"
+   *           AND weight.sample_time.physical_time < "2023-11-25T00:00:00Z"`
+   *           - `weight.sample_time.physical_time >=
+   *           "2024-08-14T12:34:56Z"`
+   *
+   *   - Sample observation civil time:
+   *       - Pattern: `{sample_data_type}.sample_time.civil_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `weight.sample_time.civil_time >= "2023-11-24" AND
+   *          weight.sample_time.civil_time < "2023-11-25"`
+   *          - `weight.sample_time.civil_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Daily summary date:
+   *       - Pattern: `{daily_summary_data_type}.date`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date literal expected in ISO 8601 `YYYY-MM-DD` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `daily_heart_rate_variability.date < "2024-08-15"`
+   *
+   *
+   *
+   *   - Session civil start time (**Excluding Sleep and ECG**):
+   *       - Pattern: `{session_data_type}.interval.civil_start_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`
+   *       - Example:
+   *          - `exercise.interval.civil_start_time >= "2023-11-24" AND
+   *          exercise.interval.civil_start_time < "2023-11-25"`
+   *          - `exercise.interval.civil_start_time >= "2024-08-14T12:34:56"`
+   *
+   *   - Session start time (**ECG specific**):
+   *       - Pattern: `electrocardiogram.interval.start_time`
+   *       - Supported comparison operators: `>=`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Example:
+   *           - `electrocardiogram.interval.start_time >= "2024-08-14T12:34:56Z"`
+   *       - Note: Only filtering by start time is supported for ECG. Filtering
+   *         by end time (e.g., `electrocardiogram.interval.end_time`) is not
+   *         supported.
+   *
+   *   - Session end time (**Sleep specific**):
+   *       - Pattern: `sleep.interval.end_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Timestamp literal expected in RFC-3339 format
+   *       - Supported logical operators: `AND`, `OR`
+   *       - Example:
+   *           - `sleep.interval.end_time >= "2023-11-24T00:00:00Z" AND
+   *           sleep.interval.end_time < "2023-11-25T00:00:00Z"`
+   *
+   *   - Session civil end time (**Sleep specific**):
+   *       - Pattern: `sleep.interval.civil_end_time`
+   *       - Supported comparison operators: `>=`, `<`
+   *       - Date with optional time literal expected in ISO 8601
+   *       `YYYY-MM-DD[THH:mm:ss]` format
+   *       - Supported logical operators: `AND`, `OR`
+   *       - Example:
+   *          - `sleep.interval.civil_end_time >= "2023-11-24" AND
+   *          sleep.interval.civil_end_time < "2023-11-25"`
+   *
+   *
+   *   Data points in the response will be ordered by the interval start time in
+   *   descending order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devicesandservices.health.v4.DataPoint|DataPoint}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.list_data_points.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_ListDataPoints_async
+   */
   listDataPointsAsync(
-      request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.devicesandservices.health.v4.IDataPoint>{
+    request?: protos.google.devicesandservices.health.v4.IListDataPointsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.devicesandservices.health.v4.IDataPoint> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataPoints iterate %j', request);
     return this.descriptors.page.listDataPoints.asyncIterate(
       this.innerApiCalls['listDataPoints'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.devicesandservices.health.v4.IDataPoint>;
   }
- /**
- * Reconcile data points from multiple data sources into a single data stream.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/heart-rate`
- *
- *   For a list of the supported data types see the
- *   [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- *   For `exercise` and `sleep` the default page size is 25.
- *   The maximum page size for `exercise` and `sleep` is 25.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- * @param {string} [request.filter]
- *   Optional. Filter expression based on https://aip.dev/160.
- *
- *   A time range, either physical or civil, can be specified.
- *   See the
- *   {@link protos.google.devicesandservices.health.v4.ListDataPointsRequest.filter|ListDataPointsRequest.filter}
- *   for the supported fields and syntax.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to reconcile.
- *
- *   If empty, data points from all data sources will be reconciled.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.ReconciledDataPoint|ReconciledDataPoint}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `reconcileDataPointsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Reconcile data points from multiple data sources into a single data stream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/heart-rate`
+   *
+   *   For a list of the supported data types see the
+   *   [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   *   For `exercise` and `sleep` the default page size is 25.
+   *   The maximum page size for `exercise` and `sleep` is 25.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression based on https://aip.dev/160.
+   *
+   *   A time range, either physical or civil, can be specified.
+   *   See the
+   *   {@link protos.google.devicesandservices.health.v4.ListDataPointsRequest.filter|ListDataPointsRequest.filter}
+   *   for the supported fields and syntax.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to reconcile.
+   *
+   *   If empty, data points from all data sources will be reconciled.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.ReconciledDataPoint|ReconciledDataPoint}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `reconcileDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   reconcileDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IReconciledDataPoint[],
-        protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IReconciledDataPoint[],
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse,
+    ]
+  >;
   reconcileDataPoints(
-      request: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IReconciledDataPoint>): void;
+    request: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IReconciledDataPoint
+    >,
+  ): void;
   reconcileDataPoints(
-      request: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      callback: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IReconciledDataPoint>): void;
+    request: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IReconciledDataPoint
+    >,
+  ): void;
   reconcileDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IReconciledDataPoint>,
-      callback?: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IReconciledDataPoint>):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IReconciledDataPoint[],
-        protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
-      ]>|void {
+          | protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.IReconciledDataPoint
+        >,
+    callback?: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IReconciledDataPoint
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IReconciledDataPoint[],
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse|null|undefined,
-      protos.google.devicesandservices.health.v4.IReconciledDataPoint>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+          | protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.IReconciledDataPoint
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('reconcileDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1731,294 +2269,331 @@ export class DataPointsServiceClient {
     this._log.info('reconcileDataPoints request %j', request);
     return this.innerApiCalls
       .reconcileDataPoints(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.devicesandservices.health.v4.IReconciledDataPoint[],
-        protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse
-      ]) => {
-        this._log.info('reconcileDataPoints values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devicesandservices.health.v4.IReconciledDataPoint[],
+          protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest | null,
+          protos.google.devicesandservices.health.v4.IReconcileDataPointsResponse,
+        ]) => {
+          this._log.info('reconcileDataPoints values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `reconcileDataPoints`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/heart-rate`
- *
- *   For a list of the supported data types see the
- *   [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- *   For `exercise` and `sleep` the default page size is 25.
- *   The maximum page size for `exercise` and `sleep` is 25.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- * @param {string} [request.filter]
- *   Optional. Filter expression based on https://aip.dev/160.
- *
- *   A time range, either physical or civil, can be specified.
- *   See the
- *   {@link protos.google.devicesandservices.health.v4.ListDataPointsRequest.filter|ListDataPointsRequest.filter}
- *   for the supported fields and syntax.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to reconcile.
- *
- *   If empty, data points from all data sources will be reconciled.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.ReconciledDataPoint|ReconciledDataPoint} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `reconcileDataPointsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `reconcileDataPoints`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/heart-rate`
+   *
+   *   For a list of the supported data types see the
+   *   [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   *   For `exercise` and `sleep` the default page size is 25.
+   *   The maximum page size for `exercise` and `sleep` is 25.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression based on https://aip.dev/160.
+   *
+   *   A time range, either physical or civil, can be specified.
+   *   See the
+   *   {@link protos.google.devicesandservices.health.v4.ListDataPointsRequest.filter|ListDataPointsRequest.filter}
+   *   for the supported fields and syntax.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to reconcile.
+   *
+   *   If empty, data points from all data sources will be reconciled.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.ReconciledDataPoint|ReconciledDataPoint} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `reconcileDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   reconcileDataPointsStream(
-      request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['reconcileDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('reconcileDataPoints stream %j', request);
     return this.descriptors.page.reconcileDataPoints.createStream(
       this.innerApiCalls.reconcileDataPoints as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `reconcileDataPoints`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/me/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/heart-rate`
- *
- *   For a list of the supported data types see the
- *   [DataPoint
- *   data][google.devicesandservices.health.v4.DataPoint] union
- *   field.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- *   For `exercise` and `sleep` the default page size is 25.
- *   The maximum page size for `exercise` and `sleep` is 25.
- * @param {string} [request.pageToken]
- *   Optional. The `next_page_token` from a previous request, if any.
- * @param {string} [request.filter]
- *   Optional. Filter expression based on https://aip.dev/160.
- *
- *   A time range, either physical or civil, can be specified.
- *   See the
- *   {@link protos.google.devicesandservices.health.v4.ListDataPointsRequest.filter|ListDataPointsRequest.filter}
- *   for the supported fields and syntax.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to reconcile.
- *
- *   If empty, data points from all data sources will be reconciled.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.devicesandservices.health.v4.ReconciledDataPoint|ReconciledDataPoint}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.reconcile_data_points.js</caption>
- * region_tag:health_v4_generated_DataPointsService_ReconcileDataPoints_async
- */
+  /**
+   * Equivalent to `reconcileDataPoints`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/heart-rate`
+   *
+   *   For a list of the supported data types see the
+   *   [DataPoint
+   *   data][google.devicesandservices.health.v4.DataPoint] union
+   *   field.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   *   For `exercise` and `sleep` the default page size is 25.
+   *   The maximum page size for `exercise` and `sleep` is 25.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression based on https://aip.dev/160.
+   *
+   *   A time range, either physical or civil, can be specified.
+   *   See the
+   *   {@link protos.google.devicesandservices.health.v4.ListDataPointsRequest.filter|ListDataPointsRequest.filter}
+   *   for the supported fields and syntax.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to reconcile.
+   *
+   *   If empty, data points from all data sources will be reconciled.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devicesandservices.health.v4.ReconciledDataPoint|ReconciledDataPoint}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.reconcile_data_points.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_ReconcileDataPoints_async
+   */
   reconcileDataPointsAsync(
-      request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.devicesandservices.health.v4.IReconciledDataPoint>{
+    request?: protos.google.devicesandservices.health.v4.IReconcileDataPointsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.devicesandservices.health.v4.IReconciledDataPoint> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['reconcileDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('reconcileDataPoints iterate %j', request);
     return this.descriptors.page.reconcileDataPoints.asyncIterate(
       this.innerApiCalls['reconcileDataPoints'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.devicesandservices.health.v4.IReconciledDataPoint>;
   }
- /**
- * Roll up data points over physical time intervals for supported data types.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/distance`
- *
- *   For a list of the supported data types see the [RollupDataPoint
- *   value][google.devicesandservices.health.v4.RollupDataPoint]
- *   union field.
- * @param {google.type.Interval} request.range
- *   Required. Closed-open range of data points that will be rolled up.
- *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
- *   `active-minutes` and `total-calories` is 14 days.
- *   The maximum range for all other data types is 90 days.
- * @param {google.protobuf.Duration} request.windowSize
- *   Required. The size of the time window to group data points into before
- *   applying the aggregation functions.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- * @param {string} [request.pageToken]
- *   Optional. The next_page_token from a previous request, if any.
- *   All other request fields need to be the same as in the initial request
- *   when the page token is specified.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to roll up.
- *
- *   If empty, data points from all available data sources will be rolled up.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.RollupDataPoint|RollupDataPoint}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `rollUpDataPointsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Roll up data points over physical time intervals for supported data types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *
+   *   For a list of the supported data types see the [RollupDataPoint
+   *   value][google.devicesandservices.health.v4.RollupDataPoint]
+   *   union field.
+   * @param {google.type.Interval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {google.protobuf.Duration} request.windowSize
+   *   Required. The size of the time window to group data points into before
+   *   applying the aggregation functions. Must be at least 1 second.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   The supported values are:
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4.RollupDataPoint|RollupDataPoint}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `rollUpDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   rollUpDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IRollupDataPoint[],
-        protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
-      ]>;
+    request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IRollupDataPoint[],
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse,
+    ]
+  >;
   rollUpDataPoints(
-      request: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IRollupDataPoint>): void;
+    request: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IRollupDataPoint
+    >,
+  ): void;
   rollUpDataPoints(
-      request: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      callback: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IRollupDataPoint>): void;
+    request: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IRollupDataPoint
+    >,
+  ): void;
   rollUpDataPoints(
-      request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IRollupDataPoint>,
-      callback?: PaginationCallback<
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-          protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse|null|undefined,
-          protos.google.devicesandservices.health.v4.IRollupDataPoint>):
-      Promise<[
-        protos.google.devicesandservices.health.v4.IRollupDataPoint[],
-        protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
-      ]>|void {
+          | protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.IRollupDataPoint
+        >,
+    callback?: PaginationCallback<
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+      | protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4.IRollupDataPoint
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4.IRollupDataPoint[],
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse|null|undefined,
-      protos.google.devicesandservices.health.v4.IRollupDataPoint>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+          | protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4.IRollupDataPoint
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('rollUpDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2027,176 +2602,188 @@ export class DataPointsServiceClient {
     this._log.info('rollUpDataPoints request %j', request);
     return this.innerApiCalls
       .rollUpDataPoints(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.devicesandservices.health.v4.IRollupDataPoint[],
-        protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest|null,
-        protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse
-      ]) => {
-        this._log.info('rollUpDataPoints values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devicesandservices.health.v4.IRollupDataPoint[],
+          protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest | null,
+          protos.google.devicesandservices.health.v4.IRollUpDataPointsResponse,
+        ]) => {
+          this._log.info('rollUpDataPoints values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `rollUpDataPoints`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/distance`
- *
- *   For a list of the supported data types see the [RollupDataPoint
- *   value][google.devicesandservices.health.v4.RollupDataPoint]
- *   union field.
- * @param {google.type.Interval} request.range
- *   Required. Closed-open range of data points that will be rolled up.
- *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
- *   `active-minutes` and `total-calories` is 14 days.
- *   The maximum range for all other data types is 90 days.
- * @param {google.protobuf.Duration} request.windowSize
- *   Required. The size of the time window to group data points into before
- *   applying the aggregation functions.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- * @param {string} [request.pageToken]
- *   Optional. The next_page_token from a previous request, if any.
- *   All other request fields need to be the same as in the initial request
- *   when the page token is specified.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to roll up.
- *
- *   If empty, data points from all available data sources will be rolled up.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.RollupDataPoint|RollupDataPoint} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `rollUpDataPointsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `rollUpDataPoints`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *
+   *   For a list of the supported data types see the [RollupDataPoint
+   *   value][google.devicesandservices.health.v4.RollupDataPoint]
+   *   union field.
+   * @param {google.type.Interval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {google.protobuf.Duration} request.windowSize
+   *   Required. The size of the time window to group data points into before
+   *   applying the aggregation functions. Must be at least 1 second.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   The supported values are:
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4.RollupDataPoint|RollupDataPoint} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `rollUpDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   rollUpDataPointsStream(
-      request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['rollUpDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('rollUpDataPoints stream %j', request);
     return this.descriptors.page.rollUpDataPoints.createStream(
       this.innerApiCalls.rollUpDataPoints as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `rollUpDataPoints`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent data type of the Data Point collection.
- *
- *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
- *
- *   - `users/me/dataTypes/steps`
- *   - `users/me/dataTypes/distance`
- *
- *   For a list of the supported data types see the [RollupDataPoint
- *   value][google.devicesandservices.health.v4.RollupDataPoint]
- *   union field.
- * @param {google.type.Interval} request.range
- *   Required. Closed-open range of data points that will be rolled up.
- *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
- *   `active-minutes` and `total-calories` is 14 days.
- *   The maximum range for all other data types is 90 days.
- * @param {google.protobuf.Duration} request.windowSize
- *   Required. The size of the time window to group data points into before
- *   applying the aggregation functions.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of data points to return.
- *   If unspecified, at most 1440 data points will be returned.
- *   The maximum page size is 10000; values above that will be truncated
- *   accordingly.
- * @param {string} [request.pageToken]
- *   Optional. The next_page_token from a previous request, if any.
- *   All other request fields need to be the same as in the initial request
- *   when the page token is specified.
- * @param {string} [request.dataSourceFamily]
- *   Optional. The data source family name to roll up.
- *
- *   If empty, data points from all available data sources will be rolled up.
- *
- *   Format: `users/me/dataSourceFamilies/{data_source_family}`
- *
- *   The supported values are:
- *
- *   - `users/me/dataSourceFamilies/all-sources` - default value
- *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
- *   - `users/me/dataSourceFamilies/google-sources` - Google first party
- *     sources
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.devicesandservices.health.v4.RollupDataPoint|RollupDataPoint}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/data_points_service.roll_up_data_points.js</caption>
- * region_tag:health_v4_generated_DataPointsService_RollUpDataPoints_async
- */
+  /**
+   * Equivalent to `rollUpDataPoints`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *
+   *   For a list of the supported data types see the [RollupDataPoint
+   *   value][google.devicesandservices.health.v4.RollupDataPoint]
+   *   union field.
+   * @param {google.type.Interval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {google.protobuf.Duration} request.windowSize
+   *   Required. The size of the time window to group data points into before
+   *   applying the aggregation functions. Must be at least 1 second.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *
+   *   The supported values are:
+   *
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devicesandservices.health.v4.RollupDataPoint|RollupDataPoint}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/data_points_service.roll_up_data_points.js</caption>
+   * region_tag:health_v4_generated_DataPointsService_RollUpDataPoints_async
+   */
   rollUpDataPointsAsync(
-      request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.devicesandservices.health.v4.IRollupDataPoint>{
+    request?: protos.google.devicesandservices.health.v4.IRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.devicesandservices.health.v4.IRollupDataPoint> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['rollUpDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('rollUpDataPoints iterate %j', request);
     return this.descriptors.page.rollUpDataPoints.asyncIterate(
       this.innerApiCalls['rollUpDataPoints'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.devicesandservices.health.v4.IRollupDataPoint>;
   }
   // --------------------
@@ -2211,7 +2798,7 @@ export class DataPointsServiceClient {
    * @param {string} data_point
    * @returns {string} Resource name string.
    */
-  dataPointPath(user:string,dataType:string,dataPoint:string) {
+  dataPointPath(user: string, dataType: string, dataPoint: string) {
     return this.pathTemplates.dataPointPathTemplate.render({
       user: user,
       data_type: dataType,
@@ -2238,7 +2825,8 @@ export class DataPointsServiceClient {
    * @returns {string} A string representing the data_type.
    */
   matchDataTypeFromDataPointName(dataPointName: string) {
-    return this.pathTemplates.dataPointPathTemplate.match(dataPointName).data_type;
+    return this.pathTemplates.dataPointPathTemplate.match(dataPointName)
+      .data_type;
   }
 
   /**
@@ -2249,7 +2837,8 @@ export class DataPointsServiceClient {
    * @returns {string} A string representing the data_point.
    */
   matchDataPointFromDataPointName(dataPointName: string) {
-    return this.pathTemplates.dataPointPathTemplate.match(dataPointName).data_point;
+    return this.pathTemplates.dataPointPathTemplate.match(dataPointName)
+      .data_point;
   }
 
   /**
@@ -2259,7 +2848,7 @@ export class DataPointsServiceClient {
    * @param {string} data_type
    * @returns {string} Resource name string.
    */
-  dataTypePath(user:string,dataType:string) {
+  dataTypePath(user: string, dataType: string) {
     return this.pathTemplates.dataTypePathTemplate.render({
       user: user,
       data_type: dataType,
@@ -2285,7 +2874,8 @@ export class DataPointsServiceClient {
    * @returns {string} A string representing the data_type.
    */
   matchDataTypeFromDataTypeName(dataTypeName: string) {
-    return this.pathTemplates.dataTypePathTemplate.match(dataTypeName).data_type;
+    return this.pathTemplates.dataTypePathTemplate.match(dataTypeName)
+      .data_type;
   }
 
   /**
@@ -2294,7 +2884,7 @@ export class DataPointsServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  identityPath(user:string) {
+  identityPath(user: string) {
     return this.pathTemplates.identityPathTemplate.render({
       user: user,
     });
@@ -2312,12 +2902,73 @@ export class DataPointsServiceClient {
   }
 
   /**
+   * Return a fully-qualified irnProfile resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  irnProfilePath(user: string) {
+    return this.pathTemplates.irnProfilePathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from IrnProfile resource.
+   *
+   * @param {string} irnProfileName
+   *   A fully-qualified path representing IrnProfile resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromIrnProfileName(irnProfileName: string) {
+    return this.pathTemplates.irnProfilePathTemplate.match(irnProfileName).user;
+  }
+
+  /**
+   * Return a fully-qualified pairedDevice resource name string.
+   *
+   * @param {string} user
+   * @param {string} paired_device
+   * @returns {string} Resource name string.
+   */
+  pairedDevicePath(user: string, pairedDevice: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.render({
+      user: user,
+      paired_device: pairedDevice,
+    });
+  }
+
+  /**
+   * Parse the user from PairedDevice resource.
+   *
+   * @param {string} pairedDeviceName
+   *   A fully-qualified path representing PairedDevice resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromPairedDeviceName(pairedDeviceName: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.match(pairedDeviceName)
+      .user;
+  }
+
+  /**
+   * Parse the paired_device from PairedDevice resource.
+   *
+   * @param {string} pairedDeviceName
+   *   A fully-qualified path representing PairedDevice resource.
+   * @returns {string} A string representing the paired_device.
+   */
+  matchPairedDeviceFromPairedDeviceName(pairedDeviceName: string) {
+    return this.pathTemplates.pairedDevicePathTemplate.match(pairedDeviceName)
+      .paired_device;
+  }
+
+  /**
    * Return a fully-qualified profile resource name string.
    *
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  profilePath(user:string) {
+  profilePath(user: string) {
     return this.pathTemplates.profilePathTemplate.render({
       user: user,
     });
@@ -2340,7 +2991,7 @@ export class DataPointsServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  settingsPath(user:string) {
+  settingsPath(user: string) {
     return this.pathTemplates.settingsPathTemplate.render({
       user: user,
     });
@@ -2358,6 +3009,119 @@ export class DataPointsServiceClient {
   }
 
   /**
+   * Return a fully-qualified subscriber resource name string.
+   *
+   * @param {string} project
+   * @param {string} subscriber
+   * @returns {string} Resource name string.
+   */
+  subscriberPath(project: string, subscriber: string) {
+    return this.pathTemplates.subscriberPathTemplate.render({
+      project: project,
+      subscriber: subscriber,
+    });
+  }
+
+  /**
+   * Parse the project from Subscriber resource.
+   *
+   * @param {string} subscriberName
+   *   A fully-qualified path representing Subscriber resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubscriberName(subscriberName: string) {
+    return this.pathTemplates.subscriberPathTemplate.match(subscriberName)
+      .project;
+  }
+
+  /**
+   * Parse the subscriber from Subscriber resource.
+   *
+   * @param {string} subscriberName
+   *   A fully-qualified path representing Subscriber resource.
+   * @returns {string} A string representing the subscriber.
+   */
+  matchSubscriberFromSubscriberName(subscriberName: string) {
+    return this.pathTemplates.subscriberPathTemplate.match(subscriberName)
+      .subscriber;
+  }
+
+  /**
+   * Return a fully-qualified subscription resource name string.
+   *
+   * @param {string} project
+   * @param {string} subscriber
+   * @param {string} subscription
+   * @returns {string} Resource name string.
+   */
+  subscriptionPath(project: string, subscriber: string, subscription: string) {
+    return this.pathTemplates.subscriptionPathTemplate.render({
+      project: project,
+      subscriber: subscriber,
+      subscription: subscription,
+    });
+  }
+
+  /**
+   * Parse the project from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .project;
+  }
+
+  /**
+   * Parse the subscriber from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscriber.
+   */
+  matchSubscriberFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscriber;
+  }
+
+  /**
+   * Parse the subscription from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscription.
+   */
+  matchSubscriptionFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscription;
+  }
+
+  /**
+   * Return a fully-qualified user resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  userPath(user: string) {
+    return this.pathTemplates.userPathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -2365,7 +3129,7 @@ export class DataPointsServiceClient {
    */
   close(): Promise<void> {
     if (this.dataPointsServiceStub && !this._terminated) {
-      return this.dataPointsServiceStub.then(stub => {
+      return this.dataPointsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

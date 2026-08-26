@@ -37,7 +37,7 @@ service BrowserService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `Browser` object.
+  // Retrieves a `Browser` object.
   rpc GetBrowser(GetBrowserRequest) returns (Browser) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/browsers/*}"
@@ -45,7 +45,7 @@ service BrowserService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `Browser` objects.
+  // Lists `Browser` objects.
   rpc ListBrowsers(ListBrowsersRequest) returns (ListBrowsersResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=networks/*}/browsers"
@@ -94,13 +94,12 @@ message ListBrowsersRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>majorVersion</code></li>
-  //   <li><code>minorVersion</code></li>
-  //   <li><code>name</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `displayName`
+  // * `majorVersion`
+  // * `minorVersion`
+  // * `name`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

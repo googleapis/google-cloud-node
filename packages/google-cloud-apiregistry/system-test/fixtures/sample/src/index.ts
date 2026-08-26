@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CloudApiRegistryClient} from '@google-cloud/apiregistry';
+import { CloudApiRegistryClient } from '@google-cloud/apiregistry';
 
 // check that the client class type name can be used
 function doStuffWithCloudApiRegistryClient(client: CloudApiRegistryClient) {

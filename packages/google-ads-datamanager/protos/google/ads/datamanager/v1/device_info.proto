@@ -17,6 +17,7 @@ syntax = "proto3";
 package google.ads.datamanager.v1;
 
 import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
 
 option csharp_namespace = "Google.Ads.DataManager.V1";
 option go_package = "cloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb";
@@ -31,7 +32,8 @@ message DeviceInfo {
   // Optional. The user-agent string of the device for the given context.
   string user_agent = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The IP address of the device for the given context.
+  // Optional. The IP address of the device for the given context. Required when
+  // used in an [AdEvent][google.ads.datamanager.v1.AdEvent].
   //
   // **Note:** Google Ads does not support IP address matching for end users in
   // the European Economic Area (EEA), United Kingdom (UK), or Switzerland (CH).
@@ -42,5 +44,39 @@ message DeviceInfo {
   // applicable Google policies. See the [About offline conversion
   // imports](https://support.google.com/google-ads/answer/2998031) page for
   // more details.
-  string ip_address = 2 [(google.api.field_behavior) = OPTIONAL];
+  string ip_address = 2 [
+    (google.api.field_info).format = IPV4_OR_IPV6,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
+  // Optional. The category of device. For example, “desktop”, “tablet”,
+  // “mobile”, “smart TV”.
+  string category = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The language the device uses in ISO 639-1 format.
+  string language_code = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The height of the screen in pixels.
+  int32 screen_height = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The width of the screen in pixels.
+  int32 screen_width = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The operating system or platform of the device.
+  string operating_system = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The version of the operating system or platform.
+  string operating_system_version = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The model of the device.
+  string model = 9 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The brand of the device.
+  string brand = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The brand or type of the browser.
+  string browser = 11 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The version of the browser.
+  string browser_version = 12 [(google.api.field_behavior) = OPTIONAL];
 }

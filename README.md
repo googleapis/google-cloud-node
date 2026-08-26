@@ -58,7 +58,7 @@ applications that interact with individual Google Cloud services:
 | [Discovery Engine API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-discoveryengine) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/discoveryengine)](https://npm.im/@google-cloud/discoveryengine) |
 | [Distributed Cloud Edge Container API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgecontainer) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/edgecontainer)](https://npm.im/@google-cloud/edgecontainer) |
 | [Distributed Cloud Edge Network API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgenetwork) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/edgenetwork)](https://npm.im/@google-cloud/edgenetwork) |
-| [DNS](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dns)](https://npm.im/@google-cloud/dns) |
+| [DNS](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dns)](https://npm.im/@google-cloud/dns) |
 | [Document AI](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-documentai) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/documentai)](https://npm.im/@google-cloud/documentai) |
 | [Document AI Warehouse](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-contentwarehouse) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/contentwarehouse)](https://npm.im/@google-cloud/contentwarehouse) |
 | [Domains](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-domains) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/domains)](https://npm.im/@google-cloud/domains) |
@@ -288,6 +288,12 @@ can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
 For example, `{{ metadata['lib_install_cmd'] }}@legacy-10` installs client libraries
 for versions compatible with Node.js 10.
+
+## Post-quantum Cryptography
+
+A minimum Node version of >=22.20 is required for post-quantum cryptography to
+be used. When running an application with a supported node version, the client
+library will attempt to negotiate and use post-quantum cryptography for all requests.
 
 ## Versioning
 

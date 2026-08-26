@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": "googleapis/nodejs-automl",
   "private": true,
@@ -16,7 +16,7 @@
     "!test/"
   ],
   "dependencies": {
-    "@google-cloud/automl": "^5.1.2",
+    "@google-cloud/automl": "^6.0.0",
     "csv": "^6.0.0",
     "mathjs": "^15.2.0",
     "yargs": "^17.0.0"
@@ -24,7 +24,6 @@
   "devDependencies": {
     "@google-cloud/storage": "^7.0.1",
     "chai": "^4.2.0",
-    "mocha": "^8.0.0",
-    "uuid": "^9.0.0"
+    "mocha": "^8.0.0"
   }
 }

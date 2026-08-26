@@ -29,7 +29,7 @@ function main(teamFolder) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the team_folder whose contents to list.
+   *  Required. Resource name of the TeamFolder to list contents for.
    *  Format: `projects/* /locations/* /teamFolders/*`.
    */
   // const teamFolder = 'abc123'
@@ -53,15 +53,15 @@ function main(teamFolder) {
    *  order. Supported keywords: `display_name` (default), `create_time`,
    *  last_modified_time.
    *  Examples:
-   *    - `orderBy="display_name"`
-   *    - `orderBy="display_name desc"`
+   *  * `orderBy="display_name"`
+   *  * `orderBy="display_name desc"`
    */
   // const orderBy = 'abc123'
   /**
    *  Optional. Optional filtering for the returned list. Filtering is currently
    *  only supported on the `display_name` field.
    *  Example:
-   *   - `filter="display_name="MyFolder""`
+   *  * `filter="display_name="MyFolder""`
    */
   // const filter = 'abc123'
 

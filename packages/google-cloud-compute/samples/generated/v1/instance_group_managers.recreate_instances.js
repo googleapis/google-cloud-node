@@ -37,6 +37,11 @@ function main(instanceGroupManager, instanceGroupManagersRecreateInstancesReques
    */
   // const instanceGroupManagersRecreateInstancesRequestResource = {}
   /**
+   *  When set, graceful shutdown is skipped for instance recreation even if it's
+   *  configured for the instances.
+   */
+  // const noGracefulShutdown = true
+  /**
    *  Project ID for this request.
    */
   // const project = 'my-project'

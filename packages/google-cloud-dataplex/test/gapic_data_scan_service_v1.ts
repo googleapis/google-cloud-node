@@ -750,6 +750,138 @@ describe('v1.DataScanServiceClient', () => {
     });
   });
 
+  describe('cancelDataScanJob', () => {
+    it('invokes cancelDataScanJob without error', async () => {
+      const client = new datascanserviceModule.v1.DataScanServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.CancelDataScanJobRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CancelDataScanJobRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.CancelDataScanJobResponse(),
+      );
+      client.innerApiCalls.cancelDataScanJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.cancelDataScanJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelDataScanJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelDataScanJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelDataScanJob without error using callback', async () => {
+      const client = new datascanserviceModule.v1.DataScanServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.CancelDataScanJobRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CancelDataScanJobRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.CancelDataScanJobResponse(),
+      );
+      client.innerApiCalls.cancelDataScanJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelDataScanJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataplex.v1.ICancelDataScanJobResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelDataScanJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelDataScanJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelDataScanJob with error', async () => {
+      const client = new datascanserviceModule.v1.DataScanServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.CancelDataScanJobRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CancelDataScanJobRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelDataScanJob = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.cancelDataScanJob(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelDataScanJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelDataScanJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelDataScanJob with closed client', async () => {
+      const client = new datascanserviceModule.v1.DataScanServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.CancelDataScanJobRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CancelDataScanJobRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.cancelDataScanJob(request), expectedError);
+    });
+  });
+
   describe('generateDataQualityRules', () => {
     it('invokes generateDataQualityRules without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
@@ -2761,6 +2893,70 @@ describe('v1.DataScanServiceClient', () => {
         assert.strictEqual(result, 'assetValue');
         assert(
           (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('changeRequest', async () => {
+      const fakePath = '/rendered/path/changeRequest';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        change_request: 'changeRequestValue',
+      };
+      const client = new datascanserviceModule.v1.DataScanServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.changeRequestPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.changeRequestPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('changeRequestPath', () => {
+        const result = client.changeRequestPath(
+          'projectValue',
+          'locationValue',
+          'changeRequestValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromChangeRequestName', () => {
+        const result = client.matchProjectFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromChangeRequestName', () => {
+        const result = client.matchLocationFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChangeRequestFromChangeRequestName', () => {
+        const result = client.matchChangeRequestFromChangeRequestName(fakePath);
+        assert.strictEqual(result, 'changeRequestValue');
+        assert(
+          (client.pathTemplates.changeRequestPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

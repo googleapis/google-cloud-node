@@ -244,7 +244,12 @@ export class LicenseCodesClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const licenseCodesStubMethods = ['get', 'testIamPermissions'];
+    const licenseCodesStubMethods = [
+      'get',
+      'getIamPolicy',
+      'setIamPolicy',
+      'testIamPermissions',
+    ];
     for (const methodName of licenseCodesStubMethods) {
       const callPromise = this.licenseCodesStub.then(
         (stub) =>
@@ -337,7 +342,6 @@ export class LicenseCodesClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/compute.readonly',
       'https://www.googleapis.com/auth/compute',
       'https://www.googleapis.com/auth/cloud-platform',
     ];
@@ -477,6 +481,310 @@ export class LicenseCodesClient {
           {} | undefined,
         ]) => {
           this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets the access control policy for a resource. May be empty if no such
+   * policy or resource exists.
+   *  *Caution* This resource is intended
+   * for use only by third-party partners who are creatingCloud Marketplace
+   * images.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.optionsRequestedPolicyVersion
+   *   Requested IAM Policy version.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_codes.get_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_LicenseCodes_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IPolicy,
+          (
+            | protos.google.cloud.compute.v1.IGetIamPolicyLicenseCodeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Sets the access control policy on the specified resource.
+   * Replaces any existing policy.
+   *  *Caution* This resource is intended
+   * for use only by third-party partners who are creatingCloud Marketplace
+   * images.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.GlobalSetPolicyRequest} request.globalSetPolicyRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/license_codes.set_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_LicenseCodes_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IPolicy,
+          (
+            | protos.google.cloud.compute.v1.ISetIamPolicyLicenseCodeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )

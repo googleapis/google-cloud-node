@@ -462,6 +462,540 @@ describe('v1.CompanyServiceClient', () => {
     });
   });
 
+  describe('createCompany', () => {
+    it('invokes createCompany without error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateCompanyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateCompanyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Company(),
+      );
+      client.innerApiCalls.createCompany = stubSimpleCall(expectedResponse);
+      const [response] = await client.createCompany(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCompany as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompany as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompany without error using callback', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateCompanyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateCompanyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Company(),
+      );
+      client.innerApiCalls.createCompany =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCompany(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.ICompany | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCompany as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompany as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompany with error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateCompanyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateCompanyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCompany = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createCompany(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createCompany as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompany as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompany with closed client', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateCompanyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateCompanyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.createCompany(request), expectedError);
+    });
+  });
+
+  describe('batchCreateCompanies', () => {
+    it('invokes batchCreateCompanies without error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateCompaniesResponse(),
+      );
+      client.innerApiCalls.batchCreateCompanies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCreateCompanies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateCompanies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateCompanies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateCompanies without error using callback', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateCompaniesResponse(),
+      );
+      client.innerApiCalls.batchCreateCompanies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateCompanies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchCreateCompaniesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateCompanies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateCompanies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateCompanies with error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateCompanies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchCreateCompanies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateCompanies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateCompanies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateCompanies with closed client', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchCreateCompanies(request), expectedError);
+    });
+  });
+
+  describe('updateCompany', () => {
+    it('invokes updateCompany without error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateCompanyRequest(),
+      );
+      request.company ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateCompanyRequest',
+        ['company', 'name'],
+      );
+      request.company.name = defaultValue1;
+      const expectedHeaderRequestParams = `company.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Company(),
+      );
+      client.innerApiCalls.updateCompany = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCompany(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCompany as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCompany as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCompany without error using callback', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateCompanyRequest(),
+      );
+      request.company ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateCompanyRequest',
+        ['company', 'name'],
+      );
+      request.company.name = defaultValue1;
+      const expectedHeaderRequestParams = `company.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Company(),
+      );
+      client.innerApiCalls.updateCompany =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCompany(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.ICompany | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCompany as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCompany as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCompany with error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateCompanyRequest(),
+      );
+      request.company ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateCompanyRequest',
+        ['company', 'name'],
+      );
+      request.company.name = defaultValue1;
+      const expectedHeaderRequestParams = `company.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCompany = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateCompany(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateCompany as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCompany as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCompany with closed client', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateCompanyRequest(),
+      );
+      request.company ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateCompanyRequest',
+        ['company', 'name'],
+      );
+      request.company.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateCompany(request), expectedError);
+    });
+  });
+
+  describe('batchUpdateCompanies', () => {
+    it('invokes batchUpdateCompanies without error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateCompaniesResponse(),
+      );
+      client.innerApiCalls.batchUpdateCompanies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchUpdateCompanies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateCompanies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateCompanies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateCompanies without error using callback', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateCompaniesResponse(),
+      );
+      client.innerApiCalls.batchUpdateCompanies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateCompanies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchUpdateCompaniesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateCompanies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateCompanies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateCompanies with error', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateCompanies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchUpdateCompanies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateCompanies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateCompanies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateCompanies with closed client', async () => {
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateCompaniesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateCompaniesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchUpdateCompanies(request), expectedError);
+    });
+  });
+
   describe('listCompanies', () => {
     it('invokes listCompanies without error', async () => {
       const client = new companyserviceModule.v1.CompanyServiceClient({
@@ -898,6 +1432,104 @@ describe('v1.CompanyServiceClient', () => {
       });
     });
 
+    describe('adRule', async () => {
+      const fakePath = '/rendered/path/adRule';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_rule: 'adRuleValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.adRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adRulePath', () => {
+        const result = client.adRulePath('networkCodeValue', 'adRuleValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adRulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdRuleName', () => {
+        const result = client.matchNetworkCodeFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdRuleFromAdRuleName', () => {
+        const result = client.matchAdRuleFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'adRuleValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('adSpot', async () => {
+      const fakePath = '/rendered/path/adSpot';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_spot: 'adSpotValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.adSpotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adSpotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adSpotPath', () => {
+        const result = client.adSpotPath('networkCodeValue', 'adSpotValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdSpotName', () => {
+        const result = client.matchNetworkCodeFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdSpotFromAdSpotName', () => {
+        const result = client.matchAdSpotFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'adSpotValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('adUnit', async () => {
       const fakePath = '/rendered/path/adUnit';
       const expectedParameters = {
@@ -1201,6 +1833,58 @@ describe('v1.CompanyServiceClient', () => {
         assert.strictEqual(result, 'browserLanguageValue');
         assert(
           (client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('cdnConfig', async () => {
+      const fakePath = '/rendered/path/cdnConfig';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        cdn_config: 'cdnConfigValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cdnConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cdnConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cdnConfigPath', () => {
+        const result = client.cdnConfigPath(
+          'networkCodeValue',
+          'cdnConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCdnConfigName', () => {
+        const result = client.matchNetworkCodeFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCdnConfigFromCdnConfigName', () => {
+        const result = client.matchCdnConfigFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'cdnConfigValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1621,6 +2305,107 @@ describe('v1.CompanyServiceClient', () => {
       });
     });
 
+    describe('creative', async () => {
+      const fakePath = '/rendered/path/creative';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative: 'creativeValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativePath', () => {
+        const result = client.creativePath('networkCodeValue', 'creativeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeName', () => {
+        const result = client.matchNetworkCodeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromCreativeName', () => {
+        const result = client.matchCreativeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeSet', async () => {
+      const fakePath = '/rendered/path/creativeSet';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_set: 'creativeSetValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativeSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeSetPath', () => {
+        const result = client.creativeSetPath(
+          'networkCodeValue',
+          'creativeSetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeSetName', () => {
+        const result = client.matchNetworkCodeFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeSetFromCreativeSetName', () => {
+        const result = client.matchCreativeSetFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'creativeSetValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('creativeTemplate', async () => {
       const fakePath = '/rendered/path/creativeTemplate';
       const expectedParameters = {
@@ -1672,6 +2457,59 @@ describe('v1.CompanyServiceClient', () => {
         assert.strictEqual(result, 'creativeTemplateValue');
         assert(
           (client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeWrapper', async () => {
+      const fakePath = '/rendered/path/creativeWrapper';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_wrapper: 'creativeWrapperValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativeWrapperPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeWrapperPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeWrapperPath', () => {
+        const result = client.creativeWrapperPath(
+          'networkCodeValue',
+          'creativeWrapperValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeWrapperName', () => {
+        const result = client.matchNetworkCodeFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeWrapperFromCreativeWrapperName', () => {
+        const result =
+          client.matchCreativeWrapperFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'creativeWrapperValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1850,6 +2688,134 @@ describe('v1.CompanyServiceClient', () => {
         assert(
           (
             client.pathTemplates.customTargetingValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiAuthenticationKey', async () => {
+      const fakePath = '/rendered/path/daiAuthenticationKey';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_authentication_key: 'daiAuthenticationKeyValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiAuthenticationKeyPath', () => {
+        const result = client.daiAuthenticationKeyPath(
+          'networkCodeValue',
+          'daiAuthenticationKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiAuthenticationKeyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiAuthenticationKeyFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'daiAuthenticationKeyValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiEncodingProfile', async () => {
+      const fakePath = '/rendered/path/daiEncodingProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_encoding_profile: 'daiEncodingProfileValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiEncodingProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiEncodingProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiEncodingProfilePath', () => {
+        const result = client.daiEncodingProfilePath(
+          'networkCodeValue',
+          'daiEncodingProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiEncodingProfileFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchDaiEncodingProfileFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'daiEncodingProfileValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2298,6 +3264,58 @@ describe('v1.CompanyServiceClient', () => {
       });
     });
 
+    describe('liveStream', async () => {
+      const fakePath = '/rendered/path/liveStream';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        live_stream: 'liveStreamValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.liveStreamPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.liveStreamPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('liveStreamPath', () => {
+        const result = client.liveStreamPath(
+          'networkCodeValue',
+          'liveStreamValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLiveStreamName', () => {
+        const result = client.matchNetworkCodeFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLiveStreamFromLiveStreamName', () => {
+        const result = client.matchLiveStreamFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'liveStreamValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('liveStreamEvent', async () => {
       const fakePath = '/rendered/path/liveStreamEvent';
       const expectedParameters = {
@@ -2719,6 +3737,55 @@ describe('v1.CompanyServiceClient', () => {
         assert.strictEqual(result, 'orderValue');
         assert(
           (client.pathTemplates.orderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('partner', async () => {
+      const fakePath = '/rendered/path/partner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        partner: 'partnerValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.partnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.partnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('partnerPath', () => {
+        const result = client.partnerPath('networkCodeValue', 'partnerValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.partnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromPartnerName', () => {
+        const result = client.matchNetworkCodeFromPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPartnerFromPartnerName', () => {
+        const result = client.matchPartnerFromPartnerName(fakePath);
+        assert.strictEqual(result, 'partnerValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3166,6 +4233,161 @@ describe('v1.CompanyServiceClient', () => {
       });
     });
 
+    describe('slate', async () => {
+      const fakePath = '/rendered/path/slate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        slate: 'slateValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.slatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.slatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('slatePath', () => {
+        const result = client.slatePath('networkCodeValue', 'slateValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.slatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSlateName', () => {
+        const result = client.matchNetworkCodeFromSlateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSlateFromSlateName', () => {
+        const result = client.matchSlateFromSlateName(fakePath);
+        assert.strictEqual(result, 'slateValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('suggestedAdUnit', async () => {
+      const fakePath = '/rendered/path/suggestedAdUnit';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        suggested_ad_unit: 'suggestedAdUnitValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.suggestedAdUnitPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.suggestedAdUnitPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('suggestedAdUnitPath', () => {
+        const result = client.suggestedAdUnitPath(
+          'networkCodeValue',
+          'suggestedAdUnitValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSuggestedAdUnitName', () => {
+        const result = client.matchNetworkCodeFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSuggestedAdUnitFromSuggestedAdUnitName', () => {
+        const result =
+          client.matchSuggestedAdUnitFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'suggestedAdUnitValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('targetingPreset', async () => {
+      const fakePath = '/rendered/path/targetingPreset';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        targeting_preset: 'targetingPresetValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.targetingPresetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.targetingPresetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('targetingPresetPath', () => {
+        const result = client.targetingPresetPath(
+          'networkCodeValue',
+          'targetingPresetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromTargetingPresetName', () => {
+        const result = client.matchNetworkCodeFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTargetingPresetFromTargetingPresetName', () => {
+        const result =
+          client.matchTargetingPresetFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'targetingPresetValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('taxonomyCategory', async () => {
       const fakePath = '/rendered/path/taxonomyCategory';
       const expectedParameters = {
@@ -3272,6 +4494,69 @@ describe('v1.CompanyServiceClient', () => {
       });
     });
 
+    describe('thirdPartyCompany', async () => {
+      const fakePath = '/rendered/path/thirdPartyCompany';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        third_party_company: 'thirdPartyCompanyValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.thirdPartyCompanyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.thirdPartyCompanyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('thirdPartyCompanyPath', () => {
+        const result = client.thirdPartyCompanyPath(
+          'networkCodeValue',
+          'thirdPartyCompanyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchNetworkCodeFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchThirdPartyCompanyFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchThirdPartyCompanyFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'thirdPartyCompanyValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
@@ -3315,6 +4600,69 @@ describe('v1.CompanyServiceClient', () => {
         assert.strictEqual(result, 'userValue');
         assert(
           (client.pathTemplates.userPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('viewabilityProvider', async () => {
+      const fakePath = '/rendered/path/viewabilityProvider';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        viewability_provider: 'viewabilityProviderValue',
+      };
+      const client = new companyserviceModule.v1.CompanyServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.viewabilityProviderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.viewabilityProviderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('viewabilityProviderPath', () => {
+        const result = client.viewabilityProviderPath(
+          'networkCodeValue',
+          'viewabilityProviderValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromViewabilityProviderName', () => {
+        const result =
+          client.matchNetworkCodeFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchViewabilityProviderFromViewabilityProviderName', () => {
+        const result =
+          client.matchViewabilityProviderFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'viewabilityProviderValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

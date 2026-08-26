@@ -22635,7 +22635,8 @@ export namespace google {
                     ROUTE_TYPE_UNSPECIFIED = 0,
                     VPC_PRIMARY_SUBNET = 1,
                     VPC_SECONDARY_SUBNET = 2,
-                    DYNAMIC_ROUTE = 3
+                    DYNAMIC_ROUTE = 3,
+                    PSC_GLOBAL_GAPI = 4
                 }
 
                 /** State enum. */
@@ -22682,7 +22683,8 @@ export namespace google {
                     LOCATION_FEATURE_UNSPECIFIED = 0,
                     SITE_TO_CLOUD_SPOKES = 1,
                     SITE_TO_SITE_SPOKES = 2,
-                    GATEWAY_SPOKES = 3
+                    GATEWAY_SPOKES = 3,
+                    TRANSPORTS = 4
                 }
 
                 /** Properties of a Hub. */
@@ -22726,6 +22728,9 @@ export namespace google {
 
                     /** Hub exportPsc */
                     exportPsc?: (boolean|null);
+
+                    /** Hub exportPscConfig */
+                    exportPscConfig?: (google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig|null);
                 }
 
                 /** Represents a Hub. */
@@ -22775,6 +22780,9 @@ export namespace google {
 
                     /** Hub exportPsc. */
                     public exportPsc?: (boolean|null);
+
+                    /** Hub exportPscConfig. */
+                    public exportPscConfig?: (google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig|null);
 
                     /**
                      * Creates a new Hub instance using the specified properties.
@@ -22852,6 +22860,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Hub {
+
+                    /** Properties of an ExportPscConfig. */
+                    interface IExportPscConfig {
+
+                        /** ExportPscConfig publishedServicesAndRegionalGoogleApis */
+                        publishedServicesAndRegionalGoogleApis?: (boolean|null);
+
+                        /** ExportPscConfig globalGoogleApis */
+                        globalGoogleApis?: (boolean|null);
+                    }
+
+                    /** Represents an ExportPscConfig. */
+                    class ExportPscConfig implements IExportPscConfig {
+
+                        /**
+                         * Constructs a new ExportPscConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig);
+
+                        /** ExportPscConfig publishedServicesAndRegionalGoogleApis. */
+                        public publishedServicesAndRegionalGoogleApis?: (boolean|null);
+
+                        /** ExportPscConfig globalGoogleApis. */
+                        public globalGoogleApis?: (boolean|null);
+
+                        /**
+                         * Creates a new ExportPscConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportPscConfig instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Encodes the specified ExportPscConfig message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig.verify|verify} messages.
+                         * @param message ExportPscConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportPscConfig message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig.verify|verify} messages.
+                         * @param message ExportPscConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportPscConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportPscConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Decodes an ExportPscConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportPscConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Verifies an ExportPscConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportPscConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportPscConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Creates a plain object from an ExportPscConfig message. Also converts values to other types if specified.
+                         * @param message ExportPscConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportPscConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportPscConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a RoutingVPC. */
@@ -27649,6 +27763,15 @@ export namespace google {
 
                     /** LinkedVpnTunnels includeImportRanges */
                     includeImportRanges?: (string[]|null);
+
+                    /** LinkedVpnTunnels excludeImportRanges */
+                    excludeImportRanges?: (string[]|null);
+
+                    /** LinkedVpnTunnels includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedVpnTunnels excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
                 }
 
                 /** Represents a LinkedVpnTunnels. */
@@ -27671,6 +27794,15 @@ export namespace google {
 
                     /** LinkedVpnTunnels includeImportRanges. */
                     public includeImportRanges: string[];
+
+                    /** LinkedVpnTunnels excludeImportRanges. */
+                    public excludeImportRanges: string[];
+
+                    /** LinkedVpnTunnels includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedVpnTunnels excludeExportRanges. */
+                    public excludeExportRanges: string[];
 
                     /**
                      * Creates a new LinkedVpnTunnels instance using the specified properties.
@@ -27764,6 +27896,15 @@ export namespace google {
 
                     /** LinkedInterconnectAttachments includeImportRanges */
                     includeImportRanges?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments excludeImportRanges */
+                    excludeImportRanges?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
                 }
 
                 /** Represents a LinkedInterconnectAttachments. */
@@ -27786,6 +27927,15 @@ export namespace google {
 
                     /** LinkedInterconnectAttachments includeImportRanges. */
                     public includeImportRanges: string[];
+
+                    /** LinkedInterconnectAttachments excludeImportRanges. */
+                    public excludeImportRanges: string[];
+
+                    /** LinkedInterconnectAttachments includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedInterconnectAttachments excludeExportRanges. */
+                    public excludeExportRanges: string[];
 
                     /**
                      * Creates a new LinkedInterconnectAttachments instance using the specified properties.
@@ -27879,6 +28029,15 @@ export namespace google {
 
                     /** LinkedRouterApplianceInstances includeImportRanges */
                     includeImportRanges?: (string[]|null);
+
+                    /** LinkedRouterApplianceInstances excludeImportRanges */
+                    excludeImportRanges?: (string[]|null);
+
+                    /** LinkedRouterApplianceInstances includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedRouterApplianceInstances excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
                 }
 
                 /** Represents a LinkedRouterApplianceInstances. */
@@ -27901,6 +28060,15 @@ export namespace google {
 
                     /** LinkedRouterApplianceInstances includeImportRanges. */
                     public includeImportRanges: string[];
+
+                    /** LinkedRouterApplianceInstances excludeImportRanges. */
+                    public excludeImportRanges: string[];
+
+                    /** LinkedRouterApplianceInstances includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedRouterApplianceInstances excludeExportRanges. */
+                    public excludeExportRanges: string[];
 
                     /**
                      * Creates a new LinkedRouterApplianceInstances instance using the specified properties.
@@ -31973,6 +32141,20 @@ export namespace google {
                     public getRemoteTransportProfile(request: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest): Promise<google.cloud.networkconnectivity.v1beta.RemoteTransportProfile>;
 
                     /**
+                     * Calls ParseFromActivationKey.
+                     * @param request ParseFromActivationKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ParseFromActivationKeyResponse
+                     */
+                    public parseFromActivationKey(request: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.ParseFromActivationKeyCallback): void;
+
+                    /**
+                     * Calls ParseFromActivationKey.
+                     * @param request ParseFromActivationKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public parseFromActivationKey(request: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest): Promise<google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse>;
+
+                    /**
                      * Calls ListTransports.
                      * @param request ListTransportsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListTransportsResponse
@@ -32074,6 +32256,13 @@ export namespace google {
                     type GetRemoteTransportProfileCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.RemoteTransportProfile) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|parseFromActivationKey}.
+                     * @param error Error, if any
+                     * @param [response] ParseFromActivationKeyResponse
+                     */
+                    type ParseFromActivationKeyCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|listTransports}.
                      * @param error Error, if any
                      * @param [response] ListTransportsResponse
@@ -32148,6 +32337,9 @@ export namespace google {
 
                     /** RemoteTransportProfile displayName */
                     displayName?: (string|null);
+
+                    /** RemoteTransportProfile providerType */
+                    providerType?: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType|null);
                 }
 
                 /** Represents a RemoteTransportProfile. */
@@ -32188,6 +32380,9 @@ export namespace google {
 
                     /** RemoteTransportProfile displayName. */
                     public displayName: string;
+
+                    /** RemoteTransportProfile providerType. */
+                    public providerType: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType);
 
                     /**
                      * Creates a new RemoteTransportProfile instance using the specified properties.
@@ -32307,6 +32502,13 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         CLOSED = 1,
                         OPEN = 2
+                    }
+
+                    /** ProviderType enum. */
+                    enum ProviderType {
+                        PROVIDER_TYPE_UNSPECIFIED = 0,
+                        CLOUD = 1,
+                        NETWORK = 2
                     }
                 }
 
@@ -32637,6 +32839,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ParseFromActivationKeyRequest. */
+                interface IParseFromActivationKeyRequest {
+
+                    /** ParseFromActivationKeyRequest parent */
+                    parent?: (string|null);
+
+                    /** ParseFromActivationKeyRequest activationKey */
+                    activationKey?: (string|null);
+                }
+
+                /** Represents a ParseFromActivationKeyRequest. */
+                class ParseFromActivationKeyRequest implements IParseFromActivationKeyRequest {
+
+                    /**
+                     * Constructs a new ParseFromActivationKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest);
+
+                    /** ParseFromActivationKeyRequest parent. */
+                    public parent: string;
+
+                    /** ParseFromActivationKeyRequest activationKey. */
+                    public activationKey: string;
+
+                    /**
+                     * Creates a new ParseFromActivationKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParseFromActivationKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest.verify|verify} messages.
+                     * @param message ParseFromActivationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest.verify|verify} messages.
+                     * @param message ParseFromActivationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParseFromActivationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParseFromActivationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Verifies a ParseFromActivationKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParseFromActivationKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParseFromActivationKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Creates a plain object from a ParseFromActivationKeyRequest message. Also converts values to other types if specified.
+                     * @param message ParseFromActivationKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParseFromActivationKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParseFromActivationKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParseFromActivationKeyResponse. */
+                interface IParseFromActivationKeyResponse {
+
+                    /** ParseFromActivationKeyResponse remoteTransportProfile */
+                    remoteTransportProfile?: (google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile|null);
+                }
+
+                /** Represents a ParseFromActivationKeyResponse. */
+                class ParseFromActivationKeyResponse implements IParseFromActivationKeyResponse {
+
+                    /**
+                     * Constructs a new ParseFromActivationKeyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse);
+
+                    /** ParseFromActivationKeyResponse remoteTransportProfile. */
+                    public remoteTransportProfile?: (google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile|null);
+
+                    /**
+                     * Creates a new ParseFromActivationKeyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParseFromActivationKeyResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse.verify|verify} messages.
+                     * @param message ParseFromActivationKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse.verify|verify} messages.
+                     * @param message ParseFromActivationKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParseFromActivationKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParseFromActivationKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Verifies a ParseFromActivationKeyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParseFromActivationKeyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParseFromActivationKeyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Creates a plain object from a ParseFromActivationKeyResponse message. Also converts values to other types if specified.
+                     * @param message ParseFromActivationKeyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParseFromActivationKeyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParseFromActivationKeyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Transport. */
                 interface ITransport {
 
@@ -32690,6 +33092,15 @@ export namespace google {
 
                     /** Transport peeringNetwork */
                     peeringNetwork?: (string|null);
+
+                    /** Transport hub */
+                    hub?: (string|null);
+
+                    /** Transport pscRoutingEnabled */
+                    pscRoutingEnabled?: (boolean|null);
+
+                    /** Transport autoAccept */
+                    autoAccept?: (boolean|null);
                 }
 
                 /** Represents a Transport. */
@@ -32751,6 +33162,15 @@ export namespace google {
 
                     /** Transport peeringNetwork. */
                     public peeringNetwork: string;
+
+                    /** Transport hub. */
+                    public hub: string;
+
+                    /** Transport pscRoutingEnabled. */
+                    public pscRoutingEnabled: boolean;
+
+                    /** Transport autoAccept. */
+                    public autoAccept: boolean;
 
                     /**
                      * Creates a new Transport instance using the specified properties.
@@ -33201,6 +33621,9 @@ export namespace google {
 
                     /** GetStatusRequest name */
                     name?: (string|null);
+
+                    /** GetStatusRequest skipCache */
+                    skipCache?: (boolean|null);
                 }
 
                 /** Represents a GetStatusRequest. */
@@ -33214,6 +33637,9 @@ export namespace google {
 
                     /** GetStatusRequest name. */
                     public name: string;
+
+                    /** GetStatusRequest skipCache. */
+                    public skipCache: boolean;
 
                     /**
                      * Creates a new GetStatusRequest instance using the specified properties.
@@ -34409,6 +34835,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -34425,6 +34854,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -35029,6 +35461,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -35042,6 +35477,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -35126,6 +35564,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -35139,6 +35580,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -35216,6 +35660,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -35544,6 +36100,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -35557,6 +36116,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -35647,6 +36209,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -35666,6 +36231,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -35882,6 +36450,468 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -35899,6 +36929,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -35912,6 +36945,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -36001,6 +37037,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -36107,10 +37240,13 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -36136,6 +37272,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -36185,6 +37324,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -36320,6 +37462,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -36360,6 +37505,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -37208,6 +38356,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -37233,6 +38384,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -38168,6 +39322,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -38225,6 +39382,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -38441,6 +39601,127 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -38684,6 +39965,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -38705,6 +39989,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -39298,6 +40585,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -39326,6 +40622,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -39449,6 +40754,218 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -39568,8 +41085,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -39584,8 +41104,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -40116,6 +41639,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Timestamp. */
@@ -40983,6 +42513,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -41005,6 +42538,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -41092,6 +42628,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -41108,6 +42647,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.
@@ -42116,6 +43658,24 @@ export namespace google {
 
                 /** Violation description */
                 description?: (string|null);
+
+                /** Violation apiService */
+                apiService?: (string|null);
+
+                /** Violation quotaMetric */
+                quotaMetric?: (string|null);
+
+                /** Violation quotaId */
+                quotaId?: (string|null);
+
+                /** Violation quotaDimensions */
+                quotaDimensions?: ({ [k: string]: string }|null);
+
+                /** Violation quotaValue */
+                quotaValue?: (number|Long|string|null);
+
+                /** Violation futureQuotaValue */
+                futureQuotaValue?: (number|Long|string|null);
             }
 
             /** Represents a Violation. */
@@ -42132,6 +43692,24 @@ export namespace google {
 
                 /** Violation description. */
                 public description: string;
+
+                /** Violation apiService. */
+                public apiService: string;
+
+                /** Violation quotaMetric. */
+                public quotaMetric: string;
+
+                /** Violation quotaId. */
+                public quotaId: string;
+
+                /** Violation quotaDimensions. */
+                public quotaDimensions: { [k: string]: string };
+
+                /** Violation quotaValue. */
+                public quotaValue: (number|Long|string);
+
+                /** Violation futureQuotaValue. */
+                public futureQuotaValue?: (number|Long|string|null);
 
                 /**
                  * Creates a new Violation instance using the specified properties.
@@ -42528,6 +44106,12 @@ export namespace google {
 
                 /** FieldViolation description */
                 description?: (string|null);
+
+                /** FieldViolation reason */
+                reason?: (string|null);
+
+                /** FieldViolation localizedMessage */
+                localizedMessage?: (google.rpc.ILocalizedMessage|null);
             }
 
             /** Represents a FieldViolation. */
@@ -42544,6 +44128,12 @@ export namespace google {
 
                 /** FieldViolation description. */
                 public description: string;
+
+                /** FieldViolation reason. */
+                public reason: string;
+
+                /** FieldViolation localizedMessage. */
+                public localizedMessage?: (google.rpc.ILocalizedMessage|null);
 
                 /**
                  * Creates a new FieldViolation instance using the specified properties.

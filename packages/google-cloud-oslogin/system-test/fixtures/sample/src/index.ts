@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {OsLoginServiceClient} from '@google-cloud/os-login';
+import { OsLoginServiceClient } from '@google-cloud/os-login';
 
 // check that the client class type name can be used
 function doStuffWithOsLoginServiceClient(client: OsLoginServiceClient) {

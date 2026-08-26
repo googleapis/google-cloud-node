@@ -37,7 +37,7 @@ service RichMediaAdsCompanyService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `RichMediaAdsCompany` object.
+  // Retrieves a `RichMediaAdsCompany` object.
   rpc GetRichMediaAdsCompany(GetRichMediaAdsCompanyRequest)
       returns (RichMediaAdsCompany) {
     option (google.api.http) = {
@@ -46,7 +46,7 @@ service RichMediaAdsCompanyService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `RichMediaAdsCompany` objects.
+  // Lists `RichMediaAdsCompany` objects.
   rpc ListRichMediaAdsCompanies(ListRichMediaAdsCompaniesRequest)
       returns (ListRichMediaAdsCompaniesResponse) {
     option (google.api.http) = {
@@ -99,14 +99,13 @@ message ListRichMediaAdsCompaniesRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>companyGvlId</code></li>
-  //   <li><code>displayName</code></li>
-  //   <li><code>gdprStatus</code></li>
-  //   <li><code>name</code></li>
-  //   <li><code>policyUrl</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `companyGvlId`
+  // * `displayName`
+  // * `gdprStatus`
+  // * `name`
+  // * `policyUrl`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ChatServiceClient} from './chat_service_client';
+export { ChatServiceClient } from './chat_service_client';

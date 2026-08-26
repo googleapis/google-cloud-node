@@ -47,6 +47,16 @@ function main(nodeVersion, imageType) {
    */
   // const imageType = 'abc123'
   /**
+   *  The desired name of the image name to use for this node.
+   *  This is used to create clusters using a custom image.
+   */
+  // const image = 'abc123'
+  /**
+   *  The project containing the desired image to use for this node pool.
+   *  This is used to create clusters using a custom image.
+   */
+  // const imageProject = 'abc123'
+  /**
    *  The desired list of Google Compute Engine
    *  zones (https://cloud.google.com/compute/docs/zones#available)
    *  in which the node pool's nodes should be located. Changing the locations
