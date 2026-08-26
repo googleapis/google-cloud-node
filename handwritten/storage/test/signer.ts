@@ -207,14 +207,20 @@ describe('signer', () => {
           const accessibleAt = accessibleAtNumber;
           const expires = accessibleAt - 86400000;
 
-          assert.throws(() => {
-            void signer.getSignedUrl({
-              version: 'v4',
-              method: 'GET',
-              accessibleAt,
-              expires,
-            });
-          }, new RegExp(SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE));
+          assert.throws(
+            () => {
+              void signer.getSignedUrl({
+                version: 'v4',
+                method: 'GET',
+                accessibleAt,
+                expires,
+              });
+            },
+            {
+              message:
+                SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE,
+            }
+          );
         });
 
         describe('checkInputTypes', () => {

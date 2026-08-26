@@ -3127,14 +3127,19 @@ describe('File', () => {
       it('should throw if a date is invalid', () => {
         const expires = new Date('31-12-2019');
 
-        assert.throws(() => {
-          void file.generateSignedPostPolicyV2(
-            {
-              expires,
-            },
-            () => {}
-          );
-        }, new RegExp(ExceptionMessages.EXPIRATION_DATE_INVALID));
+        assert.throws(
+          () => {
+            void file.generateSignedPostPolicyV2(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: ExceptionMessages.EXPIRATION_DATE_INVALID,
+          }
+        );
       });
 
       it('should throw if a date from the past is given', () => {

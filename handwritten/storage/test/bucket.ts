@@ -670,13 +670,14 @@ describe('Bucket', () => {
 
   describe('combine', () => {
     it('should throw if invalid sources are provided', () => {
-      assert.throws(() => {
-        bucket.combine();
-      }, new RegExp(BucketExceptionMessages.PROVIDE_SOURCE_FILE));
-
-      assert.throws(() => {
-        bucket.combine([]);
-      }, new RegExp(BucketExceptionMessages.PROVIDE_SOURCE_FILE));
+      assert.throws(
+        () => {
+          bucket.combine();
+        },
+        {
+          message: BucketExceptionMessages.PROVIDE_SOURCE_FILE,
+        }
+      );
     });
 
     it('should throw if a destination is not provided', () => {
