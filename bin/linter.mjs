@@ -175,18 +175,51 @@ function getChangedFiles() {
 
 // --- ESLint Checker ---
 
+// LINT.IfChange(ignored_path_segments)
+const IGNORED_PATH_SEGMENTS = [
+  'node_modules',
+  'build',
+  'dist',
+  'system-test',
+  'fixtures',
+  'test-fixtures',
+  'baselines',
+  'baselines-esm',
+  'generated',
+  '.coverage',
+  'coverage',
+  '.nyc_output',
+  'protos',
+];
+// LINT.ThenChange(.eslintrc.json:ignorePatterns)
+
+/**
+ * Determines whether a file should undergo ESLint checks.
+ * Excludes declaration files (*.d.ts), auto-generated artifacts, and test baselines/fixtures.
+ */
+function shouldLintFile(filePath) {
+  if (filePath.endsWith('.d.ts')) {
+    return false;
+  }
+  const segments = filePath.split(/[\\/]/);
+  return !segments.some(seg => IGNORED_PATH_SEGMENTS.includes(seg));
+}
+
 /**
  * Runs ESLint programmatically.
  * Blocks the PR if any rule configured as "error" (severity 2) fails.
  */
 async function checkEslint(filesToCheck) {
-  if (filesToCheck.length === 0) {
+  // Exclude declaration files (*.d.ts), auto-generated proto/sample files, and fixtures from ESLint
+  const filesToProcess = filesToCheck.filter(shouldLintFile);
+
+  if (filesToProcess.length === 0) {
     return true;
   }
 
   // Group files by package directory to set tsconfigRootDir properly for typescript-eslint
   const filesByPkg = new Map();
-  for (const file of filesToCheck) {
+  for (const file of filesToProcess) {
     const pkgDir = findTsconfigDir(file) || process.cwd();
     if (!filesByPkg.has(pkgDir)) {
       filesByPkg.set(pkgDir, []);
