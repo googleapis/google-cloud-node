@@ -311,13 +311,13 @@ export interface EncryptionEnforcementConfig {
 
 /**
  * Configuration for a bucket's IP Filter.
- * 
+ *
  * @example
  * ```
  * const {Storage} = require('@google-cloud/storage');
  * const storage = new Storage();
  * const bucket = storage.bucket('my-bucket');
- * 
+ *
  * const metadata = {
  *   ipFilter: {
  *     mode: 'Enabled',
@@ -326,7 +326,7 @@ export interface EncryptionEnforcementConfig {
  *     }
  *   }
  * };
- * 
+ *
  * bucket.setMetadata(metadata, (err, apiResponse) => {
  *   if (err) {
  *     console.error(err);

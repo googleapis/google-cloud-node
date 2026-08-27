@@ -1265,31 +1265,41 @@ describe('Storage', () => {
           ipFilter: {
             mode: 'Enabled',
             allowCrossOrgVpcs: true,
-            allowAllServiceAgentAccess: true
-          }
+            allowAllServiceAgentAccess: true,
+          },
         },
         {
           id: 'bucket-without-filter',
           name: 'bucket-without-filter',
-          location: 'US'
-        }
+          location: 'US',
+        },
       ];
-      storage.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, { items: bucketsResponse });
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, {items: bucketsResponse});
       };
 
       storage.getBuckets((err: Error | null, buckets: Bucket[]) => {
         if (err) return done(err);
 
-        const filteredBucket = buckets.find((b: Bucket) => b.name === 'bucket-with-filter')!;
-        const normalBucket = buckets.find((b: Bucket) => b.name === 'bucket-without-filter')!;
+        const filteredBucket = buckets.find(
+          (b: Bucket) => b.name === 'bucket-with-filter'
+        )!;
+        const normalBucket = buckets.find(
+          (b: Bucket) => b.name === 'bucket-without-filter'
+        )!;
 
         assert.ok(filteredBucket.metadata.ipFilter);
         assert.strictEqual(filteredBucket.metadata.ipFilter.mode, 'Enabled');
-        assert.strictEqual(filteredBucket.metadata.ipFilter.allowCrossOrgVpcs, true);
+        assert.strictEqual(
+          filteredBucket.metadata.ipFilter.allowCrossOrgVpcs,
+          true
+        );
 
         assert.strictEqual(normalBucket.metadata.ipFilter, undefined);
-        
+
         done();
       });
     });

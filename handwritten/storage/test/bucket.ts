@@ -3726,7 +3726,10 @@ describe('Bucket', () => {
           },
         };
 
-        bucket.parent.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
           assert.strictEqual(reqOpts.method, 'PATCH');
           assert.deepStrictEqual(reqOpts.json.ipFilter, metadata.ipFilter);
           callback(null, metadata);
@@ -3751,7 +3754,10 @@ describe('Bucket', () => {
           },
         };
 
-        bucket.parent.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
           assert.strictEqual(reqOpts.method, 'PATCH');
           assert.deepStrictEqual(reqOpts.json.ipFilter, metadata.ipFilter);
           callback(null, metadata);
@@ -3763,7 +3769,7 @@ describe('Bucket', () => {
         });
       });
 
-      it('should get ipFilter', done => {
+      it('should get ipFilter', async () => {
         const ipFilter = {
           mode: 'Enabled',
           publicNetworkSource: {
@@ -3779,14 +3785,15 @@ describe('Bucket', () => {
           allowCrossOrgVpcs: true,
         };
 
-        bucket.parent.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
           callback(null, {ipFilter});
         };
 
-        bucket.getMetadata().then(([metadata]: [BucketMetadata]) => {
-          assert.deepStrictEqual(metadata.ipFilter, ipFilter);
-          done();
-        }).catch(done);
+        const [metadata] = (await bucket.getMetadata()) as [BucketMetadata];
+        assert.deepStrictEqual(metadata.ipFilter, ipFilter);
       });
 
       it('should clear allowedIpCidrRanges', done => {
@@ -3805,9 +3812,15 @@ describe('Bucket', () => {
           allowAllServiceAgentAccess: false,
         };
 
-        bucket.parent.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
           if (reqOpts.method === 'PATCH') {
-            assert.deepStrictEqual(reqOpts.json.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, []);
+            assert.deepStrictEqual(
+              reqOpts.json.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+              []
+            );
             callback(null, {ipFilter: updatedIpFilter});
           } else {
             callback(null, {ipFilter: initialIpFilter});
@@ -3832,13 +3845,22 @@ describe('Bucket', () => {
             },
           };
 
-          bucket.setMetadata(metadataUpdate, (err: Error | null, meta?: BucketMetadata) => {
-            assert.ifError(err);
-            assert.strictEqual(meta?.ipFilter?.mode, 'Disabled');
-            assert.strictEqual(meta?.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, undefined);
-            assert.strictEqual(meta?.ipFilter?.allowAllServiceAgentAccess, false);
-            done();
-          });
+          bucket.setMetadata(
+            metadataUpdate,
+            (err: Error | null, meta?: BucketMetadata) => {
+              assert.ifError(err);
+              assert.strictEqual(meta?.ipFilter?.mode, 'Disabled');
+              assert.strictEqual(
+                meta?.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+                undefined
+              );
+              assert.strictEqual(
+                meta?.ipFilter?.allowAllServiceAgentAccess,
+                false
+              );
+              done();
+            }
+          );
         });
       });
     });
