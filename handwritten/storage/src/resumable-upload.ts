@@ -266,8 +266,7 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
 }
 
 export interface ConfigMetadata {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: unknown;
 
   /**
    * Set the length of the object being uploaded. If uploading a partial
