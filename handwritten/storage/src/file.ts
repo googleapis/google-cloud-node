@@ -344,8 +344,7 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
 /**
  * @internal
  */
-export interface CreateWriteStreamOptionsInternal
-  extends CreateWriteStreamOptions {
+export interface CreateWriteStreamOptionsInternal extends CreateWriteStreamOptions {
   invocationId?: string;
 }
 
@@ -1485,7 +1484,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const headers = new Headers();
 
-    if (this.encryptionKey !== undefined) {
+    if (this.encryptionKey !== undefined && this.encryptionKey !== null) {
       headers.set(
         'x-goog-copy-source-encryption-algorithm',
         ENCRYPTION_ALGORITHM_AES256,
@@ -1500,15 +1499,26 @@ class File extends ServiceObject<File, FileMetadata> {
       );
     }
 
-    if (newFile.encryptionKey !== undefined) {
+    const destinationKmsKeyName =
+      options.destinationKmsKeyName || options.kmsKeyName || newFile.kmsKeyName;
+
+    if (
+      this.encryptionKey &&
+      newFile.encryptionKey === undefined &&
+      !destinationKmsKeyName
+    ) {
+      newFile.setEncryptionKey(this.encryptionKey);
+    }
+
+    if (newFile.encryptionKey !== undefined && newFile.encryptionKey !== null) {
       headers.set('x-goog-encryption-algorithm', ENCRYPTION_ALGORITHM_AES256);
       headers.set('x-goog-encryption-key', newFile.encryptionKeyBase64 || '');
       headers.set(
         'x-goog-encryption-key-sha256',
         newFile.encryptionKeyHash || '',
       );
-    } else if (options.destinationKmsKeyName !== undefined) {
-      query.destinationKmsKeyName = options.destinationKmsKeyName;
+    } else if (destinationKmsKeyName !== undefined) {
+      query.destinationKmsKeyName = destinationKmsKeyName;
       delete options.destinationKmsKeyName;
       delete options.kmsKeyName;
     }
