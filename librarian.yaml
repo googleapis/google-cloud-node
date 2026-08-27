@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.38.0
+version: v0.39.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -637,6 +637,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      nodejs_apis:
+        - additional_protos:
+            - backstory/collection.proto
+            - backstory/data_access.proto
+            - backstory/entity.proto
+            - backstory/entity_risk.proto
+            - backstory/id.proto
+            - backstory/udm.proto
+          path: google/cloud/chronicle/v1
   - name: google-cloud-cloudcontrolspartner
     version: 0.7.0
     apis:
@@ -1917,7 +1926,7 @@ libraries:
     nodejs:
       package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
-    version: 0.6.0
+    version: 0.6.1
     apis:
       - path: google/devicesandservices/health/v4
     copyright_year: "2026"
