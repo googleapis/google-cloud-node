@@ -7,23 +7,104 @@
     "plugin:promise/recommended"
   ],
   "root": true,
-  // Note: All rules configured as "error" are blocking in the PR CI pipeline.
-  // Only rules configured as "warn" remain non-blocking.
   "rules": {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "error",
-    "promise/catch-or-return": "off",
-    "promise/always-return": "off",
-    "promise/param-names": "off",
-    "@typescript-eslint/no-floating-promises": "off"
+    "promise/catch-or-return": "error",
+    "promise/always-return": "error",
+    // Enforces the standard on handwritten code, but permits class/interface extensions
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": true
+      }
+    ]
   },
+  "overrides": [
+    // The overrides below were migrated from handwritten/firestore/.eslintrc.json
+    // during monorepo ESLint consolidation to maintain Firestore-specific rules.
+    {
+      "files": ["handwritten/firestore/dev/src/**/*.ts"],
+      "excludedFiles": [
+        "handwritten/firestore/dev/src/v1/*.ts",
+        "handwritten/firestore/dev/src/v1beta1/*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": true
+          }
+        ],
+        "no-console": ["error", {"allow": ["error"]}],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "handwritten/firestore/dev/test/*.ts",
+        "handwritten/firestore/dev/system-test/*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "describe",
+            "property": "only"
+          },
+          {
+            "object": "it",
+            "property": "only"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/no-floating-promises": "warn"
+      }
+    },
+    {
+      "files": [
+        "handwritten/firestore/dev/src/v1/**/*.ts",
+        "handwritten/firestore/dev/src/v1beta1/**/*.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-floating-promises": ["off"]
+      }
+    }
+  ],
+  // LINT.IfChange(ignorePatterns)
   "ignorePatterns": [
     "**/node_modules",
     "**/build",
+    "**/dist",
     "**/system-test",
     "**/test/fixtures",
+    "**/test-fixtures",
+    "**/fixtures",
+    "**/baselines",
+    "**/baselines-esm",
     "**/samples/generated",
     "**/.coverage",
-    "**/coverage"
+    "**/coverage",
+    "**/.nyc_output",
+    "**/protos",
+    "**/*.d.ts"
   ]
+  // LINT.ThenChange(bin/linter.mjs:ignored_path_segments)
 }

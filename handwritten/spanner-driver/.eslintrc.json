@@ -1,4 +1,7 @@
 {
+  "extends": "../../node_modules/gts",
   "root": true,
-  "extends": "./node_modules/gts"
+  "rules": {
+    "@typescript-eslint/no-floating-promises": "off"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "googleapis-common",
-  "version": "9.0.3",
+  "version": "9.0.4",
   "description": "A common tooling library used by the googleapis npm module. You probably don't want to use this directly.",
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     "url-template": "^2.0.8"
   },
   "devDependencies": {
+    "@googleapis/dialogflow": "^1.0.0",
     "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@types/extend": "^3.0.1",
     "@types/mocha": "^10.0.10",

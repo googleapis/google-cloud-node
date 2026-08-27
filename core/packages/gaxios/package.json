@@ -1,6 +1,6 @@
 {
   "name": "gaxios",
-  "version": "7.3.1",
+  "version": "8.0.0",
   "description": "A simple common HTTP client specifically for Google APIs and services.",
   "main": "build/cjs/src/index.js",
   "types": "build/cjs/src/index.d.ts",
@@ -50,7 +50,7 @@
     "google"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "author": "Google, LLC",
   "license": "Apache-2.0",
@@ -74,8 +74,8 @@
     "gts": "^6.0.2",
     "is-docker": "^3.0.0",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^5.0.0",
-    "jsdoc-region-tag": "^4.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "karma": "^6.0.0",
     "karma-chrome-launcher": "^3.0.0",
     "karma-coverage": "^2.0.0",

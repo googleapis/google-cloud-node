@@ -19,7 +19,7 @@ import * as url from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
-import {FileMetadata} from './file';
+import {Contexts} from './file';
 
 // Done to avoid a problem with mangling of identifiers when using esModuleInterop
 const fileURLToPath = url.fileURLToPath;
@@ -27,7 +27,7 @@ const isEsm = true;
 
 export function normalize<T = {}, U = Function>(
   optionsOrCallback?: T | U,
-  cb?: U,
+  cb?: U
 ) {
   const options = (
     typeof optionsOrCallback === 'object' ? optionsOrCallback : {}
@@ -59,7 +59,7 @@ export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
 export function fixedEncodeURIComponent(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g,
-    c => '%' + c.charCodeAt(0).toString(16).toUpperCase(),
+    c => '%' + c.charCodeAt(0).toString(16).toUpperCase()
   );
 }
 
@@ -111,7 +111,7 @@ export function unicodeJSONStringify(obj: object) {
   return JSON.stringify(obj).replace(
     /[\u0080-\uFFFF]/g,
     (char: string) =>
-      '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4),
+      '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4)
   );
 }
 
@@ -155,7 +155,7 @@ export function formatAsUTCISO(
   dateTimeToFormat: Date,
   includeTime = false,
   dateDelimiter = '',
-  timeDelimiter = '',
+  timeDelimiter = ''
 ): string {
   const year = dateTimeToFormat.getUTCFullYear();
   const month = dateTimeToFormat.getUTCMonth() + 1;
@@ -247,7 +247,7 @@ export class PassThroughShim extends PassThrough {
   _write(
     chunk: never,
     encoding: BufferEncoding,
-    callback: (error?: Error | null | undefined) => void,
+    callback: (error?: Error | null | undefined) => void
   ): void {
     if (this.shouldEmitWriting) {
       this.emit('writing');
@@ -279,21 +279,21 @@ export class PassThroughShim extends PassThrough {
  * Double quotes (") are forbidden in context keys and values as they
  * interfere with GCS filter string syntax.
  *
- * @param {FileMetadata['contexts']} contexts The contexts object to validate.
+ * @param {Contexts} [contexts] The contexts object to validate.
  * @returns {void} Throws an error if validation fails.
  */
-export function validateContexts(contexts?: FileMetadata['contexts']): void {
+export function validateContexts(contexts?: Contexts): void {
   const custom = contexts?.custom;
   if (!custom) return;
   for (const [key, context] of Object.entries(custom)) {
     if (key.includes('"')) {
       throw new Error(
-        `Invalid context key "${key}": Forbidden character (") detected.`,
+        `Invalid context key "${key}": Forbidden character (") detected.`
       );
     }
     if (context?.value && context.value.includes('"')) {
       throw new Error(
-        `Invalid context value for key "${key}": Forbidden character (") detected.`,
+        `Invalid context value for key "${key}": Forbidden character (") detected.`
       );
     }
   }
@@ -301,12 +301,12 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
 
 /**
  * Helper to validate contexts and route errors to either a callback or a Promise.
- * @param contexts The contexts to validate.
- * @param callback The optional user-provided callback.
+ * @param {Contexts} [contexts] The contexts to validate.
+ * @param {Function} [callback] The optional user-provided callback.
  */
 export function handleContextValidation(
-  contexts?: FileMetadata['contexts'],
-  callback?: Function,
+  contexts?: Contexts,
+  callback?: Function
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> | void {
   try {

@@ -34,6 +34,7 @@ import {
   CreateUriCallback,
   PROTOCOL_REGEX,
   UploadConfig,
+  Upload,
 } from '../src/resumable-upload.js';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -694,8 +695,8 @@ describe('resumable-upload', () => {
     });
 
     it('should wait for `wroteToChunkBuffer` if !`writeBuffers.length` && !`upstreamEnded`', async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('wroteToChunkBuffer');
       });
 
@@ -703,15 +704,15 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' if !`writeBuffers.length` && !`upstreamEnded`", async () => {
-      await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
     });
 
     it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
 
@@ -719,7 +720,7 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
-      const result = await new Promise(resolve => {
+      const result = await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             // Update the `writeBuffers` before emitting 'upstreamFinished'
@@ -729,22 +730,22 @@ describe('resumable-upload', () => {
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(result, true);
     });
 
     it("should wait for 'upstreamFinished' if !`writeBuffers.length` && !`upstreamEnded`", async () => {
-      await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
     });
 
     it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
 
@@ -752,7 +753,7 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
-      const result = await new Promise(resolve => {
+      const result = await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             // Update the `writeBuffers` before emitting 'upstreamFinished'
@@ -762,7 +763,7 @@ describe('resumable-upload', () => {
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(result, true);
@@ -772,14 +773,14 @@ describe('resumable-upload', () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
       assert.equal(up.listenerCount('upstreamFinished'), 0);
 
-      await new Promise(resolve => {
+      await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'wroteToChunkBuffer') {
             process.nextTick(() => up.emit('wroteToChunkBuffer'));
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
@@ -790,14 +791,14 @@ describe('resumable-upload', () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
       assert.equal(up.listenerCount('upstreamFinished'), 0);
 
-      await new Promise(resolve => {
+      await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             process.nextTick(() => up.emit('upstreamFinished'));
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
@@ -1394,17 +1395,13 @@ describe('resumable-upload', () => {
         const calculateMd5 = !configOptions.clientMd5Hash && configOptions.md5;
 
         if (calculateCrc32c || calculateMd5) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (up as any)['#hashValidator'] = createMockHashValidator(
-            !!calculateCrc32c,
-            !!calculateMd5
-          );
+          (up as unknown as Record<string, unknown>)['#hashValidator'] =
+            createMockHashValidator(!!calculateCrc32c, !!calculateMd5);
         }
       }
 
       async function performUpload(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        uploadInstance: any,
+        uploadInstance: Upload,
         data: Buffer,
         isMultiChunk: boolean,
         expectedCrc32c?: string,
@@ -1413,9 +1410,9 @@ describe('resumable-upload', () => {
         const capturedReqOpts: GaxiosOptions[] = [];
         requestCount = 0;
 
-        uploadInstance.makeRequestStream = async (
-          requestOptions: GaxiosOptions
-        ) => {
+        (
+          uploadInstance as unknown as {makeRequestStream: Function}
+        ).makeRequestStream = async (requestOptions: GaxiosOptions) => {
           requestCount++;
           capturedReqOpts.push(requestOptions);
 
@@ -1435,8 +1432,7 @@ describe('resumable-upload', () => {
               data: '',
               status: RESUMABLE_INCOMPLETE_STATUS_CODE,
               headers: {range: `bytes=0-${lastByteReceived}`},
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
+            } as unknown as GaxiosResponse;
           } else {
             return {
               status: 200,
@@ -1450,8 +1446,7 @@ describe('resumable-upload', () => {
               headers: {},
               config: {},
               statusText: 'OK',
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
+            } as unknown as GaxiosResponse;
           }
         };
 
@@ -1657,8 +1652,7 @@ describe('resumable-upload', () => {
         status: 200,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (up as any)['#hashValidator'] = {
+      (up as unknown as Record<string, unknown>)['#hashValidator'] = {
         crc32cEnabled: true,
         md5Enabled: true,
         crc32c: CLIENT_CRC,
@@ -1687,8 +1681,7 @@ describe('resumable-upload', () => {
       };
 
       up.md5 = true;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (up as any)['#hashValidator'] = {
+      (up as unknown as Record<string, unknown>)['#hashValidator'] = {
         crc32c: 'crc32c_match',
         md5Digest: CLIENT_MD5,
       };
@@ -1851,20 +1844,23 @@ describe('resumable-upload', () => {
     );
   });
 
-  it('currentInvocationId.checkUploadStatus should be the same on error', done => {
+  it('currentInvocationId.checkUploadStatus should be the same on error', async () => {
     const beforeCallInvocationId = up.currentInvocationId.checkUploadStatus;
-    up.destroy = () => {
-      assert.equal(
-        beforeCallInvocationId,
-        up.currentInvocationId.checkUploadStatus
-      );
-      done();
-    };
+    const destroyCalled = new Promise<void>(resolve => {
+      up.destroy = () => {
+        assert.equal(
+          beforeCallInvocationId,
+          up.currentInvocationId.checkUploadStatus
+        );
+        resolve();
+      };
+    });
     up.makeRequest = () => {
       throw new Error() as GaxiosError;
     };
 
-    up.getAndSetOffset().catch(done);
+    await up.getAndSetOffset();
+    await destroyCalled;
   });
 
   describe('#getAndSetOffset', () => {
@@ -2233,8 +2229,7 @@ describe('resumable-upload', () => {
       let abortController: AbortController;
       up.authClient = {
         request: (reqOpts: GaxiosOptions) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          abortController = reqOpts.signal as any;
+          abortController = reqOpts.signal as unknown as AbortController;
         },
       };
 
@@ -2365,7 +2360,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            'Retry limit exceeded - status: 500 - error message from server'
+            `Retry limit exceeded - status: 500 - error message from server`
           );
           done();
         };
@@ -2406,7 +2401,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              'Retry limit exceeded - status: 500 - error message from server'
+              `Retry limit exceeded - status: 500 - error message from server`
             );
             done();
           });
@@ -2590,8 +2585,9 @@ describe('resumable-upload', () => {
     it('should include correct details for custom errors with empty messages', done => {
       up.numRetries = 3;
       up.retryLimit = 3;
-      const customError = new Error('');
-      (customError as any).code = 'ERR_SOMETHING_SPECIAL';
+      const customError = Object.assign(new Error(''), {
+        code: 'ERR_SOMETHING_SPECIAL',
+      });
 
       up.on('error', (err: Error) => {
         assert.strictEqual(
@@ -2616,14 +2612,14 @@ describe('resumable-upload', () => {
         {
           method: 'POST',
           url: 'https://example.com',
-        } as any,
+        },
         {
           status: 429,
           statusText: 'Too Many Requests',
           data: '',
           config: {},
           headers: {},
-        } as any
+        } as GaxiosResponse
       );
 
       up.on('error', (err: Error) => {
@@ -2653,7 +2649,7 @@ describe('resumable-upload', () => {
         {
           method: 'POST',
           url: 'https://example.com',
-        } as any,
+        },
         {
           status: 400,
           statusText: 'Bad Request',
@@ -2665,7 +2661,7 @@ describe('resumable-upload', () => {
           },
           config: {},
           headers: {},
-        } as any
+        } as GaxiosResponse
       );
 
       up.on('error', (err: Error) => {
@@ -3312,10 +3308,12 @@ describe('resumable-upload', () => {
               FileExceptionMessages.UPLOAD_MISMATCH
             );
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const detailError = (err as any).errors && (err as any).errors[0];
+            const detailError =
+              (err as ApiError).errors && (err as ApiError).errors![0];
             assert.ok(
-              detailError && detailError.message.includes(scenario.errorPart!),
+              detailError &&
+                detailError.message &&
+                detailError.message.includes(scenario.errorPart!),
               `Error message should contain: ${scenario.errorPart}`
             );
             assert.strictEqual(up.uri, URI);

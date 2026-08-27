@@ -109,7 +109,7 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    */
   authClient?: {
     request: <T>(
-      opts: GaxiosOptions,
+      opts: GaxiosOptions
     ) => Promise<GaxiosResponse<T>> | GaxiosPromise<T>;
   };
 
@@ -266,8 +266,7 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
 }
 
 export interface ConfigMetadata {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: unknown;
 
   /**
    * Set the length of the object being uploaded. If uploading a partial
@@ -283,6 +282,7 @@ export interface ConfigMetadata {
 
 export interface GoogleInnerError {
   reason?: string;
+  message?: string;
 }
 
 export interface ApiError extends Error {
@@ -311,7 +311,7 @@ export class Upload extends Writable {
    */
   authClient: {
     request: <T>(
-      opts: GaxiosOptions,
+      opts: GaxiosOptions
     ) => Promise<GaxiosResponse<T>> | GaxiosPromise<T>;
   };
   cacheKey: string;
@@ -373,13 +373,13 @@ export class Upload extends Writable {
 
     if (cfg.offset && !cfg.uri) {
       throw new RangeError(
-        'Cannot provide an `offset` without providing a `uri`',
+        'Cannot provide an `offset` without providing a `uri`'
       );
     }
 
     if (cfg.isPartialUpload && !cfg.chunkSize) {
       throw new RangeError(
-        'Cannot set `isPartialUpload` without providing a `chunkSize`',
+        'Cannot set `isPartialUpload` without providing a `chunkSize`'
       );
     }
 
@@ -506,17 +506,25 @@ export class Upload extends Writable {
 
     this.once('writing', () => {
       if (this.uri) {
-        this.continueUploading();
+        this.continueUploading().catch(err => this.destroy(err));
       } else {
         this.createURI(err => {
           if (err) {
-            return this.destroy(err);
+            this.destroy(err);
+            return;
           }
-          this.startUploading();
-          return;
+          this.handleStartUploading();
         });
       }
     });
+  }
+
+  /**
+   * Handle start uploading.
+   * @private
+   */
+  private handleStartUploading(): void {
+    this.startUploading().catch(err => this.destroy(err));
   }
 
   /**
@@ -546,7 +554,7 @@ export class Upload extends Writable {
   _write(
     chunk: Buffer | string,
     encoding: BufferEncoding,
-    readCallback = () => {},
+    readCallback = () => {}
   ) {
     // Backwards-compatible event
     this.emit('writing');
@@ -590,7 +598,7 @@ export class Upload extends Writable {
   #validateChecksum(
     clientHash: string | undefined,
     serverHash: string | undefined,
-    hashType: 'CRC32C' | 'MD5',
+    hashType: 'CRC32C' | 'MD5'
   ): boolean {
     // Only validate if both client and server hashes are present.
     if (clientHash && serverHash) {
@@ -787,7 +795,14 @@ export class Upload extends Writable {
     if (!callback) {
       return this.createURIAsync();
     }
-    this.createURIAsync().then(r => callback(null, r), callback);
+    void (async () => {
+      try {
+        const r = await this.createURIAsync();
+        callback(null, r);
+      } catch (err) {
+        callback(err as Error);
+      }
+    })();
   }
 
   protected async createURIAsync(): Promise<string> {
@@ -823,7 +838,7 @@ export class Upload extends Writable {
           name: this.file,
           uploadType: 'resumable',
         },
-        this.params,
+        this.params
       ),
       data: metadata,
       headers: {
@@ -891,7 +906,7 @@ export class Upload extends Writable {
         factor: this.retryOptions.retryDelayMultiplier,
         maxTimeout: this.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.retryOptions.totalTimeout! * 1000, //convert to milliseconds
-      },
+      }
     );
 
     this.uri = uri;
@@ -1145,7 +1160,7 @@ export class Upload extends Writable {
       }
 
       // continue uploading next chunk
-      this.continueUploading();
+      this.continueUploading().catch(err => this.destroy(err));
     } else if (
       !this.isSuccessfulResponse(resp.status) &&
       !shouldContinueUploadInAnotherRequest
@@ -1174,7 +1189,7 @@ export class Upload extends Writable {
         this.#validateChecksum(
           clientCrc32cToValidate,
           serverCrc32c,
-          'CRC32C',
+          'CRC32C'
         ) ||
         this.#validateChecksum(clientMd5HashToValidate, serverMd5, 'MD5')
       ) {
@@ -1207,7 +1222,7 @@ export class Upload extends Writable {
    * @returns the current upload status
    */
   async checkUploadStatus(
-    config: CheckUploadStatusConfig = {},
+    config: CheckUploadStatusConfig = {}
   ): Promise<GaxiosResponse<FileMetadata | void>> {
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
       packageJson.version
@@ -1252,7 +1267,7 @@ export class Upload extends Writable {
         throw e;
       }
 
-      await new Promise(res => setTimeout(res, retryDelay));
+      await new Promise(resolve => setTimeout(resolve, retryDelay));
 
       return this.checkUploadStatus(config);
     }
@@ -1316,7 +1331,7 @@ export class Upload extends Writable {
     };
 
     const res = await this.authClient.request<{error?: object}>(
-      combinedReqOpts,
+      combinedReqOpts
     );
     if (res.data && res.data.error) {
       throw res.data.error;
@@ -1380,13 +1395,13 @@ export class Upload extends Writable {
         resp.status === NOT_FOUND_STATUS_CODE &&
         this.numChunksReadInRequest === 0
       ) {
-        this.startUploading();
+        this.startUploading().catch(err => this.destroy(err));
       } else {
         const retryDelay = this.getRetryDelay();
 
         if (retryDelay <= 0) {
           this.destroy(
-            buildRetryError('Retry total time limit exceeded', resp),
+            buildRetryError('Retry total time limit exceeded', resp)
           );
           return;
         }
@@ -1454,7 +1469,7 @@ export class Upload extends Writable {
 
 function buildRetryError(
   prefix: string,
-  resp: Pick<GaxiosResponse, 'data' | 'status'>,
+  resp: Pick<GaxiosResponse, 'data' | 'status'>
 ): Error {
   const parts: string[] = [];
 
@@ -1465,13 +1480,26 @@ function buildRetryError(
   const err = resp.data;
   if (err !== undefined && err !== null) {
     if (typeof err === 'object') {
-      const gaxiosErrLike = err as any;
+      const gaxiosErrLike = err as {
+        message?: unknown;
+        status?: number;
+        response?: {
+          status?: number;
+          statusText?: string;
+          data?: unknown;
+        };
+        code?: string | number;
+      };
       const errParts: string[] = [];
       if (gaxiosErrLike.message) {
         errParts.push(String(gaxiosErrLike.message));
       }
       const status = gaxiosErrLike.status ?? gaxiosErrLike.response?.status;
-      if (typeof status === 'number' && !isNaN(status) && status !== resp.status) {
+      if (
+        typeof status === 'number' &&
+        !isNaN(status) &&
+        status !== resp.status
+      ) {
         errParts.push(`status: ${status}`);
       }
       const statusText = gaxiosErrLike.response?.statusText;
@@ -1479,13 +1507,17 @@ function buildRetryError(
         errParts.push(`statusText: ${statusText}`);
       }
       const responseData = gaxiosErrLike.response?.data;
-      if (responseData !== undefined && responseData !== null && responseData !== '') {
+      if (
+        responseData !== undefined &&
+        responseData !== null &&
+        responseData !== ''
+      ) {
         errParts.push(
           `response: ${
             typeof responseData === 'object'
               ? JSON.stringify(responseData)
               : responseData
-          }`,
+          }`
         );
       }
       if (gaxiosErrLike.code) {
@@ -1523,13 +1555,20 @@ export function createURI(cfg: UploadConfig): Promise<string>;
 export function createURI(cfg: UploadConfig, callback: CreateUriCallback): void;
 export function createURI(
   cfg: UploadConfig,
-  callback?: CreateUriCallback,
+  callback?: CreateUriCallback
 ): void | Promise<string> {
   const up = new Upload(cfg);
   if (!callback) {
     return up.createURI();
   }
-  up.createURI().then(r => callback(null, r), callback);
+  void (async () => {
+    try {
+      const r = await up.createURI();
+      callback(null, r);
+    } catch (err) {
+      callback(err as Error);
+    }
+  })();
 }
 
 /**
@@ -1539,7 +1578,7 @@ export function createURI(
  * @returns the current upload status
  */
 export function checkUploadStatus(
-  cfg: UploadConfig & Required<Pick<UploadConfig, 'uri'>>,
+  cfg: UploadConfig & Required<Pick<UploadConfig, 'uri'>>
 ) {
   const up = new Upload(cfg);
 

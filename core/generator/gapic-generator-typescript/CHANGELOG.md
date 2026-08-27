@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.0.1...gapic-generator-v5.1.0) (2026-08-21)
+
+
+### Features
+
+* **o11y:** Introduce observability flags needed within the generator ([#9052](https://github.com/googleapis/google-cloud-node/issues/9052)) ([849708b](https://github.com/googleapis/google-cloud-node/commit/849708b7f2b54b4fbfbcccd03de1fa808226d249))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.0.0...gapic-generator-v5.0.1) (2026-08-12)
 
 
