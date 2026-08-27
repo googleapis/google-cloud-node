@@ -25,6 +25,7 @@ export {
 export {
   BaseMetadata,
   DeleteCallback,
+  DeleteOptions,
   ExistsCallback,
   GetConfig,
   InstanceResponseCallback,
