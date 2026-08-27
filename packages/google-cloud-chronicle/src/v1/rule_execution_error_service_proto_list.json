@@ -1,4 +1,10 @@
 [
+  "../../protos/backstory/collection.proto",
+  "../../protos/backstory/data_access.proto",
+  "../../protos/backstory/entity.proto",
+  "../../protos/backstory/entity_risk.proto",
+  "../../protos/backstory/id.proto",
+  "../../protos/backstory/udm.proto",
   "../../protos/google/cloud/chronicle/v1/big_query_export.proto",
   "../../protos/google/cloud/chronicle/v1/dashboard_chart.proto",
   "../../protos/google/cloud/chronicle/v1/dashboard_query.proto",
