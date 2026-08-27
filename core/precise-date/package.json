@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/precise-date",
-  "version": "5.0.1",
+  "version": "6.0.1",
   "description": "A simple utility for precise-dateing functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -18,7 +18,6 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "docs": "mkdir docs && touch docs/noop.html",
-    "docs-test": "echo no docs 👻",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test",
@@ -50,7 +49,7 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/precise-date"
 }

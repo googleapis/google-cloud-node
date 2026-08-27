@@ -1,17 +1,16 @@
 {
-  "name": "securesourcemanager",
-  "name_pretty": "Secure Source Manager API",
-  "product_documentation": "https://cloud.google.com/secure-source-manager/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/securesourcemanager/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/securesourcemanager",
-  "api_id": "securesourcemanager.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "securesourcemanager"
+    "api_description": "Regionally deployed, single-tenant managed source code repository hosted on\nGoogle Cloud.",
+    "api_id": "securesourcemanager.googleapis.com",
+    "api_shortname": "securesourcemanager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/securesourcemanager/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/securesourcemanager",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1434461",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "securesourcemanager",
+    "name_pretty": "Secure Source Manager",
+    "product_documentation": "https://cloud.google.com/secure-source-manager/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

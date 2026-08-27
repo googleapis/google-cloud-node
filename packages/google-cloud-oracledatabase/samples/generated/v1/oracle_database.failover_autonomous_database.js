@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(name, peerAutonomousDatabase) {
+function main(name) {
   // [START oracledatabase_v1_generated_OracleDatabase_FailoverAutonomousDatabase_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -34,7 +34,8 @@ function main(name, peerAutonomousDatabase) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The peer database name to fail over to.
+   *  Optional. The peer database name to fail over to. Required for cross-region
+   *  standby, and must be omitted for in-region Data Guard.
    */
   // const peerAutonomousDatabase = 'abc123'
 
@@ -48,7 +49,6 @@ function main(name, peerAutonomousDatabase) {
     // Construct request
     const request = {
       name,
-      peerAutonomousDatabase,
     };
 
     // Run request

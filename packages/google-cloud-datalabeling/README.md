@@ -91,7 +91,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_evaluations.js) |
 | search example comparisons | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js) |
 | update evaluation job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/snippet_metadata_google.cloud.datalabeling.v1beta1.json) |
 
 
 ## Supported Node.js Versions

@@ -216,6 +216,11 @@ export class DatabaseCenterClient {
         'nextPageToken',
         'resourceGroups',
       ),
+      aggregateQueryStats: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'queryStats',
+      ),
       queryIssues: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -278,6 +283,7 @@ export class DatabaseCenterClient {
       'aggregateFleet',
       'queryDatabaseResourceGroups',
       'aggregateIssueStats',
+      'aggregateQueryStats',
       'queryIssues',
     ];
     for (const methodName of databaseCenterStubMethods) {
@@ -1726,6 +1732,352 @@ export class DatabaseCenterClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>;
+  }
+  /**
+   * AggregateQueryStats provides database resource query execution statistics.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `parent`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.orderBy]
+   *   Optional. The expression to order the results by.
+   *   Example: `order_by="execution_count"`
+   *   Example: `order_by="execution_count desc"`
+   *   Supported order by fields are `execution_count`, `rows_processed`,
+   *   `total_cpu_time`, `avg_cpu_time`.
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info,
+   *     data_protection_info,'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   *   Additional specific fields for query stats are: `metric_window`,
+   *   `query_hash`, `normalized_query`.
+   *   Example: `metric_window="LAST_ONE_DAY"`
+   *   (Possible values  for `metric_window` are: `LAST_ONE_DAY`,
+   *   `LAST_ONE_WEEK`, `LAST_TWO_WEEKS`)
+   *   Example: `query_hash="12345678"`
+   *   Example: `normalized_query="SELECT * FROM table"`
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 100 query stats will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `AggregateQueryStatsRequest` call. Provide this to retrieve the subsequent
+   *   page. All parameters except page_token should match the parameters in the
+   *   call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.QueryStatsInfo|QueryStatsInfo}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `aggregateQueryStatsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  aggregateQueryStats(
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo[],
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse,
+    ]
+  >;
+  aggregateQueryStats(
+    request: protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo
+    >,
+  ): void;
+  aggregateQueryStats(
+    request: protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo
+    >,
+  ): void;
+  aggregateQueryStats(
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+          | protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo[],
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+          | protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('aggregateQueryStats values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('aggregateQueryStats request %j', request);
+    return this.innerApiCalls
+      .aggregateQueryStats(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo[],
+          protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest | null,
+          protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse,
+        ]) => {
+          this._log.info('aggregateQueryStats values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `aggregateQueryStats`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `parent`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.orderBy]
+   *   Optional. The expression to order the results by.
+   *   Example: `order_by="execution_count"`
+   *   Example: `order_by="execution_count desc"`
+   *   Supported order by fields are `execution_count`, `rows_processed`,
+   *   `total_cpu_time`, `avg_cpu_time`.
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info,
+   *     data_protection_info,'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   *   Additional specific fields for query stats are: `metric_window`,
+   *   `query_hash`, `normalized_query`.
+   *   Example: `metric_window="LAST_ONE_DAY"`
+   *   (Possible values  for `metric_window` are: `LAST_ONE_DAY`,
+   *   `LAST_ONE_WEEK`, `LAST_TWO_WEEKS`)
+   *   Example: `query_hash="12345678"`
+   *   Example: `normalized_query="SELECT * FROM table"`
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 100 query stats will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `AggregateQueryStatsRequest` call. Provide this to retrieve the subsequent
+   *   page. All parameters except page_token should match the parameters in the
+   *   call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.QueryStatsInfo|QueryStatsInfo} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `aggregateQueryStatsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  aggregateQueryStatsStream(
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['aggregateQueryStats'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('aggregateQueryStats stream %j', request);
+    return this.descriptors.page.aggregateQueryStats.createStream(
+      this.innerApiCalls.aggregateQueryStats as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `aggregateQueryStats`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `parent`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.orderBy]
+   *   Optional. The expression to order the results by.
+   *   Example: `order_by="execution_count"`
+   *   Example: `order_by="execution_count desc"`
+   *   Supported order by fields are `execution_count`, `rows_processed`,
+   *   `total_cpu_time`, `avg_cpu_time`.
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info,
+   *     data_protection_info,'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   *   Additional specific fields for query stats are: `metric_window`,
+   *   `query_hash`, `normalized_query`.
+   *   Example: `metric_window="LAST_ONE_DAY"`
+   *   (Possible values  for `metric_window` are: `LAST_ONE_DAY`,
+   *   `LAST_ONE_WEEK`, `LAST_TWO_WEEKS`)
+   *   Example: `query_hash="12345678"`
+   *   Example: `normalized_query="SELECT * FROM table"`
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 100 query stats will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `AggregateQueryStatsRequest` call. Provide this to retrieve the subsequent
+   *   page. All parameters except page_token should match the parameters in the
+   *   call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.databasecenter.v1beta.QueryStatsInfo|QueryStatsInfo}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/database_center.aggregate_query_stats.js</caption>
+   * region_tag:databasecenter_v1beta_generated_DatabaseCenter_AggregateQueryStats_async
+   */
+  aggregateQueryStatsAsync(
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['aggregateQueryStats'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('aggregateQueryStats iterate %j', request);
+    return this.descriptors.page.aggregateQueryStats.asyncIterate(
+      this.innerApiCalls['aggregateQueryStats'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.databasecenter.v1beta.IQueryStatsInfo>;
   }
   /**
    * QueryIssues provides a list of issues and recommendations

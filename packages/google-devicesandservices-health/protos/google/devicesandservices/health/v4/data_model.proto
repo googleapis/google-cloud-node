@@ -19,12 +19,13 @@ package google.devicesandservices.health.v4;
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/devicesandservices/health/v4/data_coordinates.proto";
+import "google/devicesandservices/health/v4/medical_device_info.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/type/date.proto";
 
 option csharp_namespace = "Google.DevicesAndServices.Health.V4";
-option go_package = "google.golang.org/genproto/googleapis/devicesandservices/health/apiv4main;healthpb";
+option go_package = "google.golang.org/genproto/googleapis/devicesandservices/health/apiv4;healthpb";
 option java_multiple_files = true;
 option java_outer_classname = "DataModelProto";
 option java_package = "com.google.devicesandservices.health.v4";
@@ -47,6 +48,225 @@ enum HeartRateZoneType {
 
   // The peak heart rate zone.
   PEAK = 4;
+}
+
+// Enum representing the access level of a food item.
+enum FoodAccessLevel {
+  // Unspecified food access level.
+  FOOD_ACCESS_LEVEL_UNSPECIFIED = 0;
+
+  // Public food access level.
+  FOOD_ACCESS_LEVEL_PUBLIC = 1;
+
+  // Private food access level.
+  FOOD_ACCESS_LEVEL_PRIVATE = 2;
+}
+
+// Enum representing the meal type.
+enum MealType {
+  // Unspecified meal type.
+  MEAL_TYPE_UNSPECIFIED = 0;
+
+  // Value representing a meal before breakfast.
+  BEFORE_BREAKFAST = 1;
+
+  // Value representing a breakfast.
+  BREAKFAST = 2;
+
+  // Value representing a morning snack.
+  BEFORE_LUNCH = 3;
+
+  // Value representing a lunch.
+  LUNCH = 4;
+
+  // Value representing an afternoon snack.
+  BEFORE_DINNER = 5;
+
+  // Value representing dinner.
+  DINNER = 6;
+
+  // Value representing an evening snack.
+  AFTER_DINNER = 7;
+
+  // Value representing any meal outside of the usual three meals per day.
+  SNACK = 8;
+
+  // Value representing any time (legacy NA).
+  ANYTIME = 9;
+}
+
+// Enum representing the unit of energy.
+enum EnergyUnit {
+  // Unspecified energy unit.
+  ENERGY_UNIT_UNSPECIFIED = 0;
+
+  // Value representing joule.
+  JOULE = 1;
+
+  // Value representing kilojoule.
+  KILOJOULE = 2;
+
+  // Value representing kilocalorie.
+  KILOCALORIE = 3;
+
+  // Value representing small calorie.
+  SMALL_CALORIE = 4;
+
+  // Value representing calorie.
+  CALORIE = 5;
+}
+
+// Holds information about a user logged food.
+enum Nutrient {
+  // Unspecified nutrient.
+  NUTRIENT_UNSPECIFIED = 0;
+
+  // Value representing biotin nutrient.
+  BIOTIN = 1;
+
+  // Value representing caffeine nutrient.
+  CAFFEINE = 2;
+
+  // Value representing calcium nutrient.
+  CALCIUM = 3;
+
+  // Value representing chloride nutrient.
+  CHLORIDE = 4;
+
+  // Value representing carbohydrates nutrient.
+  CARBOHYDRATES = 5;
+
+  // Value representing cholesterol nutrient.
+  CHOLESTEROL = 6;
+
+  // Value representing chromium nutrient.
+  CHROMIUM = 7;
+
+  // Value representing copper nutrient.
+  COPPER = 8;
+
+  // Value representing dietary fiber nutrient.
+  DIETARY_FIBER = 9;
+
+  // Value representing folic acid nutrient.
+  FOLIC_ACID = 10;
+
+  // Value representing iodine nutrient.
+  IODINE = 11;
+
+  // Value representing iron nutrient.
+  IRON = 12;
+
+  // Value representing magnesium nutrient.
+  MAGNESIUM = 13;
+
+  // Value representing manganese nutrient.
+  MANGANESE = 14;
+
+  // Value representing molybdenum nutrient.
+  MOLYBDENUM = 15;
+
+  // Value representing monounsaturated fat nutrient.
+  MONOUNSATURATED_FAT = 16;
+
+  // Value representing niacin nutrient.
+  NIACIN = 17;
+
+  // Value representing pantothenic acid nutrient.
+  PANTOTHENIC_ACID = 18;
+
+  // Value representing phosphorus nutrient.
+  PHOSPHORUS = 19;
+
+  // Value representing polyunsaturated fat nutrient.
+  POLYUNSATURATED_FAT = 20;
+
+  // Value representing potassium nutrient.
+  POTASSIUM = 21;
+
+  // Value representing protein nutrient.
+  PROTEIN = 22;
+
+  // Value representing riboflavin nutrient.
+  RIBOFLAVIN = 23;
+
+  // Value representing saturated fat nutrient.
+  SATURATED_FAT = 24;
+
+  // Value representing selenium nutrient.
+  SELENIUM = 25;
+
+  // Value representing sodium nutrient.
+  SODIUM = 26;
+
+  // Value representing sugar nutrient.
+  SUGAR = 27;
+
+  // Value representing thiamin nutrient.
+  THIAMIN = 28;
+
+  // Value representing trans fat nutrient.
+  TRANS_FAT = 29;
+
+  // Value representing unsaturated fat nutrient.
+  UNSATURATED_FAT = 30;
+
+  // Value representing vitamin A nutrient.
+  VITAMIN_A = 31;
+
+  // Value representing vitamin B12 nutrient.
+  VITAMIN_B12 = 32;
+
+  // Value representing vitamin B6 nutrient.
+  VITAMIN_B6 = 33;
+
+  // Value representing vitamin C nutrient.
+  VITAMIN_C = 34;
+
+  // Value representing vitamin D nutrient.
+  VITAMIN_D = 35;
+
+  // Value representing vitamin E nutrient.
+  VITAMIN_E = 36;
+
+  // Value representing vitamin K nutrient.
+  VITAMIN_K = 37;
+
+  // Value representing zinc nutrient.
+  ZINC = 38;
+
+  // Value representing folate nutrient.
+  FOLATE = 39;
+}
+
+// Enum representing the unit of weight.
+enum WeightUnit {
+  // Unspecified weight unit.
+  WEIGHT_UNIT_UNSPECIFIED = 0;
+
+  // Value representing gram.
+  GRAM = 1;
+
+  // Value representing kilogram.
+  KILOGRAM = 2;
+
+  // Value representing ounce.
+  OUNCE = 3;
+
+  // Value representing pound.
+  POUND = 4;
+
+  // Value representing stone.
+  STONE = 5;
+
+  // Value representing milligram.
+  MILLIGRAM = 6;
+
+  // Value representing microgram.
+  MICROGRAM = 7;
+
+  // Value representing nanogram.
+  NANOGRAM = 8;
 }
 
 // Enum representing the unit of volume.
@@ -79,6 +299,27 @@ enum VolumeUnit {
   PINT_US = 8;
 }
 
+// Ovulation test result.
+enum OvulationTestResult {
+  // Unspecified result.
+  OVULATION_TEST_RESULT_UNSPECIFIED = 0;
+
+  // Negative result.
+  NEGATIVE = 1;
+
+  // Luteinizing hormone surge.
+  LUTEINIZING_HORMONE_SURGE = 2;
+
+  // Estrogen surge.
+  ESTROGEN_SURGE = 3;
+
+  // Positive result.
+  POSITIVE = 4;
+
+  // Indeterminate result.
+  INDETERMINATE = 5;
+}
+
 // Record of active zone minutes in a given time interval.
 message ActiveZoneMinutes {
   // Represents different heart rate zones.
@@ -106,19 +347,20 @@ message ActiveZoneMinutes {
   // Required. Number of Active Zone Minutes earned in the given time interval.
   // Note: active_zone_minutes equals to 1 for low intensity (fat burn) zones or
   // 2 for high intensity zones (cardio, peak).
-  int64 active_zone_minutes = 3 [(google.api.field_behavior) = REQUIRED];
+  optional int64 active_zone_minutes = 3
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the result of the rollup of the active zone minutes data type.
 message ActiveZoneMinutesRollupValue {
   // Active zone minutes in `HeartRateZone.CARDIO`.
-  int64 sum_in_cardio_heart_zone = 1;
+  optional int64 sum_in_cardio_heart_zone = 1;
 
   // Active zone minutes in `HeartRateZone.PEAK`.
-  int64 sum_in_peak_heart_zone = 2;
+  optional int64 sum_in_peak_heart_zone = 2;
 
   // Active zone minutes in `HeartRateZone.FAT_BURN`.
-  int64 sum_in_fat_burn_heart_zone = 3;
+  optional int64 sum_in_fat_burn_heart_zone = 3;
 }
 
 // Record of active minutes in a given time interval.
@@ -129,7 +371,7 @@ message ActiveMinutes {
     ActivityLevel activity_level = 1 [(google.api.field_behavior) = REQUIRED];
 
     // Required. Number of whole minutes spent in activity.
-    int64 active_minutes = 2 [(google.api.field_behavior) = REQUIRED];
+    optional int64 active_minutes = 2 [(google.api.field_behavior) = REQUIRED];
   }
 
   // Activity level.
@@ -164,7 +406,7 @@ message ActiveMinutesRollupValue {
     ActiveMinutes.ActivityLevel activity_level = 1;
 
     // Number of whole minutes spent in activity.
-    int64 active_minutes_sum = 2;
+    optional int64 active_minutes_sum = 2;
   }
 
   // Active minutes by activity level. At most one record per activity level
@@ -224,7 +466,7 @@ message Altitude {
   ObservationTimeInterval interval = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Altitude gain in millimeters over the observed interval.
-  int64 gain_millimeters = 3 [(google.api.field_behavior) = REQUIRED];
+  optional int64 gain_millimeters = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Number of calories burned due to basal metabolic rate (BMR) over a period of
@@ -235,7 +477,7 @@ message BasalEnergyBurned {
 
   // Required. Number of calories burned due to basal metabolic rate in
   // kilocalories over the observed interval.
-  double kcal = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double kcal = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Body fat measurement.
@@ -245,13 +487,101 @@ message BodyFat {
       [(google.api.field_behavior) = REQUIRED];
 
   // Required. Body fat percentage, in range [0, 100].
-  double percentage = 3 [(google.api.field_behavior) = REQUIRED];
+  optional double percentage = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the result of the rollup of the body fat data type.
 message BodyFatRollupValue {
   // Average body fat percentage.
-  double body_fat_percentage_avg = 1;
+  optional double body_fat_percentage_avg = 1;
+}
+
+// Core body temperature measurement, distinct from peripheral body temperature,
+// reflects the temperature of the body's internal organs.
+message CoreBodyTemperature {
+  // Measurement location for core body temperature.
+  enum MeasurementLocation {
+    // Measurement location is unspecified.
+    MEASUREMENT_LOCATION_UNSPECIFIED = 0;
+
+    // Other measurement location.
+    OTHER = 1;
+
+    // Armpit measurement location.
+    ARMPIT = 2;
+
+    // Body measurement location.
+    BODY = 3;
+
+    // Ear measurement location.
+    EAR = 4;
+
+    // Finger measurement location.
+    FINGER = 5;
+
+    // Gastro-intestinal measurement location.
+    GASTRO_INTESTINAL = 6;
+
+    // Mouth measurement location.
+    MOUTH = 7;
+
+    // Rectum measurement location.
+    RECTUM = 8;
+
+    // Toe measurement location.
+    TOE = 9;
+
+    // Ear drum measurement location.
+    EAR_DRUM = 10;
+
+    // Temporal artery measurement location.
+    TEMPORAL_ARTERY = 11;
+
+    // Forehead measurement location.
+    FOREHEAD = 12;
+
+    // Urinary bladder measurement location.
+    URINARY_BLADDER = 13;
+
+    // Nasal measurement location.
+    NASAL = 14;
+
+    // Nasopharyngeal measurement location.
+    NASOPHARYNGEAL = 15;
+
+    // Wrist measurement location.
+    WRIST = 16;
+
+    // Vagina measurement location.
+    VAGINA = 17;
+  }
+
+  // Required. The time at which core body temperature was measured.
+  ObservationSampleTime sample_time = 2
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The core body temperature in Celsius.
+  optional double temperature_celsius = 3
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The location of the core body temperature measurement.
+  MeasurementLocation measurement_location = 4
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The unique identifier of the core body temperature measurement.
+  string id = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Represents the result of the rollup of the core body temperature data type.
+message CoreBodyTemperatureRollupValue {
+  // Average core body temperature in Celsius.
+  optional double temperature_celsius_avg = 1;
+
+  // Maximum core body temperature in Celsius.
+  optional double temperature_celsius_max = 2;
+
+  // Minimum core body temperature in Celsius.
+  optional double temperature_celsius_min = 3;
 }
 
 // Represents the result of the rollup of the calories in heart rate zone data
@@ -263,7 +593,7 @@ message CaloriesInHeartRateZoneRollupValue {
     HeartRateZoneType heart_rate_zone = 1;
 
     // The amount of kilocalories burned in the specified heart rate zone.
-    double kcal = 2;
+    optional double kcal = 2;
   }
 
   // List of calories burned in each heart rate zone.
@@ -280,10 +610,12 @@ message DailyHeartRateZones {
         [(google.api.field_behavior) = REQUIRED];
 
     // Required. Minimum heart rate for this zone in beats per minute.
-    int64 min_beats_per_minute = 2 [(google.api.field_behavior) = REQUIRED];
+    optional int64 min_beats_per_minute = 2
+        [(google.api.field_behavior) = REQUIRED];
 
     // Required. Maximum heart rate for this zone in beats per minute.
-    int64 max_beats_per_minute = 3 [(google.api.field_behavior) = REQUIRED];
+    optional int64 max_beats_per_minute = 3
+        [(google.api.field_behavior) = REQUIRED];
   }
 
   // Required. Date (in user's timezone) of the heart rate zones record.
@@ -336,7 +668,8 @@ message DailyRespiratoryRate {
   google.type.Date date = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The average number of breaths taken per minute.
-  double breaths_per_minute = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double breaths_per_minute = 2
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 // A daily oxygen saturation (SpO2) record.
@@ -348,19 +681,22 @@ message DailyOxygenSaturation {
 
   // Required. The average value of the oxygen saturation samples during the
   // sleep.
-  double average_percentage = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double average_percentage = 2
+      [(google.api.field_behavior) = REQUIRED];
 
   // Required. The lower bound of the confidence interval of oxygen saturation
   // samples during sleep.
-  double lower_bound_percentage = 3 [(google.api.field_behavior) = REQUIRED];
+  optional double lower_bound_percentage = 3
+      [(google.api.field_behavior) = REQUIRED];
 
   // Required. The upper bound of the confidence interval of oxygen saturation
   // samples during sleep.
-  double upper_bound_percentage = 4 [(google.api.field_behavior) = REQUIRED];
+  optional double upper_bound_percentage = 4
+      [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Standard deviation of the daily oxygen saturation averages from
   // the past 7-30 days.
-  double standard_deviation_percentage = 5
+  optional double standard_deviation_percentage = 5
       [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -391,7 +727,7 @@ message DailyRestingHeartRate {
   google.type.Date date = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The resting heart rate value in beats per minute.
-  int64 beats_per_minute = 4 [(google.api.field_behavior) = REQUIRED];
+  optional int64 beats_per_minute = 4 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Metadata for the daily resting heart rate.
   DailyRestingHeartRateMetadata daily_resting_heart_rate_metadata = 5
@@ -406,17 +742,17 @@ message DailySleepTemperatureDerivations {
 
   // Required. The user's nightly skin temperature. It is the mean of skin
   // temperature samples taken from the user’s sleep.
-  double nightly_temperature_celsius = 2
+  optional double nightly_temperature_celsius = 2
       [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The user's baseline skin temperature. It is the median of the
   // user's nightly skin temperature over the past 30 days.
-  double baseline_temperature_celsius = 3
+  optional double baseline_temperature_celsius = 3
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The standard deviation of the user’s relative nightly skin
   // temperature (temperature - baseline) over the past 30 days.
-  double relative_nightly_stddev_30d_celsius = 4
+  optional double relative_nightly_stddev_30d_celsius = 4
       [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -452,7 +788,7 @@ message DailyVO2Max {
 
   // Required. Daily VO2 max value measured as in ml consumed oxygen / kg of
   // body weight / min.
-  double vo2_max = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double vo2_max = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. An estimated field is added to indicate when the confidence has
   // decreased sufficiently to consider the value an estimation.
@@ -464,7 +800,8 @@ message DailyVO2Max {
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The covariance of the VO2 max value.
-  double vo2_max_covariance = 5 [(google.api.field_behavior) = OPTIONAL];
+  optional double vo2_max_covariance = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Distance traveled over an interval of time.
@@ -473,13 +810,97 @@ message Distance {
   ObservationTimeInterval interval = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Distance in millimeters over the observed interval.
-  int64 millimeters = 3 [(google.api.field_behavior) = REQUIRED];
+  optional int64 millimeters = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Result of the rollup of the user's distance.
 message DistanceRollupValue {
   // Sum of the distance in millimeters.
-  int64 millimeters_sum = 1;
+  optional int64 millimeters_sum = 1;
+}
+
+// Represents an Electrocardiogram (ECG) measurement session.
+// This data type is based on SaMD feature and any changes to it may require
+// additional review.
+message Electrocardiogram {
+  // The classification of the ECG reading rhythm.
+  enum ResultClassification {
+    // Unspecified result classification.
+    RESULT_CLASSIFICATION_UNSPECIFIED = 0;
+
+    // Heart rhythm appears normal. Corresponds to result "Normal Sinus Rhythm".
+    NORMAL_SINUS_RHYTHM = 1;
+
+    // Signs of Atrial Fibrillation detected. Corresponds to result "Atrial
+    // Fibrillation".
+    ATRIAL_FIBRILLATION = 2;
+
+    // The reading is inconclusive as it could not be classified. Corresponds to
+    // result "Inconclusive".
+    INCONCLUSIVE = 3;
+
+    // The reading is inconclusive as it could not be classified because
+    // heart rate is high (>120bpm). Corresponds to result "Inconclusive: High
+    // heart rate".
+    INCONCLUSIVE_HIGH_HEART_RATE = 4;
+
+    // The reading is inconclusive as it could not be classified because
+    // heart rate is low (<50bpm). Corresponds to result "Inconclusive: Low
+    // heart rate".
+    INCONCLUSIVE_LOW_HEART_RATE = 5;
+
+    // The reading is unreadable.
+    UNREADABLE = 6;
+
+    // The reading was not analyzed.
+    NOT_ANALYZED = 7;
+  }
+
+  // Required. Observed interval.
+  //
+  // NOTE: Historical ECG data lacks timezone offsets, so `start_utc_offset`
+  // and `end_utc_offset` will be missing or default to zero. As a result,
+  // the civil time fields within this interval will default to UTC.
+  // It is recommended to use physical time fields instead for accurate
+  // time referencing.
+  //
+  // NOTE: The `start_time` and `end_time` of the interval are equal,
+  // representing the reading time.
+  SessionTimeInterval interval = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Average heart rate recorded during ECG reading in beats per
+  // minute.
+  optional int64 beats_per_minute_avg = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The result classification of the ECG reading.
+  ResultClassification result_classification = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. An array of voltage values representing lead I ECG values.
+  // Each sample represents voltage difference in ECG graph.
+  // The first value in array corresponds to the start of the reading.
+  repeated sint32 waveform_samples = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The sampling frequency of waveform samples in hertz.
+  optional int32 sampling_frequency_hertz = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The factor by which to divide waveform samples to get voltage in
+  // millivolts: millivolts = waveform_sample / millivolts_scaling_factor.
+  optional int32 millivolts_scaling_factor = 6
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The number of leads used for ECG reading.
+  optional int32 lead_number = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. The meta information for the compatible device used to conduct
+  // the measurement.
+  //
+  // ECG measurements typically populate `firmware_version`, `feature_version`,
+  // and `device_model`.
+  MedicalDeviceInfo medical_device_info = 8
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // An exercise that stores information about a physical activity.
@@ -579,52 +1000,561 @@ message Exercise {
   message ExerciseMetadata {
     // Optional. Pool length in millimeters. Only present in the swimming
     // exercises.
-    int64 pool_length_millimeters = 1 [(google.api.field_behavior) = OPTIONAL];
+    optional int64 pool_length_millimeters = 1
+        [(google.api.field_behavior) = OPTIONAL];
 
     // Optional. Whether the exercise had GPS tracking.
     bool has_gps = 2 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // The type of activity performed during an exercise.
+  // May receive new values in the future.
   enum ExerciseType {
     // Exercise type is unspecified.
     EXERCISE_TYPE_UNSPECIFIED = 0;
 
-    // Running type.
-    RUNNING = 1;
+    // Aerobic workout type.
+    AEROBIC_WORKOUT = 13;
 
-    // Walking type.
-    WALKING = 2;
+    // Archery type.
+    ARCHERY = 47;
+
+    // Assault bike type.
+    ASSAULT_BIKE = 164;
+
+    // Backpacking type.
+    BACKPACKING = 181;
+
+    // Badminton type.
+    BADMINTON = 48;
+
+    // Ballet type.
+    BALLET = 103;
+
+    // Ballroom dance type.
+    BALLROOM_DANCE = 156;
+
+    // Barre class type.
+    BARRE_CLASS = 49;
+
+    // Baseball type.
+    BASEBALL = 50;
+
+    // Basketball type.
+    BASKETBALL = 51;
 
     // Biking type.
     BIKING = 3;
 
-    // Swimming type.
-    SWIMMING = 4;
+    // Billiards type.
+    BILLIARDS = 180;
+
+    // Body weight type.
+    BODY_WEIGHT = 149;
+
+    // Bootcamp type.
+    BOOTCAMP = 14;
+
+    // Bowling type.
+    BOWLING = 52;
+
+    // Boxing type.
+    BOXING = 53;
+
+    // Breakdancing type.
+    BREAKDANCING = 157;
+
+    // Calisthenics type.
+    CALISTHENICS = 54;
+
+    // Canoeing type.
+    CANOEING = 15;
+
+    // Cardio sculpt type.
+    CARDIO_SCULPT = 129;
+
+    // Cardio workout type.
+    CARDIO_WORKOUT = 140;
+
+    // Carpentry type.
+    CARPENTRY = 108;
+
+    // Cheerleading type.
+    CHEERLEADING = 165;
+
+    // Circuit training type.
+    CIRCUIT_TRAINING = 16;
+
+    // Cleaning type.
+    CLEANING = 105;
+
+    // Climbing type.
+    CLIMBING = 55;
+
+    // Core training type.
+    CORE_TRAINING = 17;
+
+    // Cricket type.
+    CRICKET = 56;
+
+    // Croquet type.
+    CROQUET = 111;
+
+    // Cross country ski type.
+    CROSS_COUNTRY_SKI = 18;
+
+    // Cross training type.
+    CROSS_TRAINING = 57;
+
+    // Crossfit type.
+    CROSSFIT = 19;
+
+    // Curling type.
+    CURLING = 58;
+
+    // Dancing type.
+    DANCING = 20;
+
+    // Diving type.
+    DIVING = 59;
+
+    // Electric bike type.
+    ELECTRIC_BIKE = 152;
+
+    // Electric scooter type.
+    ELECTRIC_SCOOTER = 168;
+
+    // Elliptical type.
+    ELLIPTICAL = 21;
+
+    // Equestrian sports type.
+    EQUESTRIAN_SPORTS = 60;
+
+    // Exercise class type.
+    EXERCISE_CLASS = 61;
+
+    // Fencing type.
+    FENCING = 62;
+
+    // Field hockey type.
+    FIELD_HOCKEY = 113;
+
+    // Fishing type.
+    FISHING = 63;
+
+    // Fitness gaming type.
+    FITNESS_GAMING = 64;
+
+    // Foiling type.
+    FOILING = 175;
+
+    // Football american type.
+    FOOTBALL_AMERICAN = 65;
+
+    // Football australian type.
+    FOOTBALL_AUSTRALIAN = 66;
+
+    // Free weights type.
+    FREE_WEIGHTS = 148;
+
+    // Frisbee playing general type.
+    FRISBEE_PLAYING_GENERAL = 67;
+
+    // Functional strength training type.
+    FUNCTIONAL_STRENGTH_TRAINING = 68;
+
+    // Gardening type.
+    GARDENING = 107;
+
+    // Golf type.
+    GOLF = 22;
+
+    // Gymnastics type.
+    GYMNASTICS = 69;
+
+    // Handball type.
+    HANDBALL = 70;
+
+    // Hand cycling type.
+    HAND_CYCLING = 71;
+
+    // Hiit type.
+    HIIT = 9;
 
     // Hiking type.
     HIKING = 5;
 
-    // Yoga type.
-    YOGA = 6;
+    // Hip hop type.
+    HIP_HOP = 158;
+
+    // Hockey type.
+    HOCKEY = 72;
+
+    // Hoeing type.
+    HOEING = 109;
+
+    // Household chores type.
+    HOUSEHOLD_CHORES = 137;
+
+    // Hunting type.
+    HUNTING = 73;
+
+    // Ice skating type.
+    ICE_SKATING = 127;
+
+    // Incline run type.
+    INCLINE_RUN = 142;
+
+    // Incline walk type.
+    INCLINE_WALK = 146;
+
+    // Indoor climbing type.
+    INDOOR_CLIMBING = 23;
+
+    // Interval workout type.
+    INTERVAL_WORKOUT = 24;
+
+    // Jazz dance type.
+    JAZZ_DANCE = 154;
+
+    // Jiu jitsu type.
+    JIU_JITSU = 160;
+
+    // Jumping rope type.
+    JUMPING_ROPE = 74;
+
+    // Karate type.
+    KARATE = 159;
+
+    // Kayaking type.
+    KAYAKING = 25;
+
+    // Kickboxing type.
+    KICKBOXING = 26;
+
+    // Kitesurfing type.
+    KITESURFING = 172;
+
+    // Lacrosse type.
+    LACROSSE = 75;
+
+    // Martial arts type.
+    MARTIAL_ARTS = 27;
+
+    // Meditate type.
+    MEDITATE = 28;
+
+    // Modern dance type.
+    MODERN_DANCE = 153;
+
+    // Motocross type.
+    MOTOCROSS = 114;
+
+    // Motorcycle type.
+    MOTORCYCLE = 121;
+
+    // Mountain bike type.
+    MOUNTAIN_BIKE = 128;
+
+    // Mowing lawn type.
+    MOWING_LAWN = 106;
+
+    // Muay thai type.
+    MUAY_THAI = 162;
+
+    // Multisport type.
+    MULTISPORT = 76;
+
+    // Musical performance type.
+    MUSICAL_PERFORMANCE = 163;
+
+    // Nordic walking type.
+    NORDIC_WALKING = 145;
+
+    // Orienteering type.
+    ORIENTEERING = 115;
+
+    // Other type.
+    OTHER = 12;
+
+    // Outdoor bike type.
+    OUTDOOR_BIKE = 29;
+
+    // Outdoor workout type.
+    OUTDOOR_WORKOUT = 30;
+
+    // Paddleboarding type.
+    PADDLEBOARDING = 31;
+
+    // Padel type.
+    PADEL = 176;
+
+    // Painting type.
+    PAINTING = 170;
+
+    // Paragliding type.
+    PARAGLIDING = 78;
+
+    // Parkour type.
+    PARKOUR = 166;
+
+    // Pickelball type.
+    PICKELBALL = 79;
 
     // Pilates type.
     PILATES = 7;
 
-    // Workout type.
-    WORKOUT = 8;
+    // Polo type.
+    POLO = 116;
 
-    // HIIT type.
-    HIIT = 9;
+    // Powerlifting type.
+    POWERLIFTING = 32;
 
-    // Weightlifting type.
-    WEIGHTLIFTING = 10;
+    // Power walking type.
+    POWER_WALKING = 143;
+
+    // Racket sports type.
+    RACKET_SPORTS = 169;
+
+    // Racquetball type.
+    RACQUETBALL = 80;
+
+    // Resistance bands type.
+    RESISTANCE_BANDS = 151;
+
+    // Rock climbing type.
+    ROCK_CLIMBING = 123;
+
+    // Rollerblading type.
+    ROLLERBLADING = 33;
+
+    // Roller skating type.
+    ROLLER_SKATING = 118;
+
+    // Rowing type.
+    ROWING = 81;
+
+    // Rowing machine type.
+    ROWING_MACHINE = 34;
+
+    // Rucking type.
+    RUCKING = 144;
+
+    // Rugby type.
+    RUGBY = 82;
+
+    // Running type.
+    RUNNING = 1;
+
+    // Sailing type.
+    SAILING = 83;
+
+    // Scootering type.
+    SCOOTERING = 167;
+
+    // Scuba diving type.
+    SCUBA_DIVING = 84;
+
+    // Shooting type.
+    SHOOTING = 104;
+
+    // Shoveling type.
+    SHOVELING = 171;
+
+    // Skateboarding type.
+    SKATEBOARDING = 117;
+
+    // Skating type.
+    SKATING = 35;
+
+    // Skiing type.
+    SKIING = 36;
+
+    // Skydiving type.
+    SKYDIVING = 182;
+
+    // Snorkeling type.
+    SNORKELING = 37;
+
+    // Snowboarding type.
+    SNOWBOARDING = 38;
+
+    // Snowmobiling type.
+    SNOWMOBILING = 179;
+
+    // Snowshoeing type.
+    SNOWSHOEING = 85;
+
+    // Snow sport type.
+    SNOW_SPORT = 86;
+
+    // Soccer type.
+    SOCCER = 87;
+
+    // Softball type.
+    SOFTBALL = 88;
+
+    // Speed skating type.
+    SPEED_SKATING = 178;
+
+    // Spinning type.
+    SPINNING = 39;
+
+    // Sport type.
+    SPORT = 40;
+
+    // Squash type.
+    SQUASH = 89;
+
+    // Stairclimber type.
+    STAIRCLIMBER = 41;
+
+    // Stationary bike type.
+    STATIONARY_BIKE = 139;
+
+    // Step training type.
+    STEP_TRAINING = 90;
 
     // Strength training type.
     STRENGTH_TRAINING = 11;
 
-    // Other type.
-    OTHER = 12;
+    // Stretching type.
+    STRETCHING = 42;
+
+    // Stroller walk type.
+    STROLLER_WALK = 122;
+
+    // Surfing type.
+    SURFING = 43;
+
+    // Swimming type.
+    SWIMMING = 4;
+
+    // Swimming open water type.
+    SWIMMING_OPEN_WATER = 91;
+
+    // Swimming pool type.
+    SWIMMING_POOL = 101;
+
+    // Synchronized swimming type.
+    SYNCHRONIZED_SWIMMING = 177;
+
+    // Tabata workout type.
+    TABATA_WORKOUT = 130;
+
+    // Table tennis type.
+    TABLE_TENNIS = 92;
+
+    // Taekwondo type.
+    TAEKWONDO = 161;
+
+    // Tai chi type.
+    TAI_CHI = 93;
+
+    // Tango type.
+    TANGO = 155;
+
+    // Tennis type.
+    TENNIS = 44;
+
+    // Track and field type.
+    TRACK_AND_FIELD = 94;
+
+    // Trail run type.
+    TRAIL_RUN = 141;
+
+    // Trampoline type.
+    TRAMPOLINE = 119;
+
+    // Treadmill type.
+    TREADMILL = 45;
+
+    // Treadmill walk type.
+    TREADMILL_WALK = 138;
+
+    // Trx type.
+    TRX = 131;
+
+    // Ultimate frisbee type.
+    ULTIMATE_FRISBEE = 112;
+
+    // Unicycling type.
+    UNICYCLING = 102;
+
+    // Volleyball type.
+    VOLLEYBALL = 95;
+
+    // Volleyball beach type.
+    VOLLEYBALL_BEACH = 120;
+
+    // Wakeboarding type.
+    WAKEBOARDING = 173;
+
+    // Walking type.
+    WALKING = 2;
+
+    // Walk with weights type.
+    WALK_WITH_WEIGHTS = 147;
+
+    // Water aerobics type.
+    WATER_AEROBICS = 96;
+
+    // Water jogging type.
+    WATER_JOGGING = 126;
+
+    // Water polo type.
+    WATER_POLO = 97;
+
+    // Water skiing type.
+    WATER_SKIING = 124;
+
+    // Water sport type.
+    WATER_SPORT = 98;
+
+    // Water volleyball type.
+    WATER_VOLLEYBALL = 125;
+
+    // Weeding type.
+    WEEDING = 110;
+
+    // Weightlifting type.
+    WEIGHTLIFTING = 10;
+
+    // Weight machines type.
+    WEIGHT_MACHINES = 150;
+
+    // Weights type.
+    WEIGHTS = 46;
+
+    // Wheelchair type.
+    WHEELCHAIR = 99;
+
+    // Windsurfing type.
+    WINDSURFING = 174;
+
+    // Workout type.
+    WORKOUT = 8;
+
+    // Wrestling type.
+    WRESTLING = 100;
+
+    // Yoga type.
+    YOGA = 6;
+
+    // Yoga bikram type.
+    YOGA_BIKRAM = 132;
+
+    // Yoga hatha type.
+    YOGA_HATHA = 133;
+
+    // Yoga power type.
+    YOGA_POWER = 134;
+
+    // Yoga vinyasa type.
+    YOGA_VINYASA = 135;
+
+    // Zumba type.
+    ZUMBA = 136;
   }
 
   // Required. Observed exercise interval
@@ -660,7 +1590,12 @@ message Exercise {
   ExerciseMetadata exercise_metadata = 11
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Required. Exercise display name.
+  // Required. The localized, human-readable name of the exercise.
+  // For all exercise types other than `OTHER`, the system ignores client
+  // input and overrides this field with a generated name based on
+  // `exercise_type` (e.g., "Walking" for `WALKING`). If `exercise_type` is
+  // `OTHER`, this field can contain the user's custom, free-form display
+  // name.
   string display_name = 12 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Duration excluding pauses.
@@ -685,19 +1620,19 @@ message Floors {
   ObservationTimeInterval interval = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Number of floors in the recorded interval
-  int64 count = 4 [(google.api.field_behavior) = REQUIRED];
+  optional int64 count = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the result of the rollup of the user's floors.
 message FloorsRollupValue {
   // Sum of the floors count.
-  int64 count_sum = 1;
+  optional int64 count_sum = 1;
 }
 
 // Represents the result of the rollup of the user's altitude.
 message AltitudeRollupValue {
   // Sum of the altitude gain in millimeters.
-  int64 gain_millimeters_sum = 1;
+  optional int64 gain_millimeters_sum = 1;
 }
 
 // A heart rate measurement.
@@ -754,7 +1689,7 @@ message HeartRate {
       [(google.api.field_behavior) = REQUIRED];
 
   // Required. The heart rate value in beats per minute.
-  int64 beats_per_minute = 4 [(google.api.field_behavior) = REQUIRED];
+  optional int64 beats_per_minute = 4 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Metadata about the heart rate sample.
   HeartRateMetadata metadata = 6 [(google.api.field_behavior) = OPTIONAL];
@@ -776,13 +1711,13 @@ message HeartRateRollupValue {
 // variability personal range.
 message RunVO2MaxRollupValue {
   // Minimum value of run VO2 max in the interval..
-  double rate_min = 1;
+  optional double rate_min = 1;
 
   // Maximum value of run VO2 max in the interval.
-  double rate_max = 2;
+  optional double rate_max = 2;
 
   // Average value of run VO2 max in the interval.
-  double rate_avg = 3;
+  optional double rate_avg = 3;
 }
 
 // VO2 max value calculated based on the user's running activity.
@@ -793,7 +1728,7 @@ message RunVO2Max {
       [(google.api.field_behavior) = REQUIRED];
 
   // Required. Run VO2 max value in ml/kg/min.
-  double run_vo2_max = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double run_vo2_max = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the result of the rollup of the user's daily heart rate
@@ -815,7 +1750,8 @@ message Height {
       [(google.api.field_behavior) = REQUIRED];
 
   // Required. Height of the user in millimeters.
-  int64 height_millimeters = 2 [(google.api.field_behavior) = REQUIRED];
+  optional int64 height_millimeters = 2
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 // Captures user's heart rate variability (HRV) as measured by the root mean
@@ -827,21 +1763,24 @@ message HeartRateVariability {
       [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The root mean square of successive differences between normal
-  // heartbeats. This is a measure of heart rate variability used by Fitbit.
-  double root_mean_square_of_successive_differences_milliseconds = 2
+  // heartbeats. This is a measure of heart rate variability used by Google
+  // Health.
+  optional double root_mean_square_of_successive_differences_milliseconds = 2
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The standard deviation of the heart rate variability measurement.
-  double standard_deviation_milliseconds = 3
+  optional double standard_deviation_milliseconds = 3
       [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Represents the volume quantity.
 message VolumeQuantity {
   // Required. Value representing the volume in milliliters.
-  double milliliters = 1 [(google.api.field_behavior) = REQUIRED];
+  optional double milliliters = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. Value representing the user provided unit.
+  // Optional. Value representing the user provided unit, used only for
+  // user-facing input and display purposes. In the API format, all volume
+  // quantities are converted to milliliters.
   VolumeUnit user_provided_unit = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -859,7 +1798,8 @@ message HydrationLogRollupValue {
   // Rollup for volume quantity.
   message VolumeQuantityRollup {
     // Required. The sum of volume in milliliters.
-    double milliliters_sum = 1 [(google.api.field_behavior) = REQUIRED];
+    optional double milliliters_sum = 1
+        [(google.api.field_behavior) = REQUIRED];
 
     // Optional. The user provided unit on the last element.
     VolumeUnit user_provided_unit_last = 2
@@ -868,6 +1808,99 @@ message HydrationLogRollupValue {
 
   // Rollup for amount consumed.
   VolumeQuantityRollup amount_consumed = 1;
+}
+
+// Represents an Irregular Rhythm Notification alert, indicating a potential
+// sign of atrial fibrillation (AFib).
+// This data type is based on SaMD feature and any changes to it may require
+// additional review.
+message IrregularRhythmNotification {
+  // A single heart beat measurement.
+  message HeartBeat {
+    // Required. The time of the heart beat measurement.
+    google.protobuf.Timestamp physical_time = 1
+        [(google.api.field_behavior) = REQUIRED];
+
+    // Required. The UTC offset of the user's timezone when the heart beat
+    // measurement occurred.
+    google.protobuf.Duration utc_offset = 2
+        [(google.api.field_behavior) = REQUIRED];
+
+    // Output only. The civil time in the timezone the subject is in
+    // at the time of the observation.
+    CivilDateTime civil_time = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Required. The beats-per-minute value extrapolated from the time before
+    // the following heart beat. This is calculated as 60000 / rr, where rr is
+    // the gap between heart beats in milliseconds (IBI - Interbeat Interval).
+    optional int32 beats_per_minute = 4
+        [(google.api.field_behavior) = REQUIRED];
+  }
+
+  // An analysis window evaluated for AFib.
+  //
+  // Note: The current version of the algorithm will only produce alerts if all
+  // windows are positive. So anything returned from the API will always have
+  // the positive bit set to true. Internally, windows can be negative, however.
+  // We never save "inconclusive" windows (they aren't produced by the
+  // algorithm).
+  message AlertWindow {
+    // Required. Observed interval.
+    // The start time of the analysis window.
+    google.protobuf.Timestamp start_time = 1
+        [(google.api.field_behavior) = REQUIRED];
+
+    // Required. The UTC offset of the user's timezone when the analysis window
+    // started.
+    google.protobuf.Duration start_utc_offset = 2
+        [(google.api.field_behavior) = REQUIRED];
+
+    // Required. The end time of the analysis window.
+    google.protobuf.Timestamp end_time = 3
+        [(google.api.field_behavior) = REQUIRED];
+
+    // Required. The UTC offset of the user's timezone when the analysis window
+    // ended.
+    google.protobuf.Duration end_utc_offset = 4
+        [(google.api.field_behavior) = REQUIRED];
+
+    // Output only. Observed interval start time in civil time in the timezone
+    // the subject is in at the start of the observed interval
+    CivilDateTime civil_start_time = 5
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Observed interval end time in civil time in the timezone the
+    // subject is in at the end of the observed interval
+    CivilDateTime civil_end_time = 6
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Optional. Flag indicating whether the window was positive for AFib or
+    // not. A `true` value indicates that AFib was detected in this window. A
+    // `false` value means AFib was not detected, but does not guarantee the
+    // absence of AFib.
+    bool positive = 7 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. All heart beats in the interval contained in this analysis
+    // window.
+    repeated HeartBeat heart_beats = 8 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Required. Observed interval.
+  SessionTimeInterval interval = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The overlapping analysis windows that were used to evaluate
+  // rhythm for potential AFib, containing specific information about the user's
+  // heart rhythm.
+  repeated AlertWindow alert_windows = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. The meta information for the compatible device used to conduct
+  // the measurement.
+  //
+  // Irregular Rhythm Notification measurements typically populate
+  // `algorithm_version`, `service_version`, and `device_model`.
+  MedicalDeviceInfo medical_device_info = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Summary metrics for an exercise.
@@ -968,6 +2001,245 @@ message MetricsSummary {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Represents the weight quantity.
+message WeightQuantity {
+  // Required. The weight value in grams.
+  optional double grams = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Value representing the user provided unit.
+  WeightUnit user_provided_unit = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Represents the energy quantity.
+message EnergyQuantity {
+  // Required. The energy value in kilocalories.
+  optional double kcal = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Value representing the user provided unit.
+  EnergyUnit user_provided_unit = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Represents the quantity of a nutrient.
+message NutrientQuantity {
+  // Required. The quantity of the nutrient, measured in grams.
+  WeightQuantity quantity = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The nutrient type.
+  Nutrient nutrient = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Holds information about food logged by a user.
+//
+// There are two ways of creating a nutrition log based on the food type:
+// 1. Identified food: Using the food field, which is a reference to a Food
+// resource. In this case fields `nutrients`, `energy`, `energy_from_fat`,
+// `total_carbohydrate`, `total_fat`, `food_display_name` will be populated
+// based on the referenced food.
+// 2. Anonymous food: Using the `food_display_name` field and setting
+// the  `nutrients`, `energy`, `energy_from_fat`, `total_carbohydrate`,
+// `total_fat` fields manually.
+//
+// The identified food is preferred over the anonymous food.
+// Nutrition logs created from anonymous food are not editable.
+message NutritionLog {
+  // Represents different properties and information about the serving of a
+  // specific food.
+  message Serving {
+    // Optional. The number of servings.
+    optional double amount = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Required. Food measurement unit
+    string food_measurement_unit = 2 [
+      (google.api.field_behavior) = REQUIRED,
+      (google.api.resource_reference) = {
+        type: "health.googleapis.com/DataPoint"
+      }
+    ];
+
+    // Output only. Legacy measurement unit for serving size in singular form
+    // (e.g. "piece", "gram").
+    string food_measurement_unit_display_name = 3
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Required. The time window when the food was logged.
+  SessionTimeInterval interval = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. An array of individual nutrient values for the nutrition log.
+  repeated NutrientQuantity nutrients = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The total energy of the food, measured in kilocalories (`kcal`).
+  EnergyQuantity energy = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The energy from fat, measured in kilocalories (`kcal`).
+  EnergyQuantity energy_from_fat = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The total carbohydrate content, measured in grams.
+  WeightQuantity total_carbohydrate = 7
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The total fat content, measured in grams.
+  WeightQuantity total_fat = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The meal category. One of `BREAKFAST`, `LUNCH`, `DINNER`, or
+  // `SNACK`.
+  MealType meal_type = 13 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The serving information for the logged food.
+  Serving serving = 14 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The resource name of the Food item. Required when creating a
+  // nutrition log from an identified food. For anonymous food logs, use the
+  // `food_display_name` field instead.
+  string food = 15 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "health.googleapis.com/DataPoint"
+    }
+  ];
+
+  // The display name of the food. For identified food logs, this is populated
+  // automatically from the referenced food.
+  string food_display_name = 16;
+}
+
+// Represents a food item.
+message Food {
+  // Represents different properties and information about the serving of a
+  // specific food.
+  message FoodServing {
+    // Optional. Amount of food consumed, fractional values are supported.
+    optional double amount = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Required. Food measurement unit
+    string food_measurement_unit = 2 [
+      (google.api.field_behavior) = REQUIRED,
+      (google.api.resource_reference) = {
+        type: "health.googleapis.com/DataPoint"
+      }
+    ];
+
+    // Output only. Legacy measurement unit for serving size in singular form
+    // (e.g. "piece", "gram").
+    string food_measurement_unit_display_name = 3
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Legacy measurement unit for serving size in plural form
+    // (e.g. "pieces", "grams").
+    string food_measurement_unit_display_name_plural = 4
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Optional. Value representing the multiplier used to compute the energy
+    // when using this serving instead of the default serving.
+    double multiplier = 5 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Required. The display name of the food.
+  string display_name = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The brand of the food.
+  string brand = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. The access level of the food.
+  FoodAccessLevel access_level = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The description of the food.
+  string description = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The language code where the food is available in format xx-XX.
+  // Supported values are defined in
+  // [Settings.food_language_code][google.devicesandservices.health.v4.Settings.food_language_code].
+  string language_code = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The meal type associated with this food.
+  MealType meal_type = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the nutrients of the food for the default
+  // serving.
+  repeated NutrientQuantity nutrients = 12
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the energy from fat of the food for the
+  // default serving.
+  EnergyQuantity energy_from_fat = 13 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the total carbohydrate of the food for the
+  // default serving.
+  WeightQuantity total_carbohydrate = 14
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the total fat of the food for the default
+  // serving.
+  WeightQuantity total_fat = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the minimum energy of the food for the default
+  // serving.
+  EnergyQuantity energy_min = 16 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the average energy of the food for the default
+  // serving.
+  EnergyQuantity energy_avg = 17 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Value representing the maximum energy of the food for the default
+  // serving.
+  EnergyQuantity energy_max = 18 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. Value representing the default serving of the food.
+  FoodServing default_serving = 19 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The serving of the food.
+  repeated FoodServing servings = 20 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Represents the result of the rollup of the nutrition log data type.
+message NutritionLogRollupValue {
+  // Rollup for the weight.
+  message WeightQuantityRollup {
+    // Required. The sum of the weight in grams.
+    optional double grams_sum = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. The user provided unit on the last element.
+    WeightUnit user_provided_unit_last = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Rollup for the energy quantity.
+  message EnergyQuantityRollup {
+    // Required. The sum of the energy in kilocalories.
+    optional double kcal_sum = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. The user provided unit on the last element.
+    EnergyUnit user_provided_unit_last = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Nutrient quantity rollup.
+  message NutrientQuantityRollup {
+    // Required. Aggregated nutrient weight.
+    WeightQuantityRollup quantity = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Required. Aggregated nutrient.
+    Nutrient nutrient = 2 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  // List of the nutrient roll-ups by the nutrient type.
+  repeated NutrientQuantityRollup nutrients = 1;
+
+  // Energy rollup.
+  EnergyQuantityRollup energy = 2;
+
+  // Value
+  // Energy from fat rollup.
+  EnergyQuantityRollup energy_from_fat = 3;
+
+  // Total carbohydrate rollup.
+  WeightQuantityRollup total_carbohydrate = 4;
+
+  // Total fat rollup.
+  WeightQuantityRollup total_fat = 5;
+}
+
 // Captures the user's instantaneous oxygen saturation percentage (SpO2).
 message OxygenSaturation {
   // Required. The time at which oxygen saturation was measured.
@@ -975,7 +2247,7 @@ message OxygenSaturation {
       [(google.api.field_behavior) = REQUIRED];
 
   // Required. The oxygen saturation percentage. Valid values are from 0 to 100.
-  double percentage = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double percentage = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the rollup value for the daily resting heart rate data type.
@@ -987,19 +2259,33 @@ message RestingHeartRatePersonalRangeRollupValue {
   optional double beats_per_minute_max = 2;
 }
 
+// Represents a food measurement unit.
+message FoodMeasurementUnit {
+  // Required. The display name of the food measurement unit (e.g., "gram",
+  // "piece").
+  string display_name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The plural display name of the food measurement unit (e.g.,
+  // "grams", "pieces").
+  string plural_display_name = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
 // Records respiratory rate details during sleep.
 // Can have multiple per day if the user sleeps multiple times.
 message RespiratoryRateSleepSummary {
   // Respiratory rate statistics for a given sleep stage.
   message RespiratoryRateSleepSummaryStatistics {
     // Required. Average breaths per minute.
-    double breaths_per_minute = 1 [(google.api.field_behavior) = REQUIRED];
+    optional double breaths_per_minute = 1
+        [(google.api.field_behavior) = REQUIRED];
 
     // Optional. Standard deviation of the respiratory rate during sleep.
-    double standard_deviation = 2 [(google.api.field_behavior) = OPTIONAL];
+    optional double standard_deviation = 2
+        [(google.api.field_behavior) = OPTIONAL];
 
     // Optional. How trustworthy the data is for the computation.
-    double signal_to_noise = 3 [(google.api.field_behavior) = OPTIONAL];
+    optional double signal_to_noise = 3
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Required. The time at which respiratory rate was measured.
@@ -1123,6 +2409,10 @@ message Sleep {
     StagesState stages_status = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
     // Output only. Sleep and sleep stages algorithms finished processing.
+    // A `true` value indicates whether all data processing for the session is
+    // complete.
+    // A `false` value means sleep period is detected but sleep stages is still
+    // processing.
     bool processed = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
     // Output only. Naps are sleeps without stages and relatively short
@@ -1135,6 +2425,12 @@ message Sleep {
 
     // Optional. Sleep identifier relevant in the context of the data source.
     string external_id = 7 [(google.api.field_behavior) = OPTIONAL];
+
+    // Output only. `main_sleep`: the longest sleep session with stages within
+    // one day. If no sleep session has stages, then the longest sleep is the
+    // `main_sleep`.  If there are multiple days of sleep in the response, there
+    // is one `main_sleep` per day.
+    bool main_sleep = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   //
@@ -1146,10 +2442,10 @@ message Sleep {
       SleepStageType type = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
       // Output only. Total duration in minutes of a sleep stage.
-      int64 minutes = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+      optional int64 minutes = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
       // Output only. Number of sleep stages segments.
-      int64 count = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+      optional int64 count = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
     }
 
     // Output only. Delta between wake time and bedtime. It is the sum of all
@@ -1236,7 +2532,8 @@ message Sleep {
   repeated OutOfBedSegment out_of_bed_segments = 6
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Sleep metadata: processing, main, manually edited, stages status.
+  // Optional. Sleep metadata: `processed`, `main_sleep`, `manually_edited`, and
+  // `stages_status`.
   SleepMetadata metadata = 8 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Sleep summary: metrics and stages summary.
@@ -1249,6 +2546,11 @@ message Sleep {
   // Output only. Last update time of this sleep observation.
   google.protobuf.Timestamp update_time = 11
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. List of short awake segments (under a set threshold) that are
+  // part of the sleep session. These can overlap with sleep stages.
+  repeated SleepStage short_awakenings = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Step count over the time interval.
@@ -1257,13 +2559,13 @@ message Steps {
   ObservationTimeInterval interval = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Number of steps in the recorded interval.
-  int64 count = 4 [(google.api.field_behavior) = REQUIRED];
+  optional int64 count = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the result of the rollup of the steps data type.
 message StepsRollupValue {
   // Total number of steps in the interval.
-  int64 count_sum = 1;
+  optional int64 count_sum = 1;
 }
 
 // Swim lengths data over the time interval.
@@ -1293,13 +2595,13 @@ message SwimLengthsData {
   SwimStrokeType swim_stroke_type = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Number of strokes in the lap.
-  int64 stroke_count = 3 [(google.api.field_behavior) = REQUIRED];
+  optional int64 stroke_count = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Represents the result of the rollup of the swim lengths data type.
 message SwimLengthsDataRollupValue {
   // Total number of swim strokes in the interval.
-  int64 stroke_count_sum = 1;
+  optional int64 stroke_count_sum = 1;
 }
 
 // Time in heart rate zone record. It's an interval spent in specific heart
@@ -1330,9 +2632,20 @@ message TimeInHeartRateZoneRollupValue {
 }
 
 // Represents the result of the rollup of the user's total calories.
+//
+// Note: Queries for the `total-calories` data type must include a time
+// interval filter (such as
+// [`total_calories.interval.start_time`][google.devicesandservices.health.v4main.ObservationTimeInterval.start_time]
+// or
+// [`total_calories.interval.civil_start_time`][google.devicesandservices.health.v4main.ObservationTimeInterval.civil_start_time]).
+// The maximum range is 14 days.
+//
+// Example filter query:
+// `total_calories.interval.start_time >= "2026-04-20T00:00:00Z" AND
+// total_calories.interval.start_time < "2026-04-21T00:00:00Z"`
 message TotalCaloriesRollupValue {
   // Sum of the total calories in kilocalories.
-  double kcal_sum = 1;
+  optional double kcal_sum = 1;
 }
 
 // VO2 max measurement.
@@ -1390,7 +2703,7 @@ message VO2Max {
 
   // Required. VO2 max value measured as in ml consumed oxygen / kg of body
   // weight / min.
-  double vo2_max = 2 [(google.api.field_behavior) = REQUIRED];
+  optional double vo2_max = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The method used to measure the VO2 max value.
   MeasurementMethod measurement_method = 4
@@ -1404,7 +2717,7 @@ message Weight {
       [(google.api.field_behavior) = REQUIRED];
 
   // Required. Weight of a user in grams.
-  double weight_grams = 3 [(google.api.field_behavior) = REQUIRED];
+  optional double weight_grams = 3 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Standard free-form notes captured at manual logging.
   string notes = 4 [(google.api.field_behavior) = OPTIONAL];
@@ -1413,7 +2726,124 @@ message Weight {
 // Represents the result of the rollup of the weight data type.
 message WeightRollupValue {
   // Average weight in grams.
-  double weight_grams_avg = 1;
+  optional double weight_grams_avg = 1;
+}
+
+// Represents a blood glucose level measurement.
+// LINT: LEGACY_NAMES
+message BloodGlucose {
+  // The clinical method or tool used to measure the blood glucose level.
+  enum MeasurementSource {
+    // Unspecified measurement source.
+    MEASUREMENT_SOURCE_UNSPECIFIED = 0;
+
+    // Self-monitoring of blood glucose (Blood glucose meter)
+    SELF_MONITORING_BLOOD_GLUCOSE = 1;
+
+    // Continuous glucose monitoring device
+    CONTINUOUS_GLUCOSE_MONITORING = 2;
+
+    // Laboratory test
+    LAB_TEST = 3;
+  }
+
+  // Meal type associated with the measurement.
+  enum MealType {
+    // Unspecified meal type.
+    MEAL_TYPE_UNSPECIFIED = 0;
+
+    // Breakfast.
+    BREAKFAST = 1;
+
+    // Lunch.
+    LUNCH = 2;
+
+    // Dinner.
+    DINNER = 3;
+
+    // Snack.
+    SNACK = 4;
+  }
+
+  // Timing of the measurement.
+  enum MeasurementTiming {
+    // Unspecified measurement timing.
+    MEASUREMENT_TIMING_UNSPECIFIED = 0;
+
+    // Measurement taken after meal.
+    AFTER_MEAL = 1;
+
+    // Measurement taken before meal.
+    BEFORE_MEAL = 2;
+
+    // Measurement taken while fasting.
+    FASTING = 3;
+
+    // General measurement (not associated with a meal or time of day).
+    GENERAL = 4;
+
+    // Measurement taken before bed.
+    BEFORE_BED = 5;
+
+    // Measurement taken over night.
+    OVER_NIGHT = 6;
+  }
+
+  // Type of body fluid used to measure the blood glucose.
+  enum Specimen {
+    // Unspecified specimen.
+    SPECIMEN_UNSPECIFIED = 0;
+
+    // Capillary blood.
+    CAPILLARY_BLOOD = 1;
+
+    // Interstitial fluid.
+    INTERSTITIAL_FLUID = 2;
+
+    // Plasma.
+    PLASMA = 3;
+
+    // Serum.
+    SERUM = 4;
+
+    // Tears.
+    TEARS = 5;
+
+    // Whole blood.
+    WHOLE_BLOOD = 6;
+  }
+
+  // Required. The time at which blood glucose was measured.
+  ObservationSampleTime sample_time = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Blood glucose level concentration in mg/dL.
+  optional double blood_glucose_milligrams_per_deciliter = 2
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Source of the measurement.
+  MeasurementSource measurement_source = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Meal type of the measurement.
+  MealType meal_type = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Timing of the measurement.
+  MeasurementTiming measurement_timing = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Type of body fluid used to measure the blood glucose.
+  Specimen specimen = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Standard free-form notes captured at manual logging.
+  string notes = 8 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Represents the result of the rollup of the blood glucose data type.
+// LINT: LEGACY_NAMES
+message BloodGlucoseRollupValue {
+  // Average blood glucose level in mg/dL.
+  optional double blood_glucose_milligrams_per_deciliter_avg = 1;
 }
 
 // SedentaryPeriod
@@ -1429,4 +2859,451 @@ message SedentaryPeriod {
 message SedentaryPeriodRollupValue {
   // The total time user spent sedentary during the interval.
   google.protobuf.Duration duration_sum = 1;
+}
+
+// Energy burned as part of an activity, excluding the basal energy burn.
+message ActiveEnergyBurned {
+  // Required. Observed interval
+  ObservationTimeInterval interval = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Energy burned during an activity, measured in kilocalories.
+  optional double kcal = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Represents the result of the rollup of active energy burned.
+message ActiveEnergyBurnedRollupValue {
+  // Output only. Sum of the active energy burned in kilocalories.
+  optional double kcal_sum = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Menstrual period record.
+message MenstrualPeriod {
+  // Required. Observed interval.
+  ObservationTimeInterval interval = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Standard free-form notes captured at manual logging.
+  string notes = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Ovulation test record.
+message OvulationTest {
+  // Required. The time at which ovulation test was measured.
+  ObservationSampleTime sample_time = 2
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The result of the ovulation test.
+  OvulationTestResult result = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Symptoms logged by the user.
+message Symptoms {
+  // Enum representing possible symptom values.
+  enum SymptomValue {
+    // Unspecified symptom value.
+    SYMPTOM_VALUE_UNSPECIFIED = 0;
+
+    // Abdominal cramps.
+    CRAMPS = 1;
+
+    // Headache.
+    HEADACHE = 2;
+
+    // Tender breasts.
+    TENDER_BREASTS = 3;
+
+    // Acne.
+    ACNE = 4;
+
+    // Feeling sick or unwell.
+    SICK = 5;
+
+    // Bloating or abdominal swelling.
+    BLOATED = 6;
+
+    // Hot flashes.
+    HOT_FLASHES = 7;
+
+    // Premenstrual syndrome symptoms.
+    PMS = 8;
+
+    // Coughing.
+    COUGH = 9;
+
+    // Fever or elevated body temperature.
+    FEVER = 10;
+
+    // Difficulty breathing or shortness of breath.
+    DIFFICULTY_BREATHING = 11;
+
+    // Back pain.
+    BACK_PAIN = 12;
+
+    // Shakiness or tremors.
+    SHAKINESS = 13;
+
+    // Excessive hunger.
+    HUNGER = 14;
+
+    // Excessive sweating.
+    SWEATING = 15;
+
+    // Anxiety or nervousness.
+    ANXIETY = 16;
+
+    // Excessive thirst.
+    THIRST = 17;
+
+    // Frequent urination.
+    FREQUENT_URINATION = 18;
+
+    // Blurred vision.
+    BLURRED_VISION = 19;
+
+    // Other symptoms.
+    OTHER = 20;
+
+    // High sex drive.
+    SEX_DRIVE_HIGH = 21;
+
+    // Medium sex drive.
+    SEX_DRIVE_MEDIUM = 22;
+
+    // Low sex drive.
+    SEX_DRIVE_LOW = 23;
+
+    // Heart palpitations or racing heart.
+    HEART_PALPITATIONS = 24;
+
+    // Fainting or loss of consciousness.
+    FAINTING = 25;
+
+    // Chest pain or discomfort.
+    CHEST_PAIN = 26;
+
+    // Fatigue or extreme tiredness.
+    FATIGUE = 27;
+
+    // Confusion or mental fogginess.
+    CONFUSION = 28;
+
+    // Dizziness or lightheadedness.
+    DIZZINESS = 29;
+
+    // Abdominal pain.
+    ABDOMINAL_PAIN = 30;
+
+    // Bladder leaks.
+    BLADDER_LEAKS = 31;
+
+    // Bleeding gums.
+    BLEEDING_GUMS = 32;
+
+    // Brain fog.
+    BRAIN_FOG = 33;
+
+    // Burning mouth.
+    BURNING_MOUTH = 34;
+
+    // Constipation.
+    CONSTIPATION = 35;
+
+    // Food cravings.
+    CRAVINGS = 36;
+
+    // Decreased appetite.
+    DECREASED_APPETITE = 37;
+
+    // Diarrhea.
+    DIARRHEA = 38;
+
+    // Drawing pain.
+    DRAWING_PAIN = 39;
+
+    // Dry eyes.
+    DRY_EYES = 40;
+
+    // Dry hair.
+    DRY_HAIR = 41;
+
+    // Dry skin.
+    DRY_SKIN = 42;
+
+    // Exhaustion.
+    EXHAUSTION = 43;
+
+    // Feeling good or well.
+    FEEL_GOOD = 44;
+
+    // Food aversions.
+    FOOD_AVERSIONS = 45;
+
+    // Hair loss.
+    HAIR_LOSS = 46;
+
+    // Heartburn.
+    HEARTBURN = 47;
+
+    // Hyperpigmentation.
+    HYPERPIGMENTATION = 48;
+
+    // Increased appetite.
+    INCREASED_APPETITE = 49;
+
+    // Increased appetite V2.
+    INCREASED_APPETITE_V2 = 50;
+
+    // Insomnia or difficulty sleeping.
+    INSOMNIA = 51;
+
+    // Joint pain.
+    JOINT_PAIN = 52;
+
+    // Leg cramps.
+    LEG_CRAMPS = 53;
+
+    // Milky nipple discharge.
+    MILKY_NIPPLE_DISCHARGE = 54;
+
+    // Nausea.
+    NAUSEA = 55;
+
+    // Night sweats.
+    NIGHT_SWEATS = 56;
+
+    // Normal digestion.
+    NORMAL_DIGESTION = 57;
+
+    // Normal stool.
+    NORMAL_STOOL = 58;
+
+    // Perineum pain.
+    PERINEUM_PAIN = 59;
+
+    // Sleepiness or drowsiness.
+    SLEEPINESS = 60;
+
+    // Stretch marks.
+    STRETCH_MARKS = 61;
+
+    // Swelling.
+    SWELLING = 62;
+
+    // Vaginal dryness.
+    VAGINAL_DRYNESS = 63;
+
+    // Vaginal itching.
+    VAGINAL_ITCHING = 64;
+
+    // Vomiting.
+    VOMITING = 65;
+  }
+
+  // Required. Time when the symptoms were logged.
+  ObservationSampleTime sample_time = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. List of symptoms experienced.
+  repeated SymptomValue symptoms = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Moods record.
+message Moods {
+  // The mood.
+  enum Mood {
+    // Unspecified mood.
+    MOOD_UNSPECIFIED = 0;
+
+    // Amazed.
+    AMAZED = 1;
+
+    // Amused.
+    AMUSED = 2;
+
+    // Angry.
+    ANGRY = 3;
+
+    // Annoyed.
+    ANNOYED = 4;
+
+    // Anxious.
+    ANXIOUS = 5;
+
+    // Happy.
+    HAPPY = 6;
+
+    // Content.
+    CONTENT = 7;
+
+    // Sad.
+    SAD = 8;
+
+    // Worried.
+    WORRIED = 9;
+
+    // Frustrated.
+    FRUSTRATED = 10;
+
+    // Excited.
+    EXCITED = 11;
+
+    // Calm.
+    CALM = 12;
+
+    // Stressed.
+    STRESSED = 13;
+
+    // Ashamed.
+    ASHAMED = 14;
+
+    // Brave.
+    BRAVE = 15;
+
+    // Confident.
+    CONFIDENT = 16;
+
+    // Disappointed.
+    DISAPPOINTED = 17;
+
+    // Discouraged.
+    DISCOURAGED = 18;
+
+    // Disgusted.
+    DISGUSTED = 19;
+
+    // Drained.
+    DRAINED = 20;
+
+    // Embarrassed.
+    EMBARRASSED = 21;
+
+    // Grateful.
+    GRATEFUL = 22;
+
+    // Guilty.
+    GUILTY = 23;
+
+    // Hopeful.
+    HOPEFUL = 24;
+
+    // Hopeless.
+    HOPELESS = 25;
+
+    // Indifferent.
+    INDIFFERENT = 26;
+
+    // Irritated.
+    IRRITATED = 27;
+
+    // Jealous.
+    JEALOUS = 28;
+
+    // Joyful.
+    JOYFUL = 29;
+
+    // Lonely.
+    LONELY = 30;
+
+    // Overwhelmed.
+    OVERWHELMED = 31;
+
+    // Passionate.
+    PASSIONATE = 32;
+
+    // Peaceful.
+    PEACEFUL = 33;
+
+    // Proud.
+    PROUD = 34;
+
+    // Relieved.
+    RELIEVED = 35;
+
+    // Satisfied.
+    SATISFIED = 36;
+
+    // Scared.
+    SCARED = 37;
+
+    // Surprised.
+    SURPRISED = 38;
+
+    // Energized.
+    ENERGIZED = 39;
+
+    // Fatigued.
+    FATIGUED = 40;
+
+    // Very calm.
+    VERY_CALM = 41;
+
+    // Very stressed.
+    VERY_STRESSED = 42;
+
+    // Neutral.
+    NEUTRAL = 43;
+
+    // Afraid.
+    AFRAID = 44;
+
+    // Hurting.
+    HURTING = 45;
+
+    // Bored.
+    BORED = 46;
+
+    // Bitter.
+    BITTER = 47;
+
+    // Envious.
+    ENVIOUS = 48;
+
+    // Confused.
+    CONFUSED = 49;
+
+    // Curious.
+    CURIOUS = 50;
+
+    // Awestruck.
+    AWESTRUCK = 51;
+
+    // Inspired.
+    INSPIRED = 52;
+
+    // Longing.
+    LONGING = 53;
+
+    // Accomplished.
+    ACCOMPLISHED = 54;
+
+    // Loving.
+    LOVING = 55;
+
+    // Compassionate.
+    COMPASSIONATE = 56;
+  }
+
+  // The valence.
+  enum Valence {
+    // Unspecified valence.
+    VALENCE_UNSPECIFIED = 0;
+
+    // Unpleasant.
+    UNPLEASANT = 1;
+
+    // Baseline.
+    BASELINE = 2;
+
+    // Pleasant.
+    PLEASANT = 3;
+  }
+
+  // Required. The time at which moods were measured.
+  ObservationSampleTime sample_time = 2
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The moods logged.
+  repeated Mood moods = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The valences.
+  repeated Valence valences = 5 [(google.api.field_behavior) = OPTIONAL];
 }

@@ -28,10 +28,15 @@ import {
 } from 'google-auth-library';
 import * as nock from 'nock';
 import proxyquire from 'proxyquire';
-import * as r from 'teeny-request';
 import retryRequest from 'retry-request';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
+import type {
+  CoreOptions,
+  Response,
+  RequestCallback,
+  RequestPart,
+} from 'teeny-request';
 import {teenyRequest} from 'teeny-request';
 
 import {
@@ -55,12 +60,12 @@ nock.disableNetConnect();
 const fakeResponse = {
   statusCode: 200,
   body: {star: 'trek'},
-} as r.Response;
+} as Response;
 
 const fakeBadResp = {
   statusCode: 400,
   statusMessage: 'Not Good',
-} as r.Response;
+} as Response;
 
 const fakeReqOpts: DecorateRequestOptions = {
   uri: 'http://so-fake',
@@ -76,7 +81,7 @@ function fakeRequest() {
   return (requestOverride || teenyRequest).apply(null, arguments);
 }
 
-fakeRequest.defaults = (defaults: r.CoreOptions) => {
+fakeRequest.defaults = (defaults: CoreOptions) => {
   assert.ok(
     /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
       defaults.headers!['x-goog-api-client']
@@ -181,7 +186,7 @@ describe('common/util', () => {
 
     it('should build correct ApiError', () => {
       const fakeMessage = 'Formatted Error.';
-      const fakeResponse = {statusCode: 200} as r.Response;
+      const fakeResponse = {statusCode: 200} as Response;
       const errors = [{message: 'Hi'}, {message: 'Bye'}];
       const error = {
         errors,
@@ -215,7 +220,7 @@ describe('common/util', () => {
               errors,
             },
           }),
-        } as r.Response,
+        } as Response,
       };
 
       sandbox
@@ -235,7 +240,7 @@ describe('common/util', () => {
         const errors = [new Error(errorMessage)];
         const error = {
           code: 100,
-          response: {} as r.Response,
+          response: {} as Response,
           message: customErrorMessage,
         };
 
@@ -252,7 +257,7 @@ describe('common/util', () => {
         const errors: GoogleInnerError[] = messages.map(message => ({message}));
         const error: GoogleErrorBody = {
           code: 100,
-          response: {} as r.Response,
+          response: {} as Response,
         };
 
         const expectedErrorMessage = createExpectedErrorMessage(messages);
@@ -269,7 +274,7 @@ describe('common/util', () => {
           code: 100,
           response: {
             body: Buffer.from(responseBodyMsg),
-          } as r.Response,
+          } as Response,
         };
 
         const expectedErrorMessage = createExpectedErrorMessage([
@@ -281,7 +286,7 @@ describe('common/util', () => {
       });
 
       it('should use default message if there are no errors', () => {
-        const fakeResponse = {statusCode: 200} as r.Response;
+        const fakeResponse = {statusCode: 200} as Response;
         const expectedErrorMessage = 'A failure occurred during this request.';
         const error = {
           code: 100,
@@ -299,7 +304,7 @@ describe('common/util', () => {
           message: expectedErrorMessage,
           response: {
             body: expectedErrorMessage,
-          } as r.Response,
+          } as Response,
         };
 
         const multiError = ApiError.createMultiErrorMessage(error);
@@ -426,7 +431,7 @@ describe('common/util', () => {
 
       util.handleResp(
         null,
-        {body: unparsableBody, statusCode} as r.Response,
+        {body: unparsableBody, statusCode} as Response,
         unparsableBody,
         err => {
           assert(err, 'there should be an error');
@@ -509,7 +514,7 @@ describe('common/util', () => {
           assert.strictEqual(request.maxRetries, 0);
           assert.strictEqual(Array.isArray(request.multipart), true);
 
-          const mp = request.multipart as r.RequestPart[];
+          const mp = request.multipart as RequestPart[];
 
           assert.strictEqual(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -657,7 +662,7 @@ describe('common/util', () => {
 
       requestOverride = (
         reqOpts: DecorateRequestOptions,
-        callback: (err: Error | null, res: r.Response) => void
+        callback: (err: Error | null, res: Response) => void
       ) => {
         callback(null, fakeResponse);
       };
@@ -1633,7 +1638,7 @@ describe('common/util', () => {
         retryRequestOverride = (
           rOpts: DecorateRequestOptions,
           opts: MakeRequestConfig,
-          callback: r.RequestCallback
+          callback: RequestCallback
         ) => {
           callback(error, fakeResponse, body);
         };
@@ -1803,6 +1808,64 @@ describe('common/util', () => {
 
       const decoratedRequest = util.decorateRequest(reqOpts, projectId);
       assert.deepStrictEqual(decoratedRequest.json, decoratedJson);
+    });
+
+    it('should set Content-Type header on plain headers object when json is set', () => {
+      const projectId = 'project-id';
+      const reqOpts = {
+        uri: 'http://',
+        json: {},
+        headers: {},
+      };
+      replaceProjectIdTokenOverride = (x: unknown) => x;
+
+      const decoratedRequest = util.decorateRequest(reqOpts, projectId);
+      assert.strictEqual(
+        (decoratedRequest.headers as Record<string, string>)['Content-Type'],
+        'application/json'
+      );
+    });
+
+    it('should set Content-Type header on Headers instance when json is set', () => {
+      if (typeof Headers === 'undefined') {
+        return;
+      }
+      const projectId = 'project-id';
+      const headersInstance = new Headers();
+      const reqOpts = {
+        uri: 'http://',
+        json: {},
+        headers: headersInstance,
+      };
+      replaceProjectIdTokenOverride = (x: unknown) => x;
+
+      const decoratedRequest = util.decorateRequest(reqOpts, projectId);
+      assert.strictEqual(
+        (decoratedRequest.headers as Headers).get('Content-Type'),
+        'application/json'
+      );
+    });
+
+    it('should not overwrite existing Content-Type header if already present', () => {
+      const projectId = 'project-id';
+      const reqOpts = {
+        uri: 'http://',
+        json: {},
+        headers: {
+          'content-type': 'application/x-protobuf',
+        },
+      };
+      replaceProjectIdTokenOverride = (x: unknown) => x;
+
+      const decoratedRequest = util.decorateRequest(reqOpts, projectId);
+      assert.strictEqual(
+        (decoratedRequest.headers as Record<string, string>)['content-type'],
+        'application/x-protobuf'
+      );
+      assert.strictEqual(
+        (decoratedRequest.headers as Record<string, string>)['Content-Type'],
+        undefined
+      );
     });
 
     it('should decorate the request', () => {

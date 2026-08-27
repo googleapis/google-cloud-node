@@ -459,6 +459,2470 @@ describe('v1.OrderServiceClient', () => {
     });
   });
 
+  describe('batchCreateOrders', () => {
+    it('invokes batchCreateOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateOrdersResponse(),
+      );
+      client.innerApiCalls.batchCreateOrders = stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCreateOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateOrdersResponse(),
+      );
+      client.innerApiCalls.batchCreateOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchCreateOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchCreateOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchCreateOrders(request), expectedError);
+    });
+  });
+
+  describe('batchUpdateOrders', () => {
+    it('invokes batchUpdateOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateOrdersResponse(),
+      );
+      client.innerApiCalls.batchUpdateOrders = stubSimpleCall(expectedResponse);
+      const [response] = await client.batchUpdateOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateOrdersResponse(),
+      );
+      client.innerApiCalls.batchUpdateOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchUpdateOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchUpdateOrders(request), expectedError);
+    });
+  });
+
+  describe('batchApproveOrders', () => {
+    it('invokes batchApproveOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersResponse(),
+      );
+      client.innerApiCalls.batchApproveOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchApproveOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersResponse(),
+      );
+      client.innerApiCalls.batchApproveOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchApproveOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchApproveOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchApproveOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchApproveOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchApproveOrders(request), expectedError);
+    });
+  });
+
+  describe('batchApproveAndOverbookOrders', () => {
+    it('invokes batchApproveAndOverbookOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersResponse(),
+      );
+      client.innerApiCalls.batchApproveAndOverbookOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchApproveAndOverbookOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveAndOverbookOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveAndOverbookOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveAndOverbookOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersResponse(),
+      );
+      client.innerApiCalls.batchApproveAndOverbookOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchApproveAndOverbookOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveAndOverbookOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveAndOverbookOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveAndOverbookOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchApproveAndOverbookOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchApproveAndOverbookOrders(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchApproveAndOverbookOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveAndOverbookOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveAndOverbookOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchApproveAndOverbookOrders(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchSubmitOrdersForApproval', () => {
+    it('invokes batchSubmitOrdersForApproval without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalResponse(),
+      );
+      client.innerApiCalls.batchSubmitOrdersForApproval =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchSubmitOrdersForApproval(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchSubmitOrdersForApproval as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchSubmitOrdersForApproval as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApproval without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalResponse(),
+      );
+      client.innerApiCalls.batchSubmitOrdersForApproval =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchSubmitOrdersForApproval(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchSubmitOrdersForApproval as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchSubmitOrdersForApproval as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApproval with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchSubmitOrdersForApproval = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchSubmitOrdersForApproval(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchSubmitOrdersForApproval as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchSubmitOrdersForApproval as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApproval with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchSubmitOrdersForApproval(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchSubmitOrdersForApprovalAndOverbook', () => {
+    it('invokes batchSubmitOrdersForApprovalAndOverbook without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookResponse(),
+      );
+      client.innerApiCalls.batchSubmitOrdersForApprovalAndOverbook =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchSubmitOrdersForApprovalAndOverbook(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalAndOverbook as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalAndOverbook as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApprovalAndOverbook without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookResponse(),
+      );
+      client.innerApiCalls.batchSubmitOrdersForApprovalAndOverbook =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchSubmitOrdersForApprovalAndOverbook(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalAndOverbookResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalAndOverbook as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalAndOverbook as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApprovalAndOverbook with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchSubmitOrdersForApprovalAndOverbook =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchSubmitOrdersForApprovalAndOverbook(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalAndOverbook as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalAndOverbook as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApprovalAndOverbook with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalAndOverbookRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchSubmitOrdersForApprovalAndOverbook(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchSubmitOrdersForApprovalWithoutReservationChanges', () => {
+    it('invokes batchSubmitOrdersForApprovalWithoutReservationChanges without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesResponse(),
+      );
+      client.innerApiCalls.batchSubmitOrdersForApprovalWithoutReservationChanges =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchSubmitOrdersForApprovalWithoutReservationChanges(
+          request,
+        );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApprovalWithoutReservationChanges without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesResponse(),
+      );
+      client.innerApiCalls.batchSubmitOrdersForApprovalWithoutReservationChanges =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchSubmitOrdersForApprovalWithoutReservationChanges(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalWithoutReservationChangesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApprovalWithoutReservationChanges with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchSubmitOrdersForApprovalWithoutReservationChanges =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchSubmitOrdersForApprovalWithoutReservationChanges(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchSubmitOrdersForApprovalWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchSubmitOrdersForApprovalWithoutReservationChanges with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchSubmitOrdersForApprovalWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchSubmitOrdersForApprovalWithoutReservationChanges(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchPauseOrders', () => {
+    it('invokes batchPauseOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPauseOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPauseOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPauseOrdersResponse(),
+      );
+      client.innerApiCalls.batchPauseOrders = stubSimpleCall(expectedResponse);
+      const [response] = await client.batchPauseOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchPauseOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchPauseOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchPauseOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPauseOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPauseOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPauseOrdersResponse(),
+      );
+      client.innerApiCalls.batchPauseOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchPauseOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchPauseOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchPauseOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchPauseOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchPauseOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPauseOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPauseOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchPauseOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchPauseOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchPauseOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchPauseOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchPauseOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPauseOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPauseOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchPauseOrders(request), expectedError);
+    });
+  });
+
+  describe('batchResumeOrders', () => {
+    it('invokes batchResumeOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeOrdersResponse(),
+      );
+      client.innerApiCalls.batchResumeOrders = stubSimpleCall(expectedResponse);
+      const [response] = await client.batchResumeOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchResumeOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchResumeOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResumeOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeOrdersResponse(),
+      );
+      client.innerApiCalls.batchResumeOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchResumeOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchResumeOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchResumeOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchResumeOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResumeOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchResumeOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchResumeOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchResumeOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchResumeOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResumeOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchResumeOrders(request), expectedError);
+    });
+  });
+
+  describe('batchResumeAndOverbookOrders', () => {
+    it('invokes batchResumeAndOverbookOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersResponse(),
+      );
+      client.innerApiCalls.batchResumeAndOverbookOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchResumeAndOverbookOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchResumeAndOverbookOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchResumeAndOverbookOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResumeAndOverbookOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersResponse(),
+      );
+      client.innerApiCalls.batchResumeAndOverbookOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchResumeAndOverbookOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchResumeAndOverbookOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchResumeAndOverbookOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResumeAndOverbookOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchResumeAndOverbookOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchResumeAndOverbookOrders(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchResumeAndOverbookOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchResumeAndOverbookOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResumeAndOverbookOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResumeAndOverbookOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchResumeAndOverbookOrders(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchApproveOrdersWithoutReservation', () => {
+    it('invokes batchApproveOrdersWithoutReservation without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationResponse(),
+      );
+      client.innerApiCalls.batchApproveOrdersWithoutReservation =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchApproveOrdersWithoutReservation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveOrdersWithoutReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveOrdersWithoutReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveOrdersWithoutReservation without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationResponse(),
+      );
+      client.innerApiCalls.batchApproveOrdersWithoutReservation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchApproveOrdersWithoutReservation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveOrdersWithoutReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveOrdersWithoutReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveOrdersWithoutReservation with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchApproveOrdersWithoutReservation =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchApproveOrdersWithoutReservation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchApproveOrdersWithoutReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveOrdersWithoutReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveOrdersWithoutReservation with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveOrdersWithoutReservationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchApproveOrdersWithoutReservation(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchArchiveOrders', () => {
+    it('invokes batchArchiveOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchArchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchArchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchArchiveOrdersResponse(),
+      );
+      client.innerApiCalls.batchArchiveOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchArchiveOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchArchiveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchArchiveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchArchiveOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchArchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchArchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchArchiveOrdersResponse(),
+      );
+      client.innerApiCalls.batchArchiveOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchArchiveOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchArchiveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchArchiveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchArchiveOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchArchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchArchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchArchiveOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchArchiveOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchArchiveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchArchiveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchArchiveOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchArchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchArchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchArchiveOrders(request), expectedError);
+    });
+  });
+
+  describe('batchUnarchiveOrders', () => {
+    it('invokes batchUnarchiveOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUnarchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUnarchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUnarchiveOrdersResponse(),
+      );
+      client.innerApiCalls.batchUnarchiveOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchUnarchiveOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUnarchiveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUnarchiveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUnarchiveOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUnarchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUnarchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUnarchiveOrdersResponse(),
+      );
+      client.innerApiCalls.batchUnarchiveOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUnarchiveOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUnarchiveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUnarchiveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUnarchiveOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUnarchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUnarchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUnarchiveOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchUnarchiveOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchUnarchiveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUnarchiveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUnarchiveOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUnarchiveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUnarchiveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchUnarchiveOrders(request), expectedError);
+    });
+  });
+
+  describe('batchDeleteOrders', () => {
+    it('invokes batchDeleteOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteOrdersResponse(),
+      );
+      client.innerApiCalls.batchDeleteOrders = stubSimpleCall(expectedResponse);
+      const [response] = await client.batchDeleteOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteOrdersResponse(),
+      );
+      client.innerApiCalls.batchDeleteOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeleteOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchDeleteOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchDeleteOrders(request), expectedError);
+    });
+  });
+
+  describe('batchDisapproveOrders', () => {
+    it('invokes batchDisapproveOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersResponse(),
+      );
+      client.innerApiCalls.batchDisapproveOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchDisapproveOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDisapproveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDisapproveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDisapproveOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersResponse(),
+      );
+      client.innerApiCalls.batchDisapproveOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDisapproveOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDisapproveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDisapproveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDisapproveOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDisapproveOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchDisapproveOrders(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchDisapproveOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDisapproveOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDisapproveOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchDisapproveOrders(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchDisapproveOrdersWithoutReservationChanges', () => {
+    it('invokes batchDisapproveOrdersWithoutReservationChanges without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesResponse(),
+      );
+      client.innerApiCalls.batchDisapproveOrdersWithoutReservationChanges =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchDisapproveOrdersWithoutReservationChanges(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDisapproveOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDisapproveOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDisapproveOrdersWithoutReservationChanges without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesResponse(),
+      );
+      client.innerApiCalls.batchDisapproveOrdersWithoutReservationChanges =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDisapproveOrdersWithoutReservationChanges(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchDisapproveOrdersWithoutReservationChangesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDisapproveOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDisapproveOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDisapproveOrdersWithoutReservationChanges with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDisapproveOrdersWithoutReservationChanges =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchDisapproveOrdersWithoutReservationChanges(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDisapproveOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDisapproveOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDisapproveOrdersWithoutReservationChanges with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDisapproveOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchDisapproveOrdersWithoutReservationChanges(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchRetractOrders', () => {
+    it('invokes batchRetractOrders without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersResponse(),
+      );
+      client.innerApiCalls.batchRetractOrders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchRetractOrders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRetractOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRetractOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRetractOrders without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersResponse(),
+      );
+      client.innerApiCalls.batchRetractOrders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchRetractOrders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchRetractOrdersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRetractOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRetractOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRetractOrders with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchRetractOrders = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchRetractOrders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchRetractOrders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRetractOrders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRetractOrders with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.batchRetractOrders(request), expectedError);
+    });
+  });
+
+  describe('batchRetractOrdersWithoutReservationChanges', () => {
+    it('invokes batchRetractOrdersWithoutReservationChanges without error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesResponse(),
+      );
+      client.innerApiCalls.batchRetractOrdersWithoutReservationChanges =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchRetractOrdersWithoutReservationChanges(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchRetractOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchRetractOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRetractOrdersWithoutReservationChanges without error using callback', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesResponse(),
+      );
+      client.innerApiCalls.batchRetractOrdersWithoutReservationChanges =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchRetractOrdersWithoutReservationChanges(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchRetractOrdersWithoutReservationChangesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchRetractOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchRetractOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRetractOrdersWithoutReservationChanges with error', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchRetractOrdersWithoutReservationChanges =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchRetractOrdersWithoutReservationChanges(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchRetractOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchRetractOrdersWithoutReservationChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRetractOrdersWithoutReservationChanges with closed client', async () => {
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRetractOrdersWithoutReservationChangesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchRetractOrdersWithoutReservationChanges(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listOrders', () => {
     it('invokes listOrders without error', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
@@ -893,6 +3357,104 @@ describe('v1.OrderServiceClient', () => {
       });
     });
 
+    describe('adRule', async () => {
+      const fakePath = '/rendered/path/adRule';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_rule: 'adRuleValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.adRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adRulePath', () => {
+        const result = client.adRulePath('networkCodeValue', 'adRuleValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adRulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdRuleName', () => {
+        const result = client.matchNetworkCodeFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdRuleFromAdRuleName', () => {
+        const result = client.matchAdRuleFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'adRuleValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('adSpot', async () => {
+      const fakePath = '/rendered/path/adSpot';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_spot: 'adSpotValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.adSpotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adSpotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adSpotPath', () => {
+        const result = client.adSpotPath('networkCodeValue', 'adSpotValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdSpotName', () => {
+        const result = client.matchNetworkCodeFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdSpotFromAdSpotName', () => {
+        const result = client.matchAdSpotFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'adSpotValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('adUnit', async () => {
       const fakePath = '/rendered/path/adUnit';
       const expectedParameters = {
@@ -1196,6 +3758,58 @@ describe('v1.OrderServiceClient', () => {
         assert.strictEqual(result, 'browserLanguageValue');
         assert(
           (client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('cdnConfig', async () => {
+      const fakePath = '/rendered/path/cdnConfig';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        cdn_config: 'cdnConfigValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cdnConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cdnConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cdnConfigPath', () => {
+        const result = client.cdnConfigPath(
+          'networkCodeValue',
+          'cdnConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCdnConfigName', () => {
+        const result = client.matchNetworkCodeFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCdnConfigFromCdnConfigName', () => {
+        const result = client.matchCdnConfigFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'cdnConfigValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1616,6 +4230,107 @@ describe('v1.OrderServiceClient', () => {
       });
     });
 
+    describe('creative', async () => {
+      const fakePath = '/rendered/path/creative';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative: 'creativeValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativePath', () => {
+        const result = client.creativePath('networkCodeValue', 'creativeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeName', () => {
+        const result = client.matchNetworkCodeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromCreativeName', () => {
+        const result = client.matchCreativeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeSet', async () => {
+      const fakePath = '/rendered/path/creativeSet';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_set: 'creativeSetValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativeSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeSetPath', () => {
+        const result = client.creativeSetPath(
+          'networkCodeValue',
+          'creativeSetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeSetName', () => {
+        const result = client.matchNetworkCodeFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeSetFromCreativeSetName', () => {
+        const result = client.matchCreativeSetFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'creativeSetValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('creativeTemplate', async () => {
       const fakePath = '/rendered/path/creativeTemplate';
       const expectedParameters = {
@@ -1667,6 +4382,59 @@ describe('v1.OrderServiceClient', () => {
         assert.strictEqual(result, 'creativeTemplateValue');
         assert(
           (client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeWrapper', async () => {
+      const fakePath = '/rendered/path/creativeWrapper';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_wrapper: 'creativeWrapperValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativeWrapperPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeWrapperPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeWrapperPath', () => {
+        const result = client.creativeWrapperPath(
+          'networkCodeValue',
+          'creativeWrapperValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeWrapperName', () => {
+        const result = client.matchNetworkCodeFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeWrapperFromCreativeWrapperName', () => {
+        const result =
+          client.matchCreativeWrapperFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'creativeWrapperValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1845,6 +4613,134 @@ describe('v1.OrderServiceClient', () => {
         assert(
           (
             client.pathTemplates.customTargetingValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiAuthenticationKey', async () => {
+      const fakePath = '/rendered/path/daiAuthenticationKey';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_authentication_key: 'daiAuthenticationKeyValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiAuthenticationKeyPath', () => {
+        const result = client.daiAuthenticationKeyPath(
+          'networkCodeValue',
+          'daiAuthenticationKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiAuthenticationKeyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiAuthenticationKeyFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'daiAuthenticationKeyValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiEncodingProfile', async () => {
+      const fakePath = '/rendered/path/daiEncodingProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_encoding_profile: 'daiEncodingProfileValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiEncodingProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiEncodingProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiEncodingProfilePath', () => {
+        const result = client.daiEncodingProfilePath(
+          'networkCodeValue',
+          'daiEncodingProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiEncodingProfileFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchDaiEncodingProfileFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'daiEncodingProfileValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2293,6 +5189,58 @@ describe('v1.OrderServiceClient', () => {
       });
     });
 
+    describe('liveStream', async () => {
+      const fakePath = '/rendered/path/liveStream';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        live_stream: 'liveStreamValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.liveStreamPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.liveStreamPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('liveStreamPath', () => {
+        const result = client.liveStreamPath(
+          'networkCodeValue',
+          'liveStreamValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLiveStreamName', () => {
+        const result = client.matchNetworkCodeFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLiveStreamFromLiveStreamName', () => {
+        const result = client.matchLiveStreamFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'liveStreamValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('liveStreamEvent', async () => {
       const fakePath = '/rendered/path/liveStreamEvent';
       const expectedParameters = {
@@ -2714,6 +5662,55 @@ describe('v1.OrderServiceClient', () => {
         assert.strictEqual(result, 'orderValue');
         assert(
           (client.pathTemplates.orderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('partner', async () => {
+      const fakePath = '/rendered/path/partner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        partner: 'partnerValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.partnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.partnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('partnerPath', () => {
+        const result = client.partnerPath('networkCodeValue', 'partnerValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.partnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromPartnerName', () => {
+        const result = client.matchNetworkCodeFromPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPartnerFromPartnerName', () => {
+        const result = client.matchPartnerFromPartnerName(fakePath);
+        assert.strictEqual(result, 'partnerValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3161,6 +6158,161 @@ describe('v1.OrderServiceClient', () => {
       });
     });
 
+    describe('slate', async () => {
+      const fakePath = '/rendered/path/slate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        slate: 'slateValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.slatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.slatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('slatePath', () => {
+        const result = client.slatePath('networkCodeValue', 'slateValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.slatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSlateName', () => {
+        const result = client.matchNetworkCodeFromSlateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSlateFromSlateName', () => {
+        const result = client.matchSlateFromSlateName(fakePath);
+        assert.strictEqual(result, 'slateValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('suggestedAdUnit', async () => {
+      const fakePath = '/rendered/path/suggestedAdUnit';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        suggested_ad_unit: 'suggestedAdUnitValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.suggestedAdUnitPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.suggestedAdUnitPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('suggestedAdUnitPath', () => {
+        const result = client.suggestedAdUnitPath(
+          'networkCodeValue',
+          'suggestedAdUnitValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSuggestedAdUnitName', () => {
+        const result = client.matchNetworkCodeFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSuggestedAdUnitFromSuggestedAdUnitName', () => {
+        const result =
+          client.matchSuggestedAdUnitFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'suggestedAdUnitValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('targetingPreset', async () => {
+      const fakePath = '/rendered/path/targetingPreset';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        targeting_preset: 'targetingPresetValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.targetingPresetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.targetingPresetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('targetingPresetPath', () => {
+        const result = client.targetingPresetPath(
+          'networkCodeValue',
+          'targetingPresetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromTargetingPresetName', () => {
+        const result = client.matchNetworkCodeFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTargetingPresetFromTargetingPresetName', () => {
+        const result =
+          client.matchTargetingPresetFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'targetingPresetValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('taxonomyCategory', async () => {
       const fakePath = '/rendered/path/taxonomyCategory';
       const expectedParameters = {
@@ -3267,6 +6419,69 @@ describe('v1.OrderServiceClient', () => {
       });
     });
 
+    describe('thirdPartyCompany', async () => {
+      const fakePath = '/rendered/path/thirdPartyCompany';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        third_party_company: 'thirdPartyCompanyValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.thirdPartyCompanyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.thirdPartyCompanyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('thirdPartyCompanyPath', () => {
+        const result = client.thirdPartyCompanyPath(
+          'networkCodeValue',
+          'thirdPartyCompanyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchNetworkCodeFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchThirdPartyCompanyFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchThirdPartyCompanyFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'thirdPartyCompanyValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
@@ -3310,6 +6525,69 @@ describe('v1.OrderServiceClient', () => {
         assert.strictEqual(result, 'userValue');
         assert(
           (client.pathTemplates.userPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('viewabilityProvider', async () => {
+      const fakePath = '/rendered/path/viewabilityProvider';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        viewability_provider: 'viewabilityProviderValue',
+      };
+      const client = new orderserviceModule.v1.OrderServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.viewabilityProviderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.viewabilityProviderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('viewabilityProviderPath', () => {
+        const result = client.viewabilityProviderPath(
+          'networkCodeValue',
+          'viewabilityProviderValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromViewabilityProviderName', () => {
+        const result =
+          client.matchNetworkCodeFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchViewabilityProviderFromViewabilityProviderName', () => {
+        const result =
+          client.matchViewabilityProviderFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'viewabilityProviderValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

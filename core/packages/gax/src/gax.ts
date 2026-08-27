@@ -170,6 +170,7 @@ export interface CallOptions {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  enableTelemetryTracing?: boolean;
 }
 
 export class CallSettings {
@@ -186,6 +187,7 @@ export class CallSettings {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  enableTelemetryTracing?: boolean;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -219,6 +221,7 @@ export class CallSettings {
       'longrunning' in settings ? settings.longrunning : undefined;
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
+    this.enableTelemetryTracing = settings.enableTelemetryTracing;
   }
 
   /**
@@ -242,6 +245,7 @@ export class CallSettings {
     let longrunning = this.longrunning;
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
+    let enableTelemetryTracing = this.enableTelemetryTracing;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -297,6 +301,9 @@ export class CallSettings {
     if ('retryRequestOptions' in options) {
       retryRequestOptions = options.retryRequestOptions;
     }
+    if ('enableTelemetryTracing' in options) {
+      enableTelemetryTracing = options.enableTelemetryTracing;
+    }
 
     return new CallSettings({
       timeout,
@@ -309,6 +316,7 @@ export class CallSettings {
       isBundling,
       apiName,
       retryRequestOptions,
+      enableTelemetryTracing,
     });
   }
 }

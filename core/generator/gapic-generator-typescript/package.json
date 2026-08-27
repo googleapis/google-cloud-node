@@ -1,17 +1,17 @@
 {
   "name": "@google-cloud/gapic-generator",
-  "version": "4.11.14",
+  "version": "5.1.0",
   "type": "module",
   "description": "Google API Client Library Generator for TypeScript, written in TypeScript.",
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gapic-generator-typescript",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/generator/gapic-generator-typescript",
   "private": true,
   "bugs": {
-    "url": "https://github.com/googleapis/gapic-generator-typescript/issues"
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gapic-generator-typescript",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/generator/gapic-generator-typescript",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "license": "Apache-2.0",
   "author": "Google LLC",
@@ -42,18 +42,17 @@
     "test": "mocha build/typescript/test/unit",
     "system-test": "echo 'no system test'",
     "samples-test": "echo 'no samples test'",
-    "docs": "echo no docs needed",
-    "docs-test": "echo no docs tests"
+    "docs": "echo no docs needed"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.3.0",
     "long": "^5.3.2",
     "object-hash": "^3.0.0",
-    "proto3-json-serializer": "^3.0.3",
-    "protobufjs": "^7.5.6",
-    "protobufjs-cli": "^1.2.0",
-    "prettier": "^3.2.5",
+    "proto3-json-serializer": "^4.0.0",
+    "protobufjs": "^8.6.6",
+    "protobufjs-cli": "^2.6.2",
+    "prettier": "^3.3.3",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
@@ -65,15 +64,23 @@
     "@types/object-hash": "^3.0.6",
     "@types/yargs": "^17.0.34",
     "espower-typescript": "^10.0.1",
-    "gapic-node-processing": "^0.1.6",
-    "gapic-tools": "^1.0.3",
-    "google-gax": "^5.1.1-rc.1",
+    "gapic-node-processing": "^0.2.0",
+    "gapic-tools": "^2.0.0",
+    "google-gax": "^6.0.0",
     "gts": "^6.0.2",
     "mocha": "^11.7.4",
     "nunjucks": "^3.2.4",
     "typescript": "5.6.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
+  },
+  "overrides": {
+    "protobufjs": "^8.6.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "protobufjs": "^8.6.6"
+    }
   }
 }

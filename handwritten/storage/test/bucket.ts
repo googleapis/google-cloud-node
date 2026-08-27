@@ -15,6 +15,7 @@
 import {
   BaseMetadata,
   DecorateRequestOptions,
+  DeleteOptions,
   ServiceObject,
   ServiceObjectConfig,
   util,
@@ -47,10 +48,11 @@ import {
   BucketExceptionMessages,
   BucketMetadata,
   LifecycleRule,
+  ComposeCleanupError,
 } from '../src/bucket.js';
 import {AddAclOptions} from '../src/acl.js';
 import {Policy} from '../src/iam.js';
-import sinon from 'sinon';
+import sinon, {createSandbox} from 'sinon';
 import {Transform} from 'stream';
 import {IdempotencyStrategy} from '../src/storage.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
@@ -100,10 +102,20 @@ class FakeNotification {
 }
 
 let fsStatOverride: Function | null;
+let fsCreateReadStreamOverride: Function | null;
 const fakeFs = {
   ...fs,
   stat: (filePath: string, callback: Function) => {
     return (fsStatOverride || fs.stat)(filePath, callback);
+  },
+  createReadStream: (
+    filePath: string,
+    options?: Parameters<typeof fs.createReadStream>[1]
+  ) => {
+    return (fsCreateReadStreamOverride || fs.createReadStream)(
+      filePath,
+      options
+    );
   },
 };
 
@@ -191,6 +203,8 @@ describe('Bucket', () => {
   let Bucket: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bucket: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let ComposeCleanupError: any;
 
   const STORAGE = {
     createBucket: util.noop,
@@ -211,7 +225,7 @@ describe('Bucket', () => {
   const BUCKET_NAME = 'test-bucket';
 
   before(() => {
-    Bucket = proxyquire('../src/bucket.js', {
+    const bucketModule = proxyquire('../src/bucket.js', {
       fs: fakeFs,
       'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
@@ -225,11 +239,14 @@ describe('Bucket', () => {
       './iam.js': {Iam: FakeIam},
       './notification.js': {Notification: FakeNotification},
       './signer.js': fakeSigner,
-    }).Bucket;
+    });
+    Bucket = bucketModule.Bucket;
+    ComposeCleanupError = bucketModule.ComposeCleanupError;
   });
 
   beforeEach(() => {
     fsStatOverride = null;
+    fsCreateReadStreamOverride = null;
     pLimitOverride = null;
     bucket = new Bucket(STORAGE, BUCKET_NAME);
   });
@@ -653,20 +670,20 @@ describe('Bucket', () => {
 
   describe('combine', () => {
     it('should throw if invalid sources are provided', () => {
-      assert.throws(() => {
-        bucket.combine(), BucketExceptionMessages.PROVIDE_SOURCE_FILE;
-      });
-
-      assert.throws(() => {
-        bucket.combine([]), BucketExceptionMessages.PROVIDE_SOURCE_FILE;
-      });
+      assert.throws(
+        () => {
+          bucket.combine();
+        },
+        {
+          message: BucketExceptionMessages.PROVIDE_SOURCE_FILE,
+        }
+      );
     });
 
     it('should throw if a destination is not provided', () => {
       assert.throws(() => {
-        bucket.combine(['1', '2']),
-          BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED;
-      });
+        bucket.combine(['1', '2']);
+      }, new RegExp(BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED));
     });
 
     it('should accept string or file input for sources', done => {
@@ -806,7 +823,7 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.txt');
 
       destination.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
+        assert.deepStrictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -916,6 +933,162 @@ describe('Bucket', () => {
 
       bucket.combine(sources, destination, done);
     });
+
+    it('should delete source objects if deleteSourceObjects is true', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      // Set generation on the first file and leave second file without generation
+      sources[0].generation = 12345;
+
+      let deletedCount = 0;
+      sources[0].delete = async (opts?: DeleteOptions) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, 12345);
+        deletedCount++;
+        return [{}];
+      };
+      sources[1].delete = async (opts?: DeleteOptions) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, undefined);
+        deletedCount++;
+        return [{}];
+      };
+
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        assert.strictEqual(reqOpts.json.sourceObjects[0].generation, 12345);
+        callback(null, {});
+      };
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (err: Error | null) => {
+          assert.ifError(err);
+          assert.strictEqual(deletedCount, 2);
+          done();
+        }
+      );
+    });
+
+    it('should not delete source objects if deleteSourceObjects is false/omitted', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(null, {});
+      };
+
+      bucket.combine(sources, destination, (err: Error | null) => {
+        assert.ifError(err);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should not delete source objects if compose operation fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const composeError = new Error('Compose failed.');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(composeError);
+      };
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true},
+        (err: Error | null) => {
+          assert.strictEqual(err, composeError);
+          assert.strictEqual(deletedCount, 0);
+          done();
+        }
+      );
+    });
+
+    it('should return ComposeCleanupError if deleting source objects fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const deleteError = new Error('Delete failed.');
+
+      sources[0].delete = async (opts?: DeleteOptions) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        throw deleteError;
+      };
+      sources[1].delete = async (opts?: DeleteOptions) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        return [{}];
+      };
+
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(null, {success: true});
+      };
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (
+          err: ComposeCleanupError | null,
+          newFile?: File | null,
+          apiResponse?: unknown
+        ) => {
+          try {
+            assert.ok(err instanceof ComposeCleanupError);
+            assert.strictEqual(err!.name, 'ComposeCleanupError');
+            assert.deepStrictEqual(err!.errors, [deleteError]);
+            assert.strictEqual(err!.newFile, destination);
+            assert.deepStrictEqual(err!.apiResponse, {success: true});
+
+            // Also check callback arguments
+            assert.strictEqual(newFile, destination);
+            assert.deepStrictEqual(apiResponse, {success: true});
+            done();
+          } catch (assertErr) {
+            done(assertErr);
+          }
+        }
+      );
+    });
   });
 
   describe('createChannel', () => {
@@ -926,8 +1099,8 @@ describe('Bucket', () => {
 
     it('should throw if an ID is not provided', () => {
       assert.throws(() => {
-        bucket.createChannel(), BucketExceptionMessages.CHANNEL_ID_REQUIRED;
-      });
+        bucket.createChannel();
+      }, new RegExp(BucketExceptionMessages.CHANNEL_ID_REQUIRED));
     });
 
     it('should make the correct request', done => {
@@ -1052,9 +1225,8 @@ describe('Bucket', () => {
 
     it('should throw an error if a valid topic is not provided', () => {
       assert.throws(() => {
-        bucket.createNotification(),
-          BucketExceptionMessages.TOPIC_NAME_REQUIRED;
-      });
+        bucket.createNotification();
+      }, new RegExp(BucketExceptionMessages.TOPIC_NAME_REQUIRED));
     });
 
     it('should make the correct request', done => {
@@ -1494,7 +1666,7 @@ describe('Bucket', () => {
             requesterPays: false,
           },
         });
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.disableRequesterPays(done);
@@ -1515,7 +1687,7 @@ describe('Bucket', () => {
 
     it('should set autoRetry to false when ifMetagenerationMatch is undefined', done => {
       bucket.setMetadata = () => {
-        Promise.resolve().then(() => {
+        process.nextTick(() => {
           assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
           done();
         });
@@ -1537,16 +1709,14 @@ describe('Bucket', () => {
 
     it('should throw if a config object is not provided', () => {
       assert.throws(() => {
-        bucket.enableLogging(),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
-      });
+        bucket.enableLogging();
+      }, new RegExp(BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED));
     });
 
     it('should throw if config is a function', () => {
       assert.throws(() => {
-        bucket.enableLogging(assert.ifError),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
-      });
+        bucket.enableLogging(assert.ifError);
+      }, new RegExp(BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED));
     });
 
     it('should throw if a prefix is not provided', () => {
@@ -1556,9 +1726,8 @@ describe('Bucket', () => {
             bucket: 'bucket-name',
           },
           assert.ifError
-        ),
-          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
-      });
+        );
+      }, new RegExp(BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED));
     });
 
     it('should add IAM permissions', done => {
@@ -1670,9 +1839,7 @@ describe('Bucket', () => {
         optionsOrCallback: {},
         callback: Function
       ) => {
-        Promise.resolve([setMetadataResponse]).then(resp =>
-          callback(null, ...resp)
-        );
+        process.nextTick(() => callback(null, setMetadataResponse));
       };
 
       bucket.enableLogging(
@@ -1711,7 +1878,7 @@ describe('Bucket', () => {
             requesterPays: true,
           },
         });
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.enableRequesterPays(done);
@@ -1742,8 +1909,8 @@ describe('Bucket', () => {
 
     it('should throw if no name is provided', () => {
       assert.throws(() => {
-        bucket.file(), BucketExceptionMessages.SPECIFY_FILE_NAME;
-      });
+        bucket.file();
+      }, new RegExp(BucketExceptionMessages.SPECIFY_FILE_NAME));
     });
 
     it('should return a File object', () => {
@@ -2230,7 +2397,7 @@ describe('Bucket', () => {
     let SIGNED_URL_CONFIG: GetBucketSignedUrlConfig;
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
+      sandbox = createSandbox();
 
       signerGetSignedUrlStub = sandbox.stub().resolves(EXPECTED_SIGNED_URL);
 
@@ -2287,9 +2454,8 @@ describe('Bucket', () => {
   describe('lock', () => {
     it('should throw if a metageneration is not provided', () => {
       assert.throws(() => {
-        bucket.lock(assert.ifError),
-          BucketExceptionMessages.METAGENERATION_NOT_PROVIDED;
-      });
+        bucket.lock(assert.ifError);
+      }, new RegExp(BucketExceptionMessages.METAGENERATION_NOT_PROVIDED));
     });
 
     it('should make the correct request', done => {
@@ -2484,8 +2650,8 @@ describe('Bucket', () => {
   describe('notification', () => {
     it('should throw an error if an id is not provided', () => {
       assert.throws(() => {
-        bucket.notification(), BucketExceptionMessages.SUPPLY_NOTIFICATION_ID;
-      });
+        bucket.notification();
+      }, new RegExp(BucketExceptionMessages.SUPPLY_NOTIFICATION_ID));
     });
 
     it('should return a Notification object', () => {
@@ -2509,7 +2675,7 @@ describe('Bucket', () => {
           retentionPolicy: null,
         });
 
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.removeRetentionPeriod(done);
@@ -2617,7 +2783,7 @@ describe('Bucket', () => {
         callback: Function
       ) => {
         assert.strictEqual(metadata.labels, labels);
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
       bucket.setLabels(labels, done);
     });
@@ -2648,7 +2814,7 @@ describe('Bucket', () => {
           },
         });
 
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.setRetentionPeriod(duration, done);
@@ -2668,7 +2834,7 @@ describe('Bucket', () => {
           cors: corsConfiguration,
         });
 
-        return Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.setCorsConfiguration(corsConfiguration, done);
@@ -2706,7 +2872,7 @@ describe('Bucket', () => {
       ) => {
         assert.deepStrictEqual(metadata, {storageClass: STORAGE_CLASS});
         assert.strictEqual(options, OPTIONS);
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        process.nextTick(() => callback(null));
       };
 
       bucket.setStorageClass(STORAGE_CLASS, OPTIONS, CALLBACK);
@@ -3089,6 +3255,47 @@ describe('Bucket', () => {
           assert.ok(retryCount === 1);
           done();
         });
+      });
+    });
+
+    it('should destroy the local read stream if write stream fails', done => {
+      const fakeFile = new FakeFile(bucket, 'file-name');
+      const options = {destination: fakeFile, resumable: false};
+      const originalCreateReadStream = fs.createReadStream;
+      let readStream: fs.ReadStream;
+      fsCreateReadStreamOverride = (
+        path: fs.PathLike,
+        opts?: Parameters<typeof fs.createReadStream>[1]
+      ) => {
+        readStream = originalCreateReadStream(path, opts);
+        return readStream;
+      };
+
+      fakeFile.createWriteStream = () => {
+        const ws = new stream.Writable({
+          write(chunk, encoding, callback) {
+            callback(new Error('write error'));
+          },
+        });
+        return ws;
+      };
+
+      const textfilepath = path.join(
+        getDirName(),
+        '../../../test/testdata/textfile.txt'
+      );
+
+      bucket.upload(textfilepath, options, (err: Error) => {
+        try {
+          assert.strictEqual(err.message, 'write error');
+          assert.ok(readStream);
+          assert.ok(readStream.destroyed);
+          done();
+        } catch (e) {
+          done(e);
+        } finally {
+          fsCreateReadStreamOverride = null;
+        }
       });
     });
 

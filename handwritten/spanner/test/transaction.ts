@@ -22,9 +22,9 @@ import {common as p} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 
-import {protos} from '../src';
 import {codec} from '../src/codec';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {
   CLOUD_RESOURCE_HEADER,
   LEADER_AWARE_ROUTING_HEADER,
@@ -74,6 +74,10 @@ describe('Transaction', () => {
     formattedName_: SESSION_NAME,
     request: REQUEST,
     requestStream: REQUEST_STREAM,
+    commonHeaders_: {
+      [CLOUD_RESOURCE_HEADER]: 'formatted-database-name',
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   };
 
   const PARTIAL_RESULT_STREAM = sandbox.stub();
@@ -157,6 +161,49 @@ describe('Transaction', () => {
       it('should localize `Session#requestStream`', () => {
         snapshot.requestStream();
         assert.strictEqual(REQUEST_STREAM.callCount, 1);
+      });
+
+      it('should generate _affinityKey for multiplexed sessions', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        assert.ok(txn._affinityKey);
+        assert.ok(txn._affinityKey.startsWith('mux-affinity-'));
+        assert.ok(txn._bindGaxOpts.otherArgs.options.affinityKey);
+        assert.strictEqual(
+          txn._bindGaxOpts.otherArgs.options.affinityKey,
+          txn._affinityKey,
+        );
+        assert.strictEqual(
+          txn._unbindGaxOpts.otherArgs.options.affinityKey,
+          txn._affinityKey,
+        );
+        assert.strictEqual(txn._unbindGaxOpts.otherArgs.options.unbind, true);
+      });
+
+      it('should inject affinity key in `Session#request` if multiplexed', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        txn.request({client: 'SpannerClient'}, () => {});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const arg = REQUEST.lastCall.args[0];
+        assert.deepStrictEqual(arg.gaxOpts, txn._bindGaxOpts);
+      });
+
+      it('should inject affinity key in `Session#requestStream` if multiplexed', () => {
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        txn.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const arg = REQUEST_STREAM.lastCall.args[0];
+        assert.deepStrictEqual(arg.gaxOpts, txn._bindGaxOpts);
       });
 
       it('should set the commonHeaders_', () => {
@@ -535,6 +582,31 @@ describe('Transaction', () => {
         snapshot.on('end', done);
         snapshot.end();
         snapshot.end();
+      });
+
+      it('should unbind affinity key on end if multiplexed', done => {
+        const fakeUnbind = sandbox.stub();
+        const fakeStub = {getChannel: () => ({unbind: fakeUnbind})};
+        const fakeClient = {spannerStub: Promise.resolve(fakeStub)};
+        const fakeSpanner = {
+          clients_: new Map([['SpannerClient', fakeClient]]),
+        };
+        const fakeDatabase = {parent: {parent: fakeSpanner}};
+
+        const multiplexedSession = Object.assign({}, SESSION, {
+          parent: fakeDatabase,
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+
+        txn.on('end', () => {
+          setTimeout(() => {
+            assert.strictEqual(fakeUnbind.callCount, 1);
+            assert.strictEqual(fakeUnbind.lastCall.args[0], txn._affinityKey);
+            done();
+          }, 10);
+        });
+        txn.end();
       });
     });
 
@@ -1856,6 +1928,18 @@ describe('Transaction', () => {
         );
       });
 
+      it('should inject _unbindGaxOpts for commit if _affinityKey is present', () => {
+        const stub = sandbox.stub(transaction, 'request');
+        (transaction as any)._affinityKey = 'mux-affinity-1';
+        const unbindOpts = {otherArgs: {options: {unbind: true}}};
+        (transaction as any)._unbindGaxOpts = unbindOpts;
+
+        transaction.commit();
+
+        const {gaxOpts} = stub.lastCall.args[0];
+        assert.deepStrictEqual(gaxOpts, unbindOpts);
+      });
+
       it('should accept gaxOptions as CallOptions', done => {
         const gaxOptions = {
           retry: {
@@ -2379,6 +2463,18 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should inject _unbindGaxOpts for rollback if _affinityKey is present', () => {
+        const stub = sandbox.stub(transaction, 'request');
+        (transaction as any)._affinityKey = 'mux-affinity-1';
+        const unbindOpts = {otherArgs: {options: {unbind: true}}};
+        (transaction as any)._unbindGaxOpts = unbindOpts;
+
+        transaction.rollback();
+
+        const {gaxOpts} = stub.lastCall.args[0];
+        assert.deepStrictEqual(gaxOpts, unbindOpts);
       });
 
       it('should accept gaxOptions', done => {

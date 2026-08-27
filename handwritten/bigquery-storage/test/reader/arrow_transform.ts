@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {RecordBatchStreamWriter, tableFromArrays} from 'apache-arrow';
 import {Readable} from 'stream';
 import {

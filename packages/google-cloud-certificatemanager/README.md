@@ -87,7 +87,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update certificate map entry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map_entry.js) |
 | update dns authorization | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_dns_authorization.js) |
 | update trust config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_trust_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/snippet_metadata_google.cloud.certificatemanager.v1.json) |
 
 
 ## Supported Node.js Versions

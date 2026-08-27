@@ -203,6 +203,12 @@ message InputAudioConfig {
   // over StreamingDetectIntentRequest.single_utterance.
   bool single_utterance = 8;
 
+  // Optional. If `true`, responses with voice activity speech events will be
+  // returned as they are detected.
+  // Note: This setting is relevant only for streaming methods.
+  bool enable_voice_activity_events = 27
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Only used in
   // [Participants.AnalyzeContent][google.cloud.dialogflow.v2beta1.Participants.AnalyzeContent]
   // and
@@ -597,8 +603,8 @@ enum OutputAudioEncoding {
   // Audio content returned as LINEAR16 also contains a WAV header.
   OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1;
 
-  // MP3 audio at 32kbps.
-  OUTPUT_AUDIO_ENCODING_MP3 = 2;
+  // MP3 audio at 64kbps.
+  OUTPUT_AUDIO_ENCODING_MP3 = 2 [deprecated = true];
 
   // MP3 audio at 64kbps.
   OUTPUT_AUDIO_ENCODING_MP3_64_KBPS = 4;

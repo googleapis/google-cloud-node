@@ -20,7 +20,7 @@ import {
   createTestFileFromBuffer,
   deleteTestFile,
 } from './testBenchUtil';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {getDirName} from '../src/util.js';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
@@ -393,7 +393,7 @@ export async function bucketUploadResumableInstancePrecondition(
 ) {
   const filePath = path.join(
     getDirName(),
-    `../conformance-test/test-data/tmp-${uuid.v4()}.txt`
+    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`
   );
   createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.bucket!.instancePreconditionOpts) {
@@ -411,7 +411,7 @@ export async function bucketUploadResumableInstancePrecondition(
 export async function bucketUploadResumable(options: ConformanceTestOptions) {
   const filePath = path.join(
     getDirName(),
-    `../conformance-test/test-data/tmp-${uuid.v4()}.txt`
+    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`
   );
   createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.preconditionRequired) {
@@ -797,7 +797,7 @@ export async function createBucket(options: ConformanceTestOptions) {
   const bucket = options.storage!.bucket('test-creating-bucket');
   const [exists] = await bucket.exists();
   if (exists) {
-    bucket.delete();
+    await bucket.delete();
   }
   await options.storage!.createBucket('test-creating-bucket');
 }

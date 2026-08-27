@@ -97,27 +97,91 @@ const {
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
+let contextManagerInstallAttempted = false;
+
 /*
- * This function ensures that async/await works correctly by
- * checking if context.active() returns an invalid/unset context
- * and if so, sets a global AsyncHooksContextManager otherwise
- * spans resulting from async/await invocations won't be correctly
- * associated in their respective hierarchies.
+ * If no global ContextManager is registered, install an AsyncHooksContextManager
+ * so that async/await trace context propagation works for apps that haven't
+ * configured OpenTelemetry themselves. If the host app has already installed a
+ * ContextManager, leave it alone — tearing down a working manager breaks the
+ * host's baggage and span parentage on the next gRPC call.
+ *
+ * setGlobalContextManager() returns false when a manager is already registered,
+ * which is the documented signal that we shouldn't replace it. The
+ * `contextManagerInstallAttempted` latch makes the call idempotent so we don't
+ * allocate a new AsyncHooksContextManager on each Spanner client construction.
  */
 function ensureInitialContextManagerSet() {
-  if (!context['_contextManager'] || context.active() === ROOT_CONTEXT) {
-    // If no context manager is currently set, or if the active context is the ROOT_CONTEXT,
-    // trace context propagation cannot
-    // function correctly with async/await for OpenTelemetry
-    // See {@link https://opentelemetry.io/docs/languages/js/context/#active-context}
-    context.disable(); // Disable any prior contextManager.
-    const contextManager = new AsyncHooksContextManager();
+  if (contextManagerInstallAttempted) return;
+  contextManagerInstallAttempted = true;
+  const contextManager = new AsyncHooksContextManager();
+  if (context.setGlobalContextManager(contextManager)) {
     contextManager.enable();
-    context.setGlobalContextManager(contextManager);
   }
 }
 
 export {ensureInitialContextManagerSet};
+
+let globalTracingEnabled: boolean | undefined = undefined;
+let lastCheckTime = 0;
+const CACHE_TTL_MS = 10000; // 10 seconds TTL
+
+/**
+ * isGlobalTracingEnabled returns true if tracing is enabled globally,
+ * respecting cached status and active recording spans.
+ *
+ * @returns {boolean} True if global tracing is enabled.
+ */
+function isGlobalTracingEnabled(): boolean {
+  const now = Date.now();
+  if (
+    globalTracingEnabled !== undefined &&
+    (globalTracingEnabled || now - lastCheckTime < CACHE_TTL_MS)
+  ) {
+    return globalTracingEnabled;
+  }
+
+  lastCheckTime = now;
+  const globalProvider = trace.getTracerProvider();
+  if (globalProvider) {
+    let delegate = globalProvider;
+    if (typeof (globalProvider as any).getDelegate === 'function') {
+      delegate = (globalProvider as any).getDelegate();
+    }
+    if (delegate) {
+      const name = delegate.constructor.name;
+      // Exclude the dummy NoopTracerProvider and uninitialized ProxyTracerProvider
+      if (name !== 'NoopTracerProvider' && name !== 'ProxyTracerProvider') {
+        globalTracingEnabled = true;
+        ensureInitialContextManagerSet();
+        return true;
+      }
+    }
+  }
+  globalTracingEnabled = false;
+  return false;
+}
+
+/**
+ * isTracingEnabled returns true if tracing is enabled for the given options
+ * or globally.
+ *
+ * @param {ObservabilityOptions} [opts] The observability options.
+ * @returns {boolean} True if tracing is enabled.
+ */
+export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
+  if (opts?.tracerProvider) {
+    return true;
+  }
+
+  return isGlobalTracingEnabled();
+}
+
+/** Only exported for resetting state in unit tests. */
+export function _resetTracingEnabledForTest(): void {
+  globalTracingEnabled = undefined;
+  lastCheckTime = 0;
+}
 
 /**
  * startTrace begins an active span in the current active context
@@ -132,6 +196,10 @@ export function startTrace<T>(
   config: traceConfig | undefined,
   cb: (span: Span) => T,
 ): T {
+  if (!isTracingEnabled(config?.opts)) {
+    return cb(new noopSpan());
+  }
+
   if (!config) {
     config = {} as traceConfig;
   }

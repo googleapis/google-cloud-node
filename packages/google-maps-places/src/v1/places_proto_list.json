@@ -17,5 +17,6 @@
   "../../protos/google/maps/places/v1/route_modifiers.proto",
   "../../protos/google/maps/places/v1/routing_preference.proto",
   "../../protos/google/maps/places/v1/routing_summary.proto",
+  "../../protos/google/maps/places/v1/transit.proto",
   "../../protos/google/maps/places/v1/travel_mode.proto"
 ]

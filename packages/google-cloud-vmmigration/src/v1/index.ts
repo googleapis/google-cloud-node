@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {VmMigrationClient} from './vm_migration_client';
+export { VmMigrationClient } from './vm_migration_client';

@@ -220,6 +220,9 @@ export class DataTaxonomyServiceClient {
       assetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}',
       ),
+      changeRequestPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/changeRequests/{change_request}',
+      ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}',
       ),
@@ -368,9 +371,6 @@ export class DataTaxonomyServiceClient {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
-            },
-            {
               get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
             },
             {
@@ -415,6 +415,9 @@ export class DataTaxonomyServiceClient {
             {
               get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataDomains/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -432,10 +435,6 @@ export class DataTaxonomyServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -498,6 +497,10 @@ export class DataTaxonomyServiceClient {
               post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataDomains/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -515,10 +518,6 @@ export class DataTaxonomyServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
               body: '*',
             },
             {
@@ -579,6 +578,10 @@ export class DataTaxonomyServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataDomains/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -905,7 +908,10 @@ export class DataTaxonomyServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dataplex.read-write',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -4320,6 +4326,58 @@ export class DataTaxonomyServiceClient {
    */
   matchAssetFromAssetName(assetName: string) {
     return this.pathTemplates.assetPathTemplate.match(assetName).asset;
+  }
+
+  /**
+   * Return a fully-qualified changeRequest resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} change_request
+   * @returns {string} Resource name string.
+   */
+  changeRequestPath(project: string, location: string, changeRequest: string) {
+    return this.pathTemplates.changeRequestPathTemplate.render({
+      project: project,
+      location: location,
+      change_request: changeRequest,
+    });
+  }
+
+  /**
+   * Parse the project from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .location;
+  }
+
+  /**
+   * Parse the change_request from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the change_request.
+   */
+  matchChangeRequestFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .change_request;
   }
 
   /**

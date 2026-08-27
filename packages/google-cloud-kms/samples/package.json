@@ -8,20 +8,19 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-kms",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/kms": "^5.5.0",
+    "@google-cloud/kms": "^6.0.0",
     "fast-crc32c": "^2.0.0",
     "jslint": "^0.12.1"
   },
   "devDependencies": {
     "c8": "^10.0.0",
     "chai": "^4.2.0",
-    "mocha": "^8.0.0",
-    "uuid": "^9.0.0"
+    "mocha": "^8.0.0"
   }
 }

@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class AlphaAnalyticsDataClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('data');
@@ -57,10 +66,10 @@ export class AlphaAnalyticsDataClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  alphaAnalyticsDataStub?: Promise<{[name: string]: Function}>;
+  alphaAnalyticsDataStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AlphaAnalyticsDataClient.
@@ -101,21 +110,42 @@ export class AlphaAnalyticsDataClient {
    *     const client = new AlphaAnalyticsDataClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AlphaAnalyticsDataClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'analyticsdata.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +170,7 @@ export class AlphaAnalyticsDataClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,10 +184,7 @@ export class AlphaAnalyticsDataClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -179,22 +206,22 @@ export class AlphaAnalyticsDataClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       audienceListPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/audienceLists/{audience_list}'
+        'properties/{property}/audienceLists/{audience_list}',
       ),
       metadataPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/metadata'
+        'properties/{property}/metadata',
       ),
       propertyPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}'
+        'properties/{property}',
       ),
       propertyQuotasSnapshotPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/propertyQuotasSnapshot'
+        'properties/{property}/propertyQuotasSnapshot',
       ),
       recurringAudienceListPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/recurringAudienceLists/{recurring_audience_list}'
+        'properties/{property}/recurringAudienceLists/{recurring_audience_list}',
       ),
       reportTaskPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/reportTasks/{report_task}'
+        'properties/{property}/reportTasks/{report_task}',
       ),
     };
 
@@ -202,12 +229,21 @@ export class AlphaAnalyticsDataClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAudienceLists:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'audienceLists'),
-      listRecurringAudienceLists:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'recurringAudienceLists'),
-      listReportTasks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reportTasks')
+      listAudienceLists: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'audienceLists',
+      ),
+      listRecurringAudienceLists: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'recurringAudienceLists',
+      ),
+      listReportTasks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'reportTasks',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -216,37 +252,48 @@ export class AlphaAnalyticsDataClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createAudienceListResponse = protoFilesRoot.lookup(
-      '.google.analytics.data.v1alpha.AudienceList') as gax.protobuf.Type;
+      '.google.analytics.data.v1alpha.AudienceList',
+    ) as gax.protobuf.Type;
     const createAudienceListMetadata = protoFilesRoot.lookup(
-      '.google.analytics.data.v1alpha.AudienceListMetadata') as gax.protobuf.Type;
+      '.google.analytics.data.v1alpha.AudienceListMetadata',
+    ) as gax.protobuf.Type;
     const createReportTaskResponse = protoFilesRoot.lookup(
-      '.google.analytics.data.v1alpha.ReportTask') as gax.protobuf.Type;
+      '.google.analytics.data.v1alpha.ReportTask',
+    ) as gax.protobuf.Type;
     const createReportTaskMetadata = protoFilesRoot.lookup(
-      '.google.analytics.data.v1alpha.ReportTaskMetadata') as gax.protobuf.Type;
+      '.google.analytics.data.v1alpha.ReportTaskMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAudienceList: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAudienceListResponse.decode.bind(createAudienceListResponse),
-        createAudienceListMetadata.decode.bind(createAudienceListMetadata)),
+        createAudienceListMetadata.decode.bind(createAudienceListMetadata),
+      ),
       createReportTask: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createReportTaskResponse.decode.bind(createReportTaskResponse),
-        createReportTaskMetadata.decode.bind(createReportTaskMetadata))
+        createReportTaskMetadata.decode.bind(createReportTaskMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.analytics.data.v1alpha.AlphaAnalyticsData', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.analytics.data.v1alpha.AlphaAnalyticsData',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -277,28 +324,50 @@ export class AlphaAnalyticsDataClient {
     // Put together the "service stub" for
     // google.analytics.data.v1alpha.AlphaAnalyticsData.
     this.alphaAnalyticsDataStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.analytics.data.v1alpha.AlphaAnalyticsData') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.analytics.data.v1alpha.AlphaAnalyticsData,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.analytics.data.v1alpha.AlphaAnalyticsData',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.analytics.data.v1alpha
+            .AlphaAnalyticsData,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const alphaAnalyticsDataStubMethods =
-        ['runFunnelReport', 'createAudienceList', 'queryAudienceList', 'getAudienceList', 'listAudienceLists', 'createRecurringAudienceList', 'getRecurringAudienceList', 'listRecurringAudienceLists', 'getPropertyQuotasSnapshot', 'createReportTask', 'queryReportTask', 'getReportTask', 'listReportTasks', 'runReport', 'getMetadata'];
+    const alphaAnalyticsDataStubMethods = [
+      'runFunnelReport',
+      'createAudienceList',
+      'queryAudienceList',
+      'getAudienceList',
+      'listAudienceLists',
+      'createRecurringAudienceList',
+      'getRecurringAudienceList',
+      'listRecurringAudienceLists',
+      'getPropertyQuotasSnapshot',
+      'createReportTask',
+      'queryReportTask',
+      'getReportTask',
+      'listReportTasks',
+      'runReport',
+      'getMetadata',
+    ];
     for (const methodName of alphaAnalyticsDataStubMethods) {
       const callPromise = this.alphaAnalyticsDataStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -308,7 +377,7 @@ export class AlphaAnalyticsDataClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -323,8 +392,14 @@ export class AlphaAnalyticsDataClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'analyticsdata.googleapis.com';
   }
@@ -335,8 +410,14 @@ export class AlphaAnalyticsDataClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'analyticsdata.googleapis.com';
   }
@@ -369,7 +450,7 @@ export class AlphaAnalyticsDataClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/analytics',
-      'https://www.googleapis.com/auth/analytics.readonly'
+      'https://www.googleapis.com/auth/analytics.readonly',
     ];
   }
 
@@ -379,8 +460,9 @@ export class AlphaAnalyticsDataClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -391,1607 +473,2198 @@ export class AlphaAnalyticsDataClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Returns a customized funnel report of your Google Analytics event data. The
- * data returned from the API is as a table with columns for the requested
- * dimensions and metrics.
- *
- * Funnel exploration lets you visualize the steps your users take to complete
- * a task and quickly see how well they are succeeding or failing at each
- * step. For example, how do prospects become shoppers and then become buyers?
- * How do one time buyers become repeat buyers? With this information, you can
- * improve inefficient or abandoned customer journeys. To learn more, see [GA4
- * Funnel Explorations](https://support.google.com/analytics/answer/9327974).
- *
- * This method is introduced at alpha stability with the intention of
- * gathering feedback on syntax and capabilities before entering beta. To give
- * your feedback on this API, complete the [Google Analytics Data API Funnel
- * Reporting
- * Feedback](https://docs.google.com/forms/d/e/1FAIpQLSdwOlQDJAUoBiIgUZZ3S_Lwi8gr7Bb0k1jhvc-DEg7Rol3UjA/viewform).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} [request.property]
- *   Optional. A Google Analytics property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   Within a batch request, this property should either be unspecified or
- *   consistent with the batch-level property.
- *
- *   Example: properties/1234
- * @param {number[]} [request.dateRanges]
- *   Optional. Date ranges of data to read. If multiple date ranges are
- *   requested, each response row will contain a zero based date range index. If
- *   two date ranges overlap, the event data for the overlapping days is
- *   included in the response rows for both date ranges.
- * @param {google.analytics.data.v1alpha.Funnel} [request.funnel]
- *   Optional. The configuration of this request's funnel. This funnel
- *   configuration is required.
- * @param {google.analytics.data.v1alpha.FunnelBreakdown} [request.funnelBreakdown]
- *   Optional. If specified, this breakdown adds a dimension to the funnel table
- *   sub report response. This breakdown dimension expands each funnel step to
- *   the unique values of the breakdown dimension. For example, a breakdown by
- *   the `deviceCategory` dimension will create rows for `mobile`, `tablet`,
- *   `desktop`, and the total.
- * @param {google.analytics.data.v1alpha.FunnelNextAction} [request.funnelNextAction]
- *   Optional. If specified, next action adds a dimension to the funnel
- *   visualization sub report response. This next action dimension expands each
- *   funnel step to the unique values of the next action. For example a next
- *   action of the `eventName` dimension will create rows for several events
- *   (for example `session_start` & `click`) and the total.
- *
- *   Next action only supports `eventName` and most Page / Screen dimensions
- *   like `pageTitle` and `pagePath`.
- * @param {google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType} [request.funnelVisualizationType]
- *   Optional. The funnel visualization type controls the dimensions present in
- *   the funnel visualization sub report response. If not specified,
- *   `STANDARD_FUNNEL` is used.
- * @param {number[]} [request.segments]
- *   Optional. The configurations of segments. Segments are subsets of a
- *   property's data. In a funnel report with segments, the funnel is evaluated
- *   in each segment.
- *
- *   Each segment specified in this request
- *   produces a separate row in the response; in the response, each segment
- *   identified by its name.
- *
- *   The segments parameter is optional. Requests are limited to 4 segments.
- * @param {number} [request.limit]
- *   Optional. The number of rows to return. If unspecified, 10,000 rows are
- *   returned. The API returns a maximum of 250,000 rows per request, no matter
- *   how many you ask for. `limit` must be positive.
- *
- *   The API can also return fewer rows than the requested `limit`, if there
- *   aren't as many dimension values as the `limit`.
- * @param {google.analytics.data.v1alpha.FilterExpression} [request.dimensionFilter]
- *   Optional. Dimension filters allow you to ask for only specific dimension
- *   values in the report. To learn more, see [Creating a Report: Dimension
- *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
- *   for examples. Metrics cannot be used in this filter.
- * @param {boolean} [request.returnPropertyQuota]
- *   Optional. Toggles whether to return the current state of this Analytics
- *   Property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RunFunnelReportResponse|RunFunnelReportResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunFunnelReport_async
- */
+  /**
+   * Returns a customized funnel report of your Google Analytics event data. The
+   * data returned from the API is as a table with columns for the requested
+   * dimensions and metrics.
+   *
+   * Funnel exploration lets you visualize the steps your users take to complete
+   * a task and quickly see how well they are succeeding or failing at each
+   * step. For example, how do prospects become shoppers and then become buyers?
+   * How do one time buyers become repeat buyers? With this information, you can
+   * improve inefficient or abandoned customer journeys. To learn more, see [GA4
+   * Funnel Explorations](https://support.google.com/analytics/answer/9327974).
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the [Google Analytics Data API Funnel
+   * Reporting
+   * Feedback](https://docs.google.com/forms/d/e/1FAIpQLSdwOlQDJAUoBiIgUZZ3S_Lwi8gr7Bb0k1jhvc-DEg7Rol3UjA/viewform).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.property]
+   *   Optional. A Google Analytics property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   Within a batch request, this property should either be unspecified or
+   *   consistent with the batch-level property.
+   *
+   *   Example: properties/1234
+   * @param {number[]} [request.dateRanges]
+   *   Optional. Date ranges of data to read. If multiple date ranges are
+   *   requested, each response row will contain a zero based date range index. If
+   *   two date ranges overlap, the event data for the overlapping days is
+   *   included in the response rows for both date ranges.
+   * @param {google.analytics.data.v1alpha.Funnel} [request.funnel]
+   *   Optional. The configuration of this request's funnel. This funnel
+   *   configuration is required.
+   * @param {google.analytics.data.v1alpha.FunnelBreakdown} [request.funnelBreakdown]
+   *   Optional. If specified, this breakdown adds a dimension to the funnel table
+   *   sub report response. This breakdown dimension expands each funnel step to
+   *   the unique values of the breakdown dimension. For example, a breakdown by
+   *   the `deviceCategory` dimension will create rows for `mobile`, `tablet`,
+   *   `desktop`, and the total.
+   * @param {google.analytics.data.v1alpha.FunnelNextAction} [request.funnelNextAction]
+   *   Optional. If specified, next action adds a dimension to the funnel
+   *   visualization sub report response. This next action dimension expands each
+   *   funnel step to the unique values of the next action. For example a next
+   *   action of the `eventName` dimension will create rows for several events
+   *   (for example `session_start` & `click`) and the total.
+   *
+   *   Next action only supports `eventName` and most Page / Screen dimensions
+   *   like `pageTitle` and `pagePath`.
+   * @param {google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType} [request.funnelVisualizationType]
+   *   Optional. The funnel visualization type controls the dimensions present in
+   *   the funnel visualization sub report response. If not specified,
+   *   `STANDARD_FUNNEL` is used.
+   * @param {number[]} [request.segments]
+   *   Optional. The configurations of segments. Segments are subsets of a
+   *   property's data. In a funnel report with segments, the funnel is evaluated
+   *   in each segment.
+   *
+   *   Each segment specified in this request
+   *   produces a separate row in the response; in the response, each segment
+   *   identified by its name.
+   *
+   *   The segments parameter is optional. Requests are limited to 4 segments.
+   * @param {number} [request.limit]
+   *   Optional. The number of rows to return. If unspecified, 10,000 rows are
+   *   returned. The API returns a maximum of 250,000 rows per request, no matter
+   *   how many you ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`.
+   * @param {google.analytics.data.v1alpha.FilterExpression} [request.dimensionFilter]
+   *   Optional. Dimension filters allow you to ask for only specific dimension
+   *   values in the report. To learn more, see [Creating a Report: Dimension
+   *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+   *   for examples. Metrics cannot be used in this filter.
+   * @param {boolean} [request.returnPropertyQuota]
+   *   Optional. Toggles whether to return the current state of this Analytics
+   *   Property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RunFunnelReportResponse|RunFunnelReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunFunnelReport_async
+   */
   runFunnelReport(
-      request?: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-        protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+      protos.google.analytics.data.v1alpha.IRunFunnelReportRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   runFunnelReport(
-      request: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-          protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+      | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runFunnelReport(
-      request: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-          protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+      | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runFunnelReport(
-      request?: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IRunFunnelReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-          protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-          protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-        protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+      | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+      protos.google.analytics.data.v1alpha.IRunFunnelReportRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('runFunnelReport request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-        protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+          | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('runFunnelReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.runFunnelReport(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
-        protos.google.analytics.data.v1alpha.IRunFunnelReportRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('runFunnelReport response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .runFunnelReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
+          (
+            | protos.google.analytics.data.v1alpha.IRunFunnelReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('runFunnelReport response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves an audience list of users. After creating an audience, the users
- * are not immediately available for listing. First, a request to
- * `CreateAudienceList` is necessary to create an audience list of users, and
- * then second, this method is used to retrieve the users in the audience
- * list.
- *
- * See [Creating an Audience
- * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
- * for an introduction to Audience Lists with examples.
- *
- * Audiences in Google Analytics 4 allow you to segment your users in the ways
- * that are important to your business. To learn more, see
- * https://support.google.com/analytics/answer/9267572.
- *
- * This method is available at beta stability at
- * [audienceExports.query](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/query).
- * To give your feedback on this API, complete the [Google Analytics Audience
- * Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the audience list to retrieve users from.
- *   Format: `properties/{property}/audienceLists/{audience_list}`
- * @param {number} [request.offset]
- *   Optional. The row count of the start row. The first row is counted as row
- *   0.
- *
- *   When paging, the first request does not specify offset; or equivalently,
- *   sets offset to 0; the first request returns the first `limit` of rows. The
- *   second request sets offset to the `limit` of the first request; the second
- *   request returns the second `limit` of rows.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {number} [request.limit]
- *   Optional. The number of rows to return. If unspecified, 10,000 rows are
- *   returned. The API returns a maximum of 250,000 rows per request, no matter
- *   how many you ask for. `limit` must be positive.
- *
- *   The API can also return fewer rows than the requested `limit`, if there
- *   aren't as many dimension values as the `limit`.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.QueryAudienceListResponse|QueryAudienceListResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async
- */
+  /**
+   * Retrieves an audience list of users. After creating an audience, the users
+   * are not immediately available for listing. First, a request to
+   * `CreateAudienceList` is necessary to create an audience list of users, and
+   * then second, this method is used to retrieve the users in the audience
+   * list.
+   *
+   * See [Creating an Audience
+   * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+   * for an introduction to Audience Lists with examples.
+   *
+   * Audiences in Google Analytics 4 allow you to segment your users in the ways
+   * that are important to your business. To learn more, see
+   * https://support.google.com/analytics/answer/9267572.
+   *
+   * This method is available at beta stability at
+   * [audienceExports.query](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/query).
+   * To give your feedback on this API, complete the [Google Analytics Audience
+   * Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the audience list to retrieve users from.
+   *   Format: `properties/{property}/audienceLists/{audience_list}`
+   * @param {number} [request.offset]
+   *   Optional. The row count of the start row. The first row is counted as row
+   *   0.
+   *
+   *   When paging, the first request does not specify offset; or equivalently,
+   *   sets offset to 0; the first request returns the first `limit` of rows. The
+   *   second request sets offset to the `limit` of the first request; the second
+   *   request returns the second `limit` of rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} [request.limit]
+   *   Optional. The number of rows to return. If unspecified, 10,000 rows are
+   *   returned. The API returns a maximum of 250,000 rows per request, no matter
+   *   how many you ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.QueryAudienceListResponse|QueryAudienceListResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async
+   */
   queryAudienceList(
-      request?: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-        protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+      (
+        | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   queryAudienceList(
-      request: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-          protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+      | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryAudienceList(
-      request: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-          protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+      | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryAudienceList(
-      request?: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IQueryAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-          protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-          protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-        protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+      | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+      (
+        | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryAudienceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-        protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+          | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryAudienceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryAudienceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
-        protos.google.analytics.data.v1alpha.IQueryAudienceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryAudienceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IQueryAudienceListResponse,
+          (
+            | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryAudienceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets configuration metadata about a specific audience list. This method
- * can be used to understand an audience list after it has been created.
- *
- * See [Creating an Audience
- * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
- * for an introduction to Audience Lists with examples.
- *
- * This method is available at beta stability at
- * [audienceExports.get](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/get).
- * To give your feedback on this API, complete the
- * [Google Analytics Audience Export API
- * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The audience list resource name.
- *   Format: `properties/{property}/audienceLists/{audience_list}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetAudienceList_async
- */
+  /**
+   * Gets configuration metadata about a specific audience list. This method
+   * can be used to understand an audience list after it has been created.
+   *
+   * See [Creating an Audience
+   * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+   * for an introduction to Audience Lists with examples.
+   *
+   * This method is available at beta stability at
+   * [audienceExports.get](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/get).
+   * To give your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The audience list resource name.
+   *   Format: `properties/{property}/audienceLists/{audience_list}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetAudienceList_async
+   */
   getAudienceList(
-      request?: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IAudienceList,
-        protos.google.analytics.data.v1alpha.IGetAudienceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IAudienceList,
+      protos.google.analytics.data.v1alpha.IGetAudienceListRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAudienceList(
-      request: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IAudienceList,
-          protos.google.analytics.data.v1alpha.IGetAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAudienceList(
-      request: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IAudienceList,
-          protos.google.analytics.data.v1alpha.IGetAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAudienceList(
-      request?: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IGetAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IAudienceList,
-          protos.google.analytics.data.v1alpha.IGetAudienceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IAudienceList,
-          protos.google.analytics.data.v1alpha.IGetAudienceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IAudienceList,
-        protos.google.analytics.data.v1alpha.IGetAudienceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IAudienceList,
+      protos.google.analytics.data.v1alpha.IGetAudienceListRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAudienceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IAudienceList,
-        protos.google.analytics.data.v1alpha.IGetAudienceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IAudienceList,
+          | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAudienceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAudienceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IAudienceList,
-        protos.google.analytics.data.v1alpha.IGetAudienceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAudienceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IAudienceList,
+          (
+            | protos.google.analytics.data.v1alpha.IGetAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAudienceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a recurring audience list. Recurring audience lists produces new
- * audience lists each day. Audience lists are users in an audience at the
- * time of the list's creation.
- *
- * A recurring audience list ensures that you have audience list based on the
- * most recent data available for use each day. If you manually create
- * audience list, you don't know when an audience list based on an additional
- * day's data is available. This recurring audience list automates the
- * creation of an audience list when an additional day's data is available.
- * You will consume fewer quota tokens by using recurring audience list versus
- * manually creating audience list at various times of day trying to guess
- * when an additional day's data is ready.
- *
- * This method is introduced at alpha stability with the intention of
- * gathering feedback on syntax and capabilities before entering beta. To give
- * your feedback on this API, complete the
- * [Google Analytics Audience Export API
- * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this recurring audience list will be
- *   created. Format: `properties/{property}`
- * @param {google.analytics.data.v1alpha.RecurringAudienceList} request.recurringAudienceList
- *   Required. The recurring audience list to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateRecurringAudienceList_async
- */
+  /**
+   * Creates a recurring audience list. Recurring audience lists produces new
+   * audience lists each day. Audience lists are users in an audience at the
+   * time of the list's creation.
+   *
+   * A recurring audience list ensures that you have audience list based on the
+   * most recent data available for use each day. If you manually create
+   * audience list, you don't know when an audience list based on an additional
+   * day's data is available. This recurring audience list automates the
+   * creation of an audience list when an additional day's data is available.
+   * You will consume fewer quota tokens by using recurring audience list versus
+   * manually creating audience list at various times of day trying to guess
+   * when an additional day's data is ready.
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this recurring audience list will be
+   *   created. Format: `properties/{property}`
+   * @param {google.analytics.data.v1alpha.RecurringAudienceList} request.recurringAudienceList
+   *   Required. The recurring audience list to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateRecurringAudienceList_async
+   */
   createRecurringAudienceList(
-      request?: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createRecurringAudienceList(
-      request: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRecurringAudienceList(
-      request: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRecurringAudienceList(
-      request?: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createRecurringAudienceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRecurringAudienceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createRecurringAudienceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createRecurringAudienceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createRecurringAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          (
+            | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRecurringAudienceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets configuration metadata about a specific recurring audience list. This
- * method can be used to understand a recurring audience list's state after it
- * has been created. For example, a recurring audience list resource will
- * generate audience list instances for each day, and this method can be used
- * to get the resource name of the most recent audience list instance.
- *
- * This method is introduced at alpha stability with the intention of
- * gathering feedback on syntax and capabilities before entering beta. To give
- * your feedback on this API, complete the
- * [Google Analytics Audience Export API
- * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The recurring audience list resource name.
- *   Format:
- *   `properties/{property}/recurringAudienceLists/{recurring_audience_list}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetRecurringAudienceList_async
- */
+  /**
+   * Gets configuration metadata about a specific recurring audience list. This
+   * method can be used to understand a recurring audience list's state after it
+   * has been created. For example, a recurring audience list resource will
+   * generate audience list instances for each day, and this method can be used
+   * to get the resource name of the most recent audience list instance.
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The recurring audience list resource name.
+   *   Format:
+   *   `properties/{property}/recurringAudienceLists/{recurring_audience_list}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetRecurringAudienceList_async
+   */
   getRecurringAudienceList(
-      request?: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRecurringAudienceList(
-      request: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRecurringAudienceList(
-      request: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRecurringAudienceList(
-      request?: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-          protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRecurringAudienceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRecurringAudienceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRecurringAudienceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList,
-        protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRecurringAudienceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRecurringAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          (
+            | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRecurringAudienceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get all property quotas organized by quota category for a given property.
- * This will charge 1 property quota from the category with the most quota.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Quotas from this property will be listed in the response.
- *   Format: `properties/{property}/propertyQuotasSnapshot`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.PropertyQuotasSnapshot|PropertyQuotasSnapshot}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async
- */
+  /**
+   * Get all property quotas organized by quota category for a given property.
+   * This will charge 1 property quota from the category with the most quota.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Quotas from this property will be listed in the response.
+   *   Format: `properties/{property}/propertyQuotasSnapshot`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.PropertyQuotasSnapshot|PropertyQuotasSnapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async
+   */
   getPropertyQuotasSnapshot(
-      request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-        protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      (
+        | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getPropertyQuotasSnapshot(
-      request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-          protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPropertyQuotasSnapshot(
-      request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-          protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPropertyQuotasSnapshot(
-      request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-          protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-          protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-        protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      (
+        | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getPropertyQuotasSnapshot request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-        protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+          | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPropertyQuotasSnapshot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getPropertyQuotasSnapshot(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
-        protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getPropertyQuotasSnapshot response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getPropertyQuotasSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+          (
+            | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPropertyQuotasSnapshot response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves a report task's content. After requesting the `CreateReportTask`,
- * you are able to retrieve the report content once the report is
- * ACTIVE. This method will return an error if the report task's state is not
- * `ACTIVE`. A query response will return the tabular row & column values of
- * the report.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The report source name.
- *   Format: `properties/{property}/reportTasks/{report}`
- * @param {number} [request.offset]
- *   Optional. The row count of the start row in the report. The first row is
- *   counted as row 0.
- *
- *   When paging, the first request does not specify offset; or equivalently,
- *   sets offset to 0; the first request returns the first `limit` of rows. The
- *   second request sets offset to the `limit` of the first request; the second
- *   request returns the second `limit` of rows.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {number} [request.limit]
- *   Optional. The number of rows to return from the report. If unspecified,
- *   10,000 rows are returned. The API returns a maximum of 250,000 rows per
- *   request, no matter how many you ask for. `limit` must be positive.
- *
- *   The API can also return fewer rows than the requested `limit`, if there
- *   aren't as many dimension values as the `limit`. The number of rows
- *   available to a QueryReportTaskRequest is further limited by the limit of
- *   the associated ReportTask. A query can retrieve at most ReportTask.limit
- *   rows. For example, if the ReportTask has a limit of 1,000, then a
- *   QueryReportTask request with offset=900 and limit=500 will return at most
- *   100 rows.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.QueryReportTaskResponse|QueryReportTaskResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.query_report_task.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryReportTask_async
- */
+  /**
+   * Retrieves a report task's content. After requesting the `CreateReportTask`,
+   * you are able to retrieve the report content once the report is
+   * ACTIVE. This method will return an error if the report task's state is not
+   * `ACTIVE`. A query response will return the tabular row & column values of
+   * the report.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The report source name.
+   *   Format: `properties/{property}/reportTasks/{report}`
+   * @param {number} [request.offset]
+   *   Optional. The row count of the start row in the report. The first row is
+   *   counted as row 0.
+   *
+   *   When paging, the first request does not specify offset; or equivalently,
+   *   sets offset to 0; the first request returns the first `limit` of rows. The
+   *   second request sets offset to the `limit` of the first request; the second
+   *   request returns the second `limit` of rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} [request.limit]
+   *   Optional. The number of rows to return from the report. If unspecified,
+   *   10,000 rows are returned. The API returns a maximum of 250,000 rows per
+   *   request, no matter how many you ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`. The number of rows
+   *   available to a QueryReportTaskRequest is further limited by the limit of
+   *   the associated ReportTask. A query can retrieve at most ReportTask.limit
+   *   rows. For example, if the ReportTask has a limit of 1,000, then a
+   *   QueryReportTask request with offset=900 and limit=500 will return at most
+   *   100 rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.QueryReportTaskResponse|QueryReportTaskResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.query_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryReportTask_async
+   */
   queryReportTask(
-      request?: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-        protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      protos.google.analytics.data.v1alpha.IQueryReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   queryReportTask(
-      request: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-          protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryReportTask(
-      request: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-          protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryReportTask(
-      request?: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-          protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-          protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-        protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      protos.google.analytics.data.v1alpha.IQueryReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryReportTask request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-        protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+          | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryReportTask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryReportTask(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
-        protos.google.analytics.data.v1alpha.IQueryReportTaskRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryReportTask response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryReportTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+          (
+            | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryReportTask response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets report metadata about a specific report task. After creating a report
- * task, use this method to check its processing state or inspect its
- * report definition.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The report task resource name.
- *   Format: `properties/{property}/reportTasks/{report_task}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_report_task.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetReportTask_async
- */
+  /**
+   * Gets report metadata about a specific report task. After creating a report
+   * task, use this method to check its processing state or inspect its
+   * report definition.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The report task resource name.
+   *   Format: `properties/{property}/reportTasks/{report_task}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetReportTask_async
+   */
   getReportTask(
-      request?: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IReportTask,
-        protos.google.analytics.data.v1alpha.IGetReportTaskRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask,
+      protos.google.analytics.data.v1alpha.IGetReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getReportTask(
-      request: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IReportTask,
-          protos.google.analytics.data.v1alpha.IGetReportTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IReportTask,
+      | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getReportTask(
-      request: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IReportTask,
-          protos.google.analytics.data.v1alpha.IGetReportTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IReportTask,
+      | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getReportTask(
-      request?: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IReportTask,
-          protos.google.analytics.data.v1alpha.IGetReportTaskRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IReportTask,
-          protos.google.analytics.data.v1alpha.IGetReportTaskRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IReportTask,
-        protos.google.analytics.data.v1alpha.IGetReportTaskRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IReportTask,
+      | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask,
+      protos.google.analytics.data.v1alpha.IGetReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getReportTask request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IReportTask,
-        protos.google.analytics.data.v1alpha.IGetReportTaskRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IReportTask,
+          | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReportTask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getReportTask(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IReportTask,
-        protos.google.analytics.data.v1alpha.IGetReportTaskRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getReportTask response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getReportTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IReportTask,
+          (
+            | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReportTask response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns a customized report of your Google Analytics event data. Reports
- * contain statistics derived from data collected by the Google Analytics
- * tracking code. The data returned from the API is as a table with columns
- * for the requested dimensions and metrics. Metrics are individual
- * measurements of user activity on your property, such as active users or
- * event count. Dimensions break down metrics across some common criteria,
- * such as country or event name.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   Required. A Google Analytics property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   Within a batch request, this property should either be unspecified or
- *   consistent with the batch-level property.
- *
- *   Example: properties/1234
- * @param {number[]} [request.dimensions]
- *   Optional. The dimensions requested and displayed.
- * @param {number[]} [request.metrics]
- *   Optional. The metrics requested and displayed.
- * @param {number[]} [request.dateRanges]
- *   Optional. Date ranges of data to read. If multiple date ranges are
- *   requested, each response row will contain a zero based date range index. If
- *   two date ranges overlap, the event data for the overlapping days is
- *   included in the response rows for both date ranges. In a cohort request,
- *   this `dateRanges` must be unspecified.
- * @param {google.analytics.data.v1alpha.FilterExpression} [request.dimensionFilter]
- *   Optional. Dimension filters let you ask for only specific dimension values
- *   in the report. To learn more, see [Fundamentals of Dimension
- *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
- *   for examples. Metrics cannot be used in this filter.
- * @param {google.analytics.data.v1alpha.FilterExpression} [request.metricFilter]
- *   Optional. The filter clause of metrics. Applied after aggregating the
- *   report's rows, similar to SQL having-clause. Dimensions cannot be used in
- *   this filter.
- * @param {number} [request.offset]
- *   Optional. The row count of the start row. The first row is counted as row
- *   0.
- *
- *   When paging, the first request does not specify offset; or equivalently,
- *   sets offset to 0; the first request returns the first `limit` of rows. The
- *   second request sets offset to the `limit` of the first request; the second
- *   request returns the second `limit` of rows.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {number} [request.limit]
- *   Optional. The maximum number of rows to return. If unspecified, 10,000 rows
- *   are returned. The API returns a maximum of 250,000 rows per request, no
- *   matter how many you ask for. `limit` must be positive.
- *
- *   The API can also return fewer rows than the requested `limit`, if there
- *   aren't as many dimension values as the `limit`. For instance, there are
- *   fewer than 300 possible values for the dimension `country`, so when
- *   reporting on only `country`, you can't get more than 300 rows, even if you
- *   set `limit` to a higher value.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {number[]} [request.metricAggregations]
- *   Optional. Aggregation of metrics. Aggregated metric values will be shown in
- *   rows where the dimension_values are set to "RESERVED_(MetricAggregation)".
- *   Aggregates including both comparisons and multiple date ranges will
- *   be aggregated based on the date ranges.
- * @param {number[]} [request.orderBys]
- *   Optional. Specifies how rows are ordered in the response.
- *   Requests including both comparisons and multiple date ranges will
- *   have order bys applied on the comparisons.
- * @param {string} [request.currencyCode]
- *   Optional. A currency code in ISO4217 format, such as "AED", "USD", "JPY".
- *   If the field is empty, the report uses the property's default currency.
- * @param {google.analytics.data.v1alpha.CohortSpec} [request.cohortSpec]
- *   Optional. Cohort group associated with this request. If there is a cohort
- *   group in the request the 'cohort' dimension must be present.
- * @param {boolean} [request.keepEmptyRows]
- *   Optional. If false or unspecified, each row with all metrics equal to 0
- *   will not be returned. If true, these rows will be returned if they are not
- *   separately removed by a filter.
- *
- *   Regardless of this `keep_empty_rows` setting, only data recorded by the
- *   Google Analytics property can be displayed in a report.
- *
- *   For example if a property never logs a `purchase` event, then a query for
- *   the `eventName` dimension and  `eventCount` metric will not have a row
- *   eventName: "purchase" and eventCount: 0.
- * @param {boolean} [request.returnPropertyQuota]
- *   Optional. Toggles whether to return the current state of this Google
- *   Analytics property's quota. Quota is returned in
- *   [PropertyQuota](#PropertyQuota).
- * @param {number[]} [request.comparisons]
- *   Optional. The configuration of comparisons requested and displayed. The
- *   request only requires a comparisons field in order to receive a comparison
- *   column in the response.
- * @param {google.analytics.data.v1alpha.ConversionSpec} [request.conversionSpec]
- *   Optional. Controls conversion reporting. This field is optional. If this
- *   field is set or any conversion metrics are requested, the report will be a
- *   conversion report.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RunReportResponse|RunReportResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.run_report.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunReport_async
- */
+  /**
+   * Returns a customized report of your Google Analytics event data. Reports
+   * contain statistics derived from data collected by the Google Analytics
+   * tracking code. The data returned from the API is as a table with columns
+   * for the requested dimensions and metrics. Metrics are individual
+   * measurements of user activity on your property, such as active users or
+   * event count. Dimensions break down metrics across some common criteria,
+   * such as country or event name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. A Google Analytics property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   Within a batch request, this property should either be unspecified or
+   *   consistent with the batch-level property.
+   *
+   *   Example: properties/1234
+   * @param {number[]} [request.dimensions]
+   *   Optional. The dimensions requested and displayed.
+   * @param {number[]} [request.metrics]
+   *   Optional. The metrics requested and displayed.
+   * @param {number[]} [request.dateRanges]
+   *   Optional. Date ranges of data to read. If multiple date ranges are
+   *   requested, each response row will contain a zero based date range index. If
+   *   two date ranges overlap, the event data for the overlapping days is
+   *   included in the response rows for both date ranges. In a cohort request,
+   *   this `dateRanges` must be unspecified.
+   * @param {google.analytics.data.v1alpha.FilterExpression} [request.dimensionFilter]
+   *   Optional. Dimension filters let you ask for only specific dimension values
+   *   in the report. To learn more, see [Fundamentals of Dimension
+   *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+   *   for examples. Metrics cannot be used in this filter.
+   * @param {google.analytics.data.v1alpha.FilterExpression} [request.metricFilter]
+   *   Optional. The filter clause of metrics. Applied after aggregating the
+   *   report's rows, similar to SQL having-clause. Dimensions cannot be used in
+   *   this filter.
+   * @param {number} [request.offset]
+   *   Optional. The row count of the start row. The first row is counted as row
+   *   0.
+   *
+   *   When paging, the first request does not specify offset; or equivalently,
+   *   sets offset to 0; the first request returns the first `limit` of rows. The
+   *   second request sets offset to the `limit` of the first request; the second
+   *   request returns the second `limit` of rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} [request.limit]
+   *   Optional. The maximum number of rows to return. If unspecified, 10,000 rows
+   *   are returned. The API returns a maximum of 250,000 rows per request, no
+   *   matter how many you ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`. For instance, there are
+   *   fewer than 300 possible values for the dimension `country`, so when
+   *   reporting on only `country`, you can't get more than 300 rows, even if you
+   *   set `limit` to a higher value.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number[]} [request.metricAggregations]
+   *   Optional. Aggregation of metrics. Aggregated metric values will be shown in
+   *   rows where the dimension_values are set to "RESERVED_(MetricAggregation)".
+   *   Aggregates including both comparisons and multiple date ranges will
+   *   be aggregated based on the date ranges.
+   * @param {number[]} [request.orderBys]
+   *   Optional. Specifies how rows are ordered in the response.
+   *   Requests including both comparisons and multiple date ranges will
+   *   have order bys applied on the comparisons.
+   * @param {string} [request.currencyCode]
+   *   Optional. A currency code in ISO4217 format, such as "AED", "USD", "JPY".
+   *   If the field is empty, the report uses the property's default currency.
+   * @param {google.analytics.data.v1alpha.CohortSpec} [request.cohortSpec]
+   *   Optional. Cohort group associated with this request. If there is a cohort
+   *   group in the request the 'cohort' dimension must be present.
+   * @param {boolean} [request.keepEmptyRows]
+   *   Optional. If false or unspecified, each row with all metrics equal to 0
+   *   will not be returned. If true, these rows will be returned if they are not
+   *   separately removed by a filter.
+   *
+   *   Regardless of this `keep_empty_rows` setting, only data recorded by the
+   *   Google Analytics property can be displayed in a report.
+   *
+   *   For example if a property never logs a `purchase` event, then a query for
+   *   the `eventName` dimension and  `eventCount` metric will not have a row
+   *   eventName: "purchase" and eventCount: 0.
+   * @param {boolean} [request.returnPropertyQuota]
+   *   Optional. Toggles whether to return the current state of this Google
+   *   Analytics property's quota. Quota is returned in
+   *   [PropertyQuota](#PropertyQuota).
+   * @param {number[]} [request.comparisons]
+   *   Optional. The configuration of comparisons requested and displayed. The
+   *   request only requires a comparisons field in order to receive a comparison
+   *   column in the response.
+   * @param {google.analytics.data.v1alpha.ConversionSpec} [request.conversionSpec]
+   *   Optional. Controls conversion reporting. This field is optional. If this
+   *   field is set or any conversion metrics are requested, the report will be a
+   *   conversion report.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RunReportResponse|RunReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.run_report.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunReport_async
+   */
   runReport(
-      request?: protos.google.analytics.data.v1alpha.IRunReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRunReportResponse,
-        protos.google.analytics.data.v1alpha.IRunReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IRunReportRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRunReportResponse,
+      protos.google.analytics.data.v1alpha.IRunReportRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   runReport(
-      request: protos.google.analytics.data.v1alpha.IRunReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRunReportResponse,
-          protos.google.analytics.data.v1alpha.IRunReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IRunReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRunReportResponse,
+      protos.google.analytics.data.v1alpha.IRunReportRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runReport(
-      request: protos.google.analytics.data.v1alpha.IRunReportRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IRunReportResponse,
-          protos.google.analytics.data.v1alpha.IRunReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IRunReportRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRunReportResponse,
+      protos.google.analytics.data.v1alpha.IRunReportRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runReport(
-      request?: protos.google.analytics.data.v1alpha.IRunReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IRunReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IRunReportResponse,
-          protos.google.analytics.data.v1alpha.IRunReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IRunReportResponse,
-          protos.google.analytics.data.v1alpha.IRunReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRunReportResponse,
-        protos.google.analytics.data.v1alpha.IRunReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IRunReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IRunReportResponse,
+      protos.google.analytics.data.v1alpha.IRunReportRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRunReportResponse,
+      protos.google.analytics.data.v1alpha.IRunReportRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('runReport request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IRunReportResponse,
-        protos.google.analytics.data.v1alpha.IRunReportRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRunReportResponse,
+          | protos.google.analytics.data.v1alpha.IRunReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('runReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.runReport(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IRunReportResponse,
-        protos.google.analytics.data.v1alpha.IRunReportRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('runReport response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .runReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IRunReportResponse,
+          protos.google.analytics.data.v1alpha.IRunReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runReport response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns metadata for dimensions and metrics available in reporting methods.
- * Used to explore the dimensions and metrics. In this method, a Google
- * Analytics property identifier is specified in the request, and
- * the metadata response includes Custom dimensions and metrics as well as
- * Universal metadata.
- *
- * For example if a custom metric with parameter name `levels_unlocked` is
- * registered to a property, the Metadata response will contain
- * `customEvent:levels_unlocked`. Universal metadata are dimensions and
- * metrics applicable to any property such as `country` and `totalUsers`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the metadata to retrieve. This name field is
- *   specified in the URL path and not URL parameters. Property is a numeric
- *   Google Analytics property identifier. To learn more, see [where to find
- *   your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *
- *   Example: properties/1234/metadata
- *
- *   Set the Property ID to 0 for dimensions and metrics common to all
- *   properties. In this special mode, this method will not return custom
- *   dimensions and metrics.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.Metadata|Metadata}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_metadata.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetMetadata_async
- */
+  /**
+   * Returns metadata for dimensions and metrics available in reporting methods.
+   * Used to explore the dimensions and metrics. In this method, a Google
+   * Analytics property identifier is specified in the request, and
+   * the metadata response includes Custom dimensions and metrics as well as
+   * Universal metadata.
+   *
+   * For example if a custom metric with parameter name `levels_unlocked` is
+   * registered to a property, the Metadata response will contain
+   * `customEvent:levels_unlocked`. Universal metadata are dimensions and
+   * metrics applicable to any property such as `country` and `totalUsers`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the metadata to retrieve. This name field is
+   *   specified in the URL path and not URL parameters. Property is a numeric
+   *   Google Analytics property identifier. To learn more, see [where to find
+   *   your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *
+   *   Example: properties/1234/metadata
+   *
+   *   Set the Property ID to 0 for dimensions and metrics common to all
+   *   properties. In this special mode, this method will not return custom
+   *   dimensions and metrics.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.Metadata|Metadata}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_metadata.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetMetadata_async
+   */
   getMetadata(
-      request?: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IMetadata,
-        protos.google.analytics.data.v1alpha.IGetMetadataRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IMetadata,
+      protos.google.analytics.data.v1alpha.IGetMetadataRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMetadata(
-      request: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IMetadata,
-          protos.google.analytics.data.v1alpha.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IMetadata,
+      | protos.google.analytics.data.v1alpha.IGetMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMetadata(
-      request: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1alpha.IMetadata,
-          protos.google.analytics.data.v1alpha.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IMetadata,
+      | protos.google.analytics.data.v1alpha.IGetMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMetadata(
-      request?: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1alpha.IMetadata,
-          protos.google.analytics.data.v1alpha.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1alpha.IMetadata,
-          protos.google.analytics.data.v1alpha.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IMetadata,
-        protos.google.analytics.data.v1alpha.IGetMetadataRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IGetMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IMetadata,
+      | protos.google.analytics.data.v1alpha.IGetMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IMetadata,
+      protos.google.analytics.data.v1alpha.IGetMetadataRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMetadata request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.data.v1alpha.IMetadata,
-        protos.google.analytics.data.v1alpha.IGetMetadataRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IMetadata,
+          | protos.google.analytics.data.v1alpha.IGetMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMetadata response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMetadata(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.data.v1alpha.IMetadata,
-        protos.google.analytics.data.v1alpha.IGetMetadataRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMetadata response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IMetadata,
+          protos.google.analytics.data.v1alpha.IGetMetadataRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetadata response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates an audience list for later retrieval. This method quickly returns
- * the audience list's resource name and initiates a long running asynchronous
- * request to form an audience list. To list the users in an audience list,
- * first create the audience list through this method and then send the
- * audience resource name to the `QueryAudienceList` method.
- *
- * See [Creating an Audience
- * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
- * for an introduction to Audience Lists with examples.
- *
- * An audience list is a snapshot of the users currently in the audience at
- * the time of audience list creation. Creating audience lists for one
- * audience on different days will return different results as users enter and
- * exit the audience.
- *
- * Audiences in Google Analytics 4 allow you to segment your users in the ways
- * that are important to your business. To learn more, see
- * https://support.google.com/analytics/answer/9267572. Audience lists contain
- * the users in each audience.
- *
- * This method is available at beta stability at
- * [audienceExports.create](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/create).
- * To give your feedback on this API, complete the [Google Analytics Audience
- * Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this audience list will be created.
- *   Format: `properties/{property}`
- * @param {google.analytics.data.v1alpha.AudienceList} request.audienceList
- *   Required. The audience list to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateAudienceList_async
- */
+  /**
+   * Creates an audience list for later retrieval. This method quickly returns
+   * the audience list's resource name and initiates a long running asynchronous
+   * request to form an audience list. To list the users in an audience list,
+   * first create the audience list through this method and then send the
+   * audience resource name to the `QueryAudienceList` method.
+   *
+   * See [Creating an Audience
+   * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+   * for an introduction to Audience Lists with examples.
+   *
+   * An audience list is a snapshot of the users currently in the audience at
+   * the time of audience list creation. Creating audience lists for one
+   * audience on different days will return different results as users enter and
+   * exit the audience.
+   *
+   * Audiences in Google Analytics 4 allow you to segment your users in the ways
+   * that are important to your business. To learn more, see
+   * https://support.google.com/analytics/answer/9267572. Audience lists contain
+   * the users in each audience.
+   *
+   * This method is available at beta stability at
+   * [audienceExports.create](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/create).
+   * To give your feedback on this API, complete the [Google Analytics Audience
+   * Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this audience list will be created.
+   *   Format: `properties/{property}`
+   * @param {google.analytics.data.v1alpha.AudienceList} request.audienceList
+   *   Required. The audience list to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateAudienceList_async
+   */
   createAudienceList(
-      request?: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.analytics.data.v1alpha.IAudienceList,
+        protos.google.analytics.data.v1alpha.IAudienceListMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAudienceList(
-      request: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IAudienceList,
+        protos.google.analytics.data.v1alpha.IAudienceListMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAudienceList(
-      request: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
-      callback: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IAudienceList,
+        protos.google.analytics.data.v1alpha.IAudienceListMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAudienceList(
-      request?: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.analytics.data.v1alpha.ICreateAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IAudienceList,
+            protos.google.analytics.data.v1alpha.IAudienceListMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IAudienceList,
+        protos.google.analytics.data.v1alpha.IAudienceListMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.analytics.data.v1alpha.IAudienceList,
+        protos.google.analytics.data.v1alpha.IAudienceListMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IAudienceList,
+            protos.google.analytics.data.v1alpha.IAudienceListMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAudienceList response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAudienceList request %j', request);
-    return this.innerApiCalls.createAudienceList(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.analytics.data.v1alpha.IAudienceList, protos.google.analytics.data.v1alpha.IAudienceListMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAudienceList response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAudienceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.analytics.data.v1alpha.IAudienceList,
+            protos.google.analytics.data.v1alpha.IAudienceListMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAudienceList response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAudienceList()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateAudienceList_async
- */
-  async checkCreateAudienceListProgress(name: string): Promise<LROperation<protos.google.analytics.data.v1alpha.AudienceList, protos.google.analytics.data.v1alpha.AudienceListMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createAudienceList()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateAudienceList_async
+   */
+  async checkCreateAudienceListProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.analytics.data.v1alpha.AudienceList,
+      protos.google.analytics.data.v1alpha.AudienceListMetadata
+    >
+  > {
     this._log.info('createAudienceList long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAudienceList, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.analytics.data.v1alpha.AudienceList, protos.google.analytics.data.v1alpha.AudienceListMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAudienceList,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.analytics.data.v1alpha.AudienceList,
+      protos.google.analytics.data.v1alpha.AudienceListMetadata
+    >;
   }
-/**
- * Initiates the creation of a report task. This method quickly
- * returns a report task and initiates a long running
- * asynchronous request to form a customized report of your Google Analytics
- * event data.
- *
- * A report task will be retained and available for querying for 72 hours
- * after it has been created.
- *
- * A report task created by one user can be listed and queried by all users
- * who have access to the property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this report task will be created.
- *   Format: `properties/{propertyId}`
- * @param {google.analytics.data.v1alpha.ReportTask} request.reportTask
- *   Required. The report task configuration to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_report_task.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async
- */
+  /**
+   * Initiates the creation of a report task. This method quickly
+   * returns a report task and initiates a long running
+   * asynchronous request to form a customized report of your Google Analytics
+   * event data.
+   *
+   * A report task will be retained and available for querying for 72 hours
+   * after it has been created.
+   *
+   * A report task created by one user can be listed and queried by all users
+   * who have access to the property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this report task will be created.
+   *   Format: `properties/{propertyId}`
+   * @param {google.analytics.data.v1alpha.ReportTask} request.reportTask
+   *   Required. The report task configuration to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async
+   */
   createReportTask(
-      request?: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createReportTask(
-      request: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createReportTask(
-      request: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
-      callback: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createReportTask(
-      request?: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IReportTask,
+            protos.google.analytics.data.v1alpha.IReportTaskMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IReportTask,
+            protos.google.analytics.data.v1alpha.IReportTaskMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createReportTask response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createReportTask request %j', request);
-    return this.innerApiCalls.createReportTask(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.analytics.data.v1alpha.IReportTask, protos.google.analytics.data.v1alpha.IReportTaskMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createReportTask response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createReportTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.analytics.data.v1alpha.IReportTask,
+            protos.google.analytics.data.v1alpha.IReportTaskMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReportTask response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createReportTask()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_report_task.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async
- */
-  async checkCreateReportTaskProgress(name: string): Promise<LROperation<protos.google.analytics.data.v1alpha.ReportTask, protos.google.analytics.data.v1alpha.ReportTaskMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createReportTask()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async
+   */
+  async checkCreateReportTaskProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.analytics.data.v1alpha.ReportTask,
+      protos.google.analytics.data.v1alpha.ReportTaskMetadata
+    >
+  > {
     this._log.info('createReportTask long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createReportTask, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.analytics.data.v1alpha.ReportTask, protos.google.analytics.data.v1alpha.ReportTaskMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createReportTask,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.analytics.data.v1alpha.ReportTask,
+      protos.google.analytics.data.v1alpha.ReportTaskMetadata
+    >;
   }
- /**
- * Lists all audience lists for a property. This method can be used for you to
- * find and reuse existing audience lists rather than creating unnecessary new
- * audience lists. The same audience can have multiple audience lists that
- * represent the list of users that were in an audience on different days.
- *
- * See [Creating an Audience
- * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
- * for an introduction to Audience Lists with examples.
- *
- * This method is available at beta stability at
- * [audienceExports.list](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/list).
- * To give your feedback on this API, complete the
- * [Google Analytics Audience Export API
- * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All audience lists for this property will be listed in the
- *   response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of audience lists to return. The service may
- *   return fewer than this value. If unspecified, at most 200 audience lists
- *   will be returned. The maximum value is 1000 (higher values will be coerced
- *   to the maximum).
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListAudienceLists` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListAudienceLists` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAudienceListsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all audience lists for a property. This method can be used for you to
+   * find and reuse existing audience lists rather than creating unnecessary new
+   * audience lists. The same audience can have multiple audience lists that
+   * represent the list of users that were in an audience on different days.
+   *
+   * See [Creating an Audience
+   * List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+   * for an introduction to Audience Lists with examples.
+   *
+   * This method is available at beta stability at
+   * [audienceExports.list](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/list).
+   * To give your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All audience lists for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of audience lists to return. The service may
+   *   return fewer than this value. If unspecified, at most 200 audience lists
+   *   will be returned. The maximum value is 1000 (higher values will be coerced
+   *   to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAudienceLists` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAudienceLists` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAudienceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAudienceLists(
-      request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IAudienceList[],
-        protos.google.analytics.data.v1alpha.IListAudienceListsRequest|null,
-        protos.google.analytics.data.v1alpha.IListAudienceListsResponse
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IAudienceList[],
+      protos.google.analytics.data.v1alpha.IListAudienceListsRequest | null,
+      protos.google.analytics.data.v1alpha.IListAudienceListsResponse,
+    ]
+  >;
   listAudienceLists(
-      request: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IAudienceList>): void;
+    request: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IAudienceList
+    >,
+  ): void;
   listAudienceLists(
-      request: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      callback: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IAudienceList>): void;
+    request: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IAudienceList
+    >,
+  ): void;
   listAudienceLists(
-      request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IAudienceList>,
-      callback?: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IAudienceList>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IAudienceList[],
-        protos.google.analytics.data.v1alpha.IListAudienceListsRequest|null,
-        protos.google.analytics.data.v1alpha.IListAudienceListsResponse
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IAudienceList
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IAudienceList
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IAudienceList[],
+      protos.google.analytics.data.v1alpha.IListAudienceListsRequest | null,
+      protos.google.analytics.data.v1alpha.IListAudienceListsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      protos.google.analytics.data.v1alpha.IListAudienceListsResponse|null|undefined,
-      protos.google.analytics.data.v1alpha.IAudienceList>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+          | protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IAudienceList
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAudienceLists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2000,226 +2673,255 @@ export class AlphaAnalyticsDataClient {
     this._log.info('listAudienceLists request %j', request);
     return this.innerApiCalls
       .listAudienceLists(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.analytics.data.v1alpha.IAudienceList[],
-        protos.google.analytics.data.v1alpha.IListAudienceListsRequest|null,
-        protos.google.analytics.data.v1alpha.IListAudienceListsResponse
-      ]) => {
-        this._log.info('listAudienceLists values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1alpha.IAudienceList[],
+          protos.google.analytics.data.v1alpha.IListAudienceListsRequest | null,
+          protos.google.analytics.data.v1alpha.IListAudienceListsResponse,
+        ]) => {
+          this._log.info('listAudienceLists values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAudienceLists`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All audience lists for this property will be listed in the
- *   response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of audience lists to return. The service may
- *   return fewer than this value. If unspecified, at most 200 audience lists
- *   will be returned. The maximum value is 1000 (higher values will be coerced
- *   to the maximum).
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListAudienceLists` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListAudienceLists` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAudienceListsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAudienceLists`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All audience lists for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of audience lists to return. The service may
+   *   return fewer than this value. If unspecified, at most 200 audience lists
+   *   will be returned. The maximum value is 1000 (higher values will be coerced
+   *   to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAudienceLists` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAudienceLists` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAudienceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAudienceListsStream(
-      request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAudienceLists stream %j', request);
     return this.descriptors.page.listAudienceLists.createStream(
       this.innerApiCalls.listAudienceLists as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAudienceLists`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All audience lists for this property will be listed in the
- *   response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of audience lists to return. The service may
- *   return fewer than this value. If unspecified, at most 200 audience lists
- *   will be returned. The maximum value is 1000 (higher values will be coerced
- *   to the maximum).
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListAudienceLists` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListAudienceLists` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListAudienceLists_async
- */
+  /**
+   * Equivalent to `listAudienceLists`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All audience lists for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of audience lists to return. The service may
+   *   return fewer than this value. If unspecified, at most 200 audience lists
+   *   will be returned. The maximum value is 1000 (higher values will be coerced
+   *   to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAudienceLists` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAudienceLists` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.data.v1alpha.AudienceList|AudienceList}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListAudienceLists_async
+   */
   listAudienceListsAsync(
-      request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.analytics.data.v1alpha.IAudienceList>{
+    request?: protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.analytics.data.v1alpha.IAudienceList> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAudienceLists iterate %j', request);
     return this.descriptors.page.listAudienceLists.asyncIterate(
       this.innerApiCalls['listAudienceLists'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.analytics.data.v1alpha.IAudienceList>;
   }
- /**
- * Lists all recurring audience lists for a property. This method can be used
- * for you to find and reuse existing recurring audience lists rather than
- * creating unnecessary new recurring audience lists. The same audience can
- * have multiple recurring audience lists that represent different dimension
- * combinations; for example, just the dimension `deviceId` or both the
- * dimensions `deviceId` and `userId`.
- *
- * This method is introduced at alpha stability with the intention of
- * gathering feedback on syntax and capabilities before entering beta. To give
- * your feedback on this API, complete the
- * [Google Analytics Audience Export API
- * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All recurring audience lists for this property will be listed in
- *   the response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of recurring audience lists to return. The
- *   service may return fewer than this value. If unspecified, at most 200
- *   recurring audience lists will be returned. The maximum value is 1000
- *   (higher values will be coerced to the maximum).
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
- *   page.
- *
- *   When paginating, all other parameters provided to
- *   `ListRecurringAudienceLists` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRecurringAudienceListsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all recurring audience lists for a property. This method can be used
+   * for you to find and reuse existing recurring audience lists rather than
+   * creating unnecessary new recurring audience lists. The same audience can
+   * have multiple recurring audience lists that represent different dimension
+   * combinations; for example, just the dimension `deviceId` or both the
+   * dimensions `deviceId` and `userId`.
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All recurring audience lists for this property will be listed in
+   *   the response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of recurring audience lists to return. The
+   *   service may return fewer than this value. If unspecified, at most 200
+   *   recurring audience lists will be returned. The maximum value is 1000
+   *   (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRecurringAudienceLists` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRecurringAudienceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRecurringAudienceLists(
-      request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
-        protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest|null,
-        protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest | null,
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse,
+    ]
+  >;
   listRecurringAudienceLists(
-      request: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList>): void;
+    request: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList
+    >,
+  ): void;
   listRecurringAudienceLists(
-      request: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      callback: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList>): void;
+    request: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList
+    >,
+  ): void;
   listRecurringAudienceLists(
-      request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList>,
-      callback?: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IRecurringAudienceList>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
-        protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest|null,
-        protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest | null,
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse|null|undefined,
-      protos.google.analytics.data.v1alpha.IRecurringAudienceList>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+          | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRecurringAudienceLists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2228,211 +2930,240 @@ export class AlphaAnalyticsDataClient {
     this._log.info('listRecurringAudienceLists request %j', request);
     return this.innerApiCalls
       .listRecurringAudienceLists(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
-        protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest|null,
-        protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
-      ]) => {
-        this._log.info('listRecurringAudienceLists values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest | null,
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse,
+        ]) => {
+          this._log.info('listRecurringAudienceLists values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listRecurringAudienceLists`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All recurring audience lists for this property will be listed in
- *   the response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of recurring audience lists to return. The
- *   service may return fewer than this value. If unspecified, at most 200
- *   recurring audience lists will be returned. The maximum value is 1000
- *   (higher values will be coerced to the maximum).
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
- *   page.
- *
- *   When paginating, all other parameters provided to
- *   `ListRecurringAudienceLists` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRecurringAudienceListsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRecurringAudienceLists`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All recurring audience lists for this property will be listed in
+   *   the response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of recurring audience lists to return. The
+   *   service may return fewer than this value. If unspecified, at most 200
+   *   recurring audience lists will be returned. The maximum value is 1000
+   *   (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRecurringAudienceLists` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRecurringAudienceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRecurringAudienceListsStream(
-      request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRecurringAudienceLists stream %j', request);
     return this.descriptors.page.listRecurringAudienceLists.createStream(
       this.innerApiCalls.listRecurringAudienceLists as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listRecurringAudienceLists`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All recurring audience lists for this property will be listed in
- *   the response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of recurring audience lists to return. The
- *   service may return fewer than this value. If unspecified, at most 200
- *   recurring audience lists will be returned. The maximum value is 1000
- *   (higher values will be coerced to the maximum).
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
- *   page.
- *
- *   When paginating, all other parameters provided to
- *   `ListRecurringAudienceLists` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_recurring_audience_lists.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListRecurringAudienceLists_async
- */
+  /**
+   * Equivalent to `listRecurringAudienceLists`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All recurring audience lists for this property will be listed in
+   *   the response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of recurring audience lists to return. The
+   *   service may return fewer than this value. If unspecified, at most 200
+   *   recurring audience lists will be returned. The maximum value is 1000
+   *   (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRecurringAudienceLists` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_recurring_audience_lists.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListRecurringAudienceLists_async
+   */
   listRecurringAudienceListsAsync(
-      request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.analytics.data.v1alpha.IRecurringAudienceList>{
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.analytics.data.v1alpha.IRecurringAudienceList> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRecurringAudienceLists iterate %j', request);
     return this.descriptors.page.listRecurringAudienceLists.asyncIterate(
       this.innerApiCalls['listRecurringAudienceLists'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.analytics.data.v1alpha.IRecurringAudienceList>;
   }
- /**
- * Lists all report tasks for a property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All report tasks for this property will be listed in the
- *   response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of report tasks to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListReportTasks` call.
- *   Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listReportTasksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all report tasks for a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All report tasks for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of report tasks to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReportTasks` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReportTasksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReportTasks(
-      request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IReportTask[],
-        protos.google.analytics.data.v1alpha.IListReportTasksRequest|null,
-        protos.google.analytics.data.v1alpha.IListReportTasksResponse
-      ]>;
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask[],
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest | null,
+      protos.google.analytics.data.v1alpha.IListReportTasksResponse,
+    ]
+  >;
   listReportTasks(
-      request: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-          protos.google.analytics.data.v1alpha.IListReportTasksResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IReportTask>): void;
+    request: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+      | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IReportTask
+    >,
+  ): void;
   listReportTasks(
-      request: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      callback: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-          protos.google.analytics.data.v1alpha.IListReportTasksResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IReportTask>): void;
+    request: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+      | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IReportTask
+    >,
+  ): void;
   listReportTasks(
-      request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-          protos.google.analytics.data.v1alpha.IListReportTasksResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IReportTask>,
-      callback?: PaginationCallback<
-          protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-          protos.google.analytics.data.v1alpha.IListReportTasksResponse|null|undefined,
-          protos.google.analytics.data.v1alpha.IReportTask>):
-      Promise<[
-        protos.google.analytics.data.v1alpha.IReportTask[],
-        protos.google.analytics.data.v1alpha.IListReportTasksRequest|null,
-        protos.google.analytics.data.v1alpha.IListReportTasksResponse
-      ]>|void {
+          | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IReportTask
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+      | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IReportTask
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask[],
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest | null,
+      protos.google.analytics.data.v1alpha.IListReportTasksResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      protos.google.analytics.data.v1alpha.IListReportTasksResponse|null|undefined,
-      protos.google.analytics.data.v1alpha.IReportTask>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+          | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IReportTask
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReportTasks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2441,113 +3172,117 @@ export class AlphaAnalyticsDataClient {
     this._log.info('listReportTasks request %j', request);
     return this.innerApiCalls
       .listReportTasks(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.analytics.data.v1alpha.IReportTask[],
-        protos.google.analytics.data.v1alpha.IListReportTasksRequest|null,
-        protos.google.analytics.data.v1alpha.IListReportTasksResponse
-      ]) => {
-        this._log.info('listReportTasks values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1alpha.IReportTask[],
+          protos.google.analytics.data.v1alpha.IListReportTasksRequest | null,
+          protos.google.analytics.data.v1alpha.IListReportTasksResponse,
+        ]) => {
+          this._log.info('listReportTasks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listReportTasks`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All report tasks for this property will be listed in the
- *   response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of report tasks to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListReportTasks` call.
- *   Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listReportTasksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listReportTasks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All report tasks for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of report tasks to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReportTasks` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReportTasksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReportTasksStream(
-      request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReportTasks stream %j', request);
     return this.descriptors.page.listReportTasks.createStream(
       this.innerApiCalls.listReportTasks as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listReportTasks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. All report tasks for this property will be listed in the
- *   response. Format: `properties/{property}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of report tasks to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListReportTasks` call.
- *   Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js</caption>
- * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListReportTasks_async
- */
+  /**
+   * Equivalent to `listReportTasks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All report tasks for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of report tasks to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReportTasks` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListReportTasks_async
+   */
   listReportTasksAsync(
-      request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.analytics.data.v1alpha.IReportTask>{
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.analytics.data.v1alpha.IReportTask> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReportTasks iterate %j', request);
     return this.descriptors.page.listReportTasks.asyncIterate(
       this.innerApiCalls['listReportTasks'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.analytics.data.v1alpha.IReportTask>;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2590,22 +3325,22 @@ export class AlphaAnalyticsDataClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2640,15 +3375,15 @@ export class AlphaAnalyticsDataClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2682,7 +3417,7 @@ export class AlphaAnalyticsDataClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2695,25 +3430,24 @@ export class AlphaAnalyticsDataClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2752,22 +3486,22 @@ export class AlphaAnalyticsDataClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2782,7 +3516,7 @@ export class AlphaAnalyticsDataClient {
    * @param {string} audience_list
    * @returns {string} Resource name string.
    */
-  audienceListPath(property:string,audienceList:string) {
+  audienceListPath(property: string, audienceList: string) {
     return this.pathTemplates.audienceListPathTemplate.render({
       property: property,
       audience_list: audienceList,
@@ -2797,7 +3531,8 @@ export class AlphaAnalyticsDataClient {
    * @returns {string} A string representing the property.
    */
   matchPropertyFromAudienceListName(audienceListName: string) {
-    return this.pathTemplates.audienceListPathTemplate.match(audienceListName).property;
+    return this.pathTemplates.audienceListPathTemplate.match(audienceListName)
+      .property;
   }
 
   /**
@@ -2808,7 +3543,8 @@ export class AlphaAnalyticsDataClient {
    * @returns {string} A string representing the audience_list.
    */
   matchAudienceListFromAudienceListName(audienceListName: string) {
-    return this.pathTemplates.audienceListPathTemplate.match(audienceListName).audience_list;
+    return this.pathTemplates.audienceListPathTemplate.match(audienceListName)
+      .audience_list;
   }
 
   /**
@@ -2817,7 +3553,7 @@ export class AlphaAnalyticsDataClient {
    * @param {string} property
    * @returns {string} Resource name string.
    */
-  metadataPath(property:string) {
+  metadataPath(property: string) {
     return this.pathTemplates.metadataPathTemplate.render({
       property: property,
     });
@@ -2840,7 +3576,7 @@ export class AlphaAnalyticsDataClient {
    * @param {string} property
    * @returns {string} Resource name string.
    */
-  propertyPath(property:string) {
+  propertyPath(property: string) {
     return this.pathTemplates.propertyPathTemplate.render({
       property: property,
     });
@@ -2863,7 +3599,7 @@ export class AlphaAnalyticsDataClient {
    * @param {string} property
    * @returns {string} Resource name string.
    */
-  propertyQuotasSnapshotPath(property:string) {
+  propertyQuotasSnapshotPath(property: string) {
     return this.pathTemplates.propertyQuotasSnapshotPathTemplate.render({
       property: property,
     });
@@ -2876,8 +3612,12 @@ export class AlphaAnalyticsDataClient {
    *   A fully-qualified path representing PropertyQuotasSnapshot resource.
    * @returns {string} A string representing the property.
    */
-  matchPropertyFromPropertyQuotasSnapshotName(propertyQuotasSnapshotName: string) {
-    return this.pathTemplates.propertyQuotasSnapshotPathTemplate.match(propertyQuotasSnapshotName).property;
+  matchPropertyFromPropertyQuotasSnapshotName(
+    propertyQuotasSnapshotName: string,
+  ) {
+    return this.pathTemplates.propertyQuotasSnapshotPathTemplate.match(
+      propertyQuotasSnapshotName,
+    ).property;
   }
 
   /**
@@ -2887,7 +3627,7 @@ export class AlphaAnalyticsDataClient {
    * @param {string} recurring_audience_list
    * @returns {string} Resource name string.
    */
-  recurringAudienceListPath(property:string,recurringAudienceList:string) {
+  recurringAudienceListPath(property: string, recurringAudienceList: string) {
     return this.pathTemplates.recurringAudienceListPathTemplate.render({
       property: property,
       recurring_audience_list: recurringAudienceList,
@@ -2901,8 +3641,12 @@ export class AlphaAnalyticsDataClient {
    *   A fully-qualified path representing RecurringAudienceList resource.
    * @returns {string} A string representing the property.
    */
-  matchPropertyFromRecurringAudienceListName(recurringAudienceListName: string) {
-    return this.pathTemplates.recurringAudienceListPathTemplate.match(recurringAudienceListName).property;
+  matchPropertyFromRecurringAudienceListName(
+    recurringAudienceListName: string,
+  ) {
+    return this.pathTemplates.recurringAudienceListPathTemplate.match(
+      recurringAudienceListName,
+    ).property;
   }
 
   /**
@@ -2912,8 +3656,12 @@ export class AlphaAnalyticsDataClient {
    *   A fully-qualified path representing RecurringAudienceList resource.
    * @returns {string} A string representing the recurring_audience_list.
    */
-  matchRecurringAudienceListFromRecurringAudienceListName(recurringAudienceListName: string) {
-    return this.pathTemplates.recurringAudienceListPathTemplate.match(recurringAudienceListName).recurring_audience_list;
+  matchRecurringAudienceListFromRecurringAudienceListName(
+    recurringAudienceListName: string,
+  ) {
+    return this.pathTemplates.recurringAudienceListPathTemplate.match(
+      recurringAudienceListName,
+    ).recurring_audience_list;
   }
 
   /**
@@ -2923,7 +3671,7 @@ export class AlphaAnalyticsDataClient {
    * @param {string} report_task
    * @returns {string} Resource name string.
    */
-  reportTaskPath(property:string,reportTask:string) {
+  reportTaskPath(property: string, reportTask: string) {
     return this.pathTemplates.reportTaskPathTemplate.render({
       property: property,
       report_task: reportTask,
@@ -2938,7 +3686,8 @@ export class AlphaAnalyticsDataClient {
    * @returns {string} A string representing the property.
    */
   matchPropertyFromReportTaskName(reportTaskName: string) {
-    return this.pathTemplates.reportTaskPathTemplate.match(reportTaskName).property;
+    return this.pathTemplates.reportTaskPathTemplate.match(reportTaskName)
+      .property;
   }
 
   /**
@@ -2949,7 +3698,8 @@ export class AlphaAnalyticsDataClient {
    * @returns {string} A string representing the report_task.
    */
   matchReportTaskFromReportTaskName(reportTaskName: string) {
-    return this.pathTemplates.reportTaskPathTemplate.match(reportTaskName).report_task;
+    return this.pathTemplates.reportTaskPathTemplate.match(reportTaskName)
+      .report_task;
   }
 
   /**
@@ -2960,7 +3710,7 @@ export class AlphaAnalyticsDataClient {
    */
   close(): Promise<void> {
     if (this.alphaAnalyticsDataStub && !this._terminated) {
-      return this.alphaAnalyticsDataStub.then(stub => {
+      return this.alphaAnalyticsDataStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

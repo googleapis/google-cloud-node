@@ -28,7 +28,7 @@ import {
 import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {
   getRuntimeTrackingString,
   getModuleFormat,
@@ -108,7 +108,7 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    */
   authClient?: {
     request: <T>(
-      opts: GaxiosOptions,
+      opts: GaxiosOptions
     ) => Promise<GaxiosResponse<T>> | GaxiosPromise<T>;
   };
 
@@ -265,8 +265,7 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
 }
 
 export interface ConfigMetadata {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: unknown;
 
   /**
    * Set the length of the object being uploaded. If uploading a partial
@@ -282,6 +281,7 @@ export interface ConfigMetadata {
 
 export interface GoogleInnerError {
   reason?: string;
+  message?: string;
 }
 
 export interface ApiError extends Error {
@@ -310,7 +310,7 @@ export class Upload extends Writable {
    */
   authClient: {
     request: <T>(
-      opts: GaxiosOptions,
+      opts: GaxiosOptions
     ) => Promise<GaxiosResponse<T>> | GaxiosPromise<T>;
   };
   cacheKey: string;
@@ -338,9 +338,9 @@ export class Upload extends Writable {
   isPartialUpload: boolean;
 
   private currentInvocationId = {
-    checkUploadStatus: uuid.v4(),
-    chunk: uuid.v4(),
-    uri: uuid.v4(),
+    checkUploadStatus: crypto.randomUUID(),
+    chunk: crypto.randomUUID(),
+    uri: crypto.randomUUID(),
   };
   /**
    * A cache of buffers written to this instance, ready for consuming
@@ -372,13 +372,13 @@ export class Upload extends Writable {
 
     if (cfg.offset && !cfg.uri) {
       throw new RangeError(
-        'Cannot provide an `offset` without providing a `uri`',
+        'Cannot provide an `offset` without providing a `uri`'
       );
     }
 
     if (cfg.isPartialUpload && !cfg.chunkSize) {
       throw new RangeError(
-        'Cannot set `isPartialUpload` without providing a `chunkSize`',
+        'Cannot set `isPartialUpload` without providing a `chunkSize`'
       );
     }
 
@@ -505,17 +505,25 @@ export class Upload extends Writable {
 
     this.once('writing', () => {
       if (this.uri) {
-        this.continueUploading();
+        this.continueUploading().catch(err => this.destroy(err));
       } else {
         this.createURI(err => {
           if (err) {
-            return this.destroy(err);
+            this.destroy(err);
+            return;
           }
-          this.startUploading();
-          return;
+          this.handleStartUploading();
         });
       }
     });
+  }
+
+  /**
+   * Handle start uploading.
+   * @private
+   */
+  private handleStartUploading(): void {
+    this.startUploading().catch(err => this.destroy(err));
   }
 
   /**
@@ -545,7 +553,7 @@ export class Upload extends Writable {
   _write(
     chunk: Buffer | string,
     encoding: BufferEncoding,
-    readCallback = () => {},
+    readCallback = () => {}
   ) {
     // Backwards-compatible event
     this.emit('writing');
@@ -589,7 +597,7 @@ export class Upload extends Writable {
   #validateChecksum(
     clientHash: string | undefined,
     serverHash: string | undefined,
-    hashType: 'CRC32C' | 'MD5',
+    hashType: 'CRC32C' | 'MD5'
   ): boolean {
     // Only validate if both client and server hashes are present.
     if (clientHash && serverHash) {
@@ -786,7 +794,14 @@ export class Upload extends Writable {
     if (!callback) {
       return this.createURIAsync();
     }
-    this.createURIAsync().then(r => callback(null, r), callback);
+    void (async () => {
+      try {
+        const r = await this.createURIAsync();
+        callback(null, r);
+      } catch (err) {
+        callback(err as Error);
+      }
+    })();
   }
 
   protected async createURIAsync(): Promise<string> {
@@ -822,7 +837,7 @@ export class Upload extends Writable {
           name: this.file,
           uploadType: 'resumable',
         },
-        this.params,
+        this.params
       ),
       data: metadata,
       headers: {
@@ -861,7 +876,7 @@ export class Upload extends Writable {
         try {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
-          this.currentInvocationId.uri = uuid.v4();
+          this.currentInvocationId.uri = crypto.randomUUID();
           return res.headers.location;
         } catch (err) {
           const e = err as GaxiosError;
@@ -890,7 +905,7 @@ export class Upload extends Writable {
         factor: this.retryOptions.retryDelayMultiplier,
         maxTimeout: this.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.retryOptions.totalTimeout! * 1000, //convert to milliseconds
-      },
+      }
     );
 
     this.uri = uri;
@@ -1103,7 +1118,7 @@ export class Upload extends Writable {
     }
 
     // At this point we can safely create a new id for the chunk
-    this.currentInvocationId.chunk = uuid.v4();
+    this.currentInvocationId.chunk = crypto.randomUUID();
 
     const moreDataToUpload = await this.waitForNextChunk();
 
@@ -1144,7 +1159,7 @@ export class Upload extends Writable {
       }
 
       // continue uploading next chunk
-      this.continueUploading();
+      this.continueUploading().catch(err => this.destroy(err));
     } else if (
       !this.isSuccessfulResponse(resp.status) &&
       !shouldContinueUploadInAnotherRequest
@@ -1173,7 +1188,7 @@ export class Upload extends Writable {
         this.#validateChecksum(
           clientCrc32cToValidate,
           serverCrc32c,
-          'CRC32C',
+          'CRC32C'
         ) ||
         this.#validateChecksum(clientMd5HashToValidate, serverMd5, 'MD5')
       ) {
@@ -1206,7 +1221,7 @@ export class Upload extends Writable {
    * @returns the current upload status
    */
   async checkUploadStatus(
-    config: CheckUploadStatusConfig = {},
+    config: CheckUploadStatusConfig = {}
   ): Promise<GaxiosResponse<FileMetadata | void>> {
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
       packageJson.version
@@ -1233,7 +1248,7 @@ export class Upload extends Writable {
       const resp = await this.makeRequest(opts);
 
       // Successfully got the offset we can now create a new offset invocation id
-      this.currentInvocationId.checkUploadStatus = uuid.v4();
+      this.currentInvocationId.checkUploadStatus = crypto.randomUUID();
 
       return resp;
     } catch (e) {
@@ -1251,7 +1266,7 @@ export class Upload extends Writable {
         throw e;
       }
 
-      await new Promise(res => setTimeout(res, retryDelay));
+      await new Promise(resolve => setTimeout(resolve, retryDelay));
 
       return this.checkUploadStatus(config);
     }
@@ -1315,7 +1330,7 @@ export class Upload extends Writable {
     };
 
     const res = await this.authClient.request<{error?: object}>(
-      combinedReqOpts,
+      combinedReqOpts
     );
     if (res.data && res.data.error) {
       throw res.data.error;
@@ -1379,15 +1394,13 @@ export class Upload extends Writable {
         resp.status === NOT_FOUND_STATUS_CODE &&
         this.numChunksReadInRequest === 0
       ) {
-        this.startUploading();
+        this.startUploading().catch(err => this.destroy(err));
       } else {
         const retryDelay = this.getRetryDelay();
 
         if (retryDelay <= 0) {
           this.destroy(
-            new Error(
-              `Retry total time limit exceeded - ${JSON.stringify(resp.data)}`,
-            ),
+            buildRetryError('Retry total time limit exceeded', resp)
           );
           return;
         }
@@ -1408,9 +1421,7 @@ export class Upload extends Writable {
       }
       this.numRetries++;
     } else {
-      this.destroy(
-        new Error(`Retry limit exceeded - ${JSON.stringify(resp.data)}`),
-      );
+      this.destroy(buildRetryError('Retry limit exceeded', resp));
     }
   }
 
@@ -1455,6 +1466,86 @@ export class Upload extends Writable {
   }
 }
 
+function buildRetryError(
+  prefix: string,
+  resp: Pick<GaxiosResponse, 'data' | 'status'>
+): Error {
+  const parts: string[] = [];
+
+  if (typeof resp.status === 'number' && !isNaN(resp.status)) {
+    parts.push(`status: ${resp.status}`);
+  }
+
+  const err = resp.data;
+  if (err !== undefined && err !== null) {
+    if (typeof err === 'object') {
+      const gaxiosErrLike = err as {
+        message?: unknown;
+        status?: number;
+        response?: {
+          status?: number;
+          statusText?: string;
+          data?: unknown;
+        };
+        code?: string | number;
+      };
+      const errParts: string[] = [];
+      if (gaxiosErrLike.message) {
+        errParts.push(String(gaxiosErrLike.message));
+      }
+      const status = gaxiosErrLike.status ?? gaxiosErrLike.response?.status;
+      if (
+        typeof status === 'number' &&
+        !isNaN(status) &&
+        status !== resp.status
+      ) {
+        errParts.push(`status: ${status}`);
+      }
+      const statusText = gaxiosErrLike.response?.statusText;
+      if (statusText) {
+        errParts.push(`statusText: ${statusText}`);
+      }
+      const responseData = gaxiosErrLike.response?.data;
+      if (
+        responseData !== undefined &&
+        responseData !== null &&
+        responseData !== ''
+      ) {
+        errParts.push(
+          `response: ${
+            typeof responseData === 'object'
+              ? JSON.stringify(responseData)
+              : responseData
+          }`
+        );
+      }
+      if (gaxiosErrLike.code) {
+        errParts.push(`code: ${String(gaxiosErrLike.code)}`);
+      }
+
+      if (errParts.length > 0) {
+        parts.push(...errParts);
+      } else if (err instanceof Error) {
+        parts.push(err.toString() || err.name || 'Unknown Error');
+      } else {
+        const stringified = JSON.stringify(err);
+        if (stringified && stringified !== '{}') {
+          parts.push(stringified);
+        }
+      }
+    } else if (typeof err === 'string') {
+      if (err !== '') {
+        parts.push(err);
+      }
+    } else {
+      parts.push(String(err));
+    }
+  }
+
+  const suffix = parts.join(' - ');
+  return new Error(`${prefix} - ${suffix || 'Unknown Error'}`);
+}
+
 export function upload(cfg: UploadConfig) {
   return new Upload(cfg);
 }
@@ -1463,13 +1554,20 @@ export function createURI(cfg: UploadConfig): Promise<string>;
 export function createURI(cfg: UploadConfig, callback: CreateUriCallback): void;
 export function createURI(
   cfg: UploadConfig,
-  callback?: CreateUriCallback,
+  callback?: CreateUriCallback
 ): void | Promise<string> {
   const up = new Upload(cfg);
   if (!callback) {
     return up.createURI();
   }
-  up.createURI().then(r => callback(null, r), callback);
+  void (async () => {
+    try {
+      const r = await up.createURI();
+      callback(null, r);
+    } catch (err) {
+      callback(err as Error);
+    }
+  })();
 }
 
 /**
@@ -1479,7 +1577,7 @@ export function createURI(
  * @returns the current upload status
  */
 export function checkUploadStatus(
-  cfg: UploadConfig & Required<Pick<UploadConfig, 'uri'>>,
+  cfg: UploadConfig & Required<Pick<UploadConfig, 'uri'>>
 ) {
   const up = new Upload(cfg);
 

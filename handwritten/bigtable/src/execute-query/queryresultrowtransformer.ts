@@ -13,7 +13,8 @@
 // limitations under the License.
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 import Long = require('long');
 
 import {

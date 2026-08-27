@@ -85,7 +85,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update model | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/auto_ml.update_model.js) |
 | batch predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/prediction_service.batch_predict.js) |
 | predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/prediction_service.predict.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1/snippet_metadata_google.cloud.automl.v1.json) |
 | create dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_dataset.js) |
 | create model | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.create_model.js) |
 | delete dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.delete_dataset.js) |
@@ -112,7 +111,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update table spec | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/auto_ml.update_table_spec.js) |
 | batch predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.batch_predict.js) |
 | predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/prediction_service.predict.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/samples/generated/v1beta1/snippet_metadata_google.cloud.automl.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -146,7 +144,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -156,7 +154,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-automl/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

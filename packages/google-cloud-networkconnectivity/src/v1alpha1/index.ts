@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {HubServiceClient} from './hub_service_client';
+export { HubServiceClient } from './hub_service_client';

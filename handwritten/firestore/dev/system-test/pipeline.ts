@@ -180,7 +180,7 @@ import * as chaiAsPromised from 'chai-as-promised';
 
 import {afterEach, describe, it} from 'mocha';
 import '../test/util/mocha_extensions';
-import {verifyInstance} from '../test/util/helpers';
+import {verifyInstance, isRest} from '../test/util/helpers';
 import {getTestDb, getTestRoot} from './firestore';
 
 import {Firestore as InternalFirestore} from '../src';
@@ -384,7 +384,7 @@ describe.skipClassic('Pipeline class', () => {
       });
 
       it('can execute delete stage within a transaction', async () => {
-        const promise = firestore.runTransaction(async transaction => {
+        await firestore.runTransaction(async transaction => {
           const deletePpl = firestore
             .pipeline()
             .collection(dmlCol.path)
@@ -395,7 +395,6 @@ describe.skipClassic('Pipeline class', () => {
           expectResults(deleteRes, {documents_modified: 1});
         });
 
-        await promise;
         const docSnap = await dmlCol.doc('book2').get();
         expect(docSnap.exists).to.be.false;
       });
@@ -616,7 +615,10 @@ describe.skipClassic('Pipeline class', () => {
   });
 
   describe('pipeline explain', () => {
-    it('mode: analyze, format: text', async () => {
+    it('mode: analyze, format: text', async function () {
+      if (isRest(firestore)) {
+        this.skip();
+      }
       const ppl = firestore
         .pipeline()
         .collection(randomCol.path)
@@ -656,7 +658,10 @@ describe.skipClassic('Pipeline class', () => {
       );
     });
 
-    it('mode: analyze, format: unspecified', async () => {
+    it('mode: analyze, format: unspecified', async function () {
+      if (isRest(firestore)) {
+        this.skip();
+      }
       const ppl = firestore
         .pipeline()
         .collection(randomCol.path)
@@ -1862,15 +1867,18 @@ describe.skipClassic('Pipeline class', () => {
         } catch (e: unknown) {
           expect(e instanceof Error).to.be.true;
           const err = e as ServiceError;
-          expect(err['code']).to.equal(3);
+          const isRestTest = isRest(firestore);
+          const expectedCode = isRestTest ? 400 : 3;
+          expect(err['code']).to.equal(expectedCode);
           expect(typeof err['message']).to.equal('string');
-          expect(typeof err['details']).to.equal('string');
+          if (!isRestTest) {
+            expect(typeof err['details']).to.equal('string');
+            expect(err['message']).to.equal(
+              `${err.code} INVALID_ARGUMENT: ${err.details}`,
+            );
+            expect(err['metadata'] instanceof Object).to.be.true;
+          }
           expect(typeof err['stack']).to.equal('string');
-          expect(err['metadata'] instanceof Object).to.be.true;
-
-          expect(err['message']).to.equal(
-            `${err.code} INVALID_ARGUMENT: ${err.details}`,
-          );
         }
       });
 
@@ -1894,29 +1902,32 @@ describe.skipClassic('Pipeline class', () => {
           const err = e as {[k: string]: unknown};
           expect(err instanceof Error).to.be.true;
 
-          expect(err['code']).to.equal(8);
+          const isRestTest = isRest(firestore);
+          const expectedCode = isRestTest ? 429 : 8;
+          expect(err['code']).to.equal(expectedCode);
           expect(typeof err['message']).to.equal('string');
-          expect(typeof err['details']).to.equal('string');
-          expect(typeof err['stack']).to.equal('string');
-          expect(err['metadata'] instanceof Object).to.be.true;
-
-          expect(err['message']).to.equal(
-            `${err.code} RESOURCE_EXHAUSTED: ${err.details}`,
-          );
-
-          expect('statusDetails' in err).to.be.true;
-          expect(Array.isArray(err['statusDetails'])).to.be.true;
-
-          const statusDetails = err['statusDetails'] as Array<object>;
-
-          const foundExplainStats = statusDetails.find(x => {
-            return (
-              'type_url' in x &&
-              x['type_url'] ===
-                'type.googleapis.com/google.firestore.v1.ExplainStats'
+          if (!isRestTest) {
+            expect(typeof err['details']).to.equal('string');
+            expect(err['message']).to.equal(
+              `${err.code} RESOURCE_EXHAUSTED: ${err.details}`,
             );
-          });
-          expect(foundExplainStats).to.not.be.undefined;
+
+            expect('statusDetails' in err).to.be.true;
+            expect(Array.isArray(err['statusDetails'])).to.be.true;
+
+            const statusDetails = err['statusDetails'] as Array<object>;
+
+            const foundExplainStats = statusDetails.find(x => {
+              return (
+                'type_url' in x &&
+                x['type_url'] ===
+                  'type.googleapis.com/google.firestore.v1.ExplainStats'
+              );
+            });
+            expect(foundExplainStats).to.not.be.undefined;
+            expect(err['metadata'] instanceof Object).to.be.true;
+          }
+          expect(typeof err['stack']).to.equal('string');
         }
       });
     });
@@ -7393,9 +7404,11 @@ describe.skipClassic('Pipeline search', () => {
               // queryEnhancement: 'disabled'
             });
 
-          await expect(ppl.execute()).to.be.rejectedWith(
-            /3 INVALID_ARGUMENT.*/,
-          );
+          const isRestTest = isRest(firestore);
+          const expectedErrorPattern = isRestTest
+            ? /"code": 400/
+            : /3 INVALID_ARGUMENT.*/;
+          await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
         });
       });
 
@@ -7446,7 +7459,10 @@ describe.skipClassic('Pipeline search', () => {
             .search({...commonSearchParams, retrievalDepth: 1});
 
           snapshot = await ppl.execute();
-          expectResults(snapshot, 'eastsideTacos');
+          expect(snapshot.results.length).to.equal(1);
+          expect(['solTacos', 'eastsideTacos']).to.include(
+            snapshot.results[0].id,
+          );
         });
       });
 

@@ -40,7 +40,7 @@ function main(parent, source) {
   // const source = {}
 
   // Imports the Securitycenter library
-  const {SecurityCenterClient} = require('@google-cloud/securitycenter').v2;
+  const {SecurityCenterClient} = require('@google-cloud/security-center').v2;
 
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();

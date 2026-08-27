@@ -16,6 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DiscussServiceClient} from './discuss_service_client';
-export {ModelServiceClient} from './model_service_client';
-export {TextServiceClient} from './text_service_client';
+export { DiscussServiceClient } from './discuss_service_client';
+export { ModelServiceClient } from './model_service_client';
+export { TextServiceClient } from './text_service_client';

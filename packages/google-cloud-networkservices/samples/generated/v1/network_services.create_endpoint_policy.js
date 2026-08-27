@@ -30,7 +30,7 @@ function main(parent, endpointPolicyId, endpointPolicy) {
    */
   /**
    *  Required. The parent resource of the EndpointPolicy. Must be in the
-   *  format `projects/* /locations/global`.
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

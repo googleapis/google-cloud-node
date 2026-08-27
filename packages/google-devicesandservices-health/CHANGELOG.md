@@ -1,5 +1,51 @@
 # Changelog
 
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.0...health-v0.6.1) (2026-08-26)
+
+
+### Bug Fixes
+
+* Upgrade sinon types for health package ([#9202](https://github.com/googleapis/google-cloud-node/issues/9202)) ([b312515](https://github.com/googleapis/google-cloud-node/commit/b312515bcd60c767532ebd0dabf23d95014e0a86))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.5.0...health-v0.6.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.4.0...health-v0.5.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.3.0...health-v0.4.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.2.0...health-v0.3.0) (2026-06-01)
+
+
+### Features
+
+* [health] introduce MedicalDeviceInfo message for Software as Medical Device (SaMD) metadata tracking ([#8328](https://github.com/googleapis/google-cloud-node/issues/8328)) ([8f540c7](https://github.com/googleapis/google-cloud-node/commit/8f540c744695c8c5133260130ab967c991daa317))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.1.0...health-v0.2.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## 0.1.0 (2026-05-12)
 
 

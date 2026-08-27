@@ -37,7 +37,7 @@ service ContentService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `Content` object.
+  // Retrieves a `Content` object.
   rpc GetContent(GetContentRequest) returns (Content) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/content/*}"
@@ -45,7 +45,7 @@ service ContentService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `Content` objects.
+  // Lists `Content` objects.
   rpc ListContent(ListContentRequest) returns (ListContentResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=networks/*}/content"
@@ -94,11 +94,23 @@ message ListContentRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>name</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `cmsMetadataValues`
+  // * `cmsSources.contentSource`
+  // * `cmsSources.contentSourceDisplayName`
+  // * `contentBundles`
+  // * `contentStatusSource`
+  // * `dashIngestStatus`
+  // * `displayName`
+  // * `duration`
+  // * `hlsIngestStatus`
+  // * `importTime`
+  // * `lastDashIngestTime`
+  // * `lastHlsIngestTime`
+  // * `name`
+  // * `status`
+  // * `updateTime`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

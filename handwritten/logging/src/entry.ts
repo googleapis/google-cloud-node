@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const EventId = require('eventid');
 import * as extend from 'extend';
-import {google} from '../protos/protos';
+import {EventId} from './utils/event-id';
+import {protos} from '@google-cloud/logging-api';
+import google = protos.google;
 import {
   objToStruct,
   structToObj,

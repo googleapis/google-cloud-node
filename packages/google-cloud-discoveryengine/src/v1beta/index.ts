@@ -16,6 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export { AclConfigServiceClient } from './acl_config_service_client';
+export { AssistantServiceClient } from './assistant_service_client';
+export { CmekConfigServiceClient } from './cmek_config_service_client';
 export { CompletionServiceClient } from './completion_service_client';
 export { ControlServiceClient } from './control_service_client';
 export { ConversationalSearchServiceClient } from './conversational_search_service_client';
@@ -24,6 +27,8 @@ export { DocumentServiceClient } from './document_service_client';
 export { EngineServiceClient } from './engine_service_client';
 export { EvaluationServiceClient } from './evaluation_service_client';
 export { GroundedGenerationServiceClient } from './grounded_generation_service_client';
+export { IdentityMappingStoreServiceClient } from './identity_mapping_store_service_client';
+export { LicenseConfigServiceClient } from './license_config_service_client';
 export { ProjectServiceClient } from './project_service_client';
 export { RankServiceClient } from './rank_service_client';
 export { RecommendationServiceClient } from './recommendation_service_client';
@@ -36,3 +41,5 @@ export { ServingConfigServiceClient } from './serving_config_service_client';
 export { SessionServiceClient } from './session_service_client';
 export { SiteSearchEngineServiceClient } from './site_search_engine_service_client';
 export { UserEventServiceClient } from './user_event_service_client';
+export { UserLicenseServiceClient } from './user_license_service_client';
+export { UserStoreServiceClient } from './user_store_service_client';

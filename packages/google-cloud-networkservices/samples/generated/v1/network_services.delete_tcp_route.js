@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the TcpRoute to delete. Must be in the format
-   *  `projects/* /locations/global/tcpRoutes/*`.
+   *  `projects/* /locations/* /tcpRoutes/*`.
    */
   // const name = 'abc123'
 

@@ -28,7 +28,6 @@
  */
 
 import * as http from 'http';
-import * as uuid from 'uuid';
 import * as crypto from 'crypto';
 import {trace, isSpanContextValid} from '@opentelemetry/api';
 
@@ -151,7 +150,7 @@ function toCloudTraceContext(
  * makeCloudTraceHeader generates valid X-Cloud-Trace-Context trace and spanId.
  */
 function makeCloudTraceHeader(): string {
-  const trace = uuid.v4().replace(/-/g, '');
+  const trace = crypto.randomUUID().replace(/-/g, '');
   const spanId = spanRandomBuffer().toString('hex');
   return `${trace}/${spanId}`;
 }

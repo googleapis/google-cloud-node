@@ -1,6 +1,33 @@
 # Changelog
 
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v6.0.0...bigquery-storage-v6.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.2...bigquery-storage-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update bigquery-storage to minimum Node version of 22. ([#9041](https://github.com/googleapis/google-cloud-node/issues/9041))
+
+### Features
+
+* **bigquery-storage:** Split GAPIC from the bigquery-storage handwritten package ([#8930](https://github.com/googleapis/google-cloud-node/issues/8930)) ([93c7200](https://github.com/googleapis/google-cloud-node/commit/93c7200475f6844cdf5b63437543f680033c1f8b))
+* Update bigquery-storage to minimum Node version of 22. ([#9041](https://github.com/googleapis/google-cloud-node/issues/9041)) ([9d8dbe6](https://github.com/googleapis/google-cloud-node/commit/9d8dbe65d1b4fc212dea931a4c739e1cc7661b85)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.1...bigquery-storage-v5.1.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+* **deps:** Update dependency protobufjs to v7.5.5 [security] ([#8071](https://github.com/googleapis/google-cloud-node/issues/8071)) ([ea623da](https://github.com/googleapis/google-cloud-node/commit/ea623da20f374cfa480fb9fdb7758afd0a993a8e))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.0...bigquery-storage-v5.1.1) (2026-05-13)
 
 

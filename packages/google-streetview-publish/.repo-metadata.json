@@ -1,17 +1,16 @@
 {
-  "name": "publish",
-  "name_pretty": "",
-  "product_documentation": "",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/publish/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@googlemaps/streetview-publish",
-  "api_id": "",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "publish"
+    "api_description": "Publishes 360 photos to Google Maps, along with position, orientation, and\nconnectivity metadata. Apps can offer an interface for positioning,\nconnecting, and uploading user-generated Street View images.",
+    "api_id": "streetviewpublish.googleapis.com",
+    "api_shortname": "streetviewpublish",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/publish/latest",
+    "default_version": "v1",
+    "distribution_name": "@googlemaps/streetview-publish",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=316970&template=1019235",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "streetviewpublish",
+    "name_pretty": "Street View Publish",
+    "product_documentation": "https://developers.google.com/streetview/publish",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

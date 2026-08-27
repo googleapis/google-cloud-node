@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.2.0...capacityplanner-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.1.3...capacityplanner-v0.2.0) (2026-06-29)
+
+
+### Features
+
+* Migrate google-cloud-capacityplanner to librarian v0.22.0 ([#8773](https://github.com/googleapis/google-cloud-node/issues/8773)) ([d9399f0](https://github.com/googleapis/google-cloud-node/commit/d9399f0cf44b79e2b38ce429b17709ee9845544e))
+
 ## [0.1.3](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.1.2...capacityplanner-v0.1.3) (2026-05-01)
 
 

@@ -24,7 +24,15 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListProjectFirewallEndpoints": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetFirewallEndpoint": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetProjectFirewallEndpoint": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -32,11 +40,23 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateProjectFirewallEndpoint": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteFirewallEndpoint": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DeleteProjectFirewallEndpoint": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateFirewallEndpoint": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateProjectFirewallEndpoint": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {IdentityAwareProxyAdminV1Beta1Client} from './identity_aware_proxy_admin_v1_beta1_client';
+export { IdentityAwareProxyAdminV1Beta1Client } from './identity_aware_proxy_admin_v1_beta1_client';

@@ -1,5 +1,30 @@
 # Changelog
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v6.0.0...dialogflow-cx-v6.0.1) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in REST transcoder ([#9151](https://github.com/googleapis/google-cloud-node/issues/9151)) ([0152a8e](https://github.com/googleapis/google-cloud-node/commit/0152a8ee36592d90f435336fda95993c9cbd227a))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.2...dialogflow-cx-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [5.8.2](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.1...dialogflow-cx-v5.8.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.0...dialogflow-cx-v5.8.1) (2026-05-01)
 
 

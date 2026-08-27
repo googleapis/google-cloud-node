@@ -22,7 +22,7 @@ import {common as protobuf} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {PassThrough} from 'stream';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as opentelemetry from '@opentelemetry/api';
 import {google} from '../protos/protos';
 import * as defer from 'p-defer';
@@ -60,8 +60,8 @@ class FakePubSub {
   }
 }
 
-const projectId = uuid.v4();
-const subId = uuid.v4();
+const projectId = crypto.randomUUID();
+const subId = crypto.randomUUID();
 
 class FakeSubscription {
   name = `projects/${projectId}/subscriptions/${subId}`;
@@ -170,11 +170,11 @@ class FakePreciseDate {
 }
 
 const RECEIVED_MESSAGE = {
-  ackId: uuid.v4(),
+  ackId: crypto.randomUUID(),
   message: {
     attributes: {},
     data: Buffer.from('Hello, world!'),
-    messageId: uuid.v4(),
+    messageId: crypto.randomUUID(),
     orderingKey: 'ordering-key',
     publishTime: {seconds: 12, nanos: 32},
   },
@@ -452,7 +452,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -470,7 +470,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -946,7 +946,7 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
+        'INFO',
       );
       assert.strictEqual(fakeLog.args![1], message.id);
     });
@@ -1168,13 +1168,13 @@ describe('Subscriber', () => {
         tracing.spanContextToContext(parentSpanContext)!,
       );
       const messageWithSpanContext = {
-        ackId: uuid.v4(),
+        ackId: crypto.randomUUID(),
         message: {
           attributes: {
             [tracing.modernAttributeName]: JSON.stringify(parentSpanContext),
           },
           data: Buffer.from('Hello, world!'),
-          messageId: uuid.v4(),
+          messageId: crypto.randomUUID(),
           orderingKey: 'ordering-key',
           publishTime: {seconds: 12, nanos: 32},
         },
@@ -1200,7 +1200,10 @@ describe('Subscriber', () => {
       assert.strictEqual(spans[0].events.length, 2);
       const firstSpan = spans.pop();
       assert.ok(firstSpan);
-      assert.strictEqual(firstSpan.parentSpanId, parentSpanContext.spanId);
+      assert.strictEqual(
+        firstSpan.parentSpanContext?.spanId,
+        parentSpanContext.spanId,
+      );
       assert.strictEqual(
         firstSpan.name,
         `${subId} subscribe`,
