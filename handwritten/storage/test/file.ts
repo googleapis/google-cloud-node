@@ -690,7 +690,10 @@ describe('File', () => {
 
       file.bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(newFile.encryptionKey, file.encryptionKey);
-        assert.strictEqual(newFile.encryptionKeyBase64, file.encryptionKeyBase64);
+        assert.strictEqual(
+          newFile.encryptionKeyBase64,
+          file.encryptionKeyBase64
+        );
         assert.strictEqual(newFile.encryptionKeyHash, file.encryptionKeyHash);
 
         assert.strictEqual(
@@ -878,10 +881,7 @@ describe('File', () => {
           reqOpts.headers!['x-goog-encryption-key-sha256'],
           undefined
         );
-        assert.strictEqual(
-          reqOpts.qs.destinationKmsKeyName,
-          kmsKeyName
-        );
+        assert.strictEqual(reqOpts.qs.destinationKmsKeyName, kmsKeyName);
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
         assert.strictEqual(newFile.encryptionKey, undefined);
         assert.strictEqual(reqOpts.json.kmsKeyName, undefined);
@@ -968,9 +968,7 @@ describe('File', () => {
         const newFileName = '/new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
         // File uri encodes file name when calling this.bucket.request during copy
-        const expectedPath = `/o/${encodeURIComponent(
-          file.name
-        )}/rewriteTo/b/${
+        const expectedPath = `/o/${encodeURIComponent(file.name)}/rewriteTo/b/${
           file.bucket.name
         }/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
@@ -4966,7 +4964,7 @@ describe('File', () => {
         callback();
       };
 
-      file.rotateEncryptionKey(newKey, (err: any) => {
+      file.rotateEncryptionKey(newKey, (err: unknown) => {
         assert.ifError(err);
         assert.strictEqual(file.encryptionKey, newKey);
         done();
@@ -4991,7 +4989,7 @@ describe('File', () => {
         callback();
       };
 
-      file.rotateEncryptionKey({kmsKeyName}, (err: any) => {
+      file.rotateEncryptionKey({kmsKeyName}, (err: unknown) => {
         assert.ifError(err);
         assert.strictEqual(file.encryptionKey, null);
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
@@ -5018,7 +5016,7 @@ describe('File', () => {
         callback(copyError);
       };
 
-      file.rotateEncryptionKey(newKey, (err: any) => {
+      file.rotateEncryptionKey(newKey, (err: unknown) => {
         assert.strictEqual(err, copyError);
         assert.strictEqual(file.encryptionKey, oldKey);
         done();

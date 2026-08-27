@@ -1469,9 +1469,7 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     const destinationKmsKeyName =
-      options.destinationKmsKeyName ||
-      options.kmsKeyName ||
-      newFile.kmsKeyName;
+      options.destinationKmsKeyName || options.kmsKeyName || newFile.kmsKeyName;
 
     if (
       this.encryptionKey &&
@@ -1519,9 +1517,9 @@ class File extends ServiceObject<File, FileMetadata> {
       {
         method: 'POST',
         uri: `/o/${encodeURIComponent(
-          this.name,
+          this.name
         )}/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(
-          newFile.name,
+          newFile.name
         )}`,
         qs: query,
         json: options,
