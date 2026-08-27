@@ -3129,7 +3129,7 @@ describe('File', () => {
 
         assert.throws(
           () => {
-            file.generateSignedPostPolicyV2(
+            void file.generateSignedPostPolicyV2(
               {
                 expires,
               },
@@ -3161,7 +3161,7 @@ describe('File', () => {
       });
     });
 
-    describe('equality condition', () => {
+    describe('equality conditions', () => {
       it('should add equality conditions (array of arrays)', done => {
         file.generateSignedPostPolicyV2(
           {
@@ -3755,7 +3755,7 @@ describe('File', () => {
 
         assert.throws(
           () => {
-            file.generateSignedPostPolicyV4(
+            void file.generateSignedPostPolicyV4(
               {
                 expires,
               },
@@ -3958,7 +3958,7 @@ describe('File', () => {
         optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
         cb: MetadataCallback<FileMetadata>
       ) => {
-        setImmediate(() => cb(null, apiResponse as unknown as FileMetadata));
+        process.nextTick(() => cb(null, apiResponse));
       };
 
       file.makePrivate((err: Error, apiResponse_: {}) => {
