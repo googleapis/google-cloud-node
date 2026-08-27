@@ -61,9 +61,11 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     }
 
     this._lastExported = now;
-    this._exportAsync(metrics).then(resultCallback, err => {
-      resultCallback({code: ExportResultCode.FAILED, error: err});
-    });
+    this._exportAsync(metrics)
+      .then(resultCallback)
+      .catch(err => {
+        resultCallback({code: ExportResultCode.FAILED, error: err});
+      });
   }
 
   async shutdown(): Promise<void> {}

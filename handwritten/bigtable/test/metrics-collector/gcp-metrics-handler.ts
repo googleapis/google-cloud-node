@@ -59,6 +59,20 @@ function cleanMetrics(metrics: ResourceMetrics): ResourceMetrics {
     });
   });
 
+  if (newMetrics.resource && newMetrics.resource._attributes) {
+    const allowed = [
+      'service.name',
+      'telemetry.sdk.language',
+      'telemetry.sdk.name',
+      'telemetry.sdk.version',
+    ];
+    for (const key of Object.keys(newMetrics.resource._attributes)) {
+      if (!allowed.includes(key)) {
+        delete newMetrics.resource._attributes[key];
+      }
+    }
+  }
+
   return newMetrics;
 }
 
