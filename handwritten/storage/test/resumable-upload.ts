@@ -3042,9 +3042,13 @@ describe('resumable-upload', () => {
           status: 429,
           statusText: 'Too Many Requests',
           data: '',
-          config: {},
+          config: {
+            method: 'POST',
+            url: new URL('https://example.com'),
+            headers: new Headers(),
+          },
           headers: {},
-        } as GaxiosResponse,
+        } as unknown as GaxiosResponse,
       );
 
       up.on('error', (err: Error) => {
@@ -3086,7 +3090,11 @@ describe('resumable-upload', () => {
               code: 400,
             },
           },
-          config: {},
+          config: {
+            method: 'POST',
+            url: new URL('https://example.com'),
+            headers: new Headers(),
+          },
           headers: {},
         } as GaxiosResponse,
       );
