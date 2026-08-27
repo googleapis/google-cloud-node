@@ -120,7 +120,10 @@ describe('ResourceStream', () => {
     it('should pass in the query options', () => {
       stream._read();
 
-      expect(requestSpy).toHaveBeenLastCalledWith(config.query, expect.any(Function));
+      expect(requestSpy).toHaveBeenLastCalledWith(
+        config.query,
+        expect.any(Function),
+      );
     });
 
     it('should destroy the stream if an error occurs', () => {

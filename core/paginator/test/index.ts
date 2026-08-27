@@ -14,8 +14,7 @@
 
 import {PassThrough, Transform} from 'stream';
 import * as crypto from 'crypto';
-import * as P from '../src';
-import {paginator, ParsedArguments} from '../src';
+import type {ParsedArguments} from '../src';
 
 const util = {
   noop: () => {
@@ -23,7 +22,7 @@ const util = {
   },
 };
 
-class FakeResourceStream extends Transform {
+class mockFakeResourceStream extends Transform {
   calledWith: unknown[];
   constructor(...args: unknown[]) {
     super({objectMode: true});
@@ -33,20 +32,13 @@ class FakeResourceStream extends Transform {
 
 // Mock the resource-stream module so runAsStream_ instantiates the fake class
 jest.mock('../src/resource-stream', () => {
-  const {Transform} = require('stream');
   return {
-    ResourceStream: class FakeResourceStream extends Transform {
-      calledWith: unknown[];
-      constructor(...args: unknown[]) {
-        super({objectMode: true});
-        this.calledWith = args;
-      }
-    },
+    ResourceStream: mockFakeResourceStream,
   };
 });
 
 // Retrieve the mocked ResourceStream class to check instances
-import {ResourceStream} from '../src/resource-stream';
+import {paginator, ResourceStream} from '../src';
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -54,7 +46,7 @@ afterEach(() => {
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 function createFakeStream<T = any>() {
-  return new PassThrough({objectMode: true}) as P.ResourceStream<T>;
+  return new PassThrough({objectMode: true}) as ResourceStream<T>;
 }
 
 describe('paginator', () => {
