@@ -118,7 +118,7 @@ const fakePromisify = {
 };
 
 const fsCached = fs;
-const safeFs: any = {};
+const safeFs: Record<string, unknown> = {};
 const descriptors = Object.getOwnPropertyDescriptors(fsCached);
 for (const key of Object.keys(descriptors)) {
   const desc = descriptors[key];
@@ -126,7 +126,7 @@ for (const key of Object.keys(descriptors)) {
     Object.defineProperty(safeFs, key, desc);
   }
 }
-const fakeFs = {...safeFs} as typeof fs;
+const fakeFs = {...safeFs} as unknown as typeof fs;
 
 const zlibCached = zlib;
 let createGunzipOverride: Function | null;
@@ -3370,33 +3370,41 @@ describe('File', () => {
       it('should throw if a date is invalid', () => {
         const expires = new Date('31-12-2019');
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_INVALID;
-        });
+        assert.throws(
+          () => {
+            void file.generateSignedPostPolicyV2(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: ExceptionMessages.EXPIRATION_DATE_INVALID,
+          }
+        );
       });
 
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_PAST;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: ExceptionMessages.EXPIRATION_DATE_PAST,
+          }
+        );
       });
     });
 
-    describe('equality condition', () => {
+    describe('equality conditions', () => {
       it('should add equality conditions (array of arrays)', done => {
         file.generateSignedPostPolicyV2(
           {
@@ -3428,29 +3436,37 @@ describe('File', () => {
       });
 
       it('should throw if equal condition is not an array', () => {
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires: Date.now() + 2000,
-              equals: [{}],
-            },
-            () => {}
-          ),
-            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires: Date.now() + 2000,
+                equals: [{}],
+              },
+              () => {}
+            );
+          },
+          {
+            message: FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS,
+          }
+        );
       });
 
       it('should throw if equal condition length is not 2', () => {
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires: Date.now() + 2000,
-              equals: [['1', '2', '3']],
-            },
-            () => {}
-          ),
-            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires: Date.now() + 2000,
+                equals: [['1', '2', '3']],
+              },
+              () => {}
+            );
+          },
+          {
+            message: FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS,
+          }
+        );
       });
     });
 
@@ -3486,29 +3502,37 @@ describe('File', () => {
       });
 
       it('should throw if prefix condition is not an array', () => {
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires: Date.now() + 2000,
-              startsWith: [{}],
-            },
-            () => {}
-          ),
-            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires: Date.now() + 2000,
+                startsWith: [{}],
+              },
+              () => {}
+            );
+          },
+          {
+            message: FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS,
+          }
+        );
       });
 
       it('should throw if prefix condition length is not 2', () => {
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires: Date.now() + 2000,
-              startsWith: [['1', '2', '3']],
-            },
-            () => {}
-          ),
-            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires: Date.now() + 2000,
+                startsWith: [['1', '2', '3']],
+              },
+              () => {}
+            );
+          },
+          {
+            message: FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS,
+          }
+        );
       });
     });
 
@@ -3529,29 +3553,37 @@ describe('File', () => {
       });
 
       it('should throw if content length has no min', () => {
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires: Date.now() + 2000,
-              contentLengthRange: [{max: 1}],
-            },
-            () => {}
-          ),
-            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires: Date.now() + 2000,
+                contentLengthRange: [{max: 1}],
+              },
+              () => {}
+            );
+          },
+          {
+            message: FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX,
+          }
+        );
       });
 
       it('should throw if content length has no max', () => {
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires: Date.now() + 2000,
-              contentLengthRange: [{min: 0}],
-            },
-            () => {}
-          ),
-            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV2(
+              {
+                expires: Date.now() + 2000,
+                contentLengthRange: [{min: 0}],
+              },
+              () => {}
+            );
+          },
+          {
+            message: FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX,
+          }
+        );
       });
     });
   });
@@ -3928,43 +3960,55 @@ describe('File', () => {
       it('should throw if a date is invalid', () => {
         const expires = new Date('31-12-2019');
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV4(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_INVALID;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV4(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: ExceptionMessages.EXPIRATION_DATE_INVALID,
+          }
+        );
       });
 
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV4(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_PAST;
-        });
+        assert.throws(
+          () => {
+            file.generateSignedPostPolicyV4(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: ExceptionMessages.EXPIRATION_DATE_PAST,
+          }
+        );
       });
 
       it('should throw if a date beyond 7 days is given', () => {
         const expires = Date.now() + 7.1 * 24 * 60 * 60 * 1000;
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV4(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            {message: 'Max allowed expiration is seven days (604800 seconds).'};
-        });
+        assert.throws(
+          () => {
+            void file.generateSignedPostPolicyV4(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: 'Max allowed expiration is seven days (604800 seconds).',
+          }
+        );
       });
     });
   });
@@ -4157,7 +4201,7 @@ describe('File', () => {
         optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
         cb: MetadataCallback<FileMetadata>
       ) => {
-        Promise.resolve([apiResponse]).then(resp => cb(null, ...resp));
+        process.nextTick(() => cb(null, apiResponse));
       };
 
       file.makePrivate((err: Error, apiResponse_: {}) => {
@@ -5399,6 +5443,26 @@ describe('File', () => {
 
       file.save(DATA, assert.ifError);
     });
+
+    it('should return a promise when a callback is provided', async () => {
+      file.createWriteStream = () => {
+        const writeStream = new PassThrough();
+        setImmediate(() => {
+          writeStream.emit('finish');
+        });
+        return writeStream;
+      };
+
+      let callbackCalled = false;
+      const promise = file.save(DATA, (err?: Error | null) => {
+        assert.ifError(err);
+        callbackCalled = true;
+      }) as unknown as Promise<void>;
+
+      assert(promise instanceof Promise);
+      await promise;
+      assert.strictEqual(callbackCalled, true);
+    });
   });
 
   describe('setMetadata', () => {
@@ -5619,7 +5683,6 @@ describe('File', () => {
       assert.strictEqual(sentMetadata.contexts.custom['empty-key'].value, '');
     });
   });
-
 
   describe('setStorageClass', () => {
     const STORAGE_CLASS = 'new_storage_class';
