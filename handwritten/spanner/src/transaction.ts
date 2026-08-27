@@ -32,7 +32,14 @@ import {
 } from './partial-result-stream';
 import {Session} from './session';
 import {Key} from './table';
-import {Span} from './instrument';
+import {
+  Span,
+  ObservabilityOptions,
+  startTrace,
+  setSpanError,
+  setSpanErrorAndException,
+  traceConfig,
+} from './instrument';
 import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {protos} from '@google-cloud/spanner-api';
 import spannerClient = protos.google;
@@ -43,13 +50,6 @@ import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
 import {Database, Spanner} from '.';
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
-import {
-  ObservabilityOptions,
-  startTrace,
-  setSpanError,
-  setSpanErrorAndException,
-  traceConfig,
-} from './instrument';
 import {RunTransactionOptions} from './transaction-runner';
 import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
 
@@ -1852,9 +1852,7 @@ export class Snapshot extends EventEmitter {
    */
   protected _getDirectedReadOptions(
     directedReadOptions:
-      | google.spanner.v1.IDirectedReadOptions
-      | null
-      | undefined,
+      google.spanner.v1.IDirectedReadOptions | null | undefined,
   ) {
     if (
       !directedReadOptions &&
@@ -2911,8 +2909,7 @@ export class Transaction extends Dml {
   ): void;
   rollback(
     gaxOptionsOrCallback?:
-      | CallOptions
-      | spannerClient.spanner.v1.Spanner.RollbackCallback,
+      CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
     let gaxOpts =

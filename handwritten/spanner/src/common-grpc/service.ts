@@ -27,7 +27,17 @@ import {
   ServiceConfig,
   util,
 } from '@google-cloud/common';
-import {replaceProjectIdToken} from '../helper';
+import {
+  replaceProjectIdToken,
+  isArray,
+  isBoolean,
+  isError,
+  isNull,
+  isNumber,
+  isObject,
+  isString,
+  isUndefined,
+} from '../helper';
 import {
   loadSync,
   PackageDefinition,
@@ -40,16 +50,6 @@ import {grpc, GrpcClient} from 'google-gax';
 import {Request, Response} from 'teeny-request';
 import * as retryRequest from 'retry-request';
 import {Duplex, PassThrough} from 'stream';
-import {
-  isArray,
-  isBoolean,
-  isError,
-  isNull,
-  isNumber,
-  isObject,
-  isString,
-  isUndefined,
-} from '../helper';
 
 const gaxProtoPath = path.join(
   path.dirname(require.resolve('google-gax')),

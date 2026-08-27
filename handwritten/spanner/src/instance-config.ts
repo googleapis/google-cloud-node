@@ -18,7 +18,7 @@ const common = require('./common-grpc/service-object');
 
 import {protos} from '@google-cloud/spanner-api';
 import instanceAdmin = protos.google;
-import {Operation as GaxOperation} from 'google-gax';
+import {Operation as GaxOperation, CallOptions, grpc} from 'google-gax';
 import snakeCase = require('lodash.snakecase');
 import {
   CLOUD_RESOURCE_HEADER,
@@ -36,7 +36,6 @@ import {
   Spanner,
 } from './index';
 import {promisifyAll} from '@google-cloud/promisify';
-import {CallOptions, grpc} from 'google-gax';
 
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
@@ -404,8 +403,7 @@ class InstanceConfig extends common.GrpcServiceObject {
   ): void;
   delete(
     optionsOrCallback?:
-      | DeleteInstanceConfigRequest
-      | DeleteInstanceConfigCallback,
+      DeleteInstanceConfigRequest | DeleteInstanceConfigCallback,
     cb?: DeleteInstanceConfigCallback,
   ): void | Promise<DeleteInstanceConfigResponse> {
     const config =
