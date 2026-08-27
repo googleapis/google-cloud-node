@@ -599,7 +599,7 @@ describe('paginator', () => {
         const stream = paginator.runAsStream_(
           fakeArgs,
           fakeFn,
-        ) as unknown as FakeResourceStream;
+        ) as unknown as mockFakeResourceStream;
 
         expect(stream instanceof ResourceStream).toBe(true);
         const [args, requestFn] = (stream as any).calledWith;
