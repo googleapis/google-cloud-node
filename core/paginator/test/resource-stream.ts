@@ -132,7 +132,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(fakeError);
 
       expect(stub).toHaveBeenCalledTimes(1);
@@ -144,7 +144,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, [], fakeQuery);
 
       expect(stream._nextQuery).toBe(fakeQuery);
@@ -156,7 +156,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, [], {}, fakeRes, anotherArg);
 
       expect(stream._otherArgs).toEqual([fakeRes, anotherArg]);
@@ -171,7 +171,7 @@ describe('ResourceStream', () => {
       stream._read();
 
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, results);
 
       expect(stream._resultsToSend).toBe(expected);
@@ -183,7 +183,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, results, {});
 
       expect(stub).toHaveBeenCalledTimes(results.length);
@@ -201,7 +201,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, results, {});
 
       expect(requestSpy).toHaveBeenCalledTimes(1);
@@ -212,7 +212,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, []);
 
       expect(stub).toHaveBeenCalledTimes(1);
@@ -226,7 +226,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, results, {});
 
       expect(stub).toHaveBeenCalledTimes(1);
@@ -239,7 +239,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, [], {});
 
       expect(stub).toHaveBeenCalledTimes(1);
@@ -251,7 +251,7 @@ describe('ResourceStream', () => {
       const results = Array(stream.readableHighWaterMark).fill({});
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, results, {});
 
       const stub = jest.spyOn(stream, '_read').mockImplementation();
@@ -267,7 +267,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, [{}], {});
 
       const stub = jest.spyOn(stream, '_read').mockImplementation();
@@ -281,7 +281,7 @@ describe('ResourceStream', () => {
 
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, [{}], {});
 
       const stub = jest.spyOn(stream, '_read').mockImplementation();
@@ -293,7 +293,7 @@ describe('ResourceStream', () => {
     it('should set reading to false inbetween reads', () => {
       stream._read();
       const callback =
-        requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+        requestSpy.mock.lastCall![1];
       callback(null, [{}], {});
 
       expect(stream._reading).toBe(false);
