@@ -281,7 +281,8 @@ export class Service {
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
-    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue !== '';
+    const hasValidUserToken =
+      typeof userTokenValue === 'string' && userTokenValue !== '';
     const idempotencyToken = hasValidUserToken
       ? (userTokenValue as string)
       : crypto.randomUUID();

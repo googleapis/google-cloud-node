@@ -883,7 +883,8 @@ describe('resumable-upload', () => {
         const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
         assert.ok(match);
         const invocationId = match.groups!.gcclInvocationId;
-        const idempotencyToken = reqOpts.headers['x-goog-gcs-idempotency-token'];
+        const idempotencyToken =
+          reqOpts.headers['x-goog-gcs-idempotency-token'];
         assert.strictEqual(idempotencyToken, invocationId);
         done();
         return {headers: {location: '/foo'}};
@@ -908,8 +909,14 @@ describe('resumable-upload', () => {
         assert.strictEqual(invocationId, customToken);
 
         // Verify there is no duplicate x-goog-gcs-idempotency-token header
-        assert.strictEqual(combinedReqOpts.headers['x-goog-gcs-idempotency-token'], undefined);
-        assert.strictEqual(combinedReqOpts.headers['X-Goog-Gcs-Idempotency-Token'], customToken);
+        assert.strictEqual(
+          combinedReqOpts.headers['x-goog-gcs-idempotency-token'],
+          undefined
+        );
+        assert.strictEqual(
+          combinedReqOpts.headers['X-Goog-Gcs-Idempotency-Token'],
+          customToken
+        );
         return {headers: {location: '/foo'}};
       };
 
@@ -929,9 +936,10 @@ describe('resumable-upload', () => {
         const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
         assert.ok(match);
         const invocationId = match.groups!.gcclInvocationId;
-        
+
         // Verify a fallback token was generated and matches the invocation ID
-        const idempotencyToken = combinedReqOpts.headers['x-goog-gcs-idempotency-token'];
+        const idempotencyToken =
+          combinedReqOpts.headers['x-goog-gcs-idempotency-token'];
         assert.strictEqual(idempotencyToken, invocationId);
         return {headers: {location: '/foo'}};
       };
@@ -952,14 +960,14 @@ describe('resumable-upload', () => {
           const error = new GaxiosError(
             'Retriable error',
             {} as GaxiosOptions,
-            { status: 500 } as GaxiosResponse
+            {status: 500} as GaxiosResponse
           );
           throw error;
         } else if (invocationCount === 2) {
           token2 = reqOpts.headers['x-goog-gcs-idempotency-token'] as string;
-          return { headers: { location: '/foo' } };
+          return {headers: {location: '/foo'}};
         }
-        return { headers: { location: '/foo' } };
+        return {headers: {location: '/foo'}};
       };
 
       await up.createURI();

@@ -72,7 +72,8 @@ describe('headers', () => {
       );
     assert.ok(match);
     const invocationId = match.groups!.gcclInvocationId;
-    const idempotencyToken = requests[0].headers['x-goog-gcs-idempotency-token'];
+    const idempotencyToken =
+      requests[0].headers['x-goog-gcs-idempotency-token'];
     assert.strictEqual(idempotencyToken, invocationId);
   });
 
@@ -98,7 +99,8 @@ describe('headers', () => {
       );
     assert.ok(match);
     const invocationId = match.groups!.gcclInvocationId;
-    const idempotencyToken = requests[1].headers['x-goog-gcs-idempotency-token'];
+    const idempotencyToken =
+      requests[1].headers['x-goog-gcs-idempotency-token'];
     assert.strictEqual(idempotencyToken, invocationId);
   });
 
@@ -115,8 +117,10 @@ describe('headers', () => {
     } catch (err) {
       if (err !== error) throw err;
     }
-    const token1 = requests[requests.length - 2].headers['x-goog-gcs-idempotency-token'];
-    const token2 = requests[requests.length - 1].headers['x-goog-gcs-idempotency-token'];
+    const token1 =
+      requests[requests.length - 2].headers['x-goog-gcs-idempotency-token'];
+    const token2 =
+      requests[requests.length - 1].headers['x-goog-gcs-idempotency-token'];
     assert.ok(token1);
     assert.ok(token2);
     assert.notStrictEqual(token1, token2);

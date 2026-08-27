@@ -498,7 +498,8 @@ describe('Service', () => {
         const match = r.exec(reqOpts.headers!['x-goog-api-client']);
         assert.ok(match);
         const invocationId = match.groups!.gcclInvocationId;
-        const idempotencyToken = reqOpts.headers!['x-goog-gcs-idempotency-token'];
+        const idempotencyToken =
+          reqOpts.headers!['x-goog-gcs-idempotency-token'];
         assert.strictEqual(idempotencyToken, invocationId);
         done();
       };
@@ -528,8 +529,14 @@ describe('Service', () => {
         assert.strictEqual(invocationId, customToken);
 
         // Verify there is no duplicate x-goog-gcs-idempotency-token header
-        assert.strictEqual(reqOpts.headers!['x-goog-gcs-idempotency-token'], undefined);
-        assert.strictEqual(reqOpts.headers!['X-Goog-Gcs-Idempotency-Token'], customToken);
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-gcs-idempotency-token'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['X-Goog-Gcs-Idempotency-Token'],
+          customToken
+        );
         done();
       };
 
@@ -547,7 +554,8 @@ describe('Service', () => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         const pkg = service.packageJson;
         const r = new RegExp(
-          `^gl-node/${process.versions.node} gccl/${pkg.version
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
           }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
         );
         const match = r.exec(reqOpts.headers!['x-goog-api-client']);
@@ -555,7 +563,8 @@ describe('Service', () => {
         const invocationId = match.groups!.gcclInvocationId;
 
         // Verify a fallback token was generated and matches the invocation ID
-        const idempotencyToken = reqOpts.headers!['x-goog-gcs-idempotency-token'];
+        const idempotencyToken =
+          reqOpts.headers!['x-goog-gcs-idempotency-token'];
         assert.strictEqual(idempotencyToken, invocationId);
         done();
       };
