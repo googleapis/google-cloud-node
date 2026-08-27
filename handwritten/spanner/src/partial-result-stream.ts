@@ -16,8 +16,6 @@
 
 import {GrpcService} from './common-grpc/service';
 import * as checkpointStream from 'checkpoint-stream';
-import * as eventsIntercept from 'events-intercept';
-import mergeStream = require('merge-stream');
 import {common as p} from 'protobufjs';
 import {Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
@@ -578,17 +576,18 @@ export function partialResultStream(
   const maxQueued = 10;
   let lastResumeToken: ResumeToken;
   let lastRequestStream: Readable;
+  let errorListener: (err: grpc.ServiceError) => void;
   const startTime = Date.now();
   const timeout = options?.gaxOptions?.timeout ?? Infinity;
 
-  // mergeStream allows multiple streams to be connected into one. This is good;
+  // requestsStream allows multiple streams to be connected into one. This is good;
   // if we need to retry a request and pipe more data to the user's stream.
   // We also add an additional stream that can be used to flush any remaining
   // items in the checkpoint stream that have been received, and that did not
   // contain a resume token.
-  const requestsStream = mergeStream();
+  const requestsStream = new stream.PassThrough({objectMode: true});
   const flushStream = new stream.PassThrough({objectMode: true});
-  requestsStream.add(flushStream);
+  flushStream.pipe(requestsStream, {end: false});
   const partialRSStream = new PartialResultStream(options);
   const userStream = streamEvents(partialRSStream);
   // We keep track of the number of PartialResultSets that did not include a
@@ -626,7 +625,11 @@ export function partialResultStream(
     }
     lastRequestStream = requestFn(lastResumeToken);
     lastRequestStream.on('end', endListener);
-    requestsStream.add(lastRequestStream);
+    errorListener = (err: grpc.ServiceError) => {
+      setImmediate(() => retry(err));
+    };
+    lastRequestStream.on('error', errorListener);
+    lastRequestStream.pipe(requestsStream, {end: false});
   };
 
   const retry = (err: grpc.ServiceError): void => {
@@ -659,6 +662,9 @@ export function partialResultStream(
 
     if (lastRequestStream) {
       lastRequestStream.removeListener('end', endListener);
+      if (errorListener) {
+        lastRequestStream.removeListener('error', errorListener);
+      }
       lastRequestStream.destroy();
     }
     // Delay the retry until all the values that are already in the stream
@@ -674,15 +680,6 @@ export function partialResultStream(
   };
 
   userStream.once('reading', makeRequest);
-  eventsIntercept.patch(requestsStream);
-
-  // need types for events-intercept
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (requestsStream as any).intercept('error', err =>
-    // Retry __after__ all pending data has been processed to ensure that the
-    // checkpoint stream is reset at the correct position.
-    setImmediate(() => retry(err)),
-  );
 
   return (
     requestsStream
