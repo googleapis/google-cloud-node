@@ -5079,6 +5079,26 @@ describe('File', () => {
 
       file.save(DATA, assert.ifError);
     });
+
+    it('should return a promise when a callback is provided', async () => {
+      file.createWriteStream = () => {
+        const writeStream = new PassThrough();
+        setImmediate(() => {
+          writeStream.emit('finish');
+        });
+        return writeStream;
+      };
+
+      let callbackCalled = false;
+      const promise = file.save(DATA, (err?: Error | null) => {
+        assert.ifError(err);
+        callbackCalled = true;
+      }) as unknown as Promise<void>;
+
+      assert(promise instanceof Promise);
+      await promise;
+      assert.strictEqual(callbackCalled, true);
+    });
   });
 
   describe('setMetadata', () => {

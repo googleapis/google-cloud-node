@@ -4381,7 +4381,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (!callback) {
       return returnValue;
     }
-    void (async () => {
+    return (async () => {
       try {
         await returnValue;
       } catch (err) {
@@ -4390,7 +4390,6 @@ class File extends ServiceObject<File, FileMetadata> {
       }
       callback();
     })();
-    return;
   }
 
   setMetadata(
