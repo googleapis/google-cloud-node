@@ -34,6 +34,7 @@ import {
   CreateUriCallback,
   PROTOCOL_REGEX,
   UploadConfig,
+  Upload,
 } from '../src/resumable-upload.js';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -1371,17 +1372,13 @@ describe('resumable-upload', () => {
         const calculateMd5 = !configOptions.clientMd5Hash && configOptions.md5;
 
         if (calculateCrc32c || calculateMd5) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (up as any)['#hashValidator'] = createMockHashValidator(
-            !!calculateCrc32c,
-            !!calculateMd5
-          );
+          (up as unknown as Record<string, unknown>)['#hashValidator'] =
+            createMockHashValidator(!!calculateCrc32c, !!calculateMd5);
         }
       }
 
       async function performUpload(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        uploadInstance: any,
+        uploadInstance: Upload,
         data: Buffer,
         isMultiChunk: boolean,
         expectedCrc32c?: string,
@@ -1390,9 +1387,9 @@ describe('resumable-upload', () => {
         const capturedReqOpts: GaxiosOptions[] = [];
         requestCount = 0;
 
-        uploadInstance.makeRequestStream = async (
-          requestOptions: GaxiosOptions
-        ) => {
+        (
+          uploadInstance as unknown as {makeRequestStream: Function}
+        ).makeRequestStream = async (requestOptions: GaxiosOptions) => {
           requestCount++;
           capturedReqOpts.push(requestOptions);
 
@@ -1412,8 +1409,7 @@ describe('resumable-upload', () => {
               data: '',
               status: RESUMABLE_INCOMPLETE_STATUS_CODE,
               headers: {range: `bytes=0-${lastByteReceived}`},
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
+            } as unknown as GaxiosResponse;
           } else {
             return {
               status: 200,
@@ -1427,8 +1423,7 @@ describe('resumable-upload', () => {
               headers: {},
               config: {},
               statusText: 'OK',
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
+            } as unknown as GaxiosResponse;
           }
         };
 
@@ -1619,8 +1614,7 @@ describe('resumable-upload', () => {
         status: 200,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (up as any)['#hashValidator'] = {
+      (up as unknown as Record<string, unknown>)['#hashValidator'] = {
         crc32cEnabled: true,
         md5Enabled: true,
         crc32c: CLIENT_CRC,
@@ -1649,8 +1643,7 @@ describe('resumable-upload', () => {
       };
 
       up.md5 = true;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (up as any)['#hashValidator'] = {
+      (up as unknown as Record<string, unknown>)['#hashValidator'] = {
         crc32c: 'crc32c_match',
         md5Digest: CLIENT_MD5,
       };
@@ -2158,8 +2151,7 @@ describe('resumable-upload', () => {
       let abortController: AbortController;
       up.authClient = {
         request: (reqOpts: GaxiosOptions) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          abortController = reqOpts.signal as any;
+          abortController = reqOpts.signal as unknown as AbortController;
         },
       };
 
@@ -3227,10 +3219,12 @@ describe('resumable-upload', () => {
               FileExceptionMessages.UPLOAD_MISMATCH
             );
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const detailError = (err as any).errors && (err as any).errors[0];
+            const detailError =
+              (err as ApiError).errors && (err as ApiError).errors![0];
             assert.ok(
-              detailError && detailError.message.includes(scenario.errorPart!),
+              detailError &&
+                detailError.message &&
+                detailError.message.includes(scenario.errorPart!),
               `Error message should contain: ${scenario.errorPart}`
             );
             assert.strictEqual(up.uri, URI);
