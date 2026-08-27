@@ -14,7 +14,7 @@
 
 import {PassThrough, Transform} from 'stream';
 import * as crypto from 'crypto';
-import type {ParsedArguments} from '../src';
+import {paginator, ParsedArguments, ResourceStream} from '../src';
 
 const util = {
   noop: () => {
@@ -22,23 +22,23 @@ const util = {
   },
 };
 
-class mockFakeResourceStream extends Transform {
+interface MockFakeResourceStream extends Transform {
   calledWith: unknown[];
-  constructor(...args: unknown[]) {
-    super({objectMode: true});
-    this.calledWith = args;
-  }
 }
 
 // Mock the resource-stream module so runAsStream_ instantiates the fake class
 jest.mock('../src/resource-stream', () => {
+  const {Transform} = require('stream');
   return {
-    ResourceStream: mockFakeResourceStream,
+    ResourceStream: class MockFakeResourceStream extends Transform {
+      calledWith: unknown[];
+      constructor(...args: unknown[]) {
+        super({objectMode: true});
+        this.calledWith = args;
+      }
+    },
   };
 });
-
-// Retrieve the mocked ResourceStream class to check instances
-import {paginator, ResourceStream} from '../src';
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -591,10 +591,10 @@ describe('paginator', () => {
         const stream = paginator.runAsStream_(
           fakeArgs,
           fakeFn,
-        ) as unknown as mockFakeResourceStream;
+        ) as unknown as MockFakeResourceStream;
 
         expect(stream instanceof ResourceStream).toBe(true);
-        const [args, requestFn] = (stream as any).calledWith;
+        const [args, requestFn] = stream.calledWith;
         expect(args).toBe(fakeArgs);
         expect(requestFn).toBe(fakeFn);
       });
