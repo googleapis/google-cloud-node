@@ -118,7 +118,7 @@ const fakePromisify = {
 };
 
 const fsCached = fs;
-const safeFs: any = {};
+const safeFs: Record<string, unknown> = {};
 const descriptors = Object.getOwnPropertyDescriptors(fsCached);
 for (const key of Object.keys(descriptors)) {
   const desc = descriptors[key];
@@ -3127,33 +3127,36 @@ describe('File', () => {
       it('should throw if a date is invalid', () => {
         const expires = new Date('31-12-2019');
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV2(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_INVALID;
-        });
+        assert.throws(
+          () => {
+            void file.generateSignedPostPolicyV2(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: ExceptionMessages.EXPIRATION_DATE_INVALID,
+          }
+        );
       });
 
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires,
             },
             () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_PAST;
-        });
+          );
+        }, new RegExp(ExceptionMessages.EXPIRATION_DATE_PAST));
       });
     });
 
-    describe('equality condition', () => {
+    describe('equality conditions', () => {
       it('should add equality conditions (array of arrays)', done => {
         file.generateSignedPostPolicyV2(
           {
@@ -3186,28 +3189,26 @@ describe('File', () => {
 
       it('should throw if equal condition is not an array', () => {
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires: Date.now() + 2000,
               equals: [{}],
             },
             () => {}
-          ),
-            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
-        });
+          );
+        }, new RegExp(FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS));
       });
 
       it('should throw if equal condition length is not 2', () => {
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires: Date.now() + 2000,
               equals: [['1', '2', '3']],
             },
             () => {}
-          ),
-            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
-        });
+          );
+        }, new RegExp(FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS));
       });
     });
 
@@ -3244,28 +3245,26 @@ describe('File', () => {
 
       it('should throw if prefix condition is not an array', () => {
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires: Date.now() + 2000,
               startsWith: [{}],
             },
             () => {}
-          ),
-            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
-        });
+          );
+        }, new RegExp(FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS));
       });
 
       it('should throw if prefix condition length is not 2', () => {
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires: Date.now() + 2000,
               startsWith: [['1', '2', '3']],
             },
             () => {}
-          ),
-            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
-        });
+          );
+        }, new RegExp(FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS));
       });
     });
 
@@ -3287,28 +3286,26 @@ describe('File', () => {
 
       it('should throw if content length has no min', () => {
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires: Date.now() + 2000,
               contentLengthRange: [{max: 1}],
             },
             () => {}
-          ),
-            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
-        });
+          );
+        }, new RegExp(FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX));
       });
 
       it('should throw if content length has no max', () => {
         assert.throws(() => {
-          file.generateSignedPostPolicyV2(
+          void file.generateSignedPostPolicyV2(
             {
               expires: Date.now() + 2000,
               contentLengthRange: [{min: 0}],
             },
             () => {}
-          ),
-            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
-        });
+          );
+        }, new RegExp(FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX));
       });
     });
   });
@@ -3686,42 +3683,44 @@ describe('File', () => {
         const expires = new Date('31-12-2019');
 
         assert.throws(() => {
-          file.generateSignedPostPolicyV4(
+          void file.generateSignedPostPolicyV4(
             {
               expires,
             },
             () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_INVALID;
-        });
+          );
+        }, new RegExp(ExceptionMessages.EXPIRATION_DATE_INVALID));
       });
 
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
         assert.throws(() => {
-          file.generateSignedPostPolicyV4(
+          void file.generateSignedPostPolicyV4(
             {
               expires,
             },
             () => {}
-          ),
-            ExceptionMessages.EXPIRATION_DATE_PAST;
-        });
+          );
+        }, new RegExp(ExceptionMessages.EXPIRATION_DATE_PAST));
       });
 
       it('should throw if a date beyond 7 days is given', () => {
         const expires = Date.now() + 7.1 * 24 * 60 * 60 * 1000;
 
-        assert.throws(() => {
-          file.generateSignedPostPolicyV4(
-            {
-              expires,
-            },
-            () => {}
-          ),
-            {message: 'Max allowed expiration is seven days (604800 seconds).'};
-        });
+        assert.throws(
+          () => {
+            void file.generateSignedPostPolicyV4(
+              {
+                expires,
+              },
+              () => {}
+            );
+          },
+          {
+            message: 'Max allowed expiration is seven days (604800 seconds).',
+          }
+        );
       });
     });
   });
@@ -3914,7 +3913,7 @@ describe('File', () => {
         optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
         cb: MetadataCallback<FileMetadata>
       ) => {
-        Promise.resolve([apiResponse]).then(resp => cb(null, ...resp));
+        process.nextTick(() => cb(null, apiResponse));
       };
 
       file.makePrivate((err: Error, apiResponse_: {}) => {
@@ -5299,7 +5298,6 @@ describe('File', () => {
       assert.strictEqual(sentMetadata.contexts.custom['empty-key'].value, '');
     });
   });
-
 
   describe('setStorageClass', () => {
     const STORAGE_CLASS = 'new_storage_class';

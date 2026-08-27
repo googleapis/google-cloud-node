@@ -283,6 +283,7 @@ export interface ConfigMetadata {
 
 export interface GoogleInnerError {
   reason?: string;
+  message?: string;
 }
 
 export interface ApiError extends Error {
