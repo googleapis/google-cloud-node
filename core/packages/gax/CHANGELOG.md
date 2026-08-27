@@ -6,6 +6,20 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.3...google-gax-v6.1.0) (2026-08-26)
+
+
+### Features
+
+* Add Otel Tracing helpers and tests ([#9070](https://github.com/googleapis/google-cloud-node/issues/9070)) ([5111d52](https://github.com/googleapis/google-cloud-node/commit/5111d528f91c07da232a181d5636bcaeccd765a7))
+* **gax:** Accept clientOptions in createApiCall for telemetry tracing ([#9176](https://github.com/googleapis/google-cloud-node/issues/9176)) ([257a895](https://github.com/googleapis/google-cloud-node/commit/257a895e361472f0b04cb87bcb20798530a08aed))
+
+
+### Bug Fixes
+
+* **gax:** Fix several missing files from the monorepo merge ([#9209](https://github.com/googleapis/google-cloud-node/issues/9209)) ([6fcd94d](https://github.com/googleapis/google-cloud-node/commit/6fcd94d507befa4805a2d257b3f312458ac2c48c))
+* Turn on the gax vulnerability tests again ([#9204](https://github.com/googleapis/google-cloud-node/issues/9204)) ([09609c8](https://github.com/googleapis/google-cloud-node/commit/09609c8796f975740f8eb3fae95fbdfec2e05209))
+
 ## [6.0.3](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.2...google-gax-v6.0.3) (2026-08-21)
 
 
