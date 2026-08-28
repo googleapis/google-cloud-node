@@ -17,7 +17,7 @@
     "lint": "node ./bin/linter.mjs",
     "clean": "echo nothing to clean",
     "precompile": "echo nothing to precompile",
-    "compile": "turbo run compile --concurrency=1",
+    "compile": "turbo run compile --concurrency=4",
     "system-test": "echo nothing to system test",
     "samples-test": "echo nothing to sample test"
   },
