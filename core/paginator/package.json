@@ -31,19 +31,17 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/extend": "^3.0.4",
-    "@types/jest": "^30.0.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^22.13.8",
-    "@types/uuid": "^10.0.0",
     "gts": "^6.0.2",
-    "jest": "^30.4.2",
+    "jest": "^29.7.0",
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^6.0.0",
     "jsdoc-region-tag": "^5.0.0",
     "linkinator": "^6.1.2",
     "path-to-regexp": "^8.2.0",
     "ts-jest": "^29.4.10",
-    "typescript": "^5.8.2",
-    "uuid": "^11.1.0"
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "extend": "^3.0.2"
