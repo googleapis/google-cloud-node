@@ -3510,33 +3510,35 @@ class File extends ServiceObject<File, FileMetadata> {
     for (const curInter of allInterceptors) {
       gaxios.interceptors.request.add(curInter);
     }
-    gaxios
-      .request({
-        method: 'GET',
-        url,
-        retryConfig: {
-          retry: this.storage.retryOptions.maxRetries,
-          noResponseRetries: this.storage.retryOptions.maxRetries,
-          maxRetryDelay: this.storage.retryOptions.maxRetryDelay,
-          retryDelayMultiplier: this.storage.retryOptions.retryDelayMultiplier,
-          shouldRetry: this.storage.retryOptions.retryableErrorFn,
-          totalTimeout: this.storage.retryOptions.totalTimeout,
-        },
-      })
-      // eslint-disable-next-line promise/always-return
-      .then(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    (async () => {
+      try {
+        await gaxios.request({
+          method: 'GET',
+          url,
+          retryConfig: {
+            retry: this.storage.retryOptions.maxRetries,
+            noResponseRetries: this.storage.retryOptions.maxRetries,
+            maxRetryDelay: this.storage.retryOptions.maxRetryDelay,
+            retryDelayMultiplier:
+              this.storage.retryOptions.retryDelayMultiplier,
+            shouldRetry: this.storage.retryOptions.retryableErrorFn,
+            totalTimeout: this.storage.retryOptions.totalTimeout,
+          },
+        });
         cb(null, true);
-      })
-      .catch(err => {
-        const status = err.response?.status;
+      } catch (err: unknown) {
+        const status = (err as {response?: {status?: number}})?.response
+          ?.status;
         // 401 Unauthorized or 403 Forbidden means the object is NOT public.
         if (status === 401 || status === 403) {
           cb(null, false);
         } else {
           // Any other error (like 404) is a real error.
-          cb(err);
+          cb(err as Error);
         }
-      });
+      }
+    })();
   }
 
   makePrivate(
