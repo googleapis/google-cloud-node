@@ -1429,18 +1429,24 @@ describe('resumable-upload', () => {
           ? Math.ceil(data.byteLength / CHUNK_SIZE)
           : 1;
 
-        (uploadInstance as any).makeRequestStream = async (
-          requestOptions: GaxiosOptions,
-        ) => {
+        (
+          uploadInstance as unknown as {
+            makeRequestStream: (opts: GaxiosOptions) => Promise<unknown>;
+          }
+        ).makeRequestStream = async (requestOptions: GaxiosOptions) => {
           requestCount++;
           capturedReqOpts.push(requestOptions);
 
           await new Promise<void>(resolve => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const body = requestOptions.body as any;
-            if (body?.on) {
-              body.on('data', () => {});
-              body.on('end', resolve);
+            const body = requestOptions.body;
+            if (
+              body &&
+              typeof body === 'object' &&
+              'on' in body &&
+              typeof (body as {on: unknown}).on === 'function'
+            ) {
+              (body as unknown as NodeJS.EventEmitter).on('data', () => {});
+              (body as unknown as NodeJS.EventEmitter).on('end', resolve);
             } else {
               resolve();
             }
