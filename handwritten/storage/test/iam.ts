@@ -232,7 +232,7 @@ describe('storage/iam', () => {
         {
           permissions,
         },
-        options
+        options,
       );
 
       BUCKET_INSTANCE.storageTransport.makeRequest = sandbox
