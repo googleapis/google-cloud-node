@@ -29,7 +29,7 @@ runs:
         restore-keys: |
           ${{ runner.os }}-turbo-
     - name: Compile Workspace (Turborepo Caching)
-      run: pnpm run compile
+      run: pnpm run compile -- --concurrency=4
       shell: bash
     - run: node --version
       shell: bash
