@@ -2309,16 +2309,7 @@ class File extends ServiceObject<File, FileMetadata> {
       fileWriteStreamMetadataReceived = true;
     });
 
-    writeStream.once('writing', async () => {
-      if (options.resumable === false) {
-        await this.startSimpleUpload_(
-          fileWriteStream,
-          options as CreateWriteStreamOptionsInternal,
-        );
-      } else {
-        await this.startResumableUpload_(fileWriteStream, options);
-      }
-
+    writeStream.once('writing', () => {
       pipeline(
         emitStream,
         ...(transformStreams as [Transform]),
@@ -2375,6 +2366,15 @@ class File extends ServiceObject<File, FileMetadata> {
           }
         },
       );
+
+      if (options.resumable === false) {
+        this.startSimpleUpload_(
+          fileWriteStream,
+          options as CreateWriteStreamOptionsInternal,
+        );
+      } else {
+        this.startResumableUpload_(fileWriteStream, options);
+      }
     });
 
     return writeStream;
