@@ -17,7 +17,7 @@
 import {GrpcService} from './common-grpc/service';
 import * as checkpointStream from 'checkpoint-stream';
 import {common as p} from 'protobufjs';
-import {Readable, Transform} from 'stream';
+import { PassThrough, Readable, Transform } from 'stream';
 import * as streamEvents from 'stream-events';
 import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
@@ -25,7 +25,6 @@ import {DeadlineError, isRetryableInternalError} from './transaction-runner';
 import {codec, JSONOptions, Json, Field, Value} from './codec';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
-import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
 
 const originalDecode = codec.decode;
@@ -585,9 +584,9 @@ export function partialResultStream(
   // We also add an additional stream that can be used to flush any remaining
   // items in the checkpoint stream that have been received, and that did not
   // contain a resume token.
-  const requestsStream = new stream.PassThrough({objectMode: true});
-  const flushStream = new stream.PassThrough({objectMode: true});
-  flushStream.pipe(requestsStream, {end: false});
+  const requestsStream = new PassThrough({ objectMode: true });
+  const flushStream = new PassThrough({ objectMode: true });
+  flushStream.pipe(requestsStream);
   const partialRSStream = new PartialResultStream(options);
   const userStream = streamEvents(partialRSStream);
   // We keep track of the number of PartialResultSets that did not include a
@@ -616,7 +615,6 @@ export function partialResultStream(
       // then push `null` to end the stream.
       flushStream.push({resumeToken: '_'});
       flushStream.push(null);
-      requestsStream.end();
     });
   };
   const makeRequest = (): void => {
