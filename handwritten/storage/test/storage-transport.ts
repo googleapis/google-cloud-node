@@ -18,11 +18,17 @@ import {
   StorageTransport,
 } from '../src/storage-transport.js';
 import {GoogleAuth} from 'google-auth-library';
-import sinon from 'sinon';
+import sinon, {createSandbox} from 'sinon';
 import assert from 'assert';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {RETRYABLE_ERR_FN_DEFAULT} from '../src/storage.js';
-import {Gaxios, GaxiosResponse} from 'gaxios';
+import {
+  Gaxios,
+  GaxiosError,
+  GaxiosInterceptor,
+  GaxiosOptionsPrepared,
+  GaxiosResponse,
+} from 'gaxios';
 
 describe('Storage Transport', () => {
   let sandbox: sinon.SinonSandbox;
@@ -31,7 +37,7 @@ describe('Storage Transport', () => {
   const baseUrl = 'https://storage.googleapis.com';
 
   beforeEach(() => {
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
 
     authClientStub = new GoogleAuth();
     sandbox.stub(authClientStub, 'request');
@@ -126,8 +132,7 @@ describe('Storage Transport', () => {
   });
 
   it('should clear and add interceptors if provided', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const interceptorStub: any = {
+    const interceptorStub: GaxiosInterceptor<GaxiosOptionsPrepared> = {
       resolved: sandbox.stub(),
       rejected: sandbox.stub(),
     };
@@ -136,13 +141,9 @@ describe('Storage Transport', () => {
       interceptors: [interceptorStub],
     };
 
-    let capturedGaxiosInstance: Gaxios | undefined;
     const gaxiosRequestStub = sandbox
       .stub(Gaxios.prototype, 'request')
-      .callsFake(function (this: Gaxios, opts: any) {
-        capturedGaxiosInstance = this;
-        return Promise.resolve({data: {}} as any);
-      });
+      .resolves({data: {}} as GaxiosResponse);
 
     const requestStub = authClientStub.request as sinon.SinonStub;
     requestStub.resolves({data: {}});
@@ -157,9 +158,11 @@ describe('Storage Transport', () => {
     await calledWith.adapter({headers: {}});
 
     assert.strictEqual(gaxiosRequestStub.calledOnce, true);
+    const capturedGaxiosInstance = gaxiosRequestStub.getCall(0)
+      .thisValue as Gaxios;
     assert.ok(capturedGaxiosInstance);
     const interceptorSet = capturedGaxiosInstance.interceptors
-      .request as any as Set<any>;
+      .request as unknown as Set<GaxiosInterceptor<GaxiosOptionsPrepared>>;
     assert.strictEqual(interceptorSet.size, 1);
     const handlers = Array.from(interceptorSet);
     assert.strictEqual(handlers[0].resolved, interceptorStub.resolved);
@@ -211,8 +214,10 @@ describe('Storage Transport', () => {
       invocationId: invocationId,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const headers = requestStub.firstCall.args[0].headers as any;
+    const headers = requestStub.firstCall.args[0].headers as Record<
+      string,
+      string
+    >;
     const apiClientHeader = headers['x-goog-api-client'];
 
     assert.ok(apiClientHeader.includes(`gccl-invocation-id/${invocationId}`));
@@ -230,8 +235,10 @@ describe('Storage Transport', () => {
     requestStub.resolves(mockResponse);
 
     await transport.makeRequest({url: 'http://test'});
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const headers = requestStub.firstCall.args[0].headers as any;
+    const headers = requestStub.firstCall.args[0].headers as Record<
+      string,
+      string
+    >;
     const apiClientHeader = headers['x-goog-api-client'];
 
     assert.ok(apiClientHeader.includes('gccl-invocation-id/'));
@@ -269,8 +276,7 @@ describe('Storage Transport', () => {
           url: '/b/bucket/o',
           params: {ifGenerationMatch: 123},
         },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any;
+      } as unknown as GaxiosError;
 
       assert.strictEqual(retryConfig.shouldRetry(error503), true);
     });
@@ -285,10 +291,12 @@ describe('Storage Transport', () => {
 
       const malformedError = new Error(
         'Unexpected token < in JSON at position 0',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ) as any;
+      ) as unknown as GaxiosError & {stack: string};
       malformedError.stack = 'SyntaxError: Unexpected token <';
-      malformedError.config = {method: 'GET', url: '/test'};
+      malformedError.config = {
+        method: 'GET',
+        url: new URL('https://storage.googleapis.com/test'),
+      } as unknown as GaxiosOptionsPrepared;
 
       assert.strictEqual(retryConfig.shouldRetry(malformedError), true);
     });
@@ -307,8 +315,7 @@ describe('Storage Transport', () => {
       const error503 = {
         response: {status: 503},
         config: {url: '/bucket/object'},
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any;
+      } as unknown as GaxiosError;
 
       assert.strictEqual(retryConfig.shouldRetry(error503), true);
     });
@@ -323,8 +330,7 @@ describe('Storage Transport', () => {
 
       const error401 = {
         response: {status: 401},
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any;
+      } as unknown as GaxiosError;
 
       assert.strictEqual(retryConfig.shouldRetry(error401), false);
     });
@@ -360,8 +366,7 @@ describe('Storage Transport', () => {
           },
         },
         config: {method: 'GET', url: '/test'},
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any;
+      } as unknown as GaxiosError;
 
       assert.strictEqual(retryConfig.shouldRetry(rateLimitError), true);
     });
@@ -376,8 +381,7 @@ describe('Storage Transport', () => {
       const connReset = {
         code: 'ECONNRESET',
         config: {method: 'GET', url: '/test'},
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any;
+      } as unknown as GaxiosError;
       assert.strictEqual(retryConfig.shouldRetry(connReset), true);
     });
 
