@@ -2930,9 +2930,10 @@ describe('Bucket', () => {
         bucket.storage.retryOptions.idempotencyStrategy = 1;
         bucket.storage.retryOptions.retryableErrorFn = () => true;
 
-        fakeFile.createWriteStream = (options_) => {
+        fakeFile.createWriteStream = options_ => {
           retryCount++;
-          const currentId = (options_ as CreateWriteStreamOptionsInternal)?.invocationId;
+          const currentId = (options_ as CreateWriteStreamOptionsInternal)
+            ?.invocationId;
 
           if (retryCount === 1) {
             firstInvocationId = currentId;
@@ -2953,7 +2954,7 @@ describe('Bucket', () => {
               ws.emit('metadata', {});
             }
           });
-          
+
           return ws as any;
         };
 
@@ -2971,7 +2972,7 @@ describe('Bucket', () => {
           destination: fakeFile,
           resumable: false,
           validation: false,
-          preconditionOpts: { ifGenerationMatch: 123 },
+          preconditionOpts: {ifGenerationMatch: 123},
         };
 
         const authClient = new GoogleAuth();
@@ -2984,7 +2985,7 @@ describe('Bucket', () => {
           projectId: 'project-id',
           retryOptions: STORAGE.retryOptions,
           scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-          packageJson: { name: 'test-package', version: '1.0.0' },
+          packageJson: {name: 'test-package', version: '1.0.0'},
         });
 
         // Swap storage transport to test real header compilation
@@ -3004,7 +3005,7 @@ describe('Bucket', () => {
         bucket.storage.retryOptions.retryableErrorFn = () => true;
 
         const requestStub = realTransport.authClient.request as sinon.SinonStub;
-        requestStub.callsFake(async (reqOpts) => {
+        requestStub.callsFake(async reqOpts => {
           if (reqOpts.method !== 'POST') {
             return {
               config: {},
@@ -3017,7 +3018,11 @@ describe('Bucket', () => {
 
           if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
             const part = reqOpts.multipart[1];
-            if (part && part.content && typeof part.content.resume === 'function') {
+            if (
+              part &&
+              part.content &&
+              typeof part.content.resume === 'function'
+            ) {
               part.content.resume();
             }
           }
@@ -3025,7 +3030,9 @@ describe('Bucket', () => {
           retryCount++;
           const headers = reqOpts.headers || {};
           const apiClientHeader = headers['x-goog-api-client'] || '';
-          const match = apiClientHeader.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+          const match = apiClientHeader.match(
+            /gccl-invocation-id\/([a-f0-9-]+)/,
+          );
           const currentId = match ? match[1] : undefined;
 
           if (retryCount === 1) {

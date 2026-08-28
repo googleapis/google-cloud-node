@@ -15,7 +15,6 @@
 import {util} from '../src/nodejs-common/index.js';
 import assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {
   Bucket,
   Channel,
