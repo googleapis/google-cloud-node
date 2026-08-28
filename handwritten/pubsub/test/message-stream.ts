@@ -534,7 +534,7 @@ describe('MessageStream', () => {
 
         assert.strictEqual(spy.callCount, 5);
         const {args} = spy.firstCall;
-        const request = args[0] as any;
+        const request = args[0] as {protocolVersion?: string | number};
 
         assert.strictEqual(String(request.protocolVersion), '1');
 

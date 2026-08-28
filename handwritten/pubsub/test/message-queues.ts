@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import {CallOptions, GoogleError, loggingUtils, Status} from 'google-gax';
+import {CallOptions, GoogleError, Status} from 'google-gax';
 import * as sinon from 'sinon';
 import defer = require('p-defer');
 import * as crypto from 'node:crypto';
@@ -418,10 +418,7 @@ describe('MessageQueues', () => {
       fakeLog.remove();
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'INFO',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1] as string, 'logtest');
     });
 
@@ -679,10 +676,7 @@ describe('MessageQueues', () => {
       fakeLog.remove();
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'INFO',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1] as string, 'logtest');
     });
 
