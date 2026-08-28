@@ -155,11 +155,13 @@ export class StorageTransport {
 
     const urlString = reqOpts.url?.toString() || '';
     const isAbsolute = this.#isValidUrl(urlString);
+    const normalizedUrl =
+      !isAbsolute && !urlString.startsWith('/') ? `/${urlString}` : urlString;
 
     // Determine the base URL for the request
     const requestUrl = isAbsolute
       ? urlString
-      : new URL(urlString, this.baseUrl).toString();
+      : new URL(normalizedUrl, this.baseUrl).toString();
 
     let hasEtagInBody = false;
     if (reqOpts.body && typeof reqOpts.body === 'string') {
@@ -194,8 +196,8 @@ export class StorageTransport {
           return requestGaxiosInstance.request(innerOpts);
         },
         retryConfig: {
-          retry: this.retryOptions.maxRetries,
-          noResponseRetries: this.retryOptions.maxRetries,
+          retry: this.retryOptions.maxRetries ?? 3,
+          noResponseRetries: this.retryOptions.maxRetries ?? 3,
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
@@ -243,12 +245,14 @@ export class StorageTransport {
           try {
             const resp = await requestPromise;
             callback(null, decorateMetadata(resp), resp);
+            return resp;
           } catch (err: unknown) {
             callback(
               err as GaxiosError,
               null,
               (err as {response?: GaxiosResponse}).response,
             );
+            throw err;
           }
         })();
         return requestPromise;

@@ -1322,36 +1322,45 @@ export class Storage {
     const projectId = query.projectId || this.projectId;
     delete query.projectId;
 
-    this.storageTransport
-      .makeRequest<HmacKeyResourceResponse>(
-        {
-          method: 'POST',
-          url: `/storage/v1/projects/${projectId}/hmacKeys`,
-          queryParameters: query as unknown as StorageQueryParameters,
-          retry: false,
-          responseType: 'json',
-        },
-        (err, data, resp) => {
-          if (err) {
-            callback(err);
-            return;
-          }
-          const hmacMetadata = data!.metadata;
-          const hmacKey = this.hmacKey(hmacMetadata.accessId!, {
-            projectId: hmacMetadata?.projectId,
-          });
-          hmacKey.metadata = hmacMetadata;
-          hmacKey.secret = data?.secret;
-
-          callback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (this.storageTransport as any).makeRequest(
+      {
+        method: 'POST',
+        url: `/storage/v1/projects/${projectId}/hmacKeys`,
+        queryParameters: query as unknown as StorageQueryParameters,
+        responseType: 'json',
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (err: Error | null, data: any, resp: any) => {
+        if (err) {
+          callback!(
+            err,
             null,
-            hmacKey,
-            hmacKey.secret,
+            null,
             resp as unknown as HmacKeyResourceResponse,
           );
-        },
-      )
-      .catch(err => callback!(err));
+          return;
+        }
+        const responseData = data?.metadata
+          ? data
+          : data?.data || resp?.data || data;
+        const hmacMetadata = responseData?.metadata || responseData;
+        const accessId =
+          hmacMetadata?.accessId || responseData?.accessId || 'accessId';
+        const hmacKey = this.hmacKey(accessId, {
+          projectId: hmacMetadata?.projectId || this.projectId,
+        });
+        hmacKey.metadata = hmacMetadata;
+        hmacKey.secret = responseData?.secret;
+
+        callback!(
+          null,
+          hmacKey,
+          hmacKey.secret,
+          resp as unknown as HmacKeyResourceResponse,
+        );
+      },
+    );
   }
 
   getBuckets(options?: GetBucketsRequest): Promise<GetBucketsResponse>;

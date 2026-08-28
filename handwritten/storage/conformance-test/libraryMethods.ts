@@ -21,18 +21,14 @@ import {
   Policy,
   GaxiosError,
 } from '../src';
-import * as path from 'path';
-import {
-  createTestBuffer,
-  createTestFileFromBuffer,
-  deleteTestFile,
-} from './testBenchUtil.js';
+import {createTestBuffer} from './testBenchUtil.js';
 import * as crypto from 'crypto';
-import {getDirName} from '../src/util.js';
-import {StorageTransport} from '../src/storage-transport.js';
+import {
+  StorageRequestOptions,
+  StorageTransport,
+} from '../src/storage-transport.js';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
-const CHUNK_SIZE_BYTES = 2 * 1024 * 1024;
 
 export interface ConformanceTestOptions {
   bucket?: Bucket;
@@ -42,6 +38,8 @@ export interface ConformanceTestOptions {
   hmacKey?: HmacKey;
   preconditionRequired?: boolean;
   storageTransport?: StorageTransport;
+  projectId?: string;
+  retryTestId?: string;
 }
 
 /////////////////////////////////////////////////
@@ -51,63 +49,37 @@ export interface ConformanceTestOptions {
 export async function addLifecycleRuleInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.addLifecycleRule({
-    action: {
-      type: 'Delete',
-    },
-    condition: {
-      age: 365 * 3, // Specified in days.
-    },
-  });
+  return await addLifecycleRule(options);
 }
 
 export async function addLifecycleRule(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({
+      lifecycle: {
+        rule: [
+          {
+            action: {type: 'Delete'},
+            condition: {age: 1095}, // Specified in days.
+          },
+        ],
+      },
+    }),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.addLifecycleRule(
-      {
-        action: {
-          type: 'Delete',
-        },
-        condition: {
-          age: 365 * 3, // Specified in days.
-        },
-      },
-      {
-        ifMetagenerationMatch: 2,
-      },
-    );
-  } else {
-    await options.bucket!.addLifecycleRule({
-      action: {
-        type: 'Delete',
-      },
-      condition: {
-        age: 365 * 3, // Specified in days.
-      },
-    });
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function combineInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const file1 = options.bucket!.file('file1.txt');
-  const file2 = options.bucket!.file('file2.txt');
-  await file1.save('file1 contents');
-  await file2.save('file2 contents');
-  let allFiles;
-  const sources = [file1, file2];
-  if (options.preconditionRequired) {
-    allFiles = options.bucket!.file('all-files.txt', {
-      preconditionOpts: {
-        ifGenerationMatch: 0,
-      },
-    });
-  } else {
-    allFiles = options.bucket!.file('all-files.txt');
-  }
-
-  await options.bucket!.combine(sources, allFiles);
+  return await combine(options);
 }
 
 export async function combine(options: ConformanceTestOptions) {
@@ -115,36 +87,114 @@ export async function combine(options: ConformanceTestOptions) {
   const file2 = options.bucket!.file('file2.txt');
   await file1.save('file1 contents');
   await file2.save('file2 contents');
-  const sources = [file1, file2];
-  const allFiles = options.bucket!.file('all-files.txt');
-  await allFiles.save('allfiles contents');
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const combineOptions: any = {};
   if (options.preconditionRequired) {
-    await options.bucket!.combine(sources, allFiles, {
-      ifGenerationMatch: allFiles.metadata.generation!,
-    });
-  } else {
-    await options.bucket!.combine(sources, allFiles);
+    combineOptions.ifGenerationMatch = 0;
   }
+
+  return await options.bucket!.combine(
+    ['file1.txt', 'file2.txt'],
+    'all-files.txt',
+    combineOptions,
+  );
 }
 
 export async function create(options: ConformanceTestOptions) {
-  const [bucketExists] = await options.bucket!.exists();
-  if (bucketExists) {
-    await options.bucket!.deleteFiles();
-    await options.bucket!.delete({
-      ignoreNotFound: true,
-    });
+  if (!options.storageTransport || !options.projectId || !options.bucket) {
+    throw new Error(
+      'storageTransport, projectId, and bucket are required for the create test.',
+    );
   }
-  await options.bucket!.create();
+  const bucketName = options.bucket.name;
+  let bucketExists = false;
+  const existsReq: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(bucketName)}`,
+  };
+  try {
+    await options.storageTransport.makeRequest(existsReq);
+    bucketExists = true;
+  } catch (e) {
+    const err = e as GaxiosError;
+    if (err.response?.status !== 404) {
+      throw e;
+    }
+  }
+
+  if (bucketExists) {
+    let pageToken: string | undefined = undefined;
+    do {
+      const listReq: StorageRequestOptions = {
+        method: 'GET',
+        url: `storage/v1/b/${encodeURIComponent(bucketName)}/o`,
+        queryParameters: pageToken ? {pageToken} : undefined,
+      };
+      const listResult = await options.storageTransport.makeRequest(listReq);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const objects = (listResult as any)?.data?.items || [];
+
+      for (const obj of objects) {
+        const deleteObjReq: StorageRequestOptions = {
+          method: 'DELETE',
+          url: `storage/v1/b/${encodeURIComponent(bucketName)}/o/${encodeURIComponent(obj.name)}`,
+        };
+        await options.storageTransport.makeRequest(deleteObjReq);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      pageToken = (listResult as any)?.nextPageToken;
+    } while (pageToken);
+
+    const deleteBucketReq: StorageRequestOptions = {
+      method: 'DELETE',
+      url: `storage/v1/b/${encodeURIComponent(bucketName)}`,
+    };
+    await options.storageTransport.makeRequest(deleteBucketReq);
+  }
+
+  const createRequest: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b?project=${options.projectId}`,
+    body: JSON.stringify({name: bucketName}),
+    headers: {'Content-Type': 'application/json'},
+  };
+  await options.storageTransport.makeRequest(createRequest);
 }
 
 export async function createNotification(options: ConformanceTestOptions) {
-  await options.bucket!.createNotification('my-topic');
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/notificationConfigs`,
+    body: JSON.stringify({
+      topic: 'my-topic',
+    }),
+    headers: {'Content-Type': 'application/json'},
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function deleteBucket(options: ConformanceTestOptions) {
-  await options.bucket!.deleteFiles();
-  await options.bucket!.delete();
+  try {
+    await options.bucket!.deleteFiles();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    const message = err.message || '';
+    if (!message.includes('does not exist') && err.code !== 404) {
+      throw err;
+    }
+  }
+  const requestOptions: StorageRequestOptions = {
+    method: 'DELETE',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    queryParameters: {},
+  };
+
+  if (options.preconditionRequired) {
+    requestOptions.queryParameters!.ifMetagenerationMatch = 1;
+  }
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 // Note: bucket.deleteFiles is missing from these tests
@@ -153,331 +203,455 @@ export async function deleteBucket(options: ConformanceTestOptions) {
 export async function deleteLabelsInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.deleteLabels();
+  return await deleteLabels(options);
 }
 
 export async function deleteLabels(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({labels: null}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.deleteLabels({
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.deleteLabels();
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function disableRequesterPaysInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.disableRequesterPays();
+  return await disableRequesterPays(options);
 }
 
 export async function disableRequesterPays(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({billing: {requesterPays: false}}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.disableRequesterPays({
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.disableRequesterPays();
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function enableLoggingInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const config = {
-    prefix: 'log',
-  };
-  await options.bucket!.enableLogging(config);
+  return await enableLogging(options);
 }
 
 export async function enableLogging(options: ConformanceTestOptions) {
-  let config;
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({
+      logging: {
+        logBucket: options.bucket!.name,
+        logObjectPrefix: 'log',
+      },
+    }),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    config = {
-      prefix: 'log',
-      ifMetagenerationMatch: 2,
-    };
-  } else {
-    config = {
-      prefix: 'log',
-    };
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
-  await options.bucket!.enableLogging(config);
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function enableRequesterPaysInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.enableRequesterPays();
+  return await enableRequesterPays(options);
 }
 
 export async function enableRequesterPays(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({billing: {requesterPays: true}}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.enableRequesterPays({
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.enableRequesterPays();
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketExists(options: ConformanceTestOptions) {
-  await options.bucket!.exists();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+  };
+
+  try {
+    await options.storageTransport!.makeRequest(requestOptions);
+    return true;
+  } catch (err: unknown) {
+    const gaxiosError = err as GaxiosError;
+    if (gaxiosError.response?.status === 404) {
+      return false;
+    }
+    throw err;
+  }
 }
 
 export async function bucketGet(options: ConformanceTestOptions) {
-  await options.bucket!.get();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function getFilesStream(options: ConformanceTestOptions) {
-  return new Promise((resolve, reject) => {
-    options
-      .bucket!.getFilesStream()
-      .on('data', () => {})
-      .on('end', () => resolve(undefined))
-      .on('error', (err: GaxiosError) => reject(err));
-  });
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function getLabels(options: ConformanceTestOptions) {
-  await options.bucket!.getLabels();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    queryParameters: {
+      fields: 'labels',
+    },
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketGetMetadata(options: ConformanceTestOptions) {
-  await options.bucket!.getMetadata();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    queryParameters: {
+      projection: 'full',
+    },
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function getNotifications(options: ConformanceTestOptions) {
-  await options.bucket!.getNotifications();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/notificationConfigs`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function lock(options: ConformanceTestOptions) {
-  const metageneration = 0;
-  await options.bucket!.lock(metageneration);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const retryId = (options as any).headers?.['x-retry-test-id'];
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const metadata: any = await options.storageTransport!.makeRequest({
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    headers: {...(retryId ? {'x-retry-test-id': retryId} : {})},
+  });
+  const currentMetageneration = metadata.metageneration;
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/lockRetentionPolicy`,
+    queryParameters: {
+      ifMetagenerationMatch: currentMetageneration,
+    },
+    headers: {
+      ...(retryId ? {'x-retry-test-id': retryId} : {}),
+    },
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketMakePrivateInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.makePrivate();
+  return await bucketMakePrivate(options);
 }
 
 export async function bucketMakePrivate(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({acl: []}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.makePrivate({
-      preconditionOpts: {ifMetagenerationMatch: 2},
-    });
-  } else {
-    await options.bucket!.makePrivate();
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketMakePublic(options: ConformanceTestOptions) {
-  await options.bucket!.makePublic();
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function removeRetentionPeriodInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.removeRetentionPeriod();
+  return await removeRetentionPeriod(options);
 }
 
 export async function removeRetentionPeriod(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({retentionPolicy: null}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.removeRetentionPeriod({
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.removeRetentionPeriod();
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setCorsConfigurationInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const corsConfiguration = [{maxAgeSeconds: 3600}]; // 1 hour
-  await options.bucket!.setCorsConfiguration(corsConfiguration);
+  return await setCorsConfiguration(options);
 }
 
 export async function setCorsConfiguration(options: ConformanceTestOptions) {
-  const corsConfiguration = [{maxAgeSeconds: 3600}]; // 1 hour
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({cors: [{maxAgeSeconds: 3600}]}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.setCorsConfiguration(corsConfiguration, {
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.setCorsConfiguration(corsConfiguration);
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setLabelsInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const labels = {
-    labelone: 'labelonevalue',
-    labeltwo: 'labeltwovalue',
-  };
-  await options.bucket!.setLabels(labels);
+  return await setLabels(options);
 }
 
 export async function setLabels(options: ConformanceTestOptions) {
-  const labels = {
-    labelone: 'labelonevalue',
-    labeltwo: 'labeltwovalue',
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({
+      labels: {labelone: 'labelonevalue', labeltwo: 'labeltwovalue'},
+    }),
+    queryParameters: {},
   };
+
   if (options.preconditionRequired) {
-    await options.bucket!.setLabels(labels, {
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.setLabels(labels);
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketSetMetadataInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const metadata = {
-    website: {
-      mainPageSuffix: 'http://example.com',
-      notFoundPage: 'http://example.com/404.html',
-    },
-  };
-  await options.bucket!.setMetadata(metadata);
+  return await bucketSetMetadata(options);
 }
 
 export async function bucketSetMetadata(options: ConformanceTestOptions) {
-  const metadata = {
-    website: {
-      mainPageSuffix: 'http://example.com',
-      notFoundPage: 'http://example.com/404.html',
-    },
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({
+      website: {
+        mainPageSuffix: 'http://example.com',
+        notFoundPage: 'http://example.com/404.html',
+      },
+    }),
+    queryParameters: {},
   };
+
   if (options.preconditionRequired) {
-    await options.bucket!.setMetadata(metadata, {
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.setMetadata(metadata);
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setRetentionPeriodInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const DURATION_SECONDS = 15780000; // 6 months.
-  await options.bucket!.setRetentionPeriod(DURATION_SECONDS);
+  return await setRetentionPeriod(options);
 }
 
 export async function setRetentionPeriod(options: ConformanceTestOptions) {
-  const DURATION_SECONDS = 15780000; // 6 months.
+  const DURATION_SECONDS = 15780000;
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({
+      retentionPolicy: {retentionPeriod: DURATION_SECONDS.toString()},
+    }),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.setRetentionPeriod(DURATION_SECONDS, {
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.setRetentionPeriod(DURATION_SECONDS);
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketSetStorageClassInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.bucket!.setStorageClass('nearline');
+  return await bucketSetStorageClass(options);
 }
 
 export async function bucketSetStorageClass(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}`,
+    body: JSON.stringify({storageClass: 'NEARLINE'}),
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.setStorageClass('nearline', {
-      ifMetagenerationMatch: 2,
-    });
-  } else {
-    await options.bucket!.setStorageClass('nearline');
+    requestOptions.queryParameters!.ifMetagenerationMatch = 2;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function bucketUploadResumableInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const filePath = path.join(
-    getDirName(),
-    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`,
-  );
-  createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
-  if (options.bucket!.instancePreconditionOpts) {
-    options.bucket!.instancePreconditionOpts.ifGenerationMatch = 0;
-    delete options.bucket!.instancePreconditionOpts.ifMetagenerationMatch;
-  }
-  await options.bucket!.upload(filePath, {
-    resumable: true,
-    chunkSize: CHUNK_SIZE_BYTES,
-    metadata: {contentLength: FILE_SIZE_BYTES},
-  });
-  deleteTestFile(filePath);
+  return await bucketUploadResumable(options);
 }
 
 export async function bucketUploadResumable(options: ConformanceTestOptions) {
-  const filePath = path.join(
-    getDirName(),
-    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`,
-  );
-  createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
+  const fileName = `resumable-file-${crypto.randomUUID()}.txt`;
+  const dataBuffer = Buffer.alloc(FILE_SIZE_BYTES, 'a');
+
+  const initiateOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `upload/storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o`,
+    queryParameters: {
+      uploadType: 'resumable',
+      name: fileName,
+    },
+    headers: {
+      'X-Upload-Content-Type': 'text/plain',
+      'X-Upload-Content-Length': FILE_SIZE_BYTES.toString(),
+    },
+    body: JSON.stringify({name: fileName}),
+  };
+
   if (options.preconditionRequired) {
-    await options.bucket!.upload(filePath, {
-      resumable: true,
-      chunkSize: CHUNK_SIZE_BYTES,
-      metadata: {contentLength: FILE_SIZE_BYTES},
-      preconditionOpts: {ifGenerationMatch: 0},
-    });
-  } else {
-    await options.bucket!.upload(filePath, {
-      resumable: true,
-      chunkSize: CHUNK_SIZE_BYTES,
-      metadata: {contentLength: FILE_SIZE_BYTES},
-    });
+    initiateOptions.queryParameters = initiateOptions.queryParameters || {};
+    initiateOptions.queryParameters.ifGenerationMatch = 0;
   }
-  deleteTestFile(filePath);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const response: any =
+    await options.storageTransport!.makeRequest(initiateOptions);
+
+  let sessionUri: string | null = null;
+
+  if (response.headers) {
+    if (typeof response.headers.get === 'function') {
+      sessionUri = response.headers.get('location');
+    }
+    if (!sessionUri) {
+      sessionUri = response.headers.location || response.headers.Location;
+    }
+  }
+
+  if (!sessionUri && response.data && typeof response.data === 'object') {
+    sessionUri = response.data.location;
+  }
+
+  if (!sessionUri) {
+    throw new Error(
+      'Failed to get session URI from resumable upload initiation.',
+    );
+  }
+
+  return await options.storageTransport!.makeRequest({
+    method: 'PUT',
+    url: sessionUri,
+    body: dataBuffer,
+    queryParameters: undefined,
+    headers: {
+      'Content-Length': FILE_SIZE_BYTES.toString(),
+      'Content-Range': `bytes 0-${FILE_SIZE_BYTES - 1}/${FILE_SIZE_BYTES}`,
+    },
+  });
 }
 
 export async function bucketUploadMultipartInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  if (options.bucket!.instancePreconditionOpts) {
-    delete options.bucket!.instancePreconditionOpts.ifMetagenerationMatch;
-    options.bucket!.instancePreconditionOpts.ifGenerationMatch = 0;
-  }
-  await options.bucket!.upload(
-    path.join(
-      getDirName(),
-      '../../../conformance-test/test-data/retryStrategyTestData.json',
-    ),
-    {resumable: false},
-  );
+  return await bucketUploadMultipart(options);
 }
 
 export async function bucketUploadMultipart(options: ConformanceTestOptions) {
-  if (options.bucket!.instancePreconditionOpts) {
-    delete options.bucket!.instancePreconditionOpts.ifMetagenerationMatch;
-  }
+  const fileName = 'retryStrategyTestData.json';
+  const boundary = 'foo_bar_baz';
+
+  const metadata = JSON.stringify({
+    name: fileName,
+    contentType: 'application/json',
+  });
+  const media = JSON.stringify({some: 'data'});
+  const body =
+    `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n` +
+    `--${boundary}\r\nContent-Type: application/json\r\n\r\n${media}\r\n` +
+    `--${boundary}--`;
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `upload/storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o`,
+    queryParameters: {
+      uploadType: 'multipart',
+      name: fileName,
+    },
+    headers: {'Content-Type': `multipart/related; boundary=${boundary}`},
+    body: body,
+  };
 
   if (options.preconditionRequired) {
-    await options.bucket!.upload(
-      path.join(
-        getDirName(),
-        '../../../conformance-test/test-data/retryStrategyTestData.json',
-      ),
-      {resumable: false, preconditionOpts: {ifGenerationMatch: 0}},
-    );
-  } else {
-    await options.bucket!.upload(
-      path.join(
-        getDirName(),
-        '../../../conformance-test/test-data/retryStrategyTestData.json',
-      ),
-      {resumable: false},
-    );
+    requestOptions.queryParameters!.ifGenerationMatch = 0;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 /////////////////////////////////////////////////
@@ -485,195 +659,380 @@ export async function bucketUploadMultipart(options: ConformanceTestOptions) {
 /////////////////////////////////////////////////
 
 export async function copy(options: ConformanceTestOptions) {
-  const newFile = new File(options.bucket!, 'a-different-file.png');
-  await newFile.save('a-different-file.png');
+  const sourceBucket = encodeURIComponent(options.bucket!.name);
+  const sourceFile = encodeURIComponent(options.file!.name);
+  const destinationFile = encodeURIComponent('a-different-file.png');
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${sourceBucket}/o/${sourceFile}/rewriteTo/b/${sourceBucket}/o/${destinationFile}`,
+    queryParameters: {},
+  };
 
   if (options.preconditionRequired) {
-    await options.file!.copy('a-different-file.png', {
-      preconditionOpts: {
-        ifGenerationMatch: newFile.metadata.generation!,
-      },
-    });
-  } else {
-    await options.file!.copy('a-different-file.png');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+    requestOptions.queryParameters!.ifSourceGenerationMatch = generation;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function createReadStream(options: ConformanceTestOptions) {
-  return new Promise((resolve, reject) => {
-    options
-      .file!.createReadStream()
-      .on('data', () => {})
-      .on('end', () => resolve(undefined))
-      .on('error', (err: GaxiosError) => reject(err));
-  });
+  return await download(options);
 }
 
 export async function createResumableUploadInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.file!.createResumableUpload();
+  return await createResumableUpload(options);
 }
 
 export async function createResumableUpload(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `upload/storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o`,
+    queryParameters: {
+      uploadType: 'resumable',
+      name: options.file!.name,
+    },
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.createResumableUpload({
-      preconditionOpts: {ifGenerationMatch: 0},
-    });
-  } else {
-    await options.file!.createResumableUpload();
+    requestOptions.queryParameters!.ifGenerationMatch = 0;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function fileDeleteInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.file!.delete();
+  const requestOptions: StorageRequestOptions = {
+    method: 'DELETE',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    queryParameters: {},
+    headers: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      'x-retry-test-id': (options as any).retryTestId,
+    },
+  };
+  if (options.preconditionRequired) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+    requestOptions.queryParameters!.ifGenerationMatch = generation;
+  }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function fileDelete(options: ConformanceTestOptions) {
+  const requestOptions: StorageRequestOptions = {
+    method: 'DELETE',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    queryParameters: {},
+    headers: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      'x-retry-test-id': (options as any).retryTestId,
+    },
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.delete({
-      ifGenerationMatch: options.file!.metadata.generation,
-    });
-  } else {
-    await options.file!.delete();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+    requestOptions.queryParameters!.ifGenerationMatch = generation;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function download(options: ConformanceTestOptions) {
-  await options.file!.download();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    queryParameters: {alt: 'media'},
+    responseType: 'stream',
+    headers: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...(options as any).headers,
+    },
+  };
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function exists(options: ConformanceTestOptions) {
-  await options.file!.exists();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+  };
+
+  try {
+    await options.storageTransport!.makeRequest(requestOptions);
+    return true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    if (err.code === 404) return false;
+    throw err;
+  }
 }
 
 export async function get(options: ConformanceTestOptions) {
-  await options.file!.get();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function getExpirationDate(options: ConformanceTestOptions) {
-  await options.file!.getExpirationDate();
+  return await get(options);
 }
 
 export async function getMetadata(options: ConformanceTestOptions) {
-  await options.file!.getMetadata();
+  return await get(options);
 }
 
 export async function isPublic(options: ConformanceTestOptions) {
-  await options.file!.isPublic();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+  };
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function fileMakePrivateInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.file!.makePrivate();
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    queryParameters: {},
+    body: JSON.stringify({acl: []}),
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+  if (instanceOpts?.ifGenerationMatch !== undefined) {
+    requestOptions.queryParameters!.ifGenerationMatch =
+      instanceOpts.ifGenerationMatch;
+  } else if (instanceOpts?.ifMetagenerationMatch !== undefined) {
+    requestOptions.queryParameters!.ifMetagenerationMatch =
+      instanceOpts.ifMetagenerationMatch;
+  } else if (options.preconditionRequired) {
+    requestOptions.queryParameters!.ifMetagenerationMatch =
+      options.file?.metadata.metageneration;
+  }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function fileMakePrivate(options: ConformanceTestOptions) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const retryId = (options as any).headers?.['x-retry-test-id'];
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    body: JSON.stringify({acl: []}),
+    queryParameters: {},
+    headers: {
+      'Content-Type': 'application/json',
+      ...(retryId ? {'x-retry-test-id': retryId} : {}),
+    },
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.makePrivate({
-      preconditionOpts: {
-        ifMetagenerationMatch: options.file!.metadata.metageneration,
-      },
-    });
-  } else {
-    await options.file!.makePrivate();
+    requestOptions.queryParameters!.ifMetagenerationMatch =
+      options.file!.metadata.metageneration ?? 1;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function fileMakePublic(options: ConformanceTestOptions) {
-  await options.file!.makePublic();
+  const fileName = encodeURIComponent(options.file!.name);
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${fileName}/acl`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function move(options: ConformanceTestOptions) {
+  const sourceBucket = encodeURIComponent(options.bucket!.name);
+  const sourceFile = encodeURIComponent(options.file!.name);
+  const destinationFile = encodeURIComponent('new-file');
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${sourceBucket}/o/${sourceFile}/rewriteTo/b/${sourceBucket}/o/${destinationFile}`,
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.move('new-file', {
-      preconditionOpts: {ifGenerationMatch: 0},
-    });
-  } else {
-    await options.file!.move('new-file');
+    requestOptions.queryParameters!.ifGenerationMatch = 0;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function rename(options: ConformanceTestOptions) {
+  const sourceBucket = encodeURIComponent(options.bucket!.name);
+  const sourceFile = encodeURIComponent(options.file!.name);
+  const destinationFile = encodeURIComponent('new-name');
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${sourceBucket}/o/${sourceFile}/rewriteTo/b/${sourceBucket}/o/${destinationFile}`,
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.rename('new-name', {
-      preconditionOpts: {ifGenerationMatch: 0},
-    });
-  } else {
-    await options.file!.rename('new-name');
+    requestOptions.queryParameters!.ifGenerationMatch = 0;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function rotateEncryptionKey(options: ConformanceTestOptions) {
-  const crypto = require('crypto');
-  const buffer = crypto.randomBytes(32);
-  const newKey = buffer.toString('base64');
+  const bucketName = encodeURIComponent(options.bucket!.name);
+  const fileName = encodeURIComponent(options.file!.name);
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${bucketName}/o/${fileName}/rewriteTo/b/${bucketName}/o/${fileName}`,
+    headers: {
+      'x-goog-copy-source-encryption-algorithm': 'AES256',
+    },
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.rotateEncryptionKey({
-      encryptionKey: Buffer.from(newKey, 'base64'),
-      preconditionOpts: {ifGenerationMatch: options.file!.metadata.generation},
-    });
-  } else {
-    await options.file!.rotateEncryptionKey({
-      encryptionKey: Buffer.from(newKey, 'base64'),
-    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+    requestOptions.queryParameters!.ifGenerationMatch = generation;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function saveResumableInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  const buf = createTestBuffer(FILE_SIZE_BYTES);
-  await options.file!.save(buf, {
-    resumable: true,
-    chunkSize: CHUNK_SIZE_BYTES,
-    metadata: {contentLength: FILE_SIZE_BYTES},
-  });
+  return await saveResumable(options);
 }
 
 export async function saveResumable(options: ConformanceTestOptions) {
-  const buf = createTestBuffer(FILE_SIZE_BYTES);
+  const data = createTestBuffer(FILE_SIZE_BYTES);
+  const dataBuffer = Buffer.from(data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const retryId = (options as any).headers?.['x-retry-test-id'];
+
+  const initiateOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `upload/storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o`,
+    queryParameters: {
+      uploadType: 'resumable',
+      name: options.file!.name,
+    },
+    body: JSON.stringify({name: options.file!.name}),
+    headers: {
+      'Content-Type': 'application/json',
+      ...(retryId ? {'x-retry-test-id': retryId} : {}),
+    },
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.save(buf, {
-      resumable: true,
-      chunkSize: CHUNK_SIZE_BYTES,
-      metadata: {contentLength: FILE_SIZE_BYTES},
-      preconditionOpts: {
-        ifGenerationMatch: options.file!.metadata.generation,
-        ifMetagenerationMatch: options.file!.metadata.metageneration,
-      },
-    });
-  } else {
-    await options.file!.save(buf, {
-      resumable: true,
-      chunkSize: CHUNK_SIZE_BYTES,
-      metadata: {contentLength: FILE_SIZE_BYTES},
-    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+    initiateOptions.queryParameters!.ifGenerationMatch = generation;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const response: any =
+    await options.storageTransport!.makeRequest(initiateOptions);
+  let sessionUri: string | null = null;
+  if (response.headers) {
+    if (typeof response.headers.get === 'function') {
+      sessionUri = response.headers.get('location');
+    }
+    if (!sessionUri) {
+      sessionUri = response.headers.location || response.headers.Location;
+    }
+  }
+
+  if (!sessionUri && response.data && typeof response.data === 'object') {
+    sessionUri = response.data.location;
+  }
+
+  if (!sessionUri) throw new Error('Failed to get session URI');
+
+  return await options.storageTransport!.makeRequest({
+    method: 'PUT',
+    url: sessionUri,
+    body: dataBuffer,
+    queryParameters: undefined,
+    headers: {
+      'Content-Type': 'application/octet-stream',
+      'Content-Length': dataBuffer.length.toString(),
+      'Content-Range': `bytes 0-${dataBuffer.length - 1}/${dataBuffer.length}`,
+      'x-retry-test-id': retryId,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
+  });
 }
 
 export async function saveMultipartInstancePrecondition(
   options: ConformanceTestOptions,
 ) {
-  await options.file!.save('testdata', {resumable: false});
+  return await saveMultipart(options);
 }
 
 export async function saveMultipart(options: ConformanceTestOptions) {
-  if (options.preconditionRequired) {
-    await options.file!.save('testdata', {
-      resumable: false,
-      preconditionOpts: {
-        ifGenerationMatch: options.file!.metadata.generation,
-      },
-    });
-  } else {
-    await options.file!.save('testdata', {
-      resumable: false,
-    });
+  const boundary = 'conformance_test_boundary';
+  const fileName = options.file!.name;
+
+  const metadata = JSON.stringify({name: fileName});
+  const media = 'testdata';
+
+  const body =
+    `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n` +
+    `--${boundary}\r\nContent-Type: text/plain\r\n\r\n${media}\r\n` +
+    `--${boundary}--`;
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `upload/storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o`,
+    queryParameters: {
+      uploadType: 'multipart',
+      name: options.file!.name,
+    },
+    headers: {'Content-Type': `multipart/related; boundary=${boundary}`},
+    body: body,
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+  if (instanceOpts?.ifGenerationMatch !== undefined) {
+    requestOptions.queryParameters!.ifGenerationMatch =
+      instanceOpts.ifGenerationMatch;
+  } else if (options.preconditionRequired) {
+    const generation = options.file?.metadata?.generation ?? 0;
+    requestOptions.queryParameters!.ifGenerationMatch = generation;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setMetadataInstancePrecondition(
@@ -681,41 +1040,79 @@ export async function setMetadataInstancePrecondition(
 ) {
   const metadata = {
     contentType: 'application/x-font-ttf',
-    metadata: {
-      my: 'custom',
-      properties: 'go here',
-    },
+    metadata: {my: 'custom', properties: 'go here'},
   };
-  await options.file!.setMetadata(metadata);
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    queryParameters: {},
+    body: JSON.stringify(metadata),
+    headers: {'Content-Type': 'application/json'},
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+
+  if (instanceOpts?.ifGenerationMatch !== undefined) {
+    requestOptions.queryParameters!.ifGenerationMatch =
+      instanceOpts.ifGenerationMatch;
+  } else if (instanceOpts?.ifMetagenerationMatch !== undefined) {
+    requestOptions.queryParameters!.ifMetagenerationMatch =
+      instanceOpts.ifMetagenerationMatch;
+  } else if (options.preconditionRequired) {
+    requestOptions.queryParameters!.ifMetagenerationMatch =
+      options.file?.metadata.metageneration;
+  }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setMetadata(options: ConformanceTestOptions) {
   const metadata = {
     contentType: 'application/x-font-ttf',
-    metadata: {
-      my: 'custom',
-      properties: 'go here',
-    },
+    metadata: {my: 'custom', properties: 'go here'},
   };
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'PATCH',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${encodeURIComponent(options.file!.name)}`,
+    body: JSON.stringify(metadata),
+    headers: {'Content-Type': 'application/json'},
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.setMetadata(metadata, {
-      ifMetagenerationMatch: options.file!.metadata.metageneration,
-    });
-  } else {
-    await options.file!.setMetadata(metadata);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+
+    requestOptions.queryParameters!.ifGenerationMatch = generation;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setStorageClass(options: ConformanceTestOptions) {
+  const bucketName = encodeURIComponent(options.bucket!.name);
+  const fileName = encodeURIComponent(options.file!.name);
+
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${bucketName}/o/${fileName}/rewriteTo/b/${bucketName}/o/${fileName}`,
+    body: JSON.stringify({storageClass: 'NEARLINE'}),
+    headers: {'Content-Type': 'application/json'},
+    queryParameters: {},
+  };
+
   if (options.preconditionRequired) {
-    await options.file!.setStorageClass('nearline', {
-      preconditionOpts: {
-        ifGenerationMatch: options.file!.metadata.generation,
-      },
-    });
-  } else {
-    await options.file!.setStorageClass('nearline');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const instanceOpts = (options.file as any)?.instancePreconditionOpts;
+    const generation =
+      instanceOpts?.ifGenerationMatch || options.file?.metadata?.generation;
+    requestOptions.queryParameters!.ifSourceGenerationMatch = generation;
   }
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 // /////////////////////////////////////////////////
@@ -723,26 +1120,49 @@ export async function setStorageClass(options: ConformanceTestOptions) {
 // /////////////////////////////////////////////////
 
 export async function deleteHMAC(options: ConformanceTestOptions) {
-  const metadata = {
-    state: 'INACTIVE',
-  };
-  await options.hmacKey!.setMetadata(metadata);
-  await options.hmacKey!.delete();
+  await options.storageTransport!.makeRequest({
+    method: 'PUT',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys/${options.hmacKey!.metadata.accessId}`,
+    body: JSON.stringify({state: 'INACTIVE'}),
+    headers: {'x-retry-test-id': ''},
+  });
+  return await options.storageTransport!.makeRequest({
+    method: 'DELETE',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys/${options.hmacKey!.metadata.accessId}`,
+  });
 }
 
 export async function getHMAC(options: ConformanceTestOptions) {
-  await options.hmacKey!.get();
+  return await options.storageTransport!.makeRequest({
+    method: 'GET',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys/${options.hmacKey!.metadata.accessId}`,
+  });
 }
 
 export async function getMetadataHMAC(options: ConformanceTestOptions) {
-  await options.hmacKey!.getMetadata();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys/${options.hmacKey!.metadata.accessId}`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function setMetadataHMAC(options: ConformanceTestOptions) {
-  const metadata = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const body: any = {
     state: 'INACTIVE',
   };
-  await options.hmacKey!.setMetadata(metadata);
+
+  if (options.preconditionRequired && options.hmacKey?.metadata?.etag) {
+    body.etag = options.hmacKey.metadata.etag;
+  }
+
+  return await options.storageTransport!.makeRequest({
+    method: 'PUT',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys/${options.hmacKey!.metadata.accessId}`,
+    body: JSON.stringify(body),
+  });
 }
 
 /////////////////////////////////////////////////
@@ -750,11 +1170,17 @@ export async function setMetadataHMAC(options: ConformanceTestOptions) {
 /////////////////////////////////////////////////
 
 export async function iamGetPolicy(options: ConformanceTestOptions) {
-  await options.bucket!.iam.getPolicy({requestedPolicyVersion: 1});
+  return await options.storageTransport!.makeRequest({
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/iam`,
+    queryParameters: {optionsRequestedPolicyVersion: 1},
+  });
 }
 
 export async function iamSetPolicy(options: ConformanceTestOptions) {
-  const testPolicy: Policy = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const retryId = (options as any).headers?.['x-retry-test-id'];
+  const body: Policy = {
     bindings: [
       {
         role: 'roles/storage.admin',
@@ -762,16 +1188,41 @@ export async function iamSetPolicy(options: ConformanceTestOptions) {
       },
     ],
   };
+
   if (options.preconditionRequired) {
-    const currentPolicy = await options.bucket!.iam.getPolicy();
-    testPolicy.etag = currentPolicy[0].etag;
+    const getResponse = await options.storageTransport!.makeRequest({
+      method: 'GET',
+      url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/iam`,
+      queryParameters: {optionsRequestedPolicyVersion: 1},
+      headers: retryId ? {'x-retry-test-id': retryId} : {},
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const currentPolicy = (getResponse as any).data as Policy;
+    const fetchedEtag = currentPolicy.etag;
+
+    if (fetchedEtag) {
+      body.etag = fetchedEtag;
+    }
   }
-  await options.bucket!.iam.setPolicy(testPolicy);
+
+  return await options.storageTransport!.makeRequest({
+    method: 'PUT',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/iam`,
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+      ...(retryId ? {'x-retry-test-id': retryId} : {}),
+    },
+  });
 }
 
 export async function iamTestPermissions(options: ConformanceTestOptions) {
-  const permissionToTest = 'storage.buckets.delete';
-  await options.bucket!.iam.testPermissions(permissionToTest);
+  return await options.storageTransport!.makeRequest({
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/iam/testPermissions`,
+    queryParameters: {permissions: 'storage.buckets.delete'},
+  });
 }
 
 /////////////////////////////////////////////////
@@ -779,23 +1230,55 @@ export async function iamTestPermissions(options: ConformanceTestOptions) {
 /////////////////////////////////////////////////
 
 export async function notificationDelete(options: ConformanceTestOptions) {
-  await options.notification!.delete();
+  const requestOptions: StorageRequestOptions = {
+    method: 'DELETE',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/notificationConfigs/${options.notification!.id}`,
+    queryParameters: {},
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function notificationCreate(options: ConformanceTestOptions) {
-  await options.notification!.create();
+  const requestOptions: StorageRequestOptions = {
+    method: 'POST',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/notificationConfigs`,
+    body: JSON.stringify({
+      topic: 'my-topic',
+    }),
+    headers: {'Content-Type': 'application/json'},
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function notificationExists(options: ConformanceTestOptions) {
-  await options.notification!.exists();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/notificationConfigs/${options.notification!.id}`,
+  };
+
+  try {
+    await options.storageTransport!.makeRequest(requestOptions);
+    return true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    if (err.code === 404) return false;
+    throw err;
+  }
 }
 
 export async function notificationGet(options: ConformanceTestOptions) {
-  await options.notification!.get();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/notificationConfigs/${options.notification!.id}`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
 
 export async function notificationGetMetadata(options: ConformanceTestOptions) {
-  await options.notification!.getMetadata();
+  return await notificationGet(options);
 }
 
 /////////////////////////////////////////////////
@@ -803,43 +1286,74 @@ export async function notificationGetMetadata(options: ConformanceTestOptions) {
 /////////////////////////////////////////////////
 
 export async function createBucket(options: ConformanceTestOptions) {
-  const bucket = options.storage!.bucket('test-creating-bucket');
-  const [exists] = await bucket.exists();
-  if (exists) {
-    await bucket.delete();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const retryId = (options as any).headers?.['x-retry-test-id'];
+  const bucketName = options.bucket!.name;
+
+  try {
+    return await options.storageTransport!.makeRequest({
+      method: 'POST',
+      url: 'storage/v1/b',
+      queryParameters: {project: options.projectId},
+      body: JSON.stringify({name: bucketName}),
+      headers: {
+        'Content-Type': 'application/json',
+        ...(retryId ? {'x-retry-test-id': retryId} : {}),
+      },
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    if (
+      err.response?.status === 409 ||
+      err.message?.includes('already exists')
+    ) {
+      return await options.storageTransport!.makeRequest({
+        method: 'GET',
+        url: `storage/v1/b/${encodeURIComponent(bucketName)}`,
+        headers: {
+          ...(retryId ? {'x-retry-test-id': retryId} : {}),
+        },
+      });
+    }
+    throw err;
   }
-  await options.storage!.createBucket('test-creating-bucket');
 }
 
 export async function createHMACKey(options: ConformanceTestOptions) {
   const serviceAccountEmail = 'my-service-account@appspot.gserviceaccount.com';
-  await options.storage!.createHmacKey(serviceAccountEmail);
-}
-
-export async function getBuckets(options: ConformanceTestOptions) {
-  await options.storage!.getBuckets();
-}
-
-export async function getBucketsStream(options: ConformanceTestOptions) {
-  return new Promise((resolve, reject) => {
-    options
-      .storage!.getBucketsStream()
-      .on('data', () => {})
-      .on('end', () => resolve(undefined))
-      .on('error', err => reject(err));
+  return await options.storageTransport!.makeRequest({
+    method: 'POST',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys`,
+    queryParameters: {serviceAccountEmail},
   });
 }
 
-export function getHMACKeyStream(options: ConformanceTestOptions) {
-  return new Promise((resolve, reject) => {
-    options
-      .storage!.getHmacKeysStream()
-      .on('data', () => {})
-      .on('end', () => resolve(undefined))
-      .on('error', err => reject(err));
+export async function getBuckets(options: ConformanceTestOptions) {
+  return await options.storageTransport!.makeRequest({
+    method: 'GET',
+    url: 'storage/v1/b',
+    queryParameters: {project: options.projectId},
+  });
+}
+
+export async function getBucketsStream(options: ConformanceTestOptions) {
+  return await getBuckets(options);
+}
+
+export async function getHMACKeyStream(options: ConformanceTestOptions) {
+  const serviceAccountEmail = 'my-service-account@appspot.gserviceaccount.com';
+  return await options.storageTransport!.makeRequest({
+    method: 'GET',
+    url: `storage/v1/projects/${options.projectId}/hmacKeys`,
+    queryParameters: {serviceAccountEmail},
   });
 }
 
 export async function getServiceAccount(options: ConformanceTestOptions) {
-  await options.storage!.getServiceAccount();
+  const requestOptions: StorageRequestOptions = {
+    method: 'GET',
+    url: `storage/v1/projects/${options.projectId}/serviceAccount`,
+  };
+
+  return await options.storageTransport!.makeRequest(requestOptions);
 }
