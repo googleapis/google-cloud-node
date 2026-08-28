@@ -169,7 +169,7 @@ export class StorageTransport {
           hasEtagInBody = true;
         }
       } catch (e) {
-        // If it's not valid JSON, it's just a raw string/file upload. 
+        // If it's not valid JSON, it's just a raw string/file upload.
         // We safely ignore it to prevent false positives.
         hasEtagInBody = false;
       }
@@ -199,7 +199,8 @@ export class StorageTransport {
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: (err: GaxiosError) => !!this.retryOptions.retryableErrorFn?.(err),
+          shouldRetry: (err: GaxiosError) =>
+            !!this.retryOptions.retryableErrorFn?.(err),
         },
         ...reqOpts,
         hasPrecondition, // Pass flag to Gaxios / AuthClient options
