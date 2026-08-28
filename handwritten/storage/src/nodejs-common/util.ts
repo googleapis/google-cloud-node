@@ -59,17 +59,17 @@ export interface DuplexifyConstructor {
   obj(
     writable?: Writable | false | null,
     readable?: Readable | false | null,
-    options?: DuplexifyOptions
+    options?: DuplexifyOptions,
   ): Duplexify;
   new (
     writable?: Writable | false | null,
     readable?: Readable | false | null,
-    options?: DuplexifyOptions
+    options?: DuplexifyOptions,
   ): Duplexify;
   (
     writable?: Writable | false | null,
     readable?: Readable | false | null,
-    options?: DuplexifyOptions
+    options?: DuplexifyOptions,
   ): Duplexify;
 }
 
@@ -249,7 +249,7 @@ export class Util {
    */
   maybeOptionsOrCallback<T = {}, C = (err?: Error) => void>(
     optionsOrCallback?: T | C,
-    cb?: C
+    cb?: C,
   ): [T, C] {
     return typeof optionsOrCallback === 'function'
       ? [{} as T, optionsOrCallback as C]

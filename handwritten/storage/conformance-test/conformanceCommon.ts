@@ -15,7 +15,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
-import * as libraryMethods from './libraryMethods';
+import * as libraryMethods from './libraryMethods.js';
 import {
   Bucket,
   File,
@@ -30,7 +30,7 @@ import * as assert from 'assert';
 import {
   StorageRequestOptions,
   StorageTransport,
-} from '../src/storage-transport';
+} from '../src/storage-transport.js';
 interface RetryCase {
   instructions: String[];
 }
