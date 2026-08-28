@@ -29,7 +29,7 @@ describe('common/util', () => {
     it('should return false from generic error', () => {
       const error = new GaxiosError(
         'Generic error with no code',
-        {} as GaxiosOptionsPrepared
+        {} as GaxiosOptionsPrepared,
       );
       assert.strictEqual(util.shouldRetryRequest(error), false);
     });
@@ -73,7 +73,7 @@ describe('common/util', () => {
     it('should detect rateLimitExceeded reason', () => {
       const rateLimitError = new GaxiosError(
         'Rate limit error without code.',
-        {} as GaxiosOptionsPrepared
+        {} as GaxiosOptionsPrepared,
       );
       rateLimitError.code = 'rateLimitExceeded';
       assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
@@ -82,7 +82,7 @@ describe('common/util', () => {
     it('should detect userRateLimitExceeded reason', () => {
       const rateLimitError = new GaxiosError(
         'Rate limit error without code.',
-        {} as GaxiosOptionsPrepared
+        {} as GaxiosOptionsPrepared,
       );
       rateLimitError.code = 'userRateLimitExceeded';
       assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
@@ -91,7 +91,7 @@ describe('common/util', () => {
     it('should retry on EAI_AGAIN error code', () => {
       const eaiAgainError = new GaxiosError(
         'EAI_AGAIN',
-        {} as GaxiosOptionsPrepared
+        {} as GaxiosOptionsPrepared,
       );
       eaiAgainError.code = 'getaddrinfo EAI_AGAIN pubsub.googleapis.com';
       assert.strictEqual(util.shouldRetryRequest(eaiAgainError), true);
@@ -158,7 +158,7 @@ describe('common/util', () => {
       const callback = () => {};
       const [opts, cb] = util.maybeOptionsOrCallback(
         optionsOrCallback,
-        callback
+        callback,
       );
       assert.strictEqual(opts, optionsOrCallback);
       assert.strictEqual(cb, callback);

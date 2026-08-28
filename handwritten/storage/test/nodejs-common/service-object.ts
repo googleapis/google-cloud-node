@@ -81,7 +81,7 @@ describe('ServiceObject', () => {
       const serviceObject = new ServiceObject(config);
       assert.strictEqual(
         typeof serviceObject.storageTransport.makeRequest,
-        'function'
+        'function',
       );
     });
   });
@@ -94,7 +94,7 @@ describe('ServiceObject', () => {
       function createMethod(
         id: string,
         options_: {},
-        callback: (err: Error | null, a: {}, b: {}) => void
+        callback: (err: Error | null, a: {}, b: {}) => void,
       ) {
         assert.strictEqual(id, config.id);
         assert.strictEqual(options_, options);
@@ -126,7 +126,7 @@ describe('ServiceObject', () => {
       function createMethod(
         id: string,
         options_: {},
-        callback: (err: Error | null, a: {}, b: {}) => void
+        callback: (err: Error | null, a: {}, b: {}) => void,
       ) {
         assert.strictEqual(id, config.id);
         assert.strictEqual(options_, options);
@@ -265,7 +265,7 @@ describe('ServiceObject', () => {
         .callsFake(reqOpts => {
           assert.strictEqual(
             reqOpts.queryParameters!.ignoreNotFound,
-            undefined
+            undefined,
           );
           done();
           return Promise.resolve();
@@ -418,7 +418,7 @@ describe('ServiceObject', () => {
           .callsFake((opts, callback) => {
             (callback as SO.MetadataCallback<SO.BaseMetadata>)!(
               ERROR,
-              METADATA
+              METADATA,
             );
           });
       });
@@ -467,7 +467,7 @@ describe('ServiceObject', () => {
                 callback!(null); // done()
               });
               callback!(error, null, {});
-            }
+            },
           );
 
           serviceObject.get(AUTO_CREATE_CONFIG, err => {
@@ -501,7 +501,7 @@ describe('ServiceObject', () => {
         .callsFake(function (
           this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
           reqOpts,
-          callback
+          callback,
         ) {
           assert.strictEqual(this, serviceObject.storageTransport);
           assert.strictEqual(reqOpts.url, 'base-url/id');
@@ -573,7 +573,7 @@ describe('ServiceObject', () => {
         .callsFake(function (
           this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
           reqOpts,
-          callback
+          callback,
         ) {
           const body = JSON.parse(reqOpts.body);
           assert.strictEqual(this, serviceObject.storageTransport);

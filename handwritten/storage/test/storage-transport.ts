@@ -16,12 +16,12 @@ import {describe} from 'mocha';
 import {
   StorageRequestOptions,
   StorageTransport,
-} from '../src/storage-transport';
+} from '../src/storage-transport.js';
 import {GoogleAuth} from 'google-auth-library';
 import sinon from 'sinon';
 import assert from 'assert';
-import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
-import {RETRYABLE_ERR_FN_DEFAULT} from '../src/storage';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
+import {RETRYABLE_ERR_FN_DEFAULT} from '../src/storage.js';
 import {Gaxios, GaxiosResponse} from 'gaxios';
 
 describe('Storage Transport', () => {
@@ -137,10 +137,12 @@ describe('Storage Transport', () => {
     };
 
     let capturedGaxiosInstance: Gaxios | undefined;
-    const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request').callsFake(function(this: Gaxios, opts: any) {
-      capturedGaxiosInstance = this;
-      return Promise.resolve({ data: {} } as any);
-    });
+    const gaxiosRequestStub = sandbox
+      .stub(Gaxios.prototype, 'request')
+      .callsFake(function (this: Gaxios, opts: any) {
+        capturedGaxiosInstance = this;
+        return Promise.resolve({data: {}} as any);
+      });
 
     const requestStub = authClientStub.request as sinon.SinonStub;
     requestStub.resolves({data: {}});
@@ -152,11 +154,12 @@ describe('Storage Transport', () => {
     assert.ok(calledWith.adapter);
 
     // Manually call the adapter (simulating what the real authClient request does)
-    await calledWith.adapter({ headers: {} });
+    await calledWith.adapter({headers: {}});
 
     assert.strictEqual(gaxiosRequestStub.calledOnce, true);
     assert.ok(capturedGaxiosInstance);
-    const interceptorSet = capturedGaxiosInstance.interceptors.request as any as Set<any>;
+    const interceptorSet = capturedGaxiosInstance.interceptors
+      .request as any as Set<any>;
     assert.strictEqual(interceptorSet.size, 1);
     const handlers = Array.from(interceptorSet);
     assert.strictEqual(handlers[0].resolved, interceptorStub.resolved);
