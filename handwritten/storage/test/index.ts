@@ -27,6 +27,7 @@ import * as sinon from 'sinon';
 import {HmacKeyOptions} from '../src/hmacKey.js';
 import {
   CreateHmacKeyOptions,
+  GetBucketsRequest,
   GetHmacKeysOptions,
   Storage,
   StorageExceptionMessages,
@@ -1006,8 +1007,9 @@ describe('Storage', () => {
         .stub()
         .resolves({data: {nextPageToken: token, items: []}});
       storage.getBuckets({maxResults: 5}, (err, results, nextQuery) => {
-        assert.strictEqual((nextQuery as any).pageToken, token);
-        assert.strictEqual((nextQuery as any).maxResults, 5);
+        const query = nextQuery as GetBucketsRequest;
+        assert.strictEqual(query.pageToken, token);
+        assert.strictEqual(query.maxResults, 5);
       });
     });
 
