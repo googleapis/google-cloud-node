@@ -61,8 +61,7 @@
   },
   "pnpm": {
     "overrides": {
-      "yargs": "^17.7.2",
-      "google-gax": "workspace:*"
+      "yargs": "^17.7.2"
     }
   }
 }

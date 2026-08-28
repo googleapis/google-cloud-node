@@ -6,7 +6,6 @@ settings:
 
 overrides:
   yargs: ^17.7.2
-  google-gax: workspace:*
 
 importers:
 
@@ -1195,8 +1194,8 @@ importers:
         specifier: ^7.26.8
         version: 7.27.7
       google-gax:
-        specifier: workspace:*
-        version: link:../gax
+        specifier: ^6.0.0
+        version: 6.1.0
       google-proto-files:
         specifier: ^6.0.0
         version: 6.0.1
@@ -1628,8 +1627,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.2
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       long:
         specifier: ^5.2.0
         version: 5.3.2
@@ -1758,8 +1757,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       grpc-gcp:
         specifier: ^1.0.1
         version: 1.1.1
@@ -2024,8 +2023,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       is:
         specifier: ^3.3.0
         version: 3.3.2
@@ -2224,8 +2223,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.1
+        version: 6.1.0
       protobufjs:
         specifier: ^7.5.3
         version: 7.5.9
@@ -2378,8 +2377,8 @@ importers:
         specifier: 0.2.10
         version: 0.2.10
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       lodash.groupby:
         specifier: ^4.6.0
         version: 4.6.0
@@ -2478,8 +2477,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.2
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       long:
         specifier: ^5.3.2
         version: 5.3.2
@@ -2787,8 +2786,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.2
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       google-logging-utils:
         specifier: ^2.0.0
         version: 2.0.1
@@ -2995,8 +2994,8 @@ importers:
         specifier: ^10.0.0-rc.1
         version: 10.9.1
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: 5.0.6
+        version: 5.0.6
       grpc-gcp:
         specifier: ^1.0.1
         version: 1.1.1
@@ -3374,8 +3373,8 @@ importers:
   packages/google-ads-admanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3423,8 +3422,8 @@ importers:
   packages/google-ads-datamanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3472,8 +3471,8 @@ importers:
   packages/google-ai-generativelanguage:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3524,8 +3523,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.2
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       server-destroy:
         specifier: ^1.0.1
         version: 1.0.1
@@ -3576,8 +3575,8 @@ importers:
   packages/google-analytics-data:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3625,8 +3624,8 @@ importers:
   packages/google-api-apikeys:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3674,8 +3673,8 @@ importers:
   packages/google-api-cloudquotas:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3723,8 +3722,8 @@ importers:
   packages/google-api-servicecontrol:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3772,8 +3771,8 @@ importers:
   packages/google-api-servicemanagement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3821,8 +3820,8 @@ importers:
   packages/google-api-serviceusage:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3870,8 +3869,8 @@ importers:
   packages/google-appengine:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3919,8 +3918,8 @@ importers:
   packages/google-apps-events-subscriptions:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -3968,8 +3967,8 @@ importers:
   packages/google-apps-meet:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4017,8 +4016,8 @@ importers:
   packages/google-area120-tables:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4066,8 +4065,8 @@ importers:
   packages/google-chat:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4115,8 +4114,8 @@ importers:
   packages/google-cloud-accessapproval:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4164,8 +4163,8 @@ importers:
   packages/google-cloud-advisorynotifications:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4213,8 +4212,8 @@ importers:
   packages/google-cloud-agentidentity:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.1
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4262,8 +4261,8 @@ importers:
   packages/google-cloud-agentregistry:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4311,8 +4310,8 @@ importers:
   packages/google-cloud-aiplatform:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4360,8 +4359,8 @@ importers:
   packages/google-cloud-alloydb:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4409,8 +4408,8 @@ importers:
   packages/google-cloud-apigateway:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4458,8 +4457,8 @@ importers:
   packages/google-cloud-apigeeconnect:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4507,8 +4506,8 @@ importers:
   packages/google-cloud-apigeeregistry:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4568,8 +4567,8 @@ importers:
   packages/google-cloud-apihub:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4617,8 +4616,8 @@ importers:
   packages/google-cloud-apiregistry:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4666,8 +4665,8 @@ importers:
   packages/google-cloud-apphub:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4715,8 +4714,8 @@ importers:
   packages/google-cloud-appoptimize:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4764,8 +4763,8 @@ importers:
   packages/google-cloud-asset:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4816,8 +4815,8 @@ importers:
   packages/google-cloud-assuredworkloads:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4865,8 +4864,8 @@ importers:
   packages/google-cloud-auditmanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4914,8 +4913,8 @@ importers:
   packages/google-cloud-automl:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -4978,8 +4977,8 @@ importers:
   packages/google-cloud-backupdr:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5027,8 +5026,8 @@ importers:
   packages/google-cloud-baremetalsolution:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5076,8 +5075,8 @@ importers:
   packages/google-cloud-batch:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5125,8 +5124,8 @@ importers:
   packages/google-cloud-beyondcorp-appconnections:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5174,8 +5173,8 @@ importers:
   packages/google-cloud-beyondcorp-appconnectors:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5223,8 +5222,8 @@ importers:
   packages/google-cloud-beyondcorp-appgateways:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5272,8 +5271,8 @@ importers:
   packages/google-cloud-beyondcorp-clientconnectorservices:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5321,8 +5320,8 @@ importers:
   packages/google-cloud-beyondcorp-clientgateways:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5370,8 +5369,8 @@ importers:
   packages/google-cloud-bigquery-analyticshub:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5419,8 +5418,8 @@ importers:
   packages/google-cloud-bigquery-connection:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5468,8 +5467,8 @@ importers:
   packages/google-cloud-bigquery-dataexchange:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5517,8 +5516,8 @@ importers:
   packages/google-cloud-bigquery-datapolicies:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5566,8 +5565,8 @@ importers:
   packages/google-cloud-bigquery-datatransfer:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5615,8 +5614,8 @@ importers:
   packages/google-cloud-bigquery-migration:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5676,8 +5675,8 @@ importers:
   packages/google-cloud-bigquery-reservation:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5725,8 +5724,8 @@ importers:
   packages/google-cloud-bigquery-storage-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5774,8 +5773,8 @@ importers:
   packages/google-cloud-bigtable-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5823,8 +5822,8 @@ importers:
   packages/google-cloud-billing:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5872,8 +5871,8 @@ importers:
   packages/google-cloud-billing-budgets:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5921,8 +5920,8 @@ importers:
   packages/google-cloud-binaryauthorization:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -5970,8 +5969,8 @@ importers:
   packages/google-cloud-capacityplanner:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6019,8 +6018,8 @@ importers:
   packages/google-cloud-certificatemanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6068,8 +6067,8 @@ importers:
   packages/google-cloud-ces:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6117,8 +6116,8 @@ importers:
   packages/google-cloud-channel:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6166,8 +6165,8 @@ importers:
   packages/google-cloud-chronicle:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6215,8 +6214,8 @@ importers:
   packages/google-cloud-cloudcontrolspartner:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6264,8 +6263,8 @@ importers:
   packages/google-cloud-clouddms:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6316,8 +6315,8 @@ importers:
   packages/google-cloud-cloudsecuritycompliance:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6365,8 +6364,8 @@ importers:
   packages/google-cloud-commerce-consumer-procurement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6426,8 +6425,8 @@ importers:
   packages/google-cloud-commerceproducer:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6475,8 +6474,8 @@ importers:
   packages/google-cloud-compute:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6527,8 +6526,8 @@ importers:
   packages/google-cloud-confidentialcomputing:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6576,8 +6575,8 @@ importers:
   packages/google-cloud-config:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6625,8 +6624,8 @@ importers:
   packages/google-cloud-configdelivery:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6674,8 +6673,8 @@ importers:
   packages/google-cloud-connectors:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6723,8 +6722,8 @@ importers:
   packages/google-cloud-contactcenterinsights:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6772,8 +6771,8 @@ importers:
   packages/google-cloud-contentwarehouse:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6821,8 +6820,8 @@ importers:
   packages/google-cloud-databasecenter:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6870,8 +6869,8 @@ importers:
   packages/google-cloud-datacatalog:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6922,8 +6921,8 @@ importers:
   packages/google-cloud-datacatalog-lineage:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -6971,8 +6970,8 @@ importers:
   packages/google-cloud-datacatalog-lineage-configmanagement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7020,8 +7019,8 @@ importers:
   packages/google-cloud-dataform:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7069,8 +7068,8 @@ importers:
   packages/google-cloud-datafusion:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7118,8 +7117,8 @@ importers:
   packages/google-cloud-datalabeling:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7167,8 +7166,8 @@ importers:
   packages/google-cloud-dataplex:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7219,8 +7218,8 @@ importers:
   packages/google-cloud-dataproc:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7271,8 +7270,8 @@ importers:
   packages/google-cloud-dataqna:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7320,8 +7319,8 @@ importers:
   packages/google-cloud-datastore-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7369,8 +7368,8 @@ importers:
   packages/google-cloud-datastream:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7418,8 +7417,8 @@ importers:
   packages/google-cloud-deploy:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7467,8 +7466,8 @@ importers:
   packages/google-cloud-developerconnect:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7516,8 +7515,8 @@ importers:
   packages/google-cloud-devicestreaming:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7565,8 +7564,8 @@ importers:
   packages/google-cloud-dialogflow:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7617,8 +7616,8 @@ importers:
   packages/google-cloud-dialogflow-cx:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.1.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7666,8 +7665,8 @@ importers:
   packages/google-cloud-discoveryengine:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7715,8 +7714,8 @@ importers:
   packages/google-cloud-documentai:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7767,8 +7766,8 @@ importers:
   packages/google-cloud-domains:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7816,8 +7815,8 @@ importers:
   packages/google-cloud-edgecontainer:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7865,8 +7864,8 @@ importers:
   packages/google-cloud-edgenetwork:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7914,8 +7913,8 @@ importers:
   packages/google-cloud-essentialcontacts:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -7963,8 +7962,8 @@ importers:
   packages/google-cloud-eventarc:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8012,8 +8011,8 @@ importers:
   packages/google-cloud-eventarc-publishing:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8061,8 +8060,8 @@ importers:
   packages/google-cloud-filestore:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8110,8 +8109,8 @@ importers:
   packages/google-cloud-financialservices:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8159,8 +8158,8 @@ importers:
   packages/google-cloud-firestore-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       long:
         specifier: ^5.3.2
         version: 5.3.2
@@ -8208,8 +8207,8 @@ importers:
   packages/google-cloud-ftp:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^5.0.0
+        version: 5.0.6
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8257,8 +8256,8 @@ importers:
   packages/google-cloud-functions:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8306,8 +8305,8 @@ importers:
   packages/google-cloud-gdchardwaremanagement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8355,8 +8354,8 @@ importers:
   packages/google-cloud-geminidataanalytics:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8404,8 +8403,8 @@ importers:
   packages/google-cloud-gkebackup:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8453,8 +8452,8 @@ importers:
   packages/google-cloud-gkeconnect-gateway:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8502,8 +8501,8 @@ importers:
   packages/google-cloud-gkehub:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8551,8 +8550,8 @@ importers:
   packages/google-cloud-gkemulticloud:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8600,8 +8599,8 @@ importers:
   packages/google-cloud-gkerecommender:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8649,8 +8648,8 @@ importers:
   packages/google-cloud-gsuiteaddons:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8698,8 +8697,8 @@ importers:
   packages/google-cloud-hypercomputecluster:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8747,8 +8746,8 @@ importers:
   packages/google-cloud-iap:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8796,8 +8795,8 @@ importers:
   packages/google-cloud-ids:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8845,8 +8844,8 @@ importers:
   packages/google-cloud-iot:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8894,8 +8893,8 @@ importers:
   packages/google-cloud-kms:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8943,8 +8942,8 @@ importers:
   packages/google-cloud-kms-inventory:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -8992,8 +8991,8 @@ importers:
   packages/google-cloud-language:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9044,8 +9043,8 @@ importers:
   packages/google-cloud-licensemanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9093,8 +9092,8 @@ importers:
   packages/google-cloud-lifesciences:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9142,8 +9141,8 @@ importers:
   packages/google-cloud-locationfinder:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9191,8 +9190,8 @@ importers:
   packages/google-cloud-logging-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9240,8 +9239,8 @@ importers:
   packages/google-cloud-lustre:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9289,8 +9288,8 @@ importers:
   packages/google-cloud-maintenance-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9338,8 +9337,8 @@ importers:
   packages/google-cloud-managedidentities:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9387,8 +9386,8 @@ importers:
   packages/google-cloud-managedkafka:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9436,8 +9435,8 @@ importers:
   packages/google-cloud-managedkafka-schemaregistry:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9485,8 +9484,8 @@ importers:
   packages/google-cloud-mediatranslation:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9534,8 +9533,8 @@ importers:
   packages/google-cloud-memcache:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9583,8 +9582,8 @@ importers:
   packages/google-cloud-memorystore:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9632,8 +9631,8 @@ importers:
   packages/google-cloud-metastore:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9681,8 +9680,8 @@ importers:
   packages/google-cloud-migrationcenter:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9730,8 +9729,8 @@ importers:
   packages/google-cloud-modelarmor:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^9.0.0
@@ -9779,8 +9778,8 @@ importers:
   packages/google-cloud-monitoring:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9831,8 +9830,8 @@ importers:
   packages/google-cloud-netapp:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9880,8 +9879,8 @@ importers:
   packages/google-cloud-networkconnectivity:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9929,8 +9928,8 @@ importers:
   packages/google-cloud-networkmanagement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -9978,8 +9977,8 @@ importers:
   packages/google-cloud-networksecurity:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10027,8 +10026,8 @@ importers:
   packages/google-cloud-networkservices:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10076,8 +10075,8 @@ importers:
   packages/google-cloud-notebooks:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10125,8 +10124,8 @@ importers:
   packages/google-cloud-oracledatabase:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10174,8 +10173,8 @@ importers:
   packages/google-cloud-orchestration-airflow-service:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10223,8 +10222,8 @@ importers:
   packages/google-cloud-orgpolicy:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10272,8 +10271,8 @@ importers:
   packages/google-cloud-osconfig:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10321,8 +10320,8 @@ importers:
   packages/google-cloud-oslogin:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10370,8 +10369,8 @@ importers:
   packages/google-cloud-parallelstore:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10419,8 +10418,8 @@ importers:
   packages/google-cloud-parametermanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10468,8 +10467,8 @@ importers:
   packages/google-cloud-phishingprotection:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10520,8 +10519,8 @@ importers:
   packages/google-cloud-policysimulator:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10569,8 +10568,8 @@ importers:
   packages/google-cloud-policytroubleshooter:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10618,8 +10617,8 @@ importers:
   packages/google-cloud-policytroubleshooter-iam:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10667,8 +10666,8 @@ importers:
   packages/google-cloud-privatecatalog:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10716,8 +10715,8 @@ importers:
   packages/google-cloud-privilegedaccessmanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10765,8 +10764,8 @@ importers:
   packages/google-cloud-productregistry:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10814,8 +10813,8 @@ importers:
   packages/google-cloud-pubsub-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10863,8 +10862,8 @@ importers:
   packages/google-cloud-rapidmigrationassessment:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10912,8 +10911,8 @@ importers:
   packages/google-cloud-recaptchaenterprise:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -10961,8 +10960,8 @@ importers:
   packages/google-cloud-recommender:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11010,8 +11009,8 @@ importers:
   packages/google-cloud-redis:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11062,8 +11061,8 @@ importers:
   packages/google-cloud-redis-cluster:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11111,8 +11110,8 @@ importers:
   packages/google-cloud-resourcemanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11160,8 +11159,8 @@ importers:
   packages/google-cloud-retail:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11209,8 +11208,8 @@ importers:
   packages/google-cloud-run:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11258,8 +11257,8 @@ importers:
   packages/google-cloud-saasplatform-saasservicemgmt:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11307,8 +11306,8 @@ importers:
   packages/google-cloud-scheduler:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11356,8 +11355,8 @@ importers:
   packages/google-cloud-secretmanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11405,8 +11404,8 @@ importers:
   packages/google-cloud-securesourcemanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11454,8 +11453,8 @@ importers:
   packages/google-cloud-security-privateca:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11503,8 +11502,8 @@ importers:
   packages/google-cloud-security-publicca:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11552,8 +11551,8 @@ importers:
   packages/google-cloud-securitycenter:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11601,8 +11600,8 @@ importers:
   packages/google-cloud-securitycentermanagement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11650,8 +11649,8 @@ importers:
   packages/google-cloud-servicedirectory:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       json-schema:
         specifier: ^0.4.0
         version: 0.4.0
@@ -11702,8 +11701,8 @@ importers:
   packages/google-cloud-servicehealth:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11751,8 +11750,8 @@ importers:
   packages/google-cloud-shell:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11800,8 +11799,8 @@ importers:
   packages/google-cloud-spanner-api:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11855,8 +11854,8 @@ importers:
         specifier: ^1.4.4
         version: 1.4.5
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       pumpify:
         specifier: ^2.0.1
         version: 2.0.1
@@ -11913,8 +11912,8 @@ importers:
   packages/google-cloud-sql:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -11974,8 +11973,8 @@ importers:
   packages/google-cloud-storagebatchoperations:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12023,8 +12022,8 @@ importers:
   packages/google-cloud-storageinsights:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12072,8 +12071,8 @@ importers:
   packages/google-cloud-support:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12121,8 +12120,8 @@ importers:
   packages/google-cloud-talent:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12170,8 +12169,8 @@ importers:
   packages/google-cloud-tasks:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.26.4
@@ -12243,8 +12242,8 @@ importers:
   packages/google-cloud-telcoautomation:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12292,8 +12291,8 @@ importers:
   packages/google-cloud-texttospeech:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12344,8 +12343,8 @@ importers:
   packages/google-cloud-tpu:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12405,8 +12404,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
       is-html:
         specifier: ^2.0.0
         version: 2.0.0
@@ -12478,8 +12477,8 @@ importers:
   packages/google-cloud-vectorsearch:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12527,8 +12526,8 @@ importers:
   packages/google-cloud-video-livestream:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12576,8 +12575,8 @@ importers:
   packages/google-cloud-video-stitcher:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12625,8 +12624,8 @@ importers:
   packages/google-cloud-video-transcoder:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12674,8 +12673,8 @@ importers:
   packages/google-cloud-videointelligence:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12732,8 +12731,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.1
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@google-cloud/storage':
         specifier: ^7.15.2
@@ -12790,8 +12789,8 @@ importers:
   packages/google-cloud-visionai:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12839,8 +12838,8 @@ importers:
   packages/google-cloud-vmmigration:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12888,8 +12887,8 @@ importers:
   packages/google-cloud-vmwareengine:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12937,8 +12936,8 @@ importers:
   packages/google-cloud-vpcaccess:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -12986,8 +12985,8 @@ importers:
   packages/google-cloud-webrisk:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/chai':
         specifier: ^4.2.7
@@ -13044,8 +13043,8 @@ importers:
   packages/google-cloud-websecurityscanner:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13093,8 +13092,8 @@ importers:
   packages/google-cloud-workflows:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13142,8 +13141,8 @@ importers:
   packages/google-cloud-workloadidentity:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^5.0.0
+        version: 5.0.6
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13191,8 +13190,8 @@ importers:
   packages/google-cloud-workloadmanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13240,8 +13239,8 @@ importers:
   packages/google-cloud-workstations:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13289,8 +13288,8 @@ importers:
   packages/google-container:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13338,8 +13337,8 @@ importers:
   packages/google-dataflow:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13387,8 +13386,8 @@ importers:
   packages/google-developer-knowledge:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13436,8 +13435,8 @@ importers:
   packages/google-devicesandservices-health:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13485,8 +13484,8 @@ importers:
   packages/google-devtools-artifactregistry:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13534,8 +13533,8 @@ importers:
   packages/google-devtools-cloudbuild:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13583,8 +13582,8 @@ importers:
   packages/google-devtools-cloudprofiler:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13635,8 +13634,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13684,8 +13683,8 @@ importers:
   packages/google-iam:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13733,8 +13732,8 @@ importers:
   packages/google-iam-credentials:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13782,8 +13781,8 @@ importers:
   packages/google-identity-accesscontextmanager:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13831,8 +13830,8 @@ importers:
   packages/google-maps-addressvalidation:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13880,8 +13879,8 @@ importers:
   packages/google-maps-areainsights:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13929,8 +13928,8 @@ importers:
   packages/google-maps-fleetengine:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -13978,8 +13977,8 @@ importers:
   packages/google-maps-fleetengine-delivery:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14027,8 +14026,8 @@ importers:
   packages/google-maps-geocode:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14076,8 +14075,8 @@ importers:
   packages/google-maps-isochrones:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14125,8 +14124,8 @@ importers:
   packages/google-maps-mapmanagement:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14177,8 +14176,8 @@ importers:
   packages/google-maps-mapsplatformdatasets:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14226,8 +14225,8 @@ importers:
   packages/google-maps-navconnect:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14275,8 +14274,8 @@ importers:
   packages/google-maps-places:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14324,8 +14323,8 @@ importers:
   packages/google-maps-routeoptimization:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14373,8 +14372,8 @@ importers:
   packages/google-maps-routing:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14422,8 +14421,8 @@ importers:
   packages/google-maps-solar:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14471,8 +14470,8 @@ importers:
   packages/google-marketingplatform-admin:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14520,8 +14519,8 @@ importers:
   packages/google-monitoring-dashboard:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14569,8 +14568,8 @@ importers:
   packages/google-privacy-dlp:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14618,8 +14617,8 @@ importers:
   packages/google-shopping-css:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14667,8 +14666,8 @@ importers:
   packages/google-shopping-merchant-accounts:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14716,8 +14715,8 @@ importers:
   packages/google-shopping-merchant-conversions:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14765,8 +14764,8 @@ importers:
   packages/google-shopping-merchant-datasources:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14814,8 +14813,8 @@ importers:
   packages/google-shopping-merchant-inventories:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14863,8 +14862,8 @@ importers:
   packages/google-shopping-merchant-issueresolution:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14912,8 +14911,8 @@ importers:
   packages/google-shopping-merchant-lfp:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -14961,8 +14960,8 @@ importers:
   packages/google-shopping-merchant-notifications:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15010,8 +15009,8 @@ importers:
   packages/google-shopping-merchant-ordertracking:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15059,8 +15058,8 @@ importers:
   packages/google-shopping-merchant-products:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15108,8 +15107,8 @@ importers:
   packages/google-shopping-merchant-promotions:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15157,8 +15156,8 @@ importers:
   packages/google-shopping-merchant-quota:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15206,8 +15205,8 @@ importers:
   packages/google-shopping-merchant-reports:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15255,8 +15254,8 @@ importers:
   packages/google-shopping-merchant-reviews:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15304,8 +15303,8 @@ importers:
   packages/google-storage-control:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15356,8 +15355,8 @@ importers:
   packages/google-storagetransfer:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15405,8 +15404,8 @@ importers:
   packages/google-streetview-publish:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -15454,8 +15453,8 @@ importers:
   packages/grafeas:
     dependencies:
       google-gax:
-        specifier: workspace:*
-        version: link:../../core/packages/gax
+        specifier: ^6.0.0
+        version: 6.1.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -17383,6 +17382,9 @@ packages:
 
   '@types/lodash@4.17.24':
     resolution: {integrity: sha512-gIW7lQLZbue7lRSWEFql49QJJWThrTFFeIMJdp3eH4tKoxm1OvEPg02rm4wCCSHS0cL3/Fizimb35b7k8atwsQ==}
+
+  '@types/long@4.0.2':
+    resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
 
   '@types/long@5.0.0':
     resolution: {integrity: sha512-eQs9RsucA/LNjnMoJvWG/nXa7Pot/RbBzilF/QRIU/xRl+0ApxrSUFsV5lmf01SvSlqMzJ7Zwxe440wmz2SJGA==}
@@ -20124,6 +20126,18 @@ packages:
     resolution: {integrity: sha512-Jb6Z0+nvECVz+2lzSMt9u98UsoakXxA2HGHMCxh+so3n90XgYWkq5dur19JAJV7ONiJY22yBTyJB1TSkvPq9Ng==}
     engines: {node: '>=14'}
 
+  google-gax@4.6.1:
+    resolution: {integrity: sha512-V6eky/xz2mcKfAd1Ioxyd6nmA61gao3n01C+YeuIwu3vzM9EDR6wcVzMSIbLMDXWeoi9SHYctXuKYC5uJUT3eQ==}
+    engines: {node: '>=14'}
+
+  google-gax@5.0.6:
+    resolution: {integrity: sha512-1kGbqVQBZPAAu4+/R1XxPQKP0ydbNYoLAr4l0ZO2bMV0kLyLW4I1gAk++qBLWt7DPORTzmWRMsCZe86gDjShJA==}
+    engines: {node: '>=18'}
+
+  google-gax@6.1.0:
+    resolution: {integrity: sha512-PN84pgPw6USmNfy8hlMkifsII+VzCTddRODjPqGZ0JKQuB3WYMEMMepTypmE7ymMXFYiOe3Oi0dHskQ4jkOZfg==}
+    engines: {node: '>=22'}
+
   google-logging-utils@0.0.2:
     resolution: {integrity: sha512-NEgUnEcBiP5HrPzufUkBzJOD/Sxsco3rLNo1F1TNf7ieU8ryUzBhqba8r756CjLX7rn3fHl6iLEwPYuqpoKgQQ==}
     engines: {node: '>=14'}
@@ -22367,6 +22381,14 @@ packages:
 
   propagating-hammerjs@1.5.0:
     resolution: {integrity: sha512-3PUXWmomwutoZfydC+lJwK1bKCh6sK6jZGB31RUX6+4EXzsbkDZrK4/sVR7gBrvJaEIwpTVyxQUAd29FKkmVdw==}
+
+  proto3-json-serializer@2.0.2:
+    resolution: {integrity: sha512-SAzp/O4Yh02jGdRc+uIrGoe87dkN/XtwxfZ4ZyafJHymd79ozp5VG5nyZ7ygqPM5+cpLDjjGnYFUkngonyDPOQ==}
+    engines: {node: '>=14.0.0'}
+
+  proto3-json-serializer@3.0.6:
+    resolution: {integrity: sha512-RSwWn5FFupDbiZJEAPkzONSJQAx/I5xUp1NCdaMijM5aq5Zj53JiwUpHsjBYKQ6KXz+ZyxRt/oNYOcdgcqkdaw==}
+    engines: {node: '>=18'}
 
   proto3-json-serializer@4.0.2:
     resolution: {integrity: sha512-VUQlb/J2WjOG8BKhdLwJUz+MKxSMtBGYh+TaNmRtiYVhlIzXjzeAGIx7gtc3lXlA2iURzfF2+cXaQvC2ofwzpg==}
@@ -25085,7 +25107,9 @@ snapshots:
 
   '@google-cloud/bigquery-storage-api@0.3.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/bigquery@9.0.2':
     dependencies:
@@ -25104,7 +25128,9 @@ snapshots:
 
   '@google-cloud/bigtable-api@0.3.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/cloud-rad@0.4.10(@types/node@24.13.3)':
     dependencies:
@@ -25166,27 +25192,39 @@ snapshots:
 
   '@google-cloud/datastore-api@0.3.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/dialogflow-cx@6.0.1':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/firestore-api@0.2.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 5.0.6
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/functions@5.0.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/grafeas@7.0.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/logging-api@0.3.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/logging-min@11.2.2(encoding@0.1.13)':
     dependencies:
@@ -25202,7 +25240,7 @@ snapshots:
       extend: 3.0.2
       gcp-metadata: 6.1.1(encoding@0.1.13)
       google-auth-library: 9.15.1(encoding@0.1.13)
-      google-gax: link:core/packages/gax
+      google-gax: 4.6.1(encoding@0.1.13)
       long: 5.3.2
       on-finished: 2.4.1
       pumpify: 2.0.1
@@ -25225,7 +25263,7 @@ snapshots:
       extend: 3.0.2
       gcp-metadata: 9.0.3
       google-auth-library: 11.0.2
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
       long: 5.3.2
       on-finished: 2.4.1
       pumpify: 2.0.1
@@ -25235,11 +25273,15 @@ snapshots:
 
   '@google-cloud/monitoring@5.4.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 5.0.6
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/monitoring@6.0.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/opentelemetry-cloud-monitoring-exporter@0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
@@ -25329,7 +25371,9 @@ snapshots:
 
   '@google-cloud/pubsub-api@0.3.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/pubsub@6.0.1':
     dependencies:
@@ -25344,7 +25388,7 @@ snapshots:
       arrify: 2.0.1
       extend: 3.0.2
       google-auth-library: 11.0.2
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
       google-logging-utils: 2.0.1
       heap-js: 2.7.1
       is-stream-ended: 0.1.4
@@ -25356,11 +25400,15 @@ snapshots:
 
   '@google-cloud/spanner-api@0.2.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 5.0.6
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/spanner-api@0.3.0':
     dependencies:
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@google-cloud/spanner@8.10.0':
     dependencies:
@@ -25388,7 +25436,7 @@ snapshots:
       events-intercept: 2.0.0
       extend: 3.0.2
       google-auth-library: 10.9.1
-      google-gax: link:core/packages/gax
+      google-gax: 5.0.6
       grpc-gcp: 1.1.1
       lodash.snakecase: 4.1.1
       merge-stream: 2.0.0
@@ -25408,24 +25456,32 @@ snapshots:
     dependencies:
       '@google-cloud/spanner-api': 0.3.0
       bindings: 1.5.0
+    transitivePeerDependencies:
+      - supports-color
     optional: true
 
   '@google-cloud/spannerlib-node-linux-arm64@0.2.0':
     dependencies:
       '@google-cloud/spanner-api': 0.3.0
       bindings: 1.5.0
+    transitivePeerDependencies:
+      - supports-color
     optional: true
 
   '@google-cloud/spannerlib-node-linux-x64@0.2.0':
     dependencies:
       '@google-cloud/spanner-api': 0.3.0
       bindings: 1.5.0
+    transitivePeerDependencies:
+      - supports-color
     optional: true
 
   '@google-cloud/spannerlib-node-win32-x64@0.2.0':
     dependencies:
       '@google-cloud/spanner-api': 0.3.0
       bindings: 1.5.0
+    transitivePeerDependencies:
+      - supports-color
     optional: true
 
   '@google-cloud/storage@7.21.0(encoding@0.1.13)':
@@ -26793,6 +26849,8 @@ snapshots:
       '@types/lodash': 4.17.24
 
   '@types/lodash@4.17.24': {}
+
+  '@types/long@4.0.2': {}
 
   '@types/long@5.0.0':
     dependencies:
@@ -30030,7 +30088,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.27.7
       '@babel/traverse': 7.27.7
-      google-gax: link:core/packages/gax
+      google-gax: 5.0.6
       google-proto-files: 5.0.1
       protobufjs-cli: 1.3.3(protobufjs@7.5.9)
       uglify-js: 3.19.3
@@ -30044,7 +30102,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.27.7
       '@babel/traverse': 7.27.7
-      google-gax: link:core/packages/gax
+      google-gax: 5.0.6
       google-proto-files: 5.0.1
       protobufjs-cli: 1.3.3(protobufjs@7.6.5)
       uglify-js: 3.19.3
@@ -30059,7 +30117,7 @@ snapshots:
       '@babel/core': 7.27.7
       '@babel/template': 7.29.7
       '@babel/traverse': 7.27.7
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
       google-proto-files: 6.0.1
       protobufjs-cli: 1.3.3(protobufjs@7.5.9)
       uglify-js: 3.19.3
@@ -30074,7 +30132,7 @@ snapshots:
       '@babel/core': 7.27.7
       '@babel/template': 7.29.7
       '@babel/traverse': 7.27.7
-      google-gax: link:core/packages/gax
+      google-gax: 6.1.0
       google-proto-files: 6.0.1
       protobufjs-cli: 1.3.3(protobufjs@7.6.5)
       uglify-js: 3.19.3
@@ -30399,6 +30457,56 @@ snapshots:
       jws: 4.0.1
     transitivePeerDependencies:
       - encoding
+      - supports-color
+
+  google-gax@4.6.1(encoding@0.1.13):
+    dependencies:
+      '@grpc/grpc-js': 1.14.4
+      '@grpc/proto-loader': 0.7.15
+      '@types/long': 4.0.2
+      abort-controller: 3.0.0
+      duplexify: 4.1.3
+      google-auth-library: 9.15.1(encoding@0.1.13)
+      node-fetch: 2.7.0(encoding@0.1.13)
+      object-hash: 3.0.0
+      proto3-json-serializer: 2.0.2
+      protobufjs: 7.5.9
+      retry-request: 7.0.2(encoding@0.1.13)
+      uuid: 9.0.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  google-gax@5.0.6:
+    dependencies:
+      '@grpc/grpc-js': 1.14.4
+      '@grpc/proto-loader': 0.8.1
+      duplexify: 4.1.3
+      google-auth-library: 10.9.1
+      google-logging-utils: 1.1.3
+      node-fetch: 3.3.2
+      object-hash: 3.0.0
+      proto3-json-serializer: 3.0.6
+      protobufjs: 7.5.9
+      retry-request: 8.0.3
+      rimraf: 5.0.10
+    transitivePeerDependencies:
+      - supports-color
+
+  google-gax@6.1.0:
+    dependencies:
+      '@grpc/grpc-js': 1.14.4
+      '@grpc/proto-loader': 0.8.1
+      '@opentelemetry/api': 1.9.1
+      duplexify: 4.1.3
+      google-auth-library: 11.0.2
+      google-logging-utils: 2.0.1
+      node-fetch: 3.3.2
+      object-hash: 3.0.0
+      proto3-json-serializer: 4.0.2
+      protobufjs: 7.5.9
+      retry-request: 9.0.1
+    transitivePeerDependencies:
       - supports-color
 
   google-logging-utils@0.0.2: {}
@@ -32968,6 +33076,14 @@ snapshots:
   propagating-hammerjs@1.5.0:
     dependencies:
       hammerjs: 2.0.8
+
+  proto3-json-serializer@2.0.2:
+    dependencies:
+      protobufjs: 7.5.9
+
+  proto3-json-serializer@3.0.6:
+    dependencies:
+      protobufjs: 7.5.9
 
   proto3-json-serializer@4.0.2:
     dependencies:
