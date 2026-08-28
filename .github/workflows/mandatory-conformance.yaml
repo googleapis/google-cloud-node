@@ -52,6 +52,8 @@ jobs:
       with:
         go-version: '>=1.20.2'
     - run: chmod +x .kokoro/mandatory-conformance.sh
-    - run: npm install
+    - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+    - run: pnpm install --frozen-lockfile --ignore-scripts
+    - run: pnpm --filter ...{handwritten/bigtable} run --if-present compile
     - run: go version
     - run: .kokoro/mandatory-conformance.sh
