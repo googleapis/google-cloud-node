@@ -17,7 +17,7 @@
 import {GrpcService} from './common-grpc/service';
 import * as checkpointStream from 'checkpoint-stream';
 import {common as p} from 'protobufjs';
-import { PassThrough, Readable, Transform } from 'stream';
+import {PassThrough, Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
 import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
@@ -584,8 +584,8 @@ export function partialResultStream(
   // We also add an additional stream that can be used to flush any remaining
   // items in the checkpoint stream that have been received, and that did not
   // contain a resume token.
-  const requestsStream = new PassThrough({ objectMode: true });
-  const flushStream = new PassThrough({ objectMode: true });
+  const requestsStream = new PassThrough({objectMode: true});
+  const flushStream = new PassThrough({objectMode: true});
   flushStream.pipe(requestsStream);
   const partialRSStream = new PartialResultStream(options);
   const userStream = streamEvents(partialRSStream);
@@ -660,9 +660,8 @@ export function partialResultStream(
 
     if (lastRequestStream) {
       lastRequestStream.removeListener('end', endListener);
-      if (errorListener) {
-        lastRequestStream.removeListener('error', errorListener);
-      }
+      lastRequestStream.removeAllListeners('error');
+      lastRequestStream.on('error', () => {}); // Prevent unhandled exception crash
       lastRequestStream.destroy();
     }
     // Delay the retry until all the values that are already in the stream
