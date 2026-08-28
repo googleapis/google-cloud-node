@@ -218,30 +218,39 @@ export class StorageTransport {
             (status >= 200 && status < 300) || (isResumable && status === 308)
           );
         },
-      } as any);
+      } as unknown as GaxiosOptions);
 
       // Helper to decorate plain JSON objects with metadata for backward-compatibility callbacks
       const decorateMetadata = (resp: GaxiosResponse<T>) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const data = resp.data as any;
-        const isPlainObject = (obj: any): boolean =>
+        const data = resp.data;
+        const isPlainObject = (obj: unknown): boolean =>
           obj !== null &&
           typeof obj === 'object' &&
           !(obj instanceof Buffer) &&
-          !(typeof obj.on === 'function') &&
+          !(typeof (obj as {on?: unknown}).on === 'function') &&
           !Array.isArray(obj);
 
         if (isPlainObject(data)) {
-          data.headers = resp.headers;
-          data.status = resp.status;
+          (data as Record<string, unknown>).headers = resp.headers;
+          (data as Record<string, unknown>).status = resp.status;
         }
         return data;
       };
 
       if (callback) {
-        requestPromise
-          .then(resp => callback(null, decorateMetadata(resp), resp))
-          .catch(err => callback(err, null, err.response));
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        (async () => {
+          try {
+            const resp = await requestPromise;
+            callback(null, decorateMetadata(resp), resp);
+          } catch (err: unknown) {
+            callback(
+              err as GaxiosError,
+              null,
+              (err as {response?: GaxiosResponse}).response,
+            );
+          }
+        })();
         return requestPromise;
       }
 
