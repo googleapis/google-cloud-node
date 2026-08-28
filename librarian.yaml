@@ -631,7 +631,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
