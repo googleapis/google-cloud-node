@@ -231,7 +231,7 @@ class CRC32C implements CRC32CValidator {
    * @param value 4-byte `ArrayBufferView`/`Buffer`/`TypedArray`
    */
   private static fromBuffer(
-    value: ArrayBuffer | ArrayBufferView | Buffer
+    value: ArrayBuffer | ArrayBufferView | Buffer,
   ): CRC32C {
     let buffer: Buffer;
 
@@ -247,7 +247,7 @@ class CRC32C implements CRC32CValidator {
 
     if (buffer.byteLength !== 4) {
       throw new RangeError(
-        CRC32C_EXCEPTION_MESSAGES.INVALID_INIT_BUFFER_LENGTH(buffer.byteLength)
+        CRC32C_EXCEPTION_MESSAGES.INVALID_INIT_BUFFER_LENGTH(buffer.byteLength),
       );
     }
 
@@ -283,7 +283,7 @@ class CRC32C implements CRC32CValidator {
 
     if (buffer.byteLength !== 4) {
       throw new RangeError(
-        CRC32C_EXCEPTION_MESSAGES.INVALID_INIT_BASE64_RANGE(buffer.byteLength)
+        CRC32C_EXCEPTION_MESSAGES.INVALID_INIT_BASE64_RANGE(buffer.byteLength),
       );
     }
 
@@ -298,7 +298,7 @@ class CRC32C implements CRC32CValidator {
   private static fromNumber(value: number): CRC32C {
     if (!Number.isSafeInteger(value) || value > 2 ** 32 || value < -(2 ** 32)) {
       throw new RangeError(
-        CRC32C_EXCEPTION_MESSAGES.INVALID_INIT_INTEGER(value)
+        CRC32C_EXCEPTION_MESSAGES.INVALID_INIT_INTEGER(value),
       );
     }
 
@@ -312,7 +312,7 @@ class CRC32C implements CRC32CValidator {
    * @param value A number, 4-byte `ArrayBufferView`/`Buffer`/`TypedArray`, or 4-byte base64-encoded data (string)
    */
   static from(
-    value: ArrayBuffer | ArrayBufferView | CRC32CValidator | string | number
+    value: ArrayBuffer | ArrayBufferView | CRC32CValidator | string | number,
   ): CRC32C {
     if (typeof value === 'number') {
       return this.fromNumber(value);
