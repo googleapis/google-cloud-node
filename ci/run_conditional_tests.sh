@@ -187,7 +187,7 @@ for subdir in ${subdirs[@]}; do
         if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OS" == "Windows_NT" ]]; then
             is_exempt=false
             for exempt in ${windows_exempt_tests}; do
-                if [[ "${d}" == "${exempt}"* ]]; then
+                if [[ "${d}" == "${exempt}" || "${d}" == "${exempt}/"* ]]; then
                     is_exempt=true
                     break
                 fi
