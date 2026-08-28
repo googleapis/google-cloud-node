@@ -26,10 +26,10 @@ import {
   createTestBuffer,
   createTestFileFromBuffer,
   deleteTestFile,
-} from './testBenchUtil';
+} from './testBenchUtil.js';
 import * as crypto from 'crypto';
 import {getDirName} from '../src/util.js';
-import {StorageTransport} from '../src/storage-transport';
+import {StorageTransport} from '../src/storage-transport.js';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
 const CHUNK_SIZE_BYTES = 2 * 1024 * 1024;
@@ -402,7 +402,7 @@ export async function bucketUploadResumableInstancePrecondition(
 ) {
   const filePath = path.join(
     getDirName(),
-    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`
+    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`,
   );
   createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.bucket!.instancePreconditionOpts) {
@@ -420,7 +420,7 @@ export async function bucketUploadResumableInstancePrecondition(
 export async function bucketUploadResumable(options: ConformanceTestOptions) {
   const filePath = path.join(
     getDirName(),
-    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`
+    `../conformance-test/test-data/tmp-${crypto.randomUUID()}.txt`,
   );
   createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.preconditionRequired) {
