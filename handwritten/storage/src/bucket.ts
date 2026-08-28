@@ -1788,6 +1788,49 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       );
     }
 
+    const cleanupSourceObjects = (resp?: unknown) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      (async () => {
+        try {
+          const deletePromises = (sources as File[]).map(source => {
+            const deleteOptions: DeleteOptions = {
+              ignoreNotFound: true,
+              userProject: options.userProject,
+            };
+
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              deleteOptions.ifGenerationMatch = parseInt(generation.toString());
+            }
+
+            return source
+              .delete(deleteOptions)
+              .catch(deleteErr => deleteErr as Error);
+          });
+
+          const results = await Promise.all(deletePromises);
+          const errors = results.filter(
+            (res): res is Error => res instanceof Error,
+          );
+
+          if (errors.length > 0) {
+            const cleanupErr = new ComposeCleanupError(
+              `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
+              errors,
+              destinationFile,
+              resp,
+            );
+            callback!(cleanupErr, destinationFile, resp);
+            return;
+          }
+
+          callback!(null, destinationFile, resp);
+        } catch (cleanupErr) {
+          callback!(cleanupErr as Error, destinationFile, resp);
+        }
+      })();
+    };
+
     // Make the request from the destination File object.
     destinationFile.storageTransport
       .makeRequest(
@@ -1831,44 +1874,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           }
 
           if (deleteSourceObjects) {
-            const deletePromises = (sources as File[]).map(source => {
-              const deleteOptions: DeleteOptions = {
-                ignoreNotFound: true,
-                userProject: options.userProject,
-              };
-
-              const generation =
-                source.generation ?? source.metadata?.generation;
-              if (generation !== undefined) {
-                deleteOptions.ifGenerationMatch = parseInt(
-                  generation.toString(),
-                );
-              }
-
-              return source
-                .delete(deleteOptions)
-                .catch(deleteErr => deleteErr as Error);
-            });
-
-            void Promise.all(deletePromises).then(results => {
-              const errors = results.filter(
-                (res): res is Error => res instanceof Error,
-              );
-
-              // eslint-disable-next-line promise/always-return
-              if (errors.length > 0) {
-                const cleanupErr = new ComposeCleanupError(
-                  `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
-                  errors,
-                  destinationFile,
-                  resp,
-                );
-                callback!(cleanupErr, destinationFile, resp);
-                return;
-              }
-
-              callback!(null, destinationFile, resp);
-            });
+            cleanupSourceObjects(resp);
           } else {
             callback!(null, destinationFile, resp);
           }
