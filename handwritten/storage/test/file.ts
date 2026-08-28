@@ -26,7 +26,7 @@ import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
-import sinon, {createSandbox, stub, spy, restore} from 'sinon';
+import sinon, {createSandbox, stub, spy, restore, useFakeTimers} from 'sinon';
 import {GoogleAuth} from 'google-auth-library';
 import {
   FileExceptionMessages,
@@ -50,7 +50,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import {formatAsUTCISO} from '../src/util.js';
-import {Gaxios} from 'gaxios';
+import {Gaxios, GaxiosResponse} from 'gaxios';
 class HTTPError extends Error {
   code: number;
   constructor(message: string, code: number) {
@@ -561,18 +561,19 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
 
       file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
         assert.deepStrictEqual(
           Object.fromEntries((reqOpts.headers as Headers).entries()),
           {
             'content-type': 'application/json',
             'x-goog-copy-source-encryption-algorithm': 'AES256',
-            'x-goog-copy-source-encryption-key': (file as any)
-              .encryptionKeyBase64,
-            'x-goog-copy-source-encryption-key-sha256': (file as any)
-              .encryptionKeyHash,
+            'x-goog-copy-source-encryption-key':
+              filePrivate.encryptionKeyBase64,
+            'x-goog-copy-source-encryption-key-sha256':
+              filePrivate.encryptionKeyHash,
             'x-goog-encryption-algorithm': 'AES256',
-            'x-goog-encryption-key': (file as any).encryptionKeyBase64,
-            'x-goog-encryption-key-sha256': (file as any).encryptionKeyHash,
+            'x-goog-encryption-key': filePrivate.encryptionKeyBase64,
+            'x-goog-encryption-key-sha256': filePrivate.encryptionKeyHash,
           },
         );
         done();
@@ -613,14 +614,14 @@ describe('File', () => {
             'x-goog-encryption-key-sha256': 'hash-dest',
           });
           callback?.(null, {done: true}, {});
-          return {data: {done: true}} as any;
+          return {data: {done: true}} as unknown as GaxiosResponse;
         } catch (e) {
           done(e);
           throw e;
         }
       };
 
-      file.copy(newFile, (err: any) => {
+      file.copy(newFile, (err: Error | null) => {
         assert.ifError(err);
         done();
       });
@@ -665,6 +666,8 @@ describe('File', () => {
       newFile.kmsKeyName = 'kms-key-name';
 
       file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        const newFilePrivate = newFile as unknown as Record<string, unknown>;
         const headers = Object.fromEntries(
           (reqOpts.headers as Headers).entries(),
         );
@@ -674,11 +677,11 @@ describe('File', () => {
         );
         assert.strictEqual(
           headers['x-goog-copy-source-encryption-key'],
-          (file as any).encryptionKeyBase64,
+          filePrivate.encryptionKeyBase64,
         );
         assert.strictEqual(
           headers['x-goog-copy-source-encryption-key-sha256'],
-          (file as any).encryptionKeyHash,
+          filePrivate.encryptionKeyHash,
         );
         assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
         assert.strictEqual(headers['x-goog-encryption-key'], undefined);
@@ -688,7 +691,7 @@ describe('File', () => {
           newFile.kmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, newFile.kmsKeyName);
-        assert.strictEqual((newFile as any).encryptionKey, undefined);
+        assert.strictEqual(newFilePrivate.encryptionKey, undefined);
         done();
       });
 
@@ -702,6 +705,8 @@ describe('File', () => {
       const destinationKmsKeyName = 'destination-kms-key-name';
 
       file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        const newFilePrivate = newFile as unknown as Record<string, unknown>;
         const headers = Object.fromEntries(
           (reqOpts.headers as Headers).entries(),
         );
@@ -711,11 +716,11 @@ describe('File', () => {
         );
         assert.strictEqual(
           headers['x-goog-copy-source-encryption-key'],
-          (file as any).encryptionKeyBase64,
+          filePrivate.encryptionKeyBase64,
         );
         assert.strictEqual(
           headers['x-goog-copy-source-encryption-key-sha256'],
-          (file as any).encryptionKeyHash,
+          filePrivate.encryptionKeyHash,
         );
         assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
         assert.strictEqual(headers['x-goog-encryption-key'], undefined);
@@ -725,7 +730,7 @@ describe('File', () => {
           destinationKmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
-        assert.strictEqual((newFile as any).encryptionKey, undefined);
+        assert.strictEqual(newFilePrivate.encryptionKey, undefined);
         done();
       });
 
@@ -757,6 +762,8 @@ describe('File', () => {
       const kmsKeyName = 'kms-key-name';
 
       file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        const newFilePrivate = newFile as unknown as Record<string, unknown>;
         const headers = Object.fromEntries(
           (reqOpts.headers as Headers).entries(),
         );
@@ -767,11 +774,11 @@ describe('File', () => {
         );
         assert.strictEqual(
           headers['x-goog-copy-source-encryption-key'],
-          (file as any).encryptionKeyBase64,
+          filePrivate.encryptionKeyBase64,
         );
         assert.strictEqual(
           headers['x-goog-copy-source-encryption-key-sha256'],
-          (file as any).encryptionKeyHash,
+          filePrivate.encryptionKeyHash,
         );
         assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
         assert.strictEqual(headers['x-goog-encryption-key'], undefined);
@@ -781,7 +788,7 @@ describe('File', () => {
           kmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
-        assert.strictEqual((newFile as any).encryptionKey, undefined);
+        assert.strictEqual(newFilePrivate.encryptionKey, undefined);
         assert.strictEqual(body.kmsKeyName, undefined);
         done();
       });
@@ -1919,7 +1926,7 @@ describe('File', () => {
         (err: Error | null, uri: string | undefined) => {
           assert.strictEqual(err, null);
           assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
-          sinon.assert.calledOnce(resumableUploadStub);
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
         },
       );
     });
@@ -1935,7 +1942,7 @@ describe('File', () => {
         (err: Error | null, uri: string | undefined) => {
           assert.strictEqual(err, null);
           assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
-          sinon.assert.calledOnce(resumableUploadStub);
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
         },
       );
     });
@@ -1954,7 +1961,7 @@ describe('File', () => {
           assert.strictEqual(err, null);
           assert.strictEqual(file.storage.retryOptions.autoRetry, true);
           assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
-          sinon.assert.calledOnce(resumableUploadStub);
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
         },
       );
     });
@@ -1974,7 +1981,7 @@ describe('File', () => {
           assert.strictEqual(err, null);
           assert.strictEqual(file.storage.retryOptions.autoRetry, false);
           assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
-          sinon.assert.calledOnce(resumableUploadStub);
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
         },
       );
     });
@@ -3200,7 +3207,7 @@ describe('File', () => {
     let BUCKET: any;
 
     beforeEach(() => {
-      fakeTimer = sinon.useFakeTimers(NOW);
+      fakeTimer = useFakeTimers(NOW);
       CONFIG = {
         expires: NOW.valueOf() + 2000,
       };
@@ -3568,7 +3575,7 @@ describe('File', () => {
     let SIGNED_URL_CONFIG: GetSignedUrlConfig;
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
+      sandbox = createSandbox();
 
       signerGetSignedUrlStub = sandbox.stub().resolves(EXPECTED_SIGNED_URL);
 
@@ -3739,9 +3746,7 @@ describe('File', () => {
       sandbox
         .stub(file, 'setMetadata')
         .callsFake((metadata, optionsOrCallback, cb) => {
-          Promise.resolve([apiResponse])
-            .then(resp => cb(null, ...resp))
-            .catch(() => {});
+          process.nextTick(() => cb(null, apiResponse));
         });
 
       file.makePrivate((err, apiResponse_) => {
@@ -4262,7 +4267,7 @@ describe('File', () => {
 
       it('should not delete the destination is same as origin', () => {
         file.storageTransport.makeRequest = sandbox.stub().resolves({});
-        const stub = sinon.stub(file, 'delete');
+        const deleteStub = sandbox.stub(file, 'delete');
         // destination is same bucket as object
         file.move(BUCKET, err => {
           assert.ifError(err);
@@ -4272,8 +4277,8 @@ describe('File', () => {
             // destination is same file name as string
             file.move(file.name, err => {
               assert.ifError(err);
-              assert.ok(stub.notCalled);
-              stub.reset();
+              assert.ok(deleteStub.notCalled);
+              deleteStub.reset();
             });
           });
         });
@@ -4448,7 +4453,10 @@ describe('File', () => {
 
       file.rotateEncryptionKey(newKey, (err: unknown) => {
         assert.ifError(err);
-        assert.strictEqual((file as any).encryptionKey, newKey);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          newKey,
+        );
         done();
       });
     });
@@ -4471,7 +4479,10 @@ describe('File', () => {
 
       file.rotateEncryptionKey({kmsKeyName}, (err: unknown) => {
         assert.ifError(err);
-        assert.strictEqual((file as any).encryptionKey, null);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          null,
+        );
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
         done();
       });
@@ -4496,7 +4507,10 @@ describe('File', () => {
 
       file.rotateEncryptionKey(newKey, (err: unknown) => {
         assert.strictEqual(err, copyError);
-        assert.strictEqual((file as any).encryptionKey, oldKey);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          oldKey,
+        );
         done();
       });
     });
@@ -4808,7 +4822,10 @@ describe('File', () => {
       const options = {resumable: false};
 
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        const {invocationId, ...rest} = options_ as any;
+        const {invocationId, ...rest} = (options_ || {}) as Record<
+          string,
+          unknown
+        >;
         assert.ok(invocationId);
         assert.deepStrictEqual(rest, {resumable: false});
         const ws = new PassThrough();
@@ -4821,7 +4838,10 @@ describe('File', () => {
 
     it('should not require options', async () => {
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        const {invocationId, ...rest} = options_ as any;
+        const {invocationId, ...rest} = (options_ || {}) as Record<
+          string,
+          unknown
+        >;
         assert.ok(invocationId);
         assert.deepStrictEqual(rest, {});
         const ws = new PassThrough();
@@ -4972,7 +4992,7 @@ describe('File', () => {
             headers: {},
             status: 204,
             statusText: 'No Content',
-          } as any;
+          } as GaxiosResponse;
         }
 
         if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
@@ -5006,7 +5026,7 @@ describe('File', () => {
             headers: {},
             status: 200,
             statusText: 'OK',
-          } as any;
+          } as GaxiosResponse;
         }
       });
 
@@ -5052,7 +5072,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'save').resolves();
+        const stub = sandbox.stub(file, 'save').resolves();
         await file.save('data', {metadata});
 
         assert.strictEqual(stub.calledOnce, true);
@@ -5077,7 +5097,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'save').resolves();
+        const stub = sandbox.stub(file, 'save').resolves();
         await file.save('data', {metadata});
 
         const options = stub.getCall(0).args[1];
@@ -5116,7 +5136,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(newMetadata);
 
         const sentMetadata = stub.getCall(0).args[0];
@@ -5143,7 +5163,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(patchMetadata);
 
         const sentMetadata = stub.getCall(0).args[0];
@@ -5165,7 +5185,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(patchMetadata);
 
         const sentMetadata = stub.getCall(0).args[0];
@@ -5180,7 +5200,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(clearMetadata);
         const sentMetadata = stub.getCall(0).args[0];
         assert.strictEqual(sentMetadata.contexts!.custom, null);
@@ -5196,7 +5216,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'copy').resolves();
+        const stub = sandbox.stub(file, 'copy').resolves();
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await file.copy(destFile, {metadata} as any);
@@ -5217,7 +5237,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(BUCKET, 'combine').resolves();
+        const stub = sandbox.stub(BUCKET, 'combine').resolves();
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await BUCKET.combine(sources, combinedFile, {metadata} as any);
@@ -5238,7 +5258,7 @@ describe('File', () => {
         },
       };
 
-      const stub = sinon.stub(file, 'save').resolves();
+      const stub = sandbox.stub(file, 'save').resolves();
       await file.save('data', {metadata});
 
       const sentMetadata = stub.getCall(0).args[1].metadata as FileMetadata;
@@ -5423,19 +5443,31 @@ describe('File', () => {
       });
 
       it('should localize the key to null', () => {
-        assert.strictEqual((file as any).encryptionKey, null);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          null,
+        );
       });
 
       it('should clear the base64 key', () => {
-        assert.strictEqual((file as any).encryptionKeyBase64, undefined);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKeyBase64,
+          undefined,
+        );
       });
 
       it('should clear the hash', () => {
-        assert.strictEqual((file as any).encryptionKeyHash, undefined);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKeyHash,
+          undefined,
+        );
       });
 
       it('should remove the request interceptor', () => {
-        assert.strictEqual((file as any).encryptionKeyInterceptor, undefined);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKeyInterceptor,
+          undefined,
+        );
         assert.strictEqual(file.interceptors.length, 0);
       });
     });
