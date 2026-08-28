@@ -18,6 +18,7 @@ import {describe, it, after, before} from 'mocha';
 import {TestResources} from './testResources';
 import * as protobuf from 'protobufjs';
 import * as fs from 'fs';
+import {waitForMessage} from './common';
 
 describe('Protobuf Samples System Tests', () => {
   const pubsub = new PubSub();
@@ -77,15 +78,9 @@ describe('Protobuf Samples System Tests', () => {
     const messageId = await topic.publishMessage({data: dataBuffer});
     assert.ok(messageId);
 
-    let received!: Message;
-    await new Promise<Message>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Timeout waiting for Proto message')), 15000);
-      subscription.once('message', (m: Message) => {
-        m.ack();
-        received = m;
-        clearTimeout(timeout);
-        resolve(m);
-      });
+    const received = await waitForMessage(subscription, {
+      timeoutMs: 15000,
+      timeoutErrorMessage: 'Timeout waiting for Proto message',
     });
 
     const schemaMetadata = Schema.metadataFromMessage(received.attributes);

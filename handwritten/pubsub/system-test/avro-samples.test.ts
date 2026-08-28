@@ -18,6 +18,7 @@ import {describe, it, after, before} from 'mocha';
 import {TestResources} from './testResources';
 import * as avro from 'avro-js';
 import * as fs from 'fs';
+import {waitForMessage} from './common';
 
 describe('Avro Samples System Tests', () => {
   const pubsub = new PubSub();
@@ -77,17 +78,9 @@ describe('Avro Samples System Tests', () => {
     const messageId = await topic.publishMessage({data: dataBuffer});
     assert.ok(messageId);
 
-    const message = await new Promise<Message>((resolve, reject) => {
-      const messageHandler = (m: Message) => {
-        clearTimeout(timeout);
-        m.ack();
-        resolve(m);
-      };
-      const timeout = setTimeout(() => {
-        subscription.removeListener('message', messageHandler);
-        reject(new Error('Timeout waiting for Avro record'));
-      }, 15000);
-      subscription.once('message', messageHandler);
+    const message = await waitForMessage(subscription, {
+      timeoutMs: 15000,
+      timeoutErrorMessage: 'Timeout waiting for Avro record',
     });
 
     const schemaMetadata = Schema.metadataFromMessage(message.attributes);
@@ -131,13 +124,9 @@ describe('Avro Samples System Tests', () => {
     const dataBuffer = type.toBuffer(province);
     await topic.publishMessage({data: dataBuffer});
 
-    const message = await new Promise<Message>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Timeout waiting for Avro revision')), 15000);
-      subscription.once('message', (m: Message) => {
-        clearTimeout(timeout);
-        m.ack();
-        resolve(m);
-      });
+    const message = await waitForMessage(subscription, {
+      timeoutMs: 15000,
+      timeoutErrorMessage: 'Timeout waiting for Avro revision',
     });
 
     const schemaMetadata = Schema.metadataFromMessage(message.attributes);

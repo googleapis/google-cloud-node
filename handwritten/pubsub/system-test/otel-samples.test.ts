@@ -19,6 +19,7 @@ import {describe, it, after, before} from 'mocha';
 import {TestResources} from './testResources';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {SimpleSpanProcessor, InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
+import {waitForMessage} from './common';
 
 describe('OpenTelemetry Samples System Tests', () => {
   const pubsub = new PubSub({enableOpenTelemetryTracing: true});
@@ -72,13 +73,9 @@ describe('OpenTelemetry Samples System Tests', () => {
     const messageId = await topic.publishMessage({data: dataBuffer});
     assert.ok(messageId);
 
-    const message = await new Promise<Message>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Timeout waiting for OTel message')), 15000);
-      subscription.once('message', (m: Message) => {
-        clearTimeout(timeout);
-        m.ack();
-        resolve(m);
-      });
+    const message = await waitForMessage(subscription, {
+      timeoutMs: 15000,
+      timeoutErrorMessage: 'Timeout waiting for OTel message',
     });
 
     assert.strictEqual(message.data.toString(), data);

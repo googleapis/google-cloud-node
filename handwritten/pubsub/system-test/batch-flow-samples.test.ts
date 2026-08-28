@@ -16,6 +16,7 @@ import {Message, PubSub, PublishOptions} from '../src';
 import * as assert from 'assert';
 import {describe, it, after, before} from 'mocha';
 import {TestResources} from './testResources';
+import {waitForMessages} from './common';
 
 describe('Batch and Flow Control Samples System Tests', () => {
   const pubsub = new PubSub();
@@ -61,18 +62,10 @@ describe('Batch and Flow Control Samples System Tests', () => {
     const messageIds = await Promise.all(promises);
     assert.strictEqual(messageIds.length, 10);
 
-    const messages: Message[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Timeout waiting for batched messages')), 15000);
-      subscription.on('message', (m: Message) => {
-        m.ack();
-        messages.push(m);
-        if (messages.length === 10) {
-          clearTimeout(timeout);
-          subscription.removeAllListeners('message');
-          resolve();
-        }
-      });
+    const messages = await waitForMessages(subscription, {
+      count: 10,
+      timeoutMs: 15000,
+      timeoutErrorMessage: 'Timeout waiting for batched messages',
     });
 
     assert.strictEqual(messages.length, 10);
@@ -105,18 +98,10 @@ describe('Batch and Flow Control Samples System Tests', () => {
     const messageIds = await flow.all();
     assert.strictEqual(messageIds.length, 10);
 
-    const messages: Message[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Timeout waiting for flow control messages')), 15000);
-      subscription.on('message', (m: Message) => {
-        m.ack();
-        messages.push(m);
-        if (messages.length === 10) {
-          clearTimeout(timeout);
-          subscription.removeAllListeners('message');
-          resolve();
-        }
-      });
+    const messages = await waitForMessages(subscription, {
+      count: 10,
+      timeoutMs: 15000,
+      timeoutErrorMessage: 'Timeout waiting for flow control messages',
     });
 
     assert.strictEqual(messages.length, 10);
