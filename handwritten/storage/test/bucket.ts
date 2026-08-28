@@ -25,6 +25,7 @@ import {
   CreateWriteStreamOptions,
   GaxiosOptionsPrepared,
 } from '../src/index.js';
+import {GaxiosResponse} from 'gaxios';
 import sinon, {createSandbox} from 'sinon';
 import {StorageTransport} from '../src/storage-transport.js';
 import {GoogleAuth} from 'google-auth-library';
@@ -41,6 +42,7 @@ import mime from 'mime';
 import {CreateWriteStreamOptionsInternal} from '../src/file.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
 import {DeleteOptions, util} from '../src/nodejs-common/index.js';
+import {RetryOptions} from '../src/nodejs-common/util.js';
 import path from 'path';
 import fs from 'fs';
 import * as stream from 'stream';
@@ -59,7 +61,7 @@ describe('Bucket', () => {
   let STORAGE: Storage;
   let sandbox: sinon.SinonSandbox;
   let storageTransport: StorageTransport;
-  let originalRetryOptions: any;
+  let originalRetryOptions: RetryOptions;
   const PROJECT_ID = 'project-id';
   const BUCKET_NAME = 'test-bucket';
 
@@ -80,7 +82,7 @@ describe('Bucket', () => {
     sandbox.restore();
     for (const key of Object.keys(STORAGE.retryOptions)) {
       if (!(key in originalRetryOptions)) {
-        delete (STORAGE.retryOptions as any)[key];
+        delete (STORAGE.retryOptions as Record<string, unknown>)[key];
       }
     }
     Object.assign(STORAGE.retryOptions, originalRetryOptions);
@@ -828,21 +830,22 @@ describe('Bucket', () => {
         assert.strictEqual(opts?.ignoreNotFound, true);
         assert.strictEqual(opts?.ifGenerationMatch, 12345);
         deletedCount++;
-        return [{}] as any;
+        return [{}] as unknown as [GaxiosResponse];
       };
       sources[1].delete = async (opts?: DeleteOptions) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
         assert.strictEqual(opts?.ignoreNotFound, true);
         assert.strictEqual(opts?.ifGenerationMatch, undefined);
         deletedCount++;
-        return [{}] as any;
+        return [{}] as unknown as [GaxiosResponse];
       };
 
       storageTransport.makeRequest = sandbox
         .stub()
         .callsFake((reqOpts, callback) => {
           assert.strictEqual(
-            (reqOpts.queryParameters as any)?.deleteSourceObjects,
+            (reqOpts.queryParameters as Record<string, unknown>)
+              ?.deleteSourceObjects,
             undefined,
           );
           const body = JSON.parse(reqOpts.body as string);
@@ -872,7 +875,7 @@ describe('Bucket', () => {
       sources.forEach(source => {
         source.delete = async () => {
           deletedCount++;
-          return [{}] as any;
+          return [{}] as unknown as [GaxiosResponse];
         };
       });
 
@@ -901,7 +904,7 @@ describe('Bucket', () => {
       sources.forEach(source => {
         source.delete = async () => {
           deletedCount++;
-          return [{}] as any;
+          return [{}] as unknown as [GaxiosResponse];
         };
       });
 
@@ -939,7 +942,7 @@ describe('Bucket', () => {
       sources[1].delete = async (opts?: DeleteOptions) => {
         assert.strictEqual(opts?.userProject, 'user-project-id');
         assert.strictEqual(opts?.ignoreNotFound, true);
-        return [{}] as any;
+        return [{}] as unknown as [GaxiosResponse];
       };
 
       storageTransport.makeRequest = sandbox
@@ -1434,9 +1437,7 @@ describe('Bucket', () => {
                 requesterPays: false,
               },
             });
-            Promise.resolve([])
-              .then(resp => callback(null, ...resp))
-              .catch(() => {});
+            process.nextTick(() => callback(null));
           },
         );
 
@@ -1622,9 +1623,7 @@ describe('Bucket', () => {
         .stub()
         .callsFake(
           (metadata: {}, optionsOrCallback: {}, callback: Function) => {
-            Promise.resolve([setMetadataResponse])
-              .then(resp => callback(null, ...resp))
-              .catch(() => {});
+            process.nextTick(() => callback(null, setMetadataResponse));
           },
         );
 
@@ -1660,9 +1659,7 @@ describe('Bucket', () => {
                 requesterPays: true,
               },
             });
-            Promise.resolve([])
-              .then(resp => callback(null, ...resp))
-              .catch(() => {});
+            process.nextTick(() => callback(null));
           },
         );
 
@@ -1987,16 +1984,10 @@ describe('Bucket', () => {
         .stub()
         .callsFake((reqOpts, callback) => {
           const response = {items: [fileMetadata]};
-
-          const promise = Promise.resolve(response);
           if (typeof callback === 'function') {
-            // eslint-disable-next-line promise/catch-or-return
-            promise.then(
-              res => callback(null, res),
-              err => callback(err),
-            );
+            process.nextTick(() => callback(null, response));
           }
-          return promise;
+          return Promise.resolve(response);
         });
 
       bucket.getFiles((err, files) => {
@@ -2451,9 +2442,7 @@ describe('Bucket', () => {
             retentionPolicy: null,
           });
 
-          Promise.resolve([])
-            .then(resp => callback(null, ...resp))
-            .catch(() => {});
+          process.nextTick(() => callback(null));
         });
 
       bucket.removeRetentionPeriod(done);
@@ -2484,9 +2473,7 @@ describe('Bucket', () => {
         .stub()
         .callsFake((metadata, _callbackOrOptions, callback) => {
           assert.strictEqual(metadata.labels, labels);
-          Promise.resolve([])
-            .then(resp => callback(null, ...resp))
-            .catch(() => {});
+          process.nextTick(() => callback(null));
         });
       bucket.setLabels(labels, done);
     });
@@ -2515,9 +2502,7 @@ describe('Bucket', () => {
             },
           });
 
-          Promise.resolve([])
-            .then(resp => callback(null, ...resp))
-            .catch(() => {});
+          process.nextTick(() => callback(null));
         });
 
       bucket.setRetentionPeriod(duration, done);
@@ -2535,7 +2520,7 @@ describe('Bucket', () => {
             cors: corsConfiguration,
           });
 
-          return Promise.resolve([]).then(resp => callback(null, ...resp));
+          process.nextTick(() => callback(null));
         });
 
       bucket.setCorsConfiguration(corsConfiguration, done);
@@ -2571,9 +2556,7 @@ describe('Bucket', () => {
         .callsFake((metadata, options, callback) => {
           assert.deepStrictEqual(metadata, {storageClass: STORAGE_CLASS});
           assert.strictEqual(options, OPTIONS);
-          Promise.resolve([])
-            .then(resp => callback(null, ...resp))
-            .catch(() => {});
+          process.nextTick(() => callback(null));
         });
 
       bucket.setStorageClass(STORAGE_CLASS, OPTIONS, CALLBACK);
@@ -2955,7 +2938,7 @@ describe('Bucket', () => {
             }
           });
 
-          return ws as any;
+          return ws;
         };
 
         bucket.upload(filepath, options, err => {
@@ -3013,7 +2996,7 @@ describe('Bucket', () => {
               headers: {},
               status: 204,
               statusText: 'No Content',
-            } as any;
+            } as GaxiosResponse;
           }
 
           if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
@@ -3049,7 +3032,7 @@ describe('Bucket', () => {
               headers: {},
               status: 200,
               statusText: 'OK',
-            } as any;
+            } as GaxiosResponse;
           }
         });
 
@@ -3073,7 +3056,7 @@ describe('Bucket', () => {
         return readStream;
       });
 
-      fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+      fakeFile.createWriteStream = () => {
         const ws = new stream.Writable({
           write(chunk, encoding, callback) {
             callback(new Error('write error'));
