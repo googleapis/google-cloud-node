@@ -18,7 +18,7 @@
 
 import {grpc} from 'google-gax';
 
-const DEFAULT_PORT = 1234;
+const DEFAULT_PORT = 0;
 
 export class MockServer {
   port: string;
@@ -29,15 +29,20 @@ export class MockServer {
     callback?: (port: string) => void,
     port?: string | number | undefined,
   ) {
-    const portString = Number(port ? port : DEFAULT_PORT).toString();
+    const portString = Number(
+      port !== undefined ? port : DEFAULT_PORT,
+    ).toString();
     this.port = portString;
     const server = new grpc.Server();
     this.server = server;
     server.bindAsync(
       `localhost:${this.port}`,
       grpc.ServerCredentials.createInsecure(),
-      () => {
-        callback ? callback(portString) : undefined;
+      (err, boundPort) => {
+        if (boundPort) {
+          this.port = boundPort.toString();
+        }
+        callback ? callback(this.port) : undefined;
       },
     );
   }
