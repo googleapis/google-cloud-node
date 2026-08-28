@@ -130,7 +130,7 @@ export class Generator {
         );
       }
       const deserialized = serializer.fromProto3JSON(
-        ServiceConfig as any,
+        ServiceConfig as protobuf.Type,
         json,
       );
       if (!deserialized) {
@@ -139,7 +139,7 @@ export class Generator {
         );
       }
       this.grpcServiceConfig = ServiceConfig.toObject(
-        deserialized as any,
+        deserialized as protobuf.Message,
       ) as protos.grpc.service_config.ServiceConfig;
     }
   }

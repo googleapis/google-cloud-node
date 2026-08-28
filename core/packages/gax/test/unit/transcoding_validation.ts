@@ -37,8 +37,7 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
   });
 
   // Test 1: Single Asterisk Dot Validation on client call
-  it.skip('1. should throw an error for single-asterisk segment traversal using exactly "." as session ID', async () => {
-    // TODO: Re-enable this test when the gax version with the new encoding is released.
+  it('1. should throw an error for single-asterisk segment traversal using exactly "." as session ID', async () => {
     await client.initialize();
     await assert.rejects(
       client.detectIntent({
@@ -50,8 +49,7 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
   });
 
   // Test 2: Single Asterisk Dot-Dot Validation on client call
-  it.skip('2. should throw an error for single-asterisk segment traversal using exactly ".." as session ID', async () => {
-    // TODO: Re-enable this test when the gax version with the new encoding is released.
+  it('2. should throw an error for single-asterisk segment traversal using exactly ".." as session ID', async () => {
     await client.initialize();
     await assert.rejects(
       client.detectIntent({
@@ -128,8 +126,7 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
   });
 
   // Test 9: Percent-encoding all other characters
-  it.skip('9. should percent-encode all other characters except unreserved ones', async () => {
-    // TODO: Re-enable this test when the gax version with the new encoding is released.
+  it('9. should percent-encode all other characters except unreserved ones', async () => {
     await client.initialize();
     await client.detectIntent({
       session: "projects/p/locations/l/agents/a/sessions/ !@$&'()*+,;=:%",
@@ -144,3 +141,4 @@ describe('Dialogflow CX Fallback Transcoding and Path Traversal Prevention', () 
     );
   });
 });
+
