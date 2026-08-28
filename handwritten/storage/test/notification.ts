@@ -19,8 +19,9 @@ import {
   GaxiosError,
   GaxiosOptionsPrepared,
   GaxiosResponse,
+  Notification,
+  Storage,
 } from '../src/index.js';
-import {Notification, Storage} from '../src/index.js';
 import * as sinon from 'sinon';
 import {StorageTransport} from '../src/storage-transport.js';
 

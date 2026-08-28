@@ -30,7 +30,7 @@ import * as assert from 'assert';
 import {
   StorageRequestOptions,
   StorageTransport,
-} from '../src/storage-transport';
+} from '../src/storage-transport.js';
 interface RetryCase {
   instructions: String[];
 }
