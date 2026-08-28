@@ -2793,6 +2793,24 @@ describe('storage', function () {
         const [contents] = await file.download();
         assert.strictEqual(contents.toString(), 'secret data');
       });
+
+      it('should copy a CSEK-encrypted file to a standard non-CSEK destination when destination key is null', async () => {
+        const srcFile = bucket.file('encrypted-source');
+        srcFile.setEncryptionKey('a'.repeat(32));
+
+        await srcFile.save('csek data', { resumable: false });
+
+        const dstFile = bucket.file('non-csek-destination');
+        dstFile.setEncryptionKey(null);
+
+        await srcFile.copy(dstFile);
+
+        const [metadata] = await dstFile.getMetadata();
+        assert.strictEqual(metadata.customerEncryption, undefined);
+
+        const [contents] = await dstFile.download();
+        assert.strictEqual(contents.toString(), 'csek data');
+      });
     });
 
     describe.skip('kms keys', () => {

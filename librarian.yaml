@@ -637,6 +637,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      nodejs_apis:
+        - additional_protos:
+            - backstory/collection.proto
+            - backstory/data_access.proto
+            - backstory/entity.proto
+            - backstory/entity_risk.proto
+            - backstory/id.proto
+            - backstory/udm.proto
+          path: google/cloud/chronicle/v1
   - name: google-cloud-cloudcontrolspartner
     version: 0.7.0
     apis:
@@ -1916,6 +1925,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
+      metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
     version: 0.6.1
     apis:
