@@ -23,6 +23,7 @@ import {
   GaxiosError,
   GaxiosOptionsPrepared,
 } from '../src/index.js';
+import {GaxiosResponse} from 'gaxios';
 import * as sinon from 'sinon';
 import {HmacKeyOptions} from '../src/hmacKey.js';
 import {
@@ -1145,28 +1146,41 @@ describe('Storage', () => {
           location: 'US',
         },
       ];
-      storage.request = (
-        reqOpts: DecorateRequestOptions,
-        callback: Function
-      ) => {
-        callback(null, {items: bucketsResponse});
-      };
+      storage.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(
+          (
+            reqOpts: unknown,
+            callback: (
+              err: null,
+              data: {items: typeof bucketsResponse},
+              resp: unknown,
+            ) => void,
+          ) => {
+            if (callback) {
+              callback(null, {items: bucketsResponse}, {} as GaxiosResponse);
+            }
+            return Promise.resolve({
+              data: {items: bucketsResponse},
+            } as GaxiosResponse);
+          },
+        );
 
       storage.getBuckets((err: Error | null, buckets: Bucket[]) => {
         if (err) return done(err);
 
         const filteredBucket = buckets.find(
-          (b: Bucket) => b.name === 'bucket-with-filter'
+          (b: Bucket) => b.name === 'bucket-with-filter',
         )!;
         const normalBucket = buckets.find(
-          (b: Bucket) => b.name === 'bucket-without-filter'
+          (b: Bucket) => b.name === 'bucket-without-filter',
         )!;
 
         assert.ok(filteredBucket.metadata.ipFilter);
         assert.strictEqual(filteredBucket.metadata.ipFilter.mode, 'Enabled');
         assert.strictEqual(
           filteredBucket.metadata.ipFilter.allowCrossOrgVpcs,
-          true
+          true,
         );
 
         assert.strictEqual(normalBucket.metadata.ipFilter, undefined);
