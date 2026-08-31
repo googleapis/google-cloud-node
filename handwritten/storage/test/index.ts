@@ -23,6 +23,7 @@ import {
   GaxiosError,
   GaxiosOptionsPrepared,
 } from '../src/index.js';
+import {GaxiosResponse} from 'gaxios';
 import * as sinon from 'sinon';
 import {HmacKeyOptions} from '../src/hmacKey.js';
 import {
@@ -1125,6 +1126,66 @@ describe('Storage', () => {
         });
 
         assert.strictEqual(buckets.length, 0);
+      });
+    });
+
+    it('should list buckets with ipFilter summary', done => {
+      const bucketsResponse = [
+        {
+          id: 'bucket-with-filter',
+          name: 'bucket-with-filter',
+          ipFilter: {
+            mode: 'Enabled',
+            allowCrossOrgVpcs: true,
+            allowAllServiceAgentAccess: true,
+          },
+        },
+        {
+          id: 'bucket-without-filter',
+          name: 'bucket-without-filter',
+          location: 'US',
+        },
+      ];
+      storage.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(
+          (
+            reqOpts: unknown,
+            callback: (
+              err: null,
+              data: {items: typeof bucketsResponse},
+              resp: unknown,
+            ) => void,
+          ) => {
+            if (callback) {
+              callback(null, {items: bucketsResponse}, {} as GaxiosResponse);
+            }
+            return Promise.resolve({
+              data: {items: bucketsResponse},
+            } as GaxiosResponse);
+          },
+        );
+
+      storage.getBuckets((err: Error | null, buckets: Bucket[]) => {
+        if (err) return done(err);
+
+        const filteredBucket = buckets.find(
+          (b: Bucket) => b.name === 'bucket-with-filter',
+        )!;
+        const normalBucket = buckets.find(
+          (b: Bucket) => b.name === 'bucket-without-filter',
+        )!;
+
+        assert.ok(filteredBucket.metadata.ipFilter);
+        assert.strictEqual(filteredBucket.metadata.ipFilter.mode, 'Enabled');
+        assert.strictEqual(
+          filteredBucket.metadata.ipFilter.allowCrossOrgVpcs,
+          true,
+        );
+
+        assert.strictEqual(normalBucket.metadata.ipFilter, undefined);
+
+        done();
       });
     });
   });

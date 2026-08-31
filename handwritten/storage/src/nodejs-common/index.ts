@@ -35,6 +35,10 @@ export {
   Abortable,
   AbortableDuplex,
   BodyResponseCallback,
+  DecorateHeadersOptions,
+  DecorateHeadersResult,
+  decorateHeaders,
+  Headers,
   ResponseBody,
   util,
 } from './util.js';
