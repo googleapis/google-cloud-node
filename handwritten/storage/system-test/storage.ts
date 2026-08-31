@@ -1307,6 +1307,27 @@ describe('storage', function () {
         await ipFilterBucket.delete().catch(() => { });
       });
 
+
+      it('should create a bucket with ipFilter', async () => {
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.0.0/16'],
+            },
+            allowAllServiceAgentAccess: true,
+          },
+        };
+        const bucketToCreate = storage.bucket(generateName());
+        const [bucket, apiResponse] = await bucketToCreate.create(metadata);
+        
+        assert.strictEqual(apiResponse.ipFilter?.mode, metadata.ipFilter?.mode);
+        assert.deepStrictEqual(apiResponse.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, metadata.ipFilter?.publicNetworkSource?.allowedIpCidrRanges);
+        assert.strictEqual(apiResponse.ipFilter?.allowAllServiceAgentAccess, metadata.ipFilter?.allowAllServiceAgentAccess);
+        
+        await bucket.delete().catch(() => {});
+      });
+
       it('should set ipFilter', async () => {
         const metadata: BucketMetadata = {
           ipFilter: {

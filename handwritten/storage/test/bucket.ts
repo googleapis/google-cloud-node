@@ -3716,6 +3716,36 @@ describe('Bucket', () => {
     });
 
     describe('ipFilter', () => {
+      it('should pass ipFilter to create', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.0.0/16'],
+            },
+            allowAllServiceAgentAccess: true,
+          },
+        };
+
+        const storageMock = Object.assign({}, bucket.storage, {
+          createBucket: (
+            name: string,
+            options: unknown,
+            callback: Function
+          ) => {
+            assert.strictEqual(name, bucket.name);
+            assert.deepStrictEqual(options, metadata);
+            callback(null, bucket, metadata);
+          },
+        });
+
+        const testBucket = new Bucket(storageMock, bucket.name);
+        testBucket.create(metadata, (err: Error | null) => {
+          assert.ifError(err);
+          done();
+        });
+      });
+
       it('should enable ipFilter', done => {
         const metadata = {
           ipFilter: {
