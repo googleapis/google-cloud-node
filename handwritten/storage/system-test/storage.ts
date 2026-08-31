@@ -1313,7 +1313,7 @@ describe('storage', function () {
           ipFilter: {
             mode: 'Disabled',
             publicNetworkSource: {
-              allowedIpCidrRanges: ['192.168.0.0/16'],
+              allowedIpCidrRanges: ['0.0.0.0/0'],
             },
             allowAllServiceAgentAccess: true,
           },
