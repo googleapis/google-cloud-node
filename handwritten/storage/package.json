@@ -54,7 +54,6 @@
     "compile:cjs": "tsc -p ./tsconfig.cjs.json",
     "compile:esm": "tsc -p .",
     "compile": "npm run compile:cjs && npm run compile:esm",
-    "compile:sourcemaps": "npm run compile:cjs -- --sourceMap && npm run compile:esm -- --sourceMap",
     "conformance-test": "mocha --parallel build/cjs/conformance-test/ --require build/cjs/conformance-test/globalHooks.js",
     "docs": "jsdoc -c .jsdoc.json",
     "fix": "gts fix",
