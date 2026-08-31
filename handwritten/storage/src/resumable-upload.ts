@@ -807,7 +807,7 @@ export class Upload extends Writable {
     // Delete content length and content type from metadata if they exist.
     // These are headers and should not be sent as part of the metadata.
     if (metadata.contentLength) {
-      headers.set('X-Upload-Content-Length', metadata.contentLength.toString());
+      headers['X-Upload-Content-Length'] = metadata.contentLength.toString();
       delete metadata.contentLength;
     }
 
