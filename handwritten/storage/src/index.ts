@@ -146,6 +146,7 @@ export {
   GetNotificationsCallback,
   GetNotificationsOptions,
   GetNotificationsResponse,
+  IpFilter,
   Labels,
   LifecycleAction,
   LifecycleCondition,
@@ -167,7 +168,6 @@ export {
   UploadCallback,
   UploadOptions,
   UploadResponse,
-  IpFilter,
 } from './bucket.js';
 export * from './crc32c.js';
 export {Channel, StopCallback} from './channel.js';
