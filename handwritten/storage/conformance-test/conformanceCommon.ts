@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
 import * as libraryMethods from './libraryMethods.js';
 import {Bucket, File, HmacKey, Notification, Storage} from '../src';
