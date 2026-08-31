@@ -1,4 +1,4 @@
-// Copyright 2026 Google LLC
+// Copyright 2022-2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -170,7 +170,7 @@ export class TestResources {
       if (name.startsWith(this.testSuiteId)) {
         const parts = name.split('-');
         const createdAt = Number(parts[1]);
-        const timeDiff = (Date.now() - createdAt) / (1000 * 60 * 60);
+        const timeDiff = (this.tokenMaker.timestamp() - createdAt) / (1000 * 60 * 60);
         if (timeDiff >= 2) {
           return true;
         }
