@@ -184,6 +184,7 @@ export class StorageTransport {
           const innerOpts = {
             ...opts,
             adapter: undefined,
+            params: undefined,
           };
           return requestGaxiosInstance.request(innerOpts);
         },
@@ -265,6 +266,19 @@ export class StorageTransport {
       packageJson: this.packageJson,
       providedUserAgent: this.providedUserAgent,
     });
+
+    const hasContentType = Object.keys(headers).some(
+      k => k.toLowerCase() === 'content-type',
+    );
+    if (!hasContentType && reqOpts.body && typeof reqOpts.body === 'string') {
+      try {
+        JSON.parse(reqOpts.body);
+        headers['Content-Type'] = 'application/json';
+      } catch {
+        // Not a JSON string, leave Content-Type unset
+      }
+    }
+
     return headers;
   }
 
