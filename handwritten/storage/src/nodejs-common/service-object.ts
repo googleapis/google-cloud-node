@@ -532,7 +532,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
         this.methods.setMetadata) ||
       {};
 
-    let url = `${this.baseUrl}/${this.name}`;
+    let url = `${this.baseUrl}/${this.id || this.name}`;
     if (isBucket(this.parent)) {
       // TODO: remove any suppression during follow up PR to improve type safety.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
