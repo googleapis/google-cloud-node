@@ -1,0 +1,52 @@
+{
+  "name": "google-test-utils",
+  "version": "0.1.0",
+  "description": "Testing utilities for Google Cloud client libraries",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "directory": "core/test-utils",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
+  "scripts": {
+    "test": "jest --coverage",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "lint": "gts check",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "docs": "jsdoc -c .jsdoc.js",
+    "samples-test": "echo 'no samples test'",
+    "system-test": "echo 'no system test'",
+    "clean": "gts clean",
+    "precompile": "gts clean"
+  },
+  "keywords": [
+    "google",
+    "testing",
+    "test",
+    "utilities"
+  ],
+  "files": [
+    "build/src",
+    "!build/src/**/*.map"
+  ],
+  "author": "Google Inc.",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.13.8",
+    "gts": "^6.0.2",
+    "jest": "^29.7.0",
+    "jsdoc": "^4.0.4",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
+    "ts-jest": "^29.4.10",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/test-utils"
+}
