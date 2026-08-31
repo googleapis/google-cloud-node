@@ -756,9 +756,7 @@ export function injectSpan(span: Span, message: MessageWithAttributes): void {
     return;
   }
 
-  if (!message.attributes) {
-    message.attributes = {};
-  }
+  message.attributes = Object.assign({}, message.attributes);
 
   if (message.attributes[modernAttributeName]) {
     console.warn(

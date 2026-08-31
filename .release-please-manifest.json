@@ -91,7 +91,7 @@
   "packages/google-cloud-certificatemanager": "3.0.0",
   "packages/google-cloud-ces": "0.8.0",
   "packages/google-cloud-channel": "5.0.0",
-  "packages/google-cloud-chronicle": "0.7.0",
+  "packages/google-cloud-chronicle": "0.8.0",
   "packages/google-cloud-cloudcontrolspartner": "0.7.0",
   "packages/google-cloud-clouddms": "5.0.0",
   "packages/google-cloud-cloudsecuritycompliance": "0.3.0",

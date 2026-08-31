@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "a0cbc510dd45db2232a909a0b8c225771cfbcf18",
+          "message": "Bundle backstory UDM protos into @google-cloud/chronicle",
+          "issues": [
+            "9189"
+          ],
+          "scope": "chronicle"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "2fc3e81a-3aa9-42ff-afcb-6df56dc808e1",
+      "createTime": "2026-08-28T08:19:43.503Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "b312515bcd60c767532ebd0dabf23d95014e0a86",
           "message": "Upgrade sinon types for health package",
@@ -90508,5 +90526,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-26T13:37:16.745Z"
+  "updateTime": "2026-08-28T08:19:43.503Z"
 }
