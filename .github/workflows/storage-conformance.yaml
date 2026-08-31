@@ -23,6 +23,24 @@ jobs:
           node-version: 22
       - run: node --version
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Install Workspace Dependencies (Frozen Lockfile)
+        run: |
+          if ! pnpm install --frozen-lockfile --ignore-scripts; then
+            echo "::error title=PNPM Lockfile Out of Date::The pnpm-lock.yaml file is out of sync with workspace package.json dependencies."
+            echo ""
+            echo "===================================================================================================="
+            echo "❌ PNPM Lockfile Out of Date (ERR_PNPM_OUTDATED_LOCKFILE)"
+            echo ""
+            echo "One or more package.json files have changed or were merged without updating pnpm-lock.yaml."
+            echo ""
+            echo "To resolve this failure, please update the lockfile locally and commit the result:"
+            echo "    pnpm install --no-frozen-lockfile"
+            echo "    git add pnpm-lock.yaml"
+            echo "    git commit -m \"chore: update pnpm-lock.yaml\""
+            echo "    git push"
+            echo "===================================================================================================="
+            echo ""
+            exit 1
+          fi
       - run: pnpm --filter ...{handwritten/storage} run --if-present compile
       - run: cd handwritten/storage && pnpm run conformance-test
