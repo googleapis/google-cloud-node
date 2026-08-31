@@ -581,6 +581,26 @@
                                   "(google.api.method_signature)": "parent"
                                 }
                               ]
+                            },
+                            "UpdateReservationGroup": {
+                              "requestType": "UpdateReservationGroupRequest",
+                              "responseType": "ReservationGroup",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{reservation_group.name=projects/*/locations/*/reservationGroups/*}",
+                                "(google.api.http).body": "reservation_group",
+                                "(google.api.method_signature)": "reservation_group,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{reservation_group.name=projects/*/locations/*/reservationGroups/*}",
+                                    "body": "reservation_group"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "reservation_group,update_mask"
+                                }
+                              ]
                             }
                           }
                         },
@@ -727,6 +747,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "reservationGroupPath": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 28,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -836,6 +864,28 @@
                               "options": {
                                 "(google.api.field_behavior)": "IDENTIFIER"
                               }
+                            },
+                            "parentGroup": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).child_type": "bigqueryreservation.googleapis.com/ReservationGroup"
+                              }
+                            },
+                            "creationTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -926,6 +976,9 @@
                           "nested": {
                             "CommitmentPlan": {
                               "valuesOptions": {
+                                "FLEX": {
+                                  "deprecated": true
+                                },
                                 "FLEX_FLAT_RATE": {
                                   "deprecated": true
                                 },
@@ -1149,6 +1202,24 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "bigqueryreservation.googleapis.com/ReservationGroup"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateReservationGroupRequest": {
+                          "fields": {
+                            "reservationGroup": {
+                              "type": "ReservationGroup",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -1385,7 +1456,8 @@
                                 "CONTINUOUS": 6,
                                 "BACKGROUND_CHANGE_DATA_CAPTURE": 7,
                                 "BACKGROUND_COLUMN_METADATA_INDEX": 8,
-                                "BACKGROUND_SEARCH_INDEX_REFRESH": 9
+                                "BACKGROUND_SEARCH_INDEX_REFRESH": 9,
+                                "AUTOMATIC_MATERIALIZED_VIEW_REFRESH": 10
                               }
                             },
                             "State": {

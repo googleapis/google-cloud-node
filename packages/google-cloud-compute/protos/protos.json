@@ -314,6 +314,11 @@
                             "name"
                           ]
                         },
+                        "_resourceMetadata": {
+                          "oneof": [
+                            "resourceMetadata"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -371,6 +376,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourceMetadata": {
+                          "type": "ResourceMetadata",
+                          "id": 99063872,
                           "options": {
                             "proto3_optional": true
                           }
@@ -12404,6 +12416,11 @@
                             "authenticationConfig"
                           ]
                         },
+                        "_identity": {
+                          "oneof": [
+                            "identity"
+                          ]
+                        },
                         "_sni": {
                           "oneof": [
                             "sni"
@@ -12414,6 +12431,13 @@
                         "authenticationConfig": {
                           "type": "string",
                           "id": 408053481,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "identity": {
+                          "type": "string",
+                          "id": 401109182,
                           "options": {
                             "proto3_optional": true
                           }
@@ -14755,6 +14779,9 @@
                             "MEMORY_OPTIMIZED_X4_960_12T": 424752410,
                             "MEMORY_OPTIMIZED_X4_960_16T": 424752534,
                             "NETWORK_OPTIMIZED_C4N": 147027572,
+                            "NETWORK_OPTIMIZED_U4C": 147044859,
+                            "NETWORK_OPTIMIZED_U4P": 147044872,
+                            "NETWORK_OPTIMIZED_U4S": 147044875,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
                             "TYPE_UNSPECIFIED": 437714322
                           }
@@ -25165,6 +25192,16 @@
                             "reservationName"
                           ]
                         },
+                        "_resourceMetadata": {
+                          "oneof": [
+                            "resourceMetadata"
+                          ]
+                        },
+                        "_resourceName": {
+                          "oneof": [
+                            "resourceName"
+                          ]
+                        },
                         "_schedulingType": {
                           "oneof": [
                             "schedulingType"
@@ -25198,6 +25235,11 @@
                         "_status": {
                           "oneof": [
                             "status"
+                          ]
+                        },
+                        "_storagePoolProperties": {
+                          "oneof": [
+                            "storagePoolProperties"
                           ]
                         },
                         "_timeWindow": {
@@ -25338,6 +25380,20 @@
                             "proto3_optional": true
                           }
                         },
+                        "resourceMetadata": {
+                          "type": "ResourceMetadata",
+                          "id": 99063872,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 442550300,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "schedulingType": {
                           "type": "string",
                           "id": 199835397,
@@ -25383,6 +25439,13 @@
                         "status": {
                           "type": "FutureReservationStatus",
                           "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storagePoolProperties": {
+                          "type": "FutureReservationStoragePoolProperties",
+                          "id": 71410546,
                           "options": {
                             "proto3_optional": true
                           }
@@ -25560,6 +25623,11 @@
                             "amendmentStatus"
                           ]
                         },
+                        "_exapoolProvisionedCapacityGb": {
+                          "oneof": [
+                            "exapoolProvisionedCapacityGb"
+                          ]
+                        },
                         "_existingMatchingUsageInfo": {
                           "oneof": [
                             "existingMatchingUsageInfo"
@@ -25589,6 +25657,11 @@
                           "oneof": [
                             "specificSkuProperties"
                           ]
+                        },
+                        "_storagePoolProvisionedCapacity": {
+                          "oneof": [
+                            "storagePoolProvisionedCapacity"
+                          ]
                         }
                       },
                       "fields": {
@@ -25603,6 +25676,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 140217006
+                        },
+                        "exapoolProvisionedCapacityGb": {
+                          "type": "StoragePoolExapoolProvisionedCapacityGb",
+                          "id": 345174240,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "existingMatchingUsageInfo": {
                           "type": "FutureReservationStatusExistingMatchingUsageInfo",
@@ -25642,6 +25722,13 @@
                         "specificSkuProperties": {
                           "type": "FutureReservationStatusSpecificSKUProperties",
                           "id": 108887106,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storagePoolProvisionedCapacity": {
+                          "type": "FutureReservationStoragePoolProvisionedCapacity",
+                          "id": 135892964,
                           "options": {
                             "proto3_optional": true
                           }
@@ -25859,6 +25946,90 @@
                         "sourceInstanceTemplateId": {
                           "type": "string",
                           "id": 111196154,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FutureReservationStoragePoolProperties": {
+                      "oneofs": {
+                        "_requestedExapoolProvisionedCapacityGb": {
+                          "oneof": [
+                            "requestedExapoolProvisionedCapacityGb"
+                          ]
+                        },
+                        "_requestedStoragePoolProvisionedCapacity": {
+                          "oneof": [
+                            "requestedStoragePoolProvisionedCapacity"
+                          ]
+                        },
+                        "_storagePoolType": {
+                          "oneof": [
+                            "storagePoolType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestedExapoolProvisionedCapacityGb": {
+                          "type": "StoragePoolExapoolProvisionedCapacityGb",
+                          "id": 174982159,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestedStoragePoolProvisionedCapacity": {
+                          "type": "FutureReservationStoragePoolProvisionedCapacity",
+                          "id": 326931283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storagePoolType": {
+                          "type": "string",
+                          "id": 285999289,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FutureReservationStoragePoolProvisionedCapacity": {
+                      "oneofs": {
+                        "_poolProvisionedCapacityGb": {
+                          "oneof": [
+                            "poolProvisionedCapacityGb"
+                          ]
+                        },
+                        "_poolProvisionedIops": {
+                          "oneof": [
+                            "poolProvisionedIops"
+                          ]
+                        },
+                        "_poolProvisionedThroughput": {
+                          "oneof": [
+                            "poolProvisionedThroughput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "poolProvisionedCapacityGb": {
+                          "type": "int64",
+                          "id": 478537682,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "poolProvisionedIops": {
+                          "type": "int64",
+                          "id": 112092311,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "poolProvisionedThroughput": {
+                          "type": "int64",
+                          "id": 169215640,
                           "options": {
                             "proto3_optional": true
                           }
@@ -41268,6 +41439,11 @@
                     },
                     "InstanceFlexibilityPolicyInstanceSelection": {
                       "oneofs": {
+                        "_minCpuPlatform": {
+                          "oneof": [
+                            "minCpuPlatform"
+                          ]
+                        },
                         "_rank": {
                           "oneof": [
                             "rank"
@@ -41284,6 +41460,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 79720065
+                        },
+                        "minCpuPlatform": {
+                          "type": "string",
+                          "id": 242912759,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "rank": {
                           "type": "int64",
@@ -78339,6 +78522,36 @@
                         }
                       }
                     },
+                    "RegexRewrite": {
+                      "oneofs": {
+                        "_pathPattern": {
+                          "oneof": [
+                            "pathPattern"
+                          ]
+                        },
+                        "_pathSubstitution": {
+                          "oneof": [
+                            "pathSubstitution"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pathPattern": {
+                          "type": "string",
+                          "id": 316473718,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pathSubstitution": {
+                          "type": "string",
+                          "id": 268020951,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Region": {
                       "oneofs": {
                         "_creationTimestamp": {
@@ -80937,6 +81150,11 @@
                             "reservationSharingPolicy"
                           ]
                         },
+                        "_resourceMetadata": {
+                          "oneof": [
+                            "resourceMetadata"
+                          ]
+                        },
                         "_resourceStatus": {
                           "oneof": [
                             "resourceStatus"
@@ -81104,6 +81322,13 @@
                         "reservationSharingPolicy": {
                           "type": "AllocationReservationSharingPolicy",
                           "id": 205970120,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourceMetadata": {
+                          "type": "ResourceMetadata",
+                          "id": 99063872,
                           "options": {
                             "proto3_optional": true
                           }
@@ -83218,6 +83443,36 @@
                         "group": {
                           "type": "string",
                           "id": 98629247,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ResourceMetadata": {
+                      "oneofs": {
+                        "_apiVersion": {
+                          "oneof": [
+                            "apiVersion"
+                          ]
+                        },
+                        "_resourceType": {
+                          "oneof": [
+                            "resourceType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 476021683,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 442752203,
                           "options": {
                             "proto3_optional": true
                           }
@@ -91010,6 +91265,7 @@
                           "values": {
                             "UNDEFINED_ENFORCE_ON_KEY": 0,
                             "ALL": 64897,
+                            "ASN": 65116,
                             "HTTP_COOKIE": 494981627,
                             "HTTP_HEADER": 91597348,
                             "HTTP_PATH": 311503228,
@@ -91058,6 +91314,7 @@
                           "values": {
                             "UNDEFINED_ENFORCE_ON_KEY_TYPE": 0,
                             "ALL": 64897,
+                            "ASN": 65116,
                             "HTTP_COOKIE": 494981627,
                             "HTTP_HEADER": 91597348,
                             "HTTP_PATH": 311503228,
@@ -108656,6 +108913,11 @@
                           "oneof": [
                             "pathTemplateRewrite"
                           ]
+                        },
+                        "_regexRewrite": {
+                          "oneof": [
+                            "regexRewrite"
+                          ]
                         }
                       },
                       "fields": {
@@ -108676,6 +108938,13 @@
                         "pathTemplateRewrite": {
                           "type": "string",
                           "id": 423409569,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "regexRewrite": {
+                          "type": "RegexRewrite",
+                          "id": 380801428,
                           "options": {
                             "proto3_optional": true
                           }
@@ -150034,6 +150303,9 @@
                             "MEMORY_OPTIMIZED_X4_960_12T": 424752410,
                             "MEMORY_OPTIMIZED_X4_960_16T": 424752534,
                             "NETWORK_OPTIMIZED_C4N": 147027572,
+                            "NETWORK_OPTIMIZED_U4C": 147044859,
+                            "NETWORK_OPTIMIZED_U4P": 147044872,
+                            "NETWORK_OPTIMIZED_U4S": 147044875,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
                             "TYPE_UNSPECIFIED": 437714322
                           }
@@ -161059,6 +161331,11 @@
                             "reservationName"
                           ]
                         },
+                        "_resourceName": {
+                          "oneof": [
+                            "resourceName"
+                          ]
+                        },
                         "_schedulingType": {
                           "oneof": [
                             "schedulingType"
@@ -161092,6 +161369,11 @@
                         "_status": {
                           "oneof": [
                             "status"
+                          ]
+                        },
+                        "_storagePoolProperties": {
+                          "oneof": [
+                            "storagePoolProperties"
                           ]
                         },
                         "_timeWindow": {
@@ -161246,6 +161528,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 442550300,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "schedulingType": {
                           "type": "string",
                           "id": 199835397,
@@ -161291,6 +161580,13 @@
                         "status": {
                           "type": "FutureReservationStatus",
                           "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storagePoolProperties": {
+                          "type": "FutureReservationStoragePoolProperties",
+                          "id": 71410546,
                           "options": {
                             "proto3_optional": true
                           }
@@ -161477,6 +161773,11 @@
                             "amendmentStatus"
                           ]
                         },
+                        "_exapoolProvisionedCapacityGb": {
+                          "oneof": [
+                            "exapoolProvisionedCapacityGb"
+                          ]
+                        },
                         "_existingMatchingUsageInfo": {
                           "oneof": [
                             "existingMatchingUsageInfo"
@@ -161506,6 +161807,11 @@
                           "oneof": [
                             "specificSkuProperties"
                           ]
+                        },
+                        "_storagePoolProvisionedCapacity": {
+                          "oneof": [
+                            "storagePoolProvisionedCapacity"
+                          ]
                         }
                       },
                       "fields": {
@@ -161520,6 +161826,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 140217006
+                        },
+                        "exapoolProvisionedCapacityGb": {
+                          "type": "StoragePoolExapoolProvisionedCapacityGb",
+                          "id": 345174240,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "existingMatchingUsageInfo": {
                           "type": "FutureReservationStatusExistingMatchingUsageInfo",
@@ -161559,6 +161872,13 @@
                         "specificSkuProperties": {
                           "type": "FutureReservationStatusSpecificSKUProperties",
                           "id": 108887106,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storagePoolProvisionedCapacity": {
+                          "type": "FutureReservationStoragePoolProvisionedCapacity",
+                          "id": 135892964,
                           "options": {
                             "proto3_optional": true
                           }
@@ -161776,6 +162096,90 @@
                         "sourceInstanceTemplateId": {
                           "type": "string",
                           "id": 111196154,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FutureReservationStoragePoolProperties": {
+                      "oneofs": {
+                        "_requestedExapoolProvisionedCapacityGb": {
+                          "oneof": [
+                            "requestedExapoolProvisionedCapacityGb"
+                          ]
+                        },
+                        "_requestedStoragePoolProvisionedCapacity": {
+                          "oneof": [
+                            "requestedStoragePoolProvisionedCapacity"
+                          ]
+                        },
+                        "_storagePoolType": {
+                          "oneof": [
+                            "storagePoolType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestedExapoolProvisionedCapacityGb": {
+                          "type": "StoragePoolExapoolProvisionedCapacityGb",
+                          "id": 174982159,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestedStoragePoolProvisionedCapacity": {
+                          "type": "FutureReservationStoragePoolProvisionedCapacity",
+                          "id": 326931283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storagePoolType": {
+                          "type": "string",
+                          "id": 285999289,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FutureReservationStoragePoolProvisionedCapacity": {
+                      "oneofs": {
+                        "_poolProvisionedCapacityGb": {
+                          "oneof": [
+                            "poolProvisionedCapacityGb"
+                          ]
+                        },
+                        "_poolProvisionedIops": {
+                          "oneof": [
+                            "poolProvisionedIops"
+                          ]
+                        },
+                        "_poolProvisionedThroughput": {
+                          "oneof": [
+                            "poolProvisionedThroughput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "poolProvisionedCapacityGb": {
+                          "type": "int64",
+                          "id": 478537682,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "poolProvisionedIops": {
+                          "type": "int64",
+                          "id": 112092311,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "poolProvisionedThroughput": {
+                          "type": "int64",
+                          "id": 169215640,
                           "options": {
                             "proto3_optional": true
                           }
@@ -165310,6 +165714,24 @@
                         "interconnect": {
                           "type": "string",
                           "id": 224601230,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetManagedRulesetRequest": {
+                      "fields": {
+                        "managedRuleset": {
+                          "type": "string",
+                          "id": 447322950,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -178058,6 +178480,11 @@
                     },
                     "InstanceFlexibilityPolicyInstanceSelection": {
                       "oneofs": {
+                        "_minCpuPlatform": {
+                          "oneof": [
+                            "minCpuPlatform"
+                          ]
+                        },
                         "_rank": {
                           "oneof": [
                             "rank"
@@ -178074,6 +178501,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 79720065
+                        },
+                        "minCpuPlatform": {
+                          "type": "string",
+                          "id": 242912759,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "rank": {
                           "type": "int64",
@@ -193198,6 +193632,79 @@
                         }
                       }
                     },
+                    "ListManagedRulesetsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListNamedSetsRoutersRequest": {
                       "oneofs": {
                         "_filter": {
@@ -202717,6 +203224,148 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ManagedRuleset": {
+                      "oneofs": {
+                        "_changeLog": {
+                          "oneof": [
+                            "changeLog"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_rulesetId": {
+                          "oneof": [
+                            "rulesetId"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "changeLog": {
+                          "type": "string",
+                          "id": 15896117,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ruleIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 226918133
+                        },
+                        "rulesetId": {
+                          "type": "string",
+                          "id": 131214356,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ManagedRulesetList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "ManagedRuleset",
+                          "id": 100526016
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
                           "options": {
                             "proto3_optional": true
                           }
@@ -232003,6 +232652,7 @@
                             "UNDEFINED_ENFORCE_ON_KEY": 0,
                             "ALL": 64897,
                             "ALL_IPS": 343973966,
+                            "ASN": 65116,
                             "HTTP_COOKIE": 494981627,
                             "HTTP_HEADER": 91597348,
                             "HTTP_PATH": 311503228,
@@ -232052,6 +232702,7 @@
                             "UNDEFINED_ENFORCE_ON_KEY_TYPE": 0,
                             "ALL": 64897,
                             "ALL_IPS": 343973966,
+                            "ASN": 65116,
                             "HTTP_COOKIE": 494981627,
                             "HTTP_HEADER": 91597348,
                             "HTTP_PATH": 311503228,
@@ -263520,6 +264171,50 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ManagedRulesets": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetManagedRulesetRequest",
+                          "responseType": "ManagedRuleset",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/managedRulesets/{managed_ruleset}",
+                            "(google.api.method_signature)": "project,managed_ruleset"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/managedRulesets/{managed_ruleset}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,managed_ruleset"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListManagedRulesetsRequest",
+                          "responseType": "ManagedRulesetList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/managedRulesets",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/managedRulesets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
                             }
                           ]
                         }
