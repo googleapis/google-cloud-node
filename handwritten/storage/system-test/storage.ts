@@ -4744,8 +4744,8 @@ describe('storage', function () {
     return Promise.all(
       buckets.map(bucket =>
         limit(() =>
-          deleteBucketAsync(bucket).catch((err: ApiError) => {
-            if (err.code !== 404) {
+          deleteBucketAsync(bucket).catch((err: GaxiosError) => {
+            if (err.status !== 404) {
               throw err;
             }
           })
