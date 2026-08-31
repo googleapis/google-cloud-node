@@ -181,9 +181,13 @@ export class StorageTransport {
     try {
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
+          const urlHasParams = opts.url
+            ? opts.url.toString() !== requestUrl
+            : false;
           const innerOpts = {
             ...opts,
             adapter: undefined,
+            params: urlHasParams ? undefined : opts.params,
           };
           return requestGaxiosInstance.request(innerOpts);
         },
@@ -265,6 +269,19 @@ export class StorageTransport {
       packageJson: this.packageJson,
       providedUserAgent: this.providedUserAgent,
     });
+
+    const hasContentType = Object.keys(headers).some(
+      k => k.toLowerCase() === 'content-type',
+    );
+    if (!hasContentType && reqOpts.body && typeof reqOpts.body === 'string') {
+      try {
+        JSON.parse(reqOpts.body);
+        headers['Content-Type'] = 'application/json';
+      } catch {
+        // Not a JSON string, leave Content-Type unset
+      }
+    }
+
     return headers;
   }
 
