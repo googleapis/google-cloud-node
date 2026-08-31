@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm install
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/spanner-driver}"
   dir: 'handwritten/spanner-driver'
   id: 'install-dependencies'
 
@@ -23,7 +23,7 @@ steps:
   args:
   - '-c'
   - |
-    npm run test:pg-suite
+    corepack enable pnpm && pnpm run test:pg-suite
   dir: 'handwritten/spanner-driver'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable

@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs": "npm run compile",
+    "predocs": "pnpm run compile",
     "lint": "gts check",
     "system-test": "mocha build/system-test --timeout 1600000",
     "observability-test": "mocha build/observability-test --timeout 1600000",
@@ -43,9 +43,9 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build && cp -r test/data build/test",
     "prepare": "cp -r protos build && npm run compile",
-    "pretest": "npm run compile",
-    "presystem-test": "npm run compile",
-    "preobservability-test": "npm run compile",
+    "pretest": "pnpm run compile",
+    "presystem-test": "pnpm run compile",
+    "preobservability-test": "pnpm run compile",
     "benchwrapper": "node bin/benchwrapper.js",
     "precompile": "gts clean",
     "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"

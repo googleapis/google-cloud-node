@@ -20,7 +20,8 @@ export NPM_CONFIG_PREFIX=${HOME}/.npm-global
 
 cd $(dirname $0)/..
 
-npm install
+npm install -g pnpm@9
+pnpm install
 # If tests are running against main branch, configure flakybot
 # to open issues on failures:
 if [[ $KOKORO_BUILD_ARTIFACTS_SUBDIR = *"continuous"* ]] || [[ $KOKORO_BUILD_ARTIFACTS_SUBDIR = *"nightly"* ]]; then
@@ -35,7 +36,7 @@ fi
 # Unit tests exercise the entire API surface, which may include
 # deprecation warnings:
 export MOCHA_THROW_DEPRECATION=false
-npm test
+pnpm test
 
 # codecov combines coverage across integration and unit tests. Include
 # the logic below for any environment you wish to collect coverage for:

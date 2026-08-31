@@ -884,7 +884,7 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
+        async getRequestHeaders(): Promise<any> {
           return {};
         }
 
@@ -894,7 +894,7 @@ describe('Transfer Manager', () => {
           assert(opts.headers);
           assert('x-goog-api-client' in opts.headers);
           assert.match(
-            opts.headers['x-goog-api-client'],
+            (opts.headers as any)['x-goog-api-client'],
             /gccl-gcs-cmd\/tm.upload_sharded/
           );
 
@@ -925,7 +925,7 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
+        async getRequestHeaders(): Promise<any> {
           return {};
         }
 
@@ -934,7 +934,7 @@ describe('Transfer Manager', () => {
 
           assert(opts.headers);
           assert('User-Agent' in opts.headers);
-          assert.match(opts.headers['User-Agent'], /gcloud-node/);
+          assert.match((opts.headers as any)['User-Agent'], /gcloud-node/);
 
           return {
             data: Buffer.from(

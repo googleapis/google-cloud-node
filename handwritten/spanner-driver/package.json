@@ -38,10 +38,10 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
     "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
-    "test": "npm run test:esm && npm run test:cjs",
+    "test": "pnpm run test:esm && pnpm run test:cjs",
     "system-test": "mocha build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
