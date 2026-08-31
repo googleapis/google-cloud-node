@@ -631,7 +631,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
@@ -1925,6 +1925,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
+      metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
     version: 0.6.1
     apis:

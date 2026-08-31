@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.7.0...chronicle-v0.8.0) (2026-08-28)
+
+
+### Features
+
+* **chronicle:** Bundle backstory UDM protos into @google-cloud/chronicle ([#9189](https://github.com/googleapis/google-cloud-node/issues/9189)) ([a0cbc51](https://github.com/googleapis/google-cloud-node/commit/a0cbc510dd45db2232a909a0b8c225771cfbcf18))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.6.0...chronicle-v0.7.0) (2026-08-04)
 
 

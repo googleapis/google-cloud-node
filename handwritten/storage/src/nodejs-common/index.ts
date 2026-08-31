@@ -45,7 +45,11 @@ export {
   AbortableDuplex,
   ApiError,
   BodyResponseCallback,
+  DecorateHeadersOptions,
+  DecorateHeadersResult,
   DecorateRequestOptions,
+  decorateHeaders,
+  Headers,
   ResponseBody,
   util,
 } from './util.js';
