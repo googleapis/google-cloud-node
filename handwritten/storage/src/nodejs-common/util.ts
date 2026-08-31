@@ -259,10 +259,7 @@ export class Util {
       : [optionsOrCallback as T, cb as C];
   }
 
-  decorateHeaders(
-    headers?: CoreOptions['headers'],
-    options?: DecorateHeadersOptions
-  ) {
+  decorateHeaders(headers?: Headers, options?: DecorateHeadersOptions) {
     return decorateHeaders(headers, options);
   }
 
@@ -295,12 +292,12 @@ export interface DecorateHeadersResult {
  * @returns An object containing the decorated headers and the effective idempotency token.
  */
 export function decorateHeaders(
-  headers?: CoreOptions['headers'],
-  options?: DecorateHeadersOptions
+  headers?: Headers,
+  options?: DecorateHeadersOptions,
 ): DecorateHeadersResult {
   const sanitizedHeaders: Headers = {...headers};
   const userTokenKey = Object.keys(sanitizedHeaders).find(
-    key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+    key => key.toLowerCase() === 'x-goog-gcs-idempotency-token',
   );
   const userTokenValue = userTokenKey
     ? sanitizedHeaders[userTokenKey]

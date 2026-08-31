@@ -175,16 +175,16 @@ describe('common/util', () => {
       assert.ok(result.idempotencyToken);
       assert.strictEqual(
         result.headers['x-goog-gcs-idempotency-token'],
-        result.idempotencyToken
+        result.idempotencyToken,
       );
       assert.ok(result.headers['User-Agent']);
       const match = X_GOOG_API_HEADER_REGEX.exec(
-        result.headers['x-goog-api-client']
+        result.headers['x-goog-api-client'],
       );
       assert.ok(match);
       assert.strictEqual(
         match.groups!.gcclInvocationId,
-        result.idempotencyToken
+        result.idempotencyToken,
       );
     });
 
@@ -205,11 +205,11 @@ describe('common/util', () => {
       assert.strictEqual(inputHeaders['X-Keep-Header'], 'stay');
       assert.strictEqual(
         result.headers['X-Goog-Gcs-Idempotency-Token'],
-        undefined
+        undefined,
       );
       assert.strictEqual(
         result.headers['x-goog-gcs-idempotency-token'],
-        result.idempotencyToken
+        result.idempotencyToken,
       );
     });
 
@@ -221,14 +221,14 @@ describe('common/util', () => {
       assert.strictEqual(result.idempotencyToken, customToken);
       assert.strictEqual(
         result.headers['X-Goog-Gcs-Idempotency-Token'],
-        customToken
+        customToken,
       );
       assert.strictEqual(
         result.headers['x-goog-gcs-idempotency-token'],
-        undefined
+        undefined,
       );
       const match = X_GOOG_API_HEADER_REGEX.exec(
-        result.headers['x-goog-api-client']
+        result.headers['x-goog-api-client'],
       );
       assert.ok(match);
       assert.strictEqual(match.groups!.gcclInvocationId, customToken);
@@ -241,19 +241,19 @@ describe('common/util', () => {
       assert.ok(result.idempotencyToken);
       assert.strictEqual(
         result.headers['X-Goog-Gcs-Idempotency-Token'],
-        undefined
+        undefined,
       );
       assert.strictEqual(
         result.headers['x-goog-gcs-idempotency-token'],
-        result.idempotencyToken
+        result.idempotencyToken,
       );
       const match = X_GOOG_API_HEADER_REGEX.exec(
-        result.headers['x-goog-api-client']
+        result.headers['x-goog-api-client'],
       );
       assert.ok(match);
       assert.strictEqual(
         match.groups!.gcclInvocationId,
-        result.idempotencyToken
+        result.idempotencyToken,
       );
     });
 
@@ -264,19 +264,19 @@ describe('common/util', () => {
       assert.ok(result.idempotencyToken);
       assert.strictEqual(
         result.headers['X-Goog-Gcs-Idempotency-Token'],
-        undefined
+        undefined,
       );
       assert.strictEqual(
         result.headers['x-goog-gcs-idempotency-token'],
-        result.idempotencyToken
+        result.idempotencyToken,
       );
       const match = X_GOOG_API_HEADER_REGEX.exec(
-        result.headers['x-goog-api-client']
+        result.headers['x-goog-api-client'],
       );
       assert.ok(match);
       assert.strictEqual(
         match.groups!.gcclInvocationId,
-        result.idempotencyToken
+        result.idempotencyToken,
       );
     });
 
@@ -286,19 +286,19 @@ describe('common/util', () => {
         {
           'X-Goog-Gcs-Idempotency-Token': '',
         },
-        {idempotencyToken: fallback}
+        {idempotencyToken: fallback},
       );
       assert.strictEqual(result.idempotencyToken, fallback);
       assert.strictEqual(
         result.headers['X-Goog-Gcs-Idempotency-Token'],
-        undefined
+        undefined,
       );
       assert.strictEqual(
         result.headers['x-goog-gcs-idempotency-token'],
-        fallback
+        fallback,
       );
       const match = X_GOOG_API_HEADER_REGEX.exec(
-        result.headers['x-goog-api-client']
+        result.headers['x-goog-api-client'],
       );
       assert.ok(match);
       assert.strictEqual(match.groups!.gcclInvocationId, fallback);
@@ -317,8 +317,8 @@ describe('common/util', () => {
       });
       assert.ok(
         result.headers['x-goog-api-client'].endsWith(
-          ' gccl-gcs-cmd/Storage.createBucket'
-        )
+          ' gccl-gcs-cmd/Storage.createBucket',
+        ),
       );
     });
 
@@ -328,8 +328,8 @@ describe('common/util', () => {
       });
       assert.ok(
         result.headers['x-goog-api-client'].includes(
-          `gccl/7.7.7-${getModuleFormat()}`
-        )
+          `gccl/7.7.7-${getModuleFormat()}`,
+        ),
       );
     });
   });
