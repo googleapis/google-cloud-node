@@ -3714,5 +3714,185 @@ describe('Bucket', () => {
         bucket.setMetadata(clearMetadata, assert.ifError);
       });
     });
+
+    describe('ipFilter', () => {
+      it('should pass ipFilter to create', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.0.0/16'],
+            },
+            allowAllServiceAgentAccess: true,
+          },
+        };
+
+        const storageMock = Object.assign({}, bucket.storage, {
+          createBucket: (
+            name: string,
+            options: unknown,
+            callback: Function
+          ) => {
+            assert.strictEqual(name, bucket.name);
+            assert.deepStrictEqual(options, metadata);
+            callback(null, bucket, metadata);
+          },
+        });
+
+        const testBucket = new Bucket(storageMock, bucket.name);
+        testBucket.create(metadata, (err: Error | null) => {
+          assert.ifError(err);
+          done();
+        });
+      });
+
+      it('should enable ipFilter', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.1.1/32'],
+            },
+          },
+        };
+
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          assert.strictEqual(reqOpts.method, 'PATCH');
+          assert.deepStrictEqual(reqOpts.json.ipFilter, metadata.ipFilter);
+          callback(null, metadata);
+        };
+
+        bucket.setMetadata(metadata, (err: Error | null) => {
+          assert.ifError(err);
+          done();
+        });
+      });
+
+      it('should update ipFilter', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            vpcNetworkSources: [
+              {
+                network: 'projects/my-project/global/networks/my-vpc',
+                allowedIpCidrRanges: ['10.0.0.0/8'],
+              },
+            ],
+          },
+        };
+
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          assert.strictEqual(reqOpts.method, 'PATCH');
+          assert.deepStrictEqual(reqOpts.json.ipFilter, metadata.ipFilter);
+          callback(null, metadata);
+        };
+
+        bucket.setMetadata(metadata, (err: Error | null) => {
+          assert.ifError(err);
+          done();
+        });
+      });
+
+      it('should get ipFilter', async () => {
+        const ipFilter = {
+          mode: 'Enabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: ['192.168.1.1/32'],
+          },
+          vpcNetworkSources: [
+            {
+              network: 'projects/my-project/global/networks/my-vpc',
+              allowedIpCidrRanges: ['10.0.0.0/8'],
+            },
+          ],
+          allowAllServiceAgentAccess: true,
+          allowCrossOrgVpcs: true,
+        };
+
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          callback(null, {ipFilter});
+        };
+
+        const [metadata] = (await bucket.getMetadata()) as [BucketMetadata];
+        assert.deepStrictEqual(metadata.ipFilter, ipFilter);
+      });
+
+      it('should clear allowedIpCidrRanges', done => {
+        const initialIpFilter = {
+          mode: 'Disabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: ['203.0.113.0/24'],
+          },
+        };
+
+        const updatedIpFilter = {
+          mode: 'Disabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: undefined,
+          },
+          allowAllServiceAgentAccess: false,
+        };
+
+        bucket.parent.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          if (reqOpts.method === 'PATCH') {
+            assert.deepStrictEqual(
+              reqOpts.json.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+              []
+            );
+            callback(null, {ipFilter: updatedIpFilter});
+          } else {
+            callback(null, {ipFilter: initialIpFilter});
+          }
+        };
+
+        bucket.getMetadata((err: Error | null, getMeta?: BucketMetadata) => {
+          assert.ifError(err);
+          assert.strictEqual(getMeta?.ipFilter?.mode, 'Disabled');
+          assert.deepStrictEqual(
+            getMeta?.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+            ['203.0.113.0/24']
+          );
+
+          const metadataUpdate = {
+            ipFilter: {
+              mode: 'Disabled',
+              publicNetworkSource: {
+                allowedIpCidrRanges: [],
+              },
+              allowAllServiceAgentAccess: false,
+            },
+          };
+
+          bucket.setMetadata(
+            metadataUpdate,
+            (err: Error | null, meta?: BucketMetadata) => {
+              assert.ifError(err);
+              assert.strictEqual(meta?.ipFilter?.mode, 'Disabled');
+              assert.strictEqual(
+                meta?.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+                undefined
+              );
+              assert.strictEqual(
+                meta?.ipFilter?.allowAllServiceAgentAccess,
+                false
+              );
+              done();
+            }
+          );
+        });
+      });
+    });
   });
 });
