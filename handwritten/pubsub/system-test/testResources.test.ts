@@ -1,4 +1,4 @@
-// Copyright 2026 Google LLC
+// Copyright 2022-2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ describe('testResources (unit)', () => {
     const normalizedPrefix = testResources.getPrefix('test-id-dashes');
     assert.strictEqual(
       normalizedPrefix,
-      `${suiteId}-${fixedTime}-test_id_dashes`,
+      `${suiteId}-${fixedTime}-test_id_dashes`
     );
 
     const suitePrefix = testResources.getPrefix();
@@ -74,11 +74,11 @@ describe('testResources (unit)', () => {
     assert.strictEqual(filtered.length, 2);
     assert.strictEqual(
       1,
-      filtered.filter(r => r.name?.includes('bob-9871')).length,
+      filtered.filter(r => r.name?.includes('bob-9871')).length
     );
     assert.strictEqual(
       1,
-      filtered.filter(r => r.name?.includes('bob-5782')).length,
+      filtered.filter(r => r.name?.includes('bob-5782')).length
     );
   });
 });

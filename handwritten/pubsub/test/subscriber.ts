@@ -22,10 +22,10 @@ import {common as protobuf} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {PassThrough} from 'stream';
-import * as crypto from 'crypto';
 import * as opentelemetry from '@opentelemetry/api';
 import {google} from '../protos/protos';
 import * as defer from 'p-defer';
+import * as crypto from 'node:crypto';
 
 import {HistogramOptions} from '../src/histogram';
 import {FlowControlOptions, LeaseManager} from '../src/lease-manager';
@@ -37,7 +37,6 @@ import {SpanKind} from '@opentelemetry/api';
 import {Duration} from '../src';
 import * as tracing from '../src/telemetry-tracing';
 import {FakeLog, TestUtils} from './test-utils';
-import {loggingUtils} from 'google-gax';
 
 type PullResponse = google.pubsub.v1.IStreamingPullResponse;
 
@@ -450,10 +449,7 @@ describe('Subscriber', () => {
       await subscriber.ack(message);
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'INFO',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1], message.id);
     });
 
@@ -468,10 +464,7 @@ describe('Subscriber', () => {
       await subscriber.ack(message);
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'INFO',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1], message.id);
     });
 
@@ -822,9 +815,10 @@ describe('Subscriber', () => {
             timeout: Duration.from({milliseconds: 100}),
           },
         });
-        const prom = subscriber.close().then(() => {
+        const prom = (async () => {
+          await subscriber.close();
           closed = true;
-        });
+        })();
 
         // Advance time past the timeout
         clock.tick(200);
@@ -854,9 +848,10 @@ describe('Subscriber', () => {
             timeout: Duration.from({milliseconds: 100}),
           },
         });
-        const prom = subscriber.close().then(() => {
+        const prom = (async () => {
+          await subscriber.close();
           closed = true;
-        });
+        })();
 
         // Resolve drains quickly
         ackDrainDeferred.resolve();
@@ -944,10 +939,7 @@ describe('Subscriber', () => {
       await subscriber.nack(message);
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'INFO',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1], message.id);
     });
 
