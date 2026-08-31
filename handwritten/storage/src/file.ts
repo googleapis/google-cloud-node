@@ -394,7 +394,7 @@ export type RenameCallback = MoveCallback;
 export type RotateEncryptionKeyOptions = string | Buffer | EncryptionKeyOptions;
 
 export interface EncryptionKeyOptions {
-  encryptionKey?: string | Buffer;
+  encryptionKey?: string | Buffer | null;
   kmsKeyName?: string;
   preconditionOpts?: PreconditionOptions;
 }
@@ -443,7 +443,7 @@ const COMPRESSIBLE_MIME_REGEX = new RegExp(
 
 export interface FileOptions {
   crc32cGenerator?: CRC32CValidatorGenerator;
-  encryptionKey?: string | Buffer;
+  encryptionKey?: string | Buffer | null;
   generation?: number | string;
   restoreToken?: string;
   kmsKeyName?: string;
@@ -457,6 +457,7 @@ export interface CopyOptions {
   contentType?: string;
   contentDisposition?: string;
   destinationKmsKeyName?: string;
+  kmsKeyName?: string;
   metadata?: {
     [key: string]: string | boolean | number | null;
   };
@@ -502,7 +503,7 @@ export type DownloadCallback = (
 
 export interface DownloadOptions extends CreateReadStreamOptions {
   destination?: string;
-  encryptionKey?: string | Buffer;
+  encryptionKey?: string | Buffer | null;
 }
 
 interface CopyQuery {
@@ -679,7 +680,7 @@ class File extends ServiceObject<File, FileMetadata> {
   restoreToken?: string;
   parent!: Bucket;
 
-  private encryptionKey?: string | Buffer;
+  private encryptionKey?: string | Buffer | null;
   private encryptionKeyBase64?: string;
   private encryptionKeyHash?: string;
   private encryptionKeyInterceptor?: Interceptor;
@@ -1181,7 +1182,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     this.name = name;
 
-    if (options.encryptionKey) {
+    if (options.encryptionKey !== undefined) {
       this.setEncryptionKey(options.encryptionKey);
     }
 
@@ -1274,6 +1275,8 @@ class File extends ServiceObject<File, FileMetadata> {
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
    *     that will be used to encrypt the object. Overwrites the object
    * metadata's `kms_key_name` value, if any.
+   * @property {string} [kmsKeyName] Resource name of the Cloud KMS key. Alias
+   *     for `destinationKmsKeyName`.
    * @property {Metadata} [metadata] Metadata to specify on the copied file.
    * @property {string} [predefinedAcl] Set the ACL for the new file.
    * @property {string} [token] A previously-returned `rewriteToken` from an
@@ -1458,20 +1461,32 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const headers: {[index: string]: string | undefined} = {};
 
-    if (this.encryptionKey !== undefined) {
+    if (this.encryptionKey !== undefined && this.encryptionKey !== null) {
       headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
       headers['x-goog-copy-source-encryption-key'] = this.encryptionKeyBase64;
       headers['x-goog-copy-source-encryption-key-sha256'] =
         this.encryptionKeyHash;
     }
 
-    if (newFile.encryptionKey !== undefined) {
-      this.setEncryptionKey(newFile.encryptionKey!);
-    } else if (options.destinationKmsKeyName !== undefined) {
-      query.destinationKmsKeyName = options.destinationKmsKeyName;
+    const destinationKmsKeyName =
+      options.destinationKmsKeyName || options.kmsKeyName || newFile.kmsKeyName;
+
+    if (
+      this.encryptionKey &&
+      newFile.encryptionKey === undefined &&
+      !destinationKmsKeyName
+    ) {
+      newFile.setEncryptionKey(this.encryptionKey);
+    }
+
+    if (newFile.encryptionKey !== undefined && newFile.encryptionKey !== null) {
+      headers['x-goog-encryption-algorithm'] = 'AES256';
+      headers['x-goog-encryption-key'] = newFile.encryptionKeyBase64;
+      headers['x-goog-encryption-key-sha256'] = newFile.encryptionKeyHash;
+    } else if (destinationKmsKeyName !== undefined) {
+      query.destinationKmsKeyName = destinationKmsKeyName;
       delete options.destinationKmsKeyName;
-    } else if (newFile.kmsKeyName !== undefined) {
-      query.destinationKmsKeyName = newFile.kmsKeyName;
+      delete options.kmsKeyName;
     }
 
     if (query.destinationKmsKeyName) {
@@ -1498,10 +1513,12 @@ class File extends ServiceObject<File, FileMetadata> {
       delete options.preconditionOpts;
     }
 
-    this.request(
+    this.bucket.request(
       {
         method: 'POST',
-        uri: `/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(
+        uri: `/o/${encodeURIComponent(
+          this.name
+        )}/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(
           newFile.name
         )}`,
         qs: query,
@@ -1950,7 +1967,7 @@ class File extends ServiceObject<File, FileMetadata> {
         ),
         file: this.name,
         generation: this.generation,
-        key: this.encryptionKey,
+        key: this.encryptionKey === null ? undefined : this.encryptionKey,
         kmsKeyName: this.kmsKeyName,
         metadata: options.metadata,
         offset: options.offset,
@@ -2484,7 +2501,7 @@ class File extends ServiceObject<File, FileMetadata> {
     const destination = options.destination;
     delete options.destination;
 
-    if (options.encryptionKey) {
+    if (options.encryptionKey !== undefined) {
       this.setEncryptionKey(options.encryptionKey);
       delete options.encryptionKey;
     }
@@ -2581,8 +2598,23 @@ class File extends ServiceObject<File, FileMetadata> {
    * region_tag:storage_download_encrypted_file
    * Example of downloading an encrypted file:
    */
-  setEncryptionKey(encryptionKey: string | Buffer) {
+  setEncryptionKey(encryptionKey: string | Buffer | null) {
+    if (this.encryptionKeyInterceptor) {
+      const index = this.interceptors.indexOf(this.encryptionKeyInterceptor);
+      if (index > -1) {
+        this.interceptors.splice(index, 1);
+      }
+      this.encryptionKeyInterceptor = undefined;
+    }
+
     this.encryptionKey = encryptionKey;
+
+    if (encryptionKey === null || encryptionKey === undefined) {
+      this.encryptionKeyBase64 = undefined;
+      this.encryptionKeyHash = undefined;
+      return this;
+    }
+
     this.encryptionKeyBase64 = Buffer.from(encryptionKey as string).toString(
       'base64'
     );
@@ -2603,7 +2635,7 @@ class File extends ServiceObject<File, FileMetadata> {
       },
     };
 
-    this.interceptors.push(this.encryptionKeyInterceptor!);
+    this.interceptors.push(this.encryptionKeyInterceptor);
 
     return this;
   }
@@ -4239,7 +4271,23 @@ class File extends ServiceObject<File, FileMetadata> {
       options.preconditionOpts?.ifGenerationMatch !== undefined
         ? {preconditionOpts: options.preconditionOpts}
         : {};
-    this.copy(newFile, copyOptions, callback!);
+    this.copy(newFile, copyOptions, (err, file, resp) => {
+      if (!err) {
+        if (options.encryptionKey !== undefined) {
+          this.setEncryptionKey(options.encryptionKey);
+        } else {
+          this.setEncryptionKey(null);
+        }
+        if (options.kmsKeyName !== undefined) {
+          this.kmsKeyName = options.kmsKeyName;
+        } else {
+          this.kmsKeyName = undefined;
+        }
+      }
+      if (callback) {
+        callback(err, file, resp);
+      }
+    });
   }
 
   save(data: SaveData, options?: SaveOptions): Promise<void>;
@@ -4586,7 +4634,7 @@ class File extends ServiceObject<File, FileMetadata> {
       file: this.name,
       generation: this.generation,
       isPartialUpload: options.isPartialUpload,
-      key: this.encryptionKey,
+      key: this.encryptionKey === null ? undefined : this.encryptionKey,
       kmsKeyName: this.kmsKeyName,
       metadata: options.metadata,
       offset: options.offset,
