@@ -37,7 +37,6 @@ export {
   BodyResponseCallback,
   DecorateHeadersOptions,
   DecorateHeadersResult,
-  DecorateRequestOptions,
   decorateHeaders,
   Headers,
   ResponseBody,
