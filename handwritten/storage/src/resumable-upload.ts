@@ -30,21 +30,12 @@ import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
 import * as crypto from 'crypto';
-import {
-  getRuntimeTrackingString,
-  getModuleFormat,
-  getUserAgentString,
-} from './util.js';
-import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
+import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
 import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import {getPackageJSON} from './package-json-helper.cjs';
 import {HashStreamValidator} from './hash-stream-validator.js';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
-const packageJson = getPackageJSON();
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
 
@@ -825,31 +816,21 @@ export class Upload extends Writable {
       delete metadata.contentType;
     }
 
-    const userTokenKey = Object.keys(
-      this.customRequestOptions?.headers || {}
-    ).find(key => key.toLowerCase() === 'x-goog-gcs-idempotency-token');
-    const userTokenValue = userTokenKey
-      ? this.customRequestOptions?.headers?.[userTokenKey]
-      : undefined;
-    const hasValidUserToken =
-      typeof userTokenValue === 'string' && userTokenValue !== '';
-    if (hasValidUserToken) {
-      this.currentInvocationId.uri = userTokenValue as string;
-    } else if (userTokenKey && this.customRequestOptions?.headers) {
-      this.customRequestOptions = {
-        ...this.customRequestOptions,
-        headers: {...this.customRequestOptions.headers},
-      };
-      delete this.customRequestOptions.headers![userTokenKey];
+    if (this.origin) {
+      headers.Origin = this.origin;
     }
 
-    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
-      packageJson.version
-    }-${getModuleFormat()} gccl-invocation-id/${this.currentInvocationId.uri}`;
-
-    if (this.#gcclGcsCmd) {
-      googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
-    }
+    const {headers: reqHeaders, idempotencyToken} = decorateHeaders(
+      {
+        ...this.customRequestOptions?.headers,
+        ...headers,
+      },
+      {
+        idempotencyToken: this.currentInvocationId.uri,
+        gcclGcsCmd: this.#gcclGcsCmd,
+      }
+    );
+    this.currentInvocationId.uri = idempotencyToken;
 
     // Check if headers already exist before creating new ones
     const reqOpts: GaxiosOptions = {
@@ -863,17 +844,8 @@ export class Upload extends Writable {
         this.params
       ),
       data: metadata,
-      headers: {
-        'User-Agent': getUserAgentString(),
-        'x-goog-api-client': googAPIClient,
-        ...headers,
-      },
+      headers: reqHeaders,
     };
-
-    if (!hasValidUserToken) {
-      reqOpts.headers!['x-goog-gcs-idempotency-token'] =
-        this.currentInvocationId.uri;
-    }
 
     if (metadata.contentLength) {
       reqOpts.headers!['X-Upload-Content-Length'] =
@@ -1037,42 +1009,14 @@ export class Upload extends Writable {
       },
     });
 
-    const userTokenKey = Object.keys(
-      this.customRequestOptions?.headers || {}
-    ).find(key => key.toLowerCase() === 'x-goog-gcs-idempotency-token');
-    const userTokenValue = userTokenKey
-      ? this.customRequestOptions?.headers?.[userTokenKey]
-      : undefined;
-    const hasValidUserToken =
-      typeof userTokenValue === 'string' && userTokenValue !== '';
-    if (hasValidUserToken) {
-      this.currentInvocationId.chunk = userTokenValue as string;
-    } else if (userTokenKey && this.customRequestOptions?.headers) {
-      this.customRequestOptions = {
-        ...this.customRequestOptions,
-        headers: {...this.customRequestOptions.headers},
-      };
-      delete this.customRequestOptions.headers![userTokenKey];
-    }
-
-    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
-      packageJson.version
-    }-${getModuleFormat()} gccl-invocation-id/${
-      this.currentInvocationId.chunk
-    }`;
-
-    if (this.#gcclGcsCmd) {
-      googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
-    }
-
-    const headers: GaxiosOptions['headers'] = {
-      'User-Agent': getUserAgentString(),
-      'x-goog-api-client': googAPIClient,
-    };
-
-    if (!hasValidUserToken) {
-      headers['x-goog-gcs-idempotency-token'] = this.currentInvocationId.chunk;
-    }
+    const {headers, idempotencyToken} = decorateHeaders(
+      this.customRequestOptions?.headers,
+      {
+        idempotencyToken: this.currentInvocationId.chunk,
+        gcclGcsCmd: this.#gcclGcsCmd,
+      }
+    );
+    this.currentInvocationId.chunk = idempotencyToken;
 
     // If using multiple chunk upload, set appropriate header
     if (multiChunkMode) {
@@ -1273,49 +1217,25 @@ export class Upload extends Writable {
   async checkUploadStatus(
     config: CheckUploadStatusConfig = {}
   ): Promise<GaxiosResponse<FileMetadata | void>> {
-    const userTokenKey = Object.keys(
-      this.customRequestOptions?.headers || {}
-    ).find(key => key.toLowerCase() === 'x-goog-gcs-idempotency-token');
-    const userTokenValue = userTokenKey
-      ? this.customRequestOptions?.headers?.[userTokenKey]
-      : undefined;
-    const hasValidUserToken =
-      typeof userTokenValue === 'string' && userTokenValue !== '';
-    if (hasValidUserToken) {
-      this.currentInvocationId.checkUploadStatus = userTokenValue as string;
-    } else if (userTokenKey && this.customRequestOptions?.headers) {
-      this.customRequestOptions = {
-        ...this.customRequestOptions,
-        headers: {...this.customRequestOptions.headers},
-      };
-      delete this.customRequestOptions.headers![userTokenKey];
-    }
-
-    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
-      packageJson.version
-    }-${getModuleFormat()} gccl-invocation-id/${
-      this.currentInvocationId.checkUploadStatus
-    }`;
-
-    if (this.#gcclGcsCmd) {
-      googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
-    }
+    const localHeaders: Record<string, unknown> = {
+      ...this.customRequestOptions?.headers,
+      'Content-Length': 0,
+      'Content-Range': 'bytes */*',
+    };
+    const {headers: reqHeaders, idempotencyToken} = decorateHeaders(
+      localHeaders,
+      {
+        idempotencyToken: this.currentInvocationId.checkUploadStatus,
+        gcclGcsCmd: this.#gcclGcsCmd,
+      }
+    );
+    this.currentInvocationId.checkUploadStatus = idempotencyToken;
 
     const opts: GaxiosOptions = {
       method: 'PUT',
       url: this.uri,
-      headers: {
-        'Content-Length': 0,
-        'Content-Range': 'bytes */*',
-        'User-Agent': getUserAgentString(),
-        'x-goog-api-client': googAPIClient,
-      },
+      headers: reqHeaders,
     };
-
-    if (!hasValidUserToken) {
-      opts.headers!['x-goog-gcs-idempotency-token'] =
-        this.currentInvocationId.checkUploadStatus;
-    }
 
     try {
       const resp = await this.makeRequest(opts);
@@ -1393,7 +1313,7 @@ export class Upload extends Writable {
       );
     };
 
-    const combinedReqOpts = {
+    const combinedReqOpts: GaxiosOptions = {
       ...this.customRequestOptions,
       ...reqOpts,
       headers: {
@@ -1401,6 +1321,19 @@ export class Upload extends Writable {
         ...reqOpts.headers,
       },
     };
+
+    if (combinedReqOpts.headers) {
+      const headers = combinedReqOpts.headers as Record<string, unknown>;
+      const userTokenKey = Object.keys(headers).find(
+        key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+      );
+      const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
+      const hasValidUserToken =
+        typeof userTokenValue === 'string' && userTokenValue.trim() !== '';
+      if (!hasValidUserToken && userTokenKey) {
+        delete headers[userTokenKey];
+      }
+    }
 
     const res = await this.authClient.request<{error?: object}>(
       combinedReqOpts
@@ -1423,7 +1356,7 @@ export class Upload extends Writable {
     reqOpts.signal = controller.signal;
     reqOpts.validateStatus = () => true;
 
-    const combinedReqOpts = {
+    const combinedReqOpts: GaxiosOptions = {
       ...this.customRequestOptions,
       ...reqOpts,
       headers: {
@@ -1431,6 +1364,20 @@ export class Upload extends Writable {
         ...reqOpts.headers,
       },
     };
+
+    if (combinedReqOpts.headers) {
+      const headers = combinedReqOpts.headers as Record<string, unknown>;
+      const userTokenKey = Object.keys(headers).find(
+        key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+      );
+      const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
+      const hasValidUserToken =
+        typeof userTokenValue === 'string' && userTokenValue.trim() !== '';
+      if (!hasValidUserToken && userTokenKey) {
+        delete headers[userTokenKey];
+      }
+    }
+
     const res = await this.authClient.request(combinedReqOpts);
     const successfulRequest = this.onResponse(res);
     this.removeListener('error', errorCallback);

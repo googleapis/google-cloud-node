@@ -20,7 +20,6 @@ import {
   GoogleAuthOptions,
 } from 'google-auth-library';
 import type {Request} from 'teeny-request';
-import * as crypto from 'crypto';
 
 import {Interceptor} from './service-object.js';
 import {
@@ -29,13 +28,9 @@ import {
   GCCL_GCS_CMD_KEY,
   MakeAuthenticatedRequest,
   PackageJson,
+  decorateHeaders,
   util,
 } from './util.js';
-import {
-  getRuntimeTrackingString,
-  getUserAgentString,
-  getModuleFormat,
-} from '../util.js';
 
 export const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
 
@@ -271,39 +266,12 @@ export class Service {
 
     delete reqOpts.interceptors_;
 
-    const pkg = this.packageJson;
-    let userAgent = getUserAgentString();
-    if (this.providedUserAgent) {
-      userAgent = `${this.providedUserAgent} ${userAgent}`;
-    }
-    const headers = reqOpts.headers || {};
-    const userTokenKey = Object.keys(headers).find(
-      key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
-    );
-    const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
-    const hasValidUserToken =
-      typeof userTokenValue === 'string' && userTokenValue !== '';
-    const idempotencyToken = hasValidUserToken
-      ? (userTokenValue as string)
-      : crypto.randomUUID();
-    reqOpts.headers = {
-      ...headers,
-      'User-Agent': userAgent,
-      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-        pkg.version
-      }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`,
-    };
-    if (!hasValidUserToken) {
-      if (userTokenKey) {
-        delete reqOpts.headers[userTokenKey];
-      }
-      reqOpts.headers['x-goog-gcs-idempotency-token'] = idempotencyToken;
-    }
-
-    if (reqOpts[GCCL_GCS_CMD_KEY]) {
-      reqOpts.headers['x-goog-api-client'] +=
-        ` gccl-gcs-cmd/${reqOpts[GCCL_GCS_CMD_KEY]}`;
-    }
+    const {headers} = decorateHeaders(reqOpts.headers, {
+      packageJson: this.packageJson,
+      providedUserAgent: this.providedUserAgent,
+      gcclGcsCmd: reqOpts[GCCL_GCS_CMD_KEY],
+    });
+    reqOpts.headers = headers;
 
     if (reqOpts.shouldReturnStream) {
       return this.makeAuthenticatedRequest(reqOpts) as {} as Request;

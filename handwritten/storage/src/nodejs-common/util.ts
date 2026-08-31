@@ -89,6 +89,9 @@ const MAX_RETRY_DEFAULT = 3;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ResponseBody = any;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Headers = {[header: string]: any};
+
 // Directly copy over Duplexify interfaces
 export interface DuplexifyOptions extends DuplexOptions {
   autoDestroy?: boolean;
@@ -1052,22 +1055,88 @@ export class Util {
       : [optionsOrCallback as T, cb as C];
   }
 
-  _getDefaultHeaders(gcclGcsCmd?: string) {
-    const idempotencyToken = crypto.randomUUID();
-    const headers = {
-      'User-Agent': getUserAgentString(),
-      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-        packageJson.version
-      }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`,
-      'x-goog-gcs-idempotency-token': idempotencyToken,
-    };
-
-    if (gcclGcsCmd) {
-      headers['x-goog-api-client'] += ` gccl-gcs-cmd/${gcclGcsCmd}`;
-    }
-
-    return headers;
+  decorateHeaders(
+    headers?: CoreOptions['headers'],
+    options?: DecorateHeadersOptions
+  ) {
+    return decorateHeaders(headers, options);
   }
+
+  _getDefaultHeaders(gcclGcsCmd?: string) {
+    return decorateHeaders(undefined, {gcclGcsCmd}).headers;
+  }
+}
+
+export interface DecorateHeadersOptions {
+  idempotencyToken?: string;
+  packageJson?: PackageJson;
+  providedUserAgent?: string;
+  gcclGcsCmd?: string;
+}
+
+export interface DecorateHeadersResult {
+  headers: Headers;
+  idempotencyToken: string;
+}
+
+/**
+ * Decorates and sanitizes headers for GCS requests:
+ * - Checks for user-provided `x-goog-gcs-idempotency-token` case-insensitively.
+ * - If a valid non-empty string user token is provided, uses it as the idempotency token and preserves the header.
+ * - If not provided or invalid, removes any invalid header key and sets `x-goog-gcs-idempotency-token` to either the provided fallback token or a generated UUID.
+ * - Adds `User-Agent` and `x-goog-api-client` (with tracking string, package version, gccl-invocation-id, and optional gccl-gcs-cmd).
+ *
+ * @param headers Existing headers object (optional).
+ * @param options Decoration options (idempotencyToken, packageJson, providedUserAgent, gcclGcsCmd).
+ * @returns An object containing the decorated headers and the effective idempotency token.
+ */
+export function decorateHeaders(
+  headers?: CoreOptions['headers'],
+  options?: DecorateHeadersOptions
+): DecorateHeadersResult {
+  const sanitizedHeaders: Headers = {...headers};
+  const userTokenKey = Object.keys(sanitizedHeaders).find(
+    key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+  );
+  const userTokenValue = userTokenKey
+    ? sanitizedHeaders[userTokenKey]
+    : undefined;
+  const hasValidUserToken =
+    typeof userTokenValue === 'string' && userTokenValue.trim() !== '';
+
+  const idempotencyToken = hasValidUserToken
+    ? (userTokenValue as string)
+    : options?.idempotencyToken || crypto.randomUUID();
+
+  let userAgent = getUserAgentString();
+  if (options?.providedUserAgent) {
+    userAgent = `${options.providedUserAgent} ${userAgent}`;
+  }
+
+  const pkg = options?.packageJson || packageJson;
+  let googAPIClient = `${getRuntimeTrackingString()} gccl/${
+    pkg.version
+  }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`;
+
+  const gcclGcsCmd = options?.gcclGcsCmd;
+  if (gcclGcsCmd) {
+    googAPIClient += ` gccl-gcs-cmd/${gcclGcsCmd}`;
+  }
+
+  sanitizedHeaders['User-Agent'] = userAgent;
+  sanitizedHeaders['x-goog-api-client'] = googAPIClient;
+
+  if (!hasValidUserToken) {
+    if (userTokenKey) {
+      delete sanitizedHeaders[userTokenKey];
+    }
+    sanitizedHeaders['x-goog-gcs-idempotency-token'] = idempotencyToken;
+  }
+
+  return {
+    headers: sanitizedHeaders,
+    idempotencyToken,
+  };
 }
 
 /**
