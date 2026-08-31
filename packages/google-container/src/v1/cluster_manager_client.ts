@@ -310,6 +310,7 @@ export class ClusterManagerClient {
       'checkAutopilotCompatibility',
       'fetchClusterUpgradeInfo',
       'fetchNodePoolUpgradeInfo',
+      'completeControlPlaneUpgrade',
     ];
     for (const methodName of clusterManagerStubMethods) {
       const callPromise = this.clusterManagerStub.then(
@@ -1152,6 +1153,9 @@ export class ClusterManagerClient {
    *   default behavior, i.e. according to the chosen autoscaling profile.
    * @param {google.container.v1.TaintConfig} request.taintConfig
    *   The taint configuration for the node pool.
+   * @param {google.container.v1.NodePool.NodePoolMaintenancePolicy} [request.maintenancePolicy]
+   *   Optional. Specifies the maintenance policy for the node pool, including
+   *   maintenance exclusion options.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5635,6 +5639,153 @@ export class ClusterManagerClient {
           {} | undefined,
         ]) => {
           this._log.info('fetchNodePoolUpgradeInfo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
+   * performing the step two upgrade for a specific cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name (project, location, cluster) of the cluster to complete
+   *   upgrade. Specified in the format `projects/* /locations/* /clusters/*`.
+   * @param {string} [request.version]
+   *   Optional. API request version that initiates this operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.complete_control_plane_upgrade.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_CompleteControlPlaneUpgrade_async
+   */
+  completeControlPlaneUpgrade(
+    request?: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      (
+        | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  completeControlPlaneUpgrade(
+    request: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  completeControlPlaneUpgrade(
+    request: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  completeControlPlaneUpgrade(
+    request?: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      (
+        | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('completeControlPlaneUpgrade request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeControlPlaneUpgrade response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeControlPlaneUpgrade(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1.IOperation,
+          (
+            | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('completeControlPlaneUpgrade response %j', response);
           return [response, options, rawResponse];
         },
       )

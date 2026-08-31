@@ -920,6 +920,28 @@
                           "(google.api.method_signature)": "name"
                         }
                       ]
+                    },
+                    "CompleteControlPlaneUpgrade": {
+                      "requestType": "CompleteControlPlaneUpgradeRequest",
+                      "responseType": "Operation",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:completeControlPlaneUpgrade",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/zones/*/clusters/*}:completeControlPlaneUpgrade",
+                        "(google.api.http).additional_bindings.body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=projects/*/locations/*/clusters/*}:completeControlPlaneUpgrade",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1/{name=projects/*/zones/*/clusters/*}:completeControlPlaneUpgrade",
+                              "body": "*"
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -1001,6 +1023,20 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
+                      }
+                    },
+                    "nodeVfioConfig": {
+                      "type": "NodeVfioConfig",
+                      "id": 15,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskIoScheduler": {
+                      "type": "DiskIoScheduler",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   },
@@ -1249,6 +1285,25 @@
                           "type": "bool",
                           "id": 1,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NodeVfioConfig": {
+                      "oneofs": {
+                        "_dmaEntryLimit": {
+                          "oneof": [
+                            "dmaEntryLimit"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dmaEntryLimit": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -2209,7 +2264,8 @@
                         "UNSPECIFIED": 0,
                         "NO_RESERVATION": 1,
                         "ANY_RESERVATION": 2,
-                        "SPECIFIC_RESERVATION": 3
+                        "SPECIFIC_RESERVATION": 3,
+                        "ANY_RESERVATION_THEN_FAIL": 4
                       }
                     }
                   }
@@ -3422,6 +3478,20 @@
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
+                    "currentEmulatedVersion": {
+                      "type": "string",
+                      "id": 167,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "rollbackSafeUpgrade": {
+                      "type": "RollbackSafeUpgrade",
+                      "id": 170,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
                     "currentNodeVersion": {
                       "type": "string",
                       "id": 105,
@@ -4049,6 +4119,11 @@
                       "oneof": [
                         "desiredDisableL4LbFirewallReconciliation"
                       ]
+                    },
+                    "_desiredEmulatedVersion": {
+                      "oneof": [
+                        "desiredEmulatedVersion"
+                      ]
                     }
                   },
                   "fields": {
@@ -4405,6 +4480,13 @@
                       "type": "ControlPlaneEgress",
                       "id": 160
                     },
+                    "desiredRollbackSafeUpgrade": {
+                      "type": "RollbackSafeUpgrade",
+                      "id": 161,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
                     "desiredManagedOpentelemetryConfig": {
                       "type": "ManagedOpenTelemetryConfig",
                       "id": 163
@@ -4422,6 +4504,14 @@
                       "id": 171,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "desiredEmulatedVersion": {
+                      "type": "string",
+                      "id": 182,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
                       }
                     }
                   }
@@ -5037,6 +5127,13 @@
                     "taintConfig": {
                       "type": "TaintConfig",
                       "id": 51
+                    },
+                    "maintenancePolicy": {
+                      "type": "NodePool.NodePoolMaintenancePolicy",
+                      "id": 52,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -5839,7 +5936,10 @@
                     "conditions": {
                       "rule": "repeated",
                       "type": "StatusCondition",
-                      "id": 105
+                      "id": 105,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "podIpv4CidrSize": {
                       "type": "int32",
@@ -5865,7 +5965,10 @@
                     },
                     "etag": {
                       "type": "string",
-                      "id": 110
+                      "id": 110,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "queuedProvisioning": {
                       "type": "QueuedProvisioning",
@@ -5884,6 +5987,13 @@
                       "id": 118,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "kubeletCertInfo": {
+                      "type": "KubeletCertInfo",
+                      "id": 119,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     }
                   },
@@ -6096,6 +6206,24 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "KubeletCertInfo": {
+                      "fields": {
+                        "tpmBootstrapCertExpireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nonTpmBootstrapCertExpireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -7413,6 +7541,11 @@
                   },
                   "nested": {
                     "Channel": {
+                      "valuesOptions": {
+                        "UNSPECIFIED": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "UNSPECIFIED": 0,
                         "RAPID": 1,
@@ -7893,6 +8026,20 @@
                       "type": "string",
                       "id": 5
                     },
+                    "currentEmulatedVersion": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "targetEmulatedVersion": {
+                      "type": "string",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
                     "resource": {
                       "type": "string",
                       "id": 6
@@ -7941,6 +8088,20 @@
                     "targetVersion": {
                       "type": "string",
                       "id": 6
+                    },
+                    "currentEmulatedVersion": {
+                      "type": "string",
+                      "id": 15,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "targetEmulatedVersion": {
+                      "type": "string",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "resource": {
                       "type": "string",
@@ -8269,7 +8430,8 @@
                         "CONTROLLER_MANAGER": 5,
                         "KCP_SSHD": 7,
                         "KCP_CONNECTION": 8,
-                        "KCP_HPA": 9
+                        "KCP_HPA": 9,
+                        "KCP_VPA": 10
                       }
                     }
                   }
@@ -8679,6 +8841,24 @@
                     }
                   }
                 },
+                "DiskIoScheduler": {
+                  "fields": {
+                    "nodeSystemIoScheduler": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodeAttachedDiskIoScheduler": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
                 "EphemeralStorageLocalSsdConfig": {
                   "fields": {
                     "localSsdCount": {
@@ -8842,6 +9022,17 @@
                 "SecondaryBootDiskUpdateStrategy": {
                   "fields": {}
                 },
+                "RollbackSafeUpgrade": {
+                  "fields": {
+                    "controlPlaneSoakDuration": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
                 "FetchClusterUpgradeInfoRequest": {
                   "fields": {
                     "name": {
@@ -8923,6 +9114,13 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "rollbackSafeUpgradeStatus": {
+                      "type": "RollbackSafeUpgradeStatus",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -8943,6 +9141,39 @@
                         "CLUSTER_DISRUPTION_BUDGET": 4,
                         "CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE": 7,
                         "SYSTEM_CONFIG": 8
+                      }
+                    }
+                  }
+                },
+                "RollbackSafeUpgradeStatus": {
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "controlPlaneUpgradeRollbackEndTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "previousVersion": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "KCP_MINOR_UPGRADE_ROLLBACK_SAFE_MODE": 1
                       }
                     }
                   }
@@ -8993,6 +9224,20 @@
                     "startType": {
                       "type": "StartType",
                       "id": 6
+                    },
+                    "initialEmulatedVersion": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "targetEmulatedVersion": {
+                      "type": "string",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -9095,6 +9340,13 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "customImageInfo": {
+                      "type": "CustomImageInfo",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -9113,6 +9365,35 @@
                         "MAINTENANCE_EXCLUSION_NO_UPGRADES": 2,
                         "MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES": 3,
                         "SYSTEM_CONFIG": 4
+                      }
+                    }
+                  }
+                },
+                "CustomImageInfo": {
+                  "fields": {
+                    "upgradeMessage": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "CompleteControlPlaneUpgradeRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "version": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }

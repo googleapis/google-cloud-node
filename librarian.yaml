@@ -16,8 +16,8 @@ version: v0.39.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 8856eed71a9cb2b9829d2617ee57fe2d8871a691
-    sha256: 54104af35306b605a97f7d1b98b9b96f4a507cd18322b44d81f62eca17969b3a
+    commit: 50aad1b835b0b1fd3acec6af91d9c9735787fe11
+    sha256: e58f3198fb96392a89b2850cca67882456f8d231ea4849f16cfb5551a012789d
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -631,7 +631,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
@@ -1925,6 +1925,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
+      metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
     version: 0.6.1
     apis:

@@ -61,6 +61,7 @@ function main() {
   const mobileCarrierServiceClient = new admanager.MobileCarrierServiceClient();
   const mobileDeviceServiceClient = new admanager.MobileDeviceServiceClient();
   const mobileDeviceSubmodelServiceClient = new admanager.MobileDeviceSubmodelServiceClient();
+  const nativeStyleServiceClient = new admanager.NativeStyleServiceClient();
   const networkServiceClient = new admanager.NetworkServiceClient();
   const operatingSystemServiceClient = new admanager.OperatingSystemServiceClient();
   const operatingSystemVersionServiceClient = new admanager.OperatingSystemVersionServiceClient();

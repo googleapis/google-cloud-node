@@ -308,6 +308,47 @@ export interface EncryptionEnforcementConfig {
   restrictionMode?: 'NotRestricted' | 'FullyRestricted';
   readonly effectiveTime?: string;
 }
+
+/**
+ * Configuration for a bucket's IP Filter.
+ *
+ * @example
+ * ```
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
+ * const bucket = storage.bucket('my-bucket');
+ *
+ * const metadata = {
+ *   ipFilter: {
+ *     mode: 'Enabled',
+ *     publicNetworkSource: {
+ *       allowedIpCidrRanges: ['192.168.1.1/32']
+ *     }
+ *   }
+ * };
+ *
+ * bucket.setMetadata(metadata, (err, apiResponse) => {
+ *   if (err) {
+ *     console.error(err);
+ *   } else {
+ *     console.log('IP filter updated successfully.');
+ *   }
+ * });
+ * ```
+ */
+export interface IpFilter {
+  mode?: 'Enabled' | 'Disabled';
+  publicNetworkSource?: {
+    allowedIpCidrRanges?: string[];
+  };
+  vpcNetworkSources?: {
+    network?: string;
+    allowedIpCidrRanges?: string[];
+  }[];
+  allowAllServiceAgentAccess?: boolean;
+  allowCrossOrgVpcs?: boolean;
+}
+
 export interface BucketMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   autoclass?: {
@@ -341,6 +382,7 @@ export interface BucketMetadata extends BaseMetadata {
       lockedTime?: string;
     };
   };
+  ipFilter?: IpFilter | null;
   labels?: {
     [key: string]: string | null;
   };

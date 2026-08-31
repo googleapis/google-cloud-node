@@ -72,6 +72,7 @@
   "devDependencies": {
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/sdk-trace-base": "^2.8.0",
+    "@opentelemetry/sdk-trace-node": "^2.8.0",
     "@types/duplexify": "^3.6.4",
     "@types/extend": "^3.0.4",
     "@types/lodash.snakecase": "^4.1.9",
@@ -82,6 +83,7 @@
     "@types/proxyquire": "^1.3.31",
     "@types/sinon": "^21.0.0",
     "@types/tmp": "^0.2.6",
+    "avro-js": "^1.12.1",
     "c8": "^10.1.3",
     "codecov": "^3.8.3",
     "execa": "~5.1.0",

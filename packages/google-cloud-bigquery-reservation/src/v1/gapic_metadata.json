@@ -125,6 +125,11 @@
                 "deleteReservationGroup"
               ]
             },
+            "UpdateReservationGroup": {
+              "methods": [
+                "updateReservationGroup"
+              ]
+            },
             "ListReservations": {
               "methods": [
                 "listReservations",
@@ -285,6 +290,11 @@
             "DeleteReservationGroup": {
               "methods": [
                 "deleteReservationGroup"
+              ]
+            },
+            "UpdateReservationGroup": {
+              "methods": [
+                "updateReservationGroup"
               ]
             },
             "ListReservations": {
