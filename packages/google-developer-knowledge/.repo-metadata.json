@@ -7,7 +7,7 @@
     "issue_tracker": "https://issuetracker.google.com/issues/new?component=190865&template=1161103",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "developerknowledge",
+    "name": "google-developer-knowledge",
     "name_pretty": "Developer Knowledge",
     "product_documentation": "https://developers.google.com/knowledge",
     "release_level": "preview",
