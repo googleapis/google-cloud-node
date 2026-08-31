@@ -875,7 +875,7 @@ describe('resumable-upload', () => {
         delete metadataNoHeaders.contentType;
         assert.deepStrictEqual(reqOpts.data, metadataNoHeaders);
         assert(reqOpts.headers);
-        const headers = reqOpts.headers as Record<string, any>;
+        const headers = reqOpts.headers as Record<string, string | undefined>;
         const apiClientHeader = headers['x-goog-api-client'];
         const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
         assert.ok(match);
@@ -897,7 +897,10 @@ describe('resumable-upload', () => {
 
       up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
         assert(combinedReqOpts.headers);
-        const headers = combinedReqOpts.headers as Record<string, any>;
+        const headers = combinedReqOpts.headers as Record<
+          string,
+          string | undefined
+        >;
         const apiClientHeader = headers['x-goog-api-client'];
         const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
         assert.ok(match);
@@ -929,7 +932,10 @@ describe('resumable-upload', () => {
 
       up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
         assert(combinedReqOpts.headers);
-        const headers = combinedReqOpts.headers as Record<string, any>;
+        const headers = combinedReqOpts.headers as Record<
+          string,
+          string | undefined
+        >;
         const apiClientHeader = headers['x-goog-api-client'];
         const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
         assert.ok(match);
@@ -957,7 +963,10 @@ describe('resumable-upload', () => {
 
       up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
         assert(combinedReqOpts.headers);
-        const headers = combinedReqOpts.headers as Record<string, any>;
+        const headers = combinedReqOpts.headers as Record<
+          string,
+          string | undefined
+        >;
         const apiClientHeader = headers['x-goog-api-client'];
         const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
         assert.ok(match);
@@ -987,7 +996,7 @@ describe('resumable-upload', () => {
       up.makeRequest = async (reqOpts: GaxiosOptions) => {
         invocationCount++;
         assert(reqOpts.headers);
-        const headers = reqOpts.headers as Record<string, any>;
+        const headers = reqOpts.headers as Record<string, string | undefined>;
         if (invocationCount === 1) {
           token1 = headers['x-goog-gcs-idempotency-token'] as string;
           const error = new GaxiosError(
@@ -1470,7 +1479,7 @@ describe('resumable-upload', () => {
           await up.startUploading();
 
           assert(capturedHeaders);
-          const headers = capturedHeaders as Record<string, any>;
+          const headers = capturedHeaders as Record<string, string | undefined>;
           const apiClientHeader = headers['x-goog-api-client'] as string;
           const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
           assert.ok(match);
@@ -1497,7 +1506,7 @@ describe('resumable-upload', () => {
           await up.startUploading();
 
           assert(capturedHeaders);
-          const headers = capturedHeaders as Record<string, any>;
+          const headers = capturedHeaders as Record<string, string | undefined>;
           const apiClientHeader = headers['x-goog-api-client'] as string;
           const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
           assert.ok(match);
@@ -1532,7 +1541,7 @@ describe('resumable-upload', () => {
           await up.startUploading();
 
           assert(capturedHeaders);
-          const headers = capturedHeaders as Record<string, any>;
+          const headers = capturedHeaders as Record<string, string | undefined>;
           const apiClientHeader = headers['x-goog-api-client'] as string;
           const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
           assert.ok(match);
@@ -1562,7 +1571,7 @@ describe('resumable-upload', () => {
           await up.startUploading();
 
           assert(capturedHeaders);
-          const headers = capturedHeaders as Record<string, any>;
+          const headers = capturedHeaders as Record<string, string | undefined>;
           const apiClientHeader = headers['x-goog-api-client'] as string;
           const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
           assert.ok(match);
@@ -1587,7 +1596,10 @@ describe('resumable-upload', () => {
 
           up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
             invocationCount++;
-            const headers = requestOptions.headers as Record<string, any>;
+            const headers = requestOptions.headers as Record<
+              string,
+              string | undefined
+            >;
             const token = headers['x-goog-gcs-idempotency-token'] as string;
             if (invocationCount === 1) {
               token1 = token;
@@ -1624,7 +1636,10 @@ describe('resumable-upload', () => {
           const chunkInvocationIds: string[] = [];
 
           up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
-            const headers = requestOptions.headers as Record<string, any>;
+            const headers = requestOptions.headers as Record<
+              string,
+              string | undefined
+            >;
             const token = headers['x-goog-gcs-idempotency-token'] as string;
             const apiClientHeader = headers['x-goog-api-client'] as string;
             const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
@@ -2235,7 +2250,7 @@ describe('resumable-upload', () => {
       await up.checkUploadStatus();
 
       assert(capturedHeaders);
-      const headers = capturedHeaders as Record<string, any>;
+      const headers = capturedHeaders as Record<string, string | undefined>;
       const apiClientHeader = headers['x-goog-api-client'] as string;
       const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
       assert.ok(match);
@@ -2259,7 +2274,7 @@ describe('resumable-upload', () => {
       await up.checkUploadStatus();
 
       assert(capturedHeaders);
-      const headers = capturedHeaders as Record<string, any>;
+      const headers = capturedHeaders as Record<string, string | undefined>;
       const apiClientHeader = headers['x-goog-api-client'] as string;
       const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
       assert.ok(match);
@@ -2288,7 +2303,7 @@ describe('resumable-upload', () => {
       await up.checkUploadStatus();
 
       assert(capturedHeaders);
-      const headers = capturedHeaders as Record<string, any>;
+      const headers = capturedHeaders as Record<string, string | undefined>;
       const apiClientHeader = headers['x-goog-api-client'] as string;
       const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
       assert.ok(match);
@@ -2315,7 +2330,7 @@ describe('resumable-upload', () => {
       await up.checkUploadStatus();
 
       assert(capturedHeaders);
-      const headers = capturedHeaders as Record<string, any>;
+      const headers = capturedHeaders as Record<string, string | undefined>;
       const apiClientHeader = headers['x-goog-api-client'] as string;
       const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
       assert.ok(match);
@@ -2337,7 +2352,7 @@ describe('resumable-upload', () => {
 
       up.makeRequest = async (reqOpts: GaxiosOptions) => {
         invocationCount++;
-        const headers = reqOpts.headers as Record<string, any>;
+        const headers = reqOpts.headers as Record<string, string | undefined>;
         const token = headers['x-goog-gcs-idempotency-token'] as string;
         if (invocationCount === 1) {
           token1 = token;
