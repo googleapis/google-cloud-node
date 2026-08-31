@@ -67,7 +67,7 @@ describe('headers', () => {
     }
     const apiClientHeader = requests[0].headers['x-goog-api-client'];
     const match =
-      /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.exec(
+      /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/.exec(
         apiClientHeader
       );
     assert.ok(match);
@@ -94,7 +94,7 @@ describe('headers', () => {
     }
     const apiClientHeader = requests[1].headers['x-goog-api-client'];
     const match =
-      /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.exec(
+      /^gl-deno\/0.00.0 gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/.exec(
         apiClientHeader
       );
     assert.ok(match);

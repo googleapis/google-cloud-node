@@ -56,8 +56,8 @@ const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 const CHUNK_SIZE_MULTIPLE = 2 ** 18;
 const queryPath = '/?userProject=user-project-id';
 const X_GOOG_API_HEADER_REGEX =
-  /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd\/(?<gcclGcsCmd>[^W]+)$/;
-const USER_AGENT_REGEX = /^gcloud-node-storage\/(?<libVersion>[^W]+)$/;
+  /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+) gccl-gcs-cmd\/(?<gcclGcsCmd>\S+)$/;
+const USER_AGENT_REGEX = /^gcloud-node-storage\/(?<libVersion>\S+)$/;
 const CORRECT_CLIENT_CRC32C = 'Q2hlY2tzdW0h';
 const INCORRECT_SERVER_CRC32C = 'Q2hlY2tzdVUa';
 const CORRECT_CLIENT_MD5 = 'CorrectMD5Hash';

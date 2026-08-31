@@ -478,7 +478,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
@@ -493,7 +493,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
         );
         const match = r.exec(reqOpts.headers!['x-goog-api-client']);
         assert.ok(match);
@@ -508,7 +508,7 @@ describe('Service', () => {
     });
 
     it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id', done => {
-      const customToken = 'my-custom-token-123';
+      const customToken = 'Custom-Token-With-W-123';
       const customReqOpts = {
         ...reqOpts,
         headers: {
@@ -521,7 +521,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
         );
         const match = r.exec(reqOpts.headers!['x-goog-api-client']);
         assert.ok(match);
@@ -556,7 +556,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
         );
         const match = r.exec(reqOpts.headers!['x-goog-api-client']);
         assert.ok(match);
@@ -579,7 +579,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+) gccl-gcs-cmd/${expected}$`
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();

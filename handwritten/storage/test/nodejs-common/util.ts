@@ -85,7 +85,7 @@ function fakeRequest() {
 
 fakeRequest.defaults = (defaults: CoreOptions) => {
   const match =
-    /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.exec(
+    /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/.exec(
       defaults.headers!['x-goog-api-client'] as string
     );
   assert.ok(match);
@@ -1963,7 +1963,7 @@ describe('common/util', () => {
 
   describe('decorateHeaders', () => {
     const X_GOOG_API_HEADER_REGEX =
-      /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/;
+      /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/;
 
     it('should return default headers when no headers are provided', () => {
       const result = decorateHeaders();
@@ -2010,7 +2010,7 @@ describe('common/util', () => {
     });
 
     it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id', () => {
-      const customToken = 'my-custom-token-456';
+      const customToken = 'Custom-Token-With-W-456';
       const result = decorateHeaders({
         'X-Goog-Gcs-Idempotency-Token': customToken,
       });
