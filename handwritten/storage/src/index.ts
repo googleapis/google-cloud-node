@@ -145,6 +145,7 @@ export {
   GetNotificationsCallback,
   GetNotificationsOptions,
   GetNotificationsResponse,
+  IpFilter,
   Labels,
   LifecycleAction,
   LifecycleCondition,

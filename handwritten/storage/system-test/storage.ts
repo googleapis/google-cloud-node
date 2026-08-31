@@ -41,6 +41,7 @@ interface ErrorCallbackFunction {
 }
 import {PubSub, Subscription, Topic} from '@google-cloud/pubsub';
 import {getDirName} from '../src/util.js';
+import {BucketMetadata} from '../src/bucket.js';
 
 class HTTPError extends Error {
   code: number;
@@ -1294,6 +1295,101 @@ describe('storage', function () {
   });
 
   describe('bucket metadata', () => {
+    describe('ipFilter', () => {
+      let ipFilterBucket: Bucket;
+
+      before(async () => {
+        ipFilterBucket = storage.bucket(generateName());
+        await ipFilterBucket.create();
+      });
+
+      after(async () => {
+        await ipFilterBucket.delete().catch(() => { });
+      });
+
+
+      it('should create a bucket with ipFilter', async () => {
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['0.0.0.0/0'],
+            },
+            allowAllServiceAgentAccess: true,
+          },
+        };
+        const bucketToCreate = storage.bucket(generateName());
+        const [bucket, apiResponse] = await bucketToCreate.create(metadata);
+        
+        assert.strictEqual(apiResponse.ipFilter?.mode, metadata.ipFilter?.mode);
+        assert.deepStrictEqual(apiResponse.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, metadata.ipFilter?.publicNetworkSource?.allowedIpCidrRanges);
+        assert.strictEqual(apiResponse.ipFilter?.allowAllServiceAgentAccess, metadata.ipFilter?.allowAllServiceAgentAccess);
+        
+        await bucket.delete().catch(() => {});
+      });
+
+      it('should set ipFilter', async () => {
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['0.0.0.0/0', '::/0'],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.deepStrictEqual(meta.ipFilter, metadata.ipFilter);
+      });
+
+      it('should get ipFilter', async () => {
+        const [meta] = await ipFilterBucket.getMetadata();
+        assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
+        assert.deepStrictEqual(
+          meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+          ['0.0.0.0/0', '::/0']
+        );
+      });
+
+      it('should update ipFilter', async () => {
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['203.0.113.0/24'],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.deepStrictEqual(meta.ipFilter, metadata.ipFilter);
+      });
+
+      it('should clear allowedIpCidrRanges', async () => {
+        const [getMeta] = await ipFilterBucket.getMetadata();
+        assert.strictEqual(getMeta.ipFilter?.mode, 'Disabled');
+        assert.deepStrictEqual(
+          getMeta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+          ['203.0.113.0/24']
+        );
+
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              // The API omits the field when the array is cleared.
+              allowedIpCidrRanges: [],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+        const [meta] = await ipFilterBucket.setMetadata(metadata);
+        assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
+        assert.strictEqual(meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, undefined);
+        assert.strictEqual(meta.ipFilter?.allowAllServiceAgentAccess, false);
+      });
+    });
+
     it('should allow setting metadata on a bucket', async () => {
       const metadata = {
         website: {
@@ -4646,7 +4742,15 @@ describe('storage', function () {
       setTimeout(resolve, RETENTION_DURATION_SECONDS * 1000),
     );
     return Promise.all(
-      buckets.map(bucket => limit(() => deleteBucketAsync(bucket))),
+      buckets.map(bucket =>
+        limit(() =>
+          deleteBucketAsync(bucket).catch((err: GaxiosError) => {
+            if (err.status !== 404) {
+              throw err;
+            }
+          })
+        )
+      )
     );
   }
 

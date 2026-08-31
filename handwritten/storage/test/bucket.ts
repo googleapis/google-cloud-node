@@ -27,7 +27,10 @@ import {
 } from '../src/index.js';
 import {GaxiosResponse} from 'gaxios';
 import sinon, {createSandbox} from 'sinon';
-import {StorageTransport} from '../src/storage-transport.js';
+import {
+  StorageRequestOptions,
+  StorageTransport,
+} from '../src/storage-transport.js';
 import {GoogleAuth} from 'google-auth-library';
 import {
   AvailableServiceObjectMethods,
@@ -37,6 +40,7 @@ import {
   GetBucketSignedUrlConfig,
   LifecycleRule,
   ComposeCleanupError,
+  IpFilter,
 } from '../src/bucket.js';
 import mime from 'mime';
 import {CreateWriteStreamOptionsInternal} from '../src/file.js';
@@ -3454,6 +3458,213 @@ describe('Bucket', () => {
 
         const calledMetadata = setMetadataStub.getCall(0).args[0];
         assert.strictEqual(calledMetadata.encryption, null);
+      });
+    });
+
+    describe('ipFilter', () => {
+      it('should pass ipFilter to create', done => {
+        const metadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.0.0/16'],
+            },
+            allowAllServiceAgentAccess: true,
+          },
+        };
+
+        const storageMock = Object.assign({}, bucket.storage, {
+          createBucket: (
+            name: string,
+            options: unknown,
+            callback: Function,
+          ) => {
+            assert.strictEqual(name, bucket.name);
+            assert.deepStrictEqual(options, metadata);
+            callback(null, bucket, metadata);
+          },
+        });
+
+        const testBucket = new Bucket(storageMock, bucket.name);
+        testBucket.create(metadata, (err: Error | null) => {
+          assert.ifError(err);
+          done();
+        });
+      });
+
+      it('should enable ipFilter', async () => {
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: ['192.168.1.1/32'],
+            },
+          },
+        };
+
+        bucket.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(
+            (
+              reqOpts: StorageRequestOptions,
+              callback: (err: null, data: BucketMetadata) => void,
+            ) => {
+              assert.strictEqual(reqOpts.method, 'PATCH');
+              assert.deepStrictEqual(
+                JSON.parse(reqOpts.body as string).ipFilter,
+                metadata.ipFilter,
+              );
+              if (callback) {
+                callback(null, metadata);
+              }
+              return Promise.resolve({data: metadata} as GaxiosResponse);
+            },
+          );
+
+        await bucket.setMetadata(metadata);
+      });
+
+      it('should update ipFilter', async () => {
+        const metadata: BucketMetadata = {
+          ipFilter: {
+            mode: 'Enabled',
+            vpcNetworkSources: [
+              {
+                network: 'projects/my-project/global/networks/my-vpc',
+                allowedIpCidrRanges: ['10.0.0.0/8'],
+              },
+            ],
+          },
+        };
+
+        bucket.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(
+            (
+              reqOpts: StorageRequestOptions,
+              callback: (err: null, data: BucketMetadata) => void,
+            ) => {
+              assert.strictEqual(reqOpts.method, 'PATCH');
+              assert.deepStrictEqual(
+                JSON.parse(reqOpts.body as string).ipFilter,
+                metadata.ipFilter,
+              );
+              if (callback) {
+                callback(null, metadata);
+              }
+              return Promise.resolve({data: metadata} as GaxiosResponse);
+            },
+          );
+
+        await bucket.setMetadata(metadata);
+      });
+
+      it('should get ipFilter', async () => {
+        const ipFilter: IpFilter = {
+          mode: 'Enabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: ['192.168.1.1/32'],
+          },
+          vpcNetworkSources: [
+            {
+              network: 'projects/my-project/global/networks/my-vpc',
+              allowedIpCidrRanges: ['10.0.0.0/8'],
+            },
+          ],
+          allowAllServiceAgentAccess: true,
+          allowCrossOrgVpcs: true,
+        };
+
+        bucket.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(
+            (
+              reqOpts: StorageRequestOptions,
+              callback: (err: null, data: {ipFilter: IpFilter}) => void,
+            ) => {
+              if (callback) {
+                callback(null, {ipFilter});
+              }
+              return Promise.resolve({
+                data: {ipFilter},
+              } as GaxiosResponse);
+            },
+          );
+
+        const [metadata] = await bucket.getMetadata();
+        assert.deepStrictEqual(metadata.ipFilter, ipFilter);
+      });
+
+      it('should clear allowedIpCidrRanges', async () => {
+        const initialIpFilter: IpFilter = {
+          mode: 'Disabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: ['203.0.113.0/24'],
+          },
+        };
+
+        const updatedIpFilter: IpFilter = {
+          mode: 'Disabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: undefined,
+          },
+          allowAllServiceAgentAccess: false,
+        };
+
+        bucket.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(
+            (
+              reqOpts: StorageRequestOptions,
+              callback: (err: null, data: {ipFilter: IpFilter}) => void,
+            ) => {
+              if (reqOpts.method === 'PATCH') {
+                assert.deepStrictEqual(
+                  JSON.parse(reqOpts.body as string).ipFilter
+                    ?.publicNetworkSource?.allowedIpCidrRanges,
+                  [],
+                );
+                if (callback) {
+                  callback(null, {ipFilter: updatedIpFilter});
+                }
+                return Promise.resolve({
+                  data: {ipFilter: updatedIpFilter},
+                } as GaxiosResponse);
+              } else {
+                if (callback) {
+                  callback(null, {ipFilter: initialIpFilter});
+                }
+                return Promise.resolve({
+                  data: {ipFilter: initialIpFilter},
+                } as GaxiosResponse);
+              }
+            },
+          );
+
+        const [getMeta] = await bucket.getMetadata();
+        assert.strictEqual(getMeta?.ipFilter?.mode, 'Disabled');
+        assert.deepStrictEqual(
+          getMeta?.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+          ['203.0.113.0/24'],
+        );
+
+        const metadataUpdate: BucketMetadata = {
+          ipFilter: {
+            mode: 'Disabled',
+            publicNetworkSource: {
+              allowedIpCidrRanges: [],
+            },
+            allowAllServiceAgentAccess: false,
+          },
+        };
+
+        const [meta] = await bucket.setMetadata(metadataUpdate);
+        assert.strictEqual(meta?.ipFilter?.mode, 'Disabled');
+        assert.strictEqual(
+          meta?.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+          undefined,
+        );
+        assert.strictEqual(meta?.ipFilter?.allowAllServiceAgentAccess, false);
       });
     });
   });
