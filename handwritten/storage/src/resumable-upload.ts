@@ -802,17 +802,17 @@ export class Upload extends Writable {
 
   protected async createURIAsync(): Promise<string> {
     const metadata = {...this.metadata};
-    const headers = new Headers();
+    const headers: Record<string, string> = {};
 
     // Delete content length and content type from metadata if they exist.
     // These are headers and should not be sent as part of the metadata.
     if (metadata.contentLength) {
-      headers.set('X-Upload-Content-Length', metadata.contentLength.toString());
+      headers['X-Upload-Content-Length'] = metadata.contentLength.toString();
       delete metadata.contentLength;
     }
 
     if (metadata.contentType) {
-      headers.set('X-Upload-Content-Type', metadata.contentType);
+      headers['X-Upload-Content-Type'] = metadata.contentType;
       delete metadata.contentType;
     }
 
@@ -828,7 +828,7 @@ export class Upload extends Writable {
       {
         idempotencyToken: this.currentInvocationId.uri,
         gcclGcsCmd: this.#gcclGcsCmd,
-      }
+      },
     );
     this.currentInvocationId.uri = idempotencyToken;
 
@@ -869,18 +869,14 @@ export class Upload extends Writable {
       reqOpts.params.predefinedAcl = this.predefinedAcl;
     }
 
-    if (this.origin) {
-      const headers = new Headers(reqOpts.headers);
-      headers.set('Origin', this.origin);
-      reqOpts.headers = headers;
-    }
     const uri = await AsyncRetry(
       async (bail: (err: Error) => void) => {
         try {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
           this.currentInvocationId.uri = crypto.randomUUID();
-          return res.headers.get('location');
+          const respHeaders = new Headers(res.headers);
+          return respHeaders.get('location');
         } catch (err) {
           const e = err as GaxiosError;
           if (
@@ -1007,7 +1003,7 @@ export class Upload extends Writable {
       {
         idempotencyToken: this.currentInvocationId.chunk,
         gcclGcsCmd: this.#gcclGcsCmd,
-      }
+      },
     );
     this.currentInvocationId.chunk = idempotencyToken;
 
@@ -1219,7 +1215,7 @@ export class Upload extends Writable {
       {
         idempotencyToken: this.currentInvocationId.checkUploadStatus,
         gcclGcsCmd: this.#gcclGcsCmd,
-      }
+      },
     );
     this.currentInvocationId.checkUploadStatus = idempotencyToken;
 
@@ -1320,7 +1316,7 @@ export class Upload extends Writable {
     if (combinedReqOpts.headers) {
       const headers = combinedReqOpts.headers as Record<string, unknown>;
       const userTokenKey = Object.keys(headers).find(
-        key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+        key => key.toLowerCase() === 'x-goog-gcs-idempotency-token',
       );
       const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
       const hasValidUserToken =
@@ -1363,7 +1359,7 @@ export class Upload extends Writable {
     if (combinedReqOpts.headers) {
       const headers = combinedReqOpts.headers as Record<string, unknown>;
       const userTokenKey = Object.keys(headers).find(
-        key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+        key => key.toLowerCase() === 'x-goog-gcs-idempotency-token',
       );
       const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
       const hasValidUserToken =
