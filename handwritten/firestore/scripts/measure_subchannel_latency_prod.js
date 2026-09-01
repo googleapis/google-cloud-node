@@ -194,6 +194,97 @@ async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function formatDelta(legacyValStr, fixedValStr) {
+  const legacyVal = parseFloat(legacyValStr);
+  const fixedVal = parseFloat(fixedValStr);
+  if (isNaN(legacyVal) || isNaN(fixedVal) || legacyVal === 0) {
+    return '—';
+  }
+  const diff = Math.round(legacyVal - fixedVal);
+  const pct = Math.round(((legacyVal - fixedVal) / legacyVal) * 100);
+  if (diff > 0) {
+    return `**${pct}% faster** (-${diff} ms)`;
+  } else if (diff < 0) {
+    return `${Math.abs(pct)}% slower (+${Math.abs(diff)} ms)`;
+  }
+  return '0% (no change)';
+}
+
+function printMarkdownTable(legacy, fixed) {
+  const rows = [
+    [
+      '**Subchannel Pool**',
+      legacy['Subchannel Pool'],
+      fixed['Subchannel Pool'],
+      'Local subchannel isolation',
+    ],
+    [
+      '**Concurrent Requests**',
+      legacy['Total Requests'],
+      fixed['Total Requests'],
+      '—',
+    ],
+    [
+      '**Peak GAPIC Clients**',
+      legacy['Peak GAPIC Clients'],
+      fixed['Peak GAPIC Clients'],
+      '—',
+    ],
+    [
+      '**Total Wall-Clock**',
+      legacy['Total Wall-Clock'],
+      fixed['Total Wall-Clock'],
+      formatDelta(legacy['Total Wall-Clock'], fixed['Total Wall-Clock']),
+    ],
+    [
+      '**Mean Latency**',
+      legacy['Mean Latency'],
+      fixed['Mean Latency'],
+      formatDelta(legacy['Mean Latency'], fixed['Mean Latency']),
+    ],
+    [
+      '**P50 Latency**',
+      legacy['P50 Latency'],
+      fixed['P50 Latency'],
+      formatDelta(legacy['P50 Latency'], fixed['P50 Latency']),
+    ],
+    [
+      '**P90 Latency**',
+      legacy['P90 Latency'],
+      fixed['P90 Latency'],
+      formatDelta(legacy['P90 Latency'], fixed['P90 Latency']),
+    ],
+    [
+      '**P95 Latency**',
+      legacy['P95 Latency'],
+      fixed['P95 Latency'],
+      formatDelta(legacy['P95 Latency'], fixed['P95 Latency']),
+    ],
+    [
+      '**P99 Latency**',
+      legacy['P99 Latency'],
+      fixed['P99 Latency'],
+      formatDelta(legacy['P99 Latency'], fixed['P99 Latency']),
+    ],
+    [
+      '**Max Latency**',
+      legacy['Max Latency'],
+      fixed['Max Latency'],
+      formatDelta(legacy['Max Latency'], fixed['Max Latency']),
+    ],
+    ['**Errors**', legacy.Errors, fixed.Errors, '—'],
+  ];
+
+  console.log('\n### Benchmark Results (GitHub PR Markdown Table)\n');
+  console.log(
+    '| Metric | Legacy (`use_local_subchannel_pool: 0`) | Fixed (`use_local_subchannel_pool: 1`) | Improvement / Delta |',
+  );
+  console.log('| :--- | :--- | :--- | :--- |');
+  for (const [metric, leg, fix, delta] of rows) {
+    console.log(`| ${metric} | ${leg} | ${fix} | ${delta} |`);
+  }
+}
+
 async function main() {
   const options = parseArgs();
   if (options.help) {
@@ -247,20 +338,7 @@ async function main() {
     options,
   );
 
-  console.log('\n' + '='.repeat(80));
-  console.log('PRODUCTION BENCHMARK RESULTS COMPARISON');
-  console.log('='.repeat(80));
-  console.table([legacyResult, fixedResult]);
-
-  const legacyP99 = parseInt(legacyResult['P99 Latency'], 10);
-  const fixedP99 = parseInt(fixedResult['P99 Latency'], 10);
-  if (legacyP99 > 0 && fixedP99 > 0) {
-    const diff = legacyP99 - fixedP99;
-    const pct = Math.round((diff / legacyP99) * 100);
-    console.log(
-      `\n>> P99 Latency Change: ${diff > 0 ? '-' : '+'}${Math.abs(diff)} ms (${pct}% ${diff > 0 ? 'faster' : 'slower'})`,
-    );
-  }
+  printMarkdownTable(legacyResult, fixedResult);
 }
 
 main().catch(err => {
