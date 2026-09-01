@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "fad57ff4b9164712426a041fc61db035859f9043",
+          "message": "Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries",
+          "issues": [
+            "9116"
+          ]
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "3f2b5de6-0296-4cba-a3ac-b13ca74af052",
+      "createTime": "2026-09-01T12:41:10.557Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "a0cbc510dd45db2232a909a0b8c225771cfbcf18",
           "message": "Bundle backstory UDM protos into @google-cloud/chronicle",
@@ -90526,5 +90543,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-28T08:19:43.503Z"
+  "updateTime": "2026-09-01T12:41:10.557Z"
 }
