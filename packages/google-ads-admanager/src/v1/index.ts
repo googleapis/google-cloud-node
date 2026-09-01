@@ -56,6 +56,7 @@ export { McmEarningsServiceClient } from './mcm_earnings_service_client';
 export { MobileCarrierServiceClient } from './mobile_carrier_service_client';
 export { MobileDeviceServiceClient } from './mobile_device_service_client';
 export { MobileDeviceSubmodelServiceClient } from './mobile_device_submodel_service_client';
+export { NativeStyleServiceClient } from './native_style_service_client';
 export { NetworkServiceClient } from './network_service_client';
 export { OperatingSystemServiceClient } from './operating_system_service_client';
 export { OperatingSystemVersionServiceClient } from './operating_system_version_service_client';
