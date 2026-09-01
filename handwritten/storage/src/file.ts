@@ -26,7 +26,6 @@ import {promisifyAll} from '@google-cloud/promisify';
 
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import mime from 'mime';
 import * as resumableUpload from './resumable-upload.js';
 import {Writable, Readable, pipeline, Transform, PipelineSource} from 'stream';
 import * as zlib from 'zlib';
@@ -62,6 +61,7 @@ import {
   formatAsUTCISO,
   PassThroughShim,
   handleContextValidation,
+  getMime,
 } from './util.js';
 import {CRC32C, CRC32CValidatorGenerator} from './crc32c.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
@@ -2158,23 +2158,7 @@ class File extends ServiceObject<File, FileMetadata> {
       options!.metadata!.contentType = options.contentType;
     }
 
-    if (
-      !options!.metadata!.contentType ||
-      options!.metadata!.contentType === 'auto'
-    ) {
-      const detectedContentType = mime.getType(this.name);
-      if (detectedContentType) {
-        options!.metadata!.contentType = detectedContentType;
-      }
-    }
-
-    let gzip = options.gzip;
-
-    if (gzip === 'auto') {
-      gzip = COMPRESSIBLE_MIME_REGEX.test(options!.metadata!.contentType || '');
-    }
-
-    if (gzip) {
+    if (options.gzip === true) {
       options!.metadata!.contentEncoding = 'gzip';
     }
 
@@ -2239,7 +2223,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const transformStreams: Transform[] = [];
 
-    if (gzip) {
+    if (options.gzip === true) {
       transformStreams.push(zlib.createGzip());
     }
 
@@ -2280,96 +2264,127 @@ class File extends ServiceObject<File, FileMetadata> {
       fileWriteStreamMetadataReceived = true;
     });
 
-    writeStream.once('writing', () => {
-      if (options.resumable === false) {
-        this.startSimpleUpload_(fileWriteStream, options);
-      } else {
-        this.startResumableUpload_(fileWriteStream, options);
-      }
-
-      // remove temporary noop listener as we now create a pipeline that handles the errors
-      emitStream.removeListener('error', noop);
-
-      if (fileWriteStream.destroyed) {
-        let callbackCalled = false;
-        const onError = (err: Error) => {
-          if (!callbackCalled) {
-            callbackCalled = true;
-            pipelineCallback(err);
+    writeStream.once('writing', async () => {
+      try {
+        if (
+          !options!.metadata!.contentType ||
+          options!.metadata!.contentType === 'auto'
+        ) {
+          const mime = await getMime();
+          const detectedContentType = mime.getType(this.name);
+          if (detectedContentType) {
+            options!.metadata!.contentType = detectedContentType;
           }
-        };
-        fileWriteStream.once('error', onError);
-        emitStream.destroy();
+        }
 
-        process.nextTick(() => {
-          fileWriteStream.removeListener('error', onError);
-          if (!callbackCalled) {
-            callbackCalled = true;
-            const err =
-              (fileWriteStream as Writable & {errored?: Error}).errored ||
-              new Error('Write stream destroyed');
-            pipelineCallback(err);
+        let gzip = options.gzip;
+
+        if (gzip === 'auto') {
+          gzip = COMPRESSIBLE_MIME_REGEX.test(
+            options!.metadata!.contentType || ''
+          );
+          if (gzip) {
+            options!.metadata!.contentEncoding = 'gzip';
+            transformStreams.unshift(zlib.createGzip());
           }
-        });
-        return;
-      }
+        }
 
-      pipeline(
-        emitStream,
-        ...(transformStreams as [Transform]),
-        fileWriteStream,
-        async e => {
-          if (e) {
-            return pipelineCallback(e);
-          }
+        if (options.resumable === false) {
+          this.startSimpleUpload_(fileWriteStream, options);
+        } else {
+          this.startResumableUpload_(fileWriteStream, options);
+        }
 
-          // If this is a partial upload, we don't expect final metadata yet.
-          if (options.isPartialUpload) {
-            // Emit CRC32c for this completed chunk if hash validation is active.
+        // remove temporary noop listener as we now create a pipeline that handles the errors
+        emitStream.removeListener('error', noop);
+
+        if (fileWriteStream.destroyed) {
+          let callbackCalled = false;
+          const onError = (err: Error) => {
+            if (!callbackCalled) {
+              callbackCalled = true;
+              pipelineCallback(err);
+            }
+          };
+          fileWriteStream.once('error', onError);
+          emitStream.destroy();
+
+          process.nextTick(() => {
+            fileWriteStream.removeListener('error', onError);
+            if (!callbackCalled) {
+              callbackCalled = true;
+              const err =
+                (fileWriteStream as Writable & {errored?: Error}).errored ||
+                new Error('Write stream destroyed');
+              pipelineCallback(err);
+            }
+          });
+          return;
+        }
+
+        pipeline(
+          emitStream,
+          ...(transformStreams as [Transform]),
+          fileWriteStream,
+          async e => {
+            if (e) {
+              return pipelineCallback(e);
+            }
+
+            // If this is a partial upload, we don't expect final metadata yet.
+            if (options.isPartialUpload) {
+              // Emit CRC32c for this completed chunk if hash validation is active.
+              if (hashCalculatingStream?.crc32c) {
+                writeStream.emit('crc32c', hashCalculatingStream.crc32c);
+              }
+              // Resolve the pipeline for this *partial chunk*.
+              return pipelineCallback();
+            }
+
+            // We want to make sure we've received the metadata from the server in order
+            // to properly validate the object's integrity. Depending on the type of upload,
+            // the stream could close before the response is returned.
+            if (!fileWriteStreamMetadataReceived) {
+              try {
+                await new Promise((resolve, reject) => {
+                  fileWriteStream.once('metadata', resolve);
+                  fileWriteStream.once('error', reject);
+                });
+              } catch (e) {
+                return pipelineCallback(e as Error);
+              }
+            }
+
+            // Emit the local CRC32C value for future validation, if validation is enabled.
             if (hashCalculatingStream?.crc32c) {
               writeStream.emit('crc32c', hashCalculatingStream.crc32c);
             }
-            // Resolve the pipeline for this *partial chunk*.
-            return pipelineCallback();
-          }
 
-          // We want to make sure we've received the metadata from the server in order
-          // to properly validate the object's integrity. Depending on the type of upload,
-          // the stream could close before the response is returned.
-          if (!fileWriteStreamMetadataReceived) {
             try {
-              await new Promise((resolve, reject) => {
-                fileWriteStream.once('metadata', resolve);
-                fileWriteStream.once('error', reject);
-              });
+              // Metadata may not be ready if the upload is a partial upload,
+              // nothing to validate yet.
+              const metadataNotReady =
+                options.isPartialUpload && !this.metadata;
+
+              if (hashCalculatingStream && !metadataNotReady) {
+                await this.#validateIntegrity(hashCalculatingStream, {
+                  crc32c,
+                  md5,
+                });
+              }
+
+              pipelineCallback();
             } catch (e) {
-              return pipelineCallback(e as Error);
+              pipelineCallback(e as Error);
             }
           }
-
-          // Emit the local CRC32C value for future validation, if validation is enabled.
-          if (hashCalculatingStream?.crc32c) {
-            writeStream.emit('crc32c', hashCalculatingStream.crc32c);
-          }
-
-          try {
-            // Metadata may not be ready if the upload is a partial upload,
-            // nothing to validate yet.
-            const metadataNotReady = options.isPartialUpload && !this.metadata;
-
-            if (hashCalculatingStream && !metadataNotReady) {
-              await this.#validateIntegrity(hashCalculatingStream, {
-                crc32c,
-                md5,
-              });
-            }
-
-            pipelineCallback();
-          } catch (e) {
-            pipelineCallback(e as Error);
-          }
-        }
-      );
+        );
+      } catch (err) {
+        emitStream.removeListener('error', noop);
+        emitStream.destroy(err as Error);
+        fileWriteStream.destroy(err as Error);
+        pipelineCallback(err as Error);
+      }
     });
 
     return writeStream;
