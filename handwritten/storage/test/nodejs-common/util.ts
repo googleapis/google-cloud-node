@@ -16,8 +16,9 @@
 
 import assert from 'assert';
 import {describe, it} from 'mocha';
-import {util} from '../../src/nodejs-common/util.js';
+import {decorateHeaders, util} from '../../src/nodejs-common/util.js';
 import {GaxiosError, GaxiosOptionsPrepared} from 'gaxios';
+import {getModuleFormat} from '../../src/util.js';
 
 describe('common/util', () => {
   describe('shouldRetryRequest', () => {
@@ -161,6 +162,175 @@ describe('common/util', () => {
       );
       assert.strictEqual(opts, optionsOrCallback);
       assert.strictEqual(cb, callback);
+    });
+  });
+
+  describe('decorateHeaders', () => {
+    const X_GOOG_API_HEADER_REGEX =
+      /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/;
+
+    it('should return default headers when no headers are provided', () => {
+      const result = decorateHeaders();
+      assert(result.headers);
+      assert.ok(result.idempotencyToken);
+      assert.strictEqual(
+        result.headers['x-goog-gcs-idempotency-token'],
+        result.idempotencyToken,
+      );
+      assert.ok(result.headers['User-Agent']);
+      const match = X_GOOG_API_HEADER_REGEX.exec(
+        result.headers['x-goog-api-client'],
+      );
+      assert.ok(match);
+      assert.strictEqual(
+        match.groups!.gcclInvocationId,
+        result.idempotencyToken,
+      );
+    });
+
+    it('should preserve custom headers passed in', () => {
+      const result = decorateHeaders({
+        'X-Custom-Header': 'custom-value',
+      });
+      assert.strictEqual(result.headers['X-Custom-Header'], 'custom-value');
+    });
+
+    it('should not mutate the input headers object', () => {
+      const inputHeaders = {
+        'X-Goog-Gcs-Idempotency-Token': '',
+        'X-Keep-Header': 'stay',
+      };
+      const result = decorateHeaders(inputHeaders);
+      assert.strictEqual(inputHeaders['X-Goog-Gcs-Idempotency-Token'], '');
+      assert.strictEqual(inputHeaders['X-Keep-Header'], 'stay');
+      assert.strictEqual(
+        result.headers['X-Goog-Gcs-Idempotency-Token'],
+        undefined,
+      );
+      assert.strictEqual(
+        result.headers['x-goog-gcs-idempotency-token'],
+        result.idempotencyToken,
+      );
+    });
+
+    it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id', () => {
+      const customToken = 'Custom-Token-With-W-456';
+      const result = decorateHeaders({
+        'X-Goog-Gcs-Idempotency-Token': customToken,
+      });
+      assert.strictEqual(result.idempotencyToken, customToken);
+      assert.strictEqual(
+        result.headers['X-Goog-Gcs-Idempotency-Token'],
+        customToken,
+      );
+      assert.strictEqual(
+        result.headers['x-goog-gcs-idempotency-token'],
+        undefined,
+      );
+      const match = X_GOOG_API_HEADER_REGEX.exec(
+        result.headers['x-goog-api-client'],
+      );
+      assert.ok(match);
+      assert.strictEqual(match.groups!.gcclInvocationId, customToken);
+    });
+
+    it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID', () => {
+      const result = decorateHeaders({
+        'X-Goog-Gcs-Idempotency-Token': '',
+      });
+      assert.ok(result.idempotencyToken);
+      assert.strictEqual(
+        result.headers['X-Goog-Gcs-Idempotency-Token'],
+        undefined,
+      );
+      assert.strictEqual(
+        result.headers['x-goog-gcs-idempotency-token'],
+        result.idempotencyToken,
+      );
+      const match = X_GOOG_API_HEADER_REGEX.exec(
+        result.headers['x-goog-api-client'],
+      );
+      assert.ok(match);
+      assert.strictEqual(
+        match.groups!.gcclInvocationId,
+        result.idempotencyToken,
+      );
+    });
+
+    it('should ignore whitespace-only user-provided idempotency tokens and fallback to generating a UUID', () => {
+      const result = decorateHeaders({
+        'X-Goog-Gcs-Idempotency-Token': '   ',
+      });
+      assert.ok(result.idempotencyToken);
+      assert.strictEqual(
+        result.headers['X-Goog-Gcs-Idempotency-Token'],
+        undefined,
+      );
+      assert.strictEqual(
+        result.headers['x-goog-gcs-idempotency-token'],
+        result.idempotencyToken,
+      );
+      const match = X_GOOG_API_HEADER_REGEX.exec(
+        result.headers['x-goog-api-client'],
+      );
+      assert.ok(match);
+      assert.strictEqual(
+        match.groups!.gcclInvocationId,
+        result.idempotencyToken,
+      );
+    });
+
+    it('should use provided fallback idempotencyToken when user token is not provided or invalid', () => {
+      const fallback = 'my-fallback-uuid-123';
+      const result = decorateHeaders(
+        {
+          'X-Goog-Gcs-Idempotency-Token': '',
+        },
+        {idempotencyToken: fallback},
+      );
+      assert.strictEqual(result.idempotencyToken, fallback);
+      assert.strictEqual(
+        result.headers['X-Goog-Gcs-Idempotency-Token'],
+        undefined,
+      );
+      assert.strictEqual(
+        result.headers['x-goog-gcs-idempotency-token'],
+        fallback,
+      );
+      const match = X_GOOG_API_HEADER_REGEX.exec(
+        result.headers['x-goog-api-client'],
+      );
+      assert.ok(match);
+      assert.strictEqual(match.groups!.gcclInvocationId, fallback);
+    });
+
+    it('should append providedUserAgent if provided in options', () => {
+      const result = decorateHeaders(undefined, {
+        providedUserAgent: 'custom-agent/1.0.0',
+      });
+      assert.ok(result.headers['User-Agent'].startsWith('custom-agent/1.0.0 '));
+    });
+
+    it('should append gcclGcsCmd if provided in options', () => {
+      const result = decorateHeaders(undefined, {
+        gcclGcsCmd: 'Storage.createBucket',
+      });
+      assert.ok(
+        result.headers['x-goog-api-client'].endsWith(
+          ' gccl-gcs-cmd/Storage.createBucket',
+        ),
+      );
+    });
+
+    it('should use custom packageJson if provided in options', () => {
+      const result = decorateHeaders(undefined, {
+        packageJson: {name: 'custom-pkg', version: '7.7.7'},
+      });
+      assert.ok(
+        result.headers['x-goog-api-client'].includes(
+          `gccl/7.7.7-${getModuleFormat()}`,
+        ),
+      );
     });
   });
 });

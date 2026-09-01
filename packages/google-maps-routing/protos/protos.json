@@ -1961,6 +1961,11 @@
                     },
                     "PolylineDetails": {
                       "fields": {
+                        "tunnelInfo": {
+                          "rule": "repeated",
+                          "type": "TunnelInfo",
+                          "id": 8
+                        },
                         "flyoverInfo": {
                           "rule": "repeated",
                           "type": "FlyoverInfo",
@@ -1970,6 +1975,16 @@
                           "rule": "repeated",
                           "type": "NarrowRoadInfo",
                           "id": 13
+                        },
+                        "bridgeInfo": {
+                          "rule": "repeated",
+                          "type": "BridgeInfo",
+                          "id": 14
+                        },
+                        "skywayInfo": {
+                          "rule": "repeated",
+                          "type": "SkywayInfo",
+                          "id": 15
                         }
                       },
                       "nested": {
@@ -2008,6 +2023,42 @@
                             "ROAD_FEATURE_STATE_UNSPECIFIED": 0,
                             "EXISTS": 1,
                             "DOES_NOT_EXIST": 2
+                          }
+                        },
+                        "TunnelInfo": {
+                          "fields": {
+                            "tunnelPresence": {
+                              "type": "RoadFeatureState",
+                              "id": 1
+                            },
+                            "polylinePointIndex": {
+                              "type": "PolylinePointIndex",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "BridgeInfo": {
+                          "fields": {
+                            "bridgePresence": {
+                              "type": "RoadFeatureState",
+                              "id": 1
+                            },
+                            "polylinePointIndex": {
+                              "type": "PolylinePointIndex",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SkywayInfo": {
+                          "fields": {
+                            "skywayPresence": {
+                              "type": "RoadFeatureState",
+                              "id": 1
+                            },
+                            "polylinePointIndex": {
+                              "type": "PolylinePointIndex",
+                              "id": 2
+                            }
                           }
                         },
                         "FlyoverInfo": {
@@ -2624,6 +2675,13 @@
                           "rule": "repeated",
                           "type": "TollPass",
                           "id": 6
+                        },
+                        "avoidTunnels": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2693,6 +2751,7 @@
                         "US_ME_EZPASSME": 35,
                         "US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD": 36,
                         "US_MI_BCPASS": 94,
+                        "US_MI_BREAKAWAY": 101,
                         "US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG": 37,
                         "US_MI_IQ_PROX_CARD": 38,
                         "US_MI_IQ_TAG": 95,
@@ -2947,7 +3006,10 @@
                             "TRAFFIC_ON_POLYLINE": 3,
                             "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS": 4,
                             "FLYOVER_INFO_ON_POLYLINE": 7,
-                            "NARROW_ROAD_INFO_ON_POLYLINE": 8
+                            "NARROW_ROAD_INFO_ON_POLYLINE": 8,
+                            "TUNNEL_INFO_ON_POLYLINE": 9,
+                            "BRIDGE_INFO_ON_POLYLINE": 10,
+                            "SKYWAY_INFO_ON_POLYLINE": 11
                           }
                         }
                       }
