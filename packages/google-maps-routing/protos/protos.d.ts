@@ -7268,11 +7268,20 @@ export namespace google {
                 /** Properties of a PolylineDetails. */
                 interface IPolylineDetails {
 
+                    /** PolylineDetails tunnelInfo */
+                    tunnelInfo?: (google.maps.routing.v2.PolylineDetails.ITunnelInfo[]|null);
+
                     /** PolylineDetails flyoverInfo */
                     flyoverInfo?: (google.maps.routing.v2.PolylineDetails.IFlyoverInfo[]|null);
 
                     /** PolylineDetails narrowRoadInfo */
                     narrowRoadInfo?: (google.maps.routing.v2.PolylineDetails.INarrowRoadInfo[]|null);
+
+                    /** PolylineDetails bridgeInfo */
+                    bridgeInfo?: (google.maps.routing.v2.PolylineDetails.IBridgeInfo[]|null);
+
+                    /** PolylineDetails skywayInfo */
+                    skywayInfo?: (google.maps.routing.v2.PolylineDetails.ISkywayInfo[]|null);
                 }
 
                 /** Represents a PolylineDetails. */
@@ -7284,11 +7293,20 @@ export namespace google {
                      */
                     constructor(properties?: google.maps.routing.v2.IPolylineDetails);
 
+                    /** PolylineDetails tunnelInfo. */
+                    public tunnelInfo: google.maps.routing.v2.PolylineDetails.ITunnelInfo[];
+
                     /** PolylineDetails flyoverInfo. */
                     public flyoverInfo: google.maps.routing.v2.PolylineDetails.IFlyoverInfo[];
 
                     /** PolylineDetails narrowRoadInfo. */
                     public narrowRoadInfo: google.maps.routing.v2.PolylineDetails.INarrowRoadInfo[];
+
+                    /** PolylineDetails bridgeInfo. */
+                    public bridgeInfo: google.maps.routing.v2.PolylineDetails.IBridgeInfo[];
+
+                    /** PolylineDetails skywayInfo. */
+                    public skywayInfo: google.maps.routing.v2.PolylineDetails.ISkywayInfo[];
 
                     /**
                      * Creates a new PolylineDetails instance using the specified properties.
@@ -7478,6 +7496,315 @@ export namespace google {
                         ROAD_FEATURE_STATE_UNSPECIFIED = 0,
                         EXISTS = 1,
                         DOES_NOT_EXIST = 2
+                    }
+
+                    /** Properties of a TunnelInfo. */
+                    interface ITunnelInfo {
+
+                        /** TunnelInfo tunnelPresence */
+                        tunnelPresence?: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState|null);
+
+                        /** TunnelInfo polylinePointIndex */
+                        polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+                    }
+
+                    /** Represents a TunnelInfo. */
+                    class TunnelInfo implements ITunnelInfo {
+
+                        /**
+                         * Constructs a new TunnelInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routing.v2.PolylineDetails.ITunnelInfo);
+
+                        /** TunnelInfo tunnelPresence. */
+                        public tunnelPresence: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState);
+
+                        /** TunnelInfo polylinePointIndex. */
+                        public polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+
+                        /**
+                         * Creates a new TunnelInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TunnelInfo instance
+                         */
+                        public static create(properties?: google.maps.routing.v2.PolylineDetails.ITunnelInfo): google.maps.routing.v2.PolylineDetails.TunnelInfo;
+
+                        /**
+                         * Encodes the specified TunnelInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.TunnelInfo.verify|verify} messages.
+                         * @param message TunnelInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routing.v2.PolylineDetails.ITunnelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TunnelInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.TunnelInfo.verify|verify} messages.
+                         * @param message TunnelInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routing.v2.PolylineDetails.ITunnelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TunnelInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TunnelInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails.TunnelInfo;
+
+                        /**
+                         * Decodes a TunnelInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TunnelInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails.TunnelInfo;
+
+                        /**
+                         * Verifies a TunnelInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TunnelInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TunnelInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails.TunnelInfo;
+
+                        /**
+                         * Creates a plain object from a TunnelInfo message. Also converts values to other types if specified.
+                         * @param message TunnelInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routing.v2.PolylineDetails.TunnelInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TunnelInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TunnelInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BridgeInfo. */
+                    interface IBridgeInfo {
+
+                        /** BridgeInfo bridgePresence */
+                        bridgePresence?: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState|null);
+
+                        /** BridgeInfo polylinePointIndex */
+                        polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+                    }
+
+                    /** Represents a BridgeInfo. */
+                    class BridgeInfo implements IBridgeInfo {
+
+                        /**
+                         * Constructs a new BridgeInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routing.v2.PolylineDetails.IBridgeInfo);
+
+                        /** BridgeInfo bridgePresence. */
+                        public bridgePresence: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState);
+
+                        /** BridgeInfo polylinePointIndex. */
+                        public polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+
+                        /**
+                         * Creates a new BridgeInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BridgeInfo instance
+                         */
+                        public static create(properties?: google.maps.routing.v2.PolylineDetails.IBridgeInfo): google.maps.routing.v2.PolylineDetails.BridgeInfo;
+
+                        /**
+                         * Encodes the specified BridgeInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.BridgeInfo.verify|verify} messages.
+                         * @param message BridgeInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routing.v2.PolylineDetails.IBridgeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BridgeInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.BridgeInfo.verify|verify} messages.
+                         * @param message BridgeInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routing.v2.PolylineDetails.IBridgeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BridgeInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BridgeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails.BridgeInfo;
+
+                        /**
+                         * Decodes a BridgeInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BridgeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails.BridgeInfo;
+
+                        /**
+                         * Verifies a BridgeInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BridgeInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BridgeInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails.BridgeInfo;
+
+                        /**
+                         * Creates a plain object from a BridgeInfo message. Also converts values to other types if specified.
+                         * @param message BridgeInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routing.v2.PolylineDetails.BridgeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BridgeInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BridgeInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SkywayInfo. */
+                    interface ISkywayInfo {
+
+                        /** SkywayInfo skywayPresence */
+                        skywayPresence?: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState|null);
+
+                        /** SkywayInfo polylinePointIndex */
+                        polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+                    }
+
+                    /** Represents a SkywayInfo. */
+                    class SkywayInfo implements ISkywayInfo {
+
+                        /**
+                         * Constructs a new SkywayInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routing.v2.PolylineDetails.ISkywayInfo);
+
+                        /** SkywayInfo skywayPresence. */
+                        public skywayPresence: (google.maps.routing.v2.PolylineDetails.RoadFeatureState|keyof typeof google.maps.routing.v2.PolylineDetails.RoadFeatureState);
+
+                        /** SkywayInfo polylinePointIndex. */
+                        public polylinePointIndex?: (google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null);
+
+                        /**
+                         * Creates a new SkywayInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SkywayInfo instance
+                         */
+                        public static create(properties?: google.maps.routing.v2.PolylineDetails.ISkywayInfo): google.maps.routing.v2.PolylineDetails.SkywayInfo;
+
+                        /**
+                         * Encodes the specified SkywayInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.SkywayInfo.verify|verify} messages.
+                         * @param message SkywayInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routing.v2.PolylineDetails.ISkywayInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SkywayInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.SkywayInfo.verify|verify} messages.
+                         * @param message SkywayInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routing.v2.PolylineDetails.ISkywayInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SkywayInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SkywayInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.PolylineDetails.SkywayInfo;
+
+                        /**
+                         * Decodes a SkywayInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SkywayInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.PolylineDetails.SkywayInfo;
+
+                        /**
+                         * Verifies a SkywayInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SkywayInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SkywayInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.PolylineDetails.SkywayInfo;
+
+                        /**
+                         * Creates a plain object from a SkywayInfo message. Also converts values to other types if specified.
+                         * @param message SkywayInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routing.v2.PolylineDetails.SkywayInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SkywayInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SkywayInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FlyoverInfo. */
@@ -10141,6 +10468,9 @@ export namespace google {
 
                     /** RouteModifiers tollPasses */
                     tollPasses?: (google.maps.routing.v2.TollPass[]|null);
+
+                    /** RouteModifiers avoidTunnels */
+                    avoidTunnels?: (boolean|null);
                 }
 
                 /** Represents a RouteModifiers. */
@@ -10169,6 +10499,9 @@ export namespace google {
 
                     /** RouteModifiers tollPasses. */
                     public tollPasses: google.maps.routing.v2.TollPass[];
+
+                    /** RouteModifiers avoidTunnels. */
+                    public avoidTunnels: boolean;
 
                     /**
                      * Creates a new RouteModifiers instance using the specified properties.
@@ -10309,6 +10642,7 @@ export namespace google {
                     US_ME_EZPASSME = 35,
                     US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD = 36,
                     US_MI_BCPASS = 94,
+                    US_MI_BREAKAWAY = 101,
                     US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG = 37,
                     US_MI_IQ_PROX_CARD = 38,
                     US_MI_IQ_TAG = 95,
@@ -10745,7 +11079,10 @@ export namespace google {
                         TRAFFIC_ON_POLYLINE = 3,
                         HTML_FORMATTED_NAVIGATION_INSTRUCTIONS = 4,
                         FLYOVER_INFO_ON_POLYLINE = 7,
-                        NARROW_ROAD_INFO_ON_POLYLINE = 8
+                        NARROW_ROAD_INFO_ON_POLYLINE = 8,
+                        TUNNEL_INFO_ON_POLYLINE = 9,
+                        BRIDGE_INFO_ON_POLYLINE = 10,
+                        SKYWAY_INFO_ON_POLYLINE = 11
                     }
                 }
 

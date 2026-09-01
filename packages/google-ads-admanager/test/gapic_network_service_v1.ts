@@ -462,6 +462,368 @@ describe('v1.NetworkServiceClient', () => {
     });
   });
 
+  describe('updateNetwork', () => {
+    it('invokes updateNetwork without error', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateNetworkRequest(),
+      );
+      request.network ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateNetworkRequest',
+        ['network', 'name'],
+      );
+      request.network.name = defaultValue1;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Network(),
+      );
+      client.innerApiCalls.updateNetwork = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateNetwork(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateNetwork as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetwork as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNetwork without error using callback', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateNetworkRequest(),
+      );
+      request.network ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateNetworkRequest',
+        ['network', 'name'],
+      );
+      request.network.name = defaultValue1;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Network(),
+      );
+      client.innerApiCalls.updateNetwork =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateNetwork(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.INetwork | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateNetwork as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetwork as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNetwork with error', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateNetworkRequest(),
+      );
+      request.network ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateNetworkRequest',
+        ['network', 'name'],
+      );
+      request.network.name = defaultValue1;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateNetwork = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateNetwork(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateNetwork as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetwork as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNetwork with closed client', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateNetworkRequest(),
+      );
+      request.network ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateNetworkRequest',
+        ['network', 'name'],
+      );
+      request.network.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateNetwork(request), expectedError);
+    });
+  });
+
+  describe('provisionTestNetwork', () => {
+    it('invokes provisionTestNetwork without error', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.ProvisionTestNetworkRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Network(),
+      );
+      client.innerApiCalls.provisionTestNetwork =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.provisionTestNetwork(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes provisionTestNetwork without error using callback', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.ProvisionTestNetworkRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.Network(),
+      );
+      client.innerApiCalls.provisionTestNetwork =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.provisionTestNetwork(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.INetwork | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes provisionTestNetwork with error', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.ProvisionTestNetworkRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.provisionTestNetwork = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.provisionTestNetwork(request), expectedError);
+    });
+
+    it('invokes provisionTestNetwork with closed client', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.ProvisionTestNetworkRequest(),
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.provisionTestNetwork(request), expectedError);
+    });
+  });
+
+  describe('getDefaultThirdPartyDataDeclaration', () => {
+    it('invokes getDefaultThirdPartyDataDeclaration without error', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.DefaultThirdPartyDataDeclaration(),
+      );
+      client.innerApiCalls.getDefaultThirdPartyDataDeclaration =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.getDefaultThirdPartyDataDeclaration(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDefaultThirdPartyDataDeclaration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDefaultThirdPartyDataDeclaration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDefaultThirdPartyDataDeclaration without error using callback', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.DefaultThirdPartyDataDeclaration(),
+      );
+      client.innerApiCalls.getDefaultThirdPartyDataDeclaration =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDefaultThirdPartyDataDeclaration(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IDefaultThirdPartyDataDeclaration | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDefaultThirdPartyDataDeclaration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDefaultThirdPartyDataDeclaration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDefaultThirdPartyDataDeclaration with error', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDefaultThirdPartyDataDeclaration = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getDefaultThirdPartyDataDeclaration(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getDefaultThirdPartyDataDeclaration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDefaultThirdPartyDataDeclaration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDefaultThirdPartyDataDeclaration with closed client', async () => {
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getDefaultThirdPartyDataDeclaration(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listNetworks', () => {
     it('invokes listNetworks without error', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
@@ -2198,6 +2560,52 @@ describe('v1.NetworkServiceClient', () => {
       });
     });
 
+    describe('defaultThirdPartyDataDeclaration', async () => {
+      const fakePath = '/rendered/path/defaultThirdPartyDataDeclaration';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+      };
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('defaultThirdPartyDataDeclarationPath', () => {
+        const result =
+          client.defaultThirdPartyDataDeclarationPath('networkCodeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDefaultThirdPartyDataDeclarationName', () => {
+        const result =
+          client.matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('deviceCapability', async () => {
       const fakePath = '/rendered/path/deviceCapability';
       const expectedParameters = {
@@ -2906,6 +3314,58 @@ describe('v1.NetworkServiceClient', () => {
             client.pathTemplates.mobileDeviceSubmodelPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeStyle', async () => {
+      const fakePath = '/rendered/path/nativeStyle';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        native_style: 'nativeStyleValue',
+      };
+      const client = new networkserviceModule.v1.NetworkServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.nativeStylePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeStylePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeStylePath', () => {
+        const result = client.nativeStylePath(
+          'networkCodeValue',
+          'nativeStyleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromNativeStyleName', () => {
+        const result = client.matchNetworkCodeFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNativeStyleFromNativeStyleName', () => {
+        const result = client.matchNativeStyleFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'nativeStyleValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
