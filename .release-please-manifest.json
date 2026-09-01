@@ -63,6 +63,7 @@
   "packages/google-cloud-apiregistry": "0.3.0",
   "packages/google-cloud-apphub": "0.7.0",
   "packages/google-cloud-appoptimize": "0.3.0",
+  "packages/google-cloud-apptopology": "0.0.0",
   "packages/google-cloud-asset": "7.0.1",
   "packages/google-cloud-assuredworkloads": "6.0.0",
   "packages/google-cloud-auditmanager": "0.3.0",
