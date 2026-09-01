@@ -566,7 +566,7 @@ describe('ServiceObject', () => {
   });
 
   describe('setMetadata', () => {
-    it('should make the correct request', async done => {
+    it('should make the correct request', done => {
       const metadata = {metadataProperty: true};
       serviceObject.storageTransport.makeRequest = sandbox
         .stub()
@@ -578,13 +578,13 @@ describe('ServiceObject', () => {
           const body = JSON.parse(reqOpts.body);
           assert.strictEqual(this, serviceObject.storageTransport);
           assert.strictEqual(reqOpts.method, 'PATCH');
-          assert.strictEqual(reqOpts.url, 'base-url/undefined');
+          assert.strictEqual(reqOpts.url, 'base-url/id');
           assert.deepStrictEqual(body, metadata);
           done();
           callback!(null);
           return Promise.resolve();
         });
-      await serviceObject.setMetadata(metadata, () => {});
+      void serviceObject.setMetadata(metadata, () => {});
     });
 
     it('should accept options', done => {

@@ -812,7 +812,7 @@ export class Upload extends Writable {
     }
 
     if (metadata.contentType) {
-      headers['X-Upload-Content-Length'] = metadata.contentType;
+      headers['X-Upload-Content-Type'] = metadata.contentType;
       delete metadata.contentType;
     }
 

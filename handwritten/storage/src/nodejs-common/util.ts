@@ -295,7 +295,21 @@ export function decorateHeaders(
   headers?: Headers,
   options?: DecorateHeadersOptions,
 ): DecorateHeadersResult {
-  const sanitizedHeaders: Headers = {...headers};
+  const sanitizedHeaders: Headers = {};
+  if (headers) {
+    if (
+      typeof (headers as Headers & {entries?: () => Iterable<[string, string]>})
+        .entries === 'function'
+    ) {
+      for (const [key, value] of (
+        headers as Headers & {entries: () => Iterable<[string, string]>}
+      ).entries()) {
+        sanitizedHeaders[key] = value;
+      }
+    } else {
+      Object.assign(sanitizedHeaders, headers);
+    }
+  }
   const userTokenKey = Object.keys(sanitizedHeaders).find(
     key => key.toLowerCase() === 'x-goog-gcs-idempotency-token',
   );

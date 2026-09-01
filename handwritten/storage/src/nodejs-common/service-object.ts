@@ -492,7 +492,9 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           },
         },
         (err, data, resp) => {
-          this.metadata = data!;
+          if (!err && data) {
+            this.metadata = data;
+          }
           callback(err, data!, resp);
         },
       )
@@ -532,11 +534,11 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
         this.methods.setMetadata) ||
       {};
 
-    let url = `${this.baseUrl}/${this.name}`;
+    let url = `${this.baseUrl}/${this.id}`;
     if (isBucket(this.parent)) {
       // TODO: remove any suppression during follow up PR to improve type safety.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      url = `${this.parent.baseUrl}/${(this.parent as any).name}${url}`;
+      url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
     const body = Object.assign({}, methodConfig.reqOpts?.body, metadata);
@@ -558,8 +560,14 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           },
         },
         (err, data, resp) => {
-          this.metadata = data!;
-          callback(err, this.metadata, resp);
+          if (!err && data) {
+            this.metadata = data;
+          }
+          callback(
+            err,
+            (err ? undefined : this.metadata) as unknown as K,
+            resp,
+          );
         },
       )
       // eslint-disable-next-line promise/no-callback-in-promise

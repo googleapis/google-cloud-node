@@ -230,6 +230,35 @@ describe('storage', function () {
   });
 
   describe('acls', () => {
+    let bucket: Bucket;
+
+    before(async function () {
+      bucket = storage.bucket(generateName());
+      try {
+        await bucket.create({
+          iamConfiguration: {
+            uniformBucketLevelAccess: {
+              enabled: false,
+            },
+          },
+        });
+      } catch (e) {
+        if (
+          (e as Error).message?.includes(
+            'constraints/storage.uniformBucketLevelAccess',
+          )
+        ) {
+          this.skip();
+        }
+        throw e;
+      }
+    });
+
+    after(async () => {
+      if (bucket) {
+        await bucket.delete().catch(() => {});
+      }
+    });
     describe('buckets', () => {
       // Some bucket update operations have a rate limit.
       // Introduce a delay between tests to avoid getting an error.
@@ -356,7 +385,9 @@ describe('storage', function () {
 
       it('should make files private', async () => {
         await Promise.all(
-          ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
+          ['a', 'b', 'c'].map(text =>
+            createFileWithContentPromise(text, bucket),
+          ),
         );
 
         await bucket.makePrivate({includeFiles: true});
@@ -1499,7 +1530,7 @@ describe('storage', function () {
         },
       });
 
-      const rules = [].slice.call(bucket.metadata.lifecycle?.rule);
+      const rules = [].slice.call(bucket.metadata?.lifecycle?.rule);
       assert.deepStrictEqual(rules.pop(), {
         action: {
           type: 'Delete',
@@ -1513,7 +1544,8 @@ describe('storage', function () {
 
     it('should append a new rule', async () => {
       const numExistingRules =
-        (bucket.metadata.lifecycle && bucket.metadata.lifecycle.rule!.length) ||
+        (bucket.metadata?.lifecycle &&
+          bucket.metadata?.lifecycle?.rule?.length) ||
         0;
 
       await bucket.addLifecycleRule({
@@ -1537,7 +1569,7 @@ describe('storage', function () {
       });
       await bucket.getMetadata();
       assert.strictEqual(
-        bucket.metadata.lifecycle!.rule!.length,
+        bucket.metadata?.lifecycle!.rule!.length,
         numExistingRules + 2,
       );
     });
@@ -1553,7 +1585,7 @@ describe('storage', function () {
       });
 
       assert(
-        bucket.metadata.lifecycle!.rule!.some(
+        bucket.metadata?.lifecycle?.rule?.some(
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
@@ -1575,7 +1607,7 @@ describe('storage', function () {
       });
 
       assert(
-        bucket.metadata.lifecycle!.rule!.some(
+        bucket.metadata?.lifecycle?.rule?.some(
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
@@ -1593,7 +1625,7 @@ describe('storage', function () {
           createdBefore: new Date('2018'),
         },
       });
-      const rules = [].slice.call(bucket.metadata.lifecycle?.rule);
+      const rules = [].slice.call(bucket.metadata?.lifecycle?.rule);
       assert.deepStrictEqual(rules.pop(), {
         action: {
           type: 'Delete',
@@ -1618,7 +1650,7 @@ describe('storage', function () {
       });
 
       assert(
-        bucket.metadata.lifecycle!.rule!.some(
+        bucket.metadata?.lifecycle?.rule?.some(
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
@@ -1642,7 +1674,7 @@ describe('storage', function () {
       });
 
       assert(
-        bucket.metadata.lifecycle!.rule!.some(
+        bucket.metadata?.lifecycle?.rule?.some(
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
@@ -1657,7 +1689,7 @@ describe('storage', function () {
         lifecycle: null,
       });
 
-      assert.strictEqual(bucket.metadata.lifecycle, undefined);
+      assert.strictEqual(bucket.metadata?.lifecycle, undefined);
     });
   });
 
@@ -4821,8 +4853,11 @@ describe('storage', function () {
     return fileObject.file.save(fileObject.contents);
   }
 
-  function createFileWithContentPromise(content: string) {
-    return bucket.file(`${generateName()}.txt`).save(content);
+  function createFileWithContentPromise(
+    content: string,
+    bucketInstance: Bucket = bucket,
+  ) {
+    return bucketInstance.file(`${generateName()}.txt`).save(content);
   }
 
   function isNullOrUndefined(envVarName: string) {
