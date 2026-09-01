@@ -32,13 +32,13 @@ describe('headers', () => {
   let storageTransport: StorageTransport;
   let gaxiosResponse: GaxiosResponse;
 
-  before(() => {
+  beforeEach(() => {
     sandbox = sinon.createSandbox();
     storage = new Storage();
     authClient = sandbox.createStubInstance(GoogleAuth);
     gaxiosResponse = {
       config: {} as GaxiosOptionsPrepared,
-      data: {},
+      data: {id: 'foo-bucket', name: 'foo-bucket'},
       status: 200,
       statusText: 'OK',
       headers: [] as unknown as Headers,
@@ -74,23 +74,19 @@ describe('headers', () => {
     sandbox.restore();
   });
 
+  function getHeader(headers: unknown, name: string): string | null {
+    if (!headers) return null;
+    if (typeof (headers as Headers).get === 'function') {
+      return (headers as Headers).get(name);
+    }
+    return (headers as Record<string, string>)[name] || null;
+  }
+
   it('populates x-goog-api-client header (node)', async () => {
     const bucket = storage.bucket('foo-bucket');
+    let capturedHeaders: unknown;
     authClient.request = opts => {
-      let apiClientHeader: string | null = '';
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (typeof (opts.headers as any).get === 'function') {
-        apiClientHeader = (opts.headers as Headers).get('x-goog-api-client');
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        apiClientHeader = (opts.headers as any)['x-goog-api-client'];
-      }
-      assert.ok(
-        /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-          apiClientHeader!,
-        ),
-      );
+      capturedHeaders = opts.headers;
       return Promise.resolve(gaxiosResponse);
     };
 
@@ -99,25 +95,26 @@ describe('headers', () => {
     } catch (err) {
       if (err !== error) throw err;
     }
+    const apiClientHeader = getHeader(capturedHeaders, 'x-goog-api-client');
+    assert.ok(apiClientHeader);
+    const match =
+      /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)(?: gccl-gcs-cmd\/(?<gcclGcsCmd>\S+))?$/.exec(
+        apiClientHeader,
+      );
+    assert.ok(match);
+    const invocationId = match.groups!.gcclInvocationId;
+    const idempotencyToken = getHeader(
+      capturedHeaders,
+      'x-goog-gcs-idempotency-token',
+    );
+    assert.strictEqual(idempotencyToken, invocationId);
   });
 
   it('populates x-goog-api-client header (deno)', async () => {
     const bucket = storage.bucket('foo-bucket');
+    let capturedHeaders: unknown;
     authClient.request = opts => {
-      let apiClientHeader: string | null = '';
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (typeof (opts.headers as any).get === 'function') {
-        apiClientHeader = (opts.headers as Headers).get('x-goog-api-client');
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        apiClientHeader = (opts.headers as any)['x-goog-api-client'];
-      }
-      assert.ok(
-        /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-          apiClientHeader!,
-        ),
-      );
+      capturedHeaders = opts.headers;
       return Promise.resolve(gaxiosResponse);
     };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -132,5 +129,45 @@ describe('headers', () => {
     } catch (err) {
       if (err !== error) throw err;
     }
+    const apiClientHeader = getHeader(capturedHeaders, 'x-goog-api-client');
+    assert.ok(apiClientHeader);
+    const match =
+      /^gl-deno\/0.00.0 gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)(?: gccl-gcs-cmd\/(?<gcclGcsCmd>\S+))?$/.exec(
+        apiClientHeader,
+      );
+    assert.ok(match);
+    const invocationId = match.groups!.gcclInvocationId;
+    const idempotencyToken = getHeader(
+      capturedHeaders,
+      'x-goog-gcs-idempotency-token',
+    );
+    assert.strictEqual(idempotencyToken, invocationId);
+  });
+
+  it('generates unique tokens for different requests', async () => {
+    const capturedTokens: string[] = [];
+    authClient.request = opts => {
+      const token = getHeader(opts.headers, 'x-goog-gcs-idempotency-token');
+      if (token) {
+        capturedTokens.push(token);
+      }
+      return Promise.resolve(gaxiosResponse);
+    };
+    const bucket = storage.bucket('foo-bucket');
+    try {
+      await bucket.create();
+    } catch (err) {
+      if (err !== error) throw err;
+    }
+    try {
+      await bucket.create();
+    } catch (err) {
+      if (err !== error) throw err;
+    }
+    const token1 = capturedTokens[0];
+    const token2 = capturedTokens[1];
+    assert.ok(token1);
+    assert.ok(token2);
+    assert.notStrictEqual(token1, token2);
   });
 });

@@ -21,16 +21,10 @@ import {
   GaxiosResponse,
 } from 'gaxios';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {
-  getModuleFormat,
-  getRuntimeTrackingString,
-  getUserAgentString,
-} from './util.js';
-import {randomUUID} from 'crypto';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
-import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
+import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
 import {RETRYABLE_ERR_FN_DEFAULT, RetryOptions} from './storage.js';
 
 export interface StandardStorageQueryParams {
@@ -284,24 +278,13 @@ export class StorageTransport {
   }
 
   #prepareHeaders(reqOpts: StorageRequestOptions): Record<string, string> {
-    const headersObj = this.#buildRequestHeaders(
-      reqOpts.headers,
-      reqOpts.invocationId,
-    );
-
-    if (reqOpts[GCCL_GCS_CMD_KEY]) {
-      const current = headersObj.get('x-goog-api-client') || '';
-      headersObj.set(
-        'x-goog-api-client',
-        `${current} gccl-gcs-cmd/${reqOpts[GCCL_GCS_CMD_KEY]}`,
-      );
-    }
-
-    const finalHeaders: Record<string, string> = {};
-    headersObj.forEach((v, k) => {
-      finalHeaders[k] = v;
+    const {headers} = decorateHeaders(reqOpts.headers, {
+      idempotencyToken: reqOpts.invocationId,
+      gcclGcsCmd: reqOpts[GCCL_GCS_CMD_KEY],
+      packageJson: this.packageJson,
+      providedUserAgent: this.providedUserAgent,
     });
-    return finalHeaders;
+    return headers;
   }
 
   #isValidUrl(url: string): boolean {
@@ -331,23 +314,4 @@ export class StorageTransport {
     }
     return searchParams.toString();
   };
-
-  #buildRequestHeaders(
-    reqHeaders?: GaxiosOptions['headers'],
-    invocationId?: string,
-  ) {
-    const headers = new Headers(reqHeaders);
-    headers.set('User-Agent', this.#getUserAgentString());
-    const finalInvocationId = invocationId || randomUUID();
-    headers.set(
-      'x-goog-api-client',
-      `${getRuntimeTrackingString()} gccl/${this.packageJson.version}-${getModuleFormat()} gccl-invocation-id/${finalInvocationId}`,
-    );
-    return headers;
-  }
-
-  #getUserAgentString(): string {
-    const base = getUserAgentString();
-    return this.providedUserAgent ? `${this.providedUserAgent} ${base}` : base;
-  }
 }

@@ -293,6 +293,10 @@ export class MobileDeviceSubmodelServiceClient {
       daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
+      defaultThirdPartyDataDeclarationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'networks/{network_code}/defaultThirdPartyDataDeclaration',
+        ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
       ),
@@ -331,6 +335,9 @@ export class MobileDeviceSubmodelServiceClient {
       ),
       mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}',
+      ),
+      nativeStylePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/nativeStyles/{native_style}',
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}',
@@ -2152,6 +2159,35 @@ export class MobileDeviceSubmodelServiceClient {
   }
 
   /**
+   * Return a fully-qualified defaultThirdPartyDataDeclaration resource name string.
+   *
+   * @param {string} network_code
+   * @returns {string} Resource name string.
+   */
+  defaultThirdPartyDataDeclarationPath(networkCode: string) {
+    return this.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render(
+      {
+        network_code: networkCode,
+      },
+    );
+  }
+
+  /**
+   * Parse the network_code from DefaultThirdPartyDataDeclaration resource.
+   *
+   * @param {string} defaultThirdPartyDataDeclarationName
+   *   A fully-qualified path representing DefaultThirdPartyDataDeclaration resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+    defaultThirdPartyDataDeclarationName: string,
+  ) {
+    return this.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match(
+      defaultThirdPartyDataDeclarationName,
+    ).network_code;
+  }
+
+  /**
    * Return a fully-qualified deviceCapability resource name string.
    *
    * @param {string} network_code
@@ -2663,6 +2699,44 @@ export class MobileDeviceSubmodelServiceClient {
     return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(
       mobileDeviceSubmodelName,
     ).mobile_device_submodel;
+  }
+
+  /**
+   * Return a fully-qualified nativeStyle resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} native_style
+   * @returns {string} Resource name string.
+   */
+  nativeStylePath(networkCode: string, nativeStyle: string) {
+    return this.pathTemplates.nativeStylePathTemplate.render({
+      network_code: networkCode,
+      native_style: nativeStyle,
+    });
+  }
+
+  /**
+   * Parse the network_code from NativeStyle resource.
+   *
+   * @param {string} nativeStyleName
+   *   A fully-qualified path representing NativeStyle resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromNativeStyleName(nativeStyleName: string) {
+    return this.pathTemplates.nativeStylePathTemplate.match(nativeStyleName)
+      .network_code;
+  }
+
+  /**
+   * Parse the native_style from NativeStyle resource.
+   *
+   * @param {string} nativeStyleName
+   *   A fully-qualified path representing NativeStyle resource.
+   * @returns {string} A string representing the native_style.
+   */
+  matchNativeStyleFromNativeStyleName(nativeStyleName: string) {
+    return this.pathTemplates.nativeStylePathTemplate.match(nativeStyleName)
+      .native_style;
   }
 
   /**

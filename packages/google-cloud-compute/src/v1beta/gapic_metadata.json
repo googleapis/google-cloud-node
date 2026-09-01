@@ -4789,6 +4789,44 @@
         }
       }
     },
+    "ManagedRulesets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ManagedRulesetsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ManagedRulesetsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkAttachments": {
       "clients": {
         "grpc": {

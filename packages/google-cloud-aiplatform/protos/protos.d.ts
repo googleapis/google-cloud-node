@@ -17105,6 +17105,9 @@ export namespace google {
                         /** ParallelAiSearch apiKey */
                         apiKey?: (string|null);
 
+                        /** ParallelAiSearch enableZeroDataRetention */
+                        enableZeroDataRetention?: (boolean|null);
+
                         /** ParallelAiSearch customConfigs */
                         customConfigs?: (google.protobuf.IStruct|null);
                     }
@@ -17120,6 +17123,9 @@ export namespace google {
 
                         /** ParallelAiSearch apiKey. */
                         public apiKey: string;
+
+                        /** ParallelAiSearch enableZeroDataRetention. */
+                        public enableZeroDataRetention: boolean;
 
                         /** ParallelAiSearch customConfigs. */
                         public customConfigs?: (google.protobuf.IStruct|null);
@@ -170423,6 +170429,9 @@ export namespace google {
                         /** ParallelAiSearch apiKey */
                         apiKey?: (string|null);
 
+                        /** ParallelAiSearch enableZeroDataRetention */
+                        enableZeroDataRetention?: (boolean|null);
+
                         /** ParallelAiSearch customConfigs */
                         customConfigs?: (google.protobuf.IStruct|null);
                     }
@@ -170438,6 +170447,9 @@ export namespace google {
 
                         /** ParallelAiSearch apiKey. */
                         public apiKey: string;
+
+                        /** ParallelAiSearch enableZeroDataRetention. */
+                        public enableZeroDataRetention: boolean;
 
                         /** ParallelAiSearch customConfigs. */
                         public customConfigs?: (google.protobuf.IStruct|null);
