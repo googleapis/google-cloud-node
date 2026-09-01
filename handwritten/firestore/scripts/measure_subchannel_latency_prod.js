@@ -1,3 +1,47 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Benchmark measuring client-side P99 latency against a live production
+ * Firestore backend to demonstrate the effect of 'grpc.use_local_subchannel_pool'.
+ *
+ * BACKGROUND:
+ * Google Cloud gRPC endpoints enforce a limit of 100 concurrent HTTP/2 streams per TCP
+ * connection (via the standard HTTP/2 SETTINGS_MAX_CONCURRENT_STREAMS frame).
+ *
+ * In @google-cloud/firestore, ClientPool dynamically scales GAPIC clients when active
+ * operations on a client reach 100 (MAX_CONCURRENT_REQUESTS_PER_CLIENT = 100).
+ *
+ * However, by default ('grpc.use_local_subchannel_pool: 0'), @grpc/grpc-js shares a single
+ * global SubchannelPool across all client channels. As a result, all pooled GAPIC clients
+ * are multiplexed onto the same single underlying TCP connection. When concurrent requests
+ * exceed 100, requests queue up on the client side waiting for previous streams to half-close,
+ * causing severe tail (P99) latency degradation.
+ *
+ * Setting 'grpc.use_local_subchannel_pool: 1' isolates subchannel pools per client channel,
+ * ensuring each pooled GAPIC client establishes its own independent TCP connection. This
+ * enables true parallel connection pooling, eliminates client-side stream queuing, and
+ * prevents P99 tail latency spikes.
+ *
+ * USAGE:
+ *   node scripts/measure_subchannel_latency_prod.js [options]
+ *   node scripts/measure_subchannel_latency_prod.js --concurrency 500
+ *   node scripts/measure_subchannel_latency_prod.js --project <PROJECT_ID> --concurrency 500
+ *
+ * Outputs a vertical GitHub Markdown table suitable for pasting into PR descriptions.
+ */
+
 const {performance} = require('perf_hooks');
 const {Firestore} = require('../build/src');
 
