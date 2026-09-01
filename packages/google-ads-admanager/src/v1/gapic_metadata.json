@@ -537,6 +537,31 @@
                 "getAudienceSegment"
               ]
             },
+            "BatchActivateAudienceSegments": {
+              "methods": [
+                "batchActivateAudienceSegments"
+              ]
+            },
+            "BatchDeactivateAudienceSegments": {
+              "methods": [
+                "batchDeactivateAudienceSegments"
+              ]
+            },
+            "BatchApproveAudienceSegments": {
+              "methods": [
+                "batchApproveAudienceSegments"
+              ]
+            },
+            "BatchRejectAudienceSegments": {
+              "methods": [
+                "batchRejectAudienceSegments"
+              ]
+            },
+            "BatchPopulateAudienceSegments": {
+              "methods": [
+                "batchPopulateAudienceSegments"
+              ]
+            },
             "ListAudienceSegments": {
               "methods": [
                 "listAudienceSegments",
@@ -552,6 +577,31 @@
             "GetAudienceSegment": {
               "methods": [
                 "getAudienceSegment"
+              ]
+            },
+            "BatchActivateAudienceSegments": {
+              "methods": [
+                "batchActivateAudienceSegments"
+              ]
+            },
+            "BatchDeactivateAudienceSegments": {
+              "methods": [
+                "batchDeactivateAudienceSegments"
+              ]
+            },
+            "BatchApproveAudienceSegments": {
+              "methods": [
+                "batchApproveAudienceSegments"
+              ]
+            },
+            "BatchRejectAudienceSegments": {
+              "methods": [
+                "batchRejectAudienceSegments"
+              ]
+            },
+            "BatchPopulateAudienceSegments": {
+              "methods": [
+                "batchPopulateAudienceSegments"
               ]
             },
             "ListAudienceSegments": {
@@ -807,6 +857,26 @@
                 "batchUpdateChildPublishers"
               ]
             },
+            "BatchResendChildPublisherInvitationEmails": {
+              "methods": [
+                "batchResendChildPublisherInvitationEmails"
+              ]
+            },
+            "BatchRenegotiateChildPublisherAgreements": {
+              "methods": [
+                "batchRenegotiateChildPublisherAgreements"
+              ]
+            },
+            "BatchRejectChildPublishers": {
+              "methods": [
+                "batchRejectChildPublishers"
+              ]
+            },
+            "BatchWithdrawChildPublishers": {
+              "methods": [
+                "batchWithdrawChildPublishers"
+              ]
+            },
             "ListChildPublishers": {
               "methods": [
                 "listChildPublishers",
@@ -842,6 +912,26 @@
             "BatchUpdateChildPublishers": {
               "methods": [
                 "batchUpdateChildPublishers"
+              ]
+            },
+            "BatchResendChildPublisherInvitationEmails": {
+              "methods": [
+                "batchResendChildPublisherInvitationEmails"
+              ]
+            },
+            "BatchRenegotiateChildPublisherAgreements": {
+              "methods": [
+                "batchRenegotiateChildPublisherAgreements"
+              ]
+            },
+            "BatchRejectChildPublishers": {
+              "methods": [
+                "batchRejectChildPublishers"
+              ]
+            },
+            "BatchWithdrawChildPublishers": {
+              "methods": [
+                "batchWithdrawChildPublishers"
               ]
             },
             "ListChildPublishers": {
@@ -2619,6 +2709,94 @@
         }
       }
     },
+    "NativeStyleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NativeStyleServiceClient",
+          "rpcs": {
+            "GetNativeStyle": {
+              "methods": [
+                "getNativeStyle"
+              ]
+            },
+            "BatchCreateNativeStyles": {
+              "methods": [
+                "batchCreateNativeStyles"
+              ]
+            },
+            "BatchUpdateNativeStyles": {
+              "methods": [
+                "batchUpdateNativeStyles"
+              ]
+            },
+            "BatchActivateNativeStyles": {
+              "methods": [
+                "batchActivateNativeStyles"
+              ]
+            },
+            "BatchDeactivateNativeStyles": {
+              "methods": [
+                "batchDeactivateNativeStyles"
+              ]
+            },
+            "BatchArchiveNativeStyles": {
+              "methods": [
+                "batchArchiveNativeStyles"
+              ]
+            },
+            "ListNativeStyles": {
+              "methods": [
+                "listNativeStyles",
+                "listNativeStylesStream",
+                "listNativeStylesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NativeStyleServiceClient",
+          "rpcs": {
+            "GetNativeStyle": {
+              "methods": [
+                "getNativeStyle"
+              ]
+            },
+            "BatchCreateNativeStyles": {
+              "methods": [
+                "batchCreateNativeStyles"
+              ]
+            },
+            "BatchUpdateNativeStyles": {
+              "methods": [
+                "batchUpdateNativeStyles"
+              ]
+            },
+            "BatchActivateNativeStyles": {
+              "methods": [
+                "batchActivateNativeStyles"
+              ]
+            },
+            "BatchDeactivateNativeStyles": {
+              "methods": [
+                "batchDeactivateNativeStyles"
+              ]
+            },
+            "BatchArchiveNativeStyles": {
+              "methods": [
+                "batchArchiveNativeStyles"
+              ]
+            },
+            "ListNativeStyles": {
+              "methods": [
+                "listNativeStyles",
+                "listNativeStylesStream",
+                "listNativeStylesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkService": {
       "clients": {
         "grpc": {
@@ -2627,6 +2805,21 @@
             "GetNetwork": {
               "methods": [
                 "getNetwork"
+              ]
+            },
+            "UpdateNetwork": {
+              "methods": [
+                "updateNetwork"
+              ]
+            },
+            "ProvisionTestNetwork": {
+              "methods": [
+                "provisionTestNetwork"
+              ]
+            },
+            "GetDefaultThirdPartyDataDeclaration": {
+              "methods": [
+                "getDefaultThirdPartyDataDeclaration"
               ]
             },
             "ListNetworks": {
@@ -2644,6 +2837,21 @@
             "GetNetwork": {
               "methods": [
                 "getNetwork"
+              ]
+            },
+            "UpdateNetwork": {
+              "methods": [
+                "updateNetwork"
+              ]
+            },
+            "ProvisionTestNetwork": {
+              "methods": [
+                "provisionTestNetwork"
+              ]
+            },
+            "GetDefaultThirdPartyDataDeclaration": {
+              "methods": [
+                "getDefaultThirdPartyDataDeclaration"
               ]
             },
             "ListNetworks": {

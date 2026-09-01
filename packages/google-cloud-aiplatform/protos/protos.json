@@ -4851,6 +4851,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "enableZeroDataRetention": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "customConfigs": {
                               "type": "google.protobuf.Struct",
                               "id": 3,
@@ -46257,6 +46264,13 @@
                             "apiKey": {
                               "type": "string",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableZeroDataRetention": {
+                              "type": "bool",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

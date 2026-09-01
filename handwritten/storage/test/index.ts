@@ -1256,6 +1256,53 @@ describe('Storage', () => {
         }
       );
     });
+
+    it('should list buckets with ipFilter summary', done => {
+      const bucketsResponse = [
+        {
+          id: 'bucket-with-filter',
+          name: 'bucket-with-filter',
+          ipFilter: {
+            mode: 'Enabled',
+            allowCrossOrgVpcs: true,
+            allowAllServiceAgentAccess: true,
+          },
+        },
+        {
+          id: 'bucket-without-filter',
+          name: 'bucket-without-filter',
+          location: 'US',
+        },
+      ];
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, {items: bucketsResponse});
+      };
+
+      storage.getBuckets((err: Error | null, buckets: Bucket[]) => {
+        if (err) return done(err);
+
+        const filteredBucket = buckets.find(
+          (b: Bucket) => b.name === 'bucket-with-filter'
+        )!;
+        const normalBucket = buckets.find(
+          (b: Bucket) => b.name === 'bucket-without-filter'
+        )!;
+
+        assert.ok(filteredBucket.metadata.ipFilter);
+        assert.strictEqual(filteredBucket.metadata.ipFilter.mode, 'Enabled');
+        assert.strictEqual(
+          filteredBucket.metadata.ipFilter.allowCrossOrgVpcs,
+          true
+        );
+
+        assert.strictEqual(normalBucket.metadata.ipFilter, undefined);
+
+        done();
+      });
+    });
   });
 
   describe('getHmacKeys', () => {

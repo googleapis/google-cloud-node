@@ -454,6 +454,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public listReservationGroups(request: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest): Promise<google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse>;
+
+                        /**
+                         * Calls UpdateReservationGroup.
+                         * @param request UpdateReservationGroupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ReservationGroup
+                         */
+                        public updateReservationGroup(request: google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.UpdateReservationGroupCallback): void;
+
+                        /**
+                         * Calls UpdateReservationGroup.
+                         * @param request UpdateReservationGroupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateReservationGroup(request: google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest): Promise<google.cloud.bigquery.reservation.v1.ReservationGroup>;
                     }
 
                     namespace ReservationService {
@@ -660,6 +674,13 @@ export namespace google {
                          * @param [response] ListReservationGroupsResponse
                          */
                         type ListReservationGroupsCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|updateReservationGroup}.
+                         * @param error Error, if any
+                         * @param [response] ReservationGroup
+                         */
+                        type UpdateReservationGroupCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.ReservationGroup) => void;
                     }
 
                     /** Properties of a Reservation. */
@@ -718,6 +739,9 @@ export namespace google {
 
                         /** Reservation schedulingPolicy */
                         schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
+
+                        /** Reservation reservationGroupPath */
+                        reservationGroupPath?: (string[]|null);
                     }
 
                     /** Represents a Reservation. */
@@ -782,6 +806,9 @@ export namespace google {
 
                         /** Reservation schedulingPolicy. */
                         public schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
+
+                        /** Reservation reservationGroupPath. */
+                        public reservationGroupPath: string[];
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -1198,6 +1225,15 @@ export namespace google {
 
                         /** ReservationGroup name */
                         name?: (string|null);
+
+                        /** ReservationGroup parentGroup */
+                        parentGroup?: (string|null);
+
+                        /** ReservationGroup creationTime */
+                        creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ReservationGroup updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents a ReservationGroup. */
@@ -1211,6 +1247,15 @@ export namespace google {
 
                         /** ReservationGroup name. */
                         public name: string;
+
+                        /** ReservationGroup parentGroup. */
+                        public parentGroup: string;
+
+                        /** ReservationGroup creationTime. */
+                        public creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ReservationGroup updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
 
                         /**
                          * Creates a new ReservationGroup instance using the specified properties.
@@ -2708,6 +2753,109 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of an UpdateReservationGroupRequest. */
+                    interface IUpdateReservationGroupRequest {
+
+                        /** UpdateReservationGroupRequest reservationGroup */
+                        reservationGroup?: (google.cloud.bigquery.reservation.v1.IReservationGroup|null);
+
+                        /** UpdateReservationGroupRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateReservationGroupRequest. */
+                    class UpdateReservationGroupRequest implements IUpdateReservationGroupRequest {
+
+                        /**
+                         * Constructs a new UpdateReservationGroupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest);
+
+                        /** UpdateReservationGroupRequest reservationGroup. */
+                        public reservationGroup?: (google.cloud.bigquery.reservation.v1.IReservationGroup|null);
+
+                        /** UpdateReservationGroupRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateReservationGroupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateReservationGroupRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest): google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest;
+
+                        /**
+                         * Encodes the specified UpdateReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest.verify|verify} messages.
+                         * @param message UpdateReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest.verify|verify} messages.
+                         * @param message UpdateReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateReservationGroupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest;
+
+                        /**
+                         * Decodes an UpdateReservationGroupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest;
+
+                        /**
+                         * Verifies an UpdateReservationGroupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateReservationGroupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateReservationGroupRequest message. Also converts values to other types if specified.
+                         * @param message UpdateReservationGroupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateReservationGroupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateReservationGroupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a CreateCapacityCommitmentRequest. */
                     interface ICreateCapacityCommitmentRequest {
 
@@ -3810,7 +3958,8 @@ export namespace google {
                             CONTINUOUS = 6,
                             BACKGROUND_CHANGE_DATA_CAPTURE = 7,
                             BACKGROUND_COLUMN_METADATA_INDEX = 8,
-                            BACKGROUND_SEARCH_INDEX_REFRESH = 9
+                            BACKGROUND_SEARCH_INDEX_REFRESH = 9,
+                            AUTOMATIC_MATERIALIZED_VIEW_REFRESH = 10
                         }
 
                         /** State enum. */

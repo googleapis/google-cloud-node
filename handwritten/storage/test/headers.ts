@@ -65,11 +65,16 @@ describe('headers', () => {
     } catch (err) {
       if (err !== error) throw err;
     }
-    assert.ok(
-      /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-        requests[0].headers['x-goog-api-client']
-      )
-    );
+    const apiClientHeader = requests[0].headers['x-goog-api-client'];
+    const match =
+      /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/.exec(
+        apiClientHeader
+      );
+    assert.ok(match);
+    const invocationId = match.groups!.gcclInvocationId;
+    const idempotencyToken =
+      requests[0].headers['x-goog-gcs-idempotency-token'];
+    assert.strictEqual(idempotencyToken, invocationId);
   });
 
   it('populates x-goog-api-client header (deno)', async () => {
@@ -87,10 +92,37 @@ describe('headers', () => {
     } catch (err) {
       if (err !== error) throw err;
     }
-    assert.ok(
-      /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-        requests[1].headers['x-goog-api-client']
-      )
-    );
+    const apiClientHeader = requests[1].headers['x-goog-api-client'];
+    const match =
+      /^gl-deno\/0.00.0 gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+)$/.exec(
+        apiClientHeader
+      );
+    assert.ok(match);
+    const invocationId = match.groups!.gcclInvocationId;
+    const idempotencyToken =
+      requests[1].headers['x-goog-gcs-idempotency-token'];
+    assert.strictEqual(idempotencyToken, invocationId);
+  });
+
+  it('generates unique tokens for different requests', async () => {
+    const storage = new Storage();
+    const bucket = storage.bucket('foo-bucket');
+    try {
+      await bucket.create();
+    } catch (err) {
+      if (err !== error) throw err;
+    }
+    try {
+      await bucket.create();
+    } catch (err) {
+      if (err !== error) throw err;
+    }
+    const token1 =
+      requests[requests.length - 2].headers['x-goog-gcs-idempotency-token'];
+    const token2 =
+      requests[requests.length - 1].headers['x-goog-gcs-idempotency-token'];
+    assert.ok(token1);
+    assert.ok(token2);
+    assert.notStrictEqual(token1, token2);
   });
 });
