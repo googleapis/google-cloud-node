@@ -33,6 +33,7 @@ import {
   GoogleError,
   grpc,
   Operation as GaxOperation,
+  ServiceError,
 } from 'google-gax';
 import {Backup} from './backup';
 import {BatchTransaction, TransactionIdentifier} from './batch-transaction';
@@ -98,7 +99,6 @@ import {finished, Duplex, Readable, Transform} from 'stream';
 import {PreciseDate} from '@google-cloud/precise-date';
 import {EnumKey, RequestConfig, TranslateEnumKeys, Spanner} from '.';
 import {toArray} from './helper';
-import {ServiceError} from 'google-gax';
 import IPolicy = google.iam.v1.IPolicy;
 import Policy = google.iam.v1.Policy;
 import FieldMask = google.protobuf.FieldMask;
@@ -2381,8 +2381,7 @@ class Database extends common.GrpcServiceObject {
   ): void;
   async getOperations(
     optionsOrCallback?:
-      | GetDatabaseOperationsOptions
-      | GetDatabaseOperationsCallback,
+      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
   ): Promise<GetDatabaseOperationsResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
