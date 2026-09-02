@@ -43,6 +43,7 @@ export class API {
   handwrittenLayer?: boolean;
   legacyProtoLoad: boolean;
   restNumericEnums: boolean;
+  resumableUploadMethods: string[];
   documentationUri: any;
   newIssueUri: string;
   title?: string;
@@ -109,6 +110,7 @@ export class API {
     this.diregapic = options.diregapic ?? false;
     this.legacyProtoLoad = options.legacyProtoLoad ?? false;
     this.restNumericEnums = options.restNumericEnums ?? false;
+    this.resumableUploadMethods = options.resumableUploadMethods ?? [];
     this.documentationUri =
       options.serviceYaml?.publishing?.documentation_uri ?? '';
     this.newIssueUri = options.serviceYaml?.publishing?.new_issue_uri ?? '';

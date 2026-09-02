@@ -85,6 +85,7 @@ export class Generator {
   legacyProtoLoad?: boolean;
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
+  resumableUploadMethods?: string[];
   format?: string | string[];
 
   private root: protobuf.Root;
@@ -245,6 +246,15 @@ export class Generator {
     }
   }
 
+  private readResumableUploadMethods() {
+    if (this.paramMap['resumable-upload-methods']) {
+      this.resumableUploadMethods = this.paramMap['resumable-upload-methods']
+        .split(';')
+        .map(name => name.trim())
+        .filter(name => name.length > 0);
+    }
+  }
+
   async initializeFromStdin() {
     const inputBuffer = await getStdin();
     const CodeGeneratorRequest = this.root.lookupType('CodeGeneratorRequest');
@@ -274,6 +284,7 @@ export class Generator {
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
       this.readFormat();
+      this.readResumableUploadMethods();
     }
   }
 
@@ -334,6 +345,7 @@ export class Generator {
       legacyProtoLoad: this.legacyProtoLoad,
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
+      resumableUploadMethods: this.resumableUploadMethods,
     });
     return api;
   }

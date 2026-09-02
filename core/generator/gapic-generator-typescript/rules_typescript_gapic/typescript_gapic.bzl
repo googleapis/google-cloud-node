@@ -30,6 +30,7 @@ def typescript_gapic_library(
   legacy_proto_load = None,
   rest_numeric_enums = None,
   mixins = None,
+  resumable_upload_methods = None,
   format = None,
   extra_protoc_parameters = [],
   extra_protoc_file_parameters = {},
@@ -56,6 +57,8 @@ def typescript_gapic_library(
     plugin_args_dict["rest-numeric-enums"] = "true"
   if mixins:
     plugin_args_dict["mixins"] = mixins
+  if resumable_upload_methods:
+    plugin_args_dict["resumable-upload-methods"] = resumable_upload_methods
 
   file_args = {} # note: keys are filenames, values are parameter name, aligned with the prior art
   for key, value in extra_protoc_file_parameters:
