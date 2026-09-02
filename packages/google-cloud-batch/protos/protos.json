@@ -836,6 +836,13 @@
                           }
                         },
                         "NetworkInterface": {
+                          "oneofs": {
+                            "_nicType": {
+                              "oneof": [
+                                "nicType"
+                              ]
+                            }
+                          },
                           "fields": {
                             "network": {
                               "type": "string",
@@ -848,6 +855,24 @@
                             "noExternalIpAddress": {
                               "type": "bool",
                               "id": 3
+                            },
+                            "nicType": {
+                              "type": "NicType",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "NicType": {
+                              "values": {
+                                "NIC_TYPE_UNSPECIFIED": 0,
+                                "GVNIC": 1,
+                                "IRDMA": 2,
+                                "MRDMA": 3
+                              }
                             }
                           }
                         },
