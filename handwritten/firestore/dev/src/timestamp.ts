@@ -118,7 +118,7 @@ export class Timestamp implements firestore.Timestamp {
   }
 
   /**
-   * Creates a new timestamp from the given Temporal Instant.
+   * Creates a new timestamp from the given `Temporal.Instant`.
    *
    * @example
    * ```
@@ -256,7 +256,9 @@ export class Timestamp implements firestore.Timestamp {
    */
   toInstant(): Temporal.Instant {
     if (typeof Temporal === 'undefined' || !Temporal.Instant) {
-      throw new Error('Temporal is not available in the current environment.');
+      throw new Error(
+        'The Temporal object is not available in the current environment.',
+      );
     }
     const nanos =
       BigInt(this._seconds) * 1000000000n + BigInt(this._nanoseconds);
