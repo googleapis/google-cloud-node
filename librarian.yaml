@@ -54,7 +54,7 @@ default:
   output: packages
 libraries:
   - name: google-ads-admanager
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -224,7 +224,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.2.0
+    version: 7.3.0
     apis:
       - path: google/cloud/aiplatform/v1
         nodejs:
@@ -387,7 +387,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-apptopology
-    version: 0.0.0
+    version: 0.1.0
     apis:
       - path: google/cloud/apptopology/v1
     copyright_year: "2026"
@@ -548,7 +548,7 @@ libraries:
     nodejs:
       default_version: v2
   - name: google-cloud-bigquery-reservation
-    version: 5.1.0
+    version: 5.2.0
     apis:
       - path: google/cloud/bigquery/reservation/v1
     copyright_year: "2026"
@@ -684,7 +684,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.1.0
+    version: 7.2.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -722,7 +722,7 @@ libraries:
     nodejs:
       default_version: v1alpha1
   - name: google-cloud-config
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/config/v1
     copyright_year: "2026"
@@ -907,7 +907,7 @@ libraries:
       metadata_name_override: dialogflow-cx
       name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -1438,7 +1438,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1900,7 +1900,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-container
-    version: 7.0.0
+    version: 7.1.0
     apis:
       - path: google/container/v1
       - path: google/container/v1beta1
@@ -1917,7 +1917,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
@@ -2016,7 +2016,7 @@ libraries:
       package_name: '@googlemaps/addressvalidation'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest
   - name: google-maps-areainsights
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/maps/areainsights/v1
     copyright_year: "2026"
@@ -2100,7 +2100,7 @@ libraries:
       package_name: '@googlemaps/routeoptimization'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routeoptimization/latest
   - name: google-maps-routing
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/maps/routing/v2
     copyright_year: "2026"
