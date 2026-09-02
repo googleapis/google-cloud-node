@@ -80,7 +80,7 @@ export interface MethodDescriptorProto
   toJSON: Function | undefined;
   isDiregapicLRO?: boolean;
   // If set, the method opts into the resumable upload protocol
-  // via the google.api.media_upload method option.
+  // via the resumable_upload_methods generator parameter.
   resumableUpload?: {uploadPrefix: string} | undefined;
   // if wrappers are allowed and there is a maxResultsParamter, return true
   maxResultsParameter?: boolean;
@@ -307,24 +307,22 @@ function streaming(method: MethodDescriptorProto) {
   return undefined;
 }
 
-// Detect methods that opt into the resumable upload protocol via
-// the google.api.media_upload method option. The upload prefix defaults to
-// `/resumable/upload` and can be overridden by the annotation.
-function resumableUpload(method: MethodDescriptorProto): {
-  uploadPrefix: string;
-} | undefined {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const mediaUpload = method.options?.['.google.api.mediaUpload'] as
-    | {
-        enabled?: boolean;
-        mediaUploadPaths?: string[];
-      }
-    | undefined;
-  if (!mediaUpload || mediaUpload.enabled === false) {
-    return undefined;
+// Methods selected with the resumable_upload_methods generator parameter use
+// the default upload prefix, since the parameter only identifies methods.
+const DEFAULT_RESUMABLE_UPLOAD_PREFIX = '/resumable/upload';
+
+function resumableUploadMethodNames(
+  serviceName: string,
+  resumableUploadMethods: string[] | undefined,
+): Set<string> {
+  const servicePrefix = `${serviceName}.`;
+  const methodNames = new Set<string>();
+  for (const methodName of resumableUploadMethods ?? []) {
+    if (methodName.startsWith(servicePrefix)) {
+      methodNames.add(methodName.substring(servicePrefix.length));
+    }
   }
-  const paths = mediaUpload.mediaUploadPaths ?? [];
-  return {uploadPrefix: paths[0] ?? '/resumable/upload'};
+  return methodNames;
 }
 
 // returns true if the method has wrappers for UInt32Value enabled
@@ -658,7 +656,6 @@ function augmentMethod(
         parameters.diregapic,
         wrappersAllowed,
       ),
-      resumableUpload: resumableUpload(method),
       ignoreMapPagingMethod: ignoreMapPagingMethod(
         parameters.allMessages,
         method,
@@ -1056,9 +1053,13 @@ export function augmentService(parameters: AugmentServiceParameters) {
   augmentedService.bundleConfigs = parameters.options.bundleConfigs?.filter(
     bc => bc.serviceName === parameters.service.name,
   );
+  const resumableUploadMethods = resumableUploadMethodNames(
+    parameters.service.name!,
+    parameters.options.resumableUploadMethods,
+  );
   augmentedService.method =
-    augmentedService.method?.map(method =>
-      augmentMethod(
+    augmentedService.method?.map(method => {
+      const augmentedMethod = augmentMethod(
         {
           allMessages: parameters.allMessages,
           localMessages: parameters.localMessages,
@@ -1066,8 +1067,14 @@ export function augmentService(parameters: AugmentServiceParameters) {
           diregapic: parameters.options.diregapic,
         },
         method,
-      ),
-    ) ?? [];
+      );
+      if (resumableUploadMethods.has(augmentedMethod.name!)) {
+        augmentedMethod.resumableUpload = {
+          uploadPrefix: DEFAULT_RESUMABLE_UPLOAD_PREFIX,
+        };
+      }
+      return augmentedMethod;
+    }) ?? [];
 
   /* Selective GAPIC method handling. */
   augmentedService.method = augmentedService.method.filter(

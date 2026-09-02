@@ -34,8 +34,7 @@ describe('Baseline tests', () => {
     outputDir: '.test-out-resumable-upload',
     protoPath: 'google/samples/resumable/v1/resumable.proto',
     useCommonProto: false,
-    resumableUploadMethods:
-      'ResumableUploadService.CreateResumableUpload;ResumableUploadService.GetUploadStatus',
+    resumableUploadMethods: 'ResumableUploadService.CreateResumableUpload',
   });
   runBaselineTest({
     baselineName: 'dlp',

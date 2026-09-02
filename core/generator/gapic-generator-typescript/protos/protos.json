@@ -389,44 +389,6 @@
                 }
               }
             },
-            "MediaUpload": {
-              "fields": {
-                "enabled": {
-                  "type": "bool",
-                  "id": 1
-                },
-                "mediaUploadPaths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "startNotification": {
-                  "type": "bool",
-                  "id": 3
-                },
-                "uploadNotification": {
-                  "type": "bool",
-                  "id": 4
-                },
-                "finalizeNotification": {
-                  "type": "bool",
-                  "id": 5
-                },
-                "directUploadService": {
-                  "type": "string",
-                  "id": 6
-                },
-                "maxUploadSessionDurationSeconds": {
-                  "type": "int64",
-                  "id": 7
-                }
-              }
-            },
-            "mediaUpload": {
-              "type": "MediaUpload",
-              "id": 1052,
-              "extend": "google.protobuf.MethodOptions"
-            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,

@@ -13,8 +13,7 @@
 // limitations under the License.
 
 // Synthetic fixture used by the baseline tests to exercise resumable upload
-// method generation. The google.api.media_upload annotation is defined by
-// the local copy of google/api/media_upload.proto.
+// method generation via the resumable_upload_methods generator parameter.
 
 syntax = "proto3";
 
@@ -22,7 +21,6 @@ package google.samples.resumable.v1;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
-import "google/api/media_upload.proto";
 
 option csharp_namespace = "Google.Samples.Resumable.V1";
 option go_package = "google.golang.org/genproto/googleapis/samples/resumable/v1;resumable";
@@ -43,10 +41,6 @@ service ResumableUploadService {
     option (google.api.http) = {
       post: "/v1/uploads"
       body: "*"
-    };
-    option (google.api.media_upload) = {
-      enabled: true
-      media_upload_paths: "/resumable/upload"
     };
   }
 

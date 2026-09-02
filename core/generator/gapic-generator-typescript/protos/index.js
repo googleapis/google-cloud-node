@@ -5169,405 +5169,6 @@
                 return FieldInfo;
             })();
     
-            api.MediaUpload = (function() {
-    
-                /**
-                 * Properties of a MediaUpload.
-                 * @memberof google.api
-                 * @interface IMediaUpload
-                 * @property {boolean|null} [enabled] MediaUpload enabled
-                 * @property {Array.<string>|null} [mediaUploadPaths] MediaUpload mediaUploadPaths
-                 * @property {boolean|null} [startNotification] MediaUpload startNotification
-                 * @property {boolean|null} [uploadNotification] MediaUpload uploadNotification
-                 * @property {boolean|null} [finalizeNotification] MediaUpload finalizeNotification
-                 * @property {string|null} [directUploadService] MediaUpload directUploadService
-                 * @property {number|Long|null} [maxUploadSessionDurationSeconds] MediaUpload maxUploadSessionDurationSeconds
-                 */
-    
-                /**
-                 * Constructs a new MediaUpload.
-                 * @memberof google.api
-                 * @classdesc Represents a MediaUpload.
-                 * @implements IMediaUpload
-                 * @constructor
-                 * @param {google.api.IMediaUpload=} [properties] Properties to set
-                 */
-                function MediaUpload(properties) {
-                    this.mediaUploadPaths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * MediaUpload enabled.
-                 * @member {boolean} enabled
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.enabled = false;
-    
-                /**
-                 * MediaUpload mediaUploadPaths.
-                 * @member {Array.<string>} mediaUploadPaths
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.mediaUploadPaths = $util.emptyArray;
-    
-                /**
-                 * MediaUpload startNotification.
-                 * @member {boolean} startNotification
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.startNotification = false;
-    
-                /**
-                 * MediaUpload uploadNotification.
-                 * @member {boolean} uploadNotification
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.uploadNotification = false;
-    
-                /**
-                 * MediaUpload finalizeNotification.
-                 * @member {boolean} finalizeNotification
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.finalizeNotification = false;
-    
-                /**
-                 * MediaUpload directUploadService.
-                 * @member {string} directUploadService
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.directUploadService = "";
-    
-                /**
-                 * MediaUpload maxUploadSessionDurationSeconds.
-                 * @member {number|Long} maxUploadSessionDurationSeconds
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 */
-                MediaUpload.prototype.maxUploadSessionDurationSeconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Creates a new MediaUpload instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {google.api.IMediaUpload=} [properties] Properties to set
-                 * @returns {google.api.MediaUpload} MediaUpload instance
-                 */
-                MediaUpload.create = function create(properties) {
-                    return new MediaUpload(properties);
-                };
-    
-                /**
-                 * Encodes the specified MediaUpload message. Does not implicitly {@link google.api.MediaUpload.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {google.api.IMediaUpload} message MediaUpload message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                MediaUpload.encode = function encode(message, writer, q) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (q === undefined)
-                        q = 0;
-                    if (q > $util.recursionLimit)
-                        throw Error("max depth exceeded");
-                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
-                    if (message.mediaUploadPaths != null && message.mediaUploadPaths.length)
-                        for (var i = 0; i < message.mediaUploadPaths.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.mediaUploadPaths[i]);
-                    if (message.startNotification != null && Object.hasOwnProperty.call(message, "startNotification"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.startNotification);
-                    if (message.uploadNotification != null && Object.hasOwnProperty.call(message, "uploadNotification"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.uploadNotification);
-                    if (message.finalizeNotification != null && Object.hasOwnProperty.call(message, "finalizeNotification"))
-                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.finalizeNotification);
-                    if (message.directUploadService != null && Object.hasOwnProperty.call(message, "directUploadService"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.directUploadService);
-                    if (message.maxUploadSessionDurationSeconds != null && Object.hasOwnProperty.call(message, "maxUploadSessionDurationSeconds"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int64(message.maxUploadSessionDurationSeconds);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified MediaUpload message, length delimited. Does not implicitly {@link google.api.MediaUpload.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {google.api.IMediaUpload} message MediaUpload message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                MediaUpload.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a MediaUpload message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.MediaUpload} MediaUpload
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                MediaUpload.decode = function decode(reader, length, error, long) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $Reader.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MediaUpload();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.enabled = reader.bool();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.mediaUploadPaths && message.mediaUploadPaths.length))
-                                    message.mediaUploadPaths = [];
-                                message.mediaUploadPaths.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.startNotification = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.uploadNotification = reader.bool();
-                                break;
-                            }
-                        case 5: {
-                                message.finalizeNotification = reader.bool();
-                                break;
-                            }
-                        case 6: {
-                                message.directUploadService = reader.string();
-                                break;
-                            }
-                        case 7: {
-                                message.maxUploadSessionDurationSeconds = reader.int64();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7, long);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a MediaUpload message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.MediaUpload} MediaUpload
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                MediaUpload.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a MediaUpload message.
-                 * @function verify
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                MediaUpload.verify = function verify(message, long) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        return "maximum nesting depth exceeded";
-                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
-                        if (typeof message.enabled !== "boolean")
-                            return "enabled: boolean expected";
-                    if (message.mediaUploadPaths != null && Object.hasOwnProperty.call(message, "mediaUploadPaths")) {
-                        if (!Array.isArray(message.mediaUploadPaths))
-                            return "mediaUploadPaths: array expected";
-                        for (var i = 0; i < message.mediaUploadPaths.length; ++i)
-                            if (!$util.isString(message.mediaUploadPaths[i]))
-                                return "mediaUploadPaths: string[] expected";
-                    }
-                    if (message.startNotification != null && Object.hasOwnProperty.call(message, "startNotification"))
-                        if (typeof message.startNotification !== "boolean")
-                            return "startNotification: boolean expected";
-                    if (message.uploadNotification != null && Object.hasOwnProperty.call(message, "uploadNotification"))
-                        if (typeof message.uploadNotification !== "boolean")
-                            return "uploadNotification: boolean expected";
-                    if (message.finalizeNotification != null && Object.hasOwnProperty.call(message, "finalizeNotification"))
-                        if (typeof message.finalizeNotification !== "boolean")
-                            return "finalizeNotification: boolean expected";
-                    if (message.directUploadService != null && Object.hasOwnProperty.call(message, "directUploadService"))
-                        if (!$util.isString(message.directUploadService))
-                            return "directUploadService: string expected";
-                    if (message.maxUploadSessionDurationSeconds != null && Object.hasOwnProperty.call(message, "maxUploadSessionDurationSeconds"))
-                        if (!$util.isInteger(message.maxUploadSessionDurationSeconds) && !(message.maxUploadSessionDurationSeconds && $util.isInteger(message.maxUploadSessionDurationSeconds.low) && $util.isInteger(message.maxUploadSessionDurationSeconds.high)))
-                            return "maxUploadSessionDurationSeconds: integer|Long expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a MediaUpload message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.MediaUpload} MediaUpload
-                 */
-                MediaUpload.fromObject = function fromObject(object, long) {
-                    if (object instanceof $root.google.api.MediaUpload)
-                        return object;
-                    if (!$util.isObject(object))
-                        throw TypeError(".google.api.MediaUpload: object expected");
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var message = new $root.google.api.MediaUpload();
-                    if (object.enabled != null)
-                        message.enabled = Boolean(object.enabled);
-                    if (object.mediaUploadPaths) {
-                        if (!Array.isArray(object.mediaUploadPaths))
-                            throw TypeError(".google.api.MediaUpload.mediaUploadPaths: array expected");
-                        message.mediaUploadPaths = [];
-                        for (var i = 0; i < object.mediaUploadPaths.length; ++i)
-                            message.mediaUploadPaths[i] = String(object.mediaUploadPaths[i]);
-                    }
-                    if (object.startNotification != null)
-                        message.startNotification = Boolean(object.startNotification);
-                    if (object.uploadNotification != null)
-                        message.uploadNotification = Boolean(object.uploadNotification);
-                    if (object.finalizeNotification != null)
-                        message.finalizeNotification = Boolean(object.finalizeNotification);
-                    if (object.directUploadService != null)
-                        message.directUploadService = String(object.directUploadService);
-                    if (object.maxUploadSessionDurationSeconds != null)
-                        if ($util.Long)
-                            message.maxUploadSessionDurationSeconds = $util.Long.fromValue(object.maxUploadSessionDurationSeconds, false);
-                        else if (typeof object.maxUploadSessionDurationSeconds === "string")
-                            message.maxUploadSessionDurationSeconds = parseInt(object.maxUploadSessionDurationSeconds, 10);
-                        else if (typeof object.maxUploadSessionDurationSeconds === "number")
-                            message.maxUploadSessionDurationSeconds = object.maxUploadSessionDurationSeconds;
-                        else if (typeof object.maxUploadSessionDurationSeconds === "object")
-                            message.maxUploadSessionDurationSeconds = new $util.LongBits(object.maxUploadSessionDurationSeconds.low >>> 0, object.maxUploadSessionDurationSeconds.high >>> 0).toNumber();
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a MediaUpload message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {google.api.MediaUpload} message MediaUpload
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                MediaUpload.toObject = function toObject(message, options, q) {
-                    if (!options)
-                        options = {};
-                    if (q === undefined)
-                        q = 0;
-                    if (q > $util.recursionLimit)
-                        throw Error("max depth exceeded");
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.mediaUploadPaths = [];
-                    if (options.defaults) {
-                        object.enabled = false;
-                        object.startNotification = false;
-                        object.uploadNotification = false;
-                        object.finalizeNotification = false;
-                        object.directUploadService = "";
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.maxUploadSessionDurationSeconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
-                        } else
-                            object.maxUploadSessionDurationSeconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
-                    }
-                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
-                        object.enabled = message.enabled;
-                    if (message.mediaUploadPaths && message.mediaUploadPaths.length) {
-                        object.mediaUploadPaths = [];
-                        for (var j = 0; j < message.mediaUploadPaths.length; ++j)
-                            object.mediaUploadPaths[j] = message.mediaUploadPaths[j];
-                    }
-                    if (message.startNotification != null && Object.hasOwnProperty.call(message, "startNotification"))
-                        object.startNotification = message.startNotification;
-                    if (message.uploadNotification != null && Object.hasOwnProperty.call(message, "uploadNotification"))
-                        object.uploadNotification = message.uploadNotification;
-                    if (message.finalizeNotification != null && Object.hasOwnProperty.call(message, "finalizeNotification"))
-                        object.finalizeNotification = message.finalizeNotification;
-                    if (message.directUploadService != null && Object.hasOwnProperty.call(message, "directUploadService"))
-                        object.directUploadService = message.directUploadService;
-                    if (message.maxUploadSessionDurationSeconds != null && Object.hasOwnProperty.call(message, "maxUploadSessionDurationSeconds"))
-                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
-                            object.maxUploadSessionDurationSeconds = typeof message.maxUploadSessionDurationSeconds === "number" ? BigInt(message.maxUploadSessionDurationSeconds) : $util.Long.fromBits(message.maxUploadSessionDurationSeconds.low >>> 0, message.maxUploadSessionDurationSeconds.high >>> 0, false).toBigInt();
-                        else if (typeof message.maxUploadSessionDurationSeconds === "number")
-                            object.maxUploadSessionDurationSeconds = options.longs === String ? String(message.maxUploadSessionDurationSeconds) : message.maxUploadSessionDurationSeconds;
-                        else
-                            object.maxUploadSessionDurationSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.maxUploadSessionDurationSeconds) : options.longs === Number ? new $util.LongBits(message.maxUploadSessionDurationSeconds.low >>> 0, message.maxUploadSessionDurationSeconds.high >>> 0).toNumber() : message.maxUploadSessionDurationSeconds;
-                    return object;
-                };
-    
-                /**
-                 * Converts this MediaUpload to JSON.
-                 * @function toJSON
-                 * @memberof google.api.MediaUpload
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                MediaUpload.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for MediaUpload
-                 * @function getTypeUrl
-                 * @memberof google.api.MediaUpload
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                MediaUpload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.MediaUpload";
-                };
-    
-                return MediaUpload;
-            })();
-    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -20205,7 +19806,6 @@
                  * @property {google.protobuf.IFeatureSet|null} [features] MethodOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
-                 * @property {google.api.IMediaUpload|null} [".google.api.mediaUpload"] MethodOptions .google.api.mediaUpload
                  * @property {google.api.IRoutingRule|null} [".google.api.routing"] MethodOptions .google.api.routing
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
                  * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
@@ -20267,14 +19867,6 @@
                  * @instance
                  */
                 MethodOptions.prototype[".google.api.http"] = null;
-    
-                /**
-                 * MethodOptions .google.api.mediaUpload.
-                 * @member {google.api.IMediaUpload|null|undefined} .google.api.mediaUpload
-                 * @memberof google.protobuf.MethodOptions
-                 * @instance
-                 */
-                MethodOptions.prototype[".google.api.mediaUpload"] = null;
     
                 /**
                  * MethodOptions .google.api.routing.
@@ -20342,8 +19934,6 @@
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
-                    if (message[".google.api.mediaUpload"] != null && Object.hasOwnProperty.call(message, ".google.api.mediaUpload"))
-                        $root.google.api.MediaUpload.encode(message[".google.api.mediaUpload"], writer.uint32(/* id 1052, wireType 2 =*/8418).fork(), q + 1).ldelim();
                     if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http"))
                         $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork(), q + 1).ldelim();
                     if (message[".google.api.routing"] != null && Object.hasOwnProperty.call(message, ".google.api.routing"))
@@ -20408,10 +19998,6 @@
                             }
                         case 72295728: {
                                 message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1);
-                                break;
-                            }
-                        case 1052: {
-                                message[".google.api.mediaUpload"] = $root.google.api.MediaUpload.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 72295729: {
@@ -20498,11 +20084,6 @@
                         if (error)
                             return ".google.api.http." + error;
                     }
-                    if (message[".google.api.mediaUpload"] != null && Object.hasOwnProperty.call(message, ".google.api.mediaUpload")) {
-                        var error = $root.google.api.MediaUpload.verify(message[".google.api.mediaUpload"], long + 1);
-                        if (error)
-                            return ".google.api.mediaUpload." + error;
-                    }
                     if (message[".google.api.routing"] != null && Object.hasOwnProperty.call(message, ".google.api.routing")) {
                         var error = $root.google.api.RoutingRule.verify(message[".google.api.routing"], long + 1);
                         if (error)
@@ -20583,11 +20164,6 @@
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
-                    if (object[".google.api.mediaUpload"] != null) {
-                        if (!$util.isObject(object[".google.api.mediaUpload"]))
-                            throw TypeError(".google.protobuf.MethodOptions..google.api.mediaUpload: object expected");
-                        message[".google.api.mediaUpload"] = $root.google.api.MediaUpload.fromObject(object[".google.api.mediaUpload"], long + 1);
-                    }
                     if (object[".google.api.routing"] != null) {
                         if (!$util.isObject(object[".google.api.routing"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.api.routing: object expected");
@@ -20634,7 +20210,6 @@
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.longrunning.operationInfo"] = null;
-                        object[".google.api.mediaUpload"] = null;
                         object[".google.api.http"] = null;
                         object[".google.api.routing"] = null;
                     }
@@ -20656,8 +20231,6 @@
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
                             object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
                     }
-                    if (message[".google.api.mediaUpload"] != null && Object.hasOwnProperty.call(message, ".google.api.mediaUpload"))
-                        object[".google.api.mediaUpload"] = $root.google.api.MediaUpload.toObject(message[".google.api.mediaUpload"], options, q + 1);
                     if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http"))
                         object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options, q + 1);
                     if (message[".google.api.routing"] != null && Object.hasOwnProperty.call(message, ".google.api.routing"))

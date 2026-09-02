@@ -37,8 +37,7 @@ describe('Baseline tests: ESM', () => {
     protoPath: 'google/samples/resumable/v1/resumable.proto',
     useCommonProto: false,
     format: 'esm',
-    resumableUploadMethods:
-      'ResumableUploadService.CreateResumableUpload;ResumableUploadService.GetUploadStatus',
+    resumableUploadMethods: 'ResumableUploadService.CreateResumableUpload',
   });
   runBaselineTest({
     baselineName: 'dlp-esm',

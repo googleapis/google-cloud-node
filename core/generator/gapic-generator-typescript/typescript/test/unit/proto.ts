@@ -1777,8 +1777,8 @@ describe('src/schema/proto.ts', () => {
   });
 });
 
-describe('src/schema/proto.ts - resumable upload detection', () => {
-  it('marks methods annotated with google.api.media_upload', () => {
+describe('src/schema/proto.ts - resumable upload methods', () => {
+  function augmentResumableTestService(resumableUploadMethods?: string[]) {
     const fd = {} as protos.google.protobuf.FileDescriptorProto;
     fd.package = 'google.samples.resumable.v1';
     fd.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
@@ -1787,13 +1787,8 @@ describe('src/schema/proto.ts - resumable upload detection', () => {
       {
         name: 'CreateResumableUpload',
         inputType: '.google.samples.resumable.v1.CreateResumableUploadRequest',
-        outputType: '.google.samples.resumable.v1.CreateResumableUploadResponse',
-        options: {
-          '.google.api.mediaUpload': {
-            enabled: true,
-            mediaUploadPaths: ['/resumable/upload'],
-          },
-        },
+        outputType:
+          '.google.samples.resumable.v1.CreateResumableUploadResponse',
       },
       {
         name: 'GetUploadStatus',
@@ -1804,8 +1799,9 @@ describe('src/schema/proto.ts - resumable upload detection', () => {
 
     const options: Options = {
       grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+      resumableUploadMethods,
     };
-    const augmentedService = augmentService({
+    return augmentService({
       allMessages: {},
       localMessages: {},
       packageName: 'google.samples.resumable.v1',
@@ -1816,6 +1812,13 @@ describe('src/schema/proto.ts - resumable upload detection', () => {
       options,
       protoFile: 'fd',
     });
+  }
+
+  it('marks methods listed in resumableUploadMethods', () => {
+    const augmentedService = augmentResumableTestService([
+      'OtherService.DoNotEnable',
+      'ResumableUploadService.CreateResumableUpload',
+    ]);
 
     assert.strictEqual(augmentedService.resumableUploads.length, 1);
     assert.deepStrictEqual(
@@ -1839,37 +1842,30 @@ describe('src/schema/proto.ts - resumable upload detection', () => {
     );
   });
 
-  it('ignores media upload annotations that are not enabled', () => {
-    const fd = {} as protos.google.protobuf.FileDescriptorProto;
-    fd.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
-    fd.service[0].name = 'TestService';
-    fd.service[0].method = [
-      {
-        name: 'CreateUpload',
-        inputType: '.test.CreateUploadRequest',
-        outputType: '.test.CreateUploadResponse',
-        options: {
-          '.google.api.mediaUpload': {enabled: false},
-        },
-      },
-    ] as protos.google.protobuf.MethodDescriptorProto[];
+  it('does not enable methods that are not listed for the service', () => {
+    const augmentedService = augmentResumableTestService([
+      'ResumableUploadService.CreateResumableUpload',
+    ]);
 
-    const options: Options = {
-      grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
-    };
-    const augmentedService = augmentService({
-      allMessages: {},
-      localMessages: {},
-      packageName: 'test',
-      service: fd.service[0],
-      commentsMap: new CommentsMap([fd]),
-      allResourceDatabase: new ResourceDatabase(),
-      resourceDatabase: new ResourceDatabase(),
-      options,
-      protoFile: 'fd',
-    });
+    assert.strictEqual(
+      augmentedService.method.find(m => m.name === 'GetUploadStatus')
+        ?.resumableUpload,
+      undefined,
+    );
+    assert.strictEqual(
+      augmentedService.simpleMethods.some(m => m.name === 'GetUploadStatus'),
+      true,
+    );
+  });
+
+  it('does not enable resumable uploads when the option is omitted', () => {
+    const augmentedService = augmentResumableTestService();
 
     assert.strictEqual(augmentedService.resumableUploads.length, 0);
-    assert.strictEqual(augmentedService.method[0].resumableUpload, undefined);
+    assert.strictEqual(
+      augmentedService.method.find(m => m.name === 'CreateResumableUpload')
+        ?.resumableUpload,
+      undefined,
+    );
   });
 });
