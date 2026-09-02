@@ -32,6 +32,8 @@ function main(name) {
    *  Required. Specifies the name of the document to retrieve.
    *  Format: `documents/{uri_without_scheme}`
    *  Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *  The name must not exceed 500 characters; values longer than 500 characters
+   *  will result in an `INVALID_ARGUMENT` error.
    */
   // const name = 'abc123'
   /**

@@ -229,6 +229,11 @@ function main(nodeVersion, imageType) {
    *  The taint configuration for the node pool.
    */
   // const taintConfig = {}
+  /**
+   *  Optional. Specifies the maintenance policy for the node pool, including
+   *  maintenance exclusion options.
+   */
+  // const maintenancePolicy = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

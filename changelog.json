@@ -4,6 +4,135 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "fad57ff4b9164712426a041fc61db035859f9043",
+          "message": "Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries",
+          "issues": [
+            "9116"
+          ]
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "3f2b5de6-0296-4cba-a3ac-b13ca74af052",
+      "createTime": "2026-09-01T12:41:10.557Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a0cbc510dd45db2232a909a0b8c225771cfbcf18",
+          "message": "Bundle backstory UDM protos into @google-cloud/chronicle",
+          "issues": [
+            "9189"
+          ],
+          "scope": "chronicle"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "2fc3e81a-3aa9-42ff-afcb-6df56dc808e1",
+      "createTime": "2026-08-28T08:19:43.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b312515bcd60c767532ebd0dabf23d95014e0a86",
+          "message": "Upgrade sinon types for health package",
+          "issues": [
+            "9202"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "32bcc1e7-8c9b-4036-ae32-5fc71d80bce0",
+      "createTime": "2026-08-26T13:37:16.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "94aac1eb121d6bbfbd92007befe8b8f159b4d379",
+          "message": "Patch the vulnerability for Bigquery and other REST based clients",
+          "issues": [
+            "9188"
+          ]
+        }
+      ],
+      "version": "9.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "7976bd3e-a490-4f94-9187-81fa34db9e2a",
+      "createTime": "2026-08-26T13:37:16.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5111d528f91c07da232a181d5636bcaeccd765a7",
+          "message": "Add Otel Tracing helpers and tests",
+          "issues": [
+            "9070"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "257a895e361472f0b04cb87bcb20798530a08aed",
+          "message": "Accept clientOptions in createApiCall for telemetry tracing",
+          "issues": [
+            "9176"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "6fcd94d507befa4805a2d257b3f312458ac2c48c",
+          "message": "Fix several missing files from the monorepo merge",
+          "issues": [
+            "9209"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "09609c8796f975740f8eb3fae95fbdfec2e05209",
+          "message": "Turn on the gax vulnerability tests again",
+          "issues": [
+            "9204"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "c06c140e-d816-4ef4-a011-d1e735f12f3d",
+      "createTime": "2026-08-26T13:37:16.695Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "94aac1eb121d6bbfbd92007befe8b8f159b4d379",
+          "message": "Patch the vulnerability for Bigquery and other REST based clients",
+          "issues": [
+            "9188"
+          ]
+        }
+      ],
+      "version": "8.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "9eadd707-8f18-454f-b2fe-8cedea9558c5",
+      "createTime": "2026-08-26T13:37:16.654Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "461fbe38c9b67ab78b3a6244ddec2d8194fd53b9",
           "message": "Onboard a new library",
@@ -90414,5 +90543,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-21T17:24:24.777Z"
+  "updateTime": "2026-09-01T12:41:10.557Z"
 }

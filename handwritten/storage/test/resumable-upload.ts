@@ -34,6 +34,7 @@ import {
   CreateUriCallback,
   PROTOCOL_REGEX,
   UploadConfig,
+  Upload,
 } from '../src/resumable-upload.js';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -55,8 +56,8 @@ const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 const CHUNK_SIZE_MULTIPLE = 2 ** 18;
 const queryPath = '/?userProject=user-project-id';
 const X_GOOG_API_HEADER_REGEX =
-  /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd\/(?<gcclGcsCmd>[^W]+)$/;
-const USER_AGENT_REGEX = /^gcloud-node-storage\/(?<libVersion>[^W]+)$/;
+  /^gl-node\/(?<nodeVersion>\S+) gccl\/(?<gccl>\S+) gccl-invocation-id\/(?<gcclInvocationId>\S+) gccl-gcs-cmd\/(?<gcclGcsCmd>\S+)$/;
+const USER_AGENT_REGEX = /^gcloud-node-storage\/(?<libVersion>\S+)$/;
 const CORRECT_CLIENT_CRC32C = 'Q2hlY2tzdW0h';
 const INCORRECT_SERVER_CRC32C = 'Q2hlY2tzdVUa';
 const CORRECT_CLIENT_MD5 = 'CorrectMD5Hash';
@@ -694,8 +695,8 @@ describe('resumable-upload', () => {
     });
 
     it('should wait for `wroteToChunkBuffer` if !`writeBuffers.length` && !`upstreamEnded`', async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('wroteToChunkBuffer');
       });
 
@@ -703,15 +704,15 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' if !`writeBuffers.length` && !`upstreamEnded`", async () => {
-      await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
     });
 
     it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
 
@@ -719,7 +720,7 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
-      const result = await new Promise(resolve => {
+      const result = await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             // Update the `writeBuffers` before emitting 'upstreamFinished'
@@ -729,22 +730,22 @@ describe('resumable-upload', () => {
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(result, true);
     });
 
     it("should wait for 'upstreamFinished' if !`writeBuffers.length` && !`upstreamEnded`", async () => {
-      await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
     });
 
     it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
-      const result = await new Promise(resolve => {
-        up.waitForNextChunk().then(resolve);
+      const result = await new Promise((resolve, reject) => {
+        up.waitForNextChunk().then(resolve).catch(reject);
         up.emit('upstreamFinished');
       });
 
@@ -752,7 +753,7 @@ describe('resumable-upload', () => {
     });
 
     it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
-      const result = await new Promise(resolve => {
+      const result = await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             // Update the `writeBuffers` before emitting 'upstreamFinished'
@@ -762,7 +763,7 @@ describe('resumable-upload', () => {
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(result, true);
@@ -772,14 +773,14 @@ describe('resumable-upload', () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
       assert.equal(up.listenerCount('upstreamFinished'), 0);
 
-      await new Promise(resolve => {
+      await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'wroteToChunkBuffer') {
             process.nextTick(() => up.emit('wroteToChunkBuffer'));
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
@@ -790,14 +791,14 @@ describe('resumable-upload', () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
       assert.equal(up.listenerCount('upstreamFinished'), 0);
 
-      await new Promise(resolve => {
+      await new Promise((resolve, reject) => {
         up.on('newListener', (event: string) => {
           if (event === 'upstreamFinished') {
             process.nextTick(() => up.emit('upstreamFinished'));
           }
         });
 
-        up.waitForNextChunk().then(resolve);
+        up.waitForNextChunk().then(resolve).catch(reject);
       });
 
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
@@ -877,10 +878,138 @@ describe('resumable-upload', () => {
         delete metadataNoHeaders.contentLength;
         delete metadataNoHeaders.contentType;
         assert.deepStrictEqual(reqOpts.data, metadataNoHeaders);
+        assert(reqOpts.headers);
+        const apiClientHeader = reqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        const idempotencyToken =
+          reqOpts.headers['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
         done();
         return {headers: {location: '/foo'}};
       };
       up.createURI();
+    });
+
+    it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id in createURI', async () => {
+      const customToken = 'my-custom-resumable-token';
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': customToken,
+        },
+      };
+
+      up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
+        assert(combinedReqOpts.headers);
+        const apiClientHeader = combinedReqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        assert.strictEqual(invocationId, customToken);
+
+        // Verify there is no duplicate x-goog-gcs-idempotency-token header
+        assert.strictEqual(
+          combinedReqOpts.headers['x-goog-gcs-idempotency-token'],
+          undefined
+        );
+        assert.strictEqual(
+          combinedReqOpts.headers['X-Goog-Gcs-Idempotency-Token'],
+          customToken
+        );
+        return {headers: {location: '/foo'}};
+      };
+
+      await up.createURI();
+      assert.strictEqual(
+        up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+        customToken
+      );
+    });
+
+    it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID in createURI', async () => {
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': '', // invalid empty string
+        },
+      };
+
+      up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
+        assert(combinedReqOpts.headers);
+        const apiClientHeader = combinedReqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+
+        // Verify a fallback token was generated and matches the invocation ID
+        const idempotencyToken =
+          combinedReqOpts.headers['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        return {headers: {location: '/foo'}};
+      };
+
+      await up.createURI();
+      assert.strictEqual(
+        up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+        ''
+      );
+    });
+
+    it('should ignore whitespace-only user-provided idempotency tokens and fallback to generating a UUID in createURI', async () => {
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': '   ', // whitespace only
+        },
+      };
+
+      up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
+        assert(combinedReqOpts.headers);
+        const apiClientHeader = combinedReqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+
+        // Verify a fallback token was generated and matches the invocation ID
+        const idempotencyToken =
+          combinedReqOpts.headers['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        return {headers: {location: '/foo'}};
+      };
+
+      await up.createURI();
+      assert.strictEqual(
+        up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+        '   '
+      );
+    });
+
+    it('should reuse the same x-goog-gcs-idempotency-token on retry of createURI', async () => {
+      let invocationCount = 0;
+      let token1 = '';
+      let token2 = '';
+
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        invocationCount++;
+        assert(reqOpts.headers);
+        if (invocationCount === 1) {
+          token1 = reqOpts.headers['x-goog-gcs-idempotency-token'] as string;
+          const error = new GaxiosError(
+            'Retriable error',
+            {} as GaxiosOptions,
+            {status: 500} as GaxiosResponse
+          );
+          throw error;
+        } else if (invocationCount === 2) {
+          token2 = reqOpts.headers['x-goog-gcs-idempotency-token'] as string;
+          return {headers: {location: '/foo'}};
+        }
+        return {headers: {location: '/foo'}};
+      };
+
+      await up.createURI();
+      assert.strictEqual(invocationCount, 2);
+      assert.ok(token1);
+      assert.strictEqual(token1, token2);
     });
 
     it('should pass through the KMS key name', done => {
@@ -1293,6 +1422,218 @@ describe('resumable-upload', () => {
           assert.equal(data.byteLength, CONTENT_LENGTH - NUM_BYTES_WRITTEN);
         });
       });
+
+      describe('idempotency and header decoration', () => {
+        it('should attach x-goog-gcs-idempotency-token matching gccl-invocation-id in sendChunk', async () => {
+          let capturedHeaders: GaxiosOptions['headers'];
+          up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
+            capturedHeaders = requestOptions.headers;
+            return null;
+          };
+          up.writeBuffers = [Buffer.alloc(16)];
+          await up.startUploading();
+
+          assert(capturedHeaders);
+          const apiClientHeader = capturedHeaders[
+            'x-goog-api-client'
+          ] as string;
+          const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+          assert.ok(match);
+          const invocationId = match.groups!.gcclInvocationId;
+          assert.strictEqual(
+            capturedHeaders['x-goog-gcs-idempotency-token'],
+            invocationId
+          );
+        });
+
+        it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively in sendChunk', async () => {
+          const customToken = 'my-custom-chunk-token';
+          up.customRequestOptions = {
+            headers: {
+              'X-Goog-Gcs-Idempotency-Token': customToken,
+            },
+          };
+          let capturedHeaders: GaxiosOptions['headers'];
+          up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
+            capturedHeaders = requestOptions.headers;
+            return null;
+          };
+          up.writeBuffers = [Buffer.alloc(16)];
+          await up.startUploading();
+
+          assert(capturedHeaders);
+          const apiClientHeader = capturedHeaders[
+            'x-goog-api-client'
+          ] as string;
+          const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+          assert.ok(match);
+          const invocationId = match.groups!.gcclInvocationId;
+          assert.strictEqual(invocationId, customToken);
+          assert.strictEqual(
+            capturedHeaders['X-Goog-Gcs-Idempotency-Token'],
+            customToken
+          );
+          assert.strictEqual(
+            capturedHeaders['x-goog-gcs-idempotency-token'],
+            undefined
+          );
+          assert.strictEqual(
+            up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+            customToken
+          );
+        });
+
+        it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID in sendChunk', async () => {
+          up.customRequestOptions = {
+            headers: {
+              'X-Goog-Gcs-Idempotency-Token': '',
+            },
+          };
+          let capturedHeaders: GaxiosOptions['headers'];
+          up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
+            capturedHeaders = requestOptions.headers;
+            return null;
+          };
+          up.writeBuffers = [Buffer.alloc(16)];
+          await up.startUploading();
+
+          assert(capturedHeaders);
+          const apiClientHeader = capturedHeaders[
+            'x-goog-api-client'
+          ] as string;
+          const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+          assert.ok(match);
+          const invocationId = match.groups!.gcclInvocationId;
+          assert.strictEqual(
+            capturedHeaders['x-goog-gcs-idempotency-token'],
+            invocationId
+          );
+          assert.strictEqual(
+            up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+            ''
+          );
+        });
+
+        it('should ignore whitespace-only user-provided idempotency tokens and fallback to generating a UUID in sendChunk', async () => {
+          up.customRequestOptions = {
+            headers: {
+              'X-Goog-Gcs-Idempotency-Token': '   ',
+            },
+          };
+          let capturedHeaders: GaxiosOptions['headers'];
+          up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
+            capturedHeaders = requestOptions.headers;
+            return null;
+          };
+          up.writeBuffers = [Buffer.alloc(16)];
+          await up.startUploading();
+
+          assert(capturedHeaders);
+          const apiClientHeader = capturedHeaders[
+            'x-goog-api-client'
+          ] as string;
+          const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+          assert.ok(match);
+          const invocationId = match.groups!.gcclInvocationId;
+          assert.strictEqual(
+            capturedHeaders['x-goog-gcs-idempotency-token'],
+            invocationId
+          );
+          assert.strictEqual(
+            up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+            '   '
+          );
+        });
+
+        it('should reuse the same idempotency token on retry of the same chunk', async () => {
+          up.writeBuffers = [Buffer.alloc(16)];
+          up.retryOptions.retryableErrorFn = () => true;
+
+          let invocationCount = 0;
+          let token1 = '';
+          let token2 = '';
+
+          up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
+            invocationCount++;
+            const token = requestOptions.headers![
+              'x-goog-gcs-idempotency-token'
+            ] as string;
+            if (invocationCount === 1) {
+              token1 = token;
+              const err = new Error('Retriable error') as ApiError;
+              err.code = 500;
+              throw err;
+            }
+            token2 = token;
+            return null;
+          };
+
+          const retryPromise = new Promise<void>(resolve => {
+            up.attemptDelayedRetry = async () => {
+              await up.startUploading();
+              resolve();
+            };
+          });
+
+          await up.startUploading();
+          await retryPromise;
+
+          assert.strictEqual(invocationCount, 2);
+          assert.ok(token1);
+          assert.strictEqual(token1, token2);
+        });
+
+        it('should generate distinct idempotency tokens for Chunk 1 and Chunk 2 in multi-chunk uploads', done => {
+          up.chunkSize = 256;
+          up.contentLength = 512;
+          up.writeBuffers = [Buffer.alloc(256), Buffer.alloc(256)];
+          up.upstreamEnded = false;
+
+          const chunkTokens: string[] = [];
+          const chunkInvocationIds: string[] = [];
+
+          up.makeRequestStream = async (requestOptions: GaxiosOptions) => {
+            const headers = requestOptions.headers!;
+            const token = headers['x-goog-gcs-idempotency-token'] as string;
+            const apiClientHeader = headers['x-goog-api-client'] as string;
+            const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+            assert.ok(match);
+            chunkTokens.push(token);
+            chunkInvocationIds.push(match.groups!.gcclInvocationId);
+
+            if (chunkTokens.length === 1) {
+              return {
+                status: 308,
+                headers: {range: 'bytes 0-255'},
+                data: {},
+              } as unknown as GaxiosResponse;
+            }
+            return {
+              status: 200,
+              headers: {},
+              data: {size: 512},
+            } as unknown as GaxiosResponse;
+          };
+
+          up.on('metadata', () => {
+            try {
+              assert.strictEqual(chunkTokens.length, 2);
+              assert.strictEqual(chunkTokens[0], chunkInvocationIds[0]);
+              assert.strictEqual(chunkTokens[1], chunkInvocationIds[1]);
+              assert.notStrictEqual(chunkTokens[0], chunkTokens[1]);
+              assert.notStrictEqual(
+                chunkInvocationIds[0],
+                chunkInvocationIds[1]
+              );
+              done();
+            } catch (err) {
+              done(err);
+            }
+          });
+
+          up.startUploading();
+        });
+      });
     });
 
     describe('X-Goog-Hash header injection', () => {
@@ -1371,17 +1712,13 @@ describe('resumable-upload', () => {
         const calculateMd5 = !configOptions.clientMd5Hash && configOptions.md5;
 
         if (calculateCrc32c || calculateMd5) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (up as any)['#hashValidator'] = createMockHashValidator(
-            !!calculateCrc32c,
-            !!calculateMd5
-          );
+          (up as unknown as Record<string, unknown>)['#hashValidator'] =
+            createMockHashValidator(!!calculateCrc32c, !!calculateMd5);
         }
       }
 
       async function performUpload(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        uploadInstance: any,
+        uploadInstance: Upload,
         data: Buffer,
         isMultiChunk: boolean,
         expectedCrc32c?: string,
@@ -1390,9 +1727,9 @@ describe('resumable-upload', () => {
         const capturedReqOpts: GaxiosOptions[] = [];
         requestCount = 0;
 
-        uploadInstance.makeRequestStream = async (
-          requestOptions: GaxiosOptions
-        ) => {
+        (
+          uploadInstance as unknown as {makeRequestStream: Function}
+        ).makeRequestStream = async (requestOptions: GaxiosOptions) => {
           requestCount++;
           capturedReqOpts.push(requestOptions);
 
@@ -1412,8 +1749,7 @@ describe('resumable-upload', () => {
               data: '',
               status: RESUMABLE_INCOMPLETE_STATUS_CODE,
               headers: {range: `bytes=0-${lastByteReceived}`},
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
+            } as unknown as GaxiosResponse;
           } else {
             return {
               status: 200,
@@ -1427,8 +1763,7 @@ describe('resumable-upload', () => {
               headers: {},
               config: {},
               statusText: 'OK',
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
+            } as unknown as GaxiosResponse;
           }
         };
 
@@ -1619,8 +1954,7 @@ describe('resumable-upload', () => {
         status: 200,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (up as any)['#hashValidator'] = {
+      (up as unknown as Record<string, unknown>)['#hashValidator'] = {
         crc32cEnabled: true,
         md5Enabled: true,
         crc32c: CLIENT_CRC,
@@ -1649,8 +1983,7 @@ describe('resumable-upload', () => {
       };
 
       up.md5 = true;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (up as any)['#hashValidator'] = {
+      (up as unknown as Record<string, unknown>)['#hashValidator'] = {
         crc32c: 'crc32c_match',
         md5Digest: CLIENT_MD5,
       };
@@ -1813,20 +2146,170 @@ describe('resumable-upload', () => {
     );
   });
 
-  it('currentInvocationId.checkUploadStatus should be the same on error', done => {
+  it('currentInvocationId.checkUploadStatus should be the same on error', async () => {
     const beforeCallInvocationId = up.currentInvocationId.checkUploadStatus;
-    up.destroy = () => {
-      assert.equal(
-        beforeCallInvocationId,
-        up.currentInvocationId.checkUploadStatus
-      );
-      done();
-    };
+    const destroyCalled = new Promise<void>(resolve => {
+      up.destroy = () => {
+        assert.equal(
+          beforeCallInvocationId,
+          up.currentInvocationId.checkUploadStatus
+        );
+        resolve();
+      };
+    });
     up.makeRequest = () => {
       throw new Error() as GaxiosError;
     };
 
-    up.getAndSetOffset().catch(done);
+    await up.getAndSetOffset();
+    await destroyCalled;
+  });
+
+  describe('#checkUploadStatus', () => {
+    beforeEach(() => {
+      up.uri = 'http://example.com/upload';
+    });
+
+    it('should attach x-goog-gcs-idempotency-token matching gccl-invocation-id in checkUploadStatus', async () => {
+      let capturedHeaders: GaxiosOptions['headers'];
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        capturedHeaders = reqOpts.headers;
+        return {status: 308, headers: {range: 'bytes 0-10'}};
+      };
+
+      await up.checkUploadStatus();
+
+      assert(capturedHeaders);
+      const apiClientHeader = capturedHeaders['x-goog-api-client'] as string;
+      const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+      assert.ok(match);
+      const invocationId = match.groups!.gcclInvocationId;
+      assert.strictEqual(
+        capturedHeaders['x-goog-gcs-idempotency-token'],
+        invocationId
+      );
+    });
+
+    it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively in checkUploadStatus', async () => {
+      const customToken = 'my-custom-status-token';
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': customToken,
+        },
+      };
+      let capturedHeaders: GaxiosOptions['headers'];
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        capturedHeaders = reqOpts.headers;
+        return {status: 308, headers: {range: 'bytes 0-10'}};
+      };
+
+      await up.checkUploadStatus();
+
+      assert(capturedHeaders);
+      const apiClientHeader = capturedHeaders['x-goog-api-client'] as string;
+      const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+      assert.ok(match);
+      const invocationId = match.groups!.gcclInvocationId;
+      assert.strictEqual(invocationId, customToken);
+      assert.strictEqual(
+        capturedHeaders['X-Goog-Gcs-Idempotency-Token'],
+        customToken
+      );
+      assert.strictEqual(
+        capturedHeaders['x-goog-gcs-idempotency-token'],
+        undefined
+      );
+      assert.strictEqual(
+        up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+        customToken
+      );
+    });
+
+    it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID in checkUploadStatus', async () => {
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': '',
+        },
+      };
+      let capturedHeaders: GaxiosOptions['headers'];
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        capturedHeaders = reqOpts.headers;
+        return {status: 308, headers: {range: 'bytes 0-10'}};
+      };
+
+      await up.checkUploadStatus();
+
+      assert(capturedHeaders);
+      const apiClientHeader = capturedHeaders['x-goog-api-client'] as string;
+      const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+      assert.ok(match);
+      const invocationId = match.groups!.gcclInvocationId;
+      assert.strictEqual(
+        capturedHeaders['x-goog-gcs-idempotency-token'],
+        invocationId
+      );
+      assert.strictEqual(
+        up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+        ''
+      );
+    });
+
+    it('should ignore whitespace-only user-provided idempotency tokens and fallback to generating a UUID in checkUploadStatus', async () => {
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': '   ',
+        },
+      };
+      let capturedHeaders: GaxiosOptions['headers'];
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        capturedHeaders = reqOpts.headers;
+        return {status: 308, headers: {range: 'bytes 0-10'}};
+      };
+
+      await up.checkUploadStatus();
+
+      assert(capturedHeaders);
+      const apiClientHeader = capturedHeaders['x-goog-api-client'] as string;
+      const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader);
+      assert.ok(match);
+      const invocationId = match.groups!.gcclInvocationId;
+      assert.strictEqual(
+        capturedHeaders['x-goog-gcs-idempotency-token'],
+        invocationId
+      );
+      assert.strictEqual(
+        up.customRequestOptions.headers!['X-Goog-Gcs-Idempotency-Token'],
+        '   '
+      );
+    });
+
+    it('should reuse the same x-goog-gcs-idempotency-token on retry of checkUploadStatus', async () => {
+      let invocationCount = 0;
+      let token1 = '';
+      let token2 = '';
+
+      up.getRetryDelay = () => 1;
+      up.retryOptions.retryableErrorFn = () => true;
+
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        invocationCount++;
+        const token = reqOpts.headers![
+          'x-goog-gcs-idempotency-token'
+        ] as string;
+        if (invocationCount === 1) {
+          token1 = token;
+          throw new Error('Transient error');
+        }
+        token2 = token;
+        return {status: 308, headers: {range: 'bytes 0-10'}};
+      };
+
+      await up.checkUploadStatus();
+
+      assert.strictEqual(invocationCount, 2);
+      assert.ok(token1);
+      assert.strictEqual(token1, token2);
+    });
   });
 
   describe('#getAndSetOffset', () => {
@@ -2155,8 +2638,7 @@ describe('resumable-upload', () => {
       let abortController: AbortController;
       up.authClient = {
         request: (reqOpts: GaxiosOptions) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          abortController = reqOpts.signal as any;
+          abortController = reqOpts.signal as unknown as AbortController;
         },
       };
 
@@ -2287,7 +2769,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            `Retry limit exceeded - status: 500 - error message from server`,
+            `Retry limit exceeded - status: 500 - error message from server`
           );
           done();
         };
@@ -2328,7 +2810,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              `Retry limit exceeded - status: 500 - error message from server`,
+              `Retry limit exceeded - status: 500 - error message from server`
             );
             done();
           });
@@ -2494,11 +2976,11 @@ describe('resumable-upload', () => {
       up.numRetries = 3;
       up.retryLimit = 3;
       const nativeError = new Error('native connection issue');
-      
+
       up.on('error', (err: Error) => {
         assert.strictEqual(
           err.message,
-          'Retry limit exceeded - native connection issue',
+          'Retry limit exceeded - native connection issue'
         );
         done();
       });
@@ -2512,13 +2994,14 @@ describe('resumable-upload', () => {
     it('should include correct details for custom errors with empty messages', done => {
       up.numRetries = 3;
       up.retryLimit = 3;
-      const customError = new Error('');
-      (customError as any).code = 'ERR_SOMETHING_SPECIAL';
+      const customError = Object.assign(new Error(''), {
+        code: 'ERR_SOMETHING_SPECIAL',
+      });
 
       up.on('error', (err: Error) => {
         assert.strictEqual(
           err.message,
-          'Retry limit exceeded - code: ERR_SOMETHING_SPECIAL',
+          'Retry limit exceeded - code: ERR_SOMETHING_SPECIAL'
         );
         done();
       });
@@ -2538,21 +3021,24 @@ describe('resumable-upload', () => {
         {
           method: 'POST',
           url: 'https://example.com',
-        } as any,
+        },
         {
           status: 429,
           statusText: 'Too Many Requests',
           data: '',
           config: {},
           headers: {},
-        } as any
+        } as GaxiosResponse
       );
 
       up.on('error', (err: Error) => {
         // Assert that the formatted error message includes key HTTP details from the GaxiosError.
         assert(err.message.includes('Retry limit exceeded'));
         assert(err.message.includes('Request failed with status code 429'));
-        assert(err.message.includes('status: 429') || err.message.includes('code: 429'));
+        assert(
+          err.message.includes('status: 429') ||
+            err.message.includes('code: 429')
+        );
         assert(err.message.includes('statusText: Too Many Requests'));
         done();
       });
@@ -2572,7 +3058,7 @@ describe('resumable-upload', () => {
         {
           method: 'POST',
           url: 'https://example.com',
-        } as any,
+        },
         {
           status: 400,
           statusText: 'Bad Request',
@@ -2584,14 +3070,17 @@ describe('resumable-upload', () => {
           },
           config: {},
           headers: {},
-        } as any
+        } as GaxiosResponse
       );
 
       up.on('error', (err: Error) => {
         // Assert that the formatted error message includes key HTTP details and the inner API error message.
         assert(err.message.includes('Retry limit exceeded'));
         assert(err.message.includes('Request failed with status code 400'));
-        assert(err.message.includes('status: 400') || err.message.includes('code: 400'));
+        assert(
+          err.message.includes('status: 400') ||
+            err.message.includes('code: 400')
+        );
         assert(err.message.includes('Invalid query parameter value'));
         done();
       });
@@ -3217,10 +3706,12 @@ describe('resumable-upload', () => {
               FileExceptionMessages.UPLOAD_MISMATCH
             );
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const detailError = (err as any).errors && (err as any).errors[0];
+            const detailError =
+              (err as ApiError).errors && (err as ApiError).errors![0];
             assert.ok(
-              detailError && detailError.message.includes(scenario.errorPart!),
+              detailError &&
+                detailError.message &&
+                detailError.message.includes(scenario.errorPart!),
               `Error message should contain: ${scenario.errorPart}`
             );
             assert.strictEqual(up.uri, URI);

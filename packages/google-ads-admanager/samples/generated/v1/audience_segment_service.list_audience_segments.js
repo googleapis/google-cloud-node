@@ -52,7 +52,21 @@ function main(parent) {
    *   See syntax details at
    *   https://developers.google.com/ad-manager/api/beta/filters
    *  **Filterable fields:**
+   *  * `adIdSize`
+   *  * `categoryIds`
+   *  * `dataProviderDisplayName`
    *  * `displayName`
+   *  * `idfaSize`
+   *  * `mobileWebSize`
+   *  * `ppidSize`
+   *  * `segmentType`
+   *  * `sharedId`
+   *  * `size`
+   *  * `status`
+   *  * `thirdPartyAudienceSegment.approvalStatus`
+   *  * `thirdPartyAudienceSegment.cost`
+   *  * `thirdPartyAudienceSegment.endTime`
+   *  * `thirdPartyAudienceSegment.startTime`
    */
   // const filter = 'abc123'
   /**

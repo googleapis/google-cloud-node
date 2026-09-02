@@ -23,12 +23,21 @@ import {
   MissingProjectIdError,
 } from '@google-cloud/projectify';
 import * as htmlEntities from 'html-entities';
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {CredentialBody} from 'google-auth-library';
-import * as r from 'teeny-request';
+import {
+  AuthClient,
+  GoogleAuth,
+  GoogleAuthOptions,
+  CredentialBody,
+} from 'google-auth-library';
+import type {
+  CoreOptions,
+  Options,
+  OptionsWithUri,
+  Response,
+} from 'teeny-request';
+import {teenyRequest} from 'teeny-request';
 import retryRequest from 'retry-request';
 import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
-import {teenyRequest} from 'teeny-request';
 import {Interceptor} from './service-object.js';
 import * as crypto from 'crypto';
 import {DEFAULT_PROJECT_ID_TOKEN} from './service.js';
@@ -52,7 +61,7 @@ const packageJson = getPackageJSON();
  **/
 export const GCCL_GCS_CMD_KEY = Symbol.for('GCCL_GCS_CMD');
 
-const requestDefaults: r.CoreOptions = {
+const requestDefaults: CoreOptions = {
   timeout: 60000,
   gzip: true,
   forever: true,
@@ -80,6 +89,9 @@ const MAX_RETRY_DEFAULT = 3;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ResponseBody = any;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Headers = {[header: string]: any};
+
 // Directly copy over Duplexify interfaces
 export interface DuplexifyOptions extends DuplexOptions {
   autoDestroy?: boolean;
@@ -96,22 +108,22 @@ export interface DuplexifyConstructor {
   obj(
     writable?: Writable | false | null,
     readable?: Readable | false | null,
-    options?: DuplexifyOptions,
+    options?: DuplexifyOptions
   ): Duplexify;
   new (
     writable?: Writable | false | null,
     readable?: Readable | false | null,
-    options?: DuplexifyOptions,
+    options?: DuplexifyOptions
   ): Duplexify;
   (
     writable?: Writable | false | null,
     readable?: Readable | false | null,
-    options?: DuplexifyOptions,
+    options?: DuplexifyOptions
   ): Duplexify;
 }
 
 export interface ParsedHttpRespMessage {
-  resp: r.Response;
+  resp: Response;
   err?: ApiError;
 }
 
@@ -119,18 +131,18 @@ export interface MakeAuthenticatedRequest {
   (reqOpts: DecorateRequestOptions): Duplexify;
   (
     reqOpts: DecorateRequestOptions,
-    options?: MakeAuthenticatedRequestOptions,
+    options?: MakeAuthenticatedRequestOptions
   ): void | Abortable;
   (
     reqOpts: DecorateRequestOptions,
-    callback?: BodyResponseCallback,
+    callback?: BodyResponseCallback
   ): void | Abortable;
   (
     reqOpts: DecorateRequestOptions,
-    optionsOrCallback?: MakeAuthenticatedRequestOptions | BodyResponseCallback,
+    optionsOrCallback?: MakeAuthenticatedRequestOptions | BodyResponseCallback
   ): void | Abortable | Duplexify;
   getCredentials: (
-    callback: (err?: Error | null, credentials?: CredentialBody) => void,
+    callback: (err?: Error | null, credentials?: CredentialBody) => void
   ) => void;
   authClient: GoogleAuth<AuthClient>;
 }
@@ -145,8 +157,10 @@ export interface PackageJson {
   version: string;
 }
 
-export interface MakeAuthenticatedRequestFactoryConfig
-  extends Omit<GoogleAuthOptions, 'authClient'> {
+export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
+  GoogleAuthOptions,
+  'authClient'
+> {
   /**
    * Automatically retry requests if the response is related to rate limits or
    * certain intermittent server errors. We will exponentially backoff
@@ -200,7 +214,7 @@ export interface OnAuthenticatedCallback {
 export interface GoogleErrorBody {
   code: number;
   errors?: GoogleInnerError[];
-  response: r.Response;
+  response: Response;
   message?: string;
 }
 
@@ -224,22 +238,19 @@ export interface MakeWritableStreamOptions {
   /**
    * Request object, in the format of a standard Node.js http.request() object.
    */
-  request?: r.Options;
+  request?: Options;
 
   makeAuthenticatedRequest(
-    reqOpts: r.OptionsWithUri & {
+    reqOpts: OptionsWithUri & {
       [GCCL_GCS_CMD_KEY]?: string;
     },
     fnobj: {
-      onAuthenticated(
-        err: Error | null,
-        authenticatedReqOpts?: r.Options,
-      ): void;
-    },
+      onAuthenticated(err: Error | null, authenticatedReqOpts?: Options): void;
+    }
   ): void;
 }
 
-export interface DecorateRequestOptions extends r.CoreOptions {
+export interface DecorateRequestOptions extends CoreOptions {
   autoPaginate?: boolean;
   autoPaginateVal?: boolean;
   objectMode?: boolean;
@@ -264,7 +275,7 @@ export interface ParsedHttpResponseBody {
 export class ApiError extends Error {
   code?: number;
   errors?: GoogleInnerError[];
-  response?: r.Response;
+  response?: Response;
   constructor(errorMessage: string);
   constructor(errorBody: GoogleErrorBody);
   constructor(errorBodyOrMessage?: GoogleErrorBody | string) {
@@ -300,7 +311,7 @@ export class ApiError extends Error {
    */
   static createMultiErrorMessage(
     err: GoogleErrorBody,
-    errors?: GoogleInnerError[],
+    errors?: GoogleInnerError[]
   ): string {
     const messages: Set<string> = new Set();
 
@@ -321,7 +332,7 @@ export class ApiError extends Error {
     if (messageArr.length > 1) {
       messageArr = messageArr.map((message, i) => `    ${i + 1}. ${message}`);
       messageArr.unshift(
-        'Multiple errors occurred during the request. Please see the `errors` array for complete details.\n',
+        'Multiple errors occurred during the request. Please see the `errors` array for complete details.\n'
       );
       messageArr.push('\n');
     }
@@ -337,7 +348,7 @@ export class ApiError extends Error {
  */
 export class PartialFailureError extends Error {
   errors?: GoogleInnerError[];
-  response?: r.Response;
+  response?: Response;
   constructor(b: GoogleErrorBody) {
     super();
     const errorObject = b;
@@ -351,7 +362,7 @@ export class PartialFailureError extends Error {
 }
 
 export interface BodyResponseCallback {
-  (err: Error | ApiError | null, body?: ResponseBody, res?: r.Response): void;
+  (err: Error | ApiError | null, body?: ResponseBody, res?: Response): void;
 }
 
 export interface RetryOptions {
@@ -383,7 +394,7 @@ export interface MakeRequestConfig {
 
   stream?: Duplexify;
 
-  shouldRetryFn?: (response?: r.Response) => boolean;
+  shouldRetryFn?: (response?: Response) => boolean;
 }
 
 export class Util {
@@ -410,9 +421,9 @@ export class Util {
    */
   handleResp(
     err: Error | null,
-    resp?: r.Response | null,
+    resp?: Response | null,
     body?: ResponseBody,
-    callback?: BodyResponseCallback,
+    callback?: BodyResponseCallback
   ) {
     callback = callback || util.noop;
 
@@ -444,7 +455,7 @@ export class Util {
    * @param {?error} parsedHttpRespMessage.err - An error detected.
    * @param {object} parsedHttpRespMessage.resp - The original response object.
    */
-  parseHttpRespMessage(httpRespMessage: r.Response) {
+  parseHttpRespMessage(httpRespMessage: Response) {
     const parsedHttpRespMessage = {
       resp: httpRespMessage,
     } as ParsedHttpRespMessage;
@@ -510,7 +521,7 @@ export class Util {
   makeWritableStream(
     dup: Duplexify,
     options: MakeWritableStreamOptions,
-    onComplete?: Function,
+    onComplete?: Function
   ) {
     onComplete = onComplete || util.noop;
 
@@ -546,7 +557,7 @@ export class Util {
           body: writeStream,
         },
       ],
-    } as {} as r.OptionsWithUri & {
+    } as {} as OptionsWithUri & {
       [GCCL_GCS_CMD_KEY]?: string;
     };
 
@@ -558,7 +569,7 @@ export class Util {
         }
 
         requestDefaults.headers = util._getDefaultHeaders(
-          reqOpts[GCCL_GCS_CMD_KEY],
+          reqOpts[GCCL_GCS_CMD_KEY]
         );
         const request = teenyRequest.defaults(requestDefaults);
         request(authenticatedReqOpts!, (err, resp, body) => {
@@ -625,7 +636,7 @@ export class Util {
    * @param {array} config.scopes - Array of scopes required for the API.
    */
   makeAuthenticatedRequestFactory(
-    config: MakeAuthenticatedRequestFactoryConfig,
+    config: MakeAuthenticatedRequestFactoryConfig
   ) {
     const googleAutoAuthConfig = {...config};
     if (googleAutoAuthConfig.projectId === DEFAULT_PROJECT_ID_TOKEN) {
@@ -656,21 +667,19 @@ export class Util {
      * authenticated request options.
      */
     function makeAuthenticatedRequest(
-      reqOpts: DecorateRequestOptions,
+      reqOpts: DecorateRequestOptions
     ): Duplexify;
     function makeAuthenticatedRequest(
       reqOpts: DecorateRequestOptions,
-      options?: MakeAuthenticatedRequestOptions,
+      options?: MakeAuthenticatedRequestOptions
     ): void | Abortable;
     function makeAuthenticatedRequest(
       reqOpts: DecorateRequestOptions,
-      callback?: BodyResponseCallback,
+      callback?: BodyResponseCallback
     ): void | Abortable;
     function makeAuthenticatedRequest(
       reqOpts: DecorateRequestOptions,
-      optionsOrCallback?:
-        | MakeAuthenticatedRequestOptions
-        | BodyResponseCallback,
+      optionsOrCallback?: MakeAuthenticatedRequestOptions | BodyResponseCallback
     ): void | Abortable | Duplexify {
       let stream: Duplexify;
       let projectId: string;
@@ -693,7 +702,7 @@ export class Util {
 
       const onAuthenticated = async (
         err: Error | null,
-        authenticatedReqOpts?: DecorateRequestOptions,
+        authenticatedReqOpts?: DecorateRequestOptions
       ) => {
         const authLibraryError = err;
         const autoAuthFailed =
@@ -712,7 +721,7 @@ export class Util {
             // Try with existing `projectId` value
             authenticatedReqOpts = util.decorateRequest(
               authenticatedReqOpts!,
-              projectId,
+              projectId
             );
 
             err = null;
@@ -725,7 +734,7 @@ export class Util {
 
                 authenticatedReqOpts = util.decorateRequest(
                   authenticatedReqOpts!,
-                  projectId,
+                  projectId
                 );
 
                 err = null;
@@ -771,7 +780,7 @@ export class Util {
                 apiResponseError = authLibraryError;
               }
               callback!(apiResponseError, ...params);
-            },
+            }
           );
         }
       };
@@ -820,14 +829,14 @@ export class Util {
 
           return onAuthenticated(
             null,
-            authorizedReqOpts as DecorateRequestOptions,
+            authorizedReqOpts as DecorateRequestOptions
           );
         } catch (e) {
           return onAuthenticated(e as Error);
         }
       };
 
-      prepareRequest();
+      void prepareRequest();
 
       if (stream!) {
         return stream!;
@@ -858,17 +867,17 @@ export class Util {
    * @param {object=} config - Configuration object.
    * @param {boolean=} config.autoRetry - Automatically retry requests if the
    *     response is related to rate limits or certain intermittent server
-   * errors. We will exponentially backoff subsequent requests by default.
-   * (default: true)
+   *     errors. We will exponentially backoff subsequent requests by default.
+   *     (default: true)
    * @param {number=} config.maxRetries - Maximum number of automatic retries
    *     attempted before returning the error. (default: 3)
-   * @param {object=} config.request - HTTP module for request calls.
+   * @param {object=} config.retryOptions - Configuration for retryRequest.
    * @param {function} callback - The callback function.
    */
   makeRequest(
     reqOpts: DecorateRequestOptions,
     config: MakeRequestConfig,
-    callback: BodyResponseCallback,
+    callback: BodyResponseCallback
   ): void | Abortable {
     let autoRetryValue = AUTO_RETRY_DEFAULT;
     if (config.autoRetry !== undefined) {
@@ -885,13 +894,13 @@ export class Util {
     }
 
     requestDefaults.headers = this._getDefaultHeaders(
-      reqOpts[GCCL_GCS_CMD_KEY],
+      reqOpts[GCCL_GCS_CMD_KEY]
     );
     const options = {
       request: teenyRequest.defaults(requestDefaults),
       retries: autoRetryValue !== false ? maxRetryValue : 0,
       noResponseRetries: autoRetryValue !== false ? maxRetryValue : 0,
-      shouldRetryFn(httpRespMessage: r.Response) {
+      shouldRetryFn(httpRespMessage: Response) {
         const err = util.parseHttpRespMessage(httpRespMessage).err;
         if (config.retryOptions?.retryableErrorFn) {
           return err && config.retryOptions?.retryableErrorFn(err);
@@ -914,8 +923,8 @@ export class Util {
         options,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (err: Error | null, response: {}, body: any) => {
-          util.handleResp(err, response as {} as r.Response, body, callback!);
-        },
+          util.handleResp(err, response as {} as Response, body, callback!);
+        }
       );
     }
     const dup = config.stream as AbortableDuplex;
@@ -971,13 +980,18 @@ export class Util {
       delete reqOpts.json.autoPaginateVal;
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
 
+      interface HeaderLike {
+        set(name: string, value: string): void;
+        has(name: string): boolean;
+      }
       const headers = reqOpts.headers || {};
+      const headerLike = headers as unknown as Partial<HeaderLike>;
       if (
-        typeof (headers as any).set === 'function' &&
-        typeof (headers as any).has === 'function'
+        typeof headerLike.set === 'function' &&
+        typeof headerLike.has === 'function'
       ) {
-        if (!(headers as any).has('content-type')) {
-          (headers as any).set('Content-Type', 'application/json');
+        if (!headerLike.has('content-type')) {
+          headerLike.set('Content-Type', 'application/json');
         }
         reqOpts.headers = headers;
       } else {
@@ -986,7 +1000,7 @@ export class Util {
         );
         reqOpts.headers = hasContentType
           ? headers
-          : { ...headers, 'Content-Type': 'application/json' };
+          : {...headers, 'Content-Type': 'application/json'};
       }
     }
 
@@ -1034,27 +1048,95 @@ export class Util {
    */
   maybeOptionsOrCallback<T = {}, C = (err?: Error) => void>(
     optionsOrCallback?: T | C,
-    cb?: C,
+    cb?: C
   ): [T, C] {
     return typeof optionsOrCallback === 'function'
       ? [{} as T, optionsOrCallback as C]
       : [optionsOrCallback as T, cb as C];
   }
 
-  _getDefaultHeaders(gcclGcsCmd?: string) {
-    const headers = {
-      'User-Agent': getUserAgentString(),
-      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-        packageJson.version
-      }-${getModuleFormat()} gccl-invocation-id/${crypto.randomUUID()}`,
-    };
-
-    if (gcclGcsCmd) {
-      headers['x-goog-api-client'] += ` gccl-gcs-cmd/${gcclGcsCmd}`;
-    }
-
-    return headers;
+  decorateHeaders(
+    headers?: CoreOptions['headers'],
+    options?: DecorateHeadersOptions
+  ) {
+    return decorateHeaders(headers, options);
   }
+
+  _getDefaultHeaders(gcclGcsCmd?: string) {
+    return decorateHeaders(undefined, {gcclGcsCmd}).headers;
+  }
+}
+
+export interface DecorateHeadersOptions {
+  idempotencyToken?: string;
+  packageJson?: PackageJson;
+  providedUserAgent?: string;
+  gcclGcsCmd?: string;
+}
+
+export interface DecorateHeadersResult {
+  headers: Headers;
+  idempotencyToken: string;
+}
+
+/**
+ * Decorates and sanitizes headers for GCS requests:
+ * - Checks for user-provided `x-goog-gcs-idempotency-token` case-insensitively.
+ * - If a valid non-empty string user token is provided, uses it as the idempotency token and preserves the header.
+ * - If not provided or invalid, removes any invalid header key and sets `x-goog-gcs-idempotency-token` to either the provided fallback token or a generated UUID.
+ * - Adds `User-Agent` and `x-goog-api-client` (with tracking string, package version, gccl-invocation-id, and optional gccl-gcs-cmd).
+ *
+ * @param headers Existing headers object (optional).
+ * @param options Decoration options (idempotencyToken, packageJson, providedUserAgent, gcclGcsCmd).
+ * @returns An object containing the decorated headers and the effective idempotency token.
+ */
+export function decorateHeaders(
+  headers?: CoreOptions['headers'],
+  options?: DecorateHeadersOptions
+): DecorateHeadersResult {
+  const sanitizedHeaders: Headers = {...headers};
+  const userTokenKey = Object.keys(sanitizedHeaders).find(
+    key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+  );
+  const userTokenValue = userTokenKey
+    ? sanitizedHeaders[userTokenKey]
+    : undefined;
+  const hasValidUserToken =
+    typeof userTokenValue === 'string' && userTokenValue.trim() !== '';
+
+  const idempotencyToken = hasValidUserToken
+    ? (userTokenValue as string)
+    : options?.idempotencyToken || crypto.randomUUID();
+
+  let userAgent = getUserAgentString();
+  if (options?.providedUserAgent) {
+    userAgent = `${options.providedUserAgent} ${userAgent}`;
+  }
+
+  const pkg = options?.packageJson || packageJson;
+  let googAPIClient = `${getRuntimeTrackingString()} gccl/${
+    pkg.version
+  }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`;
+
+  const gcclGcsCmd = options?.gcclGcsCmd;
+  if (gcclGcsCmd) {
+    googAPIClient += ` gccl-gcs-cmd/${gcclGcsCmd}`;
+  }
+
+  sanitizedHeaders['User-Agent'] = userAgent;
+  sanitizedHeaders['x-goog-api-client'] = googAPIClient;
+
+  if (!hasValidUserToken) {
+    if (userTokenKey) {
+      delete sanitizedHeaders[userTokenKey];
+    }
+    sanitizedHeaders['x-goog-gcs-idempotency-token'] = idempotencyToken;
+  }
+
+  return {
+    headers: sanitizedHeaders,
+    idempotencyToken,
+  };
 }
 
 /**

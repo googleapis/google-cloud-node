@@ -1064,6 +1064,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "agentsSpec": {
+                          "type": "AgentsSpec",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "toolsSpec": {
                           "type": "ToolsSpec",
                           "id": 18,
@@ -1080,6 +1087,31 @@
                         }
                       },
                       "nested": {
+                        "AgentsSpec": {
+                          "fields": {
+                            "agentSpecs": {
+                              "rule": "repeated",
+                              "type": "AgentSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "AgentSpec": {
+                              "fields": {
+                                "agentId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "ToolsSpec": {
                           "fields": {
                             "vertexAiSearchSpec": {
@@ -27754,6 +27786,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "agentsSpec": {
+                          "type": "AgentsSpec",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "toolsSpec": {
                           "type": "ToolsSpec",
                           "id": 18,
@@ -27770,6 +27809,31 @@
                         }
                       },
                       "nested": {
+                        "AgentsSpec": {
+                          "fields": {
+                            "agentSpecs": {
+                              "rule": "repeated",
+                              "type": "AgentSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "AgentSpec": {
+                              "fields": {
+                                "agentId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "ToolsSpec": {
                           "fields": {
                             "vertexAiSearchSpec": {
