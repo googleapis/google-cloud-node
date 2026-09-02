@@ -400,6 +400,15 @@ export class {{ service.name }}Client {
     };
 {%- endfor %}
 {%- endif %}
+{%- if api.enableTelemetryTracing %}
+
+    const internalTelemetryInfo = {
+      gcpClientService: '{{ api.loggingName }}',
+      gcpVersion: '{{ api.naming.version }}',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '{{ api.publishName }}',
+    };
+{%- endif %}
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -407,24 +416,7 @@ export class {{ service.name }}Client {
         opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')
 {%- if service.apiVersion -%}
        , 'x-goog-api-version': '{{ service.apiVersion }}'
-{%- endif %}});
-
-    {%- if api.enableTelemetryTracing %}
-      if (opts.enableTelemetryTracing) {
-        // set the internal telemetry info using `otherArgs` attribute of `CallSettings`
-        const internalTelemetryInfo = {
-          gcpClientService: '{{ api.loggingName }}',
-          gcpVersion: '{{ api.naming.version }}',
-          gcpRepo: 'googleapis/google-cloud-node',
-          gcpArtifact: '{{ api.publishName }}',
-        };
-        for (const methodName of Object.keys(this._defaults)) {
-          this._defaults[methodName].enableTelemetryTracing = opts.enableTelemetryTracing;
-          this._defaults[methodName].otherArgs = this._defaults[methodName].otherArgs || {};
-          this._defaults[methodName].otherArgs.internalTelemetryInfo = internalTelemetryInfo;
-        }
-      }
-    {%- endif %}
+{%- endif %}}{% if api.enableTelemetryTracing %}, opts.enableTelemetryTracing, internalTelemetryInfo{% endif %});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code

@@ -33,6 +33,7 @@ import {
   GrpcClientOptions,
   GrpcModule,
 } from '../../src/grpc';
+import {ClientConfig} from '../../src/gax';
 import {PassThroughClient} from 'google-auth-library';
 
 function gaxGrpc(options?: GrpcClientOptions) {
@@ -126,6 +127,59 @@ describe('grpc', () => {
       public options: {[index: string]: string | number | Function},
     ) {}
   }
+
+  describe('constructSettings', () => {
+    const grpcClient = gaxGrpc();
+    const serviceConfig = {
+      interfaces: {
+        'google.fake.service': {
+          methods: {
+            method: {
+              timeout_millis: 10,
+            },
+          },
+        },
+      },
+    };
+
+    it('constructs settings without telemetry options', () => {
+      const settings = grpcClient.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, undefined);
+      assert.strictEqual(
+        settings.method.otherArgs.internalTelemetryInfo,
+        undefined,
+      );
+    });
+
+    it('constructs settings with enableTelemetryTracing and internalTelemetryInfo', () => {
+      const telemetryInfo = {
+        gcpClientService: 'fake',
+        gcpVersion: 'v1',
+        gcpRepo: 'googleapis/google-cloud-node',
+        gcpArtifact: '@google-cloud/fake',
+      };
+      const settings = grpcClient.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+        true,
+        telemetryInfo,
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, true);
+      assert.deepStrictEqual(
+        settings.method.otherArgs.internalTelemetryInfo,
+        telemetryInfo,
+      );
+    });
+  });
 
   describe('createStub', () => {
     let grpcClient: GrpcClient;

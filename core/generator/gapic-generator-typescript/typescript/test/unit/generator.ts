@@ -408,9 +408,6 @@ apis:
         f.name?.includes('test_service_client.ts'),
       );
       assert.ok(clientFile);
-      assert.ok(
-        clientFile.content?.includes('if (opts.enableTelemetryTracing) {'),
-      );
       assert.ok(clientFile.content?.includes('internalTelemetryInfo'));
       assert.ok(clientFile.content?.includes("gcpClientService: 'test',"));
       assert.ok(clientFile.content?.includes("gcpVersion: 'v1',"));
@@ -423,25 +420,20 @@ apis:
         clientFile.content?.includes("gcpArtifact: '@google-cloud/test',"),
       );
       assert.ok(
-        clientFile.content?.includes(
-          'this._defaults[methodName].enableTelemetryTracing =',
+        /constructSettings\([\s\S]*opts\.enableTelemetryTracing[\s\S]*internalTelemetryInfo[\s\S]*\)/.test(
+          clientFile.content || '',
         ),
       );
-      assert.ok(clientFile.content?.includes('opts.enableTelemetryTracing;'));
-      assert.ok(
-        clientFile.content?.includes('this._defaults[methodName].otherArgs ='),
-      );
-      assert.ok(
+      assert.strictEqual(
         clientFile.content?.includes(
-          'this._defaults[methodName].otherArgs || {};',
+          'this._defaults[methodName].enableTelemetryTracing',
         ),
+        false,
       );
-      assert.ok(
-        clientFile.content?.includes(
-          'this._defaults[methodName].otherArgs.internalTelemetryInfo =',
-        ),
+      assert.strictEqual(
+        clientFile.content?.includes('this._defaults[methodName].otherArgs'),
+        false,
       );
-      assert.ok(clientFile.content?.includes('internalTelemetryInfo;'));
     });
 
     it('should generate telemetry tracing configuration in service client when enableTelemetryTracing is true (ESM)', async () => {
@@ -485,9 +477,6 @@ apis:
         f.name?.includes('test_service_client.ts'),
       );
       assert.ok(clientFile);
-      assert.ok(
-        clientFile.content?.includes('if (opts.enableTelemetryTracing) {'),
-      );
       assert.ok(clientFile.content?.includes('internalTelemetryInfo'));
       assert.ok(clientFile.content?.includes("gcpClientService: 'test',"));
       assert.ok(clientFile.content?.includes("gcpVersion: 'v1',"));
@@ -500,25 +489,20 @@ apis:
         clientFile.content?.includes("gcpArtifact: '@google-cloud/test',"),
       );
       assert.ok(
-        clientFile.content?.includes(
-          'this._defaults[methodName].enableTelemetryTracing =',
+        /constructSettings\([\s\S]*opts\.enableTelemetryTracing[\s\S]*internalTelemetryInfo[\s\S]*\)/.test(
+          clientFile.content || '',
         ),
       );
-      assert.ok(clientFile.content?.includes('opts.enableTelemetryTracing;'));
-      assert.ok(
-        clientFile.content?.includes('this._defaults[methodName].otherArgs ='),
-      );
-      assert.ok(
+      assert.strictEqual(
         clientFile.content?.includes(
-          'this._defaults[methodName].otherArgs || {};',
+          'this._defaults[methodName].enableTelemetryTracing',
         ),
+        false,
       );
-      assert.ok(
-        clientFile.content?.includes(
-          'this._defaults[methodName].otherArgs.internalTelemetryInfo =',
-        ),
+      assert.strictEqual(
+        clientFile.content?.includes('this._defaults[methodName].otherArgs'),
+        false,
       );
-      assert.ok(clientFile.content?.includes('internalTelemetryInfo;'));
     });
 
     it('should not generate telemetry tracing configuration when enableTelemetryTracing is false', async () => {
@@ -561,11 +545,11 @@ apis:
       );
       assert.ok(clientFile);
       assert.strictEqual(
-        clientFile.content?.includes('if (opts.enableTelemetryTracing) {'),
+        clientFile.content?.includes('internalTelemetryInfo'),
         false,
       );
       assert.strictEqual(
-        clientFile.content?.includes('internalTelemetryInfo'),
+        clientFile.content?.includes('opts.enableTelemetryTracing'),
         false,
       );
     });
