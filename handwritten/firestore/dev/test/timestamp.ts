@@ -315,7 +315,7 @@ describe('timestamps', () => {
       try {
         const ts = new Firestore.Timestamp(100, 200);
         expect(() => ts.toInstant()).to.throw(
-          'Temporal is not available in the current environment.',
+          'The Temporal object is not available in the current environment.',
         );
       } finally {
         (globalThis as Record<string, unknown>).Temporal = saved;

@@ -2918,7 +2918,7 @@ declare namespace FirebaseFirestore {
      */
     static fromMillis(milliseconds: number): Timestamp;
     /**
-     * Creates a new timestamp from the given Temporal Instant.
+     * Creates a new timestamp from the given `Temporal.Instant`.
      *
      * @param instant The `Temporal.Instant` to initialize the `Timestamp` from.
      * @returns A new `Timestamp` representing the same point in time as the
