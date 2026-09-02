@@ -27,6 +27,26 @@
         "ListAudienceSegments": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "BatchActivateAudienceSegments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeactivateAudienceSegments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchApproveAudienceSegments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchRejectAudienceSegments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchPopulateAudienceSegments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

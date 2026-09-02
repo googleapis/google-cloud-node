@@ -1046,6 +1046,588 @@ describe('v1.ChildPublisherServiceClient', () => {
     });
   });
 
+  describe('batchResendChildPublisherInvitationEmails', () => {
+    it('invokes batchResendChildPublisherInvitationEmails without error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse(),
+      );
+      client.innerApiCalls.batchResendChildPublisherInvitationEmails =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchResendChildPublisherInvitationEmails(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchResendChildPublisherInvitationEmails as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchResendChildPublisherInvitationEmails as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResendChildPublisherInvitationEmails without error using callback', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse(),
+      );
+      client.innerApiCalls.batchResendChildPublisherInvitationEmails =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchResendChildPublisherInvitationEmails(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchResendChildPublisherInvitationEmails as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchResendChildPublisherInvitationEmails as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResendChildPublisherInvitationEmails with error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchResendChildPublisherInvitationEmails =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchResendChildPublisherInvitationEmails(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchResendChildPublisherInvitationEmails as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchResendChildPublisherInvitationEmails as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchResendChildPublisherInvitationEmails with closed client', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchResendChildPublisherInvitationEmails(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchRenegotiateChildPublisherAgreements', () => {
+    it('invokes batchRenegotiateChildPublisherAgreements without error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse(),
+      );
+      client.innerApiCalls.batchRenegotiateChildPublisherAgreements =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchRenegotiateChildPublisherAgreements(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchRenegotiateChildPublisherAgreements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchRenegotiateChildPublisherAgreements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRenegotiateChildPublisherAgreements without error using callback', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse(),
+      );
+      client.innerApiCalls.batchRenegotiateChildPublisherAgreements =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchRenegotiateChildPublisherAgreements(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchRenegotiateChildPublisherAgreements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchRenegotiateChildPublisherAgreements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRenegotiateChildPublisherAgreements with error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchRenegotiateChildPublisherAgreements =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchRenegotiateChildPublisherAgreements(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchRenegotiateChildPublisherAgreements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchRenegotiateChildPublisherAgreements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRenegotiateChildPublisherAgreements with closed client', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchRenegotiateChildPublisherAgreements(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchRejectChildPublishers', () => {
+    it('invokes batchRejectChildPublishers without error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectChildPublishersResponse(),
+      );
+      client.innerApiCalls.batchRejectChildPublishers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchRejectChildPublishers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRejectChildPublishers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRejectChildPublishers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRejectChildPublishers without error using callback', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectChildPublishersResponse(),
+      );
+      client.innerApiCalls.batchRejectChildPublishers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchRejectChildPublishers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchRejectChildPublishersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRejectChildPublishers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRejectChildPublishers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRejectChildPublishers with error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchRejectChildPublishers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchRejectChildPublishers(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchRejectChildPublishers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRejectChildPublishers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRejectChildPublishers with closed client', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchRejectChildPublishers(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchWithdrawChildPublishers', () => {
+    it('invokes batchWithdrawChildPublishers without error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchWithdrawChildPublishersResponse(),
+      );
+      client.innerApiCalls.batchWithdrawChildPublishers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchWithdrawChildPublishers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchWithdrawChildPublishers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchWithdrawChildPublishers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchWithdrawChildPublishers without error using callback', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchWithdrawChildPublishersResponse(),
+      );
+      client.innerApiCalls.batchWithdrawChildPublishers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchWithdrawChildPublishers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchWithdrawChildPublishersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchWithdrawChildPublishers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchWithdrawChildPublishers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchWithdrawChildPublishers with error', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchWithdrawChildPublishers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchWithdrawChildPublishers(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchWithdrawChildPublishers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchWithdrawChildPublishers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchWithdrawChildPublishers with closed client', async () => {
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchWithdrawChildPublishersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchWithdrawChildPublishers(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listChildPublishers', () => {
     it('invokes listChildPublishers without error', async () => {
       const client =
@@ -2934,6 +3516,53 @@ describe('v1.ChildPublisherServiceClient', () => {
       });
     });
 
+    describe('defaultThirdPartyDataDeclaration', async () => {
+      const fakePath = '/rendered/path/defaultThirdPartyDataDeclaration';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+      };
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('defaultThirdPartyDataDeclarationPath', () => {
+        const result =
+          client.defaultThirdPartyDataDeclarationPath('networkCodeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDefaultThirdPartyDataDeclarationName', () => {
+        const result =
+          client.matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('deviceCapability', async () => {
       const fakePath = '/rendered/path/deviceCapability';
       const expectedParameters = {
@@ -3655,6 +4284,59 @@ describe('v1.ChildPublisherServiceClient', () => {
             client.pathTemplates.mobileDeviceSubmodelPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeStyle', async () => {
+      const fakePath = '/rendered/path/nativeStyle';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        native_style: 'nativeStyleValue',
+      };
+      const client =
+        new childpublisherserviceModule.v1.ChildPublisherServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.nativeStylePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeStylePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeStylePath', () => {
+        const result = client.nativeStylePath(
+          'networkCodeValue',
+          'nativeStyleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromNativeStyleName', () => {
+        const result = client.matchNetworkCodeFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNativeStyleFromNativeStyleName', () => {
+        const result = client.matchNativeStyleFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'nativeStyleValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

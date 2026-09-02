@@ -15686,14 +15686,463 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AudienceSegmentTypeEnum. */
+                interface IAudienceSegmentTypeEnum {
+                }
+
+                /** Represents an AudienceSegmentTypeEnum. */
+                class AudienceSegmentTypeEnum implements IAudienceSegmentTypeEnum {
+
+                    /**
+                     * Constructs a new AudienceSegmentTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IAudienceSegmentTypeEnum);
+
+                    /**
+                     * Creates a new AudienceSegmentTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceSegmentTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IAudienceSegmentTypeEnum): google.ads.admanager.v1.AudienceSegmentTypeEnum;
+
+                    /**
+                     * Encodes the specified AudienceSegmentTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentTypeEnum.verify|verify} messages.
+                     * @param message AudienceSegmentTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IAudienceSegmentTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceSegmentTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentTypeEnum.verify|verify} messages.
+                     * @param message AudienceSegmentTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IAudienceSegmentTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceSegmentTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceSegmentTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegmentTypeEnum;
+
+                    /**
+                     * Decodes an AudienceSegmentTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceSegmentTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegmentTypeEnum;
+
+                    /**
+                     * Verifies an AudienceSegmentTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceSegmentTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceSegmentTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegmentTypeEnum;
+
+                    /**
+                     * Creates a plain object from an AudienceSegmentTypeEnum message. Also converts values to other types if specified.
+                     * @param message AudienceSegmentTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.AudienceSegmentTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceSegmentTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceSegmentTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AudienceSegmentTypeEnum {
+
+                    /** AudienceSegmentType enum. */
+                    enum AudienceSegmentType {
+                        AUDIENCE_SEGMENT_TYPE_UNSPECIFIED = 0,
+                        FIRST_PARTY = 1,
+                        SHARED = 2,
+                        THIRD_PARTY = 3
+                    }
+                }
+
+                /** Properties of an AudienceSegmentStatusEnum. */
+                interface IAudienceSegmentStatusEnum {
+                }
+
+                /** Represents an AudienceSegmentStatusEnum. */
+                class AudienceSegmentStatusEnum implements IAudienceSegmentStatusEnum {
+
+                    /**
+                     * Constructs a new AudienceSegmentStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IAudienceSegmentStatusEnum);
+
+                    /**
+                     * Creates a new AudienceSegmentStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceSegmentStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IAudienceSegmentStatusEnum): google.ads.admanager.v1.AudienceSegmentStatusEnum;
+
+                    /**
+                     * Encodes the specified AudienceSegmentStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentStatusEnum.verify|verify} messages.
+                     * @param message AudienceSegmentStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IAudienceSegmentStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceSegmentStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentStatusEnum.verify|verify} messages.
+                     * @param message AudienceSegmentStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IAudienceSegmentStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceSegmentStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceSegmentStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegmentStatusEnum;
+
+                    /**
+                     * Decodes an AudienceSegmentStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceSegmentStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegmentStatusEnum;
+
+                    /**
+                     * Verifies an AudienceSegmentStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceSegmentStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceSegmentStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegmentStatusEnum;
+
+                    /**
+                     * Creates a plain object from an AudienceSegmentStatusEnum message. Also converts values to other types if specified.
+                     * @param message AudienceSegmentStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.AudienceSegmentStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceSegmentStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceSegmentStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AudienceSegmentStatusEnum {
+
+                    /** AudienceSegmentStatus enum. */
+                    enum AudienceSegmentStatus {
+                        AUDIENCE_SEGMENT_STATUS_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        INACTIVE = 2,
+                        UNUSED = 3
+                    }
+                }
+
+                /** Properties of an AudienceSegmentLicenseTypeEnum. */
+                interface IAudienceSegmentLicenseTypeEnum {
+                }
+
+                /** Represents an AudienceSegmentLicenseTypeEnum. */
+                class AudienceSegmentLicenseTypeEnum implements IAudienceSegmentLicenseTypeEnum {
+
+                    /**
+                     * Constructs a new AudienceSegmentLicenseTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IAudienceSegmentLicenseTypeEnum);
+
+                    /**
+                     * Creates a new AudienceSegmentLicenseTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceSegmentLicenseTypeEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IAudienceSegmentLicenseTypeEnum): google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum;
+
+                    /**
+                     * Encodes the specified AudienceSegmentLicenseTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum.verify|verify} messages.
+                     * @param message AudienceSegmentLicenseTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IAudienceSegmentLicenseTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceSegmentLicenseTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum.verify|verify} messages.
+                     * @param message AudienceSegmentLicenseTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IAudienceSegmentLicenseTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceSegmentLicenseTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceSegmentLicenseTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum;
+
+                    /**
+                     * Decodes an AudienceSegmentLicenseTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceSegmentLicenseTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum;
+
+                    /**
+                     * Verifies an AudienceSegmentLicenseTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceSegmentLicenseTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceSegmentLicenseTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum;
+
+                    /**
+                     * Creates a plain object from an AudienceSegmentLicenseTypeEnum message. Also converts values to other types if specified.
+                     * @param message AudienceSegmentLicenseTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceSegmentLicenseTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceSegmentLicenseTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AudienceSegmentLicenseTypeEnum {
+
+                    /** AudienceSegmentLicenseType enum. */
+                    enum AudienceSegmentLicenseType {
+                        AUDIENCE_SEGMENT_LICENSE_TYPE_UNSPECIFIED = 0,
+                        DIRECT = 1,
+                        GLOBAL = 2
+                    }
+                }
+
+                /** Properties of an AudienceSegmentApprovalStatusEnum. */
+                interface IAudienceSegmentApprovalStatusEnum {
+                }
+
+                /** Represents an AudienceSegmentApprovalStatusEnum. */
+                class AudienceSegmentApprovalStatusEnum implements IAudienceSegmentApprovalStatusEnum {
+
+                    /**
+                     * Constructs a new AudienceSegmentApprovalStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IAudienceSegmentApprovalStatusEnum);
+
+                    /**
+                     * Creates a new AudienceSegmentApprovalStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceSegmentApprovalStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IAudienceSegmentApprovalStatusEnum): google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum;
+
+                    /**
+                     * Encodes the specified AudienceSegmentApprovalStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum.verify|verify} messages.
+                     * @param message AudienceSegmentApprovalStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IAudienceSegmentApprovalStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceSegmentApprovalStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum.verify|verify} messages.
+                     * @param message AudienceSegmentApprovalStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IAudienceSegmentApprovalStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceSegmentApprovalStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceSegmentApprovalStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum;
+
+                    /**
+                     * Decodes an AudienceSegmentApprovalStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceSegmentApprovalStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum;
+
+                    /**
+                     * Verifies an AudienceSegmentApprovalStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceSegmentApprovalStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceSegmentApprovalStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum;
+
+                    /**
+                     * Creates a plain object from an AudienceSegmentApprovalStatusEnum message. Also converts values to other types if specified.
+                     * @param message AudienceSegmentApprovalStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceSegmentApprovalStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceSegmentApprovalStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AudienceSegmentApprovalStatusEnum {
+
+                    /** AudienceSegmentApprovalStatus enum. */
+                    enum AudienceSegmentApprovalStatus {
+                        AUDIENCE_SEGMENT_APPROVAL_STATUS_UNSPECIFIED = 0,
+                        APPROVED = 1,
+                        REJECTED = 2,
+                        UNAPPROVED = 3
+                    }
+                }
+
                 /** Properties of an AudienceSegment. */
                 interface IAudienceSegment {
+
+                    /** AudienceSegment nonRuleBasedFirstPartyAudienceSegment */
+                    nonRuleBasedFirstPartyAudienceSegment?: (google.ads.admanager.v1.AudienceSegment.INonRuleBasedFirstPartyAudienceSegment|null);
+
+                    /** AudienceSegment ruleBasedFirstPartyAudienceSegment */
+                    ruleBasedFirstPartyAudienceSegment?: (google.ads.admanager.v1.AudienceSegment.IRuleBasedFirstPartyAudienceSegment|null);
+
+                    /** AudienceSegment thirdPartyAudienceSegment */
+                    thirdPartyAudienceSegment?: (google.ads.admanager.v1.AudienceSegment.IThirdPartyAudienceSegment|null);
 
                     /** AudienceSegment name */
                     name?: (string|null);
 
+                    /** AudienceSegment sharedId */
+                    sharedId?: (number|Long|string|null);
+
                     /** AudienceSegment displayName */
                     displayName?: (string|null);
+
+                    /** AudienceSegment categoryIds */
+                    categoryIds?: ((number|Long|string)[]|null);
+
+                    /** AudienceSegment description */
+                    description?: (string|null);
+
+                    /** AudienceSegment status */
+                    status?: (google.ads.admanager.v1.AudienceSegmentStatusEnum.AudienceSegmentStatus|keyof typeof google.ads.admanager.v1.AudienceSegmentStatusEnum.AudienceSegmentStatus|null);
+
+                    /** AudienceSegment size */
+                    size?: (number|Long|string|null);
+
+                    /** AudienceSegment mobileWebSize */
+                    mobileWebSize?: (number|Long|string|null);
+
+                    /** AudienceSegment idfaSize */
+                    idfaSize?: (number|Long|string|null);
+
+                    /** AudienceSegment adIdSize */
+                    adIdSize?: (number|Long|string|null);
+
+                    /** AudienceSegment ppidSize */
+                    ppidSize?: (number|Long|string|null);
+
+                    /** AudienceSegment dataProviderDisplayName */
+                    dataProviderDisplayName?: (string|null);
+
+                    /** AudienceSegment segmentType */
+                    segmentType?: (google.ads.admanager.v1.AudienceSegmentTypeEnum.AudienceSegmentType|keyof typeof google.ads.admanager.v1.AudienceSegmentTypeEnum.AudienceSegmentType|null);
                 }
 
                 /** Represents an AudienceSegment. */
@@ -15705,11 +16154,56 @@ export namespace google {
                      */
                     constructor(properties?: google.ads.admanager.v1.IAudienceSegment);
 
+                    /** AudienceSegment nonRuleBasedFirstPartyAudienceSegment. */
+                    public nonRuleBasedFirstPartyAudienceSegment?: (google.ads.admanager.v1.AudienceSegment.INonRuleBasedFirstPartyAudienceSegment|null);
+
+                    /** AudienceSegment ruleBasedFirstPartyAudienceSegment. */
+                    public ruleBasedFirstPartyAudienceSegment?: (google.ads.admanager.v1.AudienceSegment.IRuleBasedFirstPartyAudienceSegment|null);
+
+                    /** AudienceSegment thirdPartyAudienceSegment. */
+                    public thirdPartyAudienceSegment?: (google.ads.admanager.v1.AudienceSegment.IThirdPartyAudienceSegment|null);
+
                     /** AudienceSegment name. */
                     public name: string;
 
+                    /** AudienceSegment sharedId. */
+                    public sharedId: (number|Long|string);
+
                     /** AudienceSegment displayName. */
                     public displayName?: (string|null);
+
+                    /** AudienceSegment categoryIds. */
+                    public categoryIds: (number|Long|string)[];
+
+                    /** AudienceSegment description. */
+                    public description?: (string|null);
+
+                    /** AudienceSegment status. */
+                    public status?: (google.ads.admanager.v1.AudienceSegmentStatusEnum.AudienceSegmentStatus|keyof typeof google.ads.admanager.v1.AudienceSegmentStatusEnum.AudienceSegmentStatus|null);
+
+                    /** AudienceSegment size. */
+                    public size?: (number|Long|string|null);
+
+                    /** AudienceSegment mobileWebSize. */
+                    public mobileWebSize?: (number|Long|string|null);
+
+                    /** AudienceSegment idfaSize. */
+                    public idfaSize?: (number|Long|string|null);
+
+                    /** AudienceSegment adIdSize. */
+                    public adIdSize?: (number|Long|string|null);
+
+                    /** AudienceSegment ppidSize. */
+                    public ppidSize?: (number|Long|string|null);
+
+                    /** AudienceSegment dataProviderDisplayName. */
+                    public dataProviderDisplayName?: (string|null);
+
+                    /** AudienceSegment segmentType. */
+                    public segmentType?: (google.ads.admanager.v1.AudienceSegmentTypeEnum.AudienceSegmentType|keyof typeof google.ads.admanager.v1.AudienceSegmentTypeEnum.AudienceSegmentType|null);
+
+                    /** AudienceSegment subType. */
+                    public subType?: ("nonRuleBasedFirstPartyAudienceSegment"|"ruleBasedFirstPartyAudienceSegment"|"thirdPartyAudienceSegment");
 
                     /**
                      * Creates a new AudienceSegment instance using the specified properties.
@@ -15789,6 +16283,445 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace AudienceSegment {
+
+                    /** Properties of a NonRuleBasedFirstPartyAudienceSegment. */
+                    interface INonRuleBasedFirstPartyAudienceSegment {
+
+                        /** NonRuleBasedFirstPartyAudienceSegment membershipExpirationDays */
+                        membershipExpirationDays?: (number|Long|string|null);
+                    }
+
+                    /** Represents a NonRuleBasedFirstPartyAudienceSegment. */
+                    class NonRuleBasedFirstPartyAudienceSegment implements INonRuleBasedFirstPartyAudienceSegment {
+
+                        /**
+                         * Constructs a new NonRuleBasedFirstPartyAudienceSegment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.admanager.v1.AudienceSegment.INonRuleBasedFirstPartyAudienceSegment);
+
+                        /** NonRuleBasedFirstPartyAudienceSegment membershipExpirationDays. */
+                        public membershipExpirationDays?: (number|Long|string|null);
+
+                        /**
+                         * Creates a new NonRuleBasedFirstPartyAudienceSegment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NonRuleBasedFirstPartyAudienceSegment instance
+                         */
+                        public static create(properties?: google.ads.admanager.v1.AudienceSegment.INonRuleBasedFirstPartyAudienceSegment): google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Encodes the specified NonRuleBasedFirstPartyAudienceSegment message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment.verify|verify} messages.
+                         * @param message NonRuleBasedFirstPartyAudienceSegment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.admanager.v1.AudienceSegment.INonRuleBasedFirstPartyAudienceSegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NonRuleBasedFirstPartyAudienceSegment message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment.verify|verify} messages.
+                         * @param message NonRuleBasedFirstPartyAudienceSegment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.admanager.v1.AudienceSegment.INonRuleBasedFirstPartyAudienceSegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NonRuleBasedFirstPartyAudienceSegment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NonRuleBasedFirstPartyAudienceSegment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Decodes a NonRuleBasedFirstPartyAudienceSegment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NonRuleBasedFirstPartyAudienceSegment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Verifies a NonRuleBasedFirstPartyAudienceSegment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NonRuleBasedFirstPartyAudienceSegment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NonRuleBasedFirstPartyAudienceSegment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Creates a plain object from a NonRuleBasedFirstPartyAudienceSegment message. Also converts values to other types if specified.
+                         * @param message NonRuleBasedFirstPartyAudienceSegment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.admanager.v1.AudienceSegment.NonRuleBasedFirstPartyAudienceSegment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NonRuleBasedFirstPartyAudienceSegment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NonRuleBasedFirstPartyAudienceSegment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RuleBasedFirstPartyAudienceSegment. */
+                    interface IRuleBasedFirstPartyAudienceSegment {
+
+                        /** RuleBasedFirstPartyAudienceSegment pageViews */
+                        pageViews?: (number|Long|string|null);
+
+                        /** RuleBasedFirstPartyAudienceSegment recencyDays */
+                        recencyDays?: (number|Long|string|null);
+
+                        /** RuleBasedFirstPartyAudienceSegment membershipExpirationDays */
+                        membershipExpirationDays?: (number|Long|string|null);
+
+                        /** RuleBasedFirstPartyAudienceSegment rule */
+                        rule?: (google.ads.admanager.v1.AudienceSegment.IRule|null);
+                    }
+
+                    /** Represents a RuleBasedFirstPartyAudienceSegment. */
+                    class RuleBasedFirstPartyAudienceSegment implements IRuleBasedFirstPartyAudienceSegment {
+
+                        /**
+                         * Constructs a new RuleBasedFirstPartyAudienceSegment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.admanager.v1.AudienceSegment.IRuleBasedFirstPartyAudienceSegment);
+
+                        /** RuleBasedFirstPartyAudienceSegment pageViews. */
+                        public pageViews?: (number|Long|string|null);
+
+                        /** RuleBasedFirstPartyAudienceSegment recencyDays. */
+                        public recencyDays?: (number|Long|string|null);
+
+                        /** RuleBasedFirstPartyAudienceSegment membershipExpirationDays. */
+                        public membershipExpirationDays?: (number|Long|string|null);
+
+                        /** RuleBasedFirstPartyAudienceSegment rule. */
+                        public rule?: (google.ads.admanager.v1.AudienceSegment.IRule|null);
+
+                        /**
+                         * Creates a new RuleBasedFirstPartyAudienceSegment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RuleBasedFirstPartyAudienceSegment instance
+                         */
+                        public static create(properties?: google.ads.admanager.v1.AudienceSegment.IRuleBasedFirstPartyAudienceSegment): google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Encodes the specified RuleBasedFirstPartyAudienceSegment message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment.verify|verify} messages.
+                         * @param message RuleBasedFirstPartyAudienceSegment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.admanager.v1.AudienceSegment.IRuleBasedFirstPartyAudienceSegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RuleBasedFirstPartyAudienceSegment message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment.verify|verify} messages.
+                         * @param message RuleBasedFirstPartyAudienceSegment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.admanager.v1.AudienceSegment.IRuleBasedFirstPartyAudienceSegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RuleBasedFirstPartyAudienceSegment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RuleBasedFirstPartyAudienceSegment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Decodes a RuleBasedFirstPartyAudienceSegment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RuleBasedFirstPartyAudienceSegment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Verifies a RuleBasedFirstPartyAudienceSegment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RuleBasedFirstPartyAudienceSegment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RuleBasedFirstPartyAudienceSegment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment;
+
+                        /**
+                         * Creates a plain object from a RuleBasedFirstPartyAudienceSegment message. Also converts values to other types if specified.
+                         * @param message RuleBasedFirstPartyAudienceSegment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.admanager.v1.AudienceSegment.RuleBasedFirstPartyAudienceSegment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RuleBasedFirstPartyAudienceSegment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RuleBasedFirstPartyAudienceSegment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ThirdPartyAudienceSegment. */
+                    interface IThirdPartyAudienceSegment {
+
+                        /** ThirdPartyAudienceSegment approvalStatus */
+                        approvalStatus?: (google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum.AudienceSegmentApprovalStatus|keyof typeof google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum.AudienceSegmentApprovalStatus|null);
+
+                        /** ThirdPartyAudienceSegment cost */
+                        cost?: (google.type.IMoney|null);
+
+                        /** ThirdPartyAudienceSegment licenseType */
+                        licenseType?: (google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum.AudienceSegmentLicenseType|keyof typeof google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum.AudienceSegmentLicenseType|null);
+
+                        /** ThirdPartyAudienceSegment startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ThirdPartyAudienceSegment endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ThirdPartyAudienceSegment. */
+                    class ThirdPartyAudienceSegment implements IThirdPartyAudienceSegment {
+
+                        /**
+                         * Constructs a new ThirdPartyAudienceSegment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.admanager.v1.AudienceSegment.IThirdPartyAudienceSegment);
+
+                        /** ThirdPartyAudienceSegment approvalStatus. */
+                        public approvalStatus?: (google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum.AudienceSegmentApprovalStatus|keyof typeof google.ads.admanager.v1.AudienceSegmentApprovalStatusEnum.AudienceSegmentApprovalStatus|null);
+
+                        /** ThirdPartyAudienceSegment cost. */
+                        public cost?: (google.type.IMoney|null);
+
+                        /** ThirdPartyAudienceSegment licenseType. */
+                        public licenseType?: (google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum.AudienceSegmentLicenseType|keyof typeof google.ads.admanager.v1.AudienceSegmentLicenseTypeEnum.AudienceSegmentLicenseType|null);
+
+                        /** ThirdPartyAudienceSegment startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ThirdPartyAudienceSegment endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ThirdPartyAudienceSegment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ThirdPartyAudienceSegment instance
+                         */
+                        public static create(properties?: google.ads.admanager.v1.AudienceSegment.IThirdPartyAudienceSegment): google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment;
+
+                        /**
+                         * Encodes the specified ThirdPartyAudienceSegment message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment.verify|verify} messages.
+                         * @param message ThirdPartyAudienceSegment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.admanager.v1.AudienceSegment.IThirdPartyAudienceSegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ThirdPartyAudienceSegment message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment.verify|verify} messages.
+                         * @param message ThirdPartyAudienceSegment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.admanager.v1.AudienceSegment.IThirdPartyAudienceSegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ThirdPartyAudienceSegment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ThirdPartyAudienceSegment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment;
+
+                        /**
+                         * Decodes a ThirdPartyAudienceSegment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ThirdPartyAudienceSegment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment;
+
+                        /**
+                         * Verifies a ThirdPartyAudienceSegment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ThirdPartyAudienceSegment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ThirdPartyAudienceSegment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment;
+
+                        /**
+                         * Creates a plain object from a ThirdPartyAudienceSegment message. Also converts values to other types if specified.
+                         * @param message ThirdPartyAudienceSegment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.admanager.v1.AudienceSegment.ThirdPartyAudienceSegment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ThirdPartyAudienceSegment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ThirdPartyAudienceSegment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Rule. */
+                    interface IRule {
+
+                        /** Rule inventoryTargeting */
+                        inventoryTargeting?: (google.ads.admanager.v1.IInventoryTargeting|null);
+
+                        /** Rule customTargeting */
+                        customTargeting?: (google.ads.admanager.v1.ICustomTargeting|null);
+                    }
+
+                    /** Represents a Rule. */
+                    class Rule implements IRule {
+
+                        /**
+                         * Constructs a new Rule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.admanager.v1.AudienceSegment.IRule);
+
+                        /** Rule inventoryTargeting. */
+                        public inventoryTargeting?: (google.ads.admanager.v1.IInventoryTargeting|null);
+
+                        /** Rule customTargeting. */
+                        public customTargeting?: (google.ads.admanager.v1.ICustomTargeting|null);
+
+                        /**
+                         * Creates a new Rule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Rule instance
+                         */
+                        public static create(properties?: google.ads.admanager.v1.AudienceSegment.IRule): google.ads.admanager.v1.AudienceSegment.Rule;
+
+                        /**
+                         * Encodes the specified Rule message. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.admanager.v1.AudienceSegment.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AudienceSegment.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.admanager.v1.AudienceSegment.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AudienceSegment.Rule;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AudienceSegment.Rule;
+
+                        /**
+                         * Verifies a Rule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Rule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AudienceSegment.Rule;
+
+                        /**
+                         * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                         * @param message Rule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.admanager.v1.AudienceSegment.Rule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Rule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Rule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Represents an AudienceSegmentService */
                 class AudienceSegmentService extends $protobuf.rpc.Service {
 
@@ -15836,6 +16769,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listAudienceSegments(request: google.ads.admanager.v1.IListAudienceSegmentsRequest): Promise<google.ads.admanager.v1.ListAudienceSegmentsResponse>;
+
+                    /**
+                     * Calls BatchActivateAudienceSegments.
+                     * @param request BatchActivateAudienceSegmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchActivateAudienceSegmentsResponse
+                     */
+                    public batchActivateAudienceSegments(request: google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest, callback: google.ads.admanager.v1.AudienceSegmentService.BatchActivateAudienceSegmentsCallback): void;
+
+                    /**
+                     * Calls BatchActivateAudienceSegments.
+                     * @param request BatchActivateAudienceSegmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchActivateAudienceSegments(request: google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest): Promise<google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse>;
+
+                    /**
+                     * Calls BatchDeactivateAudienceSegments.
+                     * @param request BatchDeactivateAudienceSegmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchDeactivateAudienceSegmentsResponse
+                     */
+                    public batchDeactivateAudienceSegments(request: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest, callback: google.ads.admanager.v1.AudienceSegmentService.BatchDeactivateAudienceSegmentsCallback): void;
+
+                    /**
+                     * Calls BatchDeactivateAudienceSegments.
+                     * @param request BatchDeactivateAudienceSegmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeactivateAudienceSegments(request: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest): Promise<google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse>;
+
+                    /**
+                     * Calls BatchApproveAudienceSegments.
+                     * @param request BatchApproveAudienceSegmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchApproveAudienceSegmentsResponse
+                     */
+                    public batchApproveAudienceSegments(request: google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest, callback: google.ads.admanager.v1.AudienceSegmentService.BatchApproveAudienceSegmentsCallback): void;
+
+                    /**
+                     * Calls BatchApproveAudienceSegments.
+                     * @param request BatchApproveAudienceSegmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchApproveAudienceSegments(request: google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest): Promise<google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse>;
+
+                    /**
+                     * Calls BatchRejectAudienceSegments.
+                     * @param request BatchRejectAudienceSegmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchRejectAudienceSegmentsResponse
+                     */
+                    public batchRejectAudienceSegments(request: google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest, callback: google.ads.admanager.v1.AudienceSegmentService.BatchRejectAudienceSegmentsCallback): void;
+
+                    /**
+                     * Calls BatchRejectAudienceSegments.
+                     * @param request BatchRejectAudienceSegmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchRejectAudienceSegments(request: google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest): Promise<google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse>;
+
+                    /**
+                     * Calls BatchPopulateAudienceSegments.
+                     * @param request BatchPopulateAudienceSegmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchPopulateAudienceSegmentsResponse
+                     */
+                    public batchPopulateAudienceSegments(request: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest, callback: google.ads.admanager.v1.AudienceSegmentService.BatchPopulateAudienceSegmentsCallback): void;
+
+                    /**
+                     * Calls BatchPopulateAudienceSegments.
+                     * @param request BatchPopulateAudienceSegmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchPopulateAudienceSegments(request: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest): Promise<google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse>;
                 }
 
                 namespace AudienceSegmentService {
@@ -15853,6 +16856,41 @@ export namespace google {
                      * @param [response] ListAudienceSegmentsResponse
                      */
                     type ListAudienceSegmentsCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListAudienceSegmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.AudienceSegmentService|batchActivateAudienceSegments}.
+                     * @param error Error, if any
+                     * @param [response] BatchActivateAudienceSegmentsResponse
+                     */
+                    type BatchActivateAudienceSegmentsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.AudienceSegmentService|batchDeactivateAudienceSegments}.
+                     * @param error Error, if any
+                     * @param [response] BatchDeactivateAudienceSegmentsResponse
+                     */
+                    type BatchDeactivateAudienceSegmentsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.AudienceSegmentService|batchApproveAudienceSegments}.
+                     * @param error Error, if any
+                     * @param [response] BatchApproveAudienceSegmentsResponse
+                     */
+                    type BatchApproveAudienceSegmentsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.AudienceSegmentService|batchRejectAudienceSegments}.
+                     * @param error Error, if any
+                     * @param [response] BatchRejectAudienceSegmentsResponse
+                     */
+                    type BatchRejectAudienceSegmentsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.AudienceSegmentService|batchPopulateAudienceSegments}.
+                     * @param error Error, if any
+                     * @param [response] BatchPopulateAudienceSegmentsResponse
+                     */
+                    type BatchPopulateAudienceSegmentsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse) => void;
                 }
 
                 /** Properties of a GetAudienceSegmentRequest. */
@@ -16182,6 +17220,1006 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListAudienceSegmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateAudienceSegmentsRequest. */
+                interface IBatchActivateAudienceSegmentsRequest {
+
+                    /** BatchActivateAudienceSegmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchActivateAudienceSegmentsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchActivateAudienceSegmentsRequest. */
+                class BatchActivateAudienceSegmentsRequest implements IBatchActivateAudienceSegmentsRequest {
+
+                    /**
+                     * Constructs a new BatchActivateAudienceSegmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest);
+
+                    /** BatchActivateAudienceSegmentsRequest parent. */
+                    public parent: string;
+
+                    /** BatchActivateAudienceSegmentsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchActivateAudienceSegmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateAudienceSegmentsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest): google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest;
+
+                    /**
+                     * Encodes the specified BatchActivateAudienceSegmentsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchActivateAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateAudienceSegmentsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchActivateAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateAudienceSegmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest;
+
+                    /**
+                     * Decodes a BatchActivateAudienceSegmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest;
+
+                    /**
+                     * Verifies a BatchActivateAudienceSegmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateAudienceSegmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateAudienceSegmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchActivateAudienceSegmentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchActivateAudienceSegmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateAudienceSegmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateAudienceSegmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateAudienceSegmentsResponse. */
+                interface IBatchActivateAudienceSegmentsResponse {
+
+                    /** BatchActivateAudienceSegmentsResponse changeCount */
+                    changeCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BatchActivateAudienceSegmentsResponse. */
+                class BatchActivateAudienceSegmentsResponse implements IBatchActivateAudienceSegmentsResponse {
+
+                    /**
+                     * Constructs a new BatchActivateAudienceSegmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse);
+
+                    /** BatchActivateAudienceSegmentsResponse changeCount. */
+                    public changeCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BatchActivateAudienceSegmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateAudienceSegmentsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse): google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse;
+
+                    /**
+                     * Encodes the specified BatchActivateAudienceSegmentsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchActivateAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateAudienceSegmentsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchActivateAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateAudienceSegmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse;
+
+                    /**
+                     * Decodes a BatchActivateAudienceSegmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse;
+
+                    /**
+                     * Verifies a BatchActivateAudienceSegmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateAudienceSegmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateAudienceSegmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchActivateAudienceSegmentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchActivateAudienceSegmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateAudienceSegmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateAudienceSegmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateAudienceSegmentsRequest. */
+                interface IBatchDeactivateAudienceSegmentsRequest {
+
+                    /** BatchDeactivateAudienceSegmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeactivateAudienceSegmentsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchDeactivateAudienceSegmentsRequest. */
+                class BatchDeactivateAudienceSegmentsRequest implements IBatchDeactivateAudienceSegmentsRequest {
+
+                    /**
+                     * Constructs a new BatchDeactivateAudienceSegmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest);
+
+                    /** BatchDeactivateAudienceSegmentsRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeactivateAudienceSegmentsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchDeactivateAudienceSegmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateAudienceSegmentsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest;
+
+                    /**
+                     * Encodes the specified BatchDeactivateAudienceSegmentsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchDeactivateAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateAudienceSegmentsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchDeactivateAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateAudienceSegmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest;
+
+                    /**
+                     * Decodes a BatchDeactivateAudienceSegmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest;
+
+                    /**
+                     * Verifies a BatchDeactivateAudienceSegmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateAudienceSegmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateAudienceSegmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateAudienceSegmentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateAudienceSegmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateAudienceSegmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateAudienceSegmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateAudienceSegmentsResponse. */
+                interface IBatchDeactivateAudienceSegmentsResponse {
+
+                    /** BatchDeactivateAudienceSegmentsResponse changeCount */
+                    changeCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BatchDeactivateAudienceSegmentsResponse. */
+                class BatchDeactivateAudienceSegmentsResponse implements IBatchDeactivateAudienceSegmentsResponse {
+
+                    /**
+                     * Constructs a new BatchDeactivateAudienceSegmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse);
+
+                    /** BatchDeactivateAudienceSegmentsResponse changeCount. */
+                    public changeCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BatchDeactivateAudienceSegmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateAudienceSegmentsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse;
+
+                    /**
+                     * Encodes the specified BatchDeactivateAudienceSegmentsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchDeactivateAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateAudienceSegmentsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchDeactivateAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateAudienceSegmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse;
+
+                    /**
+                     * Decodes a BatchDeactivateAudienceSegmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse;
+
+                    /**
+                     * Verifies a BatchDeactivateAudienceSegmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateAudienceSegmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateAudienceSegmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateAudienceSegmentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateAudienceSegmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateAudienceSegmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateAudienceSegmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchApproveAudienceSegmentsRequest. */
+                interface IBatchApproveAudienceSegmentsRequest {
+
+                    /** BatchApproveAudienceSegmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchApproveAudienceSegmentsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchApproveAudienceSegmentsRequest. */
+                class BatchApproveAudienceSegmentsRequest implements IBatchApproveAudienceSegmentsRequest {
+
+                    /**
+                     * Constructs a new BatchApproveAudienceSegmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest);
+
+                    /** BatchApproveAudienceSegmentsRequest parent. */
+                    public parent: string;
+
+                    /** BatchApproveAudienceSegmentsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchApproveAudienceSegmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchApproveAudienceSegmentsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest): google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest;
+
+                    /**
+                     * Encodes the specified BatchApproveAudienceSegmentsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchApproveAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchApproveAudienceSegmentsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchApproveAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchApproveAudienceSegmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchApproveAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest;
+
+                    /**
+                     * Decodes a BatchApproveAudienceSegmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchApproveAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest;
+
+                    /**
+                     * Verifies a BatchApproveAudienceSegmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchApproveAudienceSegmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchApproveAudienceSegmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchApproveAudienceSegmentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchApproveAudienceSegmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchApproveAudienceSegmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchApproveAudienceSegmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchApproveAudienceSegmentsResponse. */
+                interface IBatchApproveAudienceSegmentsResponse {
+
+                    /** BatchApproveAudienceSegmentsResponse changeCount */
+                    changeCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BatchApproveAudienceSegmentsResponse. */
+                class BatchApproveAudienceSegmentsResponse implements IBatchApproveAudienceSegmentsResponse {
+
+                    /**
+                     * Constructs a new BatchApproveAudienceSegmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse);
+
+                    /** BatchApproveAudienceSegmentsResponse changeCount. */
+                    public changeCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BatchApproveAudienceSegmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchApproveAudienceSegmentsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse): google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse;
+
+                    /**
+                     * Encodes the specified BatchApproveAudienceSegmentsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchApproveAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchApproveAudienceSegmentsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchApproveAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchApproveAudienceSegmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchApproveAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse;
+
+                    /**
+                     * Decodes a BatchApproveAudienceSegmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchApproveAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse;
+
+                    /**
+                     * Verifies a BatchApproveAudienceSegmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchApproveAudienceSegmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchApproveAudienceSegmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchApproveAudienceSegmentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchApproveAudienceSegmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchApproveAudienceSegmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchApproveAudienceSegmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRejectAudienceSegmentsRequest. */
+                interface IBatchRejectAudienceSegmentsRequest {
+
+                    /** BatchRejectAudienceSegmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchRejectAudienceSegmentsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchRejectAudienceSegmentsRequest. */
+                class BatchRejectAudienceSegmentsRequest implements IBatchRejectAudienceSegmentsRequest {
+
+                    /**
+                     * Constructs a new BatchRejectAudienceSegmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest);
+
+                    /** BatchRejectAudienceSegmentsRequest parent. */
+                    public parent: string;
+
+                    /** BatchRejectAudienceSegmentsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchRejectAudienceSegmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRejectAudienceSegmentsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest): google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest;
+
+                    /**
+                     * Encodes the specified BatchRejectAudienceSegmentsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchRejectAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRejectAudienceSegmentsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchRejectAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRejectAudienceSegmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRejectAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest;
+
+                    /**
+                     * Decodes a BatchRejectAudienceSegmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRejectAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest;
+
+                    /**
+                     * Verifies a BatchRejectAudienceSegmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRejectAudienceSegmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRejectAudienceSegmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchRejectAudienceSegmentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchRejectAudienceSegmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRejectAudienceSegmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRejectAudienceSegmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRejectAudienceSegmentsResponse. */
+                interface IBatchRejectAudienceSegmentsResponse {
+
+                    /** BatchRejectAudienceSegmentsResponse changeCount */
+                    changeCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BatchRejectAudienceSegmentsResponse. */
+                class BatchRejectAudienceSegmentsResponse implements IBatchRejectAudienceSegmentsResponse {
+
+                    /**
+                     * Constructs a new BatchRejectAudienceSegmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse);
+
+                    /** BatchRejectAudienceSegmentsResponse changeCount. */
+                    public changeCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BatchRejectAudienceSegmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRejectAudienceSegmentsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse): google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse;
+
+                    /**
+                     * Encodes the specified BatchRejectAudienceSegmentsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchRejectAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRejectAudienceSegmentsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchRejectAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRejectAudienceSegmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRejectAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse;
+
+                    /**
+                     * Decodes a BatchRejectAudienceSegmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRejectAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse;
+
+                    /**
+                     * Verifies a BatchRejectAudienceSegmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRejectAudienceSegmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRejectAudienceSegmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchRejectAudienceSegmentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchRejectAudienceSegmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRejectAudienceSegmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRejectAudienceSegmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchPopulateAudienceSegmentsRequest. */
+                interface IBatchPopulateAudienceSegmentsRequest {
+
+                    /** BatchPopulateAudienceSegmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchPopulateAudienceSegmentsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchPopulateAudienceSegmentsRequest. */
+                class BatchPopulateAudienceSegmentsRequest implements IBatchPopulateAudienceSegmentsRequest {
+
+                    /**
+                     * Constructs a new BatchPopulateAudienceSegmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest);
+
+                    /** BatchPopulateAudienceSegmentsRequest parent. */
+                    public parent: string;
+
+                    /** BatchPopulateAudienceSegmentsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchPopulateAudienceSegmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchPopulateAudienceSegmentsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest): google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest;
+
+                    /**
+                     * Encodes the specified BatchPopulateAudienceSegmentsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchPopulateAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchPopulateAudienceSegmentsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest.verify|verify} messages.
+                     * @param message BatchPopulateAudienceSegmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchPopulateAudienceSegmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchPopulateAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest;
+
+                    /**
+                     * Decodes a BatchPopulateAudienceSegmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchPopulateAudienceSegmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest;
+
+                    /**
+                     * Verifies a BatchPopulateAudienceSegmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchPopulateAudienceSegmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchPopulateAudienceSegmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchPopulateAudienceSegmentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchPopulateAudienceSegmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchPopulateAudienceSegmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchPopulateAudienceSegmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchPopulateAudienceSegmentsResponse. */
+                interface IBatchPopulateAudienceSegmentsResponse {
+
+                    /** BatchPopulateAudienceSegmentsResponse changeCount */
+                    changeCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BatchPopulateAudienceSegmentsResponse. */
+                class BatchPopulateAudienceSegmentsResponse implements IBatchPopulateAudienceSegmentsResponse {
+
+                    /**
+                     * Constructs a new BatchPopulateAudienceSegmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse);
+
+                    /** BatchPopulateAudienceSegmentsResponse changeCount. */
+                    public changeCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BatchPopulateAudienceSegmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchPopulateAudienceSegmentsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse): google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse;
+
+                    /**
+                     * Encodes the specified BatchPopulateAudienceSegmentsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchPopulateAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchPopulateAudienceSegmentsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse.verify|verify} messages.
+                     * @param message BatchPopulateAudienceSegmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchPopulateAudienceSegmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchPopulateAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse;
+
+                    /**
+                     * Decodes a BatchPopulateAudienceSegmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchPopulateAudienceSegmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse;
+
+                    /**
+                     * Verifies a BatchPopulateAudienceSegmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchPopulateAudienceSegmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchPopulateAudienceSegmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchPopulateAudienceSegmentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchPopulateAudienceSegmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchPopulateAudienceSegmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchPopulateAudienceSegmentsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -21664,6 +23702,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public batchUpdateChildPublishers(request: google.ads.admanager.v1.IBatchUpdateChildPublishersRequest): Promise<google.ads.admanager.v1.BatchUpdateChildPublishersResponse>;
+
+                    /**
+                     * Calls BatchResendChildPublisherInvitationEmails.
+                     * @param request BatchResendChildPublisherInvitationEmailsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchResendChildPublisherInvitationEmailsResponse
+                     */
+                    public batchResendChildPublisherInvitationEmails(request: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsRequest, callback: google.ads.admanager.v1.ChildPublisherService.BatchResendChildPublisherInvitationEmailsCallback): void;
+
+                    /**
+                     * Calls BatchResendChildPublisherInvitationEmails.
+                     * @param request BatchResendChildPublisherInvitationEmailsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchResendChildPublisherInvitationEmails(request: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsRequest): Promise<google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse>;
+
+                    /**
+                     * Calls BatchRenegotiateChildPublisherAgreements.
+                     * @param request BatchRenegotiateChildPublisherAgreementsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchRenegotiateChildPublisherAgreementsResponse
+                     */
+                    public batchRenegotiateChildPublisherAgreements(request: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsRequest, callback: google.ads.admanager.v1.ChildPublisherService.BatchRenegotiateChildPublisherAgreementsCallback): void;
+
+                    /**
+                     * Calls BatchRenegotiateChildPublisherAgreements.
+                     * @param request BatchRenegotiateChildPublisherAgreementsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchRenegotiateChildPublisherAgreements(request: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsRequest): Promise<google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse>;
+
+                    /**
+                     * Calls BatchRejectChildPublishers.
+                     * @param request BatchRejectChildPublishersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchRejectChildPublishersResponse
+                     */
+                    public batchRejectChildPublishers(request: google.ads.admanager.v1.IBatchRejectChildPublishersRequest, callback: google.ads.admanager.v1.ChildPublisherService.BatchRejectChildPublishersCallback): void;
+
+                    /**
+                     * Calls BatchRejectChildPublishers.
+                     * @param request BatchRejectChildPublishersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchRejectChildPublishers(request: google.ads.admanager.v1.IBatchRejectChildPublishersRequest): Promise<google.ads.admanager.v1.BatchRejectChildPublishersResponse>;
+
+                    /**
+                     * Calls BatchWithdrawChildPublishers.
+                     * @param request BatchWithdrawChildPublishersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchWithdrawChildPublishersResponse
+                     */
+                    public batchWithdrawChildPublishers(request: google.ads.admanager.v1.IBatchWithdrawChildPublishersRequest, callback: google.ads.admanager.v1.ChildPublisherService.BatchWithdrawChildPublishersCallback): void;
+
+                    /**
+                     * Calls BatchWithdrawChildPublishers.
+                     * @param request BatchWithdrawChildPublishersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchWithdrawChildPublishers(request: google.ads.admanager.v1.IBatchWithdrawChildPublishersRequest): Promise<google.ads.admanager.v1.BatchWithdrawChildPublishersResponse>;
                 }
 
                 namespace ChildPublisherService {
@@ -21709,6 +23803,34 @@ export namespace google {
                      * @param [response] BatchUpdateChildPublishersResponse
                      */
                     type BatchUpdateChildPublishersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateChildPublishersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|batchResendChildPublisherInvitationEmails}.
+                     * @param error Error, if any
+                     * @param [response] BatchResendChildPublisherInvitationEmailsResponse
+                     */
+                    type BatchResendChildPublisherInvitationEmailsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|batchRenegotiateChildPublisherAgreements}.
+                     * @param error Error, if any
+                     * @param [response] BatchRenegotiateChildPublisherAgreementsResponse
+                     */
+                    type BatchRenegotiateChildPublisherAgreementsCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|batchRejectChildPublishers}.
+                     * @param error Error, if any
+                     * @param [response] BatchRejectChildPublishersResponse
+                     */
+                    type BatchRejectChildPublishersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchRejectChildPublishersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.ChildPublisherService|batchWithdrawChildPublishers}.
+                     * @param error Error, if any
+                     * @param [response] BatchWithdrawChildPublishersResponse
+                     */
+                    type BatchWithdrawChildPublishersCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchWithdrawChildPublishersResponse) => void;
                 }
 
                 /** Properties of a GetChildPublisherRequest. */
@@ -22644,6 +24766,915 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BatchUpdateChildPublishersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RenegotiateChildPublisherAgreementRequest. */
+                interface IRenegotiateChildPublisherAgreementRequest {
+
+                    /** RenegotiateChildPublisherAgreementRequest name */
+                    name?: (string|null);
+
+                    /** RenegotiateChildPublisherAgreementRequest displayName */
+                    displayName?: (string|null);
+
+                    /** RenegotiateChildPublisherAgreementRequest emailAddress */
+                    emailAddress?: (string|null);
+
+                    /** RenegotiateChildPublisherAgreementRequest network */
+                    network?: (string|null);
+
+                    /** RenegotiateChildPublisherAgreementRequest delegationType */
+                    delegationType?: (google.ads.admanager.v1.DelegationTypeEnum.DelegationType|keyof typeof google.ads.admanager.v1.DelegationTypeEnum.DelegationType|null);
+
+                    /** RenegotiateChildPublisherAgreementRequest parentRevenueShareMillipercent */
+                    parentRevenueShareMillipercent?: (number|Long|string|null);
+
+                    /** RenegotiateChildPublisherAgreementRequest sellerId */
+                    sellerId?: (string|null);
+                }
+
+                /** Represents a RenegotiateChildPublisherAgreementRequest. */
+                class RenegotiateChildPublisherAgreementRequest implements IRenegotiateChildPublisherAgreementRequest {
+
+                    /**
+                     * Constructs a new RenegotiateChildPublisherAgreementRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IRenegotiateChildPublisherAgreementRequest);
+
+                    /** RenegotiateChildPublisherAgreementRequest name. */
+                    public name: string;
+
+                    /** RenegotiateChildPublisherAgreementRequest displayName. */
+                    public displayName: string;
+
+                    /** RenegotiateChildPublisherAgreementRequest emailAddress. */
+                    public emailAddress: string;
+
+                    /** RenegotiateChildPublisherAgreementRequest network. */
+                    public network: string;
+
+                    /** RenegotiateChildPublisherAgreementRequest delegationType. */
+                    public delegationType: (google.ads.admanager.v1.DelegationTypeEnum.DelegationType|keyof typeof google.ads.admanager.v1.DelegationTypeEnum.DelegationType);
+
+                    /** RenegotiateChildPublisherAgreementRequest parentRevenueShareMillipercent. */
+                    public parentRevenueShareMillipercent: (number|Long|string);
+
+                    /** RenegotiateChildPublisherAgreementRequest sellerId. */
+                    public sellerId: string;
+
+                    /**
+                     * Creates a new RenegotiateChildPublisherAgreementRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenegotiateChildPublisherAgreementRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IRenegotiateChildPublisherAgreementRequest): google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest;
+
+                    /**
+                     * Encodes the specified RenegotiateChildPublisherAgreementRequest message. Does not implicitly {@link google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest.verify|verify} messages.
+                     * @param message RenegotiateChildPublisherAgreementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IRenegotiateChildPublisherAgreementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenegotiateChildPublisherAgreementRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest.verify|verify} messages.
+                     * @param message RenegotiateChildPublisherAgreementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IRenegotiateChildPublisherAgreementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenegotiateChildPublisherAgreementRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenegotiateChildPublisherAgreementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest;
+
+                    /**
+                     * Decodes a RenegotiateChildPublisherAgreementRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenegotiateChildPublisherAgreementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest;
+
+                    /**
+                     * Verifies a RenegotiateChildPublisherAgreementRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenegotiateChildPublisherAgreementRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenegotiateChildPublisherAgreementRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest;
+
+                    /**
+                     * Creates a plain object from a RenegotiateChildPublisherAgreementRequest message. Also converts values to other types if specified.
+                     * @param message RenegotiateChildPublisherAgreementRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.RenegotiateChildPublisherAgreementRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenegotiateChildPublisherAgreementRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenegotiateChildPublisherAgreementRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRenegotiateChildPublisherAgreementsRequest. */
+                interface IBatchRenegotiateChildPublisherAgreementsRequest {
+
+                    /** BatchRenegotiateChildPublisherAgreementsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchRenegotiateChildPublisherAgreementsRequest requests */
+                    requests?: (google.ads.admanager.v1.IRenegotiateChildPublisherAgreementRequest[]|null);
+                }
+
+                /** Represents a BatchRenegotiateChildPublisherAgreementsRequest. */
+                class BatchRenegotiateChildPublisherAgreementsRequest implements IBatchRenegotiateChildPublisherAgreementsRequest {
+
+                    /**
+                     * Constructs a new BatchRenegotiateChildPublisherAgreementsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsRequest);
+
+                    /** BatchRenegotiateChildPublisherAgreementsRequest parent. */
+                    public parent: string;
+
+                    /** BatchRenegotiateChildPublisherAgreementsRequest requests. */
+                    public requests: google.ads.admanager.v1.IRenegotiateChildPublisherAgreementRequest[];
+
+                    /**
+                     * Creates a new BatchRenegotiateChildPublisherAgreementsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRenegotiateChildPublisherAgreementsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsRequest): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest;
+
+                    /**
+                     * Encodes the specified BatchRenegotiateChildPublisherAgreementsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest.verify|verify} messages.
+                     * @param message BatchRenegotiateChildPublisherAgreementsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRenegotiateChildPublisherAgreementsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest.verify|verify} messages.
+                     * @param message BatchRenegotiateChildPublisherAgreementsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRenegotiateChildPublisherAgreementsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRenegotiateChildPublisherAgreementsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest;
+
+                    /**
+                     * Decodes a BatchRenegotiateChildPublisherAgreementsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRenegotiateChildPublisherAgreementsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest;
+
+                    /**
+                     * Verifies a BatchRenegotiateChildPublisherAgreementsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRenegotiateChildPublisherAgreementsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRenegotiateChildPublisherAgreementsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchRenegotiateChildPublisherAgreementsRequest message. Also converts values to other types if specified.
+                     * @param message BatchRenegotiateChildPublisherAgreementsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRenegotiateChildPublisherAgreementsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRenegotiateChildPublisherAgreementsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRenegotiateChildPublisherAgreementsResponse. */
+                interface IBatchRenegotiateChildPublisherAgreementsResponse {
+                }
+
+                /** Represents a BatchRenegotiateChildPublisherAgreementsResponse. */
+                class BatchRenegotiateChildPublisherAgreementsResponse implements IBatchRenegotiateChildPublisherAgreementsResponse {
+
+                    /**
+                     * Constructs a new BatchRenegotiateChildPublisherAgreementsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsResponse);
+
+                    /**
+                     * Creates a new BatchRenegotiateChildPublisherAgreementsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRenegotiateChildPublisherAgreementsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsResponse): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse;
+
+                    /**
+                     * Encodes the specified BatchRenegotiateChildPublisherAgreementsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse.verify|verify} messages.
+                     * @param message BatchRenegotiateChildPublisherAgreementsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRenegotiateChildPublisherAgreementsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse.verify|verify} messages.
+                     * @param message BatchRenegotiateChildPublisherAgreementsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchRenegotiateChildPublisherAgreementsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRenegotiateChildPublisherAgreementsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRenegotiateChildPublisherAgreementsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse;
+
+                    /**
+                     * Decodes a BatchRenegotiateChildPublisherAgreementsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRenegotiateChildPublisherAgreementsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse;
+
+                    /**
+                     * Verifies a BatchRenegotiateChildPublisherAgreementsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRenegotiateChildPublisherAgreementsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRenegotiateChildPublisherAgreementsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchRenegotiateChildPublisherAgreementsResponse message. Also converts values to other types if specified.
+                     * @param message BatchRenegotiateChildPublisherAgreementsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchRenegotiateChildPublisherAgreementsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRenegotiateChildPublisherAgreementsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRenegotiateChildPublisherAgreementsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchResendChildPublisherInvitationEmailsRequest. */
+                interface IBatchResendChildPublisherInvitationEmailsRequest {
+
+                    /** BatchResendChildPublisherInvitationEmailsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchResendChildPublisherInvitationEmailsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchResendChildPublisherInvitationEmailsRequest. */
+                class BatchResendChildPublisherInvitationEmailsRequest implements IBatchResendChildPublisherInvitationEmailsRequest {
+
+                    /**
+                     * Constructs a new BatchResendChildPublisherInvitationEmailsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsRequest);
+
+                    /** BatchResendChildPublisherInvitationEmailsRequest parent. */
+                    public parent: string;
+
+                    /** BatchResendChildPublisherInvitationEmailsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchResendChildPublisherInvitationEmailsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchResendChildPublisherInvitationEmailsRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsRequest): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest;
+
+                    /**
+                     * Encodes the specified BatchResendChildPublisherInvitationEmailsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest.verify|verify} messages.
+                     * @param message BatchResendChildPublisherInvitationEmailsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchResendChildPublisherInvitationEmailsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest.verify|verify} messages.
+                     * @param message BatchResendChildPublisherInvitationEmailsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchResendChildPublisherInvitationEmailsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchResendChildPublisherInvitationEmailsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest;
+
+                    /**
+                     * Decodes a BatchResendChildPublisherInvitationEmailsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchResendChildPublisherInvitationEmailsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest;
+
+                    /**
+                     * Verifies a BatchResendChildPublisherInvitationEmailsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchResendChildPublisherInvitationEmailsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchResendChildPublisherInvitationEmailsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchResendChildPublisherInvitationEmailsRequest message. Also converts values to other types if specified.
+                     * @param message BatchResendChildPublisherInvitationEmailsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchResendChildPublisherInvitationEmailsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchResendChildPublisherInvitationEmailsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchResendChildPublisherInvitationEmailsResponse. */
+                interface IBatchResendChildPublisherInvitationEmailsResponse {
+                }
+
+                /** Represents a BatchResendChildPublisherInvitationEmailsResponse. */
+                class BatchResendChildPublisherInvitationEmailsResponse implements IBatchResendChildPublisherInvitationEmailsResponse {
+
+                    /**
+                     * Constructs a new BatchResendChildPublisherInvitationEmailsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsResponse);
+
+                    /**
+                     * Creates a new BatchResendChildPublisherInvitationEmailsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchResendChildPublisherInvitationEmailsResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsResponse): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse;
+
+                    /**
+                     * Encodes the specified BatchResendChildPublisherInvitationEmailsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse.verify|verify} messages.
+                     * @param message BatchResendChildPublisherInvitationEmailsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchResendChildPublisherInvitationEmailsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse.verify|verify} messages.
+                     * @param message BatchResendChildPublisherInvitationEmailsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchResendChildPublisherInvitationEmailsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchResendChildPublisherInvitationEmailsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchResendChildPublisherInvitationEmailsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse;
+
+                    /**
+                     * Decodes a BatchResendChildPublisherInvitationEmailsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchResendChildPublisherInvitationEmailsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse;
+
+                    /**
+                     * Verifies a BatchResendChildPublisherInvitationEmailsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchResendChildPublisherInvitationEmailsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchResendChildPublisherInvitationEmailsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchResendChildPublisherInvitationEmailsResponse message. Also converts values to other types if specified.
+                     * @param message BatchResendChildPublisherInvitationEmailsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchResendChildPublisherInvitationEmailsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchResendChildPublisherInvitationEmailsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchResendChildPublisherInvitationEmailsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchWithdrawChildPublishersRequest. */
+                interface IBatchWithdrawChildPublishersRequest {
+
+                    /** BatchWithdrawChildPublishersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchWithdrawChildPublishersRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchWithdrawChildPublishersRequest. */
+                class BatchWithdrawChildPublishersRequest implements IBatchWithdrawChildPublishersRequest {
+
+                    /**
+                     * Constructs a new BatchWithdrawChildPublishersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchWithdrawChildPublishersRequest);
+
+                    /** BatchWithdrawChildPublishersRequest parent. */
+                    public parent: string;
+
+                    /** BatchWithdrawChildPublishersRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchWithdrawChildPublishersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchWithdrawChildPublishersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchWithdrawChildPublishersRequest): google.ads.admanager.v1.BatchWithdrawChildPublishersRequest;
+
+                    /**
+                     * Encodes the specified BatchWithdrawChildPublishersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchWithdrawChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchWithdrawChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchWithdrawChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchWithdrawChildPublishersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchWithdrawChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchWithdrawChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchWithdrawChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchWithdrawChildPublishersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchWithdrawChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchWithdrawChildPublishersRequest;
+
+                    /**
+                     * Decodes a BatchWithdrawChildPublishersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchWithdrawChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchWithdrawChildPublishersRequest;
+
+                    /**
+                     * Verifies a BatchWithdrawChildPublishersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchWithdrawChildPublishersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchWithdrawChildPublishersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchWithdrawChildPublishersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchWithdrawChildPublishersRequest message. Also converts values to other types if specified.
+                     * @param message BatchWithdrawChildPublishersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchWithdrawChildPublishersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchWithdrawChildPublishersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchWithdrawChildPublishersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchWithdrawChildPublishersResponse. */
+                interface IBatchWithdrawChildPublishersResponse {
+                }
+
+                /** Represents a BatchWithdrawChildPublishersResponse. */
+                class BatchWithdrawChildPublishersResponse implements IBatchWithdrawChildPublishersResponse {
+
+                    /**
+                     * Constructs a new BatchWithdrawChildPublishersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchWithdrawChildPublishersResponse);
+
+                    /**
+                     * Creates a new BatchWithdrawChildPublishersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchWithdrawChildPublishersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchWithdrawChildPublishersResponse): google.ads.admanager.v1.BatchWithdrawChildPublishersResponse;
+
+                    /**
+                     * Encodes the specified BatchWithdrawChildPublishersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchWithdrawChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchWithdrawChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchWithdrawChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchWithdrawChildPublishersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchWithdrawChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchWithdrawChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchWithdrawChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchWithdrawChildPublishersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchWithdrawChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchWithdrawChildPublishersResponse;
+
+                    /**
+                     * Decodes a BatchWithdrawChildPublishersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchWithdrawChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchWithdrawChildPublishersResponse;
+
+                    /**
+                     * Verifies a BatchWithdrawChildPublishersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchWithdrawChildPublishersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchWithdrawChildPublishersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchWithdrawChildPublishersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchWithdrawChildPublishersResponse message. Also converts values to other types if specified.
+                     * @param message BatchWithdrawChildPublishersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchWithdrawChildPublishersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchWithdrawChildPublishersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchWithdrawChildPublishersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRejectChildPublishersRequest. */
+                interface IBatchRejectChildPublishersRequest {
+
+                    /** BatchRejectChildPublishersRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchRejectChildPublishersRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchRejectChildPublishersRequest. */
+                class BatchRejectChildPublishersRequest implements IBatchRejectChildPublishersRequest {
+
+                    /**
+                     * Constructs a new BatchRejectChildPublishersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchRejectChildPublishersRequest);
+
+                    /** BatchRejectChildPublishersRequest parent. */
+                    public parent: string;
+
+                    /** BatchRejectChildPublishersRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchRejectChildPublishersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRejectChildPublishersRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchRejectChildPublishersRequest): google.ads.admanager.v1.BatchRejectChildPublishersRequest;
+
+                    /**
+                     * Encodes the specified BatchRejectChildPublishersRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchRejectChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchRejectChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchRejectChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRejectChildPublishersRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchRejectChildPublishersRequest.verify|verify} messages.
+                     * @param message BatchRejectChildPublishersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchRejectChildPublishersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRejectChildPublishersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRejectChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchRejectChildPublishersRequest;
+
+                    /**
+                     * Decodes a BatchRejectChildPublishersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRejectChildPublishersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchRejectChildPublishersRequest;
+
+                    /**
+                     * Verifies a BatchRejectChildPublishersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRejectChildPublishersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRejectChildPublishersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchRejectChildPublishersRequest;
+
+                    /**
+                     * Creates a plain object from a BatchRejectChildPublishersRequest message. Also converts values to other types if specified.
+                     * @param message BatchRejectChildPublishersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchRejectChildPublishersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRejectChildPublishersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRejectChildPublishersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRejectChildPublishersResponse. */
+                interface IBatchRejectChildPublishersResponse {
+                }
+
+                /** Represents a BatchRejectChildPublishersResponse. */
+                class BatchRejectChildPublishersResponse implements IBatchRejectChildPublishersResponse {
+
+                    /**
+                     * Constructs a new BatchRejectChildPublishersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchRejectChildPublishersResponse);
+
+                    /**
+                     * Creates a new BatchRejectChildPublishersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRejectChildPublishersResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchRejectChildPublishersResponse): google.ads.admanager.v1.BatchRejectChildPublishersResponse;
+
+                    /**
+                     * Encodes the specified BatchRejectChildPublishersResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchRejectChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchRejectChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchRejectChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRejectChildPublishersResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchRejectChildPublishersResponse.verify|verify} messages.
+                     * @param message BatchRejectChildPublishersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchRejectChildPublishersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRejectChildPublishersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRejectChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchRejectChildPublishersResponse;
+
+                    /**
+                     * Decodes a BatchRejectChildPublishersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRejectChildPublishersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchRejectChildPublishersResponse;
+
+                    /**
+                     * Verifies a BatchRejectChildPublishersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRejectChildPublishersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRejectChildPublishersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchRejectChildPublishersResponse;
+
+                    /**
+                     * Creates a plain object from a BatchRejectChildPublishersResponse message. Also converts values to other types if specified.
+                     * @param message BatchRejectChildPublishersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchRejectChildPublishersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRejectChildPublishersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRejectChildPublishersResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -62128,6 +65159,1939 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a NativeStyleStatusEnum. */
+                interface INativeStyleStatusEnum {
+                }
+
+                /** Represents a NativeStyleStatusEnum. */
+                class NativeStyleStatusEnum implements INativeStyleStatusEnum {
+
+                    /**
+                     * Constructs a new NativeStyleStatusEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.INativeStyleStatusEnum);
+
+                    /**
+                     * Creates a new NativeStyleStatusEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NativeStyleStatusEnum instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.INativeStyleStatusEnum): google.ads.admanager.v1.NativeStyleStatusEnum;
+
+                    /**
+                     * Encodes the specified NativeStyleStatusEnum message. Does not implicitly {@link google.ads.admanager.v1.NativeStyleStatusEnum.verify|verify} messages.
+                     * @param message NativeStyleStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.INativeStyleStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NativeStyleStatusEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.NativeStyleStatusEnum.verify|verify} messages.
+                     * @param message NativeStyleStatusEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.INativeStyleStatusEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NativeStyleStatusEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NativeStyleStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.NativeStyleStatusEnum;
+
+                    /**
+                     * Decodes a NativeStyleStatusEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NativeStyleStatusEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.NativeStyleStatusEnum;
+
+                    /**
+                     * Verifies a NativeStyleStatusEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NativeStyleStatusEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NativeStyleStatusEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.NativeStyleStatusEnum;
+
+                    /**
+                     * Creates a plain object from a NativeStyleStatusEnum message. Also converts values to other types if specified.
+                     * @param message NativeStyleStatusEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.NativeStyleStatusEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NativeStyleStatusEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NativeStyleStatusEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NativeStyleStatusEnum {
+
+                    /** NativeStyleStatus enum. */
+                    enum NativeStyleStatus {
+                        NATIVE_STYLE_STATUS_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        ARCHIVED = 2,
+                        INACTIVE = 3
+                    }
+                }
+
+                /** Properties of a NativeStyle. */
+                interface INativeStyle {
+
+                    /** NativeStyle name */
+                    name?: (string|null);
+
+                    /** NativeStyle creativeTemplate */
+                    creativeTemplate?: (string|null);
+
+                    /** NativeStyle displayName */
+                    displayName?: (string|null);
+
+                    /** NativeStyle htmlSnippet */
+                    htmlSnippet?: (string|null);
+
+                    /** NativeStyle cssSnippet */
+                    cssSnippet?: (string|null);
+
+                    /** NativeStyle targeting */
+                    targeting?: (google.ads.admanager.v1.ITargeting|null);
+
+                    /** NativeStyle status */
+                    status?: (google.ads.admanager.v1.NativeStyleStatusEnum.NativeStyleStatus|keyof typeof google.ads.admanager.v1.NativeStyleStatusEnum.NativeStyleStatus|null);
+
+                    /** NativeStyle size */
+                    size?: (google.ads.admanager.v1.ISize|null);
+                }
+
+                /** Represents a NativeStyle. */
+                class NativeStyle implements INativeStyle {
+
+                    /**
+                     * Constructs a new NativeStyle.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.INativeStyle);
+
+                    /** NativeStyle name. */
+                    public name: string;
+
+                    /** NativeStyle creativeTemplate. */
+                    public creativeTemplate?: (string|null);
+
+                    /** NativeStyle displayName. */
+                    public displayName?: (string|null);
+
+                    /** NativeStyle htmlSnippet. */
+                    public htmlSnippet?: (string|null);
+
+                    /** NativeStyle cssSnippet. */
+                    public cssSnippet?: (string|null);
+
+                    /** NativeStyle targeting. */
+                    public targeting?: (google.ads.admanager.v1.ITargeting|null);
+
+                    /** NativeStyle status. */
+                    public status?: (google.ads.admanager.v1.NativeStyleStatusEnum.NativeStyleStatus|keyof typeof google.ads.admanager.v1.NativeStyleStatusEnum.NativeStyleStatus|null);
+
+                    /** NativeStyle size. */
+                    public size?: (google.ads.admanager.v1.ISize|null);
+
+                    /**
+                     * Creates a new NativeStyle instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NativeStyle instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.INativeStyle): google.ads.admanager.v1.NativeStyle;
+
+                    /**
+                     * Encodes the specified NativeStyle message. Does not implicitly {@link google.ads.admanager.v1.NativeStyle.verify|verify} messages.
+                     * @param message NativeStyle message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.INativeStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NativeStyle message, length delimited. Does not implicitly {@link google.ads.admanager.v1.NativeStyle.verify|verify} messages.
+                     * @param message NativeStyle message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.INativeStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NativeStyle message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NativeStyle
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.NativeStyle;
+
+                    /**
+                     * Decodes a NativeStyle message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NativeStyle
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.NativeStyle;
+
+                    /**
+                     * Verifies a NativeStyle message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NativeStyle message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NativeStyle
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.NativeStyle;
+
+                    /**
+                     * Creates a plain object from a NativeStyle message. Also converts values to other types if specified.
+                     * @param message NativeStyle
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.NativeStyle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NativeStyle to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NativeStyle
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a NativeStyleService */
+                class NativeStyleService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new NativeStyleService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new NativeStyleService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): NativeStyleService;
+
+                    /**
+                     * Calls GetNativeStyle.
+                     * @param request GetNativeStyleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NativeStyle
+                     */
+                    public getNativeStyle(request: google.ads.admanager.v1.IGetNativeStyleRequest, callback: google.ads.admanager.v1.NativeStyleService.GetNativeStyleCallback): void;
+
+                    /**
+                     * Calls GetNativeStyle.
+                     * @param request GetNativeStyleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNativeStyle(request: google.ads.admanager.v1.IGetNativeStyleRequest): Promise<google.ads.admanager.v1.NativeStyle>;
+
+                    /**
+                     * Calls ListNativeStyles.
+                     * @param request ListNativeStylesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListNativeStylesResponse
+                     */
+                    public listNativeStyles(request: google.ads.admanager.v1.IListNativeStylesRequest, callback: google.ads.admanager.v1.NativeStyleService.ListNativeStylesCallback): void;
+
+                    /**
+                     * Calls ListNativeStyles.
+                     * @param request ListNativeStylesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listNativeStyles(request: google.ads.admanager.v1.IListNativeStylesRequest): Promise<google.ads.admanager.v1.ListNativeStylesResponse>;
+
+                    /**
+                     * Calls BatchCreateNativeStyles.
+                     * @param request BatchCreateNativeStylesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateNativeStylesResponse
+                     */
+                    public batchCreateNativeStyles(request: google.ads.admanager.v1.IBatchCreateNativeStylesRequest, callback: google.ads.admanager.v1.NativeStyleService.BatchCreateNativeStylesCallback): void;
+
+                    /**
+                     * Calls BatchCreateNativeStyles.
+                     * @param request BatchCreateNativeStylesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateNativeStyles(request: google.ads.admanager.v1.IBatchCreateNativeStylesRequest): Promise<google.ads.admanager.v1.BatchCreateNativeStylesResponse>;
+
+                    /**
+                     * Calls BatchUpdateNativeStyles.
+                     * @param request BatchUpdateNativeStylesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateNativeStylesResponse
+                     */
+                    public batchUpdateNativeStyles(request: google.ads.admanager.v1.IBatchUpdateNativeStylesRequest, callback: google.ads.admanager.v1.NativeStyleService.BatchUpdateNativeStylesCallback): void;
+
+                    /**
+                     * Calls BatchUpdateNativeStyles.
+                     * @param request BatchUpdateNativeStylesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateNativeStyles(request: google.ads.admanager.v1.IBatchUpdateNativeStylesRequest): Promise<google.ads.admanager.v1.BatchUpdateNativeStylesResponse>;
+
+                    /**
+                     * Calls BatchActivateNativeStyles.
+                     * @param request BatchActivateNativeStylesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchActivateNativeStylesResponse
+                     */
+                    public batchActivateNativeStyles(request: google.ads.admanager.v1.IBatchActivateNativeStylesRequest, callback: google.ads.admanager.v1.NativeStyleService.BatchActivateNativeStylesCallback): void;
+
+                    /**
+                     * Calls BatchActivateNativeStyles.
+                     * @param request BatchActivateNativeStylesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchActivateNativeStyles(request: google.ads.admanager.v1.IBatchActivateNativeStylesRequest): Promise<google.ads.admanager.v1.BatchActivateNativeStylesResponse>;
+
+                    /**
+                     * Calls BatchDeactivateNativeStyles.
+                     * @param request BatchDeactivateNativeStylesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchDeactivateNativeStylesResponse
+                     */
+                    public batchDeactivateNativeStyles(request: google.ads.admanager.v1.IBatchDeactivateNativeStylesRequest, callback: google.ads.admanager.v1.NativeStyleService.BatchDeactivateNativeStylesCallback): void;
+
+                    /**
+                     * Calls BatchDeactivateNativeStyles.
+                     * @param request BatchDeactivateNativeStylesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeactivateNativeStyles(request: google.ads.admanager.v1.IBatchDeactivateNativeStylesRequest): Promise<google.ads.admanager.v1.BatchDeactivateNativeStylesResponse>;
+
+                    /**
+                     * Calls BatchArchiveNativeStyles.
+                     * @param request BatchArchiveNativeStylesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchArchiveNativeStylesResponse
+                     */
+                    public batchArchiveNativeStyles(request: google.ads.admanager.v1.IBatchArchiveNativeStylesRequest, callback: google.ads.admanager.v1.NativeStyleService.BatchArchiveNativeStylesCallback): void;
+
+                    /**
+                     * Calls BatchArchiveNativeStyles.
+                     * @param request BatchArchiveNativeStylesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchArchiveNativeStyles(request: google.ads.admanager.v1.IBatchArchiveNativeStylesRequest): Promise<google.ads.admanager.v1.BatchArchiveNativeStylesResponse>;
+                }
+
+                namespace NativeStyleService {
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|getNativeStyle}.
+                     * @param error Error, if any
+                     * @param [response] NativeStyle
+                     */
+                    type GetNativeStyleCallback = (error: (Error|null), response?: google.ads.admanager.v1.NativeStyle) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|listNativeStyles}.
+                     * @param error Error, if any
+                     * @param [response] ListNativeStylesResponse
+                     */
+                    type ListNativeStylesCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListNativeStylesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|batchCreateNativeStyles}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateNativeStylesResponse
+                     */
+                    type BatchCreateNativeStylesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchCreateNativeStylesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|batchUpdateNativeStyles}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateNativeStylesResponse
+                     */
+                    type BatchUpdateNativeStylesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchUpdateNativeStylesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|batchActivateNativeStyles}.
+                     * @param error Error, if any
+                     * @param [response] BatchActivateNativeStylesResponse
+                     */
+                    type BatchActivateNativeStylesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchActivateNativeStylesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|batchDeactivateNativeStyles}.
+                     * @param error Error, if any
+                     * @param [response] BatchDeactivateNativeStylesResponse
+                     */
+                    type BatchDeactivateNativeStylesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchDeactivateNativeStylesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NativeStyleService|batchArchiveNativeStyles}.
+                     * @param error Error, if any
+                     * @param [response] BatchArchiveNativeStylesResponse
+                     */
+                    type BatchArchiveNativeStylesCallback = (error: (Error|null), response?: google.ads.admanager.v1.BatchArchiveNativeStylesResponse) => void;
+                }
+
+                /** Properties of a GetNativeStyleRequest. */
+                interface IGetNativeStyleRequest {
+
+                    /** GetNativeStyleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNativeStyleRequest. */
+                class GetNativeStyleRequest implements IGetNativeStyleRequest {
+
+                    /**
+                     * Constructs a new GetNativeStyleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetNativeStyleRequest);
+
+                    /** GetNativeStyleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNativeStyleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNativeStyleRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetNativeStyleRequest): google.ads.admanager.v1.GetNativeStyleRequest;
+
+                    /**
+                     * Encodes the specified GetNativeStyleRequest message. Does not implicitly {@link google.ads.admanager.v1.GetNativeStyleRequest.verify|verify} messages.
+                     * @param message GetNativeStyleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetNativeStyleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNativeStyleRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetNativeStyleRequest.verify|verify} messages.
+                     * @param message GetNativeStyleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetNativeStyleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNativeStyleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNativeStyleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetNativeStyleRequest;
+
+                    /**
+                     * Decodes a GetNativeStyleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNativeStyleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetNativeStyleRequest;
+
+                    /**
+                     * Verifies a GetNativeStyleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNativeStyleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNativeStyleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetNativeStyleRequest;
+
+                    /**
+                     * Creates a plain object from a GetNativeStyleRequest message. Also converts values to other types if specified.
+                     * @param message GetNativeStyleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetNativeStyleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNativeStyleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNativeStyleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNativeStylesRequest. */
+                interface IListNativeStylesRequest {
+
+                    /** ListNativeStylesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListNativeStylesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListNativeStylesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListNativeStylesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListNativeStylesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListNativeStylesRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListNativeStylesRequest. */
+                class ListNativeStylesRequest implements IListNativeStylesRequest {
+
+                    /**
+                     * Constructs a new ListNativeStylesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListNativeStylesRequest);
+
+                    /** ListNativeStylesRequest parent. */
+                    public parent: string;
+
+                    /** ListNativeStylesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListNativeStylesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListNativeStylesRequest filter. */
+                    public filter: string;
+
+                    /** ListNativeStylesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListNativeStylesRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListNativeStylesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNativeStylesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListNativeStylesRequest): google.ads.admanager.v1.ListNativeStylesRequest;
+
+                    /**
+                     * Encodes the specified ListNativeStylesRequest message. Does not implicitly {@link google.ads.admanager.v1.ListNativeStylesRequest.verify|verify} messages.
+                     * @param message ListNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNativeStylesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListNativeStylesRequest.verify|verify} messages.
+                     * @param message ListNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNativeStylesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListNativeStylesRequest;
+
+                    /**
+                     * Decodes a ListNativeStylesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListNativeStylesRequest;
+
+                    /**
+                     * Verifies a ListNativeStylesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNativeStylesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNativeStylesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListNativeStylesRequest;
+
+                    /**
+                     * Creates a plain object from a ListNativeStylesRequest message. Also converts values to other types if specified.
+                     * @param message ListNativeStylesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListNativeStylesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNativeStylesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNativeStylesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNativeStylesResponse. */
+                interface IListNativeStylesResponse {
+
+                    /** ListNativeStylesResponse nativeStyles */
+                    nativeStyles?: (google.ads.admanager.v1.INativeStyle[]|null);
+
+                    /** ListNativeStylesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListNativeStylesResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListNativeStylesResponse. */
+                class ListNativeStylesResponse implements IListNativeStylesResponse {
+
+                    /**
+                     * Constructs a new ListNativeStylesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IListNativeStylesResponse);
+
+                    /** ListNativeStylesResponse nativeStyles. */
+                    public nativeStyles: google.ads.admanager.v1.INativeStyle[];
+
+                    /** ListNativeStylesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListNativeStylesResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListNativeStylesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNativeStylesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IListNativeStylesResponse): google.ads.admanager.v1.ListNativeStylesResponse;
+
+                    /**
+                     * Encodes the specified ListNativeStylesResponse message. Does not implicitly {@link google.ads.admanager.v1.ListNativeStylesResponse.verify|verify} messages.
+                     * @param message ListNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IListNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNativeStylesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListNativeStylesResponse.verify|verify} messages.
+                     * @param message ListNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IListNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNativeStylesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ListNativeStylesResponse;
+
+                    /**
+                     * Decodes a ListNativeStylesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ListNativeStylesResponse;
+
+                    /**
+                     * Verifies a ListNativeStylesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNativeStylesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNativeStylesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ListNativeStylesResponse;
+
+                    /**
+                     * Creates a plain object from a ListNativeStylesResponse message. Also converts values to other types if specified.
+                     * @param message ListNativeStylesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ListNativeStylesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNativeStylesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNativeStylesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateNativeStyleRequest. */
+                interface ICreateNativeStyleRequest {
+
+                    /** CreateNativeStyleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateNativeStyleRequest nativeStyle */
+                    nativeStyle?: (google.ads.admanager.v1.INativeStyle|null);
+                }
+
+                /** Represents a CreateNativeStyleRequest. */
+                class CreateNativeStyleRequest implements ICreateNativeStyleRequest {
+
+                    /**
+                     * Constructs a new CreateNativeStyleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.ICreateNativeStyleRequest);
+
+                    /** CreateNativeStyleRequest parent. */
+                    public parent: string;
+
+                    /** CreateNativeStyleRequest nativeStyle. */
+                    public nativeStyle?: (google.ads.admanager.v1.INativeStyle|null);
+
+                    /**
+                     * Creates a new CreateNativeStyleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNativeStyleRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.ICreateNativeStyleRequest): google.ads.admanager.v1.CreateNativeStyleRequest;
+
+                    /**
+                     * Encodes the specified CreateNativeStyleRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateNativeStyleRequest.verify|verify} messages.
+                     * @param message CreateNativeStyleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.ICreateNativeStyleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNativeStyleRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateNativeStyleRequest.verify|verify} messages.
+                     * @param message CreateNativeStyleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.ICreateNativeStyleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNativeStyleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNativeStyleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.CreateNativeStyleRequest;
+
+                    /**
+                     * Decodes a CreateNativeStyleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNativeStyleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.CreateNativeStyleRequest;
+
+                    /**
+                     * Verifies a CreateNativeStyleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNativeStyleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNativeStyleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.CreateNativeStyleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateNativeStyleRequest message. Also converts values to other types if specified.
+                     * @param message CreateNativeStyleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.CreateNativeStyleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNativeStyleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateNativeStyleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateNativeStylesRequest. */
+                interface IBatchCreateNativeStylesRequest {
+
+                    /** BatchCreateNativeStylesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateNativeStylesRequest requests */
+                    requests?: (google.ads.admanager.v1.ICreateNativeStyleRequest[]|null);
+                }
+
+                /** Represents a BatchCreateNativeStylesRequest. */
+                class BatchCreateNativeStylesRequest implements IBatchCreateNativeStylesRequest {
+
+                    /**
+                     * Constructs a new BatchCreateNativeStylesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateNativeStylesRequest);
+
+                    /** BatchCreateNativeStylesRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateNativeStylesRequest requests. */
+                    public requests: google.ads.admanager.v1.ICreateNativeStyleRequest[];
+
+                    /**
+                     * Creates a new BatchCreateNativeStylesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateNativeStylesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateNativeStylesRequest): google.ads.admanager.v1.BatchCreateNativeStylesRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateNativeStylesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchCreateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateNativeStylesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchCreateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateNativeStylesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateNativeStylesRequest;
+
+                    /**
+                     * Decodes a BatchCreateNativeStylesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateNativeStylesRequest;
+
+                    /**
+                     * Verifies a BatchCreateNativeStylesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateNativeStylesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateNativeStylesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateNativeStylesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateNativeStylesRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateNativeStylesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateNativeStylesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateNativeStylesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateNativeStylesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateNativeStylesResponse. */
+                interface IBatchCreateNativeStylesResponse {
+
+                    /** BatchCreateNativeStylesResponse nativeStyles */
+                    nativeStyles?: (google.ads.admanager.v1.INativeStyle[]|null);
+                }
+
+                /** Represents a BatchCreateNativeStylesResponse. */
+                class BatchCreateNativeStylesResponse implements IBatchCreateNativeStylesResponse {
+
+                    /**
+                     * Constructs a new BatchCreateNativeStylesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchCreateNativeStylesResponse);
+
+                    /** BatchCreateNativeStylesResponse nativeStyles. */
+                    public nativeStyles: google.ads.admanager.v1.INativeStyle[];
+
+                    /**
+                     * Creates a new BatchCreateNativeStylesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateNativeStylesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchCreateNativeStylesResponse): google.ads.admanager.v1.BatchCreateNativeStylesResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateNativeStylesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchCreateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchCreateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateNativeStylesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchCreateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchCreateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateNativeStylesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchCreateNativeStylesResponse;
+
+                    /**
+                     * Decodes a BatchCreateNativeStylesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchCreateNativeStylesResponse;
+
+                    /**
+                     * Verifies a BatchCreateNativeStylesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateNativeStylesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateNativeStylesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchCreateNativeStylesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateNativeStylesResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateNativeStylesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchCreateNativeStylesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateNativeStylesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateNativeStylesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateNativeStyleRequest. */
+                interface IUpdateNativeStyleRequest {
+
+                    /** UpdateNativeStyleRequest nativeStyle */
+                    nativeStyle?: (google.ads.admanager.v1.INativeStyle|null);
+
+                    /** UpdateNativeStyleRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateNativeStyleRequest. */
+                class UpdateNativeStyleRequest implements IUpdateNativeStyleRequest {
+
+                    /**
+                     * Constructs a new UpdateNativeStyleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateNativeStyleRequest);
+
+                    /** UpdateNativeStyleRequest nativeStyle. */
+                    public nativeStyle?: (google.ads.admanager.v1.INativeStyle|null);
+
+                    /** UpdateNativeStyleRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateNativeStyleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNativeStyleRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateNativeStyleRequest): google.ads.admanager.v1.UpdateNativeStyleRequest;
+
+                    /**
+                     * Encodes the specified UpdateNativeStyleRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateNativeStyleRequest.verify|verify} messages.
+                     * @param message UpdateNativeStyleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateNativeStyleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNativeStyleRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateNativeStyleRequest.verify|verify} messages.
+                     * @param message UpdateNativeStyleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateNativeStyleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNativeStyleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNativeStyleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateNativeStyleRequest;
+
+                    /**
+                     * Decodes an UpdateNativeStyleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNativeStyleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateNativeStyleRequest;
+
+                    /**
+                     * Verifies an UpdateNativeStyleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNativeStyleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNativeStyleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateNativeStyleRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateNativeStyleRequest message. Also converts values to other types if specified.
+                     * @param message UpdateNativeStyleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateNativeStyleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNativeStyleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateNativeStyleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateNativeStylesRequest. */
+                interface IBatchUpdateNativeStylesRequest {
+
+                    /** BatchUpdateNativeStylesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateNativeStylesRequest requests */
+                    requests?: (google.ads.admanager.v1.IUpdateNativeStyleRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateNativeStylesRequest. */
+                class BatchUpdateNativeStylesRequest implements IBatchUpdateNativeStylesRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateNativeStylesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateNativeStylesRequest);
+
+                    /** BatchUpdateNativeStylesRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateNativeStylesRequest requests. */
+                    public requests: google.ads.admanager.v1.IUpdateNativeStyleRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateNativeStylesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateNativeStylesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateNativeStylesRequest): google.ads.admanager.v1.BatchUpdateNativeStylesRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateNativeStylesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchUpdateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateNativeStylesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchUpdateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateNativeStylesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateNativeStylesRequest;
+
+                    /**
+                     * Decodes a BatchUpdateNativeStylesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateNativeStylesRequest;
+
+                    /**
+                     * Verifies a BatchUpdateNativeStylesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateNativeStylesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateNativeStylesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateNativeStylesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateNativeStylesRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateNativeStylesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateNativeStylesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateNativeStylesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateNativeStylesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateNativeStylesResponse. */
+                interface IBatchUpdateNativeStylesResponse {
+
+                    /** BatchUpdateNativeStylesResponse nativeStyles */
+                    nativeStyles?: (google.ads.admanager.v1.INativeStyle[]|null);
+                }
+
+                /** Represents a BatchUpdateNativeStylesResponse. */
+                class BatchUpdateNativeStylesResponse implements IBatchUpdateNativeStylesResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateNativeStylesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchUpdateNativeStylesResponse);
+
+                    /** BatchUpdateNativeStylesResponse nativeStyles. */
+                    public nativeStyles: google.ads.admanager.v1.INativeStyle[];
+
+                    /**
+                     * Creates a new BatchUpdateNativeStylesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateNativeStylesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchUpdateNativeStylesResponse): google.ads.admanager.v1.BatchUpdateNativeStylesResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateNativeStylesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchUpdateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchUpdateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateNativeStylesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchUpdateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchUpdateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateNativeStylesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchUpdateNativeStylesResponse;
+
+                    /**
+                     * Decodes a BatchUpdateNativeStylesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchUpdateNativeStylesResponse;
+
+                    /**
+                     * Verifies a BatchUpdateNativeStylesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateNativeStylesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateNativeStylesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchUpdateNativeStylesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateNativeStylesResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateNativeStylesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchUpdateNativeStylesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateNativeStylesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateNativeStylesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateNativeStylesRequest. */
+                interface IBatchActivateNativeStylesRequest {
+
+                    /** BatchActivateNativeStylesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchActivateNativeStylesRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchActivateNativeStylesRequest. */
+                class BatchActivateNativeStylesRequest implements IBatchActivateNativeStylesRequest {
+
+                    /**
+                     * Constructs a new BatchActivateNativeStylesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateNativeStylesRequest);
+
+                    /** BatchActivateNativeStylesRequest parent. */
+                    public parent: string;
+
+                    /** BatchActivateNativeStylesRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchActivateNativeStylesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateNativeStylesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateNativeStylesRequest): google.ads.admanager.v1.BatchActivateNativeStylesRequest;
+
+                    /**
+                     * Encodes the specified BatchActivateNativeStylesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchActivateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateNativeStylesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchActivateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateNativeStylesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateNativeStylesRequest;
+
+                    /**
+                     * Decodes a BatchActivateNativeStylesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateNativeStylesRequest;
+
+                    /**
+                     * Verifies a BatchActivateNativeStylesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateNativeStylesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateNativeStylesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateNativeStylesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchActivateNativeStylesRequest message. Also converts values to other types if specified.
+                     * @param message BatchActivateNativeStylesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateNativeStylesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateNativeStylesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateNativeStylesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchActivateNativeStylesResponse. */
+                interface IBatchActivateNativeStylesResponse {
+                }
+
+                /** Represents a BatchActivateNativeStylesResponse. */
+                class BatchActivateNativeStylesResponse implements IBatchActivateNativeStylesResponse {
+
+                    /**
+                     * Constructs a new BatchActivateNativeStylesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchActivateNativeStylesResponse);
+
+                    /**
+                     * Creates a new BatchActivateNativeStylesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchActivateNativeStylesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchActivateNativeStylesResponse): google.ads.admanager.v1.BatchActivateNativeStylesResponse;
+
+                    /**
+                     * Encodes the specified BatchActivateNativeStylesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchActivateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchActivateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchActivateNativeStylesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchActivateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchActivateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchActivateNativeStylesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchActivateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchActivateNativeStylesResponse;
+
+                    /**
+                     * Decodes a BatchActivateNativeStylesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchActivateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchActivateNativeStylesResponse;
+
+                    /**
+                     * Verifies a BatchActivateNativeStylesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchActivateNativeStylesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchActivateNativeStylesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchActivateNativeStylesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchActivateNativeStylesResponse message. Also converts values to other types if specified.
+                     * @param message BatchActivateNativeStylesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchActivateNativeStylesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchActivateNativeStylesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchActivateNativeStylesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateNativeStylesRequest. */
+                interface IBatchDeactivateNativeStylesRequest {
+
+                    /** BatchDeactivateNativeStylesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeactivateNativeStylesRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchDeactivateNativeStylesRequest. */
+                class BatchDeactivateNativeStylesRequest implements IBatchDeactivateNativeStylesRequest {
+
+                    /**
+                     * Constructs a new BatchDeactivateNativeStylesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateNativeStylesRequest);
+
+                    /** BatchDeactivateNativeStylesRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeactivateNativeStylesRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchDeactivateNativeStylesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateNativeStylesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateNativeStylesRequest): google.ads.admanager.v1.BatchDeactivateNativeStylesRequest;
+
+                    /**
+                     * Encodes the specified BatchDeactivateNativeStylesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchDeactivateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateNativeStylesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchDeactivateNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateNativeStylesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateNativeStylesRequest;
+
+                    /**
+                     * Decodes a BatchDeactivateNativeStylesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateNativeStylesRequest;
+
+                    /**
+                     * Verifies a BatchDeactivateNativeStylesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateNativeStylesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateNativeStylesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateNativeStylesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateNativeStylesRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateNativeStylesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateNativeStylesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateNativeStylesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateNativeStylesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeactivateNativeStylesResponse. */
+                interface IBatchDeactivateNativeStylesResponse {
+                }
+
+                /** Represents a BatchDeactivateNativeStylesResponse. */
+                class BatchDeactivateNativeStylesResponse implements IBatchDeactivateNativeStylesResponse {
+
+                    /**
+                     * Constructs a new BatchDeactivateNativeStylesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchDeactivateNativeStylesResponse);
+
+                    /**
+                     * Creates a new BatchDeactivateNativeStylesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeactivateNativeStylesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchDeactivateNativeStylesResponse): google.ads.admanager.v1.BatchDeactivateNativeStylesResponse;
+
+                    /**
+                     * Encodes the specified BatchDeactivateNativeStylesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchDeactivateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchDeactivateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeactivateNativeStylesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchDeactivateNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchDeactivateNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeactivateNativeStylesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeactivateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchDeactivateNativeStylesResponse;
+
+                    /**
+                     * Decodes a BatchDeactivateNativeStylesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeactivateNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchDeactivateNativeStylesResponse;
+
+                    /**
+                     * Verifies a BatchDeactivateNativeStylesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeactivateNativeStylesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeactivateNativeStylesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchDeactivateNativeStylesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchDeactivateNativeStylesResponse message. Also converts values to other types if specified.
+                     * @param message BatchDeactivateNativeStylesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchDeactivateNativeStylesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeactivateNativeStylesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeactivateNativeStylesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchArchiveNativeStylesRequest. */
+                interface IBatchArchiveNativeStylesRequest {
+
+                    /** BatchArchiveNativeStylesRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchArchiveNativeStylesRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchArchiveNativeStylesRequest. */
+                class BatchArchiveNativeStylesRequest implements IBatchArchiveNativeStylesRequest {
+
+                    /**
+                     * Constructs a new BatchArchiveNativeStylesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchArchiveNativeStylesRequest);
+
+                    /** BatchArchiveNativeStylesRequest parent. */
+                    public parent: string;
+
+                    /** BatchArchiveNativeStylesRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchArchiveNativeStylesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchArchiveNativeStylesRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchArchiveNativeStylesRequest): google.ads.admanager.v1.BatchArchiveNativeStylesRequest;
+
+                    /**
+                     * Encodes the specified BatchArchiveNativeStylesRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchArchiveNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchArchiveNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchArchiveNativeStylesRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveNativeStylesRequest.verify|verify} messages.
+                     * @param message BatchArchiveNativeStylesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchArchiveNativeStylesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchArchiveNativeStylesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchArchiveNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchArchiveNativeStylesRequest;
+
+                    /**
+                     * Decodes a BatchArchiveNativeStylesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchArchiveNativeStylesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchArchiveNativeStylesRequest;
+
+                    /**
+                     * Verifies a BatchArchiveNativeStylesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchArchiveNativeStylesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchArchiveNativeStylesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchArchiveNativeStylesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchArchiveNativeStylesRequest message. Also converts values to other types if specified.
+                     * @param message BatchArchiveNativeStylesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchArchiveNativeStylesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchArchiveNativeStylesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchArchiveNativeStylesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchArchiveNativeStylesResponse. */
+                interface IBatchArchiveNativeStylesResponse {
+                }
+
+                /** Represents a BatchArchiveNativeStylesResponse. */
+                class BatchArchiveNativeStylesResponse implements IBatchArchiveNativeStylesResponse {
+
+                    /**
+                     * Constructs a new BatchArchiveNativeStylesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IBatchArchiveNativeStylesResponse);
+
+                    /**
+                     * Creates a new BatchArchiveNativeStylesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchArchiveNativeStylesResponse instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IBatchArchiveNativeStylesResponse): google.ads.admanager.v1.BatchArchiveNativeStylesResponse;
+
+                    /**
+                     * Encodes the specified BatchArchiveNativeStylesResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchArchiveNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IBatchArchiveNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchArchiveNativeStylesResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveNativeStylesResponse.verify|verify} messages.
+                     * @param message BatchArchiveNativeStylesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IBatchArchiveNativeStylesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchArchiveNativeStylesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchArchiveNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.BatchArchiveNativeStylesResponse;
+
+                    /**
+                     * Decodes a BatchArchiveNativeStylesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchArchiveNativeStylesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.BatchArchiveNativeStylesResponse;
+
+                    /**
+                     * Verifies a BatchArchiveNativeStylesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchArchiveNativeStylesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchArchiveNativeStylesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.BatchArchiveNativeStylesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchArchiveNativeStylesResponse message. Also converts values to other types if specified.
+                     * @param message BatchArchiveNativeStylesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.BatchArchiveNativeStylesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchArchiveNativeStylesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchArchiveNativeStylesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Network. */
                 interface INetwork {
 
@@ -62279,6 +67243,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DefaultThirdPartyDataDeclaration. */
+                interface IDefaultThirdPartyDataDeclaration {
+
+                    /** DefaultThirdPartyDataDeclaration name */
+                    name?: (string|null);
+
+                    /** DefaultThirdPartyDataDeclaration thirdPartyDataDeclaration */
+                    thirdPartyDataDeclaration?: (google.ads.admanager.v1.IThirdPartyDataDeclaration|null);
+                }
+
+                /** Represents a DefaultThirdPartyDataDeclaration. */
+                class DefaultThirdPartyDataDeclaration implements IDefaultThirdPartyDataDeclaration {
+
+                    /**
+                     * Constructs a new DefaultThirdPartyDataDeclaration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IDefaultThirdPartyDataDeclaration);
+
+                    /** DefaultThirdPartyDataDeclaration name. */
+                    public name: string;
+
+                    /** DefaultThirdPartyDataDeclaration thirdPartyDataDeclaration. */
+                    public thirdPartyDataDeclaration?: (google.ads.admanager.v1.IThirdPartyDataDeclaration|null);
+
+                    /**
+                     * Creates a new DefaultThirdPartyDataDeclaration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DefaultThirdPartyDataDeclaration instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IDefaultThirdPartyDataDeclaration): google.ads.admanager.v1.DefaultThirdPartyDataDeclaration;
+
+                    /**
+                     * Encodes the specified DefaultThirdPartyDataDeclaration message. Does not implicitly {@link google.ads.admanager.v1.DefaultThirdPartyDataDeclaration.verify|verify} messages.
+                     * @param message DefaultThirdPartyDataDeclaration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IDefaultThirdPartyDataDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DefaultThirdPartyDataDeclaration message, length delimited. Does not implicitly {@link google.ads.admanager.v1.DefaultThirdPartyDataDeclaration.verify|verify} messages.
+                     * @param message DefaultThirdPartyDataDeclaration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IDefaultThirdPartyDataDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DefaultThirdPartyDataDeclaration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DefaultThirdPartyDataDeclaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.DefaultThirdPartyDataDeclaration;
+
+                    /**
+                     * Decodes a DefaultThirdPartyDataDeclaration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DefaultThirdPartyDataDeclaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.DefaultThirdPartyDataDeclaration;
+
+                    /**
+                     * Verifies a DefaultThirdPartyDataDeclaration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DefaultThirdPartyDataDeclaration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DefaultThirdPartyDataDeclaration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.DefaultThirdPartyDataDeclaration;
+
+                    /**
+                     * Creates a plain object from a DefaultThirdPartyDataDeclaration message. Also converts values to other types if specified.
+                     * @param message DefaultThirdPartyDataDeclaration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.DefaultThirdPartyDataDeclaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DefaultThirdPartyDataDeclaration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DefaultThirdPartyDataDeclaration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a NetworkService */
                 class NetworkService extends $protobuf.rpc.Service {
 
@@ -62326,6 +67393,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public listNetworks(request: google.ads.admanager.v1.IListNetworksRequest): Promise<google.ads.admanager.v1.ListNetworksResponse>;
+
+                    /**
+                     * Calls UpdateNetwork.
+                     * @param request UpdateNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Network
+                     */
+                    public updateNetwork(request: google.ads.admanager.v1.IUpdateNetworkRequest, callback: google.ads.admanager.v1.NetworkService.UpdateNetworkCallback): void;
+
+                    /**
+                     * Calls UpdateNetwork.
+                     * @param request UpdateNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateNetwork(request: google.ads.admanager.v1.IUpdateNetworkRequest): Promise<google.ads.admanager.v1.Network>;
+
+                    /**
+                     * Calls ProvisionTestNetwork.
+                     * @param request ProvisionTestNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Network
+                     */
+                    public provisionTestNetwork(request: google.ads.admanager.v1.IProvisionTestNetworkRequest, callback: google.ads.admanager.v1.NetworkService.ProvisionTestNetworkCallback): void;
+
+                    /**
+                     * Calls ProvisionTestNetwork.
+                     * @param request ProvisionTestNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public provisionTestNetwork(request: google.ads.admanager.v1.IProvisionTestNetworkRequest): Promise<google.ads.admanager.v1.Network>;
+
+                    /**
+                     * Calls GetDefaultThirdPartyDataDeclaration.
+                     * @param request GetDefaultThirdPartyDataDeclarationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DefaultThirdPartyDataDeclaration
+                     */
+                    public getDefaultThirdPartyDataDeclaration(request: google.ads.admanager.v1.IGetDefaultThirdPartyDataDeclarationRequest, callback: google.ads.admanager.v1.NetworkService.GetDefaultThirdPartyDataDeclarationCallback): void;
+
+                    /**
+                     * Calls GetDefaultThirdPartyDataDeclaration.
+                     * @param request GetDefaultThirdPartyDataDeclarationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDefaultThirdPartyDataDeclaration(request: google.ads.admanager.v1.IGetDefaultThirdPartyDataDeclarationRequest): Promise<google.ads.admanager.v1.DefaultThirdPartyDataDeclaration>;
                 }
 
                 namespace NetworkService {
@@ -62343,6 +67452,130 @@ export namespace google {
                      * @param [response] ListNetworksResponse
                      */
                     type ListNetworksCallback = (error: (Error|null), response?: google.ads.admanager.v1.ListNetworksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NetworkService|updateNetwork}.
+                     * @param error Error, if any
+                     * @param [response] Network
+                     */
+                    type UpdateNetworkCallback = (error: (Error|null), response?: google.ads.admanager.v1.Network) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NetworkService|provisionTestNetwork}.
+                     * @param error Error, if any
+                     * @param [response] Network
+                     */
+                    type ProvisionTestNetworkCallback = (error: (Error|null), response?: google.ads.admanager.v1.Network) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.admanager.v1.NetworkService|getDefaultThirdPartyDataDeclaration}.
+                     * @param error Error, if any
+                     * @param [response] DefaultThirdPartyDataDeclaration
+                     */
+                    type GetDefaultThirdPartyDataDeclarationCallback = (error: (Error|null), response?: google.ads.admanager.v1.DefaultThirdPartyDataDeclaration) => void;
+                }
+
+                /** Properties of an UpdateNetworkRequest. */
+                interface IUpdateNetworkRequest {
+
+                    /** UpdateNetworkRequest network */
+                    network?: (google.ads.admanager.v1.INetwork|null);
+
+                    /** UpdateNetworkRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateNetworkRequest. */
+                class UpdateNetworkRequest implements IUpdateNetworkRequest {
+
+                    /**
+                     * Constructs a new UpdateNetworkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IUpdateNetworkRequest);
+
+                    /** UpdateNetworkRequest network. */
+                    public network?: (google.ads.admanager.v1.INetwork|null);
+
+                    /** UpdateNetworkRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateNetworkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNetworkRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IUpdateNetworkRequest): google.ads.admanager.v1.UpdateNetworkRequest;
+
+                    /**
+                     * Encodes the specified UpdateNetworkRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateNetworkRequest.verify|verify} messages.
+                     * @param message UpdateNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IUpdateNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNetworkRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateNetworkRequest.verify|verify} messages.
+                     * @param message UpdateNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IUpdateNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNetworkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.UpdateNetworkRequest;
+
+                    /**
+                     * Decodes an UpdateNetworkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.UpdateNetworkRequest;
+
+                    /**
+                     * Verifies an UpdateNetworkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNetworkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.UpdateNetworkRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateNetworkRequest message. Also converts values to other types if specified.
+                     * @param message UpdateNetworkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.UpdateNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNetworkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateNetworkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetNetworkRequest. */
@@ -62654,6 +67887,194 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListNetworksResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisionTestNetworkRequest. */
+                interface IProvisionTestNetworkRequest {
+                }
+
+                /** Represents a ProvisionTestNetworkRequest. */
+                class ProvisionTestNetworkRequest implements IProvisionTestNetworkRequest {
+
+                    /**
+                     * Constructs a new ProvisionTestNetworkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IProvisionTestNetworkRequest);
+
+                    /**
+                     * Creates a new ProvisionTestNetworkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisionTestNetworkRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IProvisionTestNetworkRequest): google.ads.admanager.v1.ProvisionTestNetworkRequest;
+
+                    /**
+                     * Encodes the specified ProvisionTestNetworkRequest message. Does not implicitly {@link google.ads.admanager.v1.ProvisionTestNetworkRequest.verify|verify} messages.
+                     * @param message ProvisionTestNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IProvisionTestNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisionTestNetworkRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ProvisionTestNetworkRequest.verify|verify} messages.
+                     * @param message ProvisionTestNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IProvisionTestNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisionTestNetworkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisionTestNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.ProvisionTestNetworkRequest;
+
+                    /**
+                     * Decodes a ProvisionTestNetworkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisionTestNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.ProvisionTestNetworkRequest;
+
+                    /**
+                     * Verifies a ProvisionTestNetworkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisionTestNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisionTestNetworkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.ProvisionTestNetworkRequest;
+
+                    /**
+                     * Creates a plain object from a ProvisionTestNetworkRequest message. Also converts values to other types if specified.
+                     * @param message ProvisionTestNetworkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.ProvisionTestNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisionTestNetworkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisionTestNetworkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDefaultThirdPartyDataDeclarationRequest. */
+                interface IGetDefaultThirdPartyDataDeclarationRequest {
+
+                    /** GetDefaultThirdPartyDataDeclarationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDefaultThirdPartyDataDeclarationRequest. */
+                class GetDefaultThirdPartyDataDeclarationRequest implements IGetDefaultThirdPartyDataDeclarationRequest {
+
+                    /**
+                     * Constructs a new GetDefaultThirdPartyDataDeclarationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IGetDefaultThirdPartyDataDeclarationRequest);
+
+                    /** GetDefaultThirdPartyDataDeclarationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDefaultThirdPartyDataDeclarationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDefaultThirdPartyDataDeclarationRequest instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IGetDefaultThirdPartyDataDeclarationRequest): google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest;
+
+                    /**
+                     * Encodes the specified GetDefaultThirdPartyDataDeclarationRequest message. Does not implicitly {@link google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest.verify|verify} messages.
+                     * @param message GetDefaultThirdPartyDataDeclarationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IGetDefaultThirdPartyDataDeclarationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDefaultThirdPartyDataDeclarationRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest.verify|verify} messages.
+                     * @param message GetDefaultThirdPartyDataDeclarationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IGetDefaultThirdPartyDataDeclarationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDefaultThirdPartyDataDeclarationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDefaultThirdPartyDataDeclarationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest;
+
+                    /**
+                     * Decodes a GetDefaultThirdPartyDataDeclarationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDefaultThirdPartyDataDeclarationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest;
+
+                    /**
+                     * Verifies a GetDefaultThirdPartyDataDeclarationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDefaultThirdPartyDataDeclarationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDefaultThirdPartyDataDeclarationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest;
+
+                    /**
+                     * Creates a plain object from a GetDefaultThirdPartyDataDeclarationRequest message. Also converts values to other types if specified.
+                     * @param message GetDefaultThirdPartyDataDeclarationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.GetDefaultThirdPartyDataDeclarationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDefaultThirdPartyDataDeclarationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDefaultThirdPartyDataDeclarationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -75462,6 +80883,7 @@ export namespace google {
                         HBT_YIELD_PARTNER_NAME = 660,
                         HEADER_BIDDER_INTEGRATION_TYPE = 718,
                         HEADER_BIDDER_INTEGRATION_TYPE_NAME = 719,
+                        HIGH_ENGAGEMENT_ADS_ALLOWED = 838,
                         HOUR = 100,
                         IMPRESSION_COUNTING_METHOD = 577,
                         IMPRESSION_COUNTING_METHOD_NAME = 578,
@@ -75733,6 +81155,8 @@ export namespace google {
                         VIDEO_SDK_VERSION_NAME = 441,
                         VIDEO_STITCHER_TYPE = 752,
                         VIDEO_STITCHER_TYPE_NAME = 753,
+                        WEB_INTERSTITIAL_TRIGGER_TYPE = 826,
+                        WEB_INTERSTITIAL_TRIGGER_TYPE_NAME = 827,
                         WEB_PROPERTY_CODE = 730,
                         WEEK = 5,
                         YIELD_GROUP_BUYER_NAME = 184,

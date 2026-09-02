@@ -483,6 +483,721 @@ describe('v1.AudienceSegmentServiceClient', () => {
     });
   });
 
+  describe('batchActivateAudienceSegments', () => {
+    it('invokes batchActivateAudienceSegments without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchActivateAudienceSegments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchActivateAudienceSegments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchActivateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchActivateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateAudienceSegments without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchActivateAudienceSegments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchActivateAudienceSegments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchActivateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchActivateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateAudienceSegments with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchActivateAudienceSegments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchActivateAudienceSegments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchActivateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchActivateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateAudienceSegments with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchActivateAudienceSegments(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchDeactivateAudienceSegments', () => {
+    it('invokes batchDeactivateAudienceSegments without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchDeactivateAudienceSegments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchDeactivateAudienceSegments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeactivateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeactivateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateAudienceSegments without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchDeactivateAudienceSegments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeactivateAudienceSegments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeactivateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeactivateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateAudienceSegments with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeactivateAudienceSegments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchDeactivateAudienceSegments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchDeactivateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeactivateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateAudienceSegments with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchDeactivateAudienceSegments(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchApproveAudienceSegments', () => {
+    it('invokes batchApproveAudienceSegments without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchApproveAudienceSegments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchApproveAudienceSegments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveAudienceSegments without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchApproveAudienceSegments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchApproveAudienceSegments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApproveAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveAudienceSegments with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchApproveAudienceSegments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchApproveAudienceSegments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchApproveAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApproveAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApproveAudienceSegments with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApproveAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchApproveAudienceSegments(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchRejectAudienceSegments', () => {
+    it('invokes batchRejectAudienceSegments without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchRejectAudienceSegments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchRejectAudienceSegments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRejectAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRejectAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRejectAudienceSegments without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchRejectAudienceSegments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchRejectAudienceSegments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRejectAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRejectAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRejectAudienceSegments with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchRejectAudienceSegments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchRejectAudienceSegments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchRejectAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRejectAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRejectAudienceSegments with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchRejectAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchRejectAudienceSegments(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchPopulateAudienceSegments', () => {
+    it('invokes batchPopulateAudienceSegments without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchPopulateAudienceSegments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchPopulateAudienceSegments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchPopulateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchPopulateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchPopulateAudienceSegments without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchPopulateAudienceSegments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchPopulateAudienceSegments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchPopulateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchPopulateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchPopulateAudienceSegments with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchPopulateAudienceSegments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchPopulateAudienceSegments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchPopulateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchPopulateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchPopulateAudienceSegments with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchPopulateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchPopulateAudienceSegments(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listAudienceSegments', () => {
     it('invokes listAudienceSegments without error', async () => {
       const client =
@@ -2371,6 +3086,53 @@ describe('v1.AudienceSegmentServiceClient', () => {
       });
     });
 
+    describe('defaultThirdPartyDataDeclaration', async () => {
+      const fakePath = '/rendered/path/defaultThirdPartyDataDeclaration';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+      };
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('defaultThirdPartyDataDeclarationPath', () => {
+        const result =
+          client.defaultThirdPartyDataDeclarationPath('networkCodeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDefaultThirdPartyDataDeclarationName', () => {
+        const result =
+          client.matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('deviceCapability', async () => {
       const fakePath = '/rendered/path/deviceCapability';
       const expectedParameters = {
@@ -3092,6 +3854,59 @@ describe('v1.AudienceSegmentServiceClient', () => {
             client.pathTemplates.mobileDeviceSubmodelPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeStyle', async () => {
+      const fakePath = '/rendered/path/nativeStyle';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        native_style: 'nativeStyleValue',
+      };
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.nativeStylePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeStylePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeStylePath', () => {
+        const result = client.nativeStylePath(
+          'networkCodeValue',
+          'nativeStyleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromNativeStyleName', () => {
+        const result = client.matchNetworkCodeFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNativeStyleFromNativeStyleName', () => {
+        const result = client.matchNativeStyleFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'nativeStyleValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

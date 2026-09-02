@@ -411,6 +411,9 @@ export class DeveloperKnowledgeClient {
    *   Required. Specifies the name of the document to retrieve.
    *   Format: `documents/{uri_without_scheme}`
    *   Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *
+   *   The name must not exceed 500 characters; values longer than 500 characters
+   *   will result in an `INVALID_ARGUMENT` error.
    * @param {google.developers.knowledge.v1.DocumentView} [request.view]
    *   Optional. Specifies the
    *   {@link protos.google.developers.knowledge.v1.DocumentView|DocumentView} of the
@@ -556,6 +559,9 @@ export class DeveloperKnowledgeClient {
    *
    *   Format: `documents/{uri_without_scheme}`
    *   Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *
+   *   Each name must not exceed 500 characters; values longer than 500 characters
+   *   will result in an `INVALID_ARGUMENT` error.
    *
    * @param {google.developers.knowledge.v1.DocumentView} [request.view]
    *   Optional. Specifies the
@@ -844,7 +850,9 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. Provides the raw query string provided by the user, such as "How
-   *   to create a Cloud Storage bucket?".
+   *   to create a Cloud Storage bucket?". The query must not exceed 500
+   *   characters; values longer than 500 characters will result in an
+   *   `INVALID_ARGUMENT` error.
    * @param {number} [request.pageSize]
    *   Optional. Specifies the maximum number of results to return. The service
    *   may return fewer than this value.
@@ -865,6 +873,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -874,6 +884,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -892,6 +904,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -1019,7 +1033,9 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. Provides the raw query string provided by the user, such as "How
-   *   to create a Cloud Storage bucket?".
+   *   to create a Cloud Storage bucket?". The query must not exceed 500
+   *   characters; values longer than 500 characters will result in an
+   *   `INVALID_ARGUMENT` error.
    * @param {number} [request.pageSize]
    *   Optional. Specifies the maximum number of results to return. The service
    *   may return fewer than this value.
@@ -1040,6 +1056,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1049,6 +1067,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -1067,6 +1087,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -1117,7 +1139,9 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. Provides the raw query string provided by the user, such as "How
-   *   to create a Cloud Storage bucket?".
+   *   to create a Cloud Storage bucket?". The query must not exceed 500
+   *   characters; values longer than 500 characters will result in an
+   *   `INVALID_ARGUMENT` error.
    * @param {number} [request.pageSize]
    *   Optional. Specifies the maximum number of results to return. The service
    *   may return fewer than this value.
@@ -1138,6 +1162,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1147,6 +1173,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -1165,6 +1193,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`

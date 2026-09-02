@@ -2654,6 +2654,53 @@ describe('v1.ContentBundleServiceClient', () => {
       });
     });
 
+    describe('defaultThirdPartyDataDeclaration', async () => {
+      const fakePath = '/rendered/path/defaultThirdPartyDataDeclaration';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+      };
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('defaultThirdPartyDataDeclarationPath', () => {
+        const result =
+          client.defaultThirdPartyDataDeclarationPath('networkCodeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDefaultThirdPartyDataDeclarationName', () => {
+        const result =
+          client.matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('deviceCapability', async () => {
       const fakePath = '/rendered/path/deviceCapability';
       const expectedParameters = {
@@ -3375,6 +3422,59 @@ describe('v1.ContentBundleServiceClient', () => {
             client.pathTemplates.mobileDeviceSubmodelPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeStyle', async () => {
+      const fakePath = '/rendered/path/nativeStyle';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        native_style: 'nativeStyleValue',
+      };
+      const client =
+        new contentbundleserviceModule.v1.ContentBundleServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.nativeStylePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeStylePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeStylePath', () => {
+        const result = client.nativeStylePath(
+          'networkCodeValue',
+          'nativeStyleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromNativeStyleName', () => {
+        const result = client.matchNetworkCodeFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNativeStyleFromNativeStyleName', () => {
+        const result = client.matchNativeStyleFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'nativeStyleValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
