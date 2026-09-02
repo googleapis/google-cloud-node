@@ -114,15 +114,14 @@ libraries:
     version: 3.0.0
     apis:
       - path: google/api/cloudquotas/v1
+        nodejs:
+          omit_common_resources: true
       - path: google/api/cloudquotas/v1beta
+        nodejs:
+          omit_common_resources: true
     copyright_year: "2026"
     nodejs:
       default_version: v1
-      nodejs_apis:
-        - omit_common_resources: true
-          path: google/api/cloudquotas/v1
-        - omit_common_resources: true
-          path: google/api/cloudquotas/v1beta
       package_name: '@google-cloud/cloudquotas'
   - name: google-api-servicecontrol
     version: 5.0.0
@@ -208,12 +207,11 @@ libraries:
     version: 3.0.0
     apis:
       - path: google/cloud/advisorynotifications/v1
+        nodejs:
+          omit_common_resources: true
     copyright_year: "2026"
     nodejs:
       default_version: v1
-      nodejs_apis:
-        - omit_common_resources: true
-          path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentidentity
     version: 0.1.1
     apis:
@@ -229,21 +227,8 @@ libraries:
     version: 7.2.0
     apis:
       - path: google/cloud/aiplatform/v1
-      - path: google/cloud/aiplatform/v1beta1
-    copyright_year: "2026"
-    keep:
-      - src/decorator.ts
-      - src/enhanced-types.json
-      - src/helpers.ts
-      - src/index.ts
-      - src/value-converter.ts
-      - test/helpers.test.ts
-      - test/index.test.ts
-      - test/run.ts
-    nodejs:
-      default_version: v1
-      nodejs_apis:
-        - additional_protos:
+        nodejs:
+          additional_protos:
             - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_tables.proto
             - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_video_object_tracking.proto
             - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_text_sentiment.proto
@@ -280,8 +265,9 @@ libraries:
             - google/cloud/aiplatform/v1/schema/predict/instance/text_extraction.proto
             - google/cloud/aiplatform/v1/schema/predict/instance/video_action_recognition.proto
             - google/cloud/aiplatform/v1/schema/predict/instance/video_object_tracking.proto
-          path: google/cloud/aiplatform/v1
-        - additional_protos:
+      - path: google/cloud/aiplatform/v1beta1
+        nodejs:
+          additional_protos:
             - google/cloud/aiplatform/v1beta1/schema/geometry.proto
             - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_tables.proto
             - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_video_object_tracking.proto
@@ -325,7 +311,18 @@ libraries:
             - google/cloud/aiplatform/v1beta1/schema/annotation_spec_color.proto
             - google/cloud/aiplatform/v1beta1/schema/data_item_payload.proto
             - google/cloud/aiplatform/v1beta1/schema/dataset_metadata.proto
-          path: google/cloud/aiplatform/v1beta1
+    copyright_year: "2026"
+    keep:
+      - src/decorator.ts
+      - src/enhanced-types.json
+      - src/helpers.ts
+      - src/index.ts
+      - src/value-converter.ts
+      - test/helpers.test.ts
+      - test/index.test.ts
+      - test/run.ts
+    nodejs:
+      default_version: v1
   - name: google-cloud-alloydb
     version: 3.1.0
     apis:
@@ -580,12 +577,11 @@ libraries:
     version: 6.0.0
     apis:
       - path: google/cloud/billing/v1
+        nodejs:
+          omit_common_resources: true
     copyright_year: "2026"
     nodejs:
       default_version: v1
-      nodejs_apis:
-        - omit_common_resources: true
-          path: google/cloud/billing/v1
   - name: google-cloud-billing-budgets
     version: 7.0.0
     apis:
@@ -639,18 +635,17 @@ libraries:
     version: 0.8.0
     apis:
       - path: google/cloud/chronicle/v1
-    copyright_year: "2026"
-    nodejs:
-      default_version: v1
-      nodejs_apis:
-        - additional_protos:
+        nodejs:
+          additional_protos:
             - backstory/collection.proto
             - backstory/data_access.proto
             - backstory/entity.proto
             - backstory/entity_risk.proto
             - backstory/id.proto
             - backstory/udm.proto
-          path: google/cloud/chronicle/v1
+    copyright_year: "2026"
+    nodejs:
+      default_version: v1
   - name: google-cloud-cloudcontrolspartner
     version: 0.7.0
     apis:
@@ -692,7 +687,11 @@ libraries:
     version: 7.1.0
     apis:
       - path: google/cloud/compute/v1
+        nodejs:
+          diregapic: true
       - path: google/cloud/compute/v1beta
+        nodejs:
+          diregapic: true
     copyright_year: "2026"
     keep:
       - protos/google/cloud/compute/v1small/compute_small.proto
@@ -714,11 +713,6 @@ libraries:
       - test/gapic_region_operations_v1small.ts
     nodejs:
       default_version: v1
-      nodejs_apis:
-        - diregapic: true
-          path: google/cloud/compute/v1
-        - diregapic: true
-          path: google/cloud/compute/v1beta
   - name: google-cloud-confidentialcomputing
     version: 3.0.0
     apis:
@@ -1494,12 +1488,11 @@ libraries:
     version: 7.0.0
     apis:
       - path: google/cloud/resourcemanager/v3
+        nodejs:
+          omit_common_resources: true
     copyright_year: "2026"
     nodejs:
       default_version: v3
-      nodejs_apis:
-        - omit_common_resources: true
-          path: google/cloud/resourcemanager/v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
     version: 5.1.0
@@ -1971,20 +1964,19 @@ libraries:
     version: 7.0.1
     apis:
       - path: google/devtools/containeranalysis/v1
+        nodejs:
+          additional_protos:
+            - grafeas/v1/grafeas.proto
       - path: google/devtools/containeranalysis/v1beta1
+        nodejs:
+          additional_protos:
+            - google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto
     copyright_year: "2026"
     nodejs:
       default_version: v1
       dependencies:
         '@google-cloud/grafeas': ^6.0.0
       main_service: containeranalysis
-      nodejs_apis:
-        - additional_protos:
-            - grafeas/v1/grafeas.proto
-          path: google/devtools/containeranalysis/v1
-        - additional_protos:
-            - google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto
-          path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
     version: 3.1.0
@@ -2129,12 +2121,11 @@ libraries:
     version: 0.5.0
     apis:
       - path: google/marketingplatform/admin/v1alpha
+        nodejs:
+          omit_common_resources: true
     copyright_year: "2026"
     nodejs:
       default_version: v1alpha
-      nodejs_apis:
-        - omit_common_resources: true
-          path: google/marketingplatform/admin/v1alpha
       package_name: '@google-ads/marketing-platform-admin'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest
   - name: google-monitoring-dashboard
