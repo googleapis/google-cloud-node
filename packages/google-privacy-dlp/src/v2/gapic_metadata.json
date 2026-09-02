@@ -225,6 +225,26 @@
                 "updateConnection"
               ]
             },
+            "CreateContentPolicy": {
+              "methods": [
+                "createContentPolicy"
+              ]
+            },
+            "UpdateContentPolicy": {
+              "methods": [
+                "updateContentPolicy"
+              ]
+            },
+            "GetContentPolicy": {
+              "methods": [
+                "getContentPolicy"
+              ]
+            },
+            "DeleteContentPolicy": {
+              "methods": [
+                "deleteContentPolicy"
+              ]
+            },
             "ListInspectTemplates": {
               "methods": [
                 "listInspectTemplates",
@@ -307,6 +327,13 @@
                 "searchConnections",
                 "searchConnectionsStream",
                 "searchConnectionsAsync"
+              ]
+            },
+            "ListContentPolicies": {
+              "methods": [
+                "listContentPolicies",
+                "listContentPoliciesStream",
+                "listContentPoliciesAsync"
               ]
             }
           }
@@ -529,6 +556,26 @@
                 "updateConnection"
               ]
             },
+            "CreateContentPolicy": {
+              "methods": [
+                "createContentPolicy"
+              ]
+            },
+            "UpdateContentPolicy": {
+              "methods": [
+                "updateContentPolicy"
+              ]
+            },
+            "GetContentPolicy": {
+              "methods": [
+                "getContentPolicy"
+              ]
+            },
+            "DeleteContentPolicy": {
+              "methods": [
+                "deleteContentPolicy"
+              ]
+            },
             "ListInspectTemplates": {
               "methods": [
                 "listInspectTemplates",
@@ -611,6 +658,13 @@
                 "searchConnections",
                 "searchConnectionsStream",
                 "searchConnectionsAsync"
+              ]
+            },
+            "ListContentPolicies": {
+              "methods": [
+                "listContentPolicies",
+                "listContentPoliciesStream",
+                "listContentPoliciesAsync"
               ]
             }
           }

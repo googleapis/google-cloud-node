@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START dlp_v2_generated_DlpService_CreateDlpJob_async]
+  // [START dlp_v2_generated_DlpService_ListContentPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,19 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent resource name.
-   *  The format of this value varies depending on whether you have specified a
-   *  processing
-   *  location (https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *  + Projects scope, location specified:
-   *    `projects/{project_id}/locations/{location_id}`
-   *  + Projects scope, no location specified (defaults to global):
-   *    `projects/{project_id}`
-   *  The following example `parent` string specifies a parent project with the
-   *  identifier `example-project`, and specifies the `europe-west3` location
-   *  for processing data:
-   *      parent=projects/example-project/locations/europe-west3
+   *  Required. Resource name of the project,
+   *  for example, `projects/project-id/locations/asia`.
    */
   // const parent = 'abc123'
   /**
-   *  An inspection job scans a storage repository for InfoTypes.
+   *  Optional. Number of results per page, max 1000.
    */
-  // const inspectJob = {}
+  // const pageSize = 1234
   /**
-   *  A risk analysis job calculates re-identification risk metrics for a
-   *  BigQuery table.
+   *  Optional. Page token from a previous page to return the next set of
+   *  results. If set, all other request fields must match the original request.
    */
-  // const riskJob = {}
-  /**
-   *  The job id can contain uppercase and lowercase letters,
-   *  numbers, and hyphens; that is, it must match the regular
-   *  expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *  characters. Can be empty to allow the system to generate one.
-   */
-  // const jobId = 'abc123'
+  // const pageToken = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -66,19 +49,21 @@ function main(parent) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function callCreateDlpJob() {
+  async function callListContentPolicies() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const response = await dlpClient.createDlpJob(request);
-    console.log(response);
+    const iterable = dlpClient.listContentPoliciesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateDlpJob();
-  // [END dlp_v2_generated_DlpService_CreateDlpJob_async]
+  callListContentPolicies();
+  // [END dlp_v2_generated_DlpService_ListContentPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

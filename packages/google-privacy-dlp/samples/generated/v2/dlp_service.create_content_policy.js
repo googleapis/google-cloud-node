@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, config) {
-  // [START dlp_v2_generated_DlpService_CreateStoredInfoType_async]
+function main(parent, contentPolicy) {
+  // [START dlp_v2_generated_DlpService_CreateContentPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -31,33 +31,24 @@ function main(parent, config) {
   /**
    *  Required. Parent resource name.
    *  The format of this value varies depending on the scope of the request
-   *  (project or organization) and whether you have specified a processing
-   *  location (https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *  + Projects scope, location specified:
+   *  (project):
+   *  + Projects scope:
    *    `projects/{project_id}/locations/{location_id}`
-   *  + Projects scope, no location specified (defaults to global):
-   *    `projects/{project_id}`
-   *  + Organizations scope, location specified:
-   *    `organizations/{org_id}/locations/{location_id}`
-   *  + Organizations scope, no location specified (defaults to global):
-   *    `organizations/{org_id}`
-   *  The following example `parent` string specifies a parent project with the
-   *  identifier `example-project`, and specifies the `europe-west3` location
-   *  for processing data:
-   *      parent=projects/example-project/locations/europe-west3
    */
   // const parent = 'abc123'
   /**
-   *  Required. Configuration of the storedInfoType to create.
+   *  Required. The content_policy resource.
    */
-  // const config = {}
+  // const contentPolicy = {}
   /**
-   *  The storedInfoType ID can contain uppercase and lowercase letters,
-   *  numbers, and hyphens; that is, it must match the regular
-   *  expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *  characters. Can be empty to allow the system to generate one.
+   *  Optional. The content policy ID can contain uppercase and lowercase
+   *  letters, numbers, and hyphens; that is, it must match the regular
+   *  expression:
+   *    `[a-zA-Z\d-_]+`.
+   *  The maximum length is 100 characters. If empty, the system will generate
+   *  a random id.
    */
-  // const storedInfoTypeId = 'abc123'
+  // const contentPolicyId = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -65,20 +56,20 @@ function main(parent, config) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function callCreateStoredInfoType() {
+  async function callCreateContentPolicy() {
     // Construct request
     const request = {
       parent,
-      config,
+      contentPolicy,
     };
 
     // Run request
-    const response = await dlpClient.createStoredInfoType(request);
+    const response = await dlpClient.createContentPolicy(request);
     console.log(response);
   }
 
-  callCreateStoredInfoType();
-  // [END dlp_v2_generated_DlpService_CreateStoredInfoType_async]
+  callCreateContentPolicy();
+  // [END dlp_v2_generated_DlpService_CreateContentPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
