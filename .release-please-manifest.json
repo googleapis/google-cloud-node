@@ -268,7 +268,7 @@
   "packages/google-shopping-merchant-inventories": "0.14.0",
   "packages/google-shopping-merchant-issueresolution": "0.5.0",
   "packages/google-shopping-merchant-lfp": "0.11.0",
-  "packages/google-shopping-merchant-loyaltycustomers": "0.0.0",
+  "packages/google-shopping-merchant-loyaltycustomers": "0.1.0",
   "packages/google-shopping-merchant-notifications": "0.10.0",
   "packages/google-shopping-merchant-ordertracking": "0.5.0",
   "packages/google-shopping-merchant-products": "0.11.0",

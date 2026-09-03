@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6a606a123b34d8826e72b4d31abc1dae1f05d4f1",
+          "message": "Add google-shopping-merchant-loyaltycustomers",
+          "issues": [
+            "9245"
+          ],
+          "scope": "google/shopping/merchant/loyaltycustomers/v1"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "75f2b787-2345-4a54-861d-2b118a84e937",
+      "createTime": "2026-09-03T21:26:39.377Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "932030548323f0181bb175b0519a6e77cbe64cad",
           "message": "Add internalTelemetryInfo configuration to nunjucks templates",
           "issues": [
@@ -90921,5 +90939,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-03T17:34:39.944Z"
+  "updateTime": "2026-09-03T21:26:39.377Z"
 }
