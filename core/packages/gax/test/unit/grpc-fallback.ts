@@ -255,6 +255,41 @@ describe('grpc-fallback', () => {
     assert(headers['x-goog-api-client'][0].match('grpc-web/'));
   });
 
+  it('constructSettings should accept enableTelemetryTracing and internalTelemetryInfo', () => {
+    const gapicConfig = {
+      interfaces: {
+        'google.showcase.v1beta1.Echo': {
+          retry_codes: {},
+          retry_params: {},
+          methods: {
+            Echo: {
+              timeout_millis: 60000,
+            },
+          },
+        },
+      },
+    };
+    const telemetryInfo = {
+      gcpClientService: 'fake',
+      gcpVersion: 'v1',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/fake',
+    };
+    const settings = gaxGrpc.constructSettings(
+      'google.showcase.v1beta1.Echo',
+      gapicConfig,
+      {},
+      {},
+      true,
+      telemetryInfo,
+    );
+    assert.strictEqual(settings.echo.enableTelemetryTracing, true);
+    assert.deepStrictEqual(
+      settings.echo.otherArgs.internalTelemetryInfo,
+      telemetryInfo,
+    );
+  });
+
   it('should make a request', done => {
     const requestObject = {content: 'test-content'};
     const responseType = protos.lookupType('EchoResponse');
