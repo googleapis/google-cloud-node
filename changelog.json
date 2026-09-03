@@ -5,6 +5,228 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "8d913501-1bf9-4890-a02a-6f05aa4b2fc4",
+      "createTime": "2026-09-02T03:18:07.331Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "6683235b-886a-4706-a7bc-7647f94c3698",
+      "createTime": "2026-09-02T03:18:07.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "1bf9c80f-1736-4673-bca2-8ae10b3db6f6",
+      "createTime": "2026-09-02T03:18:07.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "3a651f27-b7a0-407b-9829-2840b5565004",
+      "createTime": "2026-09-02T03:18:07.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "a879d682-cde0-414b-9ee8-7174d8d72d6f",
+      "createTime": "2026-09-02T03:18:07.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "e0767d3a-396a-4371-ba17-55504fc1b1c7",
+      "createTime": "2026-09-02T03:18:07.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "a701c065-29db-42ba-a416-b398f92eee21",
+      "createTime": "2026-09-02T03:18:07.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "c52ed076-9737-4ede-a25a-747346c98d25",
+      "createTime": "2026-09-02T03:18:07.131Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "4153df75-faa5-481f-ba72-b08d995abeb7",
+      "createTime": "2026-09-02T03:18:07.105Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3e0e66f16e53586e24345756e103a42d8b3a4ae3",
+          "message": "Onboard a new library",
+          "issues": [
+            "9228"
+          ],
+          "scope": "google/cloud/apptopology/v1"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "f8f9292a-dad1-42a4-9350-653da889afda",
+      "createTime": "2026-09-02T03:18:07.078Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "5db7abf8-13fd-4cbe-bce2-4ec118fee1c9",
+      "createTime": "2026-09-02T03:18:07.047Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "02d3aeb0-0086-49c0-bfc5-54e63c1cca2a",
+      "createTime": "2026-09-02T03:18:07.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fad57ff4b9164712426a041fc61db035859f9043",
+          "message": "Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries",
+          "issues": [
+            "9116"
+          ]
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "3f2b5de6-0296-4cba-a3ac-b13ca74af052",
+      "createTime": "2026-09-01T12:41:10.557Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a0cbc510dd45db2232a909a0b8c225771cfbcf18",
           "message": "Bundle backstory UDM protos into @google-cloud/chronicle",
           "issues": [
@@ -90526,5 +90748,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-28T08:19:43.503Z"
+  "updateTime": "2026-09-02T03:18:07.331Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/routing-v3.0.0...routing-v3.1.0) (2026-09-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9219](https://github.com/googleapis/google-cloud-node/issues/9219)) ([09ff86e](https://github.com/googleapis/google-cloud-node/commit/09ff86ef811de9215c587496ece57ff8b5fb2b77))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/routing-v2.2.1...routing-v3.0.0) (2026-08-04)
 
 

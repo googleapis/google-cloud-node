@@ -754,6 +754,9 @@ export namespace google {
 
                         /** MigrationTaskResult translationTaskResult */
                         translationTaskResult?: (google.cloud.bigquery.migration.v2.ITranslationTaskResult|null);
+
+                        /** MigrationTaskResult taskOutputs */
+                        taskOutputs?: ({ [k: string]: google.cloud.bigquery.migration.v2.ITaskOutput }|null);
                     }
 
                     /** Represents a MigrationTaskResult. */
@@ -767,6 +770,9 @@ export namespace google {
 
                         /** MigrationTaskResult translationTaskResult. */
                         public translationTaskResult?: (google.cloud.bigquery.migration.v2.ITranslationTaskResult|null);
+
+                        /** MigrationTaskResult taskOutputs. */
+                        public taskOutputs: { [k: string]: google.cloud.bigquery.migration.v2.ITaskOutput };
 
                         /** MigrationTaskResult details. */
                         public details?: "translationTaskResult";
@@ -956,6 +962,589 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TaskOutput. */
+                    interface ITaskOutput {
+
+                        /** TaskOutput lineageOutput */
+                        lineageOutput?: (google.cloud.bigquery.migration.v2.ILineageOutput|null);
+
+                        /** TaskOutput state */
+                        state?: (google.cloud.bigquery.migration.v2.TaskOutput.State|keyof typeof google.cloud.bigquery.migration.v2.TaskOutput.State|null);
+
+                        /** TaskOutput processingError */
+                        processingError?: (google.rpc.IErrorInfo|null);
+                    }
+
+                    /** Represents a TaskOutput. */
+                    class TaskOutput implements ITaskOutput {
+
+                        /**
+                         * Constructs a new TaskOutput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ITaskOutput);
+
+                        /** TaskOutput lineageOutput. */
+                        public lineageOutput?: (google.cloud.bigquery.migration.v2.ILineageOutput|null);
+
+                        /** TaskOutput state. */
+                        public state: (google.cloud.bigquery.migration.v2.TaskOutput.State|keyof typeof google.cloud.bigquery.migration.v2.TaskOutput.State);
+
+                        /** TaskOutput processingError. */
+                        public processingError?: (google.rpc.IErrorInfo|null);
+
+                        /** TaskOutput output. */
+                        public output?: "lineageOutput";
+
+                        /**
+                         * Creates a new TaskOutput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TaskOutput instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ITaskOutput): google.cloud.bigquery.migration.v2.TaskOutput;
+
+                        /**
+                         * Encodes the specified TaskOutput message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TaskOutput.verify|verify} messages.
+                         * @param message TaskOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ITaskOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TaskOutput message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TaskOutput.verify|verify} messages.
+                         * @param message TaskOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ITaskOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TaskOutput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TaskOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.TaskOutput;
+
+                        /**
+                         * Decodes a TaskOutput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TaskOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.TaskOutput;
+
+                        /**
+                         * Verifies a TaskOutput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TaskOutput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TaskOutput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.TaskOutput;
+
+                        /**
+                         * Creates a plain object from a TaskOutput message. Also converts values to other types if specified.
+                         * @param message TaskOutput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.TaskOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TaskOutput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TaskOutput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TaskOutput {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            PENDING = 1,
+                            SUCCEEDED = 2,
+                            FAILED = 3
+                        }
+                    }
+
+                    /** Properties of a LineageOutput. */
+                    interface ILineageOutput {
+
+                        /** LineageOutput webappUri */
+                        webappUri?: (string|null);
+
+                        /** LineageOutput recognizedInputs */
+                        recognizedInputs?: (google.cloud.bigquery.migration.v2.LineageOutput.IRecognizedInput[]|null);
+
+                        /** LineageOutput processingProgressReports */
+                        processingProgressReports?: (google.cloud.bigquery.migration.v2.LineageOutput.IProgressReport[]|null);
+                    }
+
+                    /** Represents a LineageOutput. */
+                    class LineageOutput implements ILineageOutput {
+
+                        /**
+                         * Constructs a new LineageOutput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ILineageOutput);
+
+                        /** LineageOutput webappUri. */
+                        public webappUri: string;
+
+                        /** LineageOutput recognizedInputs. */
+                        public recognizedInputs: google.cloud.bigquery.migration.v2.LineageOutput.IRecognizedInput[];
+
+                        /** LineageOutput processingProgressReports. */
+                        public processingProgressReports: google.cloud.bigquery.migration.v2.LineageOutput.IProgressReport[];
+
+                        /**
+                         * Creates a new LineageOutput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LineageOutput instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ILineageOutput): google.cloud.bigquery.migration.v2.LineageOutput;
+
+                        /**
+                         * Encodes the specified LineageOutput message. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.verify|verify} messages.
+                         * @param message LineageOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ILineageOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LineageOutput message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.verify|verify} messages.
+                         * @param message LineageOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ILineageOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LineageOutput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LineageOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.LineageOutput;
+
+                        /**
+                         * Decodes a LineageOutput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LineageOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.LineageOutput;
+
+                        /**
+                         * Verifies a LineageOutput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LineageOutput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LineageOutput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.LineageOutput;
+
+                        /**
+                         * Creates a plain object from a LineageOutput message. Also converts values to other types if specified.
+                         * @param message LineageOutput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.LineageOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LineageOutput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LineageOutput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LineageOutput {
+
+                        /** Properties of a RecognizedInput. */
+                        interface IRecognizedInput {
+
+                            /** RecognizedInput type */
+                            type?: (google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput.Type|keyof typeof google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput.Type|null);
+
+                            /** RecognizedInput uncompressedSizeBytes */
+                            uncompressedSizeBytes?: (number|Long|string|null);
+                        }
+
+                        /** Represents a RecognizedInput. */
+                        class RecognizedInput implements IRecognizedInput {
+
+                            /**
+                             * Constructs a new RecognizedInput.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.migration.v2.LineageOutput.IRecognizedInput);
+
+                            /** RecognizedInput type. */
+                            public type: (google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput.Type|keyof typeof google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput.Type);
+
+                            /** RecognizedInput uncompressedSizeBytes. */
+                            public uncompressedSizeBytes: (number|Long|string);
+
+                            /**
+                             * Creates a new RecognizedInput instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RecognizedInput instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.migration.v2.LineageOutput.IRecognizedInput): google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput;
+
+                            /**
+                             * Encodes the specified RecognizedInput message. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput.verify|verify} messages.
+                             * @param message RecognizedInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.migration.v2.LineageOutput.IRecognizedInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RecognizedInput message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput.verify|verify} messages.
+                             * @param message RecognizedInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.migration.v2.LineageOutput.IRecognizedInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RecognizedInput message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RecognizedInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput;
+
+                            /**
+                             * Decodes a RecognizedInput message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RecognizedInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput;
+
+                            /**
+                             * Verifies a RecognizedInput message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RecognizedInput message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RecognizedInput
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput;
+
+                            /**
+                             * Creates a plain object from a RecognizedInput message. Also converts values to other types if specified.
+                             * @param message RecognizedInput
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RecognizedInput to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RecognizedInput
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RecognizedInput {
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                METADATA = 1,
+                                QUERY_LOG = 2,
+                                SCRIPT = 3
+                            }
+                        }
+
+                        /** Properties of a ProgressReport. */
+                        interface IProgressReport {
+
+                            /** ProgressReport processingStage */
+                            processingStage?: (google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.ProcessingStage|keyof typeof google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.ProcessingStage|null);
+
+                            /** ProgressReport workSummaries */
+                            workSummaries?: (google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.IWorkSummary[]|null);
+                        }
+
+                        /** Represents a ProgressReport. */
+                        class ProgressReport implements IProgressReport {
+
+                            /**
+                             * Constructs a new ProgressReport.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.migration.v2.LineageOutput.IProgressReport);
+
+                            /** ProgressReport processingStage. */
+                            public processingStage: (google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.ProcessingStage|keyof typeof google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.ProcessingStage);
+
+                            /** ProgressReport workSummaries. */
+                            public workSummaries: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.IWorkSummary[];
+
+                            /**
+                             * Creates a new ProgressReport instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ProgressReport instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.migration.v2.LineageOutput.IProgressReport): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport;
+
+                            /**
+                             * Encodes the specified ProgressReport message. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.verify|verify} messages.
+                             * @param message ProgressReport message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.migration.v2.LineageOutput.IProgressReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ProgressReport message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.verify|verify} messages.
+                             * @param message ProgressReport message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.migration.v2.LineageOutput.IProgressReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ProgressReport message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ProgressReport
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport;
+
+                            /**
+                             * Decodes a ProgressReport message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ProgressReport
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport;
+
+                            /**
+                             * Verifies a ProgressReport message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ProgressReport message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ProgressReport
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport;
+
+                            /**
+                             * Creates a plain object from a ProgressReport message. Also converts values to other types if specified.
+                             * @param message ProgressReport
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ProgressReport to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ProgressReport
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ProgressReport {
+
+                            /** Properties of a WorkSummary. */
+                            interface IWorkSummary {
+
+                                /** WorkSummary state */
+                                state?: (google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary.State|keyof typeof google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary.State|null);
+
+                                /** WorkSummary size */
+                                size?: (number|Long|string|null);
+
+                                /** WorkSummary comment */
+                                comment?: (string|null);
+                            }
+
+                            /** Represents a WorkSummary. */
+                            class WorkSummary implements IWorkSummary {
+
+                                /**
+                                 * Constructs a new WorkSummary.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.IWorkSummary);
+
+                                /** WorkSummary state. */
+                                public state: (google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary.State|keyof typeof google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary.State);
+
+                                /** WorkSummary size. */
+                                public size: (number|Long|string);
+
+                                /** WorkSummary comment. */
+                                public comment: string;
+
+                                /**
+                                 * Creates a new WorkSummary instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns WorkSummary instance
+                                 */
+                                public static create(properties?: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.IWorkSummary): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary;
+
+                                /**
+                                 * Encodes the specified WorkSummary message. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary.verify|verify} messages.
+                                 * @param message WorkSummary message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.IWorkSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified WorkSummary message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary.verify|verify} messages.
+                                 * @param message WorkSummary message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.IWorkSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a WorkSummary message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns WorkSummary
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary;
+
+                                /**
+                                 * Decodes a WorkSummary message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns WorkSummary
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary;
+
+                                /**
+                                 * Verifies a WorkSummary message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a WorkSummary message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns WorkSummary
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary;
+
+                                /**
+                                 * Creates a plain object from a WorkSummary message. Also converts values to other types if specified.
+                                 * @param message WorkSummary
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this WorkSummary to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for WorkSummary
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace WorkSummary {
+
+                                /** State enum. */
+                                enum State {
+                                    STATE_UNSPECIFIED = 0,
+                                    SUCCEEDED = 1,
+                                    FAILED = 2,
+                                    IN_PROGRESS = 3,
+                                    SKIPPED = 4
+                                }
+                            }
+
+                            /** ProcessingStage enum. */
+                            enum ProcessingStage {
+                                PROCESSING_STAGE_UNSPECIFIED = 0,
+                                INPUT_INGESTION = 1000,
+                                POSTPROCESSING = 2000
+                            }
+                        }
                     }
 
                     /** Properties of a ResourceErrorDetail. */
