@@ -15,7 +15,6 @@
  */
 
 import {GrpcService} from './common-grpc/service';
-import * as checkpointStream from 'checkpoint-stream';
 import {common as p} from 'protobufjs';
 import {PassThrough, Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
@@ -567,6 +566,76 @@ export class PartialResultStream extends Transform implements ResultEvents {
  * @param {RowOptions} [options] Options for formatting rows.
  * @returns {PartialResultStream}
  */
+class CheckpointStream extends Transform {
+  private queue: google.spanner.v1.PartialResultSet[] = [];
+  private maxQueued: number;
+  private isCheckpointFn: (
+    chunk: google.spanner.v1.PartialResultSet,
+  ) => boolean;
+
+  constructor(options: {
+    maxQueued?: number;
+    isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet) => boolean;
+  }) {
+    super({objectMode: true});
+    this.maxQueued = options.maxQueued ?? 10;
+    this.isCheckpointFn = options.isCheckpointFn;
+  }
+
+  _transform(
+    chunk: google.spanner.v1.PartialResultSet,
+    enc: string,
+    callback: () => void,
+  ): void {
+    this.queue.push(chunk);
+    const isCheckpoint = this.isCheckpointFn(chunk);
+    let shouldFlush = false;
+    if (isCheckpoint) {
+      this.emit('checkpoint', chunk);
+      shouldFlush = true;
+    } else if (this.queue.length > this.maxQueued) {
+      shouldFlush = true;
+    }
+
+    if (!shouldFlush) {
+      return callback();
+    }
+
+    this._flushQueue(callback);
+  }
+
+  private _flushQueue(callback: () => void): void {
+    const loopyloop = () => {
+      if (this.destroyed) {
+        return callback();
+      }
+
+      if (this.queue.length > 0) {
+        this.push(this.queue.shift());
+        setImmediate(loopyloop);
+      } else {
+        callback();
+      }
+    };
+
+    loopyloop();
+  }
+
+  flushAndDestroy(err: Error): void {
+    this._flushQueue(() => {
+      this.destroy(err);
+    });
+  }
+
+  reset(): void {
+    this.queue = [];
+  }
+
+  _flush(callback: () => void): void {
+    this._flushQueue(callback);
+  }
+}
+
 export function partialResultStream(
   requestFn: RequestFunction,
   options?: RowOptions,
@@ -593,7 +662,7 @@ export function partialResultStream(
   // resume token, as that is an indication whether it is safe to retry the
   // stream halfway.
   let withoutCheckpointCount = 0;
-  const batchAndSplitOnTokenStream = checkpointStream.obj({
+  const batchAndSplitOnTokenStream = new CheckpointStream({
     maxQueued,
     isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet): boolean => {
       const withCheckpoint = _hasResumeToken(chunk);
@@ -617,6 +686,17 @@ export function partialResultStream(
       flushStream.push(null);
     });
   };
+
+  const destroyRequestStream = (): void => {
+    if (lastRequestStream) {
+      lastRequestStream.removeListener('end', endListener);
+      lastRequestStream.removeAllListeners('error');
+      lastRequestStream.on('error', () => {});
+      lastRequestStream.unpipe(requestsStream);
+      lastRequestStream.destroy();
+    }
+  };
+
   const makeRequest = (): void => {
     if (isDefined(lastResumeToken) && lastResumeToken.length > 0) {
       partialRSStream._resetPendingValues();
@@ -624,6 +704,7 @@ export function partialResultStream(
     lastRequestStream = requestFn(lastResumeToken);
     lastRequestStream.on('end', endListener);
     errorListener = (err: grpc.ServiceError) => {
+      destroyRequestStream();
       setImmediate(() => retry(err));
     };
     lastRequestStream.on('error', errorListener);
@@ -631,13 +712,14 @@ export function partialResultStream(
   };
 
   const retry = (err: grpc.ServiceError): void => {
+    destroyRequestStream();
     const elapsed = Date.now() - startTime;
     if (elapsed >= timeout) {
       // The timeout has reached so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the Deadline exceeded error.
       setImmediate(() =>
-        batchAndSplitOnTokenStream.destroy(new DeadlineError(err)),
+        batchAndSplitOnTokenStream.flushAndDestroy(new DeadlineError(err)),
       );
       return;
     }
@@ -654,16 +736,10 @@ export function partialResultStream(
       // This is not a retryable error so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the same error.
-      setImmediate(() => batchAndSplitOnTokenStream.destroy(err));
+      setImmediate(() => batchAndSplitOnTokenStream.flushAndDestroy(err));
       return;
     }
 
-    if (lastRequestStream) {
-      lastRequestStream.removeListener('end', endListener);
-      lastRequestStream.removeAllListeners('error');
-      lastRequestStream.on('error', () => {}); // Prevent unhandled exception crash
-      lastRequestStream.destroy();
-    }
     // Delay the retry until all the values that are already in the stream
     // pipeline have been handled. This ensures that the checkpoint stream is
     // reset to the correct point. Calling .reset() directly here could cause
@@ -677,6 +753,12 @@ export function partialResultStream(
   };
 
   userStream.once('reading', makeRequest);
+  userStream.once('close', () => {
+    destroyRequestStream();
+    requestsStream.destroy();
+    flushStream.destroy();
+    batchAndSplitOnTokenStream.destroy();
+  });
 
   return (
     requestsStream
