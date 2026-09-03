@@ -348,6 +348,7 @@
     "packages/google-shopping-merchant-inventories": {},
     "packages/google-shopping-merchant-issueresolution": {},
     "packages/google-shopping-merchant-lfp": {},
+    "packages/google-shopping-merchant-loyaltycustomers": {},
     "packages/google-shopping-merchant-notifications": {},
     "packages/google-shopping-merchant-ordertracking": {},
     "packages/google-shopping-merchant-products": {},

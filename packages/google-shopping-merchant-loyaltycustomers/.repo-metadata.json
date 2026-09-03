@@ -1,0 +1,15 @@
+{
+    "api_description": "Programmatically manage your Merchant Center Accounts.",
+    "api_id": "merchantapi.googleapis.com",
+    "api_shortname": "merchantapi",
+    "default_version": "v1",
+    "distribution_name": "@google-shopping/merchant-loyaltycustomers",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=171084&template=555201",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "merchantapi",
+    "name_pretty": "Merchant",
+    "product_documentation": "https://developers.google.com/merchant/api",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
+}

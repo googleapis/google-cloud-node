@@ -2213,6 +2213,11 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+  - name: google-shopping-merchant-loyaltycustomers
+    version: 0.0.0
+    apis:
+      - path: google/shopping/merchant/loyaltycustomers/v1
+    copyright_year: "2026"
   - name: google-shopping-merchant-notifications
     version: 0.10.0
     apis:
