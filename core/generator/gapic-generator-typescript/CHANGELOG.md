@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.1...gapic-generator-v5.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.0...gapic-generator-v5.1.1) (2026-09-03)
 
 

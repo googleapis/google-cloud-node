@@ -5,6 +5,42 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "932030548323f0181bb175b0519a6e77cbe64cad",
+          "message": "Add internalTelemetryInfo configuration to nunjucks templates",
+          "issues": [
+            "9174"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "bbfcb12e-bae2-4c7a-aa08-eb3dd312bbc8",
+      "createTime": "2026-09-03T17:34:39.944Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "932030548323f0181bb175b0519a6e77cbe64cad",
+          "message": "Add internalTelemetryInfo configuration to nunjucks templates",
+          "issues": [
+            "9174"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "02c3aa4b-03b0-475a-b1da-77375f7ffd3b",
+      "createTime": "2026-09-03T17:34:39.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -90885,5 +90921,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-03T10:07:08.447Z"
+  "updateTime": "2026-09-03T17:34:39.944Z"
 }

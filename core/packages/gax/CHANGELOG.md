@@ -6,6 +6,13 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.1.0...google-gax-v6.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.3...google-gax-v6.1.0) (2026-08-26)
 
 
