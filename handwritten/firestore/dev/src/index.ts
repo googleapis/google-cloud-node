@@ -641,12 +641,14 @@ export class Firestore implements firestore.Firestore {
         const grpcOptions = Object.assign(
           {
             'grpc-node.flow_control_window': 256 * 1024,
+            'grpc.use_local_subchannel_pool': 1,
           },
           this._settings.grpcOptions,
         );
 
-        let settings: ClientOptions = {
+        const settings: ClientOptions = {
           ...this._settings,
+          ...grpcOptions,
           grpcOptions,
           fallback: useFallback,
         };

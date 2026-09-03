@@ -129,6 +129,7 @@
     "packages/google-cloud-apiregistry": {},
     "packages/google-cloud-apphub": {},
     "packages/google-cloud-appoptimize": {},
+    "packages/google-cloud-apptopology": {},
     "packages/google-cloud-asset": {},
     "packages/google-cloud-assuredworkloads": {},
     "packages/google-cloud-auditmanager": {},

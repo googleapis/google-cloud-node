@@ -2570,6 +2570,9 @@ export namespace google {
 
                     /** BigQueryTableReferences tableReferences */
                     tableReferences?: (google.cloud.geminidataanalytics.v1.IBigQueryTableReference[]|null);
+
+                    /** BigQueryTableReferences propertyGraphReferences */
+                    propertyGraphReferences?: (google.cloud.geminidataanalytics.v1.IBigQueryPropertyGraphReference[]|null);
                 }
 
                 /** Represents a BigQueryTableReferences. */
@@ -2583,6 +2586,9 @@ export namespace google {
 
                     /** BigQueryTableReferences tableReferences. */
                     public tableReferences: google.cloud.geminidataanalytics.v1.IBigQueryTableReference[];
+
+                    /** BigQueryTableReferences propertyGraphReferences. */
+                    public propertyGraphReferences: google.cloud.geminidataanalytics.v1.IBigQueryPropertyGraphReference[];
 
                     /**
                      * Creates a new BigQueryTableReferences instance using the specified properties.
@@ -23751,6 +23757,12 @@ export namespace google {
 
                     /** DatasourceReferences cloudSqlReference */
                     cloudSqlReference?: (google.cloud.geminidataanalytics.v1beta.ICloudSqlReference|null);
+
+                    /** DatasourceReferences bigtableReference */
+                    bigtableReference?: (google.cloud.geminidataanalytics.v1beta.IBigtableReference|null);
+
+                    /** DatasourceReferences firestoreReference */
+                    firestoreReference?: (google.cloud.geminidataanalytics.v1beta.IFirestoreReference|null);
                 }
 
                 /** Represents a DatasourceReferences. */
@@ -23780,8 +23792,14 @@ export namespace google {
                     /** DatasourceReferences cloudSqlReference. */
                     public cloudSqlReference?: (google.cloud.geminidataanalytics.v1beta.ICloudSqlReference|null);
 
+                    /** DatasourceReferences bigtableReference. */
+                    public bigtableReference?: (google.cloud.geminidataanalytics.v1beta.IBigtableReference|null);
+
+                    /** DatasourceReferences firestoreReference. */
+                    public firestoreReference?: (google.cloud.geminidataanalytics.v1beta.IFirestoreReference|null);
+
                     /** DatasourceReferences references. */
-                    public references?: ("bq"|"studio"|"looker"|"alloydb"|"spannerReference"|"cloudSqlReference");
+                    public references?: ("bq"|"studio"|"looker"|"alloydb"|"spannerReference"|"cloudSqlReference"|"bigtableReference"|"firestoreReference");
 
                     /**
                      * Creates a new DatasourceReferences instance using the specified properties.
@@ -23869,6 +23887,9 @@ export namespace google {
 
                     /** BigQueryTableReferences propertyGraphReferences */
                     propertyGraphReferences?: (google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference[]|null);
+
+                    /** BigQueryTableReferences agentContextReference */
+                    agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
                 }
 
                 /** Represents a BigQueryTableReferences. */
@@ -23885,6 +23906,9 @@ export namespace google {
 
                     /** BigQueryTableReferences propertyGraphReferences. */
                     public propertyGraphReferences: google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference[];
+
+                    /** BigQueryTableReferences agentContextReference. */
+                    public agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
 
                     /**
                      * Creates a new BigQueryTableReferences instance using the specified properties.
@@ -24606,6 +24630,442 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AlloyDbDatabaseReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigtableReference. */
+                interface IBigtableReference {
+
+                    /** BigtableReference databaseReference */
+                    databaseReference?: (google.cloud.geminidataanalytics.v1beta.IBigtableDatabaseReference|null);
+
+                    /** BigtableReference agentContextReference */
+                    agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
+                }
+
+                /** Represents a BigtableReference. */
+                class BigtableReference implements IBigtableReference {
+
+                    /**
+                     * Constructs a new BigtableReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IBigtableReference);
+
+                    /** BigtableReference databaseReference. */
+                    public databaseReference?: (google.cloud.geminidataanalytics.v1beta.IBigtableDatabaseReference|null);
+
+                    /** BigtableReference agentContextReference. */
+                    public agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
+
+                    /**
+                     * Creates a new BigtableReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigtableReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IBigtableReference): google.cloud.geminidataanalytics.v1beta.BigtableReference;
+
+                    /**
+                     * Encodes the specified BigtableReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigtableReference.verify|verify} messages.
+                     * @param message BigtableReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IBigtableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigtableReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigtableReference.verify|verify} messages.
+                     * @param message BigtableReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IBigtableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigtableReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigtableReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.BigtableReference;
+
+                    /**
+                     * Decodes a BigtableReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigtableReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.BigtableReference;
+
+                    /**
+                     * Verifies a BigtableReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigtableReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigtableReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.BigtableReference;
+
+                    /**
+                     * Creates a plain object from a BigtableReference message. Also converts values to other types if specified.
+                     * @param message BigtableReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.BigtableReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigtableReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigtableReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigtableDatabaseReference. */
+                interface IBigtableDatabaseReference {
+
+                    /** BigtableDatabaseReference projectId */
+                    projectId?: (string|null);
+
+                    /** BigtableDatabaseReference instanceId */
+                    instanceId?: (string|null);
+
+                    /** BigtableDatabaseReference tableIds */
+                    tableIds?: (string[]|null);
+
+                    /** BigtableDatabaseReference databaseTableReferences */
+                    databaseTableReferences?: (google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference[]|null);
+                }
+
+                /** Represents a BigtableDatabaseReference. */
+                class BigtableDatabaseReference implements IBigtableDatabaseReference {
+
+                    /**
+                     * Constructs a new BigtableDatabaseReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IBigtableDatabaseReference);
+
+                    /** BigtableDatabaseReference projectId. */
+                    public projectId: string;
+
+                    /** BigtableDatabaseReference instanceId. */
+                    public instanceId: string;
+
+                    /** BigtableDatabaseReference tableIds. */
+                    public tableIds: string[];
+
+                    /** BigtableDatabaseReference databaseTableReferences. */
+                    public databaseTableReferences: google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference[];
+
+                    /**
+                     * Creates a new BigtableDatabaseReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigtableDatabaseReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IBigtableDatabaseReference): google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference;
+
+                    /**
+                     * Encodes the specified BigtableDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference.verify|verify} messages.
+                     * @param message BigtableDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IBigtableDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigtableDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference.verify|verify} messages.
+                     * @param message BigtableDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IBigtableDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigtableDatabaseReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigtableDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference;
+
+                    /**
+                     * Decodes a BigtableDatabaseReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigtableDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference;
+
+                    /**
+                     * Verifies a BigtableDatabaseReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigtableDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigtableDatabaseReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference;
+
+                    /**
+                     * Creates a plain object from a BigtableDatabaseReference message. Also converts values to other types if specified.
+                     * @param message BigtableDatabaseReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.BigtableDatabaseReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigtableDatabaseReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigtableDatabaseReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FirestoreReference. */
+                interface IFirestoreReference {
+
+                    /** FirestoreReference databaseReference */
+                    databaseReference?: (google.cloud.geminidataanalytics.v1beta.IFirestoreDatabaseReference|null);
+
+                    /** FirestoreReference agentContextReference */
+                    agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
+                }
+
+                /** Represents a FirestoreReference. */
+                class FirestoreReference implements IFirestoreReference {
+
+                    /**
+                     * Constructs a new FirestoreReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IFirestoreReference);
+
+                    /** FirestoreReference databaseReference. */
+                    public databaseReference?: (google.cloud.geminidataanalytics.v1beta.IFirestoreDatabaseReference|null);
+
+                    /** FirestoreReference agentContextReference. */
+                    public agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
+
+                    /**
+                     * Creates a new FirestoreReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FirestoreReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IFirestoreReference): google.cloud.geminidataanalytics.v1beta.FirestoreReference;
+
+                    /**
+                     * Encodes the specified FirestoreReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.FirestoreReference.verify|verify} messages.
+                     * @param message FirestoreReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IFirestoreReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FirestoreReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.FirestoreReference.verify|verify} messages.
+                     * @param message FirestoreReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IFirestoreReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FirestoreReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FirestoreReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.FirestoreReference;
+
+                    /**
+                     * Decodes a FirestoreReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FirestoreReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.FirestoreReference;
+
+                    /**
+                     * Verifies a FirestoreReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FirestoreReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FirestoreReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.FirestoreReference;
+
+                    /**
+                     * Creates a plain object from a FirestoreReference message. Also converts values to other types if specified.
+                     * @param message FirestoreReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.FirestoreReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FirestoreReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FirestoreReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FirestoreDatabaseReference. */
+                interface IFirestoreDatabaseReference {
+
+                    /** FirestoreDatabaseReference projectId */
+                    projectId?: (string|null);
+
+                    /** FirestoreDatabaseReference databaseId */
+                    databaseId?: (string|null);
+
+                    /** FirestoreDatabaseReference collectionIds */
+                    collectionIds?: (string[]|null);
+
+                    /** FirestoreDatabaseReference databaseTableReferences */
+                    databaseTableReferences?: (google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference[]|null);
+                }
+
+                /** Represents a FirestoreDatabaseReference. */
+                class FirestoreDatabaseReference implements IFirestoreDatabaseReference {
+
+                    /**
+                     * Constructs a new FirestoreDatabaseReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IFirestoreDatabaseReference);
+
+                    /** FirestoreDatabaseReference projectId. */
+                    public projectId: string;
+
+                    /** FirestoreDatabaseReference databaseId. */
+                    public databaseId: string;
+
+                    /** FirestoreDatabaseReference collectionIds. */
+                    public collectionIds: string[];
+
+                    /** FirestoreDatabaseReference databaseTableReferences. */
+                    public databaseTableReferences: google.cloud.geminidataanalytics.v1beta.IDatabaseTableReference[];
+
+                    /**
+                     * Creates a new FirestoreDatabaseReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FirestoreDatabaseReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IFirestoreDatabaseReference): google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference;
+
+                    /**
+                     * Encodes the specified FirestoreDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference.verify|verify} messages.
+                     * @param message FirestoreDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IFirestoreDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FirestoreDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference.verify|verify} messages.
+                     * @param message FirestoreDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IFirestoreDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FirestoreDatabaseReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FirestoreDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference;
+
+                    /**
+                     * Decodes a FirestoreDatabaseReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FirestoreDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference;
+
+                    /**
+                     * Verifies a FirestoreDatabaseReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FirestoreDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FirestoreDatabaseReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference;
+
+                    /**
+                     * Creates a plain object from a FirestoreDatabaseReference message. Also converts values to other types if specified.
+                     * @param message FirestoreDatabaseReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.FirestoreDatabaseReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FirestoreDatabaseReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FirestoreDatabaseReference
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -25570,8 +26030,14 @@ export namespace google {
                     /** Datasource cloudSqlReference */
                     cloudSqlReference?: (google.cloud.geminidataanalytics.v1beta.ICloudSqlReference|null);
 
+                    /** Datasource bigtableReference */
+                    bigtableReference?: (google.cloud.geminidataanalytics.v1beta.IBigtableReference|null);
+
                     /** Datasource bigqueryPropertyGraphReference */
                     bigqueryPropertyGraphReference?: (google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference|null);
+
+                    /** Datasource firestoreReference */
+                    firestoreReference?: (google.cloud.geminidataanalytics.v1beta.IFirestoreReference|null);
 
                     /** Datasource schema */
                     schema?: (google.cloud.geminidataanalytics.v1beta.ISchema|null);
@@ -25607,8 +26073,14 @@ export namespace google {
                     /** Datasource cloudSqlReference. */
                     public cloudSqlReference?: (google.cloud.geminidataanalytics.v1beta.ICloudSqlReference|null);
 
+                    /** Datasource bigtableReference. */
+                    public bigtableReference?: (google.cloud.geminidataanalytics.v1beta.IBigtableReference|null);
+
                     /** Datasource bigqueryPropertyGraphReference. */
                     public bigqueryPropertyGraphReference?: (google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference|null);
+
+                    /** Datasource firestoreReference. */
+                    public firestoreReference?: (google.cloud.geminidataanalytics.v1beta.IFirestoreReference|null);
 
                     /** Datasource schema. */
                     public schema?: (google.cloud.geminidataanalytics.v1beta.ISchema|null);
@@ -25617,7 +26089,7 @@ export namespace google {
                     public structSchema?: (google.protobuf.IStruct|null);
 
                     /** Datasource reference. */
-                    public reference?: ("bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|"bigqueryPropertyGraphReference");
+                    public reference?: ("bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|"bigtableReference"|"bigqueryPropertyGraphReference"|"firestoreReference");
 
                     /**
                      * Creates a new Datasource instance using the specified properties.
@@ -29017,6 +29489,9 @@ export namespace google {
 
                     /** GenerationOptions generateDisambiguationQuestion */
                     generateDisambiguationQuestion?: (boolean|null);
+
+                    /** GenerationOptions generateDebugInfo */
+                    generateDebugInfo?: (boolean|null);
                 }
 
                 /** Represents a GenerationOptions. */
@@ -29039,6 +29514,9 @@ export namespace google {
 
                     /** GenerationOptions generateDisambiguationQuestion. */
                     public generateDisambiguationQuestion: boolean;
+
+                    /** GenerationOptions generateDebugInfo. */
+                    public generateDebugInfo: boolean;
 
                     /**
                      * Creates a new GenerationOptions instance using the specified properties.
@@ -29441,6 +29919,9 @@ export namespace google {
 
                     /** QueryDataResponse disambiguationQuestion */
                     disambiguationQuestion?: (string[]|null);
+
+                    /** QueryDataResponse pipelineDebugInfo */
+                    pipelineDebugInfo?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents a QueryDataResponse. */
@@ -29466,6 +29947,9 @@ export namespace google {
 
                     /** QueryDataResponse disambiguationQuestion. */
                     public disambiguationQuestion: string[];
+
+                    /** QueryDataResponse pipelineDebugInfo. */
+                    public pipelineDebugInfo?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new QueryDataResponse instance using the specified properties.

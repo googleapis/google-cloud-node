@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/apptopology/v1/graph.proto",
+  "../../protos/google/cloud/apptopology/v1/query.proto",
+  "../../protos/google/cloud/apptopology/v1/schema.proto",
+  "../../protos/google/cloud/apptopology/v1/service.proto"
+]
