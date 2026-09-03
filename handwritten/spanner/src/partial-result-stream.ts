@@ -605,20 +605,20 @@ class CheckpointStream extends Transform {
   }
 
   private _flushQueue(callback: () => void): void {
-    const loopyloop = () => {
+    const loop = () => {
       if (this.destroyed) {
         return callback();
       }
 
       if (this.queue.length > 0) {
         this.push(this.queue.shift());
-        setImmediate(loopyloop);
+        setImmediate(loop);
       } else {
         callback();
       }
     };
 
-    loopyloop();
+    loop();
   }
 
   flushAndDestroy(err: Error): void {
@@ -691,7 +691,7 @@ export function partialResultStream(
     if (lastRequestStream) {
       lastRequestStream.removeListener('end', endListener);
       lastRequestStream.removeAllListeners('error');
-      lastRequestStream.on('error', () => {});
+      lastRequestStream.on('error', () => { });
       lastRequestStream.unpipe(requestsStream);
       lastRequestStream.destroy();
     }
