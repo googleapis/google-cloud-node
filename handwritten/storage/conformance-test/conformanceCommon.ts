@@ -201,45 +201,35 @@ export function executeScenario(testCase: RetryTestCase) {
 
             const injectHeader = async (
               reqOpts: gaxios.GaxiosOptionsPrepared,
-            ) => {
+            ): Promise<gaxios.GaxiosOptionsPrepared> => {
               const url = reqOpts.url?.toString() || '';
               if (url.includes('retry_test') || !creationResult?.id) {
                 return reqOpts;
               }
-              reqOpts.headers = reqOpts.headers || {};
-              if (typeof (reqOpts.headers as Headers).set === 'function') {
-                (reqOpts.headers as Headers).set(
-                  'x-retry-test-id',
-                  creationResult.id,
-                );
-              }
-              try {
+              if (typeof reqOpts.headers?.set === 'function') {
+                reqOpts.headers.set('x-retry-test-id', creationResult.id);
+              } else if (reqOpts.headers) {
                 (reqOpts.headers as unknown as Record<string, unknown>)[
                   'x-retry-test-id'
                 ] = creationResult.id;
-              } catch (e) {
-                /* empty */
               }
               return reqOpts;
             };
 
-            const interceptor = {
-              resolved: injectHeader,
-              request: injectHeader,
-            };
-
-            const transportWithInstance =
-              storage.storageTransport as unknown as {
-                gaxiosInstance: gaxios.Gaxios;
+            const interceptor: gaxios.GaxiosInterceptor<gaxios.GaxiosOptionsPrepared> =
+              {
+                resolved: injectHeader,
               };
+
             const defaultGaxios = gaxios as unknown as {
               instance: gaxios.Gaxios;
             };
 
-            transportWithInstance.gaxiosInstance?.interceptors?.request?.clear();
+            storage.interceptors = [interceptor];
+            storage.storageTransport.gaxiosInstance?.interceptors?.request?.clear();
             defaultGaxios.instance?.interceptors?.request?.clear();
 
-            transportWithInstance.gaxiosInstance.interceptors.request.add(
+            storage.storageTransport.gaxiosInstance.interceptors.request.add(
               interceptor,
             );
             defaultGaxios.instance.interceptors.request.add(interceptor);
@@ -258,7 +248,8 @@ export function executeScenario(testCase: RetryTestCase) {
                 }, undefined);
               }
             } finally {
-              transportWithInstance.gaxiosInstance?.interceptors?.request?.clear();
+              storage.interceptors = [];
+              storage.storageTransport.gaxiosInstance?.interceptors?.request?.clear();
               defaultGaxios.instance?.interceptors?.request?.clear();
             }
           }).timeout(TIMEOUT_FOR_INDIVIDUAL_TEST);
@@ -274,14 +265,17 @@ async function createBucketForTest(
   method: String,
 ) {
   const bucket = storage.bucket(generateName(method, 'bucket'));
-  const [metadata] = await bucket.create();
-  await bucket.setRetentionPeriod(DURATION_SECONDS);
+  await bucket.create();
+  const [metadata] = await bucket.setRetentionPeriod(DURATION_SECONDS);
+  bucket.metadata = metadata;
   if (withPrecondition) {
-    return new Bucket(storage, bucket.name, {
+    const newBucket = new Bucket(storage, bucket.name, {
       preconditionOpts: {
-        ifMetagenerationMatch: metadata.metageneration,
+        ifMetagenerationMatch: metadata.metageneration || 2,
       },
     });
+    newBucket.metadata = metadata;
+    return newBucket;
   }
   return bucket;
 }
@@ -296,14 +290,20 @@ async function createFileForTest(
     return file;
   }
   await file.save('test-content');
+  const [metadata] = await file.getMetadata();
+  file.metadata = metadata;
+  if (method === 'isPublic') {
+    await file.makePublic();
+  }
   if (withPrecondition) {
-    const [metadata] = await file.getMetadata();
-    return new File(bucket, file.name, {
+    const newFile = new File(bucket, file.name, {
       preconditionOpts: {
         ifMetagenerationMatch: metadata.metageneration,
         ifGenerationMatch: metadata.generation,
       },
     });
+    newFile.metadata = metadata;
+    return newFile;
   }
   return file;
 }

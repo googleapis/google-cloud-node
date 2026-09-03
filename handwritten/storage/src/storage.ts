@@ -58,7 +58,7 @@ export interface ServiceAccount {
 export type GetServiceAccountResponse = [ServiceAccount, unknown];
 export interface GetServiceAccountCallback {
   (
-    err: Error | null,
+    err: GaxiosError | null,
     serviceAccount?: ServiceAccount,
     apiResponse?: unknown,
   ): void;
@@ -391,21 +391,32 @@ export function isTransientError(err: GaxiosError): boolean {
  * @private
  */
 export function isRequestIdempotent(
-  config:
-    | GaxiosOptionsPrepared
-    | GaxiosOptions
-    | StorageRequestOptions
-    | Record<string, unknown>,
+  config: GaxiosOptions | StorageRequestOptions | Record<string, unknown>,
 ): boolean {
   const method = ((config.method as string) || 'GET').toUpperCase();
   const url = config.url ? config.url.toString() : '';
   const params = (config.params || {}) as Record<string, unknown>;
+
+  const data =
+    (config as {data?: unknown; body?: unknown}).data ||
+    (config as {body?: unknown}).body;
+  let hasEtag = false;
+  if (typeof data === 'string') {
+    try {
+      hasEtag = !!JSON.parse(data).etag;
+    } catch {
+      // ignore
+    }
+  } else if (typeof data === 'object' && data !== null) {
+    hasEtag = !!(data as {etag?: unknown}).etag;
+  }
 
   // Optimized Precondition Check
   const hasPrecondition = !!(
     params.ifGenerationMatch !== undefined ||
     params.ifMetagenerationMatch !== undefined ||
     params.ifSourceGenerationMatch !== undefined ||
+    hasEtag ||
     (config as {hasPrecondition?: boolean}).hasPrecondition
   );
 
@@ -425,11 +436,7 @@ export function isRequestIdempotent(
   }
 
   if (method === 'POST') {
-    return (
-      url.includes('/v1/b') &&
-      !url.includes('/o') &&
-      !url.includes('/notificationConfigs')
-    );
+    return /\/v1\/b(\?|$)/.test(url);
   }
 
   return false;
@@ -908,8 +915,12 @@ export class Storage {
 
     this.retryOptions = config.retryOptions;
 
-    this.storageTransport = new StorageTransport({...config, ...options});
-    this.interceptors = [];
+    this.interceptors = options.interceptors_ || [];
+    this.storageTransport = new StorageTransport({
+      ...config,
+      ...options,
+      interceptors: this.interceptors,
+    });
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
 
     this.getBucketsStream = paginator.streamify('getBuckets');

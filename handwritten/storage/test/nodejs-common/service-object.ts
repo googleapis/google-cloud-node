@@ -578,7 +578,7 @@ describe('ServiceObject', () => {
           const body = JSON.parse(reqOpts.body);
           assert.strictEqual(this, serviceObject.storageTransport);
           assert.strictEqual(reqOpts.method, 'PATCH');
-          assert.strictEqual(reqOpts.url, 'base-url/undefined');
+          assert.strictEqual(reqOpts.url, 'base-url/id');
           assert.deepStrictEqual(body, metadata);
           done();
           callback!(null);

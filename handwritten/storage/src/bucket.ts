@@ -4789,6 +4789,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       typeof coreOpts === 'object' &&
       coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
       localPreconditionOptions?.ifMetagenerationMatch === undefined &&
+      this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
       (methodType === AvailableServiceObjectMethods.setMetadata ||
         methodType === AvailableServiceObjectMethods.delete) &&
       this.storage.retryOptions.idempotencyStrategy ===
