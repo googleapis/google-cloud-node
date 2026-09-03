@@ -813,6 +813,9 @@ export namespace google {
 
                     /** AnswerQueryRequest query */
                     query?: (string|null);
+
+                    /** AnswerQueryRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents an AnswerQueryRequest. */
@@ -826,6 +829,9 @@ export namespace google {
 
                     /** AnswerQueryRequest query. */
                     public query: string;
+
+                    /** AnswerQueryRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new AnswerQueryRequest instance using the specified properties.
