@@ -80,7 +80,7 @@
     "@opentelemetry/context-async-hooks": "^2.0.1",
     "@opentelemetry/sdk-trace-node": "^2.0.1",
     "@types/assert": "^1.5.11",
-    "@types/chai": "^4.3.20",
+    "@types/chai": "^5.0.0",
     "@types/chai-as-promised": "^7.1.8",
     "@types/duplexify": "^3.6.4",
     "@types/extend": "^3.0.4",
