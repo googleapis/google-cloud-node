@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2026 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-shopping/merchant-loyaltycustomers',
+    systemName: '@google-shopping/loyaltycustomers',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

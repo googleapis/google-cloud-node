@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const loyaltycustomers = require('@google-shopping/merchant-loyaltycustomers');
+const loyaltycustomers = require('@google-shopping/loyaltycustomers');
 
 function main() {
   const loyaltyCustomerMatchServiceClient = new loyaltycustomers.LoyaltyCustomerMatchServiceClient();

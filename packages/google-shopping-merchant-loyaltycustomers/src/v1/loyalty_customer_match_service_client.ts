@@ -65,7 +65,7 @@ export class LoyaltyCustomerMatchServiceClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('merchant-loyaltycustomers');
+  private _log = logging.log('loyaltycustomers');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

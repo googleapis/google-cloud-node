@@ -39,7 +39,7 @@ function main(parent, loyaltyCustomer) {
   // const loyaltyCustomer = {}
 
   // Imports the Loyaltycustomers library
-  const {LoyaltyCustomerMatchServiceClient} = require('@google-shopping/merchant-loyaltycustomers').v1;
+  const {LoyaltyCustomerMatchServiceClient} = require('@google-shopping/loyaltycustomers').v1;
 
   // Instantiates a client
   const loyaltycustomersClient = new LoyaltyCustomerMatchServiceClient();

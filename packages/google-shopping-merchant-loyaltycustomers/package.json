@@ -1,5 +1,5 @@
 {
-  "name": "@google-shopping/merchant-loyaltycustomers",
+  "name": "@google-shopping/loyaltycustomers",
   "version": "0.1.0",
   "description": "Loyaltycustomers client for Node.js",
   "repository": {

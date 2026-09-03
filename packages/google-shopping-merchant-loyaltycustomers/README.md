@@ -6,7 +6,7 @@
 
 [//]: # "releaseLevel"
 
-[![npm version](https://img.shields.io/npm/v/@google-shopping/merchant-loyaltycustomers.svg)](https://www.npmjs.org/package/@google-shopping/merchant-loyaltycustomers)
+[![npm version](https://img.shields.io/npm/v/@google-shopping/loyaltycustomers.svg)](https://www.npmjs.org/package/@google-shopping/loyaltycustomers)
 
 Merchant API client for Node.js
 
@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-shopping/merchant-loyaltycustomers
+npm install @google-shopping/loyaltycustomers
 ```
 
 [//]: # "partials.body"
@@ -73,7 +73,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-shopping/merchant-loyaltycustomers@legacy-8` installs client libraries
+For example, `npm install @google-shopping/loyaltycustomers@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
