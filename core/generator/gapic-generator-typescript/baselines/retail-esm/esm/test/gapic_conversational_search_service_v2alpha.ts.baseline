@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as conversationalsearchserviceModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -126,7 +126,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'retail.example.com');
@@ -135,7 +135,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'retail.example.com');
@@ -162,7 +162,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'retail.configured.example.com');
@@ -177,7 +177,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -210,7 +210,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -219,15 +219,15 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       assert(client.conversationalSearchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.conversationalSearchServiceStub);
@@ -236,16 +236,16 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -255,7 +255,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -265,7 +265,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -280,7 +280,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -306,7 +306,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -355,7 +355,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -404,7 +404,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -452,7 +452,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -466,11 +466,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       );
       request.placement = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.conversationalSearch(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -507,11 +507,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.alertConfigPathTemplate.render = sinon
@@ -552,11 +552,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.attributesConfigPathTemplate.render = sinon
@@ -625,11 +625,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.branchPathTemplate.render = sinon
@@ -705,11 +705,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.catalogPathTemplate.render = sinon
@@ -774,11 +774,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.completionConfigPathTemplate.render = sinon
@@ -847,11 +847,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.controlPathTemplate.render = sinon
@@ -925,11 +925,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.loggingConfigPathTemplate.render = sinon
@@ -971,11 +971,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
@@ -1073,11 +1073,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.modelPathTemplate.render = sinon
@@ -1155,11 +1155,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.productPathTemplate.render = sinon
@@ -1244,11 +1244,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.retailProjectPathTemplate.render = sinon
@@ -1290,11 +1290,11 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
       const client =
         new conversationalsearchserviceModule.v2alpha.ConversationalSearchServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.servingConfigPathTemplate.render = sinon

@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { AlertPolicyServiceClient } from './alert_policy_service_client.js';
-export { GroupServiceClient } from './group_service_client.js';
-export { MetricServiceClient } from './metric_service_client.js';
-export { NotificationChannelServiceClient } from './notification_channel_service_client.js';
-export { ServiceMonitoringServiceClient } from './service_monitoring_service_client.js';
-export { UptimeCheckServiceClient } from './uptime_check_service_client.js';
+export {AlertPolicyServiceClient} from './alert_policy_service_client.js';
+export {GroupServiceClient} from './group_service_client.js';
+export {MetricServiceClient} from './metric_service_client.js';
+export {NotificationChannelServiceClient} from './notification_channel_service_client.js';
+export {ServiceMonitoringServiceClient} from './service_monitoring_service_client.js';
+export {UptimeCheckServiceClient} from './uptime_check_service_client.js';
