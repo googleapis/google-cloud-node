@@ -185,7 +185,14 @@ for subdir in ${subdirs[@]}; do
 
         # Our CI uses Git Bash on Windows to execute this script, which returns "msys" or "cygwin" for OSTYPE.
         if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OS" == "Windows_NT" ]]; then
-            if [[ "${windows_exempt_tests}" =~ "${d}" ]]; then
+            is_exempt=false
+            for exempt in ${windows_exempt_tests}; do
+                if [[ "${d}" == "${exempt}" || "${d}" == "${exempt}/"* ]]; then
+                    is_exempt=true
+                    break
+                fi
+            done
+            if [[ "${is_exempt}" == "true" ]]; then
                 echo "Skipping ${d} on Windows (in exemption list)"
                 continue
             fi

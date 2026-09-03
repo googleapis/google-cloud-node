@@ -360,6 +360,11 @@
                             "translationTaskResult": {
                               "type": "TranslationTaskResult",
                               "id": 2
+                            },
+                            "taskOutputs": {
+                              "keyType": "string",
+                              "type": "TaskOutput",
+                              "id": 3
                             }
                           }
                         },
@@ -378,6 +383,160 @@
                             "consoleUri": {
                               "type": "string",
                               "id": 3
+                            }
+                          }
+                        },
+                        "TaskOutput": {
+                          "oneofs": {
+                            "output": {
+                              "oneof": [
+                                "lineageOutput"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "lineageOutput": {
+                              "type": "LineageOutput",
+                              "id": 3
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "processingError": {
+                              "type": "google.rpc.ErrorInfo",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "PENDING": 1,
+                                "SUCCEEDED": 2,
+                                "FAILED": 3
+                              }
+                            }
+                          }
+                        },
+                        "LineageOutput": {
+                          "fields": {
+                            "webappUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "recognizedInputs": {
+                              "rule": "repeated",
+                              "type": "RecognizedInput",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "processingProgressReports": {
+                              "rule": "repeated",
+                              "type": "ProgressReport",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RecognizedInput": {
+                              "fields": {
+                                "type": {
+                                  "type": "Type",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "uncompressedSizeBytes": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Type": {
+                                  "values": {
+                                    "TYPE_UNSPECIFIED": 0,
+                                    "METADATA": 1,
+                                    "QUERY_LOG": 2,
+                                    "SCRIPT": 3
+                                  }
+                                }
+                              }
+                            },
+                            "ProgressReport": {
+                              "fields": {
+                                "processingStage": {
+                                  "type": "ProcessingStage",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "workSummaries": {
+                                  "rule": "repeated",
+                                  "type": "WorkSummary",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "WorkSummary": {
+                                  "fields": {
+                                    "state": {
+                                      "type": "State",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "size": {
+                                      "type": "int64",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "comment": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "State": {
+                                      "values": {
+                                        "STATE_UNSPECIFIED": 0,
+                                        "SUCCEEDED": 1,
+                                        "FAILED": 2,
+                                        "IN_PROGRESS": 3,
+                                        "SKIPPED": 4
+                                      }
+                                    }
+                                  }
+                                },
+                                "ProcessingStage": {
+                                  "values": {
+                                    "PROCESSING_STAGE_UNSPECIFIED": 0,
+                                    "INPUT_INGESTION": 1000,
+                                    "POSTPROCESSING": 2000
+                                  }
+                                }
+                              }
                             }
                           }
                         },

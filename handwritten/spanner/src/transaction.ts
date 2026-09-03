@@ -32,7 +32,14 @@ import {
 } from './partial-result-stream';
 import {Session} from './session';
 import {Key} from './table';
-import {Span} from './instrument';
+import {
+  Span,
+  ObservabilityOptions,
+  startTrace,
+  setSpanError,
+  setSpanErrorAndException,
+  traceConfig,
+} from './instrument';
 import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {protos} from '@google-cloud/spanner-api';
 import spannerClient = protos.google;
@@ -43,13 +50,6 @@ import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
 import {Database, Spanner} from '.';
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
-import {
-  ObservabilityOptions,
-  startTrace,
-  setSpanError,
-  setSpanErrorAndException,
-  traceConfig,
-} from './instrument';
 import {RunTransactionOptions} from './transaction-runner';
 import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
 
@@ -86,6 +86,15 @@ export interface BatchWriteOptions {
   requestOptions?: Pick<IRequestOptions, 'priority' | 'transactionTag'>;
   gaxOptions?: CallOptions;
   excludeTxnFromChangeStreams?: boolean;
+}
+
+export interface QueueSendOptions {
+  payload?: Value;
+  deliverTime?: Date | spannerClient.protobuf.ITimestamp;
+}
+
+export interface QueueAckOptions {
+  ignoreNotFound?: boolean;
 }
 
 export interface RequestOptions {
@@ -1843,9 +1852,7 @@ export class Snapshot extends EventEmitter {
    */
   protected _getDirectedReadOptions(
     directedReadOptions:
-      | google.spanner.v1.IDirectedReadOptions
-      | null
-      | undefined,
+      google.spanner.v1.IDirectedReadOptions | null | undefined,
   ) {
     if (
       !directedReadOptions &&
@@ -2804,6 +2811,28 @@ export class Transaction extends Dml {
   }
 
   /**
+   * Queue a send mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to send.
+   * @param {QueueSendOptions} [options] Options for the send mutation.
+   */
+  queueSend(queue: string, key: Key, options?: QueueSendOptions): void {
+    this._queuedMutations.push(buildSendMutation(queue, key, options));
+  }
+
+  /**
+   * Queue an ack mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to ack.
+   * @param {QueueAckOptions} [options] Options for the ack mutation.
+   */
+  queueAck(queue: string, key: Key, options?: QueueAckOptions): void {
+    this._queuedMutations.push(buildAckMutation(queue, key, options));
+  }
+
+  /**
    * Replace rows of data within a table.
    *
    * @see [Commit API Documentation](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#google.spanner.v1.Spanner.Commit)
@@ -2880,8 +2909,7 @@ export class Transaction extends Dml {
   ): void;
   rollback(
     gaxOptionsOrCallback?:
-      | CallOptions
-      | spannerClient.spanner.v1.Spanner.RollbackCallback,
+      CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
     let gaxOpts =
@@ -3176,6 +3204,69 @@ function buildDeleteMutation(
 }
 
 /**
+ * Builds a send mutation.
+ *
+ * @param {string} queue - The name of the queue.
+ * @param {Key} key - The key for the message.
+ * @param {QueueSendOptions} [options] - Options for sending the message.
+ * @returns {spannerClient.spanner.v1.Mutation} - The formatted send mutation.
+ */
+function buildSendMutation(
+  queue: string,
+  key: Key,
+  options?: QueueSendOptions,
+): spannerClient.spanner.v1.Mutation {
+  const send: spannerClient.spanner.v1.Mutation.ISend = {
+    queue,
+    key: codec.convertToListValue(toArray(key)),
+  };
+  if (options) {
+    if (options.payload !== undefined) {
+      send.payload = codec.encode(options.payload);
+    }
+    if (options.deliverTime) {
+      if (options.deliverTime instanceof Date) {
+        send.deliverTime = codec.convertMsToProtoTimestamp(
+          options.deliverTime.getTime(),
+        );
+      } else {
+        send.deliverTime = options.deliverTime;
+      }
+    }
+  }
+  const mutation: spannerClient.spanner.v1.IMutation = {
+    send,
+  };
+  return mutation as spannerClient.spanner.v1.Mutation;
+}
+
+/**
+ * Builds an ack mutation.
+ *
+ * @param {string} queue - The name of the queue.
+ * @param {Key} key - The key for the message.
+ * @param {QueueAckOptions} [options] - Options for acking the message.
+ * @returns {spannerClient.spanner.v1.Mutation} - The formatted ack mutation.
+ */
+function buildAckMutation(
+  queue: string,
+  key: Key,
+  options?: QueueAckOptions,
+): spannerClient.spanner.v1.Mutation {
+  const ack: spannerClient.spanner.v1.Mutation.IAck = {
+    queue,
+    key: codec.convertToListValue(toArray(key)),
+  };
+  if (options && options.ignoreNotFound !== undefined) {
+    ack.ignoreNotFound = options.ignoreNotFound;
+  }
+  const mutation: spannerClient.spanner.v1.IMutation = {
+    ack,
+  };
+  return mutation as spannerClient.spanner.v1.Mutation;
+}
+
+/**
  * MutationSet represent a set of changes to be applied atomically to a Cloud Spanner
  * database with a {@link Transaction}.
  * Mutations are used to insert, update, upsert(insert or update), replace, or
@@ -3228,6 +3319,28 @@ export class MutationSet {
    */
   insert(table: string, rows: object | object[]): void {
     this._queuedMutations.push(buildMutation('insert', table, rows));
+  }
+
+  /**
+   * Queue a send mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to send.
+   * @param {QueueSendOptions} [options] Options for the send mutation.
+   */
+  queueSend(queue: string, key: Key, options?: QueueSendOptions): void {
+    this._queuedMutations.push(buildSendMutation(queue, key, options));
+  }
+
+  /**
+   * Queue an ack mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to ack.
+   * @param {QueueAckOptions} [options] Options for the ack mutation.
+   */
+  queueAck(queue: string, key: Key, options?: QueueAckOptions): void {
+    this._queuedMutations.push(buildAckMutation(queue, key, options));
   }
 
   /**
@@ -3320,6 +3433,14 @@ export class MutationGroup {
 
   insert(table: string, rows: object | object[]): void {
     this._proto.mutations.push(buildMutation('insert', table, rows));
+  }
+
+  queueSend(queue: string, key: Key, options?: QueueSendOptions): void {
+    this._proto.mutations.push(buildSendMutation(queue, key, options));
+  }
+
+  queueAck(queue: string, key: Key, options?: QueueAckOptions): void {
+    this._proto.mutations.push(buildAckMutation(queue, key, options));
   }
 
   update(table: string, rows: object | object[]): void {
