@@ -566,7 +566,7 @@ describe('ServiceObject', () => {
   });
 
   describe('setMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', async done => {
       const metadata = {metadataProperty: true};
       serviceObject.storageTransport.makeRequest = sandbox
         .stub()
