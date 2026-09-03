@@ -5,6 +5,143 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "2d9e0148-c51e-4de4-a04c-35de70412995",
+      "createTime": "2026-09-03T10:07:08.447Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "3b651cc1-05b6-47ce-ada1-5cd0840fa391",
+      "createTime": "2026-09-03T10:07:08.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "09d72919-7ef2-4f2d-8b3f-f9bfc5001ab1",
+      "createTime": "2026-09-03T10:07:08.372Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "63657996-5cd6-4529-b196-7a6ff24a33aa",
+      "createTime": "2026-09-03T10:07:08.334Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "505d6800-0a0d-46f1-ad31-394ef28969df",
+      "createTime": "2026-09-03T10:07:08.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "a6e817b3-51b7-4123-8629-d1049c06b149",
+      "createTime": "2026-09-03T10:07:08.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "8c7a4143-91ef-4f84-8912-681a697fcd22",
+      "createTime": "2026-09-03T10:07:08.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0725ed96195258b45de6b77f36a07d187f677fe3",
+          "message": "Update prettier formatting guidelines",
+          "issues": [
+            "9239"
+          ],
+          "scope": "gapic-generator-typescript"
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "ccea466d-53d7-489b-a422-43441482f607",
+      "createTime": "2026-09-03T10:07:08.147Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -90748,5 +90885,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-02T03:18:07.331Z"
+  "updateTime": "2026-09-03T10:07:08.447Z"
 }
