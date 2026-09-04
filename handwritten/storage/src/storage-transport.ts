@@ -69,6 +69,7 @@ interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
   useAuthWithCustomEndpoint?: boolean;
   userAgent?: string;
   gaxiosInstance?: Gaxios;
+  interceptors?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
 }
 
 interface PackageJson {
@@ -93,10 +94,12 @@ export class StorageTransport {
   private timeout?: number;
   private projectId?: string;
   private useAuthWithCustomEndpoint?: boolean;
-  private gaxiosInstance: Gaxios;
+  gaxiosInstance: Gaxios;
+  private sharedInterceptors?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
 
   constructor(options: TransportParameters) {
     this.gaxiosInstance = options.gaxiosInstance || new Gaxios();
+    this.sharedInterceptors = options.interceptors;
     if (options.authClient instanceof GoogleAuth) {
       this.authClient = options.authClient;
     } else {
@@ -133,6 +136,65 @@ export class StorageTransport {
       reqOpts.queryParameters.project = this.projectId;
     }
 
+    if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+      const boundary = '===============storage_multipart_boundary==';
+      const chunks: Buffer[] = [];
+      for (const part of reqOpts.multipart) {
+        let contentType = 'application/octet-stream';
+        if (part.headers) {
+          if (typeof (part.headers as Headers).get === 'function') {
+            contentType =
+              (part.headers as Headers).get('content-type') || contentType;
+          } else if (typeof part.headers === 'object') {
+            const h = part.headers as unknown as Record<string, string>;
+            contentType = h['Content-Type'] || h['content-type'] || contentType;
+          }
+        }
+        chunks.push(
+          Buffer.from(`--${boundary}\r\nContent-Type: ${contentType}\r\n\r\n`),
+        );
+        if (typeof part.content === 'string') {
+          chunks.push(Buffer.from(part.content));
+        } else if (Buffer.isBuffer(part.content)) {
+          chunks.push(part.content);
+        } else if (
+          part.content &&
+          typeof (part.content as {pipe?: unknown}).pipe === 'function'
+        ) {
+          const stream = part.content as import('stream').Readable;
+          const streamChunks: Buffer[] = [];
+          await new Promise<void>((resolve, reject) => {
+            stream.on('data', chunk =>
+              streamChunks.push(
+                Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
+              ),
+            );
+            stream.once('end', resolve);
+            stream.once('error', reject);
+            if (typeof stream.resume === 'function') {
+              stream.resume();
+            }
+          });
+          chunks.push(Buffer.concat(streamChunks));
+        }
+        chunks.push(Buffer.from('\r\n'));
+      }
+      chunks.push(Buffer.from(`--${boundary}--\r\n`));
+
+      reqOpts.headers = reqOpts.headers || {};
+      if (typeof (reqOpts.headers as Headers).set === 'function') {
+        (reqOpts.headers as Headers).set(
+          'Content-Type',
+          `multipart/related; boundary="${boundary}"`,
+        );
+      } else {
+        (reqOpts.headers as Record<string, string>)['Content-Type'] =
+          `multipart/related; boundary="${boundary}"`;
+      }
+      reqOpts.body = Buffer.concat(chunks);
+      delete reqOpts.multipart;
+    }
+
     // Header Construction
     const headers = this.#prepareHeaders(reqOpts);
 
@@ -140,6 +202,14 @@ export class StorageTransport {
     const requestGaxiosInstance = reqOpts.interceptors
       ? new Gaxios()
       : this.gaxiosInstance;
+
+    if (this.sharedInterceptors) {
+      for (const inter of this.sharedInterceptors) {
+        if (!requestGaxiosInstance.interceptors.request.has(inter)) {
+          requestGaxiosInstance.interceptors.request.add(inter);
+        }
+      }
+    }
 
     if (reqOpts.interceptors) {
       for (const inter of reqOpts.interceptors) {
@@ -149,11 +219,13 @@ export class StorageTransport {
 
     const urlString = reqOpts.url?.toString() || '';
     const isAbsolute = this.#isValidUrl(urlString);
+    const normalizedUrl =
+      !isAbsolute && !urlString.startsWith('/') ? `/${urlString}` : urlString;
 
     // Determine the base URL for the request
     const requestUrl = isAbsolute
       ? urlString
-      : new URL(urlString, this.baseUrl).toString();
+      : new URL(normalizedUrl, this.baseUrl).toString();
 
     let hasEtagInBody = false;
     if (reqOpts.body && typeof reqOpts.body === 'string') {
@@ -188,8 +260,8 @@ export class StorageTransport {
           return requestGaxiosInstance.request(innerOpts);
         },
         retryConfig: {
-          retry: this.retryOptions.maxRetries,
-          noResponseRetries: this.retryOptions.maxRetries,
+          retry: this.retryOptions.maxRetries ?? 3,
+          noResponseRetries: this.retryOptions.maxRetries ?? 3,
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
@@ -225,26 +297,39 @@ export class StorageTransport {
           !Array.isArray(obj);
 
         if (isPlainObject(data)) {
-          (data as Record<string, unknown>).headers = resp.headers;
-          (data as Record<string, unknown>).status = resp.status;
+          Object.defineProperties(data, {
+            headers: {
+              value: resp.headers,
+              writable: true,
+              configurable: true,
+              enumerable: false,
+            },
+            status: {
+              value: resp.status,
+              writable: true,
+              configurable: true,
+              enumerable: false,
+            },
+          });
         }
         return data;
       };
 
       if (callback) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        (async () => {
-          try {
-            const resp = await requestPromise;
+        requestPromise
+          .then(resp => {
+            // eslint-disable-next-line promise/no-callback-in-promise
             callback(null, decorateMetadata(resp), resp);
-          } catch (err: unknown) {
+            return resp;
+          })
+          .catch((err: unknown) => {
+            // eslint-disable-next-line promise/no-callback-in-promise
             callback(
               err as GaxiosError,
               null,
               (err as {response?: GaxiosResponse}).response,
             );
-          }
-        })();
+          });
         return requestPromise;
       }
 

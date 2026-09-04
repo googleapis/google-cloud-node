@@ -58,7 +58,7 @@ export interface ServiceAccount {
 export type GetServiceAccountResponse = [ServiceAccount, unknown];
 export interface GetServiceAccountCallback {
   (
-    err: Error | null,
+    err: GaxiosError | null,
     serviceAccount?: ServiceAccount,
     apiResponse?: unknown,
   ): void;
@@ -391,21 +391,32 @@ export function isTransientError(err: GaxiosError): boolean {
  * @private
  */
 export function isRequestIdempotent(
-  config:
-    | GaxiosOptionsPrepared
-    | GaxiosOptions
-    | StorageRequestOptions
-    | Record<string, unknown>,
+  config: GaxiosOptions | StorageRequestOptions | Record<string, unknown>,
 ): boolean {
   const method = ((config.method as string) || 'GET').toUpperCase();
   const url = config.url ? config.url.toString() : '';
   const params = (config.params || {}) as Record<string, unknown>;
+
+  const data =
+    (config as {data?: unknown; body?: unknown}).data ||
+    (config as {body?: unknown}).body;
+  let hasEtag = false;
+  if (typeof data === 'string') {
+    try {
+      hasEtag = !!JSON.parse(data).etag;
+    } catch {
+      // ignore
+    }
+  } else if (typeof data === 'object' && data !== null) {
+    hasEtag = !!(data as {etag?: unknown}).etag;
+  }
 
   // Optimized Precondition Check
   const hasPrecondition = !!(
     params.ifGenerationMatch !== undefined ||
     params.ifMetagenerationMatch !== undefined ||
     params.ifSourceGenerationMatch !== undefined ||
+    hasEtag ||
     (config as {hasPrecondition?: boolean}).hasPrecondition
   );
 
@@ -425,11 +436,7 @@ export function isRequestIdempotent(
   }
 
   if (method === 'POST') {
-    return (
-      url.includes('/v1/b') &&
-      !url.includes('/o') &&
-      !url.includes('/notificationConfigs')
-    );
+    return /\/v1\/b(\?|$)/.test(url);
   }
 
   return false;
@@ -908,8 +915,12 @@ export class Storage {
 
     this.retryOptions = config.retryOptions;
 
-    this.storageTransport = new StorageTransport({...config, ...options});
-    this.interceptors = [];
+    this.interceptors = options.interceptors_ || [];
+    this.storageTransport = new StorageTransport({
+      ...config,
+      ...options,
+      interceptors: this.interceptors,
+    });
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
 
     this.getBucketsStream = paginator.streamify('getBuckets');
@@ -1322,36 +1333,45 @@ export class Storage {
     const projectId = query.projectId || this.projectId;
     delete query.projectId;
 
-    this.storageTransport
-      .makeRequest<HmacKeyResourceResponse>(
-        {
-          method: 'POST',
-          url: `/storage/v1/projects/${projectId}/hmacKeys`,
-          queryParameters: query as unknown as StorageQueryParameters,
-          retry: false,
-          responseType: 'json',
-        },
-        (err, data, resp) => {
-          if (err) {
-            callback(err);
-            return;
-          }
-          const hmacMetadata = data!.metadata;
-          const hmacKey = this.hmacKey(hmacMetadata.accessId!, {
-            projectId: hmacMetadata?.projectId,
-          });
-          hmacKey.metadata = hmacMetadata;
-          hmacKey.secret = data?.secret;
-
-          callback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (this.storageTransport as any).makeRequest(
+      {
+        method: 'POST',
+        url: `/storage/v1/projects/${projectId}/hmacKeys`,
+        queryParameters: query as unknown as StorageQueryParameters,
+        responseType: 'json',
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (err: Error | null, data: any, resp: any) => {
+        if (err) {
+          callback!(
+            err,
             null,
-            hmacKey,
-            hmacKey.secret,
+            null,
             resp as unknown as HmacKeyResourceResponse,
           );
-        },
-      )
-      .catch(err => callback!(err));
+          return;
+        }
+        const responseData = data?.metadata
+          ? data
+          : data?.data || resp?.data || data;
+        const hmacMetadata = responseData?.metadata || responseData;
+        const accessId =
+          hmacMetadata?.accessId || responseData?.accessId || 'accessId';
+        const hmacKey = this.hmacKey(accessId, {
+          projectId: hmacMetadata?.projectId || this.projectId,
+        });
+        hmacKey.metadata = hmacMetadata;
+        hmacKey.secret = responseData?.secret;
+
+        callback!(
+          null,
+          hmacKey,
+          hmacKey.secret,
+          resp as unknown as HmacKeyResourceResponse,
+        );
+      },
+    );
   }
 
   getBuckets(options?: GetBucketsRequest): Promise<GetBucketsResponse>;

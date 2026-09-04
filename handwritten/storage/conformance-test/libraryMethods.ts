@@ -42,6 +42,7 @@ export interface ConformanceTestOptions {
   hmacKey?: HmacKey;
   preconditionRequired?: boolean;
   storageTransport?: StorageTransport;
+  projectId?: string;
 }
 
 /////////////////////////////////////////////////
@@ -253,8 +254,8 @@ export async function getNotifications(options: ConformanceTestOptions) {
 }
 
 export async function lock(options: ConformanceTestOptions) {
-  const metageneration = 0;
-  await options.bucket!.lock(metageneration);
+  const [metadata] = await options.bucket!.getMetadata();
+  await options.bucket!.lock(metadata.metageneration!);
 }
 
 export async function bucketMakePrivateInstancePrecondition(
@@ -562,7 +563,10 @@ export async function getMetadata(options: ConformanceTestOptions) {
 }
 
 export async function isPublic(options: ConformanceTestOptions) {
-  await options.file!.isPublic();
+  const [isPub] = await options.file!.isPublic();
+  if (!isPub) {
+    throw new Error('File is not public');
+  }
 }
 
 export async function fileMakePrivateInstancePrecondition(
@@ -608,7 +612,6 @@ export async function rename(options: ConformanceTestOptions) {
 }
 
 export async function rotateEncryptionKey(options: ConformanceTestOptions) {
-  const crypto = require('crypto');
   const buffer = crypto.randomBytes(32);
   const newKey = buffer.toString('base64');
   if (options.preconditionRequired) {
@@ -739,9 +742,12 @@ export async function getMetadataHMAC(options: ConformanceTestOptions) {
 }
 
 export async function setMetadataHMAC(options: ConformanceTestOptions) {
-  const metadata = {
+  const metadata: {state: 'ACTIVE' | 'INACTIVE'; etag?: string} = {
     state: 'INACTIVE',
   };
+  if (options.preconditionRequired && options.hmacKey?.metadata?.etag) {
+    metadata.etag = options.hmacKey.metadata.etag;
+  }
   await options.hmacKey!.setMetadata(metadata);
 }
 

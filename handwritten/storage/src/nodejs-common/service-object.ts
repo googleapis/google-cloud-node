@@ -313,28 +313,40 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
-    this.storageTransport
-      .makeRequest(
-        {
-          method: 'DELETE',
-          responseType: 'json',
-          url,
-          ...methodConfig.reqOpts,
-          queryParameters: {
-            ...methodConfig.reqOpts?.queryParameters,
-            ...options,
-          },
-        },
-        (err, data, resp) => {
+    const req: StorageRequestOptions = {
+      method: 'DELETE',
+      responseType: 'json',
+      url,
+      ...methodConfig.reqOpts,
+      queryParameters: {
+        ...methodConfig.reqOpts?.queryParameters,
+        ...options,
+      },
+    };
+
+    if (callback) {
+      this.storageTransport
+        .makeRequest(req, (err, data, resp) => {
           if (err) {
             if (err.status === 404 && ignoreNotFound) {
               err = null;
             }
           }
           callback(err, resp);
-        },
-      )
-      .catch(err => callback!(err));
+        })
+        .catch(err => callback!(err));
+      return;
+    }
+
+    return this.storageTransport
+      .makeRequest(req)
+      .then(resp => [resp] as [GaxiosResponse])
+      .catch(err => {
+        if (err.status === 404 && ignoreNotFound) {
+          return [err.response] as [GaxiosResponse];
+        }
+        throw err;
+      });
   }
 
   /**
@@ -478,25 +490,32 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     const query = {...options} as any;
     delete query.headers;
 
-    this.storageTransport
-      .makeRequest<K>(
-        {
-          method: 'GET',
-          responseType: 'json',
-          url,
-          ...methodConfig.reqOpts,
-          headers,
-          queryParameters: {
-            ...methodConfig.reqOpts?.queryParameters,
-            ...query,
-          },
-        },
-        (err, data, resp) => {
+    const req: StorageRequestOptions = {
+      method: 'GET',
+      responseType: 'json',
+      url,
+      ...methodConfig.reqOpts,
+      headers,
+      queryParameters: {
+        ...methodConfig.reqOpts?.queryParameters,
+        ...query,
+      },
+    };
+
+    if (callback) {
+      this.storageTransport
+        .makeRequest<K>(req, (err, data, resp) => {
           this.metadata = data!;
           callback(err, data!, resp);
-        },
-      )
-      .catch(err => callback!(err));
+        })
+        .catch(err => callback!(err));
+      return;
+    }
+
+    return this.storageTransport.makeRequest<K>(req).then(resp => {
+      this.metadata = resp.data!;
+      return [this.metadata, resp] as MetadataResponse<K>;
+    });
   }
 
   /**
@@ -532,7 +551,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
         this.methods.setMetadata) ||
       {};
 
-    let url = `${this.baseUrl}/${this.name}`;
+    let url = `${this.baseUrl}/${this.id || this.name}`;
     if (isBucket(this.parent)) {
       // TODO: remove any suppression during follow up PR to improve type safety.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -541,29 +560,40 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     const body = Object.assign({}, methodConfig.reqOpts?.body, metadata);
 
-    this.storageTransport
-      .makeRequest<K>(
-        {
-          method: 'PATCH',
-          responseType: 'json',
-          url,
-          ...methodConfig.reqOpts,
-          body: JSON.stringify(body),
-          queryParameters: {
-            ...methodConfig.reqOpts?.queryParameters,
-            ...options,
-          },
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-        (err, data, resp) => {
+    const req: StorageRequestOptions = {
+      method: 'PATCH',
+      responseType: 'json',
+      url,
+      ...methodConfig.reqOpts,
+      body: JSON.stringify(body),
+      queryParameters: {
+        ...methodConfig.reqOpts?.queryParameters,
+        ...options,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    if (callback) {
+      this.storageTransport
+        .makeRequest<K>(req, (err, data, resp) => {
+          if (err) {
+            callback(err);
+            return;
+          }
           this.metadata = data!;
-          callback(err, this.metadata, resp);
-        },
-      )
-      // eslint-disable-next-line promise/no-callback-in-promise
-      .catch(err => callback(err));
+          callback(null, this.metadata, resp);
+        })
+        // eslint-disable-next-line promise/no-callback-in-promise
+        .catch(err => callback(err));
+      return;
+    }
+
+    return this.storageTransport.makeRequest<K>(req).then(resp => {
+      this.metadata = resp.data!;
+      return [this.metadata] as SetMetadataResponse<K>;
+    });
   }
 }
 
