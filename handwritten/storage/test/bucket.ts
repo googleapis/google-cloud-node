@@ -234,6 +234,11 @@ describe('Bucket', () => {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },
+      './util.js': {
+        ...require('../src/util.js'),
+        getPLimit: async () => fakePLimit,
+        getMime: async () => mime,
+      },
       './acl.js': {Acl: FakeAcl},
       './file.js': {File: FakeFile},
       './iam.js': {Iam: FakeIam},

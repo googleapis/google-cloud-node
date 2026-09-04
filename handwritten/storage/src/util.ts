@@ -318,3 +318,59 @@ export function handleContextValidation(
     return Promise.reject(err);
   }
 }
+
+let mimePromise: Promise<typeof import('mime')> | undefined;
+
+/**
+ * Lazily loads and returns the `mime` module.
+ * Caches the resolved module so dynamic import is evaluated only once.
+ *
+ * @internal
+ */
+export async function getMime(): Promise<typeof import('mime')> {
+  if (!mimePromise) {
+    mimePromise = import('mime')
+      .then(mod => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const modObj = mod as any;
+        const mime =
+          modObj && modObj.default && modObj.default.getType
+            ? modObj.default
+            : modObj && modObj.getType
+              ? modObj
+              : modObj.default || modObj;
+        return mime;
+      })
+      .catch(err => {
+        mimePromise = undefined;
+        throw err;
+      });
+  }
+  return mimePromise;
+}
+
+let pLimitPromise: Promise<typeof import('p-limit')> | undefined;
+
+/**
+ * Lazily loads and returns the `p-limit` module.
+ * Caches the resolved module so dynamic import is evaluated only once.
+ *
+ * @internal
+ */
+export async function getPLimit(): Promise<typeof import('p-limit')> {
+  if (!pLimitPromise) {
+    pLimitPromise = import('p-limit')
+      .then(mod => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const modObj = mod as any;
+        const pLimit =
+          typeof mod === 'function' ? mod : modObj.default || modObj;
+        return pLimit;
+      })
+      .catch(err => {
+        pLimitPromise = undefined;
+        throw err;
+      });
+  }
+  return pLimitPromise;
+}
