@@ -33,6 +33,7 @@ import {
   GrpcClientOptions,
   GrpcModule,
 } from '../../src/grpc';
+import {ClientConfig} from '../../src/gax';
 import {PassThroughClient} from 'google-auth-library';
 
 function gaxGrpc(options?: GrpcClientOptions) {
@@ -127,6 +128,59 @@ describe('grpc', () => {
     ) {}
   }
 
+  describe('constructSettings', () => {
+    const grpcClient = gaxGrpc();
+    const serviceConfig = {
+      interfaces: {
+        'google.fake.service': {
+          methods: {
+            method: {
+              timeout_millis: 10,
+            },
+          },
+        },
+      },
+    };
+
+    it('constructs settings without telemetry options', () => {
+      const settings = grpcClient.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, undefined);
+      assert.strictEqual(
+        settings.method.otherArgs.internalTelemetryInfo,
+        undefined,
+      );
+    });
+
+    it('constructs settings with enableTelemetryTracing and internalTelemetryInfo', () => {
+      const telemetryInfo = {
+        gcpClientService: 'fake',
+        gcpVersion: 'v1',
+        gcpRepo: 'googleapis/google-cloud-node',
+        gcpArtifact: '@google-cloud/fake',
+      };
+      const settings = grpcClient.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+        true,
+        telemetryInfo,
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, true);
+      assert.deepStrictEqual(
+        settings.method.otherArgs.internalTelemetryInfo,
+        telemetryInfo,
+      );
+    });
+  });
+
   describe('createStub', () => {
     let grpcClient: GrpcClient;
     const dummyChannelCreds = {channelCreds: 'dummyChannelCreds'};
@@ -165,18 +219,17 @@ describe('grpc', () => {
       } as unknown as GrpcClientOptions);
     });
 
-    it('creates a stub', () => {
+    it('creates a stub', async () => {
       const opts = {servicePath: 'foo.example.com', port: 443};
       // @ts-ignore
-      return grpcClient.createStub(DummyStub, opts).then(stub => {
-        assert(stub instanceof DummyStub);
-        assert.strictEqual(stub.address, 'foo.example.com:443');
-        assert.deepStrictEqual(stub.creds, dummyChannelCreds);
-        assert.deepStrictEqual(stub.options, {
-          'grpc.max_receive_message_length': -1,
-          'grpc.max_send_message_length': -1,
-          'grpc.initial_reconnect_backoff_ms': 1000,
-        });
+      const stub = await grpcClient.createStub(DummyStub, opts);
+      assert(stub instanceof DummyStub);
+      assert.strictEqual(stub.address, 'foo.example.com:443');
+      assert.deepStrictEqual(stub.creds, dummyChannelCreds);
+      assert.deepStrictEqual(stub.options, {
+        'grpc.max_receive_message_length': -1,
+        'grpc.max_send_message_length': -1,
+        'grpc.initial_reconnect_backoff_ms': 1000,
       });
     });
 
@@ -204,7 +257,7 @@ describe('grpc', () => {
       );
     });
 
-    it('supports optional parameters', () => {
+    it('supports optional parameters', async () => {
       const opts = {
         servicePath: 'foo.example.com',
         port: 443,
@@ -219,85 +272,79 @@ describe('grpc', () => {
         'grpc-node.max_session_memory': 10,
       };
       // @ts-ignore
-      return grpcClient.createStub(DummyStub, opts).then(stub => {
-        assert(stub instanceof DummyStub);
-        assert.strictEqual(stub.address, 'foo.example.com:443');
-        assert.deepStrictEqual(stub.creds, dummyChannelCreds);
-        [
-          'grpc.max_send_message_length',
-          'grpc.initial_reconnect_backoff_ms',
-          'grpc.max_receive_message_length', // added by createStub
-          'callInvocationTransformer', // note: no grpc. prefix for grpc-gcp options
-          'channelFactoryOverride',
-          'gcpApiConfig',
-          'grpc-node.max_session_memory',
-        ].forEach(k => {
-          assert(stub.options.hasOwnProperty(k));
-        });
-        // check values
-        const dummyStub = stub as unknown as DummyStub;
-        assert.strictEqual(
-          dummyStub.options['grpc.max_send_message_length'],
-          10 * 1024 * 1024,
-        );
-        assert.strictEqual(
-          (dummyStub.options['callInvocationTransformer'] as Function)(),
-          42,
-        );
-        assert.strictEqual(
-          dummyStub.options['grpc-node.max_session_memory'],
-          10,
-        );
-        ['servicePath', 'port', 'other_dummy_options'].forEach(k => {
-          assert.strictEqual(stub.options.hasOwnProperty(k), false);
-        });
+      const stub = await grpcClient.createStub(DummyStub, opts);
+      assert(stub instanceof DummyStub);
+      assert.strictEqual(stub.address, 'foo.example.com:443');
+      assert.deepStrictEqual(stub.creds, dummyChannelCreds);
+      [
+        'grpc.max_send_message_length',
+        'grpc.initial_reconnect_backoff_ms',
+        'grpc.max_receive_message_length', // added by createStub
+        'callInvocationTransformer', // note: no grpc. prefix for grpc-gcp options
+        'channelFactoryOverride',
+        'gcpApiConfig',
+        'grpc-node.max_session_memory',
+      ].forEach(k => {
+        assert(stub.options.hasOwnProperty(k));
+      });
+      // check values
+      const dummyStub = stub as unknown as DummyStub;
+      assert.strictEqual(
+        dummyStub.options['grpc.max_send_message_length'],
+        10 * 1024 * 1024,
+      );
+      assert.strictEqual(
+        (dummyStub.options['callInvocationTransformer'] as Function)(),
+        42,
+      );
+      assert.strictEqual(dummyStub.options['grpc-node.max_session_memory'], 10);
+      ['servicePath', 'port', 'other_dummy_options'].forEach(k => {
+        assert.strictEqual(stub.options.hasOwnProperty(k), false);
       });
     });
 
-    it('supports the older grpc options logic for compatibility', () => {
+    it('supports the older grpc options logic for compatibility', async () => {
       const opts = {
         servicePath: 'foo.example.com',
         port: 443,
         'grpc.grpc.max_send_message_length': 10 * 1024 * 1024,
       };
       // @ts-ignore
-      return grpcClient.createStub(DummyStub, opts).then(stub => {
-        assert(stub instanceof DummyStub);
-        [
-          'grpc.max_send_message_length',
-          'grpc.max_receive_message_length', // added by createStub
-        ].forEach(k => {
-          assert(stub.options.hasOwnProperty(k));
-        });
-        ['servicePath', 'port'].forEach(k => {
-          assert.strictEqual(stub.options.hasOwnProperty(k), false);
-        });
+      const stub = await grpcClient.createStub(DummyStub, opts);
+      assert(stub instanceof DummyStub);
+      [
+        'grpc.max_send_message_length',
+        'grpc.max_receive_message_length', // added by createStub
+      ].forEach(k => {
+        assert(stub.options.hasOwnProperty(k));
+      });
+      ['servicePath', 'port'].forEach(k => {
+        assert.strictEqual(stub.options.hasOwnProperty(k), false);
       });
     });
 
-    it('makes it possible to override grpc.max_receive_message_length', () => {
+    it('makes it possible to override grpc.max_receive_message_length', async () => {
       const opts = {
         servicePath: 'foo.example.com',
         port: 443,
         'grpc.max_receive_message_length': 10 * 1024 * 1024,
       };
       // @ts-ignore
-      return grpcClient.createStub(DummyStub, opts).then(stub => {
-        assert(stub instanceof DummyStub);
-        assert(stub.options.hasOwnProperty('grpc.max_receive_message_length'));
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ['servicePath', 'port'].forEach(k => {
-          assert.strictEqual(stub.options.hasOwnProperty(k), false);
-        });
-        const dummyStub = stub as unknown as DummyStub;
-        assert.strictEqual(
-          dummyStub.options['grpc.max_receive_message_length'],
-          10 * 1024 * 1024,
-        );
+      const stub = await grpcClient.createStub(DummyStub, opts);
+      assert(stub instanceof DummyStub);
+      assert(stub.options.hasOwnProperty('grpc.max_receive_message_length'));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ['servicePath', 'port'].forEach(k => {
+        assert.strictEqual(stub.options.hasOwnProperty(k), false);
       });
+      const dummyStub = stub as unknown as DummyStub;
+      assert.strictEqual(
+        dummyStub.options['grpc.max_receive_message_length'],
+        10 * 1024 * 1024,
+      );
     });
 
-    it('uses the passed grpc channel credentials', () => {
+    it('uses the passed grpc channel credentials', async () => {
       const customCreds = {channelCreds: 'custom'};
       const opts = {
         servicePath: 'foo.example.com',
@@ -305,16 +352,15 @@ describe('grpc', () => {
         sslCreds: customCreds,
       };
       // @ts-ignore
-      return grpcClient.createStub(DummyStub, opts).then(stub => {
-        assert(stub instanceof DummyStub);
-        assert.strictEqual(stub.address, 'foo.example.com:443');
-        assert.deepStrictEqual(stub.creds, customCreds);
-        assert.strictEqual(stubAuth.getClient.callCount, 0);
-        const credentials = stubGrpc.credentials;
-        assert.strictEqual(credentials.createSsl.callCount, 0);
-        assert.strictEqual(credentials.combineChannelCredentials.callCount, 0);
-        assert.strictEqual(credentials.createFromGoogleCredential.callCount, 0);
-      });
+      const stub = await grpcClient.createStub(DummyStub, opts);
+      assert(stub instanceof DummyStub);
+      assert.strictEqual(stub.address, 'foo.example.com:443');
+      assert.deepStrictEqual(stub.creds, customCreds);
+      assert.strictEqual(stubAuth.getClient.callCount, 0);
+      const credentials = stubGrpc.credentials;
+      assert.strictEqual(credentials.createSsl.callCount, 0);
+      assert.strictEqual(credentials.combineChannelCredentials.callCount, 0);
+      assert.strictEqual(credentials.createFromGoogleCredential.callCount, 0);
     });
   });
 
@@ -490,52 +536,30 @@ describe('grpc', () => {
     );
 
     describe('use with protobufjs load', () => {
-      it('should not be able to load test file using protobufjs directly', done => {
-        protobuf.load(TEST_FILE).then(
-          () => {
-            done(Error('should not get here'));
-          },
-          () => {
-            done();
-          },
+      it('should not be able to load test file using protobufjs directly', async () => {
+        await assert.rejects(protobuf.load(TEST_FILE));
+      });
+
+      it('should load a test file', async () => {
+        const root = await protobuf.load(TEST_FILE, new GoogleProtoFilesRoot());
+        assert(root instanceof protobuf.Root);
+        assert(
+          root.lookup('google.example.library.v1.LibraryService') instanceof
+            protobuf.Service,
+        );
+        assert(root.lookup('test.TestMessage') instanceof protobuf.Type);
+      });
+
+      it('should fail trying to load a non existent file.', async () => {
+        await assert.rejects(
+          protobuf.load(NON_EXISTENT_FILE, new GoogleProtoFilesRoot()),
         );
       });
 
-      it('should load a test file', done => {
-        protobuf
-          .load(TEST_FILE, new GoogleProtoFilesRoot())
-          .then(root => {
-            assert(root instanceof protobuf.Root);
-            assert(
-              root.lookup('google.example.library.v1.LibraryService') instanceof
-                protobuf.Service,
-            );
-            assert(root.lookup('test.TestMessage') instanceof protobuf.Type);
-            done();
-          })
-          .catch(done);
-      });
-
-      it('should fail trying to load a non existent file.', done => {
-        protobuf
-          .load(NON_EXISTENT_FILE, new GoogleProtoFilesRoot())
-          .then(() => {
-            done(Error('should not get here'));
-          })
-          .catch(() => {
-            done();
-          });
-      });
-
-      it('should fail loading a file with a missing include.', done => {
-        protobuf
-          .load(MISSING_INCLUDE_FILE, new GoogleProtoFilesRoot())
-          .then(() => {
-            done(Error('should not get here'));
-          })
-          .catch(() => {
-            done();
-          });
+      it('should fail loading a file with a missing include.', async () => {
+        await assert.rejects(
+          protobuf.load(MISSING_INCLUDE_FILE, new GoogleProtoFilesRoot()),
+        );
       });
     });
 

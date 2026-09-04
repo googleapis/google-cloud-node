@@ -20,14 +20,14 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as analyticsserviceModule from '../src/index.js';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,7 +54,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -215,7 +215,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.analyticsServiceStub, undefined);
@@ -223,12 +223,12 @@ describe('v2alpha.AnalyticsServiceClient', () => {
       assert(client.analyticsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.analyticsServiceStub);
@@ -237,14 +237,14 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.analyticsServiceStub, undefined);
@@ -253,7 +253,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -261,7 +261,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -273,7 +273,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -296,7 +296,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
   describe('exportAnalyticsMetrics', () => {
     it('invokes exportAnalyticsMetrics without error', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -329,7 +329,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
 
     it('invokes exportAnalyticsMetrics without error using callback', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
 
     it('invokes exportAnalyticsMetrics with call error', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
 
     it('invokes exportAnalyticsMetrics with LRO error', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
 
     it('invokes checkExportAnalyticsMetricsProgress without error', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -458,8 +458,8 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportAnalyticsMetricsProgress(
@@ -472,7 +472,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
 
     it('invokes checkExportAnalyticsMetricsProgress with error', async () => {
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -497,10 +497,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.alertConfigPathTemplate.render = sinon
@@ -539,10 +539,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.attributesConfigPathTemplate.render = sinon
@@ -609,10 +609,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.branchPathTemplate.render = sinon
@@ -686,10 +686,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.catalogPathTemplate.render = sinon
@@ -752,10 +752,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.completionConfigPathTemplate.render = sinon
@@ -822,10 +822,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         control: 'controlValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.controlPathTemplate.render = sinon
@@ -897,10 +897,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.loggingConfigPathTemplate.render = sinon
@@ -940,10 +940,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         merchant_center_account_link: 'merchantCenterAccountLinkValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
@@ -1039,10 +1039,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         model: 'modelValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.modelPathTemplate.render = sinon
@@ -1118,10 +1118,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         product: 'productValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.productPathTemplate.render = sinon
@@ -1204,10 +1204,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.retailProjectPathTemplate.render = sinon
@@ -1247,10 +1247,10 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new analyticsserviceModule.v2alpha.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.servingConfigPathTemplate.render = sinon
