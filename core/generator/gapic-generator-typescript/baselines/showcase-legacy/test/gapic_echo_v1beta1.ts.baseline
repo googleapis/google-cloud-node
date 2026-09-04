@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as echoModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
@@ -37,7 +37,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -191,9 +191,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -257,7 +257,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.echoStub, undefined);
@@ -265,12 +265,12 @@ describe('v1beta1.EchoClient', () => {
       assert(client.echoStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.echoStub);
@@ -279,14 +279,14 @@ describe('v1beta1.EchoClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.echoStub, undefined);
@@ -295,7 +295,7 @@ describe('v1beta1.EchoClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta1.EchoClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -315,7 +315,7 @@ describe('v1beta1.EchoClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -338,7 +338,7 @@ describe('v1beta1.EchoClient', () => {
   describe('echo', () => {
     it('invokes echo without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -365,7 +365,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes echo without error using callback', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes echo with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes echo with closed client', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -441,7 +441,7 @@ describe('v1beta1.EchoClient', () => {
       // path template: {qux=projects/*}/**
       request.otherHeader = 'projects/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.echo(request), expectedError);
@@ -451,7 +451,7 @@ describe('v1beta1.EchoClient', () => {
   describe('echoErrorDetails', () => {
     it('invokes echoErrorDetails without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes echoErrorDetails without error using callback', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes echoErrorDetails with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes echoErrorDetails with closed client', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v1beta1.EchoClient', () => {
         new protos.google.showcase.v1beta1.EchoErrorDetailsRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.echoErrorDetails(request), expectedError);
@@ -536,7 +536,7 @@ describe('v1beta1.EchoClient', () => {
   describe('pagedExpandLegacy', () => {
     it('invokes pagedExpandLegacy without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -553,7 +553,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpandLegacy without error using callback', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpandLegacy with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpandLegacy with closed client', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1beta1.EchoClient', () => {
         new protos.google.showcase.v1beta1.PagedExpandLegacyRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pagedExpandLegacy(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1beta1.EchoClient', () => {
   describe('block', () => {
     it('invokes block without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -638,7 +638,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes block without error using callback', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes block with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes block with closed client', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1beta1.EchoClient', () => {
         new protos.google.showcase.v1beta1.BlockRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.block(request), expectedError);
@@ -702,7 +702,7 @@ describe('v1beta1.EchoClient', () => {
   describe('wait', () => {
     it('invokes wait without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -720,7 +720,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes wait without error using callback', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes wait with call error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -774,7 +774,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes wait with LRO error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -793,7 +793,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes checkWaitProgress without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,8 +801,8 @@ describe('v1beta1.EchoClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkWaitProgress(
@@ -815,7 +815,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes checkWaitProgress with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1beta1.EchoClient', () => {
   describe('expand', () => {
     it('invokes expand without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes expand without error and gaxServerStreamingRetries enabled', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -892,7 +892,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes expand with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,7 +921,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes expand with closed client', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,11 +929,11 @@ describe('v1beta1.EchoClient', () => {
         new protos.google.showcase.v1beta1.ExpandRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.expand(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -959,7 +959,7 @@ describe('v1beta1.EchoClient', () => {
   describe('chat', () => {
     it('invokes chat without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes chat with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,7 +1040,7 @@ describe('v1beta1.EchoClient', () => {
   describe('collect', () => {
     it('invokes collect without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes collect with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1beta1.EchoClient', () => {
   describe('pagedExpand', () => {
     it('invokes pagedExpand without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1150,7 +1150,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpand without error using callback', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpand with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpandStream without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('invokes pagedExpandStream with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,7 +1293,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('uses async iteration with pagedExpand without error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1329,7 +1329,7 @@ describe('v1beta1.EchoClient', () => {
 
     it('uses async iteration with pagedExpand with error', async () => {
       const client = new echoModule.v1beta1.EchoClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,7 +19,7 @@
 import * as v1beta1 from './v1beta1';
 const CloudRedisClient = v1beta1.CloudRedisClient;
 type CloudRedisClient = v1beta1.CloudRedisClient;
-export { v1beta1, CloudRedisClient };
-export default { v1beta1, CloudRedisClient };
+export {v1beta1, CloudRedisClient};
+export default {v1beta1, CloudRedisClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

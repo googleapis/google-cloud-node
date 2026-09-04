@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { ComplianceClient } from './compliance_client.js';
-export { EchoClient } from './echo_client.js';
-export { IdentityClient } from './identity_client.js';
-export { MessagingClient } from './messaging_client.js';
-export { SequenceServiceClient } from './sequence_service_client.js';
-export { TestingClient } from './testing_client.js';
+export {ComplianceClient} from './compliance_client.js';
+export {EchoClient} from './echo_client.js';
+export {IdentityClient} from './identity_client.js';
+export {MessagingClient} from './messaging_client.js';
+export {SequenceServiceClient} from './sequence_service_client.js';
+export {TestingClient} from './testing_client.js';
