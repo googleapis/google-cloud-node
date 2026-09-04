@@ -27,6 +27,7 @@ import * as protobuf from 'protobufjs';
 import objectHash from 'object-hash';
 
 import * as gax from './gax';
+import {StaticTraceContext} from './util';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');
@@ -370,11 +371,13 @@ export class GrpcClient {
    * A wrapper of {@link constructSettings} function under the gRPC context.
    *
    * Most of parameters are common among constructSettings, please take a look.
-   * @param {string} serviceName - The fullly-qualified name of the service.
+   * @param {string} serviceName - The fully-qualified name of the service.
    * @param {Object} clientConfig - A dictionary of the client config.
    * @param {Object} configOverrides - A dictionary of overriding configs.
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
+   * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+   * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -382,6 +385,8 @@ export class GrpcClient {
     clientConfig: gax.ClientConfig,
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
+    enableTelemetryTracing?: boolean,
+    internalTelemetryInfo?: StaticTraceContext,
   ) {
     return gax.constructSettings(
       serviceName,
@@ -389,6 +394,8 @@ export class GrpcClient {
       configOverrides,
       this.grpc.status,
       {metadataBuilder: this.metadataBuilder(headers)},
+      enableTelemetryTracing,
+      internalTelemetryInfo,
     );
   }
 

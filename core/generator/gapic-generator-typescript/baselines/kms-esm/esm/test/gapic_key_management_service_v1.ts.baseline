@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as keymanagementserviceModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -128,9 +128,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -260,7 +260,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.keyManagementServiceStub, undefined);
@@ -268,13 +268,13 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(client.keyManagementServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.keyManagementServiceStub);
@@ -283,15 +283,15 @@ describe('v1.KeyManagementServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.keyManagementServiceStub, undefined);
@@ -300,7 +300,7 @@ describe('v1.KeyManagementServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -309,7 +309,7 @@ describe('v1.KeyManagementServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -322,7 +322,7 @@ describe('v1.KeyManagementServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -346,7 +346,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getKeyRing without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -378,7 +378,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getKeyRing without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -426,7 +426,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getKeyRing with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -458,7 +458,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getKeyRing with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKeyRing(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKey without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKey without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKey with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKey with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCryptoKey(request), expectedError);
@@ -618,7 +618,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKeyVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKeyVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKeyVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getCryptoKeyVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCryptoKeyVersion(request), expectedError);
@@ -755,7 +755,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getPublicKey without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getPublicKey without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getPublicKey with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getPublicKey with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPublicKey(request), expectedError);
@@ -891,7 +891,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getImportJob without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getImportJob without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getImportJob with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getImportJob with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getImportJob(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createKeyRing without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createKeyRing without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createKeyRing with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createKeyRing with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createKeyRing(request), expectedError);
@@ -1163,7 +1163,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKey without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKey without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1243,7 +1243,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKey with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKey with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1288,7 +1288,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCryptoKey(request), expectedError);
@@ -1299,7 +1299,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKeyVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1332,7 +1332,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKeyVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1380,7 +1380,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKeyVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createCryptoKeyVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1442,7 +1442,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes importCryptoKeyVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1475,7 +1475,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes importCryptoKeyVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1523,7 +1523,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes importCryptoKeyVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1558,7 +1558,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes importCryptoKeyVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1571,7 +1571,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1585,7 +1585,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createImportJob without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1617,7 +1617,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createImportJob without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createImportJob with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes createImportJob with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createImportJob(request), expectedError);
@@ -1721,7 +1721,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKey without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKey without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKey with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1836,7 +1836,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKey with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1850,7 +1850,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKey.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCryptoKey(request), expectedError);
@@ -1861,7 +1861,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1944,7 +1944,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1980,7 +1980,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1994,7 +1994,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKeyVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2008,7 +2008,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes encrypt without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2040,7 +2040,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes encrypt without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes encrypt with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2117,7 +2117,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes encrypt with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.encrypt(request), expectedError);
@@ -2141,7 +2141,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes decrypt without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2173,7 +2173,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes decrypt without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2221,7 +2221,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes decrypt with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2250,7 +2250,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes decrypt with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2263,7 +2263,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.decrypt(request), expectedError);
@@ -2274,7 +2274,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricSign without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricSign without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2354,7 +2354,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricSign with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2386,7 +2386,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricSign with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2399,7 +2399,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.asymmetricSign(request), expectedError);
@@ -2410,7 +2410,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricDecrypt without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2442,7 +2442,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricDecrypt without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2490,7 +2490,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricDecrypt with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2522,7 +2522,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes asymmetricDecrypt with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2535,7 +2535,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.asymmetricDecrypt(request), expectedError);
@@ -2546,7 +2546,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyPrimaryVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2579,7 +2579,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyPrimaryVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2627,7 +2627,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyPrimaryVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2662,7 +2662,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes updateCryptoKeyPrimaryVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2675,7 +2675,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2689,7 +2689,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes destroyCryptoKeyVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2722,7 +2722,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes destroyCryptoKeyVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2770,7 +2770,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes destroyCryptoKeyVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2805,7 +2805,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes destroyCryptoKeyVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2818,7 +2818,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2832,7 +2832,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes restoreCryptoKeyVersion without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2865,7 +2865,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes restoreCryptoKeyVersion without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2913,7 +2913,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes restoreCryptoKeyVersion with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2948,7 +2948,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes restoreCryptoKeyVersion with closed client', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2961,7 +2961,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2975,7 +2975,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listKeyRings without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3009,7 +3009,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listKeyRings without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3059,7 +3059,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listKeyRings with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3091,7 +3091,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listKeyRingsStream without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3143,7 +3143,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listKeyRingsStream with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3192,7 +3192,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listKeyRings without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3236,7 +3236,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listKeyRings with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3279,7 +3279,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeys without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3313,7 +3313,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeys without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3363,7 +3363,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeys with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3395,7 +3395,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeysStream without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3447,7 +3447,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeysStream with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3494,7 +3494,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listCryptoKeys without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3538,7 +3538,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listCryptoKeys with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3581,7 +3581,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeyVersions without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3622,7 +3622,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeyVersions without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3678,7 +3678,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeyVersions with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3713,7 +3713,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeyVersionsStream without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3780,7 +3780,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listCryptoKeyVersionsStream with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3836,7 +3836,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listCryptoKeyVersions without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3890,7 +3890,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listCryptoKeyVersions with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3937,7 +3937,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listImportJobs without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3971,7 +3971,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listImportJobs without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4021,7 +4021,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listImportJobs with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4053,7 +4053,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listImportJobsStream without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4105,7 +4105,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes listImportJobsStream with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4152,7 +4152,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listImportJobs without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4196,7 +4196,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('uses async iteration with listImportJobs with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4238,7 +4238,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4269,7 +4269,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4307,7 +4307,7 @@ describe('v1.KeyManagementServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4318,7 +4318,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4351,7 +4351,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4382,7 +4382,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4420,7 +4420,7 @@ describe('v1.KeyManagementServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4431,7 +4431,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4464,7 +4464,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4498,7 +4498,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4536,7 +4536,7 @@ describe('v1.KeyManagementServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4547,7 +4547,7 @@ describe('v1.KeyManagementServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
