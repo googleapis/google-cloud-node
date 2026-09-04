@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as addressgroupserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -205,7 +205,7 @@ describe('v1.AddressGroupServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networksecurity.example.com');
@@ -213,7 +213,7 @@ describe('v1.AddressGroupServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networksecurity.example.com');
@@ -288,7 +288,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -297,14 +297,14 @@ describe('v1.AddressGroupServiceClient', () => {
       assert(client.addressGroupServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.addressGroupServiceStub);
@@ -313,15 +313,15 @@ describe('v1.AddressGroupServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -331,7 +331,7 @@ describe('v1.AddressGroupServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1.AddressGroupServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -354,7 +354,7 @@ describe('v1.AddressGroupServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -379,7 +379,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getAddressGroup without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -412,7 +412,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getAddressGroup without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -461,7 +461,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getAddressGroup with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -494,7 +494,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getAddressGroup with closed client', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -508,7 +508,7 @@ describe('v1.AddressGroupServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAddressGroup(request), expectedError);
@@ -519,7 +519,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes createAddressGroup without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -554,7 +554,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes createAddressGroup without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -610,7 +610,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes createAddressGroup with call error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -643,7 +643,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes createAddressGroup with LRO error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -678,7 +678,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkCreateAddressGroupProgress without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -687,8 +687,8 @@ describe('v1.AddressGroupServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAddressGroupProgress(
@@ -702,7 +702,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkCreateAddressGroupProgress with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -725,7 +725,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes updateAddressGroup without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -761,7 +761,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes updateAddressGroup without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -818,7 +818,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes updateAddressGroup with call error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -852,7 +852,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes updateAddressGroup with LRO error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -888,7 +888,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkUpdateAddressGroupProgress without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -897,8 +897,8 @@ describe('v1.AddressGroupServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAddressGroupProgress(
@@ -912,7 +912,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkUpdateAddressGroupProgress with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -935,7 +935,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes addAddressGroupItems without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -970,7 +970,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes addAddressGroupItems without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1026,7 +1026,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes addAddressGroupItems with call error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1059,7 +1059,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes addAddressGroupItems with LRO error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1094,7 +1094,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkAddAddressGroupItemsProgress without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1103,8 +1103,8 @@ describe('v1.AddressGroupServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddAddressGroupItemsProgress(
@@ -1118,7 +1118,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkAddAddressGroupItemsProgress with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1141,7 +1141,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes removeAddressGroupItems without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1176,7 +1176,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes removeAddressGroupItems without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1232,7 +1232,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes removeAddressGroupItems with call error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1268,7 +1268,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes removeAddressGroupItems with LRO error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1303,7 +1303,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkRemoveAddressGroupItemsProgress without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1312,8 +1312,8 @@ describe('v1.AddressGroupServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1328,7 +1328,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkRemoveAddressGroupItemsProgress with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1351,7 +1351,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cloneAddressGroupItems without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1386,7 +1386,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cloneAddressGroupItems without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1442,7 +1442,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cloneAddressGroupItems with call error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1478,7 +1478,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cloneAddressGroupItems with LRO error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1513,7 +1513,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkCloneAddressGroupItemsProgress without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1522,8 +1522,8 @@ describe('v1.AddressGroupServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCloneAddressGroupItemsProgress(
@@ -1537,7 +1537,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkCloneAddressGroupItemsProgress with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1560,7 +1560,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteAddressGroup without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1595,7 +1595,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteAddressGroup without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1651,7 +1651,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteAddressGroup with call error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1684,7 +1684,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteAddressGroup with LRO error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1719,7 +1719,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkDeleteAddressGroupProgress without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1728,8 +1728,8 @@ describe('v1.AddressGroupServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAddressGroupProgress(
@@ -1743,7 +1743,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes checkDeleteAddressGroupProgress with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1766,7 +1766,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroups without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1807,7 +1807,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroups without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1840,8 +1840,7 @@ describe('v1.AddressGroupServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.IAddressGroup[]
-              | null,
+              protos.google.cloud.networksecurity.v1.IAddressGroup[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1866,7 +1865,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroups with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1899,7 +1898,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroupsStream without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1953,16 +1952,16 @@ describe('v1.AddressGroupServiceClient', () => {
       assert(
         (client.descriptors.page.listAddressGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAddressGroupsStream with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2005,16 +2004,16 @@ describe('v1.AddressGroupServiceClient', () => {
       assert(
         (client.descriptors.page.listAddressGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAddressGroups without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2057,16 +2056,16 @@ describe('v1.AddressGroupServiceClient', () => {
       assert(
         (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAddressGroups with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2100,9 +2099,9 @@ describe('v1.AddressGroupServiceClient', () => {
       assert(
         (client.descriptors.page.listAddressGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2111,7 +2110,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroupReferences without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2153,7 +2152,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroupReferences without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2212,7 +2211,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroupReferences with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2248,7 +2247,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroupReferencesStream without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2319,7 +2318,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes listAddressGroupReferencesStream with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2379,7 +2378,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('uses async iteration with listAddressGroupReferences without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2435,7 +2434,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('uses async iteration with listAddressGroupReferences with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2483,7 +2482,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2515,7 +2514,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2554,7 +2553,7 @@ describe('v1.AddressGroupServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2565,7 +2564,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2599,7 +2598,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2631,7 +2630,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2670,7 +2669,7 @@ describe('v1.AddressGroupServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2681,7 +2680,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2715,7 +2714,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2750,7 +2749,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2789,7 +2788,7 @@ describe('v1.AddressGroupServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2800,7 +2799,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2837,7 +2836,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2869,7 +2868,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2915,7 +2914,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2952,7 +2951,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3002,7 +3001,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3045,7 +3044,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3068,7 +3067,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3097,7 +3096,7 @@ describe('v1.AddressGroupServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3108,7 +3107,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3134,7 +3133,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3158,7 +3157,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3187,7 +3186,7 @@ describe('v1.AddressGroupServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3198,7 +3197,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3224,7 +3223,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3248,7 +3247,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3277,7 +3276,7 @@ describe('v1.AddressGroupServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3288,7 +3287,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3314,7 +3313,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3351,7 +3350,7 @@ describe('v1.AddressGroupServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3389,7 +3388,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3469,7 +3468,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3535,7 +3534,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3617,7 +3616,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3684,7 +3683,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3763,7 +3762,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3845,7 +3844,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3929,7 +3928,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4027,7 +4026,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4107,7 +4106,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4190,7 +4189,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4274,7 +4273,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4358,7 +4357,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4410,7 +4409,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4490,7 +4489,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4573,7 +4572,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4657,7 +4656,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4742,7 +4741,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4827,7 +4826,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4916,7 +4915,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5002,7 +5001,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5089,7 +5088,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5131,7 +5130,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5211,7 +5210,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5294,7 +5293,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5375,7 +5374,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5460,7 +5459,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5526,7 +5525,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5592,7 +5591,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5659,7 +5658,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5739,7 +5738,7 @@ describe('v1.AddressGroupServiceClient', () => {
       };
       const client = new addressgroupserviceModule.v1.AddressGroupServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

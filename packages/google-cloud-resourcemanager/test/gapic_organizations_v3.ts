@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as organizationsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.organizationsStub, undefined);
@@ -250,12 +250,12 @@ describe('v3.OrganizationsClient', () => {
       assert(client.organizationsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.organizationsStub);
@@ -264,14 +264,14 @@ describe('v3.OrganizationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.organizationsStub, undefined);
@@ -280,7 +280,7 @@ describe('v3.OrganizationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v3.OrganizationsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v3.OrganizationsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v3.OrganizationsClient', () => {
   describe('getOrganization', () => {
     it('invokes getOrganization without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes getOrganization without error using callback', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes getOrganization with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes getOrganization with closed client', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v3.OrganizationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOrganization(request), expectedError);
@@ -455,7 +455,7 @@ describe('v3.OrganizationsClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v3.OrganizationsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -587,7 +587,7 @@ describe('v3.OrganizationsClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v3.OrganizationsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -719,7 +719,7 @@ describe('v3.OrganizationsClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v3.OrganizationsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -852,7 +852,7 @@ describe('v3.OrganizationsClient', () => {
   describe('searchOrganizations', () => {
     it('invokes searchOrganizations without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes searchOrganizations without error using callback', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -904,8 +904,7 @@ describe('v3.OrganizationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.resourcemanager.v3.IOrganization[]
-              | null,
+              protos.google.cloud.resourcemanager.v3.IOrganization[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -921,7 +920,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes searchOrganizations with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -938,7 +937,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes searchOrganizationsStream without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +985,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('invokes searchOrganizationsStream with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1022,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('uses async iteration with searchOrganizations without error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1059,7 @@ describe('v3.OrganizationsClient', () => {
 
     it('uses async iteration with searchOrganizations with error', async () => {
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1093,7 @@ describe('v3.OrganizationsClient', () => {
         folder: 'folderValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1131,7 @@ describe('v3.OrganizationsClient', () => {
         organization: 'organizationValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1170,7 +1169,7 @@ describe('v3.OrganizationsClient', () => {
         project: 'projectValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1207,7 @@ describe('v3.OrganizationsClient', () => {
         tag_binding: 'tagBindingValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1247,7 +1246,7 @@ describe('v3.OrganizationsClient', () => {
         tag_hold: 'tagHoldValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1294,7 @@ describe('v3.OrganizationsClient', () => {
         tag_key: 'tagKeyValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1333,7 +1332,7 @@ describe('v3.OrganizationsClient', () => {
         tag_value: 'tagValueValue',
       };
       const client = new organizationsModule.v3.OrganizationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

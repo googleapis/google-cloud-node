@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as subscriberModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -131,9 +131,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v1.SubscriberClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.subscriberStub, undefined);
@@ -259,12 +259,12 @@ describe('v1.SubscriberClient', () => {
       assert(client.subscriberStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.subscriberStub);
@@ -273,14 +273,14 @@ describe('v1.SubscriberClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.subscriberStub, undefined);
@@ -289,7 +289,7 @@ describe('v1.SubscriberClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -297,7 +297,7 @@ describe('v1.SubscriberClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -309,7 +309,7 @@ describe('v1.SubscriberClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -332,7 +332,7 @@ describe('v1.SubscriberClient', () => {
   describe('createSubscription', () => {
     it('invokes createSubscription without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -364,7 +364,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes createSubscription without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -411,7 +411,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes createSubscription with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes createSubscription with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSubscription(request), expectedError);
@@ -465,7 +465,7 @@ describe('v1.SubscriberClient', () => {
   describe('getSubscription', () => {
     it('invokes getSubscription without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -496,7 +496,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes getSubscription without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes getSubscription with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes getSubscription with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -587,7 +587,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSubscription(request), expectedError);
@@ -597,7 +597,7 @@ describe('v1.SubscriberClient', () => {
   describe('updateSubscription', () => {
     it('invokes updateSubscription without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -630,7 +630,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes updateSubscription without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -678,7 +678,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes updateSubscription with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes updateSubscription with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSubscription(request), expectedError);
@@ -734,7 +734,7 @@ describe('v1.SubscriberClient', () => {
   describe('deleteSubscription', () => {
     it('invokes deleteSubscription without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -766,7 +766,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes deleteSubscription without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -813,7 +813,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes deleteSubscription with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes deleteSubscription with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSubscription(request), expectedError);
@@ -867,7 +867,7 @@ describe('v1.SubscriberClient', () => {
   describe('modifyAckDeadline', () => {
     it('invokes modifyAckDeadline without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -898,7 +898,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes modifyAckDeadline without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -945,7 +945,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes modifyAckDeadline with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -976,7 +976,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes modifyAckDeadline with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.modifyAckDeadline(request), expectedError);
@@ -999,7 +999,7 @@ describe('v1.SubscriberClient', () => {
   describe('acknowledge', () => {
     it('invokes acknowledge without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,7 +1030,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes acknowledge without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes acknowledge with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes acknowledge with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1121,7 +1121,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.acknowledge(request), expectedError);
@@ -1131,7 +1131,7 @@ describe('v1.SubscriberClient', () => {
   describe('pull', () => {
     it('invokes pull without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1161,7 +1161,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes pull without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes pull with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1233,7 +1233,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes pull with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1246,7 +1246,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pull(request), expectedError);
@@ -1256,7 +1256,7 @@ describe('v1.SubscriberClient', () => {
   describe('modifyPushConfig', () => {
     it('invokes modifyPushConfig without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes modifyPushConfig without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1334,7 +1334,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes modifyPushConfig with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes modifyPushConfig with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1378,7 +1378,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.modifyPushConfig(request), expectedError);
@@ -1388,7 +1388,7 @@ describe('v1.SubscriberClient', () => {
   describe('getSnapshot', () => {
     it('invokes getSnapshot without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes getSnapshot without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes getSnapshot with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1497,7 +1497,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes getSnapshot with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.snapshot = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSnapshot(request), expectedError);
@@ -1520,7 +1520,7 @@ describe('v1.SubscriberClient', () => {
   describe('createSnapshot', () => {
     it('invokes createSnapshot without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes createSnapshot without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes createSnapshot with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes createSnapshot with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSnapshot(request), expectedError);
@@ -1652,7 +1652,7 @@ describe('v1.SubscriberClient', () => {
   describe('updateSnapshot', () => {
     it('invokes updateSnapshot without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes updateSnapshot without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1732,7 +1732,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes updateSnapshot with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1764,7 +1764,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes updateSnapshot with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,7 +1778,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.snapshot.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSnapshot(request), expectedError);
@@ -1788,7 +1788,7 @@ describe('v1.SubscriberClient', () => {
   describe('deleteSnapshot', () => {
     it('invokes deleteSnapshot without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1819,7 +1819,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes deleteSnapshot without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1866,7 +1866,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes deleteSnapshot with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1897,7 +1897,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes deleteSnapshot with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.snapshot = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSnapshot(request), expectedError);
@@ -1920,7 +1920,7 @@ describe('v1.SubscriberClient', () => {
   describe('seek', () => {
     it('invokes seek without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes seek without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1995,7 +1995,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes seek with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes seek with closed client', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2035,7 +2035,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.seek(request), expectedError);
@@ -2045,7 +2045,7 @@ describe('v1.SubscriberClient', () => {
   describe('streamingPull', () => {
     it('invokes streamingPull without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes streamingPull with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2131,7 +2131,7 @@ describe('v1.SubscriberClient', () => {
   describe('listSubscriptions', () => {
     it('invokes listSubscriptions without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2164,7 +2164,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes listSubscriptions without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2213,7 +2213,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes listSubscriptions with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes listSubscriptionsStream without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2287,15 +2287,15 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSubscriptionsStream with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2333,15 +2333,15 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscriptions without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2376,15 +2376,15 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscriptions with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,9 +2416,9 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2426,7 +2426,7 @@ describe('v1.SubscriberClient', () => {
   describe('listSnapshots', () => {
     it('invokes listSnapshots without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2459,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes listSnapshots without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2508,7 +2508,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes listSnapshots with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,7 +2539,7 @@ describe('v1.SubscriberClient', () => {
 
     it('invokes listSnapshotsStream without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2582,15 +2582,15 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSnapshotsStream with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2628,15 +2628,15 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSnapshots without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2671,15 +2671,15 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSnapshots with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2711,16 +2711,16 @@ describe('v1.SubscriberClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2750,7 +2750,7 @@ describe('v1.SubscriberClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2788,7 +2788,7 @@ describe('v1.SubscriberClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2798,7 +2798,7 @@ describe('v1.SubscriberClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2830,7 +2830,7 @@ describe('v1.SubscriberClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2860,7 +2860,7 @@ describe('v1.SubscriberClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2898,7 +2898,7 @@ describe('v1.SubscriberClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2908,7 +2908,7 @@ describe('v1.SubscriberClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2940,7 +2940,7 @@ describe('v1.SubscriberClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1.SubscriberClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3011,7 +3011,7 @@ describe('v1.SubscriberClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3021,7 +3021,7 @@ describe('v1.SubscriberClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3064,7 +3064,7 @@ describe('v1.SubscriberClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3137,7 +3137,7 @@ describe('v1.SubscriberClient', () => {
         project: 'projectValue',
       };
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3176,7 +3176,7 @@ describe('v1.SubscriberClient', () => {
         topic: 'topicValue',
       };
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3225,7 @@ describe('v1.SubscriberClient', () => {
         schema: 'schemaValue',
       };
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,7 +3274,7 @@ describe('v1.SubscriberClient', () => {
         snapshot: 'snapshotValue',
       };
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3323,7 +3323,7 @@ describe('v1.SubscriberClient', () => {
         subscription: 'subscriptionValue',
       };
       const client = new subscriberModule.v1.SubscriberClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

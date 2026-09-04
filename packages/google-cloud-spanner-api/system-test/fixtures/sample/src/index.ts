@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { SpannerClient } from '@google-cloud/spanner-api';
+import {SpannerClient} from '@google-cloud/spanner-api';
 
 // check that the client class type name can be used
 function doStuffWithSpannerClient(client: SpannerClient) {

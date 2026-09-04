@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -72,7 +72,7 @@ export class CloudChannelServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('channel');
@@ -85,10 +85,10 @@ export class CloudChannelServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  cloudChannelServiceStub?: Promise<{ [name: string]: Function }>;
+  cloudChannelServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudChannelServiceClient.
@@ -164,7 +164,7 @@ export class CloudChannelServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -527,7 +527,7 @@ export class CloudChannelServiceClient {
       'google.cloud.channel.v1.CloudChannelService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -567,7 +567,7 @@ export class CloudChannelServiceClient {
           (this._protos as any).google.cloud.channel.v1.CloudChannelService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -624,7 +624,7 @@ export class CloudChannelServiceClient {
     ];
     for (const methodName of cloudChannelServiceStubMethods) {
       const callPromise = this.cloudChannelServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -830,7 +830,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomer request %j', request);
@@ -994,7 +994,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('checkCloudIdentityAccountsExist request %j', request);
@@ -1149,7 +1149,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomer request %j', request);
@@ -1292,7 +1292,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'customer.name': request.customer!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCustomer request %j', request);
@@ -1429,7 +1429,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCustomer request %j', request);
@@ -1602,7 +1602,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('importCustomer request %j', request);
@@ -1742,7 +1742,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEntitlement request %j', request);
@@ -1894,7 +1894,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getChannelPartnerLink request %j', request);
@@ -2065,7 +2065,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createChannelPartnerLink request %j', request);
@@ -2238,7 +2238,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateChannelPartnerLink request %j', request);
@@ -2399,7 +2399,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomerRepricingConfig request %j', request);
@@ -2587,7 +2587,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomerRepricingConfig request %j', request);
@@ -2762,7 +2762,7 @@ export class CloudChannelServiceClient {
         'customer_repricing_config.name':
           request.customerRepricingConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCustomerRepricingConfig request %j', request);
@@ -2923,7 +2923,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCustomerRepricingConfig request %j', request);
@@ -3084,7 +3084,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getChannelPartnerRepricingConfig request %j', request);
@@ -3279,7 +3279,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createChannelPartnerRepricingConfig request %j', request);
@@ -3460,7 +3460,7 @@ export class CloudChannelServiceClient {
         'channel_partner_repricing_config.name':
           request.channelPartnerRepricingConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateChannelPartnerRepricingConfig request %j', request);
@@ -3626,7 +3626,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteChannelPartnerRepricingConfig request %j', request);
@@ -3772,7 +3772,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entitlement: request.entitlement ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('lookupOffer request %j', request);
@@ -3925,7 +3925,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         customer: request.customer ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryEligibleBillingAccounts request %j', request);
@@ -4087,7 +4087,7 @@ export class CloudChannelServiceClient {
         account: request.account ?? '',
         integrator: request.integrator ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('registerSubscriber request %j', request);
@@ -4249,7 +4249,7 @@ export class CloudChannelServiceClient {
         account: request.account ?? '',
         integrator: request.integrator ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('unregisterSubscriber request %j', request);
@@ -4429,7 +4429,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         customer: request.customer ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4486,7 +4486,7 @@ export class CloudChannelServiceClient {
     this._log.info('provisionCloudIdentity long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4653,7 +4653,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4710,7 +4710,7 @@ export class CloudChannelServiceClient {
     this._log.info('createEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4868,7 +4868,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4925,7 +4925,7 @@ export class CloudChannelServiceClient {
     this._log.info('changeParameters long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5076,7 +5076,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5133,7 +5133,7 @@ export class CloudChannelServiceClient {
     this._log.info('changeRenewalSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5300,7 +5300,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5357,7 +5357,7 @@ export class CloudChannelServiceClient {
     this._log.info('changeOffer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5507,7 +5507,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5564,7 +5564,7 @@ export class CloudChannelServiceClient {
     this._log.info('startPaidService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5711,7 +5711,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5768,7 +5768,7 @@ export class CloudChannelServiceClient {
     this._log.info('suspendEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5920,7 +5920,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5977,7 +5977,7 @@ export class CloudChannelServiceClient {
     this._log.info('cancelEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6130,7 +6130,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6187,7 +6187,7 @@ export class CloudChannelServiceClient {
     this._log.info('activateEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6352,7 +6352,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6409,7 +6409,7 @@ export class CloudChannelServiceClient {
     this._log.info('transferEntitlements long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6566,7 +6566,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6629,7 +6629,7 @@ export class CloudChannelServiceClient {
     this._log.info('transferEntitlementsToGoogle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6753,7 +6753,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6833,7 +6833,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomers stream %j', request);
@@ -6895,7 +6895,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomers iterate %j', request);
@@ -7018,7 +7018,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7094,7 +7094,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntitlements stream %j', request);
@@ -7152,7 +7152,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntitlements iterate %j', request);
@@ -7300,7 +7300,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7393,7 +7393,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTransferableSkus stream %j', request);
@@ -7468,7 +7468,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTransferableSkus iterate %j', request);
@@ -7617,7 +7617,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7708,7 +7708,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTransferableOffers stream %j', request);
@@ -7781,7 +7781,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTransferableOffers iterate %j', request);
@@ -7906,7 +7906,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7983,7 +7983,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannelPartnerLinks stream %j', request);
@@ -8042,7 +8042,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannelPartnerLinks iterate %j', request);
@@ -8188,7 +8188,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8273,7 +8273,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomerRepricingConfigs stream %j', request);
@@ -8340,7 +8340,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomerRepricingConfigs iterate %j', request);
@@ -8489,7 +8489,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8585,7 +8585,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings =
       this._defaults['listChannelPartnerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannelPartnerRepricingConfigs stream %j', request);
@@ -8657,7 +8657,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings =
       this._defaults['listChannelPartnerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannelPartnerRepricingConfigs iterate %j', request);
@@ -8782,7 +8782,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8858,7 +8858,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSkuGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSkuGroups stream %j', request);
@@ -8916,7 +8916,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSkuGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSkuGroups iterate %j', request);
@@ -9046,7 +9046,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9121,7 +9121,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSkuGroupBillableSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSkuGroupBillableSkus stream %j', request);
@@ -9178,7 +9178,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSkuGroupBillableSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSkuGroupBillableSkus iterate %j', request);
@@ -9283,7 +9283,7 @@ export class CloudChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9353,7 +9353,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProducts stream %j', request);
@@ -9405,7 +9405,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProducts iterate %j', request);
@@ -9517,7 +9517,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9594,7 +9594,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSkus stream %j', request);
@@ -9655,7 +9655,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSkus iterate %j', request);
@@ -9773,7 +9773,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9856,7 +9856,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOffers stream %j', request);
@@ -9923,7 +9923,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOffers iterate %j', request);
@@ -10046,7 +10046,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         customer: request.customer ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10124,7 +10124,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPurchasableSkus stream %j', request);
@@ -10184,7 +10184,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPurchasableSkus iterate %j', request);
@@ -10310,7 +10310,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         customer: request.customer ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10388,7 +10388,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPurchasableOffers stream %j', request);
@@ -10448,7 +10448,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPurchasableOffers iterate %j', request);
@@ -10580,7 +10580,7 @@ export class CloudChannelServiceClient {
         account: request.account ?? '',
         integrator: request.integrator ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10659,7 +10659,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubscribers stream %j', request);
@@ -10720,7 +10720,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubscribers iterate %j', request);
@@ -10855,7 +10855,7 @@ export class CloudChannelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10938,7 +10938,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntitlementChanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntitlementChanges stream %j', request);
@@ -11003,7 +11003,7 @@ export class CloudChannelServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntitlementChanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntitlementChanges iterate %j', request);
@@ -11777,7 +11777,7 @@ export class CloudChannelServiceClient {
    */
   close(): Promise<void> {
     if (this.cloudChannelServiceStub && !this._terminated) {
-      return this.cloudChannelServiceStub.then((stub) => {
+      return this.cloudChannelServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

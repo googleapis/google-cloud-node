@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as telcoautomationModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.telcoAutomationStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.TelcoAutomationClient', () => {
       assert(client.telcoAutomationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.telcoAutomationStub);
@@ -301,14 +301,14 @@ describe('v1.TelcoAutomationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.telcoAutomationStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.TelcoAutomationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.TelcoAutomationClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.TelcoAutomationClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getOrchestrationCluster', () => {
     it('invokes getOrchestrationCluster without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getOrchestrationCluster without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getOrchestrationCluster with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -473,7 +473,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getOrchestrationCluster with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -499,7 +499,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getEdgeSlm', () => {
     it('invokes getEdgeSlm without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getEdgeSlm without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getEdgeSlm with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getEdgeSlm with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -621,7 +621,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEdgeSlm(request), expectedError);
@@ -631,7 +631,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('createBlueprint', () => {
     it('invokes createBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBlueprint(request), expectedError);
@@ -763,7 +763,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('updateBlueprint', () => {
     it('invokes updateBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.blueprint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBlueprint(request), expectedError);
@@ -899,7 +899,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getBlueprint', () => {
     it('invokes getBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1008,7 +1008,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBlueprint(request), expectedError);
@@ -1031,7 +1031,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('deleteBlueprint', () => {
     it('invokes deleteBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1062,7 +1062,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBlueprint(request), expectedError);
@@ -1163,7 +1163,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('approveBlueprint', () => {
     it('invokes approveBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1194,7 +1194,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes approveBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,7 +1241,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes approveBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes approveBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.approveBlueprint(request), expectedError);
@@ -1295,7 +1295,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('proposeBlueprint', () => {
     it('invokes proposeBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes proposeBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes proposeBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes proposeBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.proposeBlueprint(request), expectedError);
@@ -1427,7 +1427,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('rejectBlueprint', () => {
     it('invokes rejectBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1458,7 +1458,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes rejectBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1505,7 +1505,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes rejectBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes rejectBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1549,7 +1549,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.rejectBlueprint(request), expectedError);
@@ -1559,7 +1559,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('discardBlueprintChanges', () => {
     it('invokes discardBlueprintChanges without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1591,7 +1591,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes discardBlueprintChanges without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes discardBlueprintChanges with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1672,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes discardBlueprintChanges with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1685,7 +1685,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1698,7 +1698,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getPublicBlueprint', () => {
     it('invokes getPublicBlueprint without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,7 +1730,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getPublicBlueprint without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1777,7 +1777,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getPublicBlueprint with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1808,7 +1808,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getPublicBlueprint with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1821,7 +1821,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPublicBlueprint(request), expectedError);
@@ -1831,7 +1831,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('createDeployment', () => {
     it('invokes createDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1862,7 +1862,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1940,7 +1940,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDeployment(request), expectedError);
@@ -1963,7 +1963,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('updateDeployment', () => {
     it('invokes updateDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1995,7 +1995,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,7 +2043,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2089,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.deployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDeployment(request), expectedError);
@@ -2099,7 +2099,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getDeployment', () => {
     it('invokes getDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2177,7 +2177,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2208,7 +2208,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2221,7 +2221,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeployment(request), expectedError);
@@ -2231,7 +2231,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('removeDeployment', () => {
     it('invokes removeDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2262,7 +2262,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes removeDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2309,7 +2309,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes removeDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2340,7 +2340,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes removeDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2353,7 +2353,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeDeployment(request), expectedError);
@@ -2363,7 +2363,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('discardDeploymentChanges', () => {
     it('invokes discardDeploymentChanges without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2395,7 +2395,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes discardDeploymentChanges without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2442,7 +2442,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes discardDeploymentChanges with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2476,7 +2476,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes discardDeploymentChanges with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2489,7 +2489,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2502,7 +2502,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('applyDeployment', () => {
     it('invokes applyDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2533,7 +2533,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes applyDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2580,7 +2580,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes applyDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2611,7 +2611,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes applyDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2624,7 +2624,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.applyDeployment(request), expectedError);
@@ -2634,7 +2634,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('computeDeploymentStatus', () => {
     it('invokes computeDeploymentStatus without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2666,7 +2666,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes computeDeploymentStatus without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2713,7 +2713,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes computeDeploymentStatus with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2747,7 +2747,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes computeDeploymentStatus with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2760,7 +2760,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2773,7 +2773,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('rollbackDeployment', () => {
     it('invokes rollbackDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2805,7 +2805,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes rollbackDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2852,7 +2852,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes rollbackDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2883,7 +2883,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes rollbackDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.rollbackDeployment(request), expectedError);
@@ -2906,7 +2906,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getHydratedDeployment', () => {
     it('invokes getHydratedDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2938,7 +2938,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getHydratedDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2985,7 +2985,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getHydratedDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3019,7 +3019,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes getHydratedDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3032,7 +3032,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3045,7 +3045,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('updateHydratedDeployment', () => {
     it('invokes updateHydratedDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3078,7 +3078,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateHydratedDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3126,7 +3126,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateHydratedDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3161,7 +3161,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes updateHydratedDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3175,7 +3175,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.hydratedDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3188,7 +3188,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('applyHydratedDeployment', () => {
     it('invokes applyHydratedDeployment without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3220,7 +3220,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes applyHydratedDeployment without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3267,7 +3267,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes applyHydratedDeployment with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3301,7 +3301,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes applyHydratedDeployment with closed client', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3314,7 +3314,7 @@ describe('v1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3327,7 +3327,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('createOrchestrationCluster', () => {
     it('invokes createOrchestrationCluster without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3360,7 +3360,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createOrchestrationCluster without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3414,7 +3414,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createOrchestrationCluster with call error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3448,7 +3448,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createOrchestrationCluster with LRO error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkCreateOrchestrationClusterProgress without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3489,8 +3489,8 @@ describe('v1.TelcoAutomationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3504,7 +3504,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkCreateOrchestrationClusterProgress with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3525,7 +3525,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('deleteOrchestrationCluster', () => {
     it('invokes deleteOrchestrationCluster without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3558,7 +3558,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteOrchestrationCluster without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3612,7 +3612,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteOrchestrationCluster with call error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3646,7 +3646,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteOrchestrationCluster with LRO error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3679,7 +3679,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkDeleteOrchestrationClusterProgress without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3687,8 +3687,8 @@ describe('v1.TelcoAutomationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3702,7 +3702,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkDeleteOrchestrationClusterProgress with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3723,7 +3723,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('createEdgeSlm', () => {
     it('invokes createEdgeSlm without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3756,7 +3756,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createEdgeSlm without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3810,7 +3810,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createEdgeSlm with call error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3841,7 +3841,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes createEdgeSlm with LRO error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3874,7 +3874,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkCreateEdgeSlmProgress without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3882,8 +3882,8 @@ describe('v1.TelcoAutomationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEdgeSlmProgress(
@@ -3896,7 +3896,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkCreateEdgeSlmProgress with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3917,7 +3917,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('deleteEdgeSlm', () => {
     it('invokes deleteEdgeSlm without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3950,7 +3950,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteEdgeSlm without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,7 +4004,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteEdgeSlm with call error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4035,7 +4035,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes deleteEdgeSlm with LRO error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4068,7 +4068,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkDeleteEdgeSlmProgress without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4076,8 +4076,8 @@ describe('v1.TelcoAutomationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEdgeSlmProgress(
@@ -4090,7 +4090,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes checkDeleteEdgeSlmProgress with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4111,7 +4111,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listOrchestrationClusters', () => {
     it('invokes listOrchestrationClusters without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4151,7 +4151,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listOrchestrationClusters without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4208,7 +4208,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listOrchestrationClusters with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4242,7 +4242,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listOrchestrationClustersStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4311,7 +4311,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listOrchestrationClustersStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4369,7 +4369,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listOrchestrationClusters without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4423,7 +4423,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listOrchestrationClusters with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4470,7 +4470,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listEdgeSlms', () => {
     it('invokes listEdgeSlms without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4509,7 +4509,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listEdgeSlms without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4564,7 +4564,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listEdgeSlms with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4595,7 +4595,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listEdgeSlmsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4647,15 +4647,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEdgeSlmsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4698,15 +4698,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEdgeSlms without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4747,15 +4747,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEdgeSlms with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4787,9 +4787,9 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4797,7 +4797,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listBlueprints', () => {
     it('invokes listBlueprints without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4836,7 +4836,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprints without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprints with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4922,7 +4922,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprintsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4975,15 +4975,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listBlueprints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBlueprintsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5025,15 +5025,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listBlueprints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBlueprints without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5074,15 +5074,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBlueprints with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5115,9 +5115,9 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5125,7 +5125,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listBlueprintRevisions', () => {
     it('invokes listBlueprintRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5165,7 +5165,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprintRevisions without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5220,7 +5220,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprintRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5254,7 +5254,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprintRevisionsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5321,7 +5321,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listBlueprintRevisionsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5377,7 +5377,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listBlueprintRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5430,7 +5430,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listBlueprintRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5477,7 +5477,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('searchBlueprintRevisions', () => {
     it('invokes searchBlueprintRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5517,7 +5517,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchBlueprintRevisions without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5572,7 +5572,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchBlueprintRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5606,7 +5606,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchBlueprintRevisionsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5673,7 +5673,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchBlueprintRevisionsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5729,7 +5729,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with searchBlueprintRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5782,7 +5782,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with searchBlueprintRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5829,7 +5829,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('searchDeploymentRevisions', () => {
     it('invokes searchDeploymentRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5869,7 +5869,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchDeploymentRevisions without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5901,8 +5901,7 @@ describe('v1.TelcoAutomationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.telcoautomation.v1.IDeployment[]
-              | null,
+              protos.google.cloud.telcoautomation.v1.IDeployment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5926,7 +5925,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchDeploymentRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5960,7 +5959,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchDeploymentRevisionsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6027,7 +6026,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes searchDeploymentRevisionsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6083,7 +6082,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with searchDeploymentRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6137,7 +6136,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with searchDeploymentRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6184,7 +6183,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listPublicBlueprints', () => {
     it('invokes listPublicBlueprints without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6224,7 +6223,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listPublicBlueprints without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6256,8 +6255,7 @@ describe('v1.TelcoAutomationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.telcoautomation.v1.IPublicBlueprint[]
-              | null,
+              protos.google.cloud.telcoautomation.v1.IPublicBlueprint[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6281,7 +6279,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listPublicBlueprints with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6312,7 +6310,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listPublicBlueprintsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6367,15 +6365,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPublicBlueprintsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6419,15 +6417,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPublicBlueprints without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6469,15 +6467,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPublicBlueprints with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6510,9 +6508,9 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6520,7 +6518,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listDeployments', () => {
     it('invokes listDeployments without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6559,7 +6557,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeployments without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6591,8 +6589,7 @@ describe('v1.TelcoAutomationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.telcoautomation.v1.IDeployment[]
-              | null,
+              protos.google.cloud.telcoautomation.v1.IDeployment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6616,7 +6613,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeployments with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6647,7 +6644,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeploymentsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6700,15 +6697,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6750,15 +6747,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6800,15 +6797,15 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6841,9 +6838,9 @@ describe('v1.TelcoAutomationClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6851,7 +6848,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listDeploymentRevisions', () => {
     it('invokes listDeploymentRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6891,7 +6888,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeploymentRevisions without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6923,8 +6920,7 @@ describe('v1.TelcoAutomationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.telcoautomation.v1.IDeployment[]
-              | null,
+              protos.google.cloud.telcoautomation.v1.IDeployment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6948,7 +6944,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeploymentRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6982,7 +6978,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeploymentRevisionsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7049,7 +7045,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listDeploymentRevisionsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7105,7 +7101,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listDeploymentRevisions without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7159,7 +7155,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listDeploymentRevisions with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7206,7 +7202,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listHydratedDeployments', () => {
     it('invokes listHydratedDeployments without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7246,7 +7242,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listHydratedDeployments without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7303,7 +7299,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listHydratedDeployments with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7337,7 +7333,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listHydratedDeploymentsStream without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7406,7 +7402,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('invokes listHydratedDeploymentsStream with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7464,7 +7460,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listHydratedDeployments without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7518,7 +7514,7 @@ describe('v1.TelcoAutomationClient', () => {
 
     it('uses async iteration with listHydratedDeployments with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7564,7 +7560,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7594,7 +7590,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7638,7 +7634,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7673,7 +7669,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7721,7 +7717,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7762,7 +7758,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7783,7 +7779,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7811,7 +7807,7 @@ describe('v1.TelcoAutomationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7821,7 +7817,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7845,7 +7841,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7867,7 +7863,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7895,7 +7891,7 @@ describe('v1.TelcoAutomationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7905,7 +7901,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7929,7 +7925,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7951,7 +7947,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7979,7 +7975,7 @@ describe('v1.TelcoAutomationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7989,7 +7985,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8013,7 +8009,7 @@ describe('v1.TelcoAutomationClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8048,7 +8044,7 @@ describe('v1.TelcoAutomationClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8085,7 +8081,7 @@ describe('v1.TelcoAutomationClient', () => {
         blueprint: 'blueprintValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8162,7 +8158,7 @@ describe('v1.TelcoAutomationClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8238,7 +8234,7 @@ describe('v1.TelcoAutomationClient', () => {
         edge_slm: 'edgeSlmValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8304,7 +8300,7 @@ describe('v1.TelcoAutomationClient', () => {
         hydrated_deployment: 'hydratedDeploymentValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8410,7 +8406,7 @@ describe('v1.TelcoAutomationClient', () => {
         location: 'locationValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8460,7 +8456,7 @@ describe('v1.TelcoAutomationClient', () => {
         orchestration_cluster: 'orchestrationClusterValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8539,7 +8535,7 @@ describe('v1.TelcoAutomationClient', () => {
         project: 'projectValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8579,7 +8575,7 @@ describe('v1.TelcoAutomationClient', () => {
         public_lueprint: 'publicLueprintValue',
       };
       const client = new telcoautomationModule.v1.TelcoAutomationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

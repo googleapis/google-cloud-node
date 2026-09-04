@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as examplestoreserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -289,7 +289,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.exampleStoreServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(client.exampleStoreServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.exampleStoreServiceStub);
@@ -312,15 +312,15 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.exampleStoreServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getExampleStore without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getExampleStore without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getExampleStore with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getExampleStore with closed client', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExampleStore(request), expectedError);
@@ -511,7 +511,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes upsertExamples without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes upsertExamples without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes upsertExamples with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes upsertExamples with closed client', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       );
       request.exampleStore = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.upsertExamples(request), expectedError);
@@ -647,7 +647,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes removeExamples without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes removeExamples without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes removeExamples with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -759,7 +759,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes removeExamples with closed client', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -772,7 +772,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       );
       request.exampleStore = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeExamples(request), expectedError);
@@ -783,7 +783,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes searchExamples without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -815,7 +815,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes searchExamples without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes searchExamples with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes searchExamples with closed client', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       );
       request.exampleStore = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchExamples(request), expectedError);
@@ -919,7 +919,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes createExampleStore without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -953,7 +953,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes createExampleStore without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1008,7 +1008,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes createExampleStore with call error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1040,7 +1040,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes createExampleStore with LRO error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1074,7 +1074,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes checkCreateExampleStoreProgress without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1082,8 +1082,8 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateExampleStoreProgress(
@@ -1097,7 +1097,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes checkCreateExampleStoreProgress with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1119,7 +1119,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes updateExampleStore without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes updateExampleStore without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1210,7 +1210,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes updateExampleStore with call error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1243,7 +1243,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes updateExampleStore with LRO error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes checkUpdateExampleStoreProgress without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1286,8 +1286,8 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateExampleStoreProgress(
@@ -1301,7 +1301,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes checkUpdateExampleStoreProgress with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1323,7 +1323,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteExampleStore without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteExampleStore without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1412,7 +1412,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteExampleStore with call error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1444,7 +1444,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteExampleStore with LRO error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1478,7 +1478,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes checkDeleteExampleStoreProgress without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1486,8 +1486,8 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteExampleStoreProgress(
@@ -1501,7 +1501,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes checkDeleteExampleStoreProgress with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1523,7 +1523,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes listExampleStores without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes listExampleStores without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1595,8 +1595,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IExampleStore[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IExampleStore[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1621,7 +1620,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes listExampleStores with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1653,7 +1652,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes listExampleStoresStream without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1706,16 +1705,16 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExampleStoresStream with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1757,16 +1756,16 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExampleStores without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1808,16 +1807,16 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExampleStores with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1850,9 +1849,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1861,7 +1860,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes fetchExamples without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1901,7 +1900,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes fetchExamples without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1957,7 +1956,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes fetchExamples with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1989,7 +1988,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes fetchExamplesStream without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2041,16 +2040,16 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchExamplesStream with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2091,16 +2090,16 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchExamples without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2141,16 +2140,16 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchExamples with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2182,9 +2181,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2192,7 +2191,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2223,7 +2222,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2261,7 +2260,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2272,7 +2271,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2305,7 +2304,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2336,7 +2335,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2374,7 +2373,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2385,7 +2384,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2418,7 +2417,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2452,7 +2451,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2490,7 +2489,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2501,7 +2500,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2537,7 +2536,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2568,7 +2567,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2613,7 +2612,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2649,7 +2648,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2698,7 +2697,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2740,7 +2739,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2762,7 +2761,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2790,7 +2789,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2801,7 +2800,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2826,7 +2825,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2849,7 +2848,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2877,7 +2876,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2888,7 +2887,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2913,7 +2912,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2936,7 +2935,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2964,7 +2963,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2975,7 +2974,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3000,7 +2999,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3036,7 +3035,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3075,7 +3074,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3163,7 +3162,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3241,7 +3240,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3317,7 +3316,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3395,7 +3394,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3461,7 +3460,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3537,7 +3536,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3603,7 +3602,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3679,7 +3678,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3745,7 +3744,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3811,7 +3810,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3888,7 +3887,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3971,7 +3970,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4047,7 +4046,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4113,7 +4112,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4189,7 +4188,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4254,7 +4253,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4320,7 +4319,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4399,7 +4398,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4507,7 +4506,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4586,7 +4585,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4664,7 +4663,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4741,7 +4740,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4806,7 +4805,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4888,7 +4887,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4953,7 +4952,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5017,7 +5016,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5069,7 +5068,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5146,7 +5145,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5224,7 +5223,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5289,7 +5288,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5354,7 +5353,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5435,7 +5434,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5513,7 +5512,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5621,7 +5620,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5687,7 +5686,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5780,7 +5779,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5846,7 +5845,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5923,7 +5922,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6005,7 +6004,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6071,7 +6070,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6153,7 +6152,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6219,7 +6218,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6297,7 +6296,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6362,7 +6361,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6443,7 +6442,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6547,7 +6546,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6672,7 +6671,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6764,7 +6763,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6818,7 +6817,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6884,7 +6883,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6959,7 +6958,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7014,7 +7013,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7092,7 +7091,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7179,7 +7178,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7246,7 +7245,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7344,7 +7343,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7420,7 +7419,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7486,7 +7485,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7564,7 +7563,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7652,7 +7651,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7718,7 +7717,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7783,7 +7782,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7849,7 +7848,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7946,7 +7945,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8036,7 +8035,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8160,7 +8159,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8230,7 +8229,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8306,7 +8305,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       };
       const client =
         new examplestoreserviceModule.v1beta1.ExampleStoreServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

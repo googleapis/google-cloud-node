@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as analyticshubserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.analyticsHubServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(client.analyticsHubServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.analyticsHubServiceStub);
@@ -277,15 +277,15 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.analyticsHubServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getDataExchange without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getDataExchange without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getDataExchange with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getDataExchange with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataExchange(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createDataExchange without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createDataExchange without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createDataExchange with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createDataExchange with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataExchange(request), expectedError);
@@ -613,7 +613,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateDataExchange without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateDataExchange without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateDataExchange with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateDataExchange with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.dataExchange.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataExchange(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteDataExchange without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteDataExchange without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteDataExchange with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteDataExchange with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataExchange(request), expectedError);
@@ -891,7 +891,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getListing without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getListing without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getListing with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getListing with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getListing(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createListing without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createListing without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createListing with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes createListing with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createListing(request), expectedError);
@@ -1163,7 +1163,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateListing without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateListing without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateListing with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes updateListing with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.listing.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateListing(request), expectedError);
@@ -1303,7 +1303,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteListing without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteListing without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1383,7 +1383,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteListing with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes deleteListing with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteListing(request), expectedError);
@@ -1439,7 +1439,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes subscribeListing without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1471,7 +1471,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes subscribeListing without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1519,7 +1519,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes subscribeListing with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes subscribeListing with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1564,7 +1564,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.subscribeListing(request), expectedError);
@@ -1575,7 +1575,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1700,7 +1700,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1711,7 +1711,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1743,7 +1743,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1791,7 +1791,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1836,7 +1836,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1847,7 +1847,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1880,7 +1880,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1928,7 +1928,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1960,7 +1960,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1984,7 +1984,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listDataExchanges without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2024,7 +2024,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listDataExchanges without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listDataExchanges with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listDataExchangesStream without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2169,16 +2169,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataExchangesStream with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2222,16 +2222,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataExchanges without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2273,16 +2273,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataExchanges with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2315,9 +2315,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2326,7 +2326,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listOrgDataExchanges without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2367,7 +2367,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listOrgDataExchanges without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2425,7 +2425,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listOrgDataExchanges with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2457,7 +2457,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listOrgDataExchangesStream without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2512,16 +2512,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOrgDataExchangesStream with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2565,16 +2565,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOrgDataExchanges without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2616,16 +2616,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOrgDataExchanges with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2658,9 +2658,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2669,7 +2669,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listListings without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2709,7 +2709,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listListings without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2767,7 +2767,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listListings with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2799,7 +2799,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes listListingsStream without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2854,16 +2854,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listListingsStream with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2909,16 +2909,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listListings without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2960,16 +2960,16 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listListings with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3002,9 +3002,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3012,7 +3012,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3043,7 +3043,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3088,7 +3088,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3124,7 +3124,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3173,7 +3173,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3222,7 +3222,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       };
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3288,7 +3288,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       };
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3363,7 +3363,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       };
       const client =
         new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

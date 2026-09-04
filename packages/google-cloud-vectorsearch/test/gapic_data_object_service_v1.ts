@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataobjectserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -159,7 +159,7 @@ describe('v1.DataObjectServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new dataobjectserviceModule.v1.DataObjectServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -203,7 +203,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataObjectServiceStub, undefined);
@@ -211,12 +211,12 @@ describe('v1.DataObjectServiceClient', () => {
       assert(client.dataObjectServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataObjectServiceStub);
@@ -225,14 +225,14 @@ describe('v1.DataObjectServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataObjectServiceStub, undefined);
@@ -241,7 +241,7 @@ describe('v1.DataObjectServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -249,7 +249,7 @@ describe('v1.DataObjectServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -261,7 +261,7 @@ describe('v1.DataObjectServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -284,7 +284,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('createDataObject', () => {
     it('invokes createDataObject without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -315,7 +315,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes createDataObject without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -362,7 +362,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes createDataObject with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes createDataObject with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -406,7 +406,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataObject(request), expectedError);
@@ -416,7 +416,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('batchCreateDataObjects', () => {
     it('invokes batchCreateDataObjects without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchCreateDataObjects without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchCreateDataObjects with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchCreateDataObjects with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -542,7 +542,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -555,7 +555,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('getDataObject', () => {
     it('invokes getDataObject without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes getDataObject without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes getDataObject with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes getDataObject with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataObject(request), expectedError);
@@ -687,7 +687,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('updateDataObject', () => {
     it('invokes updateDataObject without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -719,7 +719,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes updateDataObject without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes updateDataObject with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes updateDataObject with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -813,7 +813,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.dataObject.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataObject(request), expectedError);
@@ -823,7 +823,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('batchUpdateDataObjects', () => {
     it('invokes batchUpdateDataObjects without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -855,7 +855,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchUpdateDataObjects without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchUpdateDataObjects with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchUpdateDataObjects with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -962,7 +962,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('deleteDataObject', () => {
     it('invokes deleteDataObject without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes deleteDataObject without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,7 +1040,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes deleteDataObject with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1071,7 +1071,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes deleteDataObject with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataObject(request), expectedError);
@@ -1094,7 +1094,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('batchDeleteDataObjects', () => {
     it('invokes batchDeleteDataObjects without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchDeleteDataObjects without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1173,7 +1173,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchDeleteDataObjects with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v1.DataObjectServiceClient', () => {
 
     it('invokes batchDeleteDataObjects with closed client', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v1.DataObjectServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1232,7 +1232,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1262,7 +1262,7 @@ describe('v1.DataObjectServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1.DataObjectServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v1.DataObjectServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1389,7 +1389,7 @@ describe('v1.DataObjectServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v1.DataObjectServiceClient', () => {
         collection: 'collectionValue',
       };
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1.DataObjectServiceClient', () => {
         dataObject: 'dataObjectValue',
       };
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1578,7 +1578,7 @@ describe('v1.DataObjectServiceClient', () => {
         index: 'indexValue',
       };
       const client = new dataobjectserviceModule.v1.DataObjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

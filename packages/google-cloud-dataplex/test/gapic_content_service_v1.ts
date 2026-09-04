@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as contentserviceModule from '../src';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -68,9 +68,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -190,7 +190,7 @@ describe('v1.ContentServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.contentServiceStub, undefined);
@@ -198,12 +198,12 @@ describe('v1.ContentServiceClient', () => {
       assert(client.contentServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.contentServiceStub);
@@ -212,14 +212,14 @@ describe('v1.ContentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.contentServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1.ContentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -236,7 +236,7 @@ describe('v1.ContentServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -248,7 +248,7 @@ describe('v1.ContentServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -270,7 +270,7 @@ describe('v1.ContentServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -300,7 +300,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -344,7 +344,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -379,7 +379,7 @@ describe('v1.ContentServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1.ContentServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -517,7 +517,7 @@ describe('v1.ContentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -527,7 +527,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -551,7 +551,7 @@ describe('v1.ContentServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -601,7 +601,7 @@ describe('v1.ContentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -611,7 +611,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -635,7 +635,7 @@ describe('v1.ContentServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -685,7 +685,7 @@ describe('v1.ContentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -695,7 +695,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -719,7 +719,7 @@ describe('v1.ContentServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -754,7 +754,7 @@ describe('v1.ContentServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -790,7 +790,7 @@ describe('v1.ContentServiceClient', () => {
         aspect_type: 'aspectTypeValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1.ContentServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -942,7 +942,7 @@ describe('v1.ContentServiceClient', () => {
         change_request: 'changeRequestValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.ContentServiceClient', () => {
         content: 'contentValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1083,7 +1083,7 @@ describe('v1.ContentServiceClient', () => {
         data_asset: 'dataAssetValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.ContentServiceClient', () => {
         data_attribute_id: 'dataAttributeIdValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v1.ContentServiceClient', () => {
         data_attribute_binding_id: 'dataAttributeBindingIdValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v1.ContentServiceClient', () => {
         data_product: 'dataProductValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,7 +1380,7 @@ describe('v1.ContentServiceClient', () => {
         dataScan: 'dataScanValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1445,7 +1445,7 @@ describe('v1.ContentServiceClient', () => {
         job: 'jobValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1520,7 +1520,7 @@ describe('v1.ContentServiceClient', () => {
         data_taxonomy_id: 'dataTaxonomyIdValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1.ContentServiceClient', () => {
         encryption_config: 'encryptionConfigValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1.ContentServiceClient', () => {
         entity: 'entityValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1742,7 +1742,7 @@ describe('v1.ContentServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1817,7 +1817,7 @@ describe('v1.ContentServiceClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1882,7 +1882,7 @@ describe('v1.ContentServiceClient', () => {
         entry_link: 'entryLinkValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,7 +1957,7 @@ describe('v1.ContentServiceClient', () => {
         entry_type: 'entryTypeValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1.ContentServiceClient', () => {
         environment: 'environmentValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1.ContentServiceClient', () => {
         glossary: 'glossaryValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2162,7 +2162,7 @@ describe('v1.ContentServiceClient', () => {
         glossary_category: 'glossaryCategoryValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2242,7 +2242,7 @@ describe('v1.ContentServiceClient', () => {
         glossary_term: 'glossaryTermValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2319,7 +2319,7 @@ describe('v1.ContentServiceClient', () => {
         job: 'jobValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2405,7 +2405,7 @@ describe('v1.ContentServiceClient', () => {
         lake: 'lakeValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2469,7 +2469,7 @@ describe('v1.ContentServiceClient', () => {
         metadata_feed: 'metadataFeedValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2533,7 +2533,7 @@ describe('v1.ContentServiceClient', () => {
         metadataJob: 'metadataJobValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2600,7 +2600,7 @@ describe('v1.ContentServiceClient', () => {
         partition: 'partitionValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2698,7 +2698,7 @@ describe('v1.ContentServiceClient', () => {
         action: 'actionValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,7 +2794,7 @@ describe('v1.ContentServiceClient', () => {
         action: 'actionValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2904,7 +2904,7 @@ describe('v1.ContentServiceClient', () => {
         action: 'actionValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3034,7 +3034,7 @@ describe('v1.ContentServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3121,7 +3121,7 @@ describe('v1.ContentServiceClient', () => {
         task: 'taskValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3197,7 +3197,7 @@ describe('v1.ContentServiceClient', () => {
         zone: 'zoneValue',
       };
       const client = new contentserviceModule.v1.ContentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

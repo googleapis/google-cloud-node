@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { GatewayControlClient } from '@google-cloud/gke-connect-gateway';
+import {GatewayControlClient} from '@google-cloud/gke-connect-gateway';
 
 // check that the client class type name can be used
 function doStuffWithGatewayControlClient(client: GatewayControlClient) {

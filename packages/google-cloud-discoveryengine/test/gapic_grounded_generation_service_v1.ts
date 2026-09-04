@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as groundedgenerationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -93,9 +93,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -182,7 +182,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -230,7 +230,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.groundedGenerationServiceStub, undefined);
@@ -238,13 +238,13 @@ describe('v1.GroundedGenerationServiceClient', () => {
       assert(client.groundedGenerationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.groundedGenerationServiceStub);
@@ -253,15 +253,15 @@ describe('v1.GroundedGenerationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.groundedGenerationServiceStub, undefined);
@@ -270,7 +270,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -279,7 +279,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -292,7 +292,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -316,7 +316,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes generateGroundedContent without error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes generateGroundedContent without error using callback', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -397,7 +397,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes generateGroundedContent with error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes generateGroundedContent with closed client', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -459,7 +459,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes checkGrounding without error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes checkGrounding without error using callback', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes checkGrounding with error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes checkGrounding with closed client', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -584,7 +584,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       );
       request.groundingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.checkGrounding(request), expectedError);
@@ -595,7 +595,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes streamGenerateGroundedContent without error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -641,7 +641,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes streamGenerateGroundedContent with error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1085,7 +1085,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1161,7 +1161,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1960,7 +1960,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2087,7 +2087,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2215,7 +2215,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2452,7 +2452,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2579,7 +2579,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2708,7 +2708,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2854,7 +2854,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2980,7 +2980,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3090,7 +3090,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3218,7 +3218,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3345,7 +3345,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3472,7 +3472,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3599,7 +3599,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3727,7 +3727,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3871,7 +3871,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3995,7 +3995,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4077,7 +4077,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4205,7 +4205,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4348,7 +4348,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4444,7 +4444,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4552,7 +4552,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4659,7 +4659,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4749,7 +4749,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4843,7 +4843,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4951,7 +4951,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5076,7 +5076,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5174,7 +5174,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5264,7 +5264,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5373,7 +5373,7 @@ describe('v1.GroundedGenerationServiceClient', () => {
       };
       const client =
         new groundedgenerationserviceModule.v1.GroundedGenerationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

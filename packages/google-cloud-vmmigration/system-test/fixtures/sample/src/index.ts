@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { VmMigrationClient } from '@google-cloud/vmmigration';
+import {VmMigrationClient} from '@google-cloud/vmmigration';
 
 // check that the client class type name can be used
 function doStuffWithVmMigrationClient(client: VmMigrationClient) {

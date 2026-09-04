@@ -29,7 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -50,7 +50,7 @@ export class SqlInstancesServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('sql');
@@ -63,10 +63,10 @@ export class SqlInstancesServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  sqlInstancesServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  sqlInstancesServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SqlInstancesServiceClient.
@@ -142,7 +142,7 @@ export class SqlInstancesServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -226,7 +226,7 @@ export class SqlInstancesServiceClient {
       'google.cloud.sql.v1.SqlInstancesService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -266,7 +266,7 @@ export class SqlInstancesServiceClient {
           (this._protos as any).google.cloud.sql.v1.SqlInstancesService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -317,7 +317,7 @@ export class SqlInstancesServiceClient {
     ];
     for (const methodName of sqlInstancesServiceStubMethods) {
       const callPromise = this.sqlInstancesServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -527,7 +527,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addServerCa request %j', request);
@@ -679,7 +679,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addServerCertificate request %j', request);
@@ -827,7 +827,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addEntraIdCertificate request %j', request);
@@ -964,7 +964,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('clone request %j', request);
@@ -1104,7 +1104,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -1243,7 +1243,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('demoteMaster request %j', request);
@@ -1380,7 +1380,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('demote request %j', request);
@@ -1513,7 +1513,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('export request %j', request);
@@ -1658,7 +1658,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('failover request %j', request);
@@ -1797,7 +1797,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reencrypt request %j', request);
@@ -1926,7 +1926,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -2057,7 +2057,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('import request %j', request);
@@ -2187,7 +2187,7 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -2333,7 +2333,7 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list request %j', request);
@@ -2474,7 +2474,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServerCas request %j', request);
@@ -2625,7 +2625,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServerCertificates request %j', request);
@@ -2774,7 +2774,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntraIdCertificates request %j', request);
@@ -2916,7 +2916,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patch request %j', request);
@@ -3062,7 +3062,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('promoteReplica request %j', request);
@@ -3207,7 +3207,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('switchover request %j', request);
@@ -3347,7 +3347,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resetSslConfig request %j', request);
@@ -3481,7 +3481,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('restart request %j', request);
@@ -3620,7 +3620,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('restoreBackup request %j', request);
@@ -3764,7 +3764,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rotateServerCa request %j', request);
@@ -3914,7 +3914,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rotateServerCertificate request %j', request);
@@ -4063,7 +4063,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rotateEntraIdCertificate request %j', request);
@@ -4203,7 +4203,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('startReplica request %j', request);
@@ -4343,7 +4343,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('stopReplica request %j', request);
@@ -4485,7 +4485,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('truncateLog request %j', request);
@@ -4621,7 +4621,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('update request %j', request);
@@ -4768,7 +4768,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEphemeral request %j', request);
@@ -4915,7 +4915,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rescheduleMaintenance request %j', request);
@@ -5079,7 +5079,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('verifyExternalSyncSettings request %j', request);
@@ -5243,7 +5243,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('startExternalSync request %j', request);
@@ -5391,7 +5391,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('performDiskShrink request %j', request);
@@ -5537,7 +5537,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDiskShrinkConfig request %j', request);
@@ -5683,7 +5683,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resetReplicaSize request %j', request);
@@ -5832,7 +5832,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLatestRecoveryTime request %j', request);
@@ -5974,7 +5974,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('executeSql request %j', request);
@@ -6123,7 +6123,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('acquireSsrsLease request %j', request);
@@ -6272,7 +6272,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('releaseSsrsLease request %j', request);
@@ -6421,7 +6421,7 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('preCheckMajorVersionUpgrade request %j', request);
@@ -6569,7 +6569,7 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pointInTimeRestore request %j', request);
@@ -6976,11 +6976,11 @@ export class SqlInstancesServiceClient {
    */
   close(): Promise<void> {
     if (this.sqlInstancesServiceStub && !this._terminated) {
-      return this.sqlInstancesServiceStub.then((stub) => {
+      return this.sqlInstancesServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

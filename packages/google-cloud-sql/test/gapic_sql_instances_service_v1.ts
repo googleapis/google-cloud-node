@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sqlinstancesserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -127,7 +127,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'sqladmin.example.com');
@@ -135,7 +135,7 @@ describe('v1.SqlInstancesServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'sqladmin.example.com');
@@ -207,7 +207,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -216,14 +216,14 @@ describe('v1.SqlInstancesServiceClient', () => {
       assert(client.sqlInstancesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sqlInstancesServiceStub);
@@ -232,15 +232,15 @@ describe('v1.SqlInstancesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -250,7 +250,7 @@ describe('v1.SqlInstancesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -259,7 +259,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -273,7 +273,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -298,7 +298,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCa without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -336,7 +336,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCa without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -390,7 +390,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCa with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -428,7 +428,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCa with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -447,7 +447,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addServerCa(request), expectedError);
@@ -458,7 +458,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCertificate without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -497,7 +497,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCertificate without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -551,7 +551,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCertificate with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -589,7 +589,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addServerCertificate with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -608,7 +608,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addServerCertificate(request), expectedError);
@@ -619,7 +619,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addEntraIdCertificate without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -658,7 +658,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addEntraIdCertificate without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -712,7 +712,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addEntraIdCertificate with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -753,7 +753,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes addEntraIdCertificate with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -772,7 +772,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -786,7 +786,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes clone without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -823,7 +823,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes clone without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -875,7 +875,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes clone with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -909,7 +909,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes clone with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -928,7 +928,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.clone(request), expectedError);
@@ -939,7 +939,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes delete without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -977,7 +977,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes delete without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1031,7 +1031,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes delete with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1066,7 +1066,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes delete with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1085,7 +1085,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.delete(request), expectedError);
@@ -1096,7 +1096,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demoteMaster without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1134,7 +1134,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demoteMaster without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1188,7 +1188,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demoteMaster with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1226,7 +1226,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demoteMaster with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1245,7 +1245,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.demoteMaster(request), expectedError);
@@ -1256,7 +1256,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demote without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1294,7 +1294,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demote without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1348,7 +1348,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demote with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1383,7 +1383,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes demote with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1402,7 +1402,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.demote(request), expectedError);
@@ -1413,7 +1413,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes export without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1451,7 +1451,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes export without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1505,7 +1505,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes export with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1540,7 +1540,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes export with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1559,7 +1559,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.export(request), expectedError);
@@ -1570,7 +1570,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes failover without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1608,7 +1608,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes failover without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1662,7 +1662,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes failover with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1697,7 +1697,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes failover with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1716,7 +1716,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.failover(request), expectedError);
@@ -1727,7 +1727,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes reencrypt without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1765,7 +1765,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes reencrypt without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1819,7 +1819,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes reencrypt with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1854,7 +1854,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes reencrypt with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1873,7 +1873,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.reencrypt(request), expectedError);
@@ -1884,7 +1884,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes get without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1921,7 +1921,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes get without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1973,7 +1973,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes get with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2007,7 +2007,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes get with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2026,7 +2026,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.get(request), expectedError);
@@ -2037,7 +2037,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes import without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2075,7 +2075,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes import without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2129,7 +2129,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes import with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2164,7 +2164,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes import with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2183,7 +2183,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.import(request), expectedError);
@@ -2194,7 +2194,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes insert without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2227,7 +2227,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes insert without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2276,7 +2276,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes insert with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2306,7 +2306,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes insert with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2320,7 +2320,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insert(request), expectedError);
@@ -2331,7 +2331,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes list without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2363,7 +2363,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes list without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2410,7 +2410,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes list with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2439,7 +2439,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes list with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2453,7 +2453,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.list(request), expectedError);
@@ -2464,7 +2464,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCas without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2502,7 +2502,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCas without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2556,7 +2556,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCas with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2594,7 +2594,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCas with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2613,7 +2613,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listServerCas(request), expectedError);
@@ -2624,7 +2624,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCertificates without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2663,7 +2663,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCertificates without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2717,7 +2717,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCertificates with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2758,7 +2758,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listServerCertificates with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2777,7 +2777,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2791,7 +2791,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listEntraIdCertificates without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2830,7 +2830,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listEntraIdCertificates without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2884,7 +2884,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listEntraIdCertificates with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2925,7 +2925,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes listEntraIdCertificates with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2944,7 +2944,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2958,7 +2958,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes patch without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2995,7 +2995,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes patch without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3047,7 +3047,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes patch with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3081,7 +3081,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes patch with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3100,7 +3100,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.patch(request), expectedError);
@@ -3111,7 +3111,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes promoteReplica without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3149,7 +3149,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes promoteReplica without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3203,7 +3203,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes promoteReplica with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3241,7 +3241,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes promoteReplica with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3260,7 +3260,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.promoteReplica(request), expectedError);
@@ -3271,7 +3271,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes switchover without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3309,7 +3309,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes switchover without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3363,7 +3363,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes switchover with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3401,7 +3401,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes switchover with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3420,7 +3420,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.switchover(request), expectedError);
@@ -3431,7 +3431,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetSslConfig without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3469,7 +3469,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetSslConfig without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3523,7 +3523,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetSslConfig with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3561,7 +3561,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetSslConfig with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3580,7 +3580,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resetSslConfig(request), expectedError);
@@ -3591,7 +3591,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restart without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3629,7 +3629,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restart without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3683,7 +3683,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restart with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3718,7 +3718,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restart with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3737,7 +3737,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.restart(request), expectedError);
@@ -3748,7 +3748,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restoreBackup without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3786,7 +3786,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restoreBackup without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3840,7 +3840,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restoreBackup with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3878,7 +3878,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes restoreBackup with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3897,7 +3897,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.restoreBackup(request), expectedError);
@@ -3908,7 +3908,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCa without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3946,7 +3946,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCa without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4000,7 +4000,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCa with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4038,7 +4038,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCa with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4057,7 +4057,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.rotateServerCa(request), expectedError);
@@ -4068,7 +4068,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCertificate without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4107,7 +4107,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCertificate without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4161,7 +4161,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCertificate with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4202,7 +4202,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateServerCertificate with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4221,7 +4221,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4235,7 +4235,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateEntraIdCertificate without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4274,7 +4274,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateEntraIdCertificate without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4328,7 +4328,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateEntraIdCertificate with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4369,7 +4369,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rotateEntraIdCertificate with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4388,7 +4388,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4402,7 +4402,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startReplica without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4440,7 +4440,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startReplica without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4494,7 +4494,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startReplica with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4532,7 +4532,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startReplica with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4551,7 +4551,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.startReplica(request), expectedError);
@@ -4562,7 +4562,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes stopReplica without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4600,7 +4600,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes stopReplica without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4654,7 +4654,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes stopReplica with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4692,7 +4692,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes stopReplica with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4711,7 +4711,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.stopReplica(request), expectedError);
@@ -4722,7 +4722,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes truncateLog without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4760,7 +4760,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes truncateLog without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4814,7 +4814,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes truncateLog with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4852,7 +4852,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes truncateLog with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4871,7 +4871,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.truncateLog(request), expectedError);
@@ -4882,7 +4882,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes update without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4920,7 +4920,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes update without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4974,7 +4974,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes update with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5009,7 +5009,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes update with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5028,7 +5028,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.update(request), expectedError);
@@ -5039,7 +5039,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes createEphemeral without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5077,7 +5077,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes createEphemeral without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5131,7 +5131,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes createEphemeral with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5169,7 +5169,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes createEphemeral with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5188,7 +5188,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEphemeral(request), expectedError);
@@ -5199,7 +5199,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rescheduleMaintenance without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5238,7 +5238,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rescheduleMaintenance without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5292,7 +5292,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rescheduleMaintenance with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5333,7 +5333,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes rescheduleMaintenance with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5352,7 +5352,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5366,7 +5366,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes verifyExternalSyncSettings without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5405,7 +5405,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes verifyExternalSyncSettings without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5459,7 +5459,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes verifyExternalSyncSettings with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5500,7 +5500,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes verifyExternalSyncSettings with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5519,7 +5519,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5533,7 +5533,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startExternalSync without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5571,7 +5571,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startExternalSync without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5625,7 +5625,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startExternalSync with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5663,7 +5663,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes startExternalSync with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5682,7 +5682,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.startExternalSync(request), expectedError);
@@ -5693,7 +5693,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes performDiskShrink without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5731,7 +5731,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes performDiskShrink without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5785,7 +5785,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes performDiskShrink with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5823,7 +5823,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes performDiskShrink with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5842,7 +5842,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.performDiskShrink(request), expectedError);
@@ -5853,7 +5853,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getDiskShrinkConfig without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5892,7 +5892,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getDiskShrinkConfig without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5946,7 +5946,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getDiskShrinkConfig with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5984,7 +5984,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getDiskShrinkConfig with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6003,7 +6003,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDiskShrinkConfig(request), expectedError);
@@ -6014,7 +6014,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetReplicaSize without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6052,7 +6052,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetReplicaSize without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6106,7 +6106,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetReplicaSize with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6144,7 +6144,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes resetReplicaSize with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6163,7 +6163,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resetReplicaSize(request), expectedError);
@@ -6174,7 +6174,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLatestRecoveryTime without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6213,7 +6213,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLatestRecoveryTime without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6267,7 +6267,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLatestRecoveryTime with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6308,7 +6308,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLatestRecoveryTime with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6327,7 +6327,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6341,7 +6341,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes executeSql without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6379,7 +6379,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes executeSql without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6433,7 +6433,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes executeSql with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6471,7 +6471,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes executeSql with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6490,7 +6490,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeSql(request), expectedError);
@@ -6501,7 +6501,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes acquireSsrsLease without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6539,7 +6539,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes acquireSsrsLease without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6593,7 +6593,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes acquireSsrsLease with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6631,7 +6631,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes acquireSsrsLease with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6650,7 +6650,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.acquireSsrsLease(request), expectedError);
@@ -6661,7 +6661,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes releaseSsrsLease without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6699,7 +6699,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes releaseSsrsLease without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6753,7 +6753,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes releaseSsrsLease with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6791,7 +6791,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes releaseSsrsLease with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6810,7 +6810,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.releaseSsrsLease(request), expectedError);
@@ -6821,7 +6821,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes preCheckMajorVersionUpgrade without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6860,7 +6860,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes preCheckMajorVersionUpgrade without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6914,7 +6914,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes preCheckMajorVersionUpgrade with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6955,7 +6955,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes preCheckMajorVersionUpgrade with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6974,7 +6974,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6988,7 +6988,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes pointInTimeRestore without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7022,7 +7022,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes pointInTimeRestore without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7071,7 +7071,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes pointInTimeRestore with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7104,7 +7104,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes pointInTimeRestore with closed client', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7118,7 +7118,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pointInTimeRestore(request), expectedError);
@@ -7128,7 +7128,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7160,7 +7160,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7206,7 +7206,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7243,7 +7243,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7293,7 +7293,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7345,7 +7345,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       };
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7432,7 +7432,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       };
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7485,7 +7485,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       };
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7587,7 +7587,7 @@ describe('v1.SqlInstancesServiceClient', () => {
       };
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

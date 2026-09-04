@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as pipelineserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.pipelineServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.PipelineServiceClient', () => {
       assert(client.pipelineServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.pipelineServiceStub);
@@ -299,14 +299,14 @@ describe('v1.PipelineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.pipelineServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.PipelineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.PipelineServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.PipelineServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('createTrainingPipeline', () => {
     it('invokes createTrainingPipeline without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes createTrainingPipeline without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes createTrainingPipeline with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes createTrainingPipeline with closed client', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.PipelineServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -497,7 +497,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('getTrainingPipeline', () => {
     it('invokes getTrainingPipeline without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes getTrainingPipeline without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes getTrainingPipeline with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes getTrainingPipeline with closed client', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v1.PipelineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTrainingPipeline(request), expectedError);
@@ -630,7 +630,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('cancelTrainingPipeline', () => {
     it('invokes cancelTrainingPipeline without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes cancelTrainingPipeline without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes cancelTrainingPipeline with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes cancelTrainingPipeline with closed client', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.PipelineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -769,7 +769,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('createPipelineJob', () => {
     it('invokes createPipelineJob without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes createPipelineJob without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes createPipelineJob with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes createPipelineJob with closed client', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -891,7 +891,7 @@ describe('v1.PipelineServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPipelineJob(request), expectedError);
@@ -901,7 +901,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('getPipelineJob', () => {
     it('invokes getPipelineJob without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes getPipelineJob without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -979,7 +979,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes getPipelineJob with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes getPipelineJob with closed client', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1.PipelineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPipelineJob(request), expectedError);
@@ -1033,7 +1033,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('cancelPipelineJob', () => {
     it('invokes cancelPipelineJob without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes cancelPipelineJob without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes cancelPipelineJob with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes cancelPipelineJob with closed client', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1155,7 +1155,7 @@ describe('v1.PipelineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelPipelineJob(request), expectedError);
@@ -1165,7 +1165,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('deleteTrainingPipeline', () => {
     it('invokes deleteTrainingPipeline without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes deleteTrainingPipeline without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes deleteTrainingPipeline with call error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes deleteTrainingPipeline with LRO error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1319,7 +1319,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkDeleteTrainingPipelineProgress without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1327,8 +1327,8 @@ describe('v1.PipelineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTrainingPipelineProgress(
@@ -1341,7 +1341,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkDeleteTrainingPipelineProgress with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1362,7 +1362,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('deletePipelineJob', () => {
     it('invokes deletePipelineJob without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes deletePipelineJob without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1449,7 +1449,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes deletePipelineJob with call error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes deletePipelineJob with LRO error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1513,7 +1513,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkDeletePipelineJobProgress without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1521,8 +1521,8 @@ describe('v1.PipelineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePipelineJobProgress(
@@ -1535,7 +1535,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkDeletePipelineJobProgress with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1556,7 +1556,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('batchDeletePipelineJobs', () => {
     it('invokes batchDeletePipelineJobs without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1589,7 +1589,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes batchDeletePipelineJobs without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1643,7 +1643,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes batchDeletePipelineJobs with call error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1677,7 +1677,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes batchDeletePipelineJobs with LRO error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkBatchDeletePipelineJobsProgress without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1718,8 +1718,8 @@ describe('v1.PipelineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1733,7 +1733,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkBatchDeletePipelineJobsProgress with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('batchCancelPipelineJobs', () => {
     it('invokes batchCancelPipelineJobs without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes batchCancelPipelineJobs without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,7 +1841,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes batchCancelPipelineJobs with call error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1875,7 +1875,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes batchCancelPipelineJobs with LRO error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1908,7 +1908,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkBatchCancelPipelineJobsProgress without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1916,8 +1916,8 @@ describe('v1.PipelineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1931,7 +1931,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes checkBatchCancelPipelineJobsProgress with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1952,7 +1952,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('listTrainingPipelines', () => {
     it('invokes listTrainingPipelines without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1992,7 +1992,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listTrainingPipelines without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2024,8 +2024,7 @@ describe('v1.PipelineServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.ITrainingPipeline[]
-              | null,
+              protos.google.cloud.aiplatform.v1.ITrainingPipeline[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2049,7 +2048,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listTrainingPipelines with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2082,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listTrainingPipelinesStream without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,7 +2149,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listTrainingPipelinesStream with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2205,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('uses async iteration with listTrainingPipelines without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2260,7 +2259,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('uses async iteration with listTrainingPipelines with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2307,7 +2306,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('listPipelineJobs', () => {
     it('invokes listPipelineJobs without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2346,7 +2345,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listPipelineJobs without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2401,7 +2400,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listPipelineJobs with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2432,7 +2431,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('invokes listPipelineJobsStream without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2484,15 +2483,15 @@ describe('v1.PipelineServiceClient', () => {
       assert(
         (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPipelineJobsStream with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2533,15 +2532,15 @@ describe('v1.PipelineServiceClient', () => {
       assert(
         (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPipelineJobs without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2582,15 +2581,15 @@ describe('v1.PipelineServiceClient', () => {
       assert(
         (client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPipelineJobs with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2622,16 +2621,16 @@ describe('v1.PipelineServiceClient', () => {
       assert(
         (client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2661,7 +2660,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,7 +2698,7 @@ describe('v1.PipelineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2709,7 +2708,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2741,7 +2740,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2771,7 +2770,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2809,7 +2808,7 @@ describe('v1.PipelineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2819,7 +2818,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2851,7 +2850,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2884,7 +2883,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2922,7 +2921,7 @@ describe('v1.PipelineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2932,7 +2931,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2967,7 +2966,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2997,7 +2996,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3041,7 +3040,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3076,7 +3075,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3124,7 +3123,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3165,7 +3164,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3186,7 +3185,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3214,7 +3213,7 @@ describe('v1.PipelineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3224,7 +3223,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3248,7 +3247,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3270,7 +3269,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3298,7 +3297,7 @@ describe('v1.PipelineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3308,7 +3307,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3332,7 +3331,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3354,7 +3353,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3382,7 +3381,7 @@ describe('v1.PipelineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3392,7 +3391,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3416,7 +3415,7 @@ describe('v1.PipelineServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3451,7 +3450,7 @@ describe('v1.PipelineServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3489,7 +3488,7 @@ describe('v1.PipelineServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3576,7 +3575,7 @@ describe('v1.PipelineServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3653,7 +3652,7 @@ describe('v1.PipelineServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3728,7 +3727,7 @@ describe('v1.PipelineServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3805,7 +3804,7 @@ describe('v1.PipelineServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3870,7 +3869,7 @@ describe('v1.PipelineServiceClient', () => {
         context: 'contextValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3945,7 +3944,7 @@ describe('v1.PipelineServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4010,7 +4009,7 @@ describe('v1.PipelineServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4085,7 +4084,7 @@ describe('v1.PipelineServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4150,7 +4149,7 @@ describe('v1.PipelineServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4215,7 +4214,7 @@ describe('v1.PipelineServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,7 +4290,7 @@ describe('v1.PipelineServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4373,7 +4372,7 @@ describe('v1.PipelineServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4449,7 +4448,7 @@ describe('v1.PipelineServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4524,7 +4523,7 @@ describe('v1.PipelineServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4588,7 +4587,7 @@ describe('v1.PipelineServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4666,7 +4665,7 @@ describe('v1.PipelineServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4743,7 +4742,7 @@ describe('v1.PipelineServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4819,7 +4818,7 @@ describe('v1.PipelineServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4883,7 +4882,7 @@ describe('v1.PipelineServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4964,7 +4963,7 @@ describe('v1.PipelineServiceClient', () => {
         index: 'indexValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5028,7 +5027,7 @@ describe('v1.PipelineServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5091,7 +5090,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5142,7 +5141,7 @@ describe('v1.PipelineServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5219,7 +5218,7 @@ describe('v1.PipelineServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5283,7 +5282,7 @@ describe('v1.PipelineServiceClient', () => {
         model: 'modelValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5347,7 +5346,7 @@ describe('v1.PipelineServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5427,7 +5426,7 @@ describe('v1.PipelineServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5504,7 +5503,7 @@ describe('v1.PipelineServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5611,7 +5610,7 @@ describe('v1.PipelineServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5676,7 +5675,7 @@ describe('v1.PipelineServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5752,7 +5751,7 @@ describe('v1.PipelineServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5833,7 +5832,7 @@ describe('v1.PipelineServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5898,7 +5897,7 @@ describe('v1.PipelineServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5979,7 +5978,7 @@ describe('v1.PipelineServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6056,7 +6055,7 @@ describe('v1.PipelineServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6118,7 +6117,7 @@ describe('v1.PipelineServiceClient', () => {
         project: 'projectValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6158,7 +6157,7 @@ describe('v1.PipelineServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6238,7 +6237,7 @@ describe('v1.PipelineServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6341,7 +6340,7 @@ describe('v1.PipelineServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6465,7 +6464,7 @@ describe('v1.PipelineServiceClient', () => {
         model: 'modelValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6556,7 +6555,7 @@ describe('v1.PipelineServiceClient', () => {
         model: 'modelValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6609,7 +6608,7 @@ describe('v1.PipelineServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6672,7 +6671,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6726,7 +6725,7 @@ describe('v1.PipelineServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6801,7 +6800,7 @@ describe('v1.PipelineServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6867,7 +6866,7 @@ describe('v1.PipelineServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6942,7 +6941,7 @@ describe('v1.PipelineServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7007,7 +7006,7 @@ describe('v1.PipelineServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7084,7 +7083,7 @@ describe('v1.PipelineServiceClient', () => {
         event: 'eventValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7171,7 +7170,7 @@ describe('v1.PipelineServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7236,7 +7235,7 @@ describe('v1.PipelineServiceClient', () => {
         study: 'studyValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7300,7 +7299,7 @@ describe('v1.PipelineServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7365,7 +7364,7 @@ describe('v1.PipelineServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7461,7 +7460,7 @@ describe('v1.PipelineServiceClient', () => {
         run: 'runValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7550,7 +7549,7 @@ describe('v1.PipelineServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7673,7 +7672,7 @@ describe('v1.PipelineServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7742,7 +7741,7 @@ describe('v1.PipelineServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7817,7 +7816,7 @@ describe('v1.PipelineServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

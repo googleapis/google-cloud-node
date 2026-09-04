@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as analyticsserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -105,9 +105,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -229,7 +229,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.analyticsServiceStub, undefined);
@@ -237,12 +237,12 @@ describe('v2beta.AnalyticsServiceClient', () => {
       assert(client.analyticsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.analyticsServiceStub);
@@ -251,14 +251,14 @@ describe('v2beta.AnalyticsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.analyticsServiceStub, undefined);
@@ -267,7 +267,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -275,7 +275,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -287,7 +287,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -310,7 +310,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('exportAnalyticsMetrics', () => {
     it('invokes exportAnalyticsMetrics without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -343,7 +343,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
 
     it('invokes exportAnalyticsMetrics without error using callback', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -397,7 +397,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
 
     it('invokes exportAnalyticsMetrics with call error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
 
     it('invokes exportAnalyticsMetrics with LRO error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
 
     it('invokes checkExportAnalyticsMetricsProgress without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,8 +472,8 @@ describe('v2beta.AnalyticsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportAnalyticsMetricsProgress(
@@ -486,7 +486,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
 
     it('invokes checkExportAnalyticsMetricsProgress with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -536,7 +536,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -580,7 +580,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -753,7 +753,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -763,7 +763,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -787,7 +787,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -809,7 +809,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -837,7 +837,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -847,7 +847,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -871,7 +871,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -921,7 +921,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -931,7 +931,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -955,7 +955,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -990,7 +990,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1024,7 +1024,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1131,7 +1131,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         control: 'controlValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1339,7 +1339,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         model: 'modelValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1416,7 +1416,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         product: 'productValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v2beta.AnalyticsServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new analyticsserviceModule.v2beta.AnalyticsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

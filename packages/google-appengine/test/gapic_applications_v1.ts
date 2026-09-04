@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as applicationsModule from '../src';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -208,7 +208,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.applicationsStub, undefined);
@@ -216,12 +216,12 @@ describe('v1.ApplicationsClient', () => {
       assert(client.applicationsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.applicationsStub);
@@ -230,14 +230,14 @@ describe('v1.ApplicationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.applicationsStub, undefined);
@@ -246,7 +246,7 @@ describe('v1.ApplicationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -254,7 +254,7 @@ describe('v1.ApplicationsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -266,7 +266,7 @@ describe('v1.ApplicationsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -289,7 +289,7 @@ describe('v1.ApplicationsClient', () => {
   describe('getApplication', () => {
     it('invokes getApplication without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -320,7 +320,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes getApplication without error using callback', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -367,7 +367,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes getApplication with error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes getApplication with closed client', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -411,7 +411,7 @@ describe('v1.ApplicationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApplication(request), expectedError);
@@ -421,7 +421,7 @@ describe('v1.ApplicationsClient', () => {
   describe('createApplication', () => {
     it('invokes createApplication without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes createApplication without error using callback', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes createApplication with call error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -497,7 +497,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes createApplication with LRO error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes checkCreateApplicationProgress without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,8 +524,8 @@ describe('v1.ApplicationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateApplicationProgress(
@@ -538,7 +538,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes checkCreateApplicationProgress with error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v1.ApplicationsClient', () => {
   describe('updateApplication', () => {
     it('invokes updateApplication without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes updateApplication without error using callback', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes updateApplication with call error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes updateApplication with LRO error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes checkUpdateApplicationProgress without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -718,8 +718,8 @@ describe('v1.ApplicationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateApplicationProgress(
@@ -732,7 +732,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes checkUpdateApplicationProgress with error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.ApplicationsClient', () => {
   describe('repairApplication', () => {
     it('invokes repairApplication without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes repairApplication without error using callback', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes repairApplication with call error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes repairApplication with LRO error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes checkRepairApplicationProgress without error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -912,8 +912,8 @@ describe('v1.ApplicationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRepairApplicationProgress(
@@ -926,7 +926,7 @@ describe('v1.ApplicationsClient', () => {
 
     it('invokes checkRepairApplicationProgress with error', async () => {
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v1.ApplicationsClient', () => {
         instance: 'instanceValue',
       };
       const client = new applicationsModule.v1.ApplicationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

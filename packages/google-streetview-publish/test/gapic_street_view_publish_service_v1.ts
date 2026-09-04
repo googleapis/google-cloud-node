@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as streetviewpublishserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -238,7 +238,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -286,7 +286,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.streetViewPublishServiceStub, undefined);
@@ -294,13 +294,13 @@ describe('v1.StreetViewPublishServiceClient', () => {
       assert(client.streetViewPublishServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.streetViewPublishServiceStub);
@@ -309,15 +309,15 @@ describe('v1.StreetViewPublishServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.streetViewPublishServiceStub, undefined);
@@ -326,7 +326,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startUpload without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startUpload without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startUpload with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -436,13 +436,13 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startUpload with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.startUpload(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhoto without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhoto without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -505,7 +505,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhoto with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhoto with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.CreatePhotoRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPhoto(request), expectedError);
@@ -542,7 +542,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhoto without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhoto without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhoto with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhoto with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.photoId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPhoto(request), expectedError);
@@ -675,7 +675,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchGetPhotos without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchGetPhotos without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchGetPhotos with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchGetPhotos with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.BatchGetPhotosRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchGetPhotos(request), expectedError);
@@ -764,7 +764,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes updatePhoto without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes updatePhoto without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -848,7 +848,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes updatePhoto with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes updatePhoto with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.photo.photoId.id = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePhoto(request), expectedError);
@@ -908,7 +908,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchUpdatePhotos without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchUpdatePhotos without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchUpdatePhotos with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchUpdatePhotos with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.BatchUpdatePhotosRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdatePhotos(request), expectedError);
@@ -997,7 +997,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhoto without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhoto without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhoto with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhoto with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.photoId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePhoto(request), expectedError);
@@ -1133,7 +1133,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchDeletePhotos without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchDeletePhotos without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchDeletePhotos with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1203,7 +1203,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes batchDeletePhotos with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.BatchDeletePhotosRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeletePhotos(request), expectedError);
@@ -1222,7 +1222,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startPhotoSequenceUpload without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startPhotoSequenceUpload without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startPhotoSequenceUpload with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1290,13 +1290,13 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes startPhotoSequenceUpload with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1310,7 +1310,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhotoSequence without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1343,7 +1343,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhotoSequence without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1391,7 +1391,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhotoSequence with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes deletePhotoSequence with closed client', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1436,7 +1436,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.sequenceId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePhotoSequence(request), expectedError);
@@ -1447,7 +1447,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhotoSequence without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1467,7 +1467,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhotoSequence without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhotoSequence with call error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1526,7 +1526,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes createPhotoSequence with LRO error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1546,7 +1546,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes checkCreatePhotoSequenceProgress without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1554,8 +1554,8 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePhotoSequenceProgress(
@@ -1569,7 +1569,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes checkCreatePhotoSequenceProgress with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1591,7 +1591,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhotoSequence without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1625,7 +1625,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhotoSequence without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1680,7 +1680,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhotoSequence with call error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes getPhotoSequence with LRO error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1746,7 +1746,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes checkGetPhotoSequenceProgress without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1754,8 +1754,8 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGetPhotoSequenceProgress(
@@ -1769,7 +1769,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes checkGetPhotoSequenceProgress with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1791,7 +1791,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotos without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotos without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1847,7 +1847,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotos with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1865,7 +1865,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotosStream without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1907,7 +1907,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotosStream with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('uses async iteration with listPhotos without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1977,7 +1977,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('uses async iteration with listPhotos with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2009,7 +2009,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotoSequences without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2030,7 +2030,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotoSequences without error using callback', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotoSequences with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2084,7 +2084,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotoSequencesStream without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2123,7 +2123,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('invokes listPhotoSequencesStream with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2157,7 +2157,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('uses async iteration with listPhotoSequences without error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
     it('uses async iteration with listPhotoSequences with error', async () => {
       const client =
         new streetviewpublishserviceModule.v1.StreetViewPublishServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

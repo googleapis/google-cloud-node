@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as hostprojectregistrationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf, LocationProtos } from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -183,7 +183,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'apihub.example.com');
@@ -192,7 +192,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'apihub.example.com');
@@ -219,7 +219,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'apihub.configured.example.com');
@@ -234,7 +234,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -276,7 +276,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       assert(client.hostProjectRegistrationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
@@ -284,7 +284,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.hostProjectRegistrationServiceStub);
@@ -293,12 +293,12 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
@@ -312,7 +312,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -499,7 +499,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -650,7 +650,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -665,7 +665,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -708,7 +708,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -741,8 +741,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IHostProjectRegistration[]
-              | null,
+              protos.google.cloud.apihub.v1.IHostProjectRegistration[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -768,7 +767,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -805,7 +804,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -878,7 +877,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -997,7 +996,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1215,7 +1214,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1266,7 +1265,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1333,7 +1332,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1403,7 +1402,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1492,7 +1491,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1559,7 +1558,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1628,7 +1627,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1717,7 +1716,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1784,7 +1783,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1851,7 +1850,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1936,7 +1935,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2037,7 +2036,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2104,7 +2103,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2187,7 +2186,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2240,7 +2239,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2308,7 +2307,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2384,7 +2383,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2427,7 +2426,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2513,7 +2512,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2602,7 +2601,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2670,7 +2669,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
       const client =
         new hostprojectregistrationserviceModule.v1.HostProjectRegistrationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

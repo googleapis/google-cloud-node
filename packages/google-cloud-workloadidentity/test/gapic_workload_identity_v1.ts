@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as workloadidentityModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -105,9 +105,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -230,7 +230,7 @@ describe('v1.WorkloadIdentityClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workloadIdentityStub, undefined);
@@ -238,12 +238,12 @@ describe('v1.WorkloadIdentityClient', () => {
       assert(client.workloadIdentityStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.workloadIdentityStub);
@@ -252,14 +252,14 @@ describe('v1.WorkloadIdentityClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workloadIdentityStub, undefined);
@@ -268,7 +268,7 @@ describe('v1.WorkloadIdentityClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -276,7 +276,7 @@ describe('v1.WorkloadIdentityClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -288,7 +288,7 @@ describe('v1.WorkloadIdentityClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -311,7 +311,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('generateServiceAgents', () => {
     it('invokes generateServiceAgents without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -344,7 +344,7 @@ describe('v1.WorkloadIdentityClient', () => {
 
     it('invokes generateServiceAgents without error using callback', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.WorkloadIdentityClient', () => {
 
     it('invokes generateServiceAgents with call error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.WorkloadIdentityClient', () => {
 
     it('invokes generateServiceAgents with LRO error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.WorkloadIdentityClient', () => {
 
     it('invokes checkGenerateServiceAgentsProgress without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -473,8 +473,8 @@ describe('v1.WorkloadIdentityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGenerateServiceAgentsProgress(
@@ -487,7 +487,7 @@ describe('v1.WorkloadIdentityClient', () => {
 
     it('invokes checkGenerateServiceAgentsProgress with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -507,7 +507,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -537,7 +537,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -581,7 +581,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -754,7 +754,7 @@ describe('v1.WorkloadIdentityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -764,7 +764,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -788,7 +788,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -810,7 +810,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -838,7 +838,7 @@ describe('v1.WorkloadIdentityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -848,7 +848,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -872,7 +872,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -922,7 +922,7 @@ describe('v1.WorkloadIdentityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -932,7 +932,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -956,7 +956,7 @@ describe('v1.WorkloadIdentityClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -991,7 +991,7 @@ describe('v1.WorkloadIdentityClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1.WorkloadIdentityClient', () => {
         service_producer: 'serviceProducerValue',
       };
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1.WorkloadIdentityClient', () => {
         service_agent: 'serviceAgentValue',
       };
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1213,7 +1213,7 @@ describe('v1.WorkloadIdentityClient', () => {
         service_producer: 'serviceProducerValue',
       };
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1298,7 +1298,7 @@ describe('v1.WorkloadIdentityClient', () => {
         service_agent: 'serviceAgentValue',
       };
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v1.WorkloadIdentityClient', () => {
         service_producer: 'serviceProducerValue',
       };
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1485,7 +1485,7 @@ describe('v1.WorkloadIdentityClient', () => {
         service_agent: 'serviceAgentValue',
       };
       const client = new workloadidentityModule.v1.WorkloadIdentityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

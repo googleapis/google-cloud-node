@@ -16,10 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  TripServiceClient,
-  VehicleServiceClient,
-} from '@googlemaps/fleetengine';
+import {TripServiceClient, VehicleServiceClient} from '@googlemaps/fleetengine';
 
 // check that the client class type name can be used
 function doStuffWithTripServiceClient(client: TripServiceClient) {

@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,7 +61,7 @@ export class ContainerAnalysisV1Beta1Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('containeranalysis');
@@ -74,8 +74,8 @@ export class ContainerAnalysisV1Beta1Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  containerAnalysisV1Beta1Stub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  containerAnalysisV1Beta1Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ContainerAnalysisV1Beta1Client.
@@ -152,7 +152,7 @@ export class ContainerAnalysisV1Beta1Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -213,7 +213,7 @@ export class ContainerAnalysisV1Beta1Client {
       'google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -254,7 +254,7 @@ export class ContainerAnalysisV1Beta1Client {
             .ContainerAnalysisV1Beta1,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -267,7 +267,7 @@ export class ContainerAnalysisV1Beta1Client {
     ];
     for (const methodName of containerAnalysisV1Beta1StubMethods) {
       const callPromise = this.containerAnalysisV1Beta1Stub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -476,7 +476,7 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -611,7 +611,7 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -747,7 +747,7 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -886,7 +886,7 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generatePackagesSummary request %j', request);
@@ -1030,7 +1030,7 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportSBOM request %j', request);
@@ -1089,7 +1089,7 @@ export class ContainerAnalysisV1Beta1Client {
    */
   close(): Promise<void> {
     if (this.containerAnalysisV1Beta1Stub && !this._terminated) {
-      return this.containerAnalysisV1Beta1Stub.then((stub) => {
+      return this.containerAnalysisV1Beta1Stub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

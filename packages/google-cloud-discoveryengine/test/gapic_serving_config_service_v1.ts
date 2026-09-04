@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as servingconfigserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -212,7 +212,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.servingConfigServiceStub, undefined);
@@ -220,13 +220,13 @@ describe('v1.ServingConfigServiceClient', () => {
       assert(client.servingConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.servingConfigServiceStub);
@@ -235,15 +235,15 @@ describe('v1.ServingConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.servingConfigServiceStub, undefined);
@@ -252,7 +252,7 @@ describe('v1.ServingConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -261,7 +261,7 @@ describe('v1.ServingConfigServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -274,7 +274,7 @@ describe('v1.ServingConfigServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -298,7 +298,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes updateServingConfig without error', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -332,7 +332,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes updateServingConfig without error using callback', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes updateServingConfig with error', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -414,7 +414,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes updateServingConfig with closed client', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1.ServingConfigServiceClient', () => {
       );
       request.servingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateServingConfig(request), expectedError);
@@ -438,7 +438,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -550,7 +550,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.ServingConfigServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -995,7 +995,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1100,7 +1100,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1434,7 +1434,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1853,7 +1853,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1980,7 +1980,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2217,7 +2217,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2346,7 +2346,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2492,7 +2492,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2618,7 +2618,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2728,7 +2728,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2856,7 +2856,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2983,7 +2983,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3110,7 +3110,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3237,7 +3237,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3365,7 +3365,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3509,7 +3509,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3633,7 +3633,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3715,7 +3715,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3843,7 +3843,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3986,7 +3986,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4082,7 +4082,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4297,7 +4297,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4387,7 +4387,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4481,7 +4481,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4589,7 +4589,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4714,7 +4714,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4812,7 +4812,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4902,7 +4902,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5011,7 +5011,7 @@ describe('v1.ServingConfigServiceClient', () => {
       };
       const client =
         new servingconfigserviceModule.v1.ServingConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

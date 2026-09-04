@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { RouteOptimizationClient } from '@googlemaps/routeoptimization';
+import {RouteOptimizationClient} from '@googlemaps/routeoptimization';
 
 // check that the client class type name can be used
 function doStuffWithRouteOptimizationClient(client: RouteOptimizationClient) {

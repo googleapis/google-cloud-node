@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as iamcredentialsModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -179,7 +179,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.iAMCredentialsStub, undefined);
@@ -187,12 +187,12 @@ describe('v1.IAMCredentialsClient', () => {
       assert(client.iAMCredentialsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.iAMCredentialsStub);
@@ -201,14 +201,14 @@ describe('v1.IAMCredentialsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.iAMCredentialsStub, undefined);
@@ -217,7 +217,7 @@ describe('v1.IAMCredentialsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -225,7 +225,7 @@ describe('v1.IAMCredentialsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -237,7 +237,7 @@ describe('v1.IAMCredentialsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -260,7 +260,7 @@ describe('v1.IAMCredentialsClient', () => {
   describe('generateAccessToken', () => {
     it('invokes generateAccessToken without error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -292,7 +292,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes generateAccessToken without error using callback', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -339,7 +339,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes generateAccessToken with error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes generateAccessToken with closed client', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.IAMCredentialsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateAccessToken(request), expectedError);
@@ -393,7 +393,7 @@ describe('v1.IAMCredentialsClient', () => {
   describe('generateIdToken', () => {
     it('invokes generateIdToken without error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes generateIdToken without error using callback', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes generateIdToken with error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes generateIdToken with closed client', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.IAMCredentialsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateIdToken(request), expectedError);
@@ -525,7 +525,7 @@ describe('v1.IAMCredentialsClient', () => {
   describe('signBlob', () => {
     it('invokes signBlob without error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes signBlob without error using callback', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes signBlob with error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes signBlob with closed client', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v1.IAMCredentialsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.signBlob(request), expectedError);
@@ -654,7 +654,7 @@ describe('v1.IAMCredentialsClient', () => {
   describe('signJwt', () => {
     it('invokes signJwt without error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -685,7 +685,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes signJwt without error using callback', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -732,7 +732,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes signJwt with error', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v1.IAMCredentialsClient', () => {
 
     it('invokes signJwt with closed client', async () => {
       const client = new iamcredentialsModule.v1.IAMCredentialsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -773,7 +773,7 @@ describe('v1.IAMCredentialsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.signJwt(request), expectedError);

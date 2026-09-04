@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { PolicyTroubleshooterClient } from '@google-cloud/policy-troubleshooter-iam';
+import {PolicyTroubleshooterClient} from '@google-cloud/policy-troubleshooter-iam';
 
 // check that the client class type name can be used
 function doStuffWithPolicyTroubleshooterClient(

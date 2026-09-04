@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as scheduleserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.scheduleServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1beta1.ScheduleServiceClient', () => {
       assert(client.scheduleServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.scheduleServiceStub);
@@ -301,14 +301,14 @@ describe('v1beta1.ScheduleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.scheduleServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('createSchedule', () => {
     it('invokes createSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes createSchedule without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes createSchedule with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes createSchedule with closed client', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSchedule(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('getSchedule', () => {
     it('invokes getSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes getSchedule without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes getSchedule with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes getSchedule with closed client', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSchedule(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('pauseSchedule', () => {
     it('invokes pauseSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes pauseSchedule without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes pauseSchedule with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes pauseSchedule with closed client', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseSchedule(request), expectedError);
@@ -756,7 +756,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('resumeSchedule', () => {
     it('invokes resumeSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes resumeSchedule without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes resumeSchedule with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes resumeSchedule with closed client', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeSchedule(request), expectedError);
@@ -888,7 +888,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('updateSchedule', () => {
     it('invokes updateSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes updateSchedule without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes updateSchedule with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes updateSchedule with closed client', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
       );
       request.schedule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSchedule(request), expectedError);
@@ -1024,7 +1024,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('deleteSchedule', () => {
     it('invokes deleteSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes deleteSchedule without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes deleteSchedule with call error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes deleteSchedule with LRO error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes checkDeleteScheduleProgress without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1183,8 +1183,8 @@ describe('v1beta1.ScheduleServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteScheduleProgress(
@@ -1197,7 +1197,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes checkDeleteScheduleProgress with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('listSchedules', () => {
     it('invokes listSchedules without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes listSchedules without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes listSchedules with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1343,7 +1343,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
 
     it('invokes listSchedulesStream without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,15 +1395,15 @@ describe('v1beta1.ScheduleServiceClient', () => {
       assert(
         (client.descriptors.page.listSchedules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSchedulesStream with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1444,15 +1444,15 @@ describe('v1beta1.ScheduleServiceClient', () => {
       assert(
         (client.descriptors.page.listSchedules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSchedules without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,15 +1493,15 @@ describe('v1beta1.ScheduleServiceClient', () => {
       assert(
         (client.descriptors.page.listSchedules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSchedules with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1534,16 +1534,16 @@ describe('v1beta1.ScheduleServiceClient', () => {
       assert(
         (client.descriptors.page.listSchedules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1573,7 +1573,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1611,7 +1611,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1621,7 +1621,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1653,7 +1653,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1683,7 +1683,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1721,7 +1721,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1731,7 +1731,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,7 +1834,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1844,7 +1844,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1988,7 +1988,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2077,7 +2077,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,7 +2098,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2126,7 +2126,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2136,7 +2136,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2160,7 +2160,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2182,7 +2182,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2210,7 +2210,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2220,7 +2220,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2244,7 +2244,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2266,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2294,7 +2294,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2304,7 +2304,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2328,7 +2328,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2363,7 +2363,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2401,7 +2401,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2488,7 +2488,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2565,7 +2565,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2640,7 +2640,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2717,7 +2717,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2782,7 +2782,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         context: 'contextValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2857,7 +2857,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2922,7 +2922,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2997,7 +2997,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3062,7 +3062,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3127,7 +3127,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3203,7 +3203,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,7 +3285,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3360,7 +3360,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         example_store: 'exampleStoreValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3425,7 +3425,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3500,7 +3500,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         extension: 'extensionValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3564,7 +3564,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3629,7 +3629,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature_monitor: 'featureMonitorValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3707,7 +3707,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature_monitor_job: 'featureMonitorJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3814,7 +3814,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3892,7 +3892,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3969,7 +3969,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4045,7 +4045,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4109,7 +4109,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         index: 'indexValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4254,7 +4254,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4317,7 +4317,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         location: 'locationValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4368,7 +4368,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         memory: 'memoryValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4444,7 +4444,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4521,7 +4521,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4585,7 +4585,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         model: 'modelValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4649,7 +4649,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4729,7 +4729,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4806,7 +4806,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4913,7 +4913,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4978,7 +4978,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5070,7 +5070,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5135,7 +5135,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5211,7 +5211,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5292,7 +5292,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5357,7 +5357,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5438,7 +5438,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         online_evaluator: 'onlineEvaluatorValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5503,7 +5503,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5580,7 +5580,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5644,7 +5644,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5724,7 +5724,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5827,7 +5827,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5951,7 +5951,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         model: 'modelValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6042,7 +6042,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         model: 'modelValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6095,7 +6095,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6160,7 +6160,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         rag_data_schema: 'ragDataSchemaValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6234,7 +6234,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         location: 'locationValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6288,7 +6288,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6365,7 +6365,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         rag_metadata: 'ragMetadataValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6451,7 +6451,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6517,7 +6517,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         runtime_revision: 'runtimeRevisionValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6614,7 +6614,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6689,7 +6689,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6754,7 +6754,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6831,7 +6831,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         event: 'eventValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6918,7 +6918,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6983,7 +6983,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         study: 'studyValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7047,7 +7047,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7112,7 +7112,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7208,7 +7208,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         run: 'runValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7297,7 +7297,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7420,7 +7420,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7489,7 +7489,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7564,7 +7564,7 @@ describe('v1beta1.ScheduleServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

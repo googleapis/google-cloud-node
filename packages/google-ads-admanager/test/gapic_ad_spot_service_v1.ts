@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as adspotserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.AdSpotServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.AdSpotServiceClient', () => {
       assert(client.adSpotServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.adSpotServiceStub);
@@ -274,12 +274,12 @@ describe('v1.AdSpotServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.AdSpotServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -452,7 +452,7 @@ describe('v1.AdSpotServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAdSpot(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.AdSpotServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAdSpot(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1.AdSpotServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateAdSpots(request), expectedError);
@@ -853,7 +853,7 @@ describe('v1.AdSpotServiceClient', () => {
       );
       request.adSpot.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAdSpot(request), expectedError);
@@ -986,7 +986,7 @@ describe('v1.AdSpotServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateAdSpots(request), expectedError);
@@ -996,7 +996,7 @@ describe('v1.AdSpotServiceClient', () => {
   describe('listAdSpots', () => {
     it('invokes listAdSpots without error', async () => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v1.AdSpotServiceClient', () => {
 
     it('invokes listAdSpots without error using callback', async () => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,7 +1078,7 @@ describe('v1.AdSpotServiceClient', () => {
 
     it('invokes listAdSpots with error', async () => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.AdSpotServiceClient', () => {
 
     it('invokes listAdSpotsStream without error', async () => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,15 +1152,15 @@ describe('v1.AdSpotServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSpots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAdSpotsStream with error', async () => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,9 +1200,9 @@ describe('v1.AdSpotServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSpots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1243,15 +1243,15 @@ describe('v1.AdSpotServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSpots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAdSpots with error', async () => {
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,9 +1285,9 @@ describe('v1.AdSpotServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSpots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1301,7 +1301,7 @@ describe('v1.AdSpotServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v1.AdSpotServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1434,7 +1434,7 @@ describe('v1.AdSpotServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v1.AdSpotServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.AdSpotServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1581,7 @@ describe('v1.AdSpotServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1633,7 @@ describe('v1.AdSpotServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.AdSpotServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1739,7 +1739,7 @@ describe('v1.AdSpotServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1788,7 +1788,7 @@ describe('v1.AdSpotServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,7 +1841,7 @@ describe('v1.AdSpotServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1893,7 +1893,7 @@ describe('v1.AdSpotServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v1.AdSpotServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1999,7 +1999,7 @@ describe('v1.AdSpotServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,7 +2056,7 @@ describe('v1.AdSpotServiceClient', () => {
         company: 'companyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1.AdSpotServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2154,7 +2154,7 @@ describe('v1.AdSpotServiceClient', () => {
         content: 'contentValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2203,7 +2203,7 @@ describe('v1.AdSpotServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2255,7 +2255,7 @@ describe('v1.AdSpotServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2307,7 +2307,7 @@ describe('v1.AdSpotServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2356,7 +2356,7 @@ describe('v1.AdSpotServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,7 +2408,7 @@ describe('v1.AdSpotServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2465,7 +2465,7 @@ describe('v1.AdSpotServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2518,7 +2518,7 @@ describe('v1.AdSpotServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2570,7 +2570,7 @@ describe('v1.AdSpotServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2633,7 +2633,7 @@ describe('v1.AdSpotServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2698,7 +2698,7 @@ describe('v1.AdSpotServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2763,7 +2763,7 @@ describe('v1.AdSpotServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2825,7 +2825,7 @@ describe('v1.AdSpotServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2872,7 +2872,7 @@ describe('v1.AdSpotServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2929,7 +2929,7 @@ describe('v1.AdSpotServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2982,7 +2982,7 @@ describe('v1.AdSpotServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3045,7 +3045,7 @@ describe('v1.AdSpotServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3110,7 +3110,7 @@ describe('v1.AdSpotServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3162,7 +3162,7 @@ describe('v1.AdSpotServiceClient', () => {
         label: 'labelValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3211,7 +3211,7 @@ describe('v1.AdSpotServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3260,7 +3260,7 @@ describe('v1.AdSpotServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3312,7 +3312,7 @@ describe('v1.AdSpotServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3364,7 +3364,7 @@ describe('v1.AdSpotServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3417,7 +3417,7 @@ describe('v1.AdSpotServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3469,7 +3469,7 @@ describe('v1.AdSpotServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3521,7 +3521,7 @@ describe('v1.AdSpotServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3586,7 +3586,7 @@ describe('v1.AdSpotServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3637,7 +3637,7 @@ describe('v1.AdSpotServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3676,7 +3676,7 @@ describe('v1.AdSpotServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3729,7 +3729,7 @@ describe('v1.AdSpotServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3794,7 +3794,7 @@ describe('v1.AdSpotServiceClient', () => {
         order: 'orderValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3843,7 +3843,7 @@ describe('v1.AdSpotServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3892,7 +3892,7 @@ describe('v1.AdSpotServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3944,7 +3944,7 @@ describe('v1.AdSpotServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3997,7 +3997,7 @@ describe('v1.AdSpotServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4060,7 +4060,7 @@ describe('v1.AdSpotServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4123,7 +4123,7 @@ describe('v1.AdSpotServiceClient', () => {
         report: 'reportValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4172,7 +4172,7 @@ describe('v1.AdSpotServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4235,7 +4235,7 @@ describe('v1.AdSpotServiceClient', () => {
         role: 'roleValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4284,7 +4284,7 @@ describe('v1.AdSpotServiceClient', () => {
         site: 'siteValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4333,7 +4333,7 @@ describe('v1.AdSpotServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4382,7 +4382,7 @@ describe('v1.AdSpotServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4435,7 +4435,7 @@ describe('v1.AdSpotServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4488,7 +4488,7 @@ describe('v1.AdSpotServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4545,7 +4545,7 @@ describe('v1.AdSpotServiceClient', () => {
         team: 'teamValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4594,7 +4594,7 @@ describe('v1.AdSpotServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4657,7 +4657,7 @@ describe('v1.AdSpotServiceClient', () => {
         user: 'userValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4706,7 +4706,7 @@ describe('v1.AdSpotServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4769,7 +4769,7 @@ describe('v1.AdSpotServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new adspotserviceModule.v1.AdSpotServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as permissionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -167,7 +167,7 @@ describe('v1beta.PermissionServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'generativelanguage.example.com');
@@ -175,7 +175,7 @@ describe('v1beta.PermissionServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'generativelanguage.example.com');
@@ -250,7 +250,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -259,14 +259,14 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(client.permissionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.permissionServiceStub);
@@ -275,15 +275,15 @@ describe('v1beta.PermissionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -293,7 +293,7 @@ describe('v1beta.PermissionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -302,7 +302,7 @@ describe('v1beta.PermissionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -316,7 +316,7 @@ describe('v1beta.PermissionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -341,7 +341,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes createPermission without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -374,7 +374,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes createPermission without error using callback', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -423,7 +423,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes createPermission with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -456,7 +456,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes createPermission with closed client', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -470,7 +470,7 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPermission(request), expectedError);
@@ -481,7 +481,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes getPermission without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -514,7 +514,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes getPermission without error using callback', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -563,7 +563,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes getPermission with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -596,7 +596,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes getPermission with closed client', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -610,7 +610,7 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPermission(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes updatePermission without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -655,7 +655,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes updatePermission without error using callback', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -705,7 +705,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes updatePermission with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -739,7 +739,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes updatePermission with closed client', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -754,7 +754,7 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.permission.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePermission(request), expectedError);
@@ -765,7 +765,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes deletePermission without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -798,7 +798,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes deletePermission without error using callback', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -847,7 +847,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes deletePermission with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -880,7 +880,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes deletePermission with closed client', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -894,7 +894,7 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePermission(request), expectedError);
@@ -905,7 +905,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes transferOwnership without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -938,7 +938,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes transferOwnership without error using callback', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -987,7 +987,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes transferOwnership with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1020,7 +1020,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes transferOwnership with closed client', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1034,7 +1034,7 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.transferOwnership(request), expectedError);
@@ -1045,7 +1045,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes listPermissions without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1086,7 +1086,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes listPermissions without error using callback', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1119,8 +1119,7 @@ describe('v1beta.PermissionServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta.IPermission[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta.IPermission[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1145,7 +1144,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes listPermissions with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1178,7 +1177,7 @@ describe('v1beta.PermissionServiceClient', () => {
     it('invokes listPermissionsStream without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1232,16 +1231,16 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPermissionsStream with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1284,16 +1283,16 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPermissions without error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1336,16 +1335,16 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPermissions with error', async () => {
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1379,9 +1378,9 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1394,7 +1393,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1436,7 +1435,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1500,7 +1499,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1541,7 +1540,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1605,7 +1604,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1655,7 +1654,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1695,7 +1694,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1735,7 +1734,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1776,7 +1775,7 @@ describe('v1beta.PermissionServiceClient', () => {
       };
       const client = new permissionserviceModule.v1beta.PermissionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

@@ -29,10 +29,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class CatalogServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('retail');
@@ -67,11 +67,11 @@ export class CatalogServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  catalogServiceStub?: Promise<{ [name: string]: Function }>;
+  catalogServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CatalogServiceClient.
@@ -147,7 +147,7 @@ export class CatalogServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -284,16 +284,16 @@ export class CatalogServiceClient {
             {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
-            { get: '/v2alpha/{name=projects/*/locations/*/operations/*}' },
-            { get: '/v2alpha/{name=projects/*/operations/*}' },
+            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v2alpha/{name=projects/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
           additional_bindings: [
-            { get: '/v2alpha/{name=projects/*/locations/*}/operations' },
-            { get: '/v2alpha/{name=projects/*}/operations' },
+            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
+            {get: '/v2alpha/{name=projects/*}/operations'},
           ],
         },
       ];
@@ -309,7 +309,7 @@ export class CatalogServiceClient {
       'google.cloud.retail.v2alpha.CatalogService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -349,7 +349,7 @@ export class CatalogServiceClient {
           (this._protos as any).google.cloud.retail.v2alpha.CatalogService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -369,7 +369,7 @@ export class CatalogServiceClient {
     ];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -580,7 +580,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'catalog.name': request.catalog!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCatalog request %j', request);
@@ -768,7 +768,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         catalog: request.catalog ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setDefaultBranch request %j', request);
@@ -908,7 +908,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         catalog: request.catalog ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDefaultBranch request %j', request);
@@ -1052,7 +1052,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCompletionConfig request %j', request);
@@ -1215,7 +1215,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'completion_config.name': request.completionConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCompletionConfig request %j', request);
@@ -1359,7 +1359,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAttributesConfig request %j', request);
@@ -1519,7 +1519,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'attributes_config.name': request.attributesConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAttributesConfig request %j', request);
@@ -1671,7 +1671,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addCatalogAttribute request %j', request);
@@ -1823,7 +1823,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeCatalogAttribute request %j', request);
@@ -1974,7 +1974,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchRemoveCatalogAttributes request %j', request);
@@ -2136,7 +2136,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('replaceCatalogAttribute request %j', request);
@@ -2300,7 +2300,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2385,7 +2385,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCatalogs stream %j', request);
@@ -2452,7 +2452,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCatalogs iterate %j', request);
@@ -3473,11 +3473,11 @@ export class CatalogServiceClient {
    */
   close(): Promise<void> {
     if (this.catalogServiceStub && !this._terminated) {
-      return this.catalogServiceStub.then((stub) => {
+      return this.catalogServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

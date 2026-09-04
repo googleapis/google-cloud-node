@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sessiontemplatecontrollerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.SessionTemplateControllerClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'dataproc.configured.example.com');
@@ -251,7 +251,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sessionTemplateControllerStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.SessionTemplateControllerClient', () => {
       assert(client.sessionTemplateControllerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sessionTemplateControllerStub);
@@ -274,15 +274,15 @@ describe('v1.SessionTemplateControllerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sessionTemplateControllerStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.SessionTemplateControllerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes createSessionTemplate without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes createSessionTemplate without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes createSessionTemplate with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes createSessionTemplate with closed client', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes updateSessionTemplate without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes updateSessionTemplate without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes updateSessionTemplate with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes updateSessionTemplate with closed client', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       );
       request.sessionTemplate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -627,7 +627,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getSessionTemplate without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getSessionTemplate without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getSessionTemplate with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getSessionTemplate with closed client', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSessionTemplate(request), expectedError);
@@ -764,7 +764,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes deleteSessionTemplate without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes deleteSessionTemplate without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes deleteSessionTemplate with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes deleteSessionTemplate with closed client', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -907,7 +907,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes listSessionTemplates without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes listSessionTemplates without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes listSessionTemplates with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes listSessionTemplatesStream without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,16 +1088,16 @@ describe('v1.SessionTemplateControllerClient', () => {
       assert(
         (client.descriptors.page.listSessionTemplates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSessionTemplatesStream with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1138,16 +1138,16 @@ describe('v1.SessionTemplateControllerClient', () => {
       assert(
         (client.descriptors.page.listSessionTemplates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSessionTemplates without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1188,16 +1188,16 @@ describe('v1.SessionTemplateControllerClient', () => {
       assert(
         (client.descriptors.page.listSessionTemplates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSessionTemplates with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1230,9 +1230,9 @@ describe('v1.SessionTemplateControllerClient', () => {
       assert(
         (client.descriptors.page.listSessionTemplates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1240,7 +1240,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1309,7 +1309,7 @@ describe('v1.SessionTemplateControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1320,7 +1320,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1353,7 +1353,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1384,7 +1384,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1422,7 +1422,7 @@ describe('v1.SessionTemplateControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1433,7 +1433,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v1.SessionTemplateControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1549,7 +1549,7 @@ describe('v1.SessionTemplateControllerClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1656,7 +1656,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1708,7 +1708,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1782,7 +1782,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1905,7 +1905,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1985,7 +1985,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2145,7 +2145,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1.SessionTemplateControllerClient', () => {
       };
       const client =
         new sessiontemplatecontrollerModule.v1.SessionTemplateControllerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

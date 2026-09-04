@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as registrationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -167,7 +167,7 @@ describe('v1.RegistrationServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'servicedirectory.example.com');
@@ -175,7 +175,7 @@ describe('v1.RegistrationServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'servicedirectory.example.com');
@@ -250,7 +250,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -259,14 +259,14 @@ describe('v1.RegistrationServiceClient', () => {
       assert(client.registrationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.registrationServiceStub);
@@ -275,15 +275,15 @@ describe('v1.RegistrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -293,7 +293,7 @@ describe('v1.RegistrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -302,7 +302,7 @@ describe('v1.RegistrationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -316,7 +316,7 @@ describe('v1.RegistrationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -341,7 +341,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createNamespace without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -374,7 +374,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createNamespace without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -423,7 +423,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createNamespace with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -456,7 +456,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createNamespace with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -470,7 +470,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createNamespace(request), expectedError);
@@ -481,7 +481,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getNamespace without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -514,7 +514,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getNamespace without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -563,7 +563,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getNamespace with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -596,7 +596,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getNamespace with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -610,7 +610,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNamespace(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateNamespace without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -655,7 +655,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateNamespace without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -705,7 +705,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateNamespace with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -739,7 +739,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateNamespace with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -754,7 +754,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.namespace.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateNamespace(request), expectedError);
@@ -765,7 +765,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteNamespace without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -798,7 +798,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteNamespace without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -847,7 +847,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteNamespace with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -880,7 +880,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteNamespace with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -894,7 +894,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteNamespace(request), expectedError);
@@ -905,7 +905,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createService without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -938,7 +938,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createService without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -987,7 +987,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createService with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1020,7 +1020,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createService with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1034,7 +1034,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createService(request), expectedError);
@@ -1045,7 +1045,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getService without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1078,7 +1078,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getService without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1127,7 +1127,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getService with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1160,7 +1160,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getService with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1174,7 +1174,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -1185,7 +1185,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateService without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1219,7 +1219,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateService without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1269,7 +1269,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateService with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1303,7 +1303,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateService with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1318,7 +1318,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.service.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateService(request), expectedError);
@@ -1329,7 +1329,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteService without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1362,7 +1362,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteService without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1411,7 +1411,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteService with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1444,7 +1444,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteService with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1458,7 +1458,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteService(request), expectedError);
@@ -1469,7 +1469,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createEndpoint without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1502,7 +1502,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createEndpoint without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1551,7 +1551,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createEndpoint with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1584,7 +1584,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes createEndpoint with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1598,7 +1598,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEndpoint(request), expectedError);
@@ -1609,7 +1609,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getEndpoint without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1642,7 +1642,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getEndpoint without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1691,7 +1691,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getEndpoint with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1724,7 +1724,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getEndpoint with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1738,7 +1738,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEndpoint(request), expectedError);
@@ -1749,7 +1749,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateEndpoint without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1783,7 +1783,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateEndpoint without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1833,7 +1833,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateEndpoint with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1867,7 +1867,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes updateEndpoint with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1882,7 +1882,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.endpoint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEndpoint(request), expectedError);
@@ -1893,7 +1893,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteEndpoint without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1926,7 +1926,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteEndpoint without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1975,7 +1975,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteEndpoint with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2008,7 +2008,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes deleteEndpoint with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2022,7 +2022,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEndpoint(request), expectedError);
@@ -2033,7 +2033,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2066,7 +2066,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2115,7 +2115,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2148,7 +2148,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2162,7 +2162,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -2173,7 +2173,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2206,7 +2206,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2255,7 +2255,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2288,7 +2288,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2302,7 +2302,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2313,7 +2313,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2347,7 +2347,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2396,7 +2396,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2429,7 +2429,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2443,7 +2443,7 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2454,7 +2454,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listNamespaces without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2495,7 +2495,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listNamespaces without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2528,8 +2528,7 @@ describe('v1.RegistrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.servicedirectory.v1.INamespace[]
-              | null,
+              protos.google.cloud.servicedirectory.v1.INamespace[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2554,7 +2553,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listNamespaces with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2587,7 +2586,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listNamespacesStream without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2641,16 +2640,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNamespacesStream with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2693,16 +2692,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNamespaces without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2745,16 +2744,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNamespaces with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2788,9 +2787,9 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2799,7 +2798,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listServices without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2840,7 +2839,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listServices without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2897,7 +2896,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listServices with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2930,7 +2929,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listServicesStream without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2983,16 +2982,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServicesStream with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3036,16 +3035,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3087,16 +3086,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3130,9 +3129,9 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3141,7 +3140,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listEndpoints without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3182,7 +3181,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listEndpoints without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3239,7 +3238,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listEndpoints with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3272,7 +3271,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes listEndpointsStream without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3326,16 +3325,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEndpointsStream with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3378,16 +3377,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpoints without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3429,16 +3428,16 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpoints with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3472,9 +3471,9 @@ describe('v1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3482,7 +3481,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3514,7 +3513,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3560,7 +3559,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3597,7 +3596,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3647,7 +3646,7 @@ describe('v1.RegistrationServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3699,7 +3698,7 @@ describe('v1.RegistrationServiceClient', () => {
       };
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3786,7 +3785,7 @@ describe('v1.RegistrationServiceClient', () => {
       };
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3838,7 +3837,7 @@ describe('v1.RegistrationServiceClient', () => {
       };
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3905,7 +3904,7 @@ describe('v1.RegistrationServiceClient', () => {
       };
       const client = new registrationserviceModule.v1.RegistrationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

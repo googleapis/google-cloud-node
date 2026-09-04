@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudredisModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudRedisStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.CloudRedisClient', () => {
       assert(client.cloudRedisStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudRedisStub);
@@ -296,14 +296,14 @@ describe('v1.CloudRedisClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudRedisStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.CloudRedisClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.CloudRedisClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.CloudRedisClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.CloudRedisClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1.CloudRedisClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1.CloudRedisClient', () => {
   describe('getInstanceAuthString', () => {
     it('invokes getInstanceAuthString without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes getInstanceAuthString without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes getInstanceAuthString with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes getInstanceAuthString with closed client', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.CloudRedisClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -626,7 +626,7 @@ describe('v1.CloudRedisClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -777,7 +777,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -785,8 +785,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -799,7 +799,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -820,7 +820,7 @@ describe('v1.CloudRedisClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,7 +909,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,8 +983,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -997,7 +997,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.CloudRedisClient', () => {
   describe('upgradeInstance', () => {
     it('invokes upgradeInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes upgradeInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes upgradeInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes upgradeInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1169,7 +1169,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkUpgradeInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1177,8 +1177,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpgradeInstanceProgress(
@@ -1191,7 +1191,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkUpgradeInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1212,7 +1212,7 @@ describe('v1.CloudRedisClient', () => {
   describe('importInstance', () => {
     it('invokes importInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes importInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes importInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes importInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkImportInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,8 +1371,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportInstanceProgress(
@@ -1385,7 +1385,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkImportInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.CloudRedisClient', () => {
   describe('exportInstance', () => {
     it('invokes exportInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1439,7 +1439,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes exportInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes exportInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes exportInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1557,7 +1557,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkExportInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,8 +1565,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportInstanceProgress(
@@ -1579,7 +1579,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkExportInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1600,7 +1600,7 @@ describe('v1.CloudRedisClient', () => {
   describe('failoverInstance', () => {
     it('invokes failoverInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1633,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes failoverInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes failoverInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1718,7 +1718,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes failoverInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1751,7 +1751,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkFailoverInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,8 +1759,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkFailoverInstanceProgress(
@@ -1773,7 +1773,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkFailoverInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v1.CloudRedisClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes deleteInstance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1912,7 +1912,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes deleteInstance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1945,7 +1945,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,8 +1953,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -1967,7 +1967,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1988,7 +1988,7 @@ describe('v1.CloudRedisClient', () => {
   describe('rescheduleMaintenance', () => {
     it('invokes rescheduleMaintenance without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes rescheduleMaintenance without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes rescheduleMaintenance with call error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes rescheduleMaintenance with LRO error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkRescheduleMaintenanceProgress without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,8 +2150,8 @@ describe('v1.CloudRedisClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRescheduleMaintenanceProgress(
@@ -2164,7 +2164,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes checkRescheduleMaintenanceProgress with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2185,7 +2185,7 @@ describe('v1.CloudRedisClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2218,7 +2218,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2267,7 +2267,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.CloudRedisClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2341,15 +2341,15 @@ describe('v1.CloudRedisClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2387,15 +2387,15 @@ describe('v1.CloudRedisClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2430,15 +2430,15 @@ describe('v1.CloudRedisClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2470,16 +2470,16 @@ describe('v1.CloudRedisClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2509,7 +2509,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2588,7 +2588,7 @@ describe('v1.CloudRedisClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2636,7 +2636,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2677,7 +2677,7 @@ describe('v1.CloudRedisClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2698,7 +2698,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2726,7 +2726,7 @@ describe('v1.CloudRedisClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2736,7 +2736,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2760,7 +2760,7 @@ describe('v1.CloudRedisClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2782,7 +2782,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2810,7 +2810,7 @@ describe('v1.CloudRedisClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2820,7 +2820,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2844,7 +2844,7 @@ describe('v1.CloudRedisClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2866,7 +2866,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2894,7 +2894,7 @@ describe('v1.CloudRedisClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2904,7 +2904,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2928,7 +2928,7 @@ describe('v1.CloudRedisClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2963,7 +2963,7 @@ describe('v1.CloudRedisClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2999,7 +2999,7 @@ describe('v1.CloudRedisClient', () => {
         instance: 'instanceValue',
       };
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3062,7 +3062,7 @@ describe('v1.CloudRedisClient', () => {
         location: 'locationValue',
       };
       const client = new cloudredisModule.v1.CloudRedisClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

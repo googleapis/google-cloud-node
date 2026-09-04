@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class RuleExecutionErrorServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('chronicle');
@@ -65,9 +65,9 @@ export class RuleExecutionErrorServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  ruleExecutionErrorServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  ruleExecutionErrorServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RuleExecutionErrorServiceClient.
@@ -144,7 +144,7 @@ export class RuleExecutionErrorServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -290,7 +290,7 @@ export class RuleExecutionErrorServiceClient {
       'google.cloud.chronicle.v1.RuleExecutionErrorService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -331,14 +331,14 @@ export class RuleExecutionErrorServiceClient {
             .RuleExecutionErrorService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const ruleExecutionErrorServiceStubMethods = ['listRuleExecutionErrors'];
     for (const methodName of ruleExecutionErrorServiceStubMethods) {
       const callPromise = this.ruleExecutionErrorServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -578,7 +578,7 @@ export class RuleExecutionErrorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -675,7 +675,7 @@ export class RuleExecutionErrorServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuleExecutionErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRuleExecutionErrors stream %j', request);
@@ -754,7 +754,7 @@ export class RuleExecutionErrorServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuleExecutionErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRuleExecutionErrors iterate %j', request);
@@ -2311,7 +2311,7 @@ export class RuleExecutionErrorServiceClient {
    */
   close(): Promise<void> {
     if (this.ruleExecutionErrorServiceStub && !this._terminated) {
-      return this.ruleExecutionErrorServiceStub.then((stub) => {
+      return this.ruleExecutionErrorServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

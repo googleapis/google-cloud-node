@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as networkservicesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.networkServicesStub, undefined);
@@ -284,12 +284,12 @@ describe('v1beta1.NetworkServicesClient', () => {
       assert(client.networkServicesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.networkServicesStub);
@@ -298,14 +298,14 @@ describe('v1beta1.NetworkServicesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.networkServicesStub, undefined);
@@ -314,7 +314,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1beta1.NetworkServicesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1beta1.NetworkServicesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1beta1.NetworkServicesClient', () => {
   describe('getEndpointPolicy', () => {
     it('invokes getEndpointPolicy without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes getEndpointPolicy without error using callback', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes getEndpointPolicy with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes getEndpointPolicy with closed client', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1beta1.NetworkServicesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEndpointPolicy(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1beta1.NetworkServicesClient', () => {
   describe('createEndpointPolicy', () => {
     it('invokes createEndpointPolicy without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes createEndpointPolicy without error using callback', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes createEndpointPolicy with call error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes createEndpointPolicy with LRO error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -640,7 +640,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes checkCreateEndpointPolicyProgress without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,8 +648,8 @@ describe('v1beta1.NetworkServicesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEndpointPolicyProgress(
@@ -662,7 +662,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes checkCreateEndpointPolicyProgress with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +683,7 @@ describe('v1beta1.NetworkServicesClient', () => {
   describe('updateEndpointPolicy', () => {
     it('invokes updateEndpointPolicy without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -717,7 +717,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes updateEndpointPolicy without error using callback', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -772,7 +772,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes updateEndpointPolicy with call error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -804,7 +804,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes updateEndpointPolicy with LRO error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes checkUpdateEndpointPolicyProgress without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,8 +846,8 @@ describe('v1beta1.NetworkServicesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEndpointPolicyProgress(
@@ -860,7 +860,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes checkUpdateEndpointPolicyProgress with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1beta1.NetworkServicesClient', () => {
   describe('deleteEndpointPolicy', () => {
     it('invokes deleteEndpointPolicy without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes deleteEndpointPolicy without error using callback', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes deleteEndpointPolicy with call error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes deleteEndpointPolicy with LRO error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes checkDeleteEndpointPolicyProgress without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,8 +1040,8 @@ describe('v1beta1.NetworkServicesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEndpointPolicyProgress(
@@ -1054,7 +1054,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes checkDeleteEndpointPolicyProgress with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v1beta1.NetworkServicesClient', () => {
   describe('listEndpointPolicies', () => {
     it('invokes listEndpointPolicies without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1115,7 +1115,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes listEndpointPolicies without error using callback', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes listEndpointPolicies with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1203,7 +1203,7 @@ describe('v1beta1.NetworkServicesClient', () => {
 
     it('invokes listEndpointPoliciesStream without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1258,15 +1258,15 @@ describe('v1beta1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEndpointPoliciesStream with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,15 +1310,15 @@ describe('v1beta1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpointPolicies without error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1360,15 +1360,15 @@ describe('v1beta1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpointPolicies with error', async () => {
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,9 +1401,9 @@ describe('v1beta1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1417,7 +1417,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         endpoint_policy: 'endpointPolicyValue',
       };
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         lb_route_extension: 'lbRouteExtensionValue',
       };
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,7 +1550,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         lb_traffic_extension: 'lbTrafficExtensionValue',
       };
       const client = new networkservicesModule.v1beta1.NetworkServicesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,7 +58,7 @@ export class BackupForGKEClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('gke-backup');
@@ -71,12 +71,12 @@ export class BackupForGKEClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  backupForGKEStub?: Promise<{ [name: string]: Function }>;
+  backupForGKEStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BackupForGKEClient.
@@ -152,7 +152,7 @@ export class BackupForGKEClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -632,7 +632,7 @@ export class BackupForGKEClient {
       'google.cloud.gkebackup.v1.BackupForGKE',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -672,7 +672,7 @@ export class BackupForGKEClient {
           (this._protos as any).google.cloud.gkebackup.v1.BackupForGKE,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -719,7 +719,7 @@ export class BackupForGKEClient {
     ];
     for (const methodName of backupForGKEStubMethods) {
       const callPromise = this.backupForGKEStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -915,7 +915,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackupPlan request %j', request);
@@ -1050,7 +1050,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackupChannel request %j', request);
@@ -1186,7 +1186,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackupPlanBinding request %j', request);
@@ -1316,7 +1316,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackup request %j', request);
@@ -1449,7 +1449,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVolumeBackup request %j', request);
@@ -1584,7 +1584,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRestorePlan request %j', request);
@@ -1719,7 +1719,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRestoreChannel request %j', request);
@@ -1864,7 +1864,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRestorePlanBinding request %j', request);
@@ -1996,7 +1996,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRestore request %j', request);
@@ -2131,7 +2131,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVolumeRestore request %j', request);
@@ -2273,7 +2273,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         backup: request.backup ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackupIndexDownloadUrl request %j', request);
@@ -2435,7 +2435,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2492,7 +2492,7 @@ export class BackupForGKEClient {
     this._log.info('createBackupPlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2615,7 +2615,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_plan.name': request.backupPlan!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2672,7 +2672,7 @@ export class BackupForGKEClient {
     this._log.info('updateBackupPlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2789,7 +2789,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2846,7 +2846,7 @@ export class BackupForGKEClient {
     this._log.info('deleteBackupPlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2971,7 +2971,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3028,7 +3028,7 @@ export class BackupForGKEClient {
     this._log.info('createBackupChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3151,7 +3151,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_channel.name': request.backupChannel!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3208,7 +3208,7 @@ export class BackupForGKEClient {
     this._log.info('updateBackupChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3329,7 +3329,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3386,7 +3386,7 @@ export class BackupForGKEClient {
     this._log.info('deleteBackupChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3510,7 +3510,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3567,7 +3567,7 @@ export class BackupForGKEClient {
     this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3689,7 +3689,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3746,7 +3746,7 @@ export class BackupForGKEClient {
     this._log.info('updateBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3867,7 +3867,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3924,7 +3924,7 @@ export class BackupForGKEClient {
     this._log.info('deleteBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4048,7 +4048,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4105,7 +4105,7 @@ export class BackupForGKEClient {
     this._log.info('createRestorePlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4227,7 +4227,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'restore_plan.name': request.restorePlan!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4284,7 +4284,7 @@ export class BackupForGKEClient {
     this._log.info('updateRestorePlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4405,7 +4405,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4462,7 +4462,7 @@ export class BackupForGKEClient {
     this._log.info('deleteRestorePlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4587,7 +4587,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4644,7 +4644,7 @@ export class BackupForGKEClient {
     this._log.info('createRestoreChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4768,7 +4768,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'restore_channel.name': request.restoreChannel!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4825,7 +4825,7 @@ export class BackupForGKEClient {
     this._log.info('updateRestoreChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4943,7 +4943,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5000,7 +5000,7 @@ export class BackupForGKEClient {
     this._log.info('deleteRestoreChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5124,7 +5124,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5181,7 +5181,7 @@ export class BackupForGKEClient {
     this._log.info('createRestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5303,7 +5303,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'restore.name': request.restore!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5360,7 +5360,7 @@ export class BackupForGKEClient {
     this._log.info('updateRestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5481,7 +5481,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5538,7 +5538,7 @@ export class BackupForGKEClient {
     this._log.info('deleteRestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5660,7 +5660,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5742,7 +5742,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupPlans stream %j', request);
@@ -5806,7 +5806,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupPlans iterate %j', request);
@@ -5926,7 +5926,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6009,7 +6009,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupChannels stream %j', request);
@@ -6074,7 +6074,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupChannels iterate %j', request);
@@ -6194,7 +6194,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6277,7 +6277,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlanBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupPlanBindings stream %j', request);
@@ -6342,7 +6342,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlanBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupPlanBindings iterate %j', request);
@@ -6458,7 +6458,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6543,7 +6543,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackups stream %j', request);
@@ -6610,7 +6610,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackups iterate %j', request);
@@ -6729,7 +6729,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6811,7 +6811,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumeBackups stream %j', request);
@@ -6875,7 +6875,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumeBackups iterate %j', request);
@@ -6994,7 +6994,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7076,7 +7076,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestorePlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestorePlans stream %j', request);
@@ -7140,7 +7140,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestorePlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestorePlans iterate %j', request);
@@ -7260,7 +7260,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7343,7 +7343,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestoreChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestoreChannels stream %j', request);
@@ -7408,7 +7408,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestoreChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestoreChannels iterate %j', request);
@@ -7528,7 +7528,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7611,7 +7611,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestorePlanBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestorePlanBindings stream %j', request);
@@ -7676,7 +7676,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestorePlanBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestorePlanBindings iterate %j', request);
@@ -7789,7 +7789,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7871,7 +7871,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestores stream %j', request);
@@ -7935,7 +7935,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRestores iterate %j', request);
@@ -8054,7 +8054,7 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8136,7 +8136,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumeRestores stream %j', request);
@@ -8200,7 +8200,7 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumeRestores iterate %j', request);
@@ -9374,14 +9374,14 @@ export class BackupForGKEClient {
    */
   close(): Promise<void> {
     if (this.backupForGKEStub && !this._terminated) {
-      return this.backupForGKEStub.then((stub) => {
+      return this.backupForGKEStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

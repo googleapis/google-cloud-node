@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class CrossNetworkAutomationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-connectivity');
@@ -70,12 +70,12 @@ export class CrossNetworkAutomationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  crossNetworkAutomationServiceStub?: Promise<{ [name: string]: Function }>;
+  crossNetworkAutomationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CrossNetworkAutomationServiceClient.
@@ -152,7 +152,7 @@ export class CrossNetworkAutomationServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -588,7 +588,7 @@ export class CrossNetworkAutomationServiceClient {
       'google.cloud.networkconnectivity.v1.CrossNetworkAutomationService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -629,7 +629,7 @@ export class CrossNetworkAutomationServiceClient {
             .CrossNetworkAutomationService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -655,7 +655,7 @@ export class CrossNetworkAutomationServiceClient {
     ];
     for (const methodName of crossNetworkAutomationServiceStubMethods) {
       const callPromise = this.crossNetworkAutomationServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -862,7 +862,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceConnectionMap request %j', request);
@@ -1005,7 +1005,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceConnectionPolicy request %j', request);
@@ -1148,7 +1148,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceClass request %j', request);
@@ -1291,7 +1291,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceConnectionToken request %j', request);
@@ -1464,7 +1464,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1521,7 +1521,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('createServiceConnectionMap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1653,7 +1653,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'service_connection_map.name': request.serviceConnectionMap!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1710,7 +1710,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('updateServiceConnectionMap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1840,7 +1840,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1897,7 +1897,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('deleteServiceConnectionMap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2031,7 +2031,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2094,7 +2094,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('createServiceConnectionPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2227,7 +2227,7 @@ export class CrossNetworkAutomationServiceClient {
         'service_connection_policy.name':
           request.serviceConnectionPolicy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2290,7 +2290,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('updateServiceConnectionPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2420,7 +2420,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2483,7 +2483,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('deleteServiceConnectionPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2615,7 +2615,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'service_class.name': request.serviceClass!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2672,7 +2672,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('updateServiceClass long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2802,7 +2802,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2859,7 +2859,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('deleteServiceClass long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2994,7 +2994,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3057,7 +3057,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('createServiceConnectionToken long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3187,7 +3187,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3250,7 +3250,7 @@ export class CrossNetworkAutomationServiceClient {
     this._log.info('deleteServiceConnectionToken long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3361,7 +3361,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3432,7 +3432,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceConnectionMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConnectionMaps stream %j', request);
@@ -3485,7 +3485,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceConnectionMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConnectionMaps iterate %j', request);
@@ -3593,7 +3593,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3664,7 +3664,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceConnectionPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConnectionPolicies stream %j', request);
@@ -3717,7 +3717,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceConnectionPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConnectionPolicies iterate %j', request);
@@ -3825,7 +3825,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3896,7 +3896,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceClasses stream %j', request);
@@ -3949,7 +3949,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceClasses iterate %j', request);
@@ -4057,7 +4057,7 @@ export class CrossNetworkAutomationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4128,7 +4128,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceConnectionTokens'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConnectionTokens stream %j', request);
@@ -4181,7 +4181,7 @@ export class CrossNetworkAutomationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceConnectionTokens'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConnectionTokens iterate %j', request);
@@ -5531,14 +5531,14 @@ export class CrossNetworkAutomationServiceClient {
    */
   close(): Promise<void> {
     if (this.crossNetworkAutomationServiceStub && !this._terminated) {
-      return this.crossNetworkAutomationServiceStub.then((stub) => {
+      return this.crossNetworkAutomationServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

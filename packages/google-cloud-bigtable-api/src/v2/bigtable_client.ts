@@ -24,10 +24,10 @@ import type {
   Descriptors,
   ClientOptions,
 } from 'google-gax';
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class BigtableClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('bigtable-api');
@@ -62,9 +62,9 @@ export class BigtableClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  bigtableStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  bigtableStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BigtableClient.
@@ -140,7 +140,7 @@ export class BigtableClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -255,7 +255,7 @@ export class BigtableClient {
       'google.bigtable.v2.Bigtable',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -295,7 +295,7 @@ export class BigtableClient {
           (this._protos as any).google.bigtable.v2.Bigtable,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -314,11 +314,11 @@ export class BigtableClient {
     ];
     for (const methodName of bigtableStubMethods) {
       const callPromise = this.bigtableStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -555,7 +555,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -567,7 +567,7 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
@@ -583,13 +583,13 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('mutateRow request %j', request);
@@ -757,7 +757,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -769,7 +769,7 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
@@ -785,13 +785,13 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('checkAndMutateRow request %j', request);
@@ -928,7 +928,7 @@ export class BigtableClient {
           .match(RegExp('(?<name>projects/[^/]+/instances/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['name'] ?? fieldValue;
-          Object.assign(routingParameter, { name: parameterValue });
+          Object.assign(routingParameter, {name: parameterValue});
         }
       }
     }
@@ -940,13 +940,13 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pingAndWarm request %j', request);
@@ -1106,7 +1106,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -1118,7 +1118,7 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
@@ -1134,13 +1134,13 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readModifyWriteRow request %j', request);
@@ -1295,7 +1295,7 @@ export class BigtableClient {
           .match(RegExp('(?<name>projects/[^/]+/instances/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['name'] ?? fieldValue;
-          Object.assign(routingParameter, { name: parameterValue });
+          Object.assign(routingParameter, {name: parameterValue});
         }
       }
     }
@@ -1307,13 +1307,13 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('prepareQuery request %j', request);
@@ -1440,7 +1440,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -1452,7 +1452,7 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
@@ -1468,7 +1468,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -1480,13 +1480,13 @@ export class BigtableClient {
           .match(RegExp('(?<name>projects/[^/]+/instances/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['name'] ?? fieldValue;
-          Object.assign(routingParameter, { name: parameterValue });
+          Object.assign(routingParameter, {name: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readRows stream %j', options);
@@ -1558,7 +1558,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -1570,7 +1570,7 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
@@ -1586,7 +1586,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -1598,13 +1598,13 @@ export class BigtableClient {
           .match(RegExp('(?<name>projects/[^/]+/instances/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['name'] ?? fieldValue;
-          Object.assign(routingParameter, { name: parameterValue });
+          Object.assign(routingParameter, {name: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('sampleRowKeys stream %j', options);
@@ -1669,7 +1669,7 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -1681,7 +1681,7 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
@@ -1697,13 +1697,13 @@ export class BigtableClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('mutateRows stream %j', options);
@@ -1748,7 +1748,7 @@ export class BigtableClient {
       this._gaxModule.routingHeader.fromParams({
         table_name: request.tableName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateInitialChangeStreamPartitions stream %j', options);
@@ -1821,7 +1821,7 @@ export class BigtableClient {
       this._gaxModule.routingHeader.fromParams({
         table_name: request.tableName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readChangeStream stream %j', options);
@@ -1923,7 +1923,7 @@ export class BigtableClient {
           .match(RegExp('(?<name>projects/[^/]+/instances/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['name'] ?? fieldValue;
-          Object.assign(routingParameter, { name: parameterValue });
+          Object.assign(routingParameter, {name: parameterValue});
         }
       }
     }
@@ -1935,13 +1935,13 @@ export class BigtableClient {
           .match(RegExp('(?<app_profile_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['app_profile_id'] ?? fieldValue;
-          Object.assign(routingParameter, { app_profile_id: parameterValue });
+          Object.assign(routingParameter, {app_profile_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('executeQuery stream %j', options);
@@ -2179,7 +2179,7 @@ export class BigtableClient {
    */
   close(): Promise<void> {
     if (this.bigtableStub && !this._terminated) {
-      return this.bigtableStub.then((stub) => {
+      return this.bigtableStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

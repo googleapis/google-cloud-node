@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataobjectsearchserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -254,7 +254,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataObjectSearchServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(client.dataObjectSearchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataObjectSearchServiceStub);
@@ -277,15 +277,15 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataObjectSearchServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes aggregateDataObjects without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -373,7 +373,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes aggregateDataObjects without error using callback', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes aggregateDataObjects with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes aggregateDataObjects with closed client', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.aggregateDataObjects(request), expectedError);
@@ -477,7 +477,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes batchSearchDataObjects without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes batchSearchDataObjects without error using callback', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes batchSearchDataObjects with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes batchSearchDataObjects with closed client', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -620,7 +620,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes searchDataObjects without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes searchDataObjects without error using callback', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -692,8 +692,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vectorsearch.v1beta.ISearchResult[]
-              | null,
+              protos.google.cloud.vectorsearch.v1beta.ISearchResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -718,7 +717,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes searchDataObjects with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -750,7 +749,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes searchDataObjectsStream without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -803,16 +802,16 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchDataObjectsStream with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -854,16 +853,16 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchDataObjects without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -905,16 +904,16 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchDataObjects with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -947,9 +946,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -958,7 +957,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes queryDataObjects without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -998,7 +997,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes queryDataObjects without error using callback', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1030,8 +1029,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vectorsearch.v1beta.IDataObject[]
-              | null,
+              protos.google.cloud.vectorsearch.v1beta.IDataObject[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1056,7 +1054,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes queryDataObjects with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,7 +1086,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes queryDataObjectsStream without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1141,16 +1139,16 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes queryDataObjectsStream with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1192,16 +1190,16 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryDataObjects without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1243,16 +1241,16 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryDataObjects with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1285,9 +1283,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1295,7 +1293,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1326,7 +1324,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1371,7 +1369,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1407,7 +1405,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1456,7 +1454,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1505,7 +1503,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       };
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1571,7 +1569,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       };
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1648,7 +1646,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       };
       const client =
         new dataobjectsearchserviceModule.v1beta.DataObjectSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

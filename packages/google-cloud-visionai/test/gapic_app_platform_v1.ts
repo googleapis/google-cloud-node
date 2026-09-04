@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as appplatformModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -278,7 +278,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.appPlatformStub, undefined);
@@ -286,12 +286,12 @@ describe('v1.AppPlatformClient', () => {
       assert(client.appPlatformStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.appPlatformStub);
@@ -300,14 +300,14 @@ describe('v1.AppPlatformClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.appPlatformStub, undefined);
@@ -316,7 +316,7 @@ describe('v1.AppPlatformClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -324,7 +324,7 @@ describe('v1.AppPlatformClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -336,7 +336,7 @@ describe('v1.AppPlatformClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -359,7 +359,7 @@ describe('v1.AppPlatformClient', () => {
   describe('getApplication', () => {
     it('invokes getApplication without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getApplication without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getApplication with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getApplication with closed client', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1.AppPlatformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApplication(request), expectedError);
@@ -491,7 +491,7 @@ describe('v1.AppPlatformClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.AppPlatformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -623,7 +623,7 @@ describe('v1.AppPlatformClient', () => {
   describe('getDraft', () => {
     it('invokes getDraft without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getDraft without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getDraft with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getDraft with closed client', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.AppPlatformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDraft(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listPrebuiltProcessors', () => {
     it('invokes listPrebuiltProcessors without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listPrebuiltProcessors without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listPrebuiltProcessors with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listPrebuiltProcessors with closed client', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1.AppPlatformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -891,7 +891,7 @@ describe('v1.AppPlatformClient', () => {
   describe('getProcessor', () => {
     it('invokes getProcessor without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getProcessor without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getProcessor with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes getProcessor with closed client', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v1.AppPlatformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessor(request), expectedError);
@@ -1023,7 +1023,7 @@ describe('v1.AppPlatformClient', () => {
   describe('createApplication', () => {
     it('invokes createApplication without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1056,7 +1056,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createApplication without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createApplication with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1141,7 +1141,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createApplication with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateApplicationProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1182,8 +1182,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateApplicationProgress(
@@ -1196,7 +1196,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateApplicationProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1217,7 +1217,7 @@ describe('v1.AppPlatformClient', () => {
   describe('updateApplication', () => {
     it('invokes updateApplication without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplication without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplication with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplication with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateApplicationProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,8 +1380,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateApplicationProgress(
@@ -1394,7 +1394,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateApplicationProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.AppPlatformClient', () => {
   describe('deleteApplication', () => {
     it('invokes deleteApplication without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteApplication without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteApplication with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteApplication with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteApplicationProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1574,8 +1574,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteApplicationProgress(
@@ -1588,7 +1588,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteApplicationProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1609,7 +1609,7 @@ describe('v1.AppPlatformClient', () => {
   describe('deployApplication', () => {
     it('invokes deployApplication without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deployApplication without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1696,7 +1696,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deployApplication with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,7 +1727,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deployApplication with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1760,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeployApplicationProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1768,8 +1768,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployApplicationProgress(
@@ -1782,7 +1782,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeployApplicationProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1.AppPlatformClient', () => {
   describe('undeployApplication', () => {
     it('invokes undeployApplication without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1836,7 +1836,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes undeployApplication without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes undeployApplication with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1921,7 +1921,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes undeployApplication with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUndeployApplicationProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1962,8 +1962,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeployApplicationProgress(
@@ -1976,7 +1976,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUndeployApplicationProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1.AppPlatformClient', () => {
   describe('addApplicationStreamInput', () => {
     it('invokes addApplicationStreamInput without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2030,7 +2030,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes addApplicationStreamInput without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2084,7 +2084,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes addApplicationStreamInput with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2118,7 +2118,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes addApplicationStreamInput with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkAddApplicationStreamInputProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2159,8 +2159,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2174,7 +2174,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkAddApplicationStreamInputProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2195,7 +2195,7 @@ describe('v1.AppPlatformClient', () => {
   describe('removeApplicationStreamInput', () => {
     it('invokes removeApplicationStreamInput without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2228,7 +2228,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes removeApplicationStreamInput without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2282,7 +2282,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes removeApplicationStreamInput with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2316,7 +2316,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes removeApplicationStreamInput with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2349,7 +2349,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkRemoveApplicationStreamInputProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,8 +2357,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2372,7 +2372,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkRemoveApplicationStreamInputProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2393,7 +2393,7 @@ describe('v1.AppPlatformClient', () => {
   describe('updateApplicationStreamInput', () => {
     it('invokes updateApplicationStreamInput without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2426,7 +2426,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplicationStreamInput without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2480,7 +2480,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplicationStreamInput with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2514,7 +2514,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplicationStreamInput with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2547,7 +2547,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateApplicationStreamInputProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2555,8 +2555,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2570,7 +2570,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateApplicationStreamInputProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2591,7 +2591,7 @@ describe('v1.AppPlatformClient', () => {
   describe('createApplicationInstances', () => {
     it('invokes createApplicationInstances without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2624,7 +2624,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createApplicationInstances without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2678,7 +2678,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createApplicationInstances with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2712,7 +2712,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createApplicationInstances with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2745,7 +2745,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateApplicationInstancesProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2753,8 +2753,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2768,7 +2768,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateApplicationInstancesProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2789,7 +2789,7 @@ describe('v1.AppPlatformClient', () => {
   describe('deleteApplicationInstances', () => {
     it('invokes deleteApplicationInstances without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2822,7 +2822,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteApplicationInstances without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2876,7 +2876,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteApplicationInstances with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2910,7 +2910,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteApplicationInstances with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2943,7 +2943,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteApplicationInstancesProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2951,8 +2951,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2966,7 +2966,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteApplicationInstancesProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2987,7 +2987,7 @@ describe('v1.AppPlatformClient', () => {
   describe('updateApplicationInstances', () => {
     it('invokes updateApplicationInstances without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3020,7 +3020,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplicationInstances without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3074,7 +3074,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplicationInstances with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3108,7 +3108,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateApplicationInstances with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3141,7 +3141,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateApplicationInstancesProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3149,8 +3149,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3164,7 +3164,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateApplicationInstancesProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3185,7 +3185,7 @@ describe('v1.AppPlatformClient', () => {
   describe('createDraft', () => {
     it('invokes createDraft without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3217,7 +3217,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createDraft without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3271,7 +3271,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createDraft with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3302,7 +3302,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createDraft with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3335,7 +3335,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateDraftProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3343,8 +3343,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDraftProgress(
@@ -3357,7 +3357,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateDraftProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3375,7 +3375,7 @@ describe('v1.AppPlatformClient', () => {
   describe('updateDraft', () => {
     it('invokes updateDraft without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3408,7 +3408,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateDraft without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3463,7 +3463,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateDraft with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3495,7 +3495,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateDraft with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3529,7 +3529,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateDraftProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3537,8 +3537,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDraftProgress(
@@ -3551,7 +3551,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateDraftProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3569,7 +3569,7 @@ describe('v1.AppPlatformClient', () => {
   describe('deleteDraft', () => {
     it('invokes deleteDraft without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3601,7 +3601,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteDraft without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3655,7 +3655,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteDraft with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3686,7 +3686,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteDraft with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3719,7 +3719,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteDraftProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,8 +3727,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDraftProgress(
@@ -3741,7 +3741,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteDraftProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3759,7 +3759,7 @@ describe('v1.AppPlatformClient', () => {
   describe('createProcessor', () => {
     it('invokes createProcessor without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3792,7 +3792,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createProcessor without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,7 +3846,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createProcessor with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3877,7 +3877,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes createProcessor with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3910,7 +3910,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateProcessorProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3918,8 +3918,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateProcessorProgress(
@@ -3932,7 +3932,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkCreateProcessorProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3953,7 +3953,7 @@ describe('v1.AppPlatformClient', () => {
   describe('updateProcessor', () => {
     it('invokes updateProcessor without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3987,7 +3987,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateProcessor without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4042,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateProcessor with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4074,7 +4074,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes updateProcessor with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,7 +4108,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateProcessorProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4116,8 +4116,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateProcessorProgress(
@@ -4130,7 +4130,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkUpdateProcessorProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4151,7 +4151,7 @@ describe('v1.AppPlatformClient', () => {
   describe('deleteProcessor', () => {
     it('invokes deleteProcessor without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4184,7 +4184,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteProcessor without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4238,7 +4238,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteProcessor with call error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4269,7 +4269,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes deleteProcessor with LRO error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4302,7 +4302,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteProcessorProgress without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4310,8 +4310,8 @@ describe('v1.AppPlatformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessorProgress(
@@ -4324,7 +4324,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes checkDeleteProcessorProgress with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4345,7 +4345,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listApplications', () => {
     it('invokes listApplications without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4384,7 +4384,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listApplications without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4439,7 +4439,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listApplications with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4470,7 +4470,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listApplicationsStream without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4522,15 +4522,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApplicationsStream with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4571,15 +4571,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApplications without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4620,15 +4620,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listApplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApplications with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4660,9 +4660,9 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listApplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4670,7 +4670,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4703,7 +4703,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4752,7 +4752,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4783,7 +4783,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4829,15 +4829,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4878,15 +4878,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4921,15 +4921,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4961,9 +4961,9 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4971,7 +4971,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listDrafts', () => {
     it('invokes listDrafts without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5004,7 +5004,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listDrafts without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5053,7 +5053,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listDrafts with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5084,7 +5084,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listDraftsStream without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5127,15 +5127,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listDrafts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDraftsStream with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5175,15 +5175,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listDrafts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDrafts without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5218,15 +5218,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listDrafts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDrafts with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5260,9 +5260,9 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listDrafts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5270,7 +5270,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listProcessors', () => {
     it('invokes listProcessors without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5303,7 +5303,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listProcessors without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5352,7 +5352,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listProcessors with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5383,7 +5383,7 @@ describe('v1.AppPlatformClient', () => {
 
     it('invokes listProcessorsStream without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5429,15 +5429,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listProcessors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProcessorsStream with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5478,15 +5478,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listProcessors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcessors without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5521,15 +5521,15 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcessors with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5561,16 +5561,16 @@ describe('v1.AppPlatformClient', () => {
       assert(
         (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5600,7 +5600,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5638,7 +5638,7 @@ describe('v1.AppPlatformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5648,7 +5648,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5680,7 +5680,7 @@ describe('v1.AppPlatformClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5710,7 +5710,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5748,7 +5748,7 @@ describe('v1.AppPlatformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5758,7 +5758,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5790,7 +5790,7 @@ describe('v1.AppPlatformClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5823,7 +5823,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5861,7 +5861,7 @@ describe('v1.AppPlatformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5871,7 +5871,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5906,7 +5906,7 @@ describe('v1.AppPlatformClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5936,7 +5936,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5980,7 +5980,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6015,7 +6015,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6063,7 +6063,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6104,7 +6104,7 @@ describe('v1.AppPlatformClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6125,7 +6125,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6153,7 +6153,7 @@ describe('v1.AppPlatformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6163,7 +6163,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6187,7 +6187,7 @@ describe('v1.AppPlatformClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6209,7 +6209,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6237,7 +6237,7 @@ describe('v1.AppPlatformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6247,7 +6247,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6271,7 +6271,7 @@ describe('v1.AppPlatformClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6293,7 +6293,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6321,7 +6321,7 @@ describe('v1.AppPlatformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6331,7 +6331,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6355,7 +6355,7 @@ describe('v1.AppPlatformClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6390,7 +6390,7 @@ describe('v1.AppPlatformClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6427,7 +6427,7 @@ describe('v1.AppPlatformClient', () => {
         analysis: 'analysisValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6504,7 +6504,7 @@ describe('v1.AppPlatformClient', () => {
         annotation: 'annotationValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6590,7 +6590,7 @@ describe('v1.AppPlatformClient', () => {
         application: 'applicationValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6655,7 +6655,7 @@ describe('v1.AppPlatformClient', () => {
         asset: 'assetValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6731,7 +6731,7 @@ describe('v1.AppPlatformClient', () => {
         channel: 'channelValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6806,7 +6806,7 @@ describe('v1.AppPlatformClient', () => {
         cluster: 'clusterValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6871,7 +6871,7 @@ describe('v1.AppPlatformClient', () => {
         collection: 'collectionValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6946,7 +6946,7 @@ describe('v1.AppPlatformClient', () => {
         corpus: 'corpusValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7011,7 +7011,7 @@ describe('v1.AppPlatformClient', () => {
         data_schema: 'dataSchemaValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7087,7 +7087,7 @@ describe('v1.AppPlatformClient', () => {
         draft: 'draftValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7163,7 +7163,7 @@ describe('v1.AppPlatformClient', () => {
         event: 'eventValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7239,7 +7239,7 @@ describe('v1.AppPlatformClient', () => {
         index: 'indexValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7314,7 +7314,7 @@ describe('v1.AppPlatformClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7379,7 +7379,7 @@ describe('v1.AppPlatformClient', () => {
         instance: 'instanceValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7453,7 +7453,7 @@ describe('v1.AppPlatformClient', () => {
         location: 'locationValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7503,7 +7503,7 @@ describe('v1.AppPlatformClient', () => {
         operator: 'operatorValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7568,7 +7568,7 @@ describe('v1.AppPlatformClient', () => {
         process: 'processValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7643,7 +7643,7 @@ describe('v1.AppPlatformClient', () => {
         processor: 'processorValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7705,7 +7705,7 @@ describe('v1.AppPlatformClient', () => {
         project: 'projectValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7746,7 +7746,7 @@ describe('v1.AppPlatformClient', () => {
         search_config: 'searchConfigValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7822,7 +7822,7 @@ describe('v1.AppPlatformClient', () => {
         search_hypernym: 'searchHypernymValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7900,7 +7900,7 @@ describe('v1.AppPlatformClient', () => {
         series: 'seriesValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7976,7 +7976,7 @@ describe('v1.AppPlatformClient', () => {
         stream: 'streamValue',
       };
       const client = new appplatformModule.v1.AppPlatformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

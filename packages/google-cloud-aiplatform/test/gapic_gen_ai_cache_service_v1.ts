@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as genaicacheserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1.GenAiCacheServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -240,7 +240,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.genAiCacheServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v1.GenAiCacheServiceClient', () => {
       assert(client.genAiCacheServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.genAiCacheServiceStub);
@@ -262,14 +262,14 @@ describe('v1.GenAiCacheServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.genAiCacheServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('createCachedContent', () => {
     it('invokes createCachedContent without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -353,7 +353,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes createCachedContent without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes createCachedContent with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes createCachedContent with closed client', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.GenAiCacheServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCachedContent(request), expectedError);
@@ -454,7 +454,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('getCachedContent', () => {
     it('invokes getCachedContent without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes getCachedContent without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes getCachedContent with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes getCachedContent with closed client', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1.GenAiCacheServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCachedContent(request), expectedError);
@@ -586,7 +586,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('updateCachedContent', () => {
     it('invokes updateCachedContent without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes updateCachedContent without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes updateCachedContent with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes updateCachedContent with closed client', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.GenAiCacheServiceClient', () => {
       );
       request.cachedContent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCachedContent(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('deleteCachedContent', () => {
     it('invokes deleteCachedContent without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes deleteCachedContent without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes deleteCachedContent with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes deleteCachedContent with closed client', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.GenAiCacheServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCachedContent(request), expectedError);
@@ -856,7 +856,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('listCachedContents', () => {
     it('invokes listCachedContents without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -896,7 +896,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes listCachedContents without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -951,7 +951,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes listCachedContents with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -982,7 +982,7 @@ describe('v1.GenAiCacheServiceClient', () => {
 
     it('invokes listCachedContentsStream without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1034,15 +1034,15 @@ describe('v1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCachedContentsStream with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1083,15 +1083,15 @@ describe('v1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCachedContents without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,15 +1132,15 @@ describe('v1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCachedContents with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1173,16 +1173,16 @@ describe('v1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1212,7 +1212,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1260,7 +1260,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1360,7 +1360,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1370,7 +1370,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1473,7 +1473,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1483,7 +1483,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1627,7 +1627,7 @@ describe('v1.GenAiCacheServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v1.GenAiCacheServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1812,7 +1812,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1964,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         context: 'contextValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2321,7 +2321,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2386,7 +2386,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2527,7 +2527,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2685,7 +2685,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2760,7 +2760,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,7 +2824,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2902,7 +2902,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2979,7 +2979,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3055,7 +3055,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3119,7 +3119,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3200,7 +3200,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         index: 'indexValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3264,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3327,7 +3327,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         location: 'locationValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3378,7 +3378,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3455,7 +3455,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3519,7 +3519,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         model: 'modelValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3583,7 +3583,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3663,7 +3663,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3740,7 +3740,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3847,7 +3847,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3912,7 +3912,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3988,7 +3988,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4069,7 +4069,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4134,7 +4134,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4215,7 +4215,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4292,7 +4292,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4354,7 +4354,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         project: 'projectValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4394,7 +4394,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4474,7 +4474,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4577,7 +4577,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4701,7 +4701,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         model: 'modelValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4792,7 +4792,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         model: 'modelValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4845,7 +4845,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4908,7 +4908,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         location: 'locationValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4962,7 +4962,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5037,7 +5037,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5103,7 +5103,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5178,7 +5178,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5243,7 +5243,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5320,7 +5320,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         event: 'eventValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5407,7 +5407,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5472,7 +5472,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         study: 'studyValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5536,7 +5536,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5601,7 +5601,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5697,7 +5697,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         run: 'runValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5786,7 +5786,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5909,7 +5909,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5978,7 +5978,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6053,7 +6053,7 @@ describe('v1.GenAiCacheServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new genaicacheserviceModule.v1.GenAiCacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

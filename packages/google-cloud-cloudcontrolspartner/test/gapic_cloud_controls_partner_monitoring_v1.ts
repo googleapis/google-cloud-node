@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudcontrolspartnermonitoringModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -170,7 +170,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
@@ -179,7 +179,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
@@ -206,7 +206,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -224,7 +224,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -257,7 +257,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -266,15 +266,15 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       assert(client.cloudControlsPartnerMonitoringStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudControlsPartnerMonitoringStub);
@@ -283,16 +283,16 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -302,7 +302,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -312,7 +312,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -327,7 +327,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -353,7 +353,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -387,7 +387,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -437,7 +437,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -471,7 +471,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -485,7 +485,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getViolation(request), expectedError);
@@ -497,7 +497,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -539,7 +539,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -572,8 +572,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.cloudcontrolspartner.v1.IViolation[]
-              | null,
+              protos.google.cloud.cloudcontrolspartner.v1.IViolation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -599,7 +598,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -633,7 +632,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -687,9 +686,9 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       assert(
         (client.descriptors.page.listViolations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -697,7 +696,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -740,9 +739,9 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       assert(
         (client.descriptors.page.listViolations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -750,7 +749,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -793,9 +792,9 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       assert(
         (client.descriptors.page.listViolations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -803,7 +802,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -837,9 +836,9 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       assert(
         (client.descriptors.page.listViolations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -857,7 +856,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -971,7 +970,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1039,7 +1038,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1116,7 +1115,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1170,7 +1169,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1266,7 +1265,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1356,7 +1355,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       const client =
         new cloudcontrolspartnermonitoringModule.v1.CloudControlsPartnerMonitoringClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as fulfillmentsModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.fulfillmentsStub, undefined);
@@ -207,12 +207,12 @@ describe('v2beta1.FulfillmentsClient', () => {
       assert(client.fulfillmentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.fulfillmentsStub);
@@ -221,14 +221,14 @@ describe('v2beta1.FulfillmentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.fulfillmentsStub, undefined);
@@ -237,7 +237,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -245,7 +245,7 @@ describe('v2beta1.FulfillmentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -257,7 +257,7 @@ describe('v2beta1.FulfillmentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -280,7 +280,7 @@ describe('v2beta1.FulfillmentsClient', () => {
   describe('getFulfillment', () => {
     it('invokes getFulfillment without error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -311,7 +311,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('invokes getFulfillment without error using callback', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -358,7 +358,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('invokes getFulfillment with error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('invokes getFulfillment with closed client', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v2beta1.FulfillmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFulfillment(request), expectedError);
@@ -412,7 +412,7 @@ describe('v2beta1.FulfillmentsClient', () => {
   describe('updateFulfillment', () => {
     it('invokes updateFulfillment without error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('invokes updateFulfillment without error using callback', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('invokes updateFulfillment with error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v2beta1.FulfillmentsClient', () => {
 
     it('invokes updateFulfillment with closed client', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v2beta1.FulfillmentsClient', () => {
       );
       request.fulfillment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFulfillment(request), expectedError);
@@ -547,7 +547,7 @@ describe('v2beta1.FulfillmentsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v2beta1.FulfillmentsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -621,7 +621,7 @@ describe('v2beta1.FulfillmentsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v2beta1.FulfillmentsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v2beta1.FulfillmentsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         location: 'locationValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -804,7 +804,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         generator: 'generatorValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         project: 'projectValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1062,7 +1062,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         context: 'contextValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,7 +1376,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         project: 'projectValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1422,7 +1422,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         intent: 'intentValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         context: 'contextValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1639,7 +1639,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         version: 'versionValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1700,7 +1700,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         message: 'messageValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1842,7 +1842,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         participant: 'participantValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1922,7 +1922,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         document: 'documentValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         location: 'locationValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2256,7 +2256,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,7 +2335,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2418,7 +2418,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         context: 'contextValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2564,7 +2564,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2705,7 +2705,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         location: 'locationValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2767,7 +2767,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         intent: 'intentValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2847,7 +2847,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         context: 'contextValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2948,7 +2948,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         version: 'versionValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3131,7 +3131,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3210,7 +3210,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         message: 'messageValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3311,7 +3311,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         participant: 'participantValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3416,7 +3416,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3499,7 +3499,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3578,7 +3578,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,7 +3658,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         document: 'documentValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3763,7 +3763,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3841,7 +3841,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3904,7 +3904,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3968,7 +3968,7 @@ describe('v2beta1.FulfillmentsClient', () => {
         tool: 'toolValue',
       };
       const client = new fulfillmentsModule.v2beta1.FulfillmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

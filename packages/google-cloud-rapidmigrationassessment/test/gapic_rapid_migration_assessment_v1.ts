@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as rapidmigrationassessmentModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -255,7 +255,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -303,7 +303,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.rapidMigrationAssessmentStub, undefined);
@@ -311,13 +311,13 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       assert(client.rapidMigrationAssessmentStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.rapidMigrationAssessmentStub);
@@ -326,15 +326,15 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.rapidMigrationAssessmentStub, undefined);
@@ -343,7 +343,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -352,7 +352,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -365,7 +365,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -389,7 +389,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getAnnotation without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getAnnotation without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getAnnotation with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getAnnotation with closed client', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnnotation(request), expectedError);
@@ -525,7 +525,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getCollector with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -637,7 +637,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getCollector with closed client', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCollector(request), expectedError);
@@ -661,7 +661,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createCollector with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createCollector with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -816,7 +816,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkCreateCollectorProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -824,8 +824,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCollectorProgress(
@@ -839,7 +839,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkCreateCollectorProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createAnnotation without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createAnnotation without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createAnnotation with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -982,7 +982,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes createAnnotation with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkCreateAnnotationProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1024,8 +1024,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAnnotationProgress(
@@ -1039,7 +1039,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkCreateAnnotationProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes updateCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes updateCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes updateCollector with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes updateCollector with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkUpdateCollectorProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1228,8 +1228,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCollectorProgress(
@@ -1243,7 +1243,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkUpdateCollectorProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteCollector with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1386,7 +1386,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteCollector with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkDeleteCollectorProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1428,8 +1428,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCollectorProgress(
@@ -1443,7 +1443,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkDeleteCollectorProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1465,7 +1465,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes resumeCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes resumeCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1554,7 +1554,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes resumeCollector with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1586,7 +1586,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes resumeCollector with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkResumeCollectorProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1628,8 +1628,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResumeCollectorProgress(
@@ -1643,7 +1643,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkResumeCollectorProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes registerCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1699,7 +1699,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes registerCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes registerCollector with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1786,7 +1786,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes registerCollector with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkRegisterCollectorProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1828,8 +1828,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRegisterCollectorProgress(
@@ -1843,7 +1843,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkRegisterCollectorProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1865,7 +1865,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes pauseCollector without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1899,7 +1899,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes pauseCollector without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes pauseCollector with call error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1986,7 +1986,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes pauseCollector with LRO error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkPauseCollectorProgress without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2028,8 +2028,8 @@ describe('v1.RapidMigrationAssessmentClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPauseCollectorProgress(
@@ -2043,7 +2043,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes checkPauseCollectorProgress with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes listCollectors without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes listCollectors without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes listCollectors with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2195,7 +2195,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes listCollectorsStream without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2250,16 +2250,16 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       assert(
         (client.descriptors.page.listCollectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCollectorsStream with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2303,16 +2303,16 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       assert(
         (client.descriptors.page.listCollectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCollectors without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2354,16 +2354,16 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       assert(
         (client.descriptors.page.listCollectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCollectors with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2396,9 +2396,9 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       assert(
         (client.descriptors.page.listCollectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2406,7 +2406,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2437,7 +2437,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2518,7 +2518,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2567,7 +2567,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2631,7 +2631,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2659,7 +2659,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2670,7 +2670,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2695,7 +2695,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2718,7 +2718,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2746,7 +2746,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2757,7 +2757,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2782,7 +2782,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2805,7 +2805,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2833,7 +2833,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2844,7 +2844,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2869,7 +2869,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2905,7 +2905,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2942,7 +2942,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       };
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3007,7 +3007,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       };
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3071,7 +3071,7 @@ describe('v1.RapidMigrationAssessmentClient', () => {
       };
       const client =
         new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as persistentresourceserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1.PersistentResourceServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new persistentresourceserviceModule.v1.PersistentResourceServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -289,7 +289,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.persistentResourceServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1.PersistentResourceServiceClient', () => {
       assert(client.persistentResourceServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.persistentResourceServiceStub);
@@ -312,15 +312,15 @@ describe('v1.PersistentResourceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.persistentResourceServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1.PersistentResourceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getPersistentResource without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getPersistentResource without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getPersistentResource with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getPersistentResource with closed client', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -504,7 +504,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -518,7 +518,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes createPersistentResource without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -552,7 +552,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes createPersistentResource without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes createPersistentResource with call error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes createPersistentResource with LRO error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -676,7 +676,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkCreatePersistentResourceProgress without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -684,8 +684,8 @@ describe('v1.PersistentResourceServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -700,7 +700,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkCreatePersistentResourceProgress with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deletePersistentResource without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deletePersistentResource without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -811,7 +811,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deletePersistentResource with call error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deletePersistentResource with LRO error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkDeletePersistentResourceProgress without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -888,8 +888,8 @@ describe('v1.PersistentResourceServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -904,7 +904,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkDeletePersistentResourceProgress with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes updatePersistentResource without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes updatePersistentResource without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes updatePersistentResource with call error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1053,7 +1053,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes updatePersistentResource with LRO error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,7 +1088,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkUpdatePersistentResourceProgress without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1096,8 +1096,8 @@ describe('v1.PersistentResourceServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1112,7 +1112,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkUpdatePersistentResourceProgress with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes rebootPersistentResource without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1168,7 +1168,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes rebootPersistentResource without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes rebootPersistentResource with call error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1258,7 +1258,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes rebootPersistentResource with LRO error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkRebootPersistentResourceProgress without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1300,8 +1300,8 @@ describe('v1.PersistentResourceServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1316,7 +1316,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes checkRebootPersistentResourceProgress with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes listPersistentResources without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes listPersistentResources without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1411,8 +1411,7 @@ describe('v1.PersistentResourceServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.IPersistentResource[]
-              | null,
+              protos.google.cloud.aiplatform.v1.IPersistentResource[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1437,7 +1436,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes listPersistentResources with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1472,7 +1471,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes listPersistentResourcesStream without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1540,7 +1539,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes listPersistentResourcesStream with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1597,7 +1596,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('uses async iteration with listPersistentResources without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1652,7 +1651,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('uses async iteration with listPersistentResources with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1699,7 +1698,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1730,7 +1729,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1768,7 +1767,7 @@ describe('v1.PersistentResourceServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1779,7 +1778,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1812,7 +1811,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1843,7 +1842,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1881,7 +1880,7 @@ describe('v1.PersistentResourceServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1892,7 +1891,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1925,7 +1924,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1959,7 +1958,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1997,7 +1996,7 @@ describe('v1.PersistentResourceServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2008,7 +2007,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2044,7 +2043,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2075,7 +2074,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2120,7 +2119,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2156,7 +2155,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2205,7 +2204,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2247,7 +2246,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2269,7 +2268,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2297,7 +2296,7 @@ describe('v1.PersistentResourceServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2308,7 +2307,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2333,7 +2332,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2356,7 +2355,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2384,7 +2383,7 @@ describe('v1.PersistentResourceServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2395,7 +2394,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2420,7 +2419,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2443,7 +2442,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2471,7 +2470,7 @@ describe('v1.PersistentResourceServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2482,7 +2481,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2507,7 +2506,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2543,7 +2542,7 @@ describe('v1.PersistentResourceServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2582,7 +2581,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2670,7 +2669,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2748,7 +2747,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2824,7 +2823,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2902,7 +2901,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2968,7 +2967,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3044,7 +3043,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3110,7 +3109,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3186,7 +3185,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3252,7 +3251,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3318,7 +3317,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3395,7 +3394,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3478,7 +3477,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3555,7 +3554,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3631,7 +3630,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3696,7 +3695,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3775,7 +3774,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3853,7 +3852,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3930,7 +3929,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3995,7 +3994,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4077,7 +4076,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4142,7 +4141,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4206,7 +4205,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4258,7 +4257,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4336,7 +4335,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4401,7 +4400,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4466,7 +4465,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4547,7 +4546,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4625,7 +4624,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4733,7 +4732,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4799,7 +4798,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4876,7 +4875,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4958,7 +4957,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5024,7 +5023,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5106,7 +5105,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5184,7 +5183,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5249,7 +5248,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5330,7 +5329,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5434,7 +5433,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5559,7 +5558,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5651,7 +5650,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5705,7 +5704,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5769,7 +5768,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5824,7 +5823,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5900,7 +5899,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5967,7 +5966,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6043,7 +6042,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6109,7 +6108,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6187,7 +6186,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6275,7 +6274,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6341,7 +6340,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6406,7 +6405,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6472,7 +6471,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6569,7 +6568,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6659,7 +6658,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6783,7 +6782,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6853,7 +6852,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6929,7 +6928,7 @@ describe('v1.PersistentResourceServiceClient', () => {
       };
       const client =
         new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

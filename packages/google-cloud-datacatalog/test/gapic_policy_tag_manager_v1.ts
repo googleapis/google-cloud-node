@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as policytagmanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.policyTagManagerStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(client.policyTagManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.policyTagManagerStub);
@@ -261,14 +261,14 @@ describe('v1.PolicyTagManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.policyTagManagerStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.PolicyTagManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.PolicyTagManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.PolicyTagManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('createTaxonomy', () => {
     it('invokes createTaxonomy without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes createTaxonomy without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes createTaxonomy with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes createTaxonomy with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTaxonomy(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('deleteTaxonomy', () => {
     it('invokes deleteTaxonomy without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes deleteTaxonomy without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes deleteTaxonomy with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes deleteTaxonomy with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTaxonomy(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('updateTaxonomy', () => {
     it('invokes updateTaxonomy without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes updateTaxonomy without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes updateTaxonomy with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes updateTaxonomy with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.taxonomy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTaxonomy(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('getTaxonomy', () => {
     it('invokes getTaxonomy without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getTaxonomy without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getTaxonomy with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getTaxonomy with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTaxonomy(request), expectedError);
@@ -852,7 +852,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('createPolicyTag', () => {
     it('invokes createPolicyTag without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes createPolicyTag without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes createPolicyTag with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes createPolicyTag with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPolicyTag(request), expectedError);
@@ -984,7 +984,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('deletePolicyTag', () => {
     it('invokes deletePolicyTag without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1015,7 +1015,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes deletePolicyTag without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1062,7 +1062,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes deletePolicyTag with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes deletePolicyTag with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePolicyTag(request), expectedError);
@@ -1116,7 +1116,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('updatePolicyTag', () => {
     it('invokes updatePolicyTag without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes updatePolicyTag without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes updatePolicyTag with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes updatePolicyTag with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.policyTag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePolicyTag(request), expectedError);
@@ -1252,7 +1252,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('getPolicyTag', () => {
     it('invokes getPolicyTag without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getPolicyTag without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getPolicyTag with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getPolicyTag with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPolicyTag(request), expectedError);
@@ -1384,7 +1384,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1506,7 +1506,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1516,7 +1516,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1547,7 +1547,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,7 +1594,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,7 +1625,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1648,7 +1648,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1680,7 +1680,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,7 +1727,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1781,7 +1781,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('listTaxonomies', () => {
     it('invokes listTaxonomies without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes listTaxonomies without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1875,7 +1875,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes listTaxonomies with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,7 +1906,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes listTaxonomiesStream without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1958,15 +1958,15 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTaxonomiesStream with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2007,15 +2007,15 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTaxonomies without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,15 +2056,15 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTaxonomies with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2096,9 +2096,9 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2106,7 +2106,7 @@ describe('v1.PolicyTagManagerClient', () => {
   describe('listPolicyTags', () => {
     it('invokes listPolicyTags without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2145,7 +2145,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes listPolicyTags without error using callback', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2200,7 +2200,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes listPolicyTags with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v1.PolicyTagManagerClient', () => {
 
     it('invokes listPolicyTagsStream without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2283,15 +2283,15 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPolicyTagsStream with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,15 +2332,15 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPolicyTags without error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2381,15 +2381,15 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPolicyTags with error', async () => {
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,9 +2421,9 @@ describe('v1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2438,7 +2438,7 @@ describe('v1.PolicyTagManagerClient', () => {
         entry: 'entryValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2513,7 +2513,7 @@ describe('v1.PolicyTagManagerClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2576,7 +2576,7 @@ describe('v1.PolicyTagManagerClient', () => {
         location: 'locationValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2627,7 +2627,7 @@ describe('v1.PolicyTagManagerClient', () => {
         policy_tag: 'policyTagValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2700,7 +2700,7 @@ describe('v1.PolicyTagManagerClient', () => {
         project: 'projectValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2742,7 +2742,7 @@ describe('v1.PolicyTagManagerClient', () => {
         tag: 'tagValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2828,7 +2828,7 @@ describe('v1.PolicyTagManagerClient', () => {
         tag_template: 'tagTemplateValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2893,7 +2893,7 @@ describe('v1.PolicyTagManagerClient', () => {
         field: 'fieldValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,7 +2972,7 @@ describe('v1.PolicyTagManagerClient', () => {
         taxonomy: 'taxonomyValue',
       };
       const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

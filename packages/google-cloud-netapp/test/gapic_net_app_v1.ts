@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as netappModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.NetAppClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.netAppStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.NetAppClient', () => {
       assert(client.netAppStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.netAppStub);
@@ -296,14 +296,14 @@ describe('v1.NetAppClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.netAppStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.NetAppClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.NetAppClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.NetAppClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.NetAppClient', () => {
   describe('getStoragePool', () => {
     it('invokes getStoragePool without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getStoragePool without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getStoragePool with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getStoragePool with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStoragePool(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1.NetAppClient', () => {
   describe('getVolume', () => {
     it('invokes getVolume without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getVolume without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getVolume with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getVolume with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVolume(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.NetAppClient', () => {
   describe('getSnapshot', () => {
     it('invokes getSnapshot without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getSnapshot without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getSnapshot with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getSnapshot with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSnapshot(request), expectedError);
@@ -748,7 +748,7 @@ describe('v1.NetAppClient', () => {
   describe('getActiveDirectory', () => {
     it('invokes getActiveDirectory without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getActiveDirectory without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -827,7 +827,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getActiveDirectory with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -858,7 +858,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getActiveDirectory with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getActiveDirectory(request), expectedError);
@@ -881,7 +881,7 @@ describe('v1.NetAppClient', () => {
   describe('getKmsConfig', () => {
     it('invokes getKmsConfig without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -912,7 +912,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getKmsConfig without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getKmsConfig with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getKmsConfig with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKmsConfig(request), expectedError);
@@ -1013,7 +1013,7 @@ describe('v1.NetAppClient', () => {
   describe('verifyKmsConfig', () => {
     it('invokes verifyKmsConfig without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes verifyKmsConfig without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes verifyKmsConfig with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes verifyKmsConfig with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.verifyKmsConfig(request), expectedError);
@@ -1145,7 +1145,7 @@ describe('v1.NetAppClient', () => {
   describe('getReplication', () => {
     it('invokes getReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getReplication with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getReplication with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReplication(request), expectedError);
@@ -1277,7 +1277,7 @@ describe('v1.NetAppClient', () => {
   describe('getBackupVault', () => {
     it('invokes getBackupVault without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackupVault without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1355,7 +1355,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackupVault with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1386,7 +1386,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackupVault with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupVault(request), expectedError);
@@ -1409,7 +1409,7 @@ describe('v1.NetAppClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1440,7 +1440,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1487,7 +1487,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1515,7 +1515,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -1538,7 +1538,7 @@ describe('v1.NetAppClient', () => {
   describe('getBackupPolicy', () => {
     it('invokes getBackupPolicy without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,7 +1569,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackupPolicy without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1616,7 +1616,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackupPolicy with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1647,7 +1647,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getBackupPolicy with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupPolicy(request), expectedError);
@@ -1670,7 +1670,7 @@ describe('v1.NetAppClient', () => {
   describe('getQuotaRule', () => {
     it('invokes getQuotaRule without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1701,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getQuotaRule without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getQuotaRule with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1779,7 +1779,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getQuotaRule with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getQuotaRule(request), expectedError);
@@ -1802,7 +1802,7 @@ describe('v1.NetAppClient', () => {
   describe('getHostGroup', () => {
     it('invokes getHostGroup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getHostGroup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1880,7 +1880,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getHostGroup with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes getHostGroup with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1924,7 +1924,7 @@ describe('v1.NetAppClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHostGroup(request), expectedError);
@@ -1934,7 +1934,7 @@ describe('v1.NetAppClient', () => {
   describe('executeOntapPost', () => {
     it('invokes executeOntapPost without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,7 +1965,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapPost without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2012,7 +2012,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapPost with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,7 +2043,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapPost with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,7 +2056,7 @@ describe('v1.NetAppClient', () => {
       );
       request.ontapPath = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeOntapPost(request), expectedError);
@@ -2066,7 +2066,7 @@ describe('v1.NetAppClient', () => {
   describe('executeOntapGet', () => {
     it('invokes executeOntapGet without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapGet without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2144,7 +2144,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapGet with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2175,7 +2175,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapGet with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v1.NetAppClient', () => {
       );
       request.ontapPath = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeOntapGet(request), expectedError);
@@ -2198,7 +2198,7 @@ describe('v1.NetAppClient', () => {
   describe('executeOntapDelete', () => {
     it('invokes executeOntapDelete without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2230,7 +2230,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapDelete without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2277,7 +2277,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapDelete with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2308,7 +2308,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapDelete with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2321,7 +2321,7 @@ describe('v1.NetAppClient', () => {
       );
       request.ontapPath = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeOntapDelete(request), expectedError);
@@ -2331,7 +2331,7 @@ describe('v1.NetAppClient', () => {
   describe('executeOntapPatch', () => {
     it('invokes executeOntapPatch without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2362,7 +2362,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapPatch without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2409,7 +2409,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapPatch with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2440,7 +2440,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes executeOntapPatch with closed client', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2453,7 +2453,7 @@ describe('v1.NetAppClient', () => {
       );
       request.ontapPath = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeOntapPatch(request), expectedError);
@@ -2463,7 +2463,7 @@ describe('v1.NetAppClient', () => {
   describe('createStoragePool', () => {
     it('invokes createStoragePool without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2496,7 +2496,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createStoragePool without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2550,7 +2550,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createStoragePool with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2581,7 +2581,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createStoragePool with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2614,7 +2614,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateStoragePoolProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2622,8 +2622,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateStoragePoolProgress(
@@ -2636,7 +2636,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateStoragePoolProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2657,7 +2657,7 @@ describe('v1.NetAppClient', () => {
   describe('updateStoragePool', () => {
     it('invokes updateStoragePool without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateStoragePool without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2746,7 +2746,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateStoragePool with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2778,7 +2778,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateStoragePool with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2812,7 +2812,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateStoragePoolProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2820,8 +2820,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateStoragePoolProgress(
@@ -2834,7 +2834,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateStoragePoolProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2855,7 +2855,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteStoragePool', () => {
     it('invokes deleteStoragePool without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2888,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteStoragePool without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2942,7 +2942,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteStoragePool with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteStoragePool with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,7 +3006,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteStoragePoolProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,8 +3014,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteStoragePoolProgress(
@@ -3028,7 +3028,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteStoragePoolProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3049,7 +3049,7 @@ describe('v1.NetAppClient', () => {
   describe('validateDirectoryService', () => {
     it('invokes validateDirectoryService without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3082,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes validateDirectoryService without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,7 +3136,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes validateDirectoryService with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3170,7 +3170,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes validateDirectoryService with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3203,7 +3203,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkValidateDirectoryServiceProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3211,8 +3211,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3226,7 +3226,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkValidateDirectoryServiceProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3247,7 +3247,7 @@ describe('v1.NetAppClient', () => {
   describe('switchActiveReplicaZone', () => {
     it('invokes switchActiveReplicaZone without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3280,7 +3280,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes switchActiveReplicaZone without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3334,7 +3334,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes switchActiveReplicaZone with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3368,7 +3368,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes switchActiveReplicaZone with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3401,7 +3401,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkSwitchActiveReplicaZoneProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3409,8 +3409,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3424,7 +3424,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkSwitchActiveReplicaZoneProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3445,7 +3445,7 @@ describe('v1.NetAppClient', () => {
   describe('createVolume', () => {
     it('invokes createVolume without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3477,7 +3477,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createVolume without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3531,7 +3531,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createVolume with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3562,7 +3562,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createVolume with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3595,7 +3595,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateVolumeProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3603,8 +3603,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateVolumeProgress(
@@ -3617,7 +3617,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateVolumeProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3635,7 +3635,7 @@ describe('v1.NetAppClient', () => {
   describe('updateVolume', () => {
     it('invokes updateVolume without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3668,7 +3668,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateVolume without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3723,7 +3723,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateVolume with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3755,7 +3755,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateVolume with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3789,7 +3789,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateVolumeProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3797,8 +3797,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateVolumeProgress(
@@ -3811,7 +3811,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateVolumeProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3829,7 +3829,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteVolume', () => {
     it('invokes deleteVolume without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3861,7 +3861,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteVolume without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3915,7 +3915,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteVolume with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3946,7 +3946,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteVolume with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3979,7 +3979,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteVolumeProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3987,8 +3987,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteVolumeProgress(
@@ -4001,7 +4001,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteVolumeProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4019,7 +4019,7 @@ describe('v1.NetAppClient', () => {
   describe('revertVolume', () => {
     it('invokes revertVolume without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4051,7 +4051,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes revertVolume without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4105,7 +4105,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes revertVolume with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4136,7 +4136,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes revertVolume with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4169,7 +4169,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkRevertVolumeProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4177,8 +4177,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRevertVolumeProgress(
@@ -4191,7 +4191,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkRevertVolumeProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4209,7 +4209,7 @@ describe('v1.NetAppClient', () => {
   describe('establishVolumePeering', () => {
     it('invokes establishVolumePeering without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4242,7 +4242,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes establishVolumePeering without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4296,7 +4296,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes establishVolumePeering with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4330,7 +4330,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes establishVolumePeering with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4363,7 +4363,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkEstablishVolumePeeringProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4371,8 +4371,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEstablishVolumePeeringProgress(
@@ -4385,7 +4385,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkEstablishVolumePeeringProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4406,7 +4406,7 @@ describe('v1.NetAppClient', () => {
   describe('createSnapshot', () => {
     it('invokes createSnapshot without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4439,7 +4439,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createSnapshot without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4493,7 +4493,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createSnapshot with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4524,7 +4524,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createSnapshot with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4557,7 +4557,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateSnapshotProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4565,8 +4565,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSnapshotProgress(
@@ -4579,7 +4579,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateSnapshotProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4600,7 +4600,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteSnapshot', () => {
     it('invokes deleteSnapshot without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4633,7 +4633,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteSnapshot without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4687,7 +4687,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteSnapshot with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4718,7 +4718,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteSnapshot with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4751,7 +4751,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteSnapshotProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4759,8 +4759,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSnapshotProgress(
@@ -4773,7 +4773,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteSnapshotProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4794,7 +4794,7 @@ describe('v1.NetAppClient', () => {
   describe('updateSnapshot', () => {
     it('invokes updateSnapshot without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4828,7 +4828,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateSnapshot without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4883,7 +4883,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateSnapshot with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4915,7 +4915,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateSnapshot with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4949,7 +4949,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateSnapshotProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4957,8 +4957,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSnapshotProgress(
@@ -4971,7 +4971,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateSnapshotProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4992,7 +4992,7 @@ describe('v1.NetAppClient', () => {
   describe('createActiveDirectory', () => {
     it('invokes createActiveDirectory without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5025,7 +5025,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createActiveDirectory without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5079,7 +5079,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createActiveDirectory with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5113,7 +5113,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createActiveDirectory with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5146,7 +5146,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateActiveDirectoryProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5154,8 +5154,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateActiveDirectoryProgress(
@@ -5168,7 +5168,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateActiveDirectoryProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5189,7 +5189,7 @@ describe('v1.NetAppClient', () => {
   describe('updateActiveDirectory', () => {
     it('invokes updateActiveDirectory without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5223,7 +5223,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateActiveDirectory without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5278,7 +5278,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateActiveDirectory with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5313,7 +5313,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateActiveDirectory with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5347,7 +5347,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateActiveDirectoryProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5355,8 +5355,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateActiveDirectoryProgress(
@@ -5369,7 +5369,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateActiveDirectoryProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5390,7 +5390,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteActiveDirectory', () => {
     it('invokes deleteActiveDirectory without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5423,7 +5423,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteActiveDirectory without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5477,7 +5477,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteActiveDirectory with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5511,7 +5511,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteActiveDirectory with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5544,7 +5544,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteActiveDirectoryProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5552,8 +5552,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteActiveDirectoryProgress(
@@ -5566,7 +5566,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteActiveDirectoryProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5587,7 +5587,7 @@ describe('v1.NetAppClient', () => {
   describe('createKmsConfig', () => {
     it('invokes createKmsConfig without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5620,7 +5620,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createKmsConfig without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5674,7 +5674,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createKmsConfig with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5705,7 +5705,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createKmsConfig with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5738,7 +5738,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateKmsConfigProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5746,8 +5746,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateKmsConfigProgress(
@@ -5760,7 +5760,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateKmsConfigProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5781,7 +5781,7 @@ describe('v1.NetAppClient', () => {
   describe('updateKmsConfig', () => {
     it('invokes updateKmsConfig without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5815,7 +5815,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateKmsConfig without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5870,7 +5870,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateKmsConfig with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5902,7 +5902,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateKmsConfig with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5936,7 +5936,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateKmsConfigProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5944,8 +5944,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateKmsConfigProgress(
@@ -5958,7 +5958,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateKmsConfigProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5979,7 +5979,7 @@ describe('v1.NetAppClient', () => {
   describe('encryptVolumes', () => {
     it('invokes encryptVolumes without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6012,7 +6012,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes encryptVolumes without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6066,7 +6066,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes encryptVolumes with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6097,7 +6097,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes encryptVolumes with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6130,7 +6130,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkEncryptVolumesProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6138,8 +6138,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEncryptVolumesProgress(
@@ -6152,7 +6152,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkEncryptVolumesProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6173,7 +6173,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteKmsConfig', () => {
     it('invokes deleteKmsConfig without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6206,7 +6206,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteKmsConfig without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6260,7 +6260,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteKmsConfig with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6291,7 +6291,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteKmsConfig with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6324,7 +6324,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteKmsConfigProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6332,8 +6332,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteKmsConfigProgress(
@@ -6346,7 +6346,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteKmsConfigProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6367,7 +6367,7 @@ describe('v1.NetAppClient', () => {
   describe('createReplication', () => {
     it('invokes createReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6400,7 +6400,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6454,7 +6454,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createReplication with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6485,7 +6485,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createReplication with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6518,7 +6518,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateReplicationProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6526,8 +6526,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReplicationProgress(
@@ -6540,7 +6540,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateReplicationProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6561,7 +6561,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteReplication', () => {
     it('invokes deleteReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6594,7 +6594,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6648,7 +6648,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteReplication with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6679,7 +6679,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteReplication with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6712,7 +6712,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteReplicationProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6720,8 +6720,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteReplicationProgress(
@@ -6734,7 +6734,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteReplicationProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6755,7 +6755,7 @@ describe('v1.NetAppClient', () => {
   describe('updateReplication', () => {
     it('invokes updateReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6789,7 +6789,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6844,7 +6844,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateReplication with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6876,7 +6876,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateReplication with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6910,7 +6910,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateReplicationProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6918,8 +6918,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateReplicationProgress(
@@ -6932,7 +6932,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateReplicationProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6953,7 +6953,7 @@ describe('v1.NetAppClient', () => {
   describe('stopReplication', () => {
     it('invokes stopReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6986,7 +6986,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes stopReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7040,7 +7040,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes stopReplication with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7071,7 +7071,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes stopReplication with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7104,7 +7104,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkStopReplicationProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7112,8 +7112,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopReplicationProgress(
@@ -7126,7 +7126,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkStopReplicationProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7147,7 +7147,7 @@ describe('v1.NetAppClient', () => {
   describe('resumeReplication', () => {
     it('invokes resumeReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7180,7 +7180,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes resumeReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7234,7 +7234,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes resumeReplication with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7265,7 +7265,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes resumeReplication with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7298,7 +7298,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkResumeReplicationProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7306,8 +7306,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResumeReplicationProgress(
@@ -7320,7 +7320,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkResumeReplicationProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7341,7 +7341,7 @@ describe('v1.NetAppClient', () => {
   describe('reverseReplicationDirection', () => {
     it('invokes reverseReplicationDirection without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7374,7 +7374,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes reverseReplicationDirection without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7428,7 +7428,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes reverseReplicationDirection with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7462,7 +7462,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes reverseReplicationDirection with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7495,7 +7495,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkReverseReplicationDirectionProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7503,8 +7503,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -7518,7 +7518,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkReverseReplicationDirectionProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7539,7 +7539,7 @@ describe('v1.NetAppClient', () => {
   describe('establishPeering', () => {
     it('invokes establishPeering without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7572,7 +7572,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes establishPeering without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7626,7 +7626,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes establishPeering with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7657,7 +7657,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes establishPeering with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7690,7 +7690,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkEstablishPeeringProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7698,8 +7698,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEstablishPeeringProgress(
@@ -7712,7 +7712,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkEstablishPeeringProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7733,7 +7733,7 @@ describe('v1.NetAppClient', () => {
   describe('syncReplication', () => {
     it('invokes syncReplication without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7766,7 +7766,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes syncReplication without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7820,7 +7820,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes syncReplication with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7851,7 +7851,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes syncReplication with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7884,7 +7884,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkSyncReplicationProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7892,8 +7892,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSyncReplicationProgress(
@@ -7906,7 +7906,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkSyncReplicationProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7927,7 +7927,7 @@ describe('v1.NetAppClient', () => {
   describe('createBackupVault', () => {
     it('invokes createBackupVault without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7960,7 +7960,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackupVault without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8014,7 +8014,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackupVault with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8045,7 +8045,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackupVault with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8078,7 +8078,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateBackupVaultProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8086,8 +8086,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupVaultProgress(
@@ -8100,7 +8100,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateBackupVaultProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8121,7 +8121,7 @@ describe('v1.NetAppClient', () => {
   describe('updateBackupVault', () => {
     it('invokes updateBackupVault without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8155,7 +8155,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackupVault without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8210,7 +8210,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackupVault with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8242,7 +8242,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackupVault with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8276,7 +8276,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateBackupVaultProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8284,8 +8284,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupVaultProgress(
@@ -8298,7 +8298,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateBackupVaultProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8319,7 +8319,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteBackupVault', () => {
     it('invokes deleteBackupVault without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8352,7 +8352,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackupVault without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8406,7 +8406,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackupVault with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8437,7 +8437,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackupVault with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8470,7 +8470,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteBackupVaultProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8478,8 +8478,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupVaultProgress(
@@ -8492,7 +8492,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteBackupVaultProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8513,7 +8513,7 @@ describe('v1.NetAppClient', () => {
   describe('createBackup', () => {
     it('invokes createBackup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8545,7 +8545,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8599,7 +8599,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackup with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8630,7 +8630,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackup with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8663,7 +8663,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateBackupProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8671,8 +8671,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupProgress(
@@ -8685,7 +8685,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateBackupProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8703,7 +8703,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8735,7 +8735,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8789,7 +8789,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackup with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8820,7 +8820,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackup with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8853,7 +8853,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8861,8 +8861,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -8875,7 +8875,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8893,7 +8893,7 @@ describe('v1.NetAppClient', () => {
   describe('updateBackup', () => {
     it('invokes updateBackup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8926,7 +8926,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8981,7 +8981,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackup with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9013,7 +9013,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackup with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9047,7 +9047,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateBackupProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9055,8 +9055,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupProgress(
@@ -9069,7 +9069,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateBackupProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9087,7 +9087,7 @@ describe('v1.NetAppClient', () => {
   describe('createBackupPolicy', () => {
     it('invokes createBackupPolicy without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9120,7 +9120,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackupPolicy without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9174,7 +9174,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackupPolicy with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9205,7 +9205,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createBackupPolicy with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9238,7 +9238,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateBackupPolicyProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9246,8 +9246,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupPolicyProgress(
@@ -9260,7 +9260,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateBackupPolicyProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9281,7 +9281,7 @@ describe('v1.NetAppClient', () => {
   describe('updateBackupPolicy', () => {
     it('invokes updateBackupPolicy without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9315,7 +9315,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackupPolicy without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9370,7 +9370,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackupPolicy with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9402,7 +9402,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateBackupPolicy with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9436,7 +9436,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateBackupPolicyProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9444,8 +9444,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupPolicyProgress(
@@ -9458,7 +9458,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateBackupPolicyProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9479,7 +9479,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteBackupPolicy', () => {
     it('invokes deleteBackupPolicy without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9512,7 +9512,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackupPolicy without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9566,7 +9566,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackupPolicy with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9597,7 +9597,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteBackupPolicy with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9630,7 +9630,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteBackupPolicyProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9638,8 +9638,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupPolicyProgress(
@@ -9652,7 +9652,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteBackupPolicyProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9673,7 +9673,7 @@ describe('v1.NetAppClient', () => {
   describe('createQuotaRule', () => {
     it('invokes createQuotaRule without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9706,7 +9706,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createQuotaRule without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9760,7 +9760,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createQuotaRule with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9791,7 +9791,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createQuotaRule with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9824,7 +9824,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateQuotaRuleProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9832,8 +9832,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateQuotaRuleProgress(
@@ -9846,7 +9846,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateQuotaRuleProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9867,7 +9867,7 @@ describe('v1.NetAppClient', () => {
   describe('updateQuotaRule', () => {
     it('invokes updateQuotaRule without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9901,7 +9901,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateQuotaRule without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9956,7 +9956,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateQuotaRule with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9988,7 +9988,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateQuotaRule with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10022,7 +10022,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateQuotaRuleProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10030,8 +10030,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateQuotaRuleProgress(
@@ -10044,7 +10044,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateQuotaRuleProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10065,7 +10065,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteQuotaRule', () => {
     it('invokes deleteQuotaRule without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10098,7 +10098,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteQuotaRule without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10152,7 +10152,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteQuotaRule with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10183,7 +10183,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteQuotaRule with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10216,7 +10216,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteQuotaRuleProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10224,8 +10224,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteQuotaRuleProgress(
@@ -10238,7 +10238,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteQuotaRuleProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10259,7 +10259,7 @@ describe('v1.NetAppClient', () => {
   describe('restoreBackupFiles', () => {
     it('invokes restoreBackupFiles without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10292,7 +10292,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes restoreBackupFiles without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10346,7 +10346,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes restoreBackupFiles with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10377,7 +10377,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes restoreBackupFiles with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10410,7 +10410,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkRestoreBackupFilesProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10418,8 +10418,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreBackupFilesProgress(
@@ -10432,7 +10432,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkRestoreBackupFilesProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10453,7 +10453,7 @@ describe('v1.NetAppClient', () => {
   describe('createHostGroup', () => {
     it('invokes createHostGroup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10486,7 +10486,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createHostGroup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10540,7 +10540,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createHostGroup with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10571,7 +10571,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes createHostGroup with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10604,7 +10604,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateHostGroupProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10612,8 +10612,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateHostGroupProgress(
@@ -10626,7 +10626,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkCreateHostGroupProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10647,7 +10647,7 @@ describe('v1.NetAppClient', () => {
   describe('updateHostGroup', () => {
     it('invokes updateHostGroup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10681,7 +10681,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateHostGroup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10736,7 +10736,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateHostGroup with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10768,7 +10768,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes updateHostGroup with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10802,7 +10802,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateHostGroupProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10810,8 +10810,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateHostGroupProgress(
@@ -10824,7 +10824,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkUpdateHostGroupProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10845,7 +10845,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteHostGroup', () => {
     it('invokes deleteHostGroup without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10878,7 +10878,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteHostGroup without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10932,7 +10932,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteHostGroup with call error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10963,7 +10963,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes deleteHostGroup with LRO error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10996,7 +10996,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteHostGroupProgress without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11004,8 +11004,8 @@ describe('v1.NetAppClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteHostGroupProgress(
@@ -11018,7 +11018,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes checkDeleteHostGroupProgress with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11039,7 +11039,7 @@ describe('v1.NetAppClient', () => {
   describe('listStoragePools', () => {
     it('invokes listStoragePools without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11072,7 +11072,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listStoragePools without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11121,7 +11121,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listStoragePools with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11152,7 +11152,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listStoragePoolsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11198,15 +11198,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listStoragePools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStoragePoolsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11247,15 +11247,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listStoragePools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStoragePools without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11290,15 +11290,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listStoragePools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStoragePools with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11330,9 +11330,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listStoragePools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11340,7 +11340,7 @@ describe('v1.NetAppClient', () => {
   describe('listVolumes', () => {
     it('invokes listVolumes without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11373,7 +11373,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listVolumes without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11422,7 +11422,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listVolumes with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11453,7 +11453,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listVolumesStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11496,15 +11496,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVolumesStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11544,15 +11544,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumes without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11587,15 +11587,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumes with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11629,9 +11629,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11639,7 +11639,7 @@ describe('v1.NetAppClient', () => {
   describe('listSnapshots', () => {
     it('invokes listSnapshots without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11672,7 +11672,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listSnapshots without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11721,7 +11721,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listSnapshots with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11752,7 +11752,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listSnapshotsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11798,15 +11798,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSnapshotsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11847,15 +11847,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSnapshots without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11890,15 +11890,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSnapshots with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11930,9 +11930,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11940,7 +11940,7 @@ describe('v1.NetAppClient', () => {
   describe('listActiveDirectories', () => {
     it('invokes listActiveDirectories without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11980,7 +11980,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listActiveDirectories without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12035,7 +12035,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listActiveDirectories with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12069,7 +12069,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listActiveDirectoriesStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12135,7 +12135,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listActiveDirectoriesStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12190,7 +12190,7 @@ describe('v1.NetAppClient', () => {
 
     it('uses async iteration with listActiveDirectories without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12243,7 +12243,7 @@ describe('v1.NetAppClient', () => {
 
     it('uses async iteration with listActiveDirectories with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12289,7 +12289,7 @@ describe('v1.NetAppClient', () => {
   describe('listKmsConfigs', () => {
     it('invokes listKmsConfigs without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12322,7 +12322,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listKmsConfigs without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12371,7 +12371,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listKmsConfigs with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12402,7 +12402,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listKmsConfigsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12448,15 +12448,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listKmsConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listKmsConfigsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12497,15 +12497,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listKmsConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKmsConfigs without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12540,15 +12540,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listKmsConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKmsConfigs with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12580,9 +12580,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listKmsConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12590,7 +12590,7 @@ describe('v1.NetAppClient', () => {
   describe('listReplications', () => {
     it('invokes listReplications without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12623,7 +12623,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listReplications without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12672,7 +12672,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listReplications with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12703,7 +12703,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listReplicationsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12749,15 +12749,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listReplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReplicationsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12798,15 +12798,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listReplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReplications without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12841,15 +12841,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listReplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReplications with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12881,9 +12881,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listReplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12891,7 +12891,7 @@ describe('v1.NetAppClient', () => {
   describe('listBackupVaults', () => {
     it('invokes listBackupVaults without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12924,7 +12924,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupVaults without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12973,7 +12973,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupVaults with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13004,7 +13004,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupVaultsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13050,15 +13050,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupVaultsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13099,15 +13099,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupVaults without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13142,15 +13142,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupVaults with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13182,9 +13182,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13192,7 +13192,7 @@ describe('v1.NetAppClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13225,7 +13225,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13274,7 +13274,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13305,7 +13305,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13348,15 +13348,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13396,15 +13396,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13439,15 +13439,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13481,9 +13481,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13491,7 +13491,7 @@ describe('v1.NetAppClient', () => {
   describe('listBackupPolicies', () => {
     it('invokes listBackupPolicies without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13525,7 +13525,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupPolicies without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13574,7 +13574,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupPolicies with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13605,7 +13605,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listBackupPoliciesStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13651,15 +13651,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupPoliciesStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13700,15 +13700,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupPolicies without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13743,15 +13743,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupPolicies with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13783,9 +13783,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listBackupPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13793,7 +13793,7 @@ describe('v1.NetAppClient', () => {
   describe('listQuotaRules', () => {
     it('invokes listQuotaRules without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13826,7 +13826,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listQuotaRules without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13875,7 +13875,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listQuotaRules with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13906,7 +13906,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listQuotaRulesStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13952,15 +13952,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listQuotaRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listQuotaRulesStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14001,15 +14001,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listQuotaRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQuotaRules without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14044,15 +14044,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listQuotaRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQuotaRules with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14084,9 +14084,9 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listQuotaRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -14094,7 +14094,7 @@ describe('v1.NetAppClient', () => {
   describe('listHostGroups', () => {
     it('invokes listHostGroups without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14127,7 +14127,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listHostGroups without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14176,7 +14176,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listHostGroups with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14207,7 +14207,7 @@ describe('v1.NetAppClient', () => {
 
     it('invokes listHostGroupsStream without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14253,15 +14253,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listHostGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHostGroupsStream with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14302,15 +14302,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listHostGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHostGroups without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14345,15 +14345,15 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listHostGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHostGroups with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14385,16 +14385,16 @@ describe('v1.NetAppClient', () => {
       assert(
         (client.descriptors.page.listHostGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14424,7 +14424,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14468,7 +14468,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14503,7 +14503,7 @@ describe('v1.NetAppClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14551,7 +14551,7 @@ describe('v1.NetAppClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14592,7 +14592,7 @@ describe('v1.NetAppClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14613,7 +14613,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14641,7 +14641,7 @@ describe('v1.NetAppClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14651,7 +14651,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14675,7 +14675,7 @@ describe('v1.NetAppClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14697,7 +14697,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14725,7 +14725,7 @@ describe('v1.NetAppClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14735,7 +14735,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14759,7 +14759,7 @@ describe('v1.NetAppClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14781,7 +14781,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14809,7 +14809,7 @@ describe('v1.NetAppClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14819,7 +14819,7 @@ describe('v1.NetAppClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14843,7 +14843,7 @@ describe('v1.NetAppClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -14878,7 +14878,7 @@ describe('v1.NetAppClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14914,7 +14914,7 @@ describe('v1.NetAppClient', () => {
         active_directory: 'activeDirectoryValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14980,7 +14980,7 @@ describe('v1.NetAppClient', () => {
         backup: 'backupValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15055,7 +15055,7 @@ describe('v1.NetAppClient', () => {
         backup_policy: 'backupPolicyValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15119,7 +15119,7 @@ describe('v1.NetAppClient', () => {
         backup_vault: 'backupVaultValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15183,7 +15183,7 @@ describe('v1.NetAppClient', () => {
         host_group: 'hostGroupValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15247,7 +15247,7 @@ describe('v1.NetAppClient', () => {
         kms_config: 'kmsConfigValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15312,7 +15312,7 @@ describe('v1.NetAppClient', () => {
         quota_rule: 'quotaRuleValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15388,7 +15388,7 @@ describe('v1.NetAppClient', () => {
         replication: 'replicationValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15464,7 +15464,7 @@ describe('v1.NetAppClient', () => {
         snapshot: 'snapshotValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15539,7 +15539,7 @@ describe('v1.NetAppClient', () => {
         storage_pool: 'storagePoolValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15603,7 +15603,7 @@ describe('v1.NetAppClient', () => {
         volume: 'volumeValue',
       };
       const client = new netappModule.v1.NetAppClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

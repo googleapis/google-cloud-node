@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as clouddeployModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudDeployStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.CloudDeployClient', () => {
       assert(client.cloudDeployStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudDeployStub);
@@ -297,14 +297,14 @@ describe('v1.CloudDeployClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudDeployStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.CloudDeployClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.CloudDeployClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.CloudDeployClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getDeliveryPipeline', () => {
     it('invokes getDeliveryPipeline without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getDeliveryPipeline without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getDeliveryPipeline with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getDeliveryPipeline with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeliveryPipeline(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.CloudDeployClient', () => {
   describe('rollbackTarget', () => {
     it('invokes rollbackTarget without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes rollbackTarget without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes rollbackTarget with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes rollbackTarget with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.rollbackTarget(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getTarget', () => {
     it('invokes getTarget without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getTarget without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getTarget with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getTarget with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTarget(request), expectedError);
@@ -750,7 +750,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getCustomTargetType', () => {
     it('invokes getCustomTargetType without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getCustomTargetType without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getCustomTargetType with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getCustomTargetType with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomTargetType(request), expectedError);
@@ -883,7 +883,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getRelease', () => {
     it('invokes getRelease without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getRelease without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getRelease with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getRelease with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRelease(request), expectedError);
@@ -1015,7 +1015,7 @@ describe('v1.CloudDeployClient', () => {
   describe('abandonRelease', () => {
     it('invokes abandonRelease without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes abandonRelease without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes abandonRelease with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1124,7 +1124,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes abandonRelease with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1137,7 +1137,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.abandonRelease(request), expectedError);
@@ -1147,7 +1147,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getDeployPolicy', () => {
     it('invokes getDeployPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,7 +1178,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getDeployPolicy without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getDeployPolicy with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1256,7 +1256,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getDeployPolicy with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1269,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeployPolicy(request), expectedError);
@@ -1279,7 +1279,7 @@ describe('v1.CloudDeployClient', () => {
   describe('approveRollout', () => {
     it('invokes approveRollout without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes approveRollout without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes approveRollout with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes approveRollout with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.approveRollout(request), expectedError);
@@ -1411,7 +1411,7 @@ describe('v1.CloudDeployClient', () => {
   describe('advanceRollout', () => {
     it('invokes advanceRollout without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes advanceRollout without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1489,7 +1489,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes advanceRollout with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1520,7 +1520,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes advanceRollout with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.advanceRollout(request), expectedError);
@@ -1543,7 +1543,7 @@ describe('v1.CloudDeployClient', () => {
   describe('cancelRollout', () => {
     it('invokes cancelRollout without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1574,7 +1574,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes cancelRollout without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes cancelRollout with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1652,7 +1652,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes cancelRollout with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelRollout(request), expectedError);
@@ -1675,7 +1675,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getRollout', () => {
     it('invokes getRollout without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1706,7 +1706,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getRollout without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1753,7 +1753,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getRollout with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getRollout with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1797,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRollout(request), expectedError);
@@ -1807,7 +1807,7 @@ describe('v1.CloudDeployClient', () => {
   describe('ignoreJob', () => {
     it('invokes ignoreJob without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes ignoreJob without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1885,7 +1885,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes ignoreJob with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1913,7 +1913,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes ignoreJob with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1926,7 +1926,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.rollout = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.ignoreJob(request), expectedError);
@@ -1936,7 +1936,7 @@ describe('v1.CloudDeployClient', () => {
   describe('retryJob', () => {
     it('invokes retryJob without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1967,7 +1967,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes retryJob without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2014,7 +2014,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes retryJob with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2042,7 +2042,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes retryJob with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2055,7 +2055,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.rollout = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.retryJob(request), expectedError);
@@ -2065,7 +2065,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getJobRun', () => {
     it('invokes getJobRun without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2096,7 +2096,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getJobRun without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2143,7 +2143,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getJobRun with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2171,7 +2171,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getJobRun with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2184,7 +2184,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJobRun(request), expectedError);
@@ -2194,7 +2194,7 @@ describe('v1.CloudDeployClient', () => {
   describe('terminateJobRun', () => {
     it('invokes terminateJobRun without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2225,7 +2225,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes terminateJobRun without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2272,7 +2272,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes terminateJobRun with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2303,7 +2303,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes terminateJobRun with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2316,7 +2316,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.terminateJobRun(request), expectedError);
@@ -2326,7 +2326,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getConfig', () => {
     it('invokes getConfig without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,7 +2357,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getConfig without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2404,7 +2404,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getConfig with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2432,7 +2432,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getConfig with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2445,7 +2445,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConfig(request), expectedError);
@@ -2455,7 +2455,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getAutomation', () => {
     it('invokes getAutomation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,7 +2486,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getAutomation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2533,7 +2533,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getAutomation with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2564,7 +2564,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getAutomation with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2577,7 +2577,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAutomation(request), expectedError);
@@ -2587,7 +2587,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getAutomationRun', () => {
     it('invokes getAutomationRun without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2618,7 +2618,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getAutomationRun without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2665,7 +2665,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getAutomationRun with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2696,7 +2696,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes getAutomationRun with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2709,7 +2709,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAutomationRun(request), expectedError);
@@ -2719,7 +2719,7 @@ describe('v1.CloudDeployClient', () => {
   describe('cancelAutomationRun', () => {
     it('invokes cancelAutomationRun without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2751,7 +2751,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes cancelAutomationRun without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2798,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes cancelAutomationRun with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2829,7 +2829,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes cancelAutomationRun with closed client', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2842,7 +2842,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelAutomationRun(request), expectedError);
@@ -2852,7 +2852,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createDeliveryPipeline', () => {
     it('invokes createDeliveryPipeline without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2885,7 +2885,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createDeliveryPipeline without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2939,7 +2939,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createDeliveryPipeline with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createDeliveryPipeline with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,7 +3006,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateDeliveryPipelineProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,8 +3014,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDeliveryPipelineProgress(
@@ -3028,7 +3028,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateDeliveryPipelineProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3049,7 +3049,7 @@ describe('v1.CloudDeployClient', () => {
   describe('updateDeliveryPipeline', () => {
     it('invokes updateDeliveryPipeline without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3083,7 +3083,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateDeliveryPipeline without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3138,7 +3138,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateDeliveryPipeline with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3173,7 +3173,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateDeliveryPipeline with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3207,7 +3207,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateDeliveryPipelineProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3215,8 +3215,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDeliveryPipelineProgress(
@@ -3229,7 +3229,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateDeliveryPipelineProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3250,7 +3250,7 @@ describe('v1.CloudDeployClient', () => {
   describe('deleteDeliveryPipeline', () => {
     it('invokes deleteDeliveryPipeline without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,7 +3283,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteDeliveryPipeline without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3337,7 +3337,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteDeliveryPipeline with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteDeliveryPipeline with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,7 +3404,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteDeliveryPipelineProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3412,8 +3412,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDeliveryPipelineProgress(
@@ -3426,7 +3426,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteDeliveryPipelineProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3447,7 +3447,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createTarget', () => {
     it('invokes createTarget without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3479,7 +3479,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createTarget without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3533,7 +3533,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createTarget with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3564,7 +3564,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createTarget with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3597,7 +3597,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateTargetProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3605,8 +3605,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTargetProgress(
@@ -3619,7 +3619,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateTargetProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3637,7 +3637,7 @@ describe('v1.CloudDeployClient', () => {
   describe('updateTarget', () => {
     it('invokes updateTarget without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3670,7 +3670,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateTarget without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3725,7 +3725,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateTarget with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3757,7 +3757,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateTarget with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3791,7 +3791,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateTargetProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3799,8 +3799,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTargetProgress(
@@ -3813,7 +3813,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateTargetProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3831,7 +3831,7 @@ describe('v1.CloudDeployClient', () => {
   describe('deleteTarget', () => {
     it('invokes deleteTarget without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3863,7 +3863,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteTarget without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3917,7 +3917,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteTarget with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3948,7 +3948,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteTarget with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3981,7 +3981,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteTargetProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3989,8 +3989,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTargetProgress(
@@ -4003,7 +4003,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteTargetProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4021,7 +4021,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createCustomTargetType', () => {
     it('invokes createCustomTargetType without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4054,7 +4054,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createCustomTargetType without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,7 +4108,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createCustomTargetType with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4142,7 +4142,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createCustomTargetType with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4175,7 +4175,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateCustomTargetTypeProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4183,8 +4183,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCustomTargetTypeProgress(
@@ -4197,7 +4197,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateCustomTargetTypeProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4218,7 +4218,7 @@ describe('v1.CloudDeployClient', () => {
   describe('updateCustomTargetType', () => {
     it('invokes updateCustomTargetType without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4252,7 +4252,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateCustomTargetType without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4307,7 +4307,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateCustomTargetType with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4342,7 +4342,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateCustomTargetType with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4376,7 +4376,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateCustomTargetTypeProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4384,8 +4384,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCustomTargetTypeProgress(
@@ -4398,7 +4398,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateCustomTargetTypeProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4419,7 +4419,7 @@ describe('v1.CloudDeployClient', () => {
   describe('deleteCustomTargetType', () => {
     it('invokes deleteCustomTargetType without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4452,7 +4452,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteCustomTargetType without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4506,7 +4506,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteCustomTargetType with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4540,7 +4540,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteCustomTargetType with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4573,7 +4573,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteCustomTargetTypeProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4581,8 +4581,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCustomTargetTypeProgress(
@@ -4595,7 +4595,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteCustomTargetTypeProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4616,7 +4616,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createRelease', () => {
     it('invokes createRelease without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4649,7 +4649,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createRelease without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4703,7 +4703,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createRelease with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4734,7 +4734,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createRelease with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4767,7 +4767,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateReleaseProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4775,8 +4775,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReleaseProgress(
@@ -4789,7 +4789,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateReleaseProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4810,7 +4810,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createDeployPolicy', () => {
     it('invokes createDeployPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4843,7 +4843,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createDeployPolicy without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4897,7 +4897,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createDeployPolicy with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4928,7 +4928,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createDeployPolicy with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4961,7 +4961,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateDeployPolicyProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4969,8 +4969,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDeployPolicyProgress(
@@ -4983,7 +4983,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateDeployPolicyProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5004,7 +5004,7 @@ describe('v1.CloudDeployClient', () => {
   describe('updateDeployPolicy', () => {
     it('invokes updateDeployPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5038,7 +5038,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateDeployPolicy without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5093,7 +5093,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateDeployPolicy with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5125,7 +5125,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateDeployPolicy with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5159,7 +5159,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateDeployPolicyProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5167,8 +5167,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDeployPolicyProgress(
@@ -5181,7 +5181,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateDeployPolicyProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5202,7 +5202,7 @@ describe('v1.CloudDeployClient', () => {
   describe('deleteDeployPolicy', () => {
     it('invokes deleteDeployPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5235,7 +5235,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteDeployPolicy without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5289,7 +5289,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteDeployPolicy with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5320,7 +5320,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteDeployPolicy with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5353,7 +5353,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteDeployPolicyProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5361,8 +5361,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDeployPolicyProgress(
@@ -5375,7 +5375,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteDeployPolicyProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5396,7 +5396,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createRollout', () => {
     it('invokes createRollout without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5429,7 +5429,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createRollout without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5483,7 +5483,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createRollout with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5514,7 +5514,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createRollout with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5547,7 +5547,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateRolloutProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5555,8 +5555,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRolloutProgress(
@@ -5569,7 +5569,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateRolloutProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5590,7 +5590,7 @@ describe('v1.CloudDeployClient', () => {
   describe('createAutomation', () => {
     it('invokes createAutomation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5623,7 +5623,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createAutomation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5677,7 +5677,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createAutomation with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5708,7 +5708,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes createAutomation with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5741,7 +5741,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateAutomationProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5749,8 +5749,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAutomationProgress(
@@ -5763,7 +5763,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkCreateAutomationProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5784,7 +5784,7 @@ describe('v1.CloudDeployClient', () => {
   describe('updateAutomation', () => {
     it('invokes updateAutomation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5818,7 +5818,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateAutomation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5873,7 +5873,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateAutomation with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5905,7 +5905,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes updateAutomation with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5939,7 +5939,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateAutomationProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5947,8 +5947,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAutomationProgress(
@@ -5961,7 +5961,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkUpdateAutomationProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5982,7 +5982,7 @@ describe('v1.CloudDeployClient', () => {
   describe('deleteAutomation', () => {
     it('invokes deleteAutomation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6015,7 +6015,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteAutomation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6069,7 +6069,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteAutomation with call error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6100,7 +6100,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes deleteAutomation with LRO error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6133,7 +6133,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteAutomationProgress without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6141,8 +6141,8 @@ describe('v1.CloudDeployClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAutomationProgress(
@@ -6155,7 +6155,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes checkDeleteAutomationProgress with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6176,7 +6176,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listDeliveryPipelines', () => {
     it('invokes listDeliveryPipelines without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6216,7 +6216,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeliveryPipelines without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6271,7 +6271,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeliveryPipelines with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6305,7 +6305,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeliveryPipelinesStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6371,7 +6371,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeliveryPipelinesStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6426,7 +6426,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('uses async iteration with listDeliveryPipelines without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6479,7 +6479,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('uses async iteration with listDeliveryPipelines with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6525,7 +6525,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listTargets', () => {
     it('invokes listTargets without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6558,7 +6558,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listTargets without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6607,7 +6607,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listTargets with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6638,7 +6638,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listTargetsStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6681,15 +6681,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listTargets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTargetsStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6729,15 +6729,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listTargets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTargets without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6772,15 +6772,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listTargets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTargets with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6814,9 +6814,9 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listTargets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6824,7 +6824,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listCustomTargetTypes', () => {
     it('invokes listCustomTargetTypes without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6864,7 +6864,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listCustomTargetTypes without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6919,7 +6919,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listCustomTargetTypes with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6953,7 +6953,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listCustomTargetTypesStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7019,7 +7019,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listCustomTargetTypesStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7074,7 +7074,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('uses async iteration with listCustomTargetTypes without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7127,7 +7127,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('uses async iteration with listCustomTargetTypes with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7173,7 +7173,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listReleases', () => {
     it('invokes listReleases without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7206,7 +7206,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listReleases without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7255,7 +7255,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listReleases with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7286,7 +7286,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listReleasesStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7329,15 +7329,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReleasesStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7377,15 +7377,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleases without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7420,15 +7420,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleases with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7460,9 +7460,9 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7470,7 +7470,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listDeployPolicies', () => {
     it('invokes listDeployPolicies without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7504,7 +7504,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeployPolicies without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7553,7 +7553,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeployPolicies with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7584,7 +7584,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listDeployPoliciesStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7630,15 +7630,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listDeployPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeployPoliciesStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7679,15 +7679,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listDeployPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployPolicies without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7722,15 +7722,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listDeployPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployPolicies with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7762,9 +7762,9 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listDeployPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7772,7 +7772,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listRollouts', () => {
     it('invokes listRollouts without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7805,7 +7805,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listRollouts without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7854,7 +7854,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listRollouts with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7885,7 +7885,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listRolloutsStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7928,15 +7928,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRolloutsStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7976,15 +7976,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRollouts without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8019,15 +8019,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRollouts with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8059,9 +8059,9 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8069,7 +8069,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listJobRuns', () => {
     it('invokes listJobRuns without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8102,7 +8102,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listJobRuns without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8151,7 +8151,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listJobRuns with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8182,7 +8182,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listJobRunsStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8225,15 +8225,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listJobRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listJobRunsStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8273,15 +8273,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listJobRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobRuns without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8316,15 +8316,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listJobRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobRuns with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8358,9 +8358,9 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listJobRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8368,7 +8368,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listAutomations', () => {
     it('invokes listAutomations without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8401,7 +8401,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listAutomations without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8450,7 +8450,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listAutomations with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8481,7 +8481,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listAutomationsStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8527,15 +8527,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAutomationsStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8576,15 +8576,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAutomations without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8619,15 +8619,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAutomations with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8659,9 +8659,9 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8669,7 +8669,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listAutomationRuns', () => {
     it('invokes listAutomationRuns without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8709,7 +8709,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listAutomationRuns without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8764,7 +8764,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listAutomationRuns with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8795,7 +8795,7 @@ describe('v1.CloudDeployClient', () => {
 
     it('invokes listAutomationRunsStream without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8847,15 +8847,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomationRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAutomationRunsStream with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8896,15 +8896,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomationRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAutomationRuns without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8945,15 +8945,15 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomationRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAutomationRuns with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8985,16 +8985,16 @@ describe('v1.CloudDeployClient', () => {
       assert(
         (client.descriptors.page.listAutomationRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9024,7 +9024,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9062,7 +9062,7 @@ describe('v1.CloudDeployClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9072,7 +9072,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9104,7 +9104,7 @@ describe('v1.CloudDeployClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9134,7 +9134,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9172,7 +9172,7 @@ describe('v1.CloudDeployClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9182,7 +9182,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9214,7 +9214,7 @@ describe('v1.CloudDeployClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9247,7 +9247,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9285,7 +9285,7 @@ describe('v1.CloudDeployClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9295,7 +9295,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9330,7 +9330,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9360,7 +9360,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9404,7 +9404,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9439,7 +9439,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9487,7 +9487,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9528,7 +9528,7 @@ describe('v1.CloudDeployClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9549,7 +9549,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9577,7 +9577,7 @@ describe('v1.CloudDeployClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9587,7 +9587,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9611,7 +9611,7 @@ describe('v1.CloudDeployClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9633,7 +9633,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9661,7 +9661,7 @@ describe('v1.CloudDeployClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9671,7 +9671,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9695,7 +9695,7 @@ describe('v1.CloudDeployClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9717,7 +9717,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9745,7 +9745,7 @@ describe('v1.CloudDeployClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9755,7 +9755,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9779,7 +9779,7 @@ describe('v1.CloudDeployClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9814,7 +9814,7 @@ describe('v1.CloudDeployClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9851,7 +9851,7 @@ describe('v1.CloudDeployClient', () => {
         automation: 'automationValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9927,7 +9927,7 @@ describe('v1.CloudDeployClient', () => {
         automation_run: 'automationRunValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10003,7 +10003,7 @@ describe('v1.CloudDeployClient', () => {
         build: 'buildValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10067,7 +10067,7 @@ describe('v1.CloudDeployClient', () => {
         cluster: 'clusterValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10130,7 +10130,7 @@ describe('v1.CloudDeployClient', () => {
         location: 'locationValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10180,7 +10180,7 @@ describe('v1.CloudDeployClient', () => {
         custom_target_type: 'customTargetTypeValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10248,7 +10248,7 @@ describe('v1.CloudDeployClient', () => {
         delivery_pipeline: 'deliveryPipelineValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10316,7 +10316,7 @@ describe('v1.CloudDeployClient', () => {
         deploy_policy: 'deployPolicyValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10380,7 +10380,7 @@ describe('v1.CloudDeployClient', () => {
         job: 'jobValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10447,7 +10447,7 @@ describe('v1.CloudDeployClient', () => {
         job_run: 'jobRunValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10543,7 +10543,7 @@ describe('v1.CloudDeployClient', () => {
         location: 'locationValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10593,7 +10593,7 @@ describe('v1.CloudDeployClient', () => {
         membership: 'membershipValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10655,7 +10655,7 @@ describe('v1.CloudDeployClient', () => {
         project: 'projectValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10696,7 +10696,7 @@ describe('v1.CloudDeployClient', () => {
         release: 'releaseValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10773,7 +10773,7 @@ describe('v1.CloudDeployClient', () => {
         rollout: 'rolloutValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10859,7 +10859,7 @@ describe('v1.CloudDeployClient', () => {
         service: 'serviceValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10923,7 +10923,7 @@ describe('v1.CloudDeployClient', () => {
         target: 'targetValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10987,7 +10987,7 @@ describe('v1.CloudDeployClient', () => {
         worker_pool: 'workerPoolValue',
       };
       const client = new clouddeployModule.v1.CloudDeployClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

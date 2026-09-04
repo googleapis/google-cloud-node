@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as queryserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v3.QueryServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.queryServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v3.QueryServiceClient', () => {
       assert(client.queryServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.queryServiceStub);
@@ -261,14 +261,14 @@ describe('v3.QueryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.queryServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v3.QueryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v3.QueryServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v3.QueryServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v3.QueryServiceClient', () => {
   describe('queryTimeSeries', () => {
     it('invokes queryTimeSeries without error', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -355,7 +355,7 @@ describe('v3.QueryServiceClient', () => {
 
     it('invokes queryTimeSeries without error using callback', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -406,7 +406,7 @@ describe('v3.QueryServiceClient', () => {
 
     it('invokes queryTimeSeries with error', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -439,7 +439,7 @@ describe('v3.QueryServiceClient', () => {
 
     it('invokes queryTimeSeriesStream without error', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -487,15 +487,15 @@ describe('v3.QueryServiceClient', () => {
       assert(
         (client.descriptors.page.queryTimeSeries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes queryTimeSeriesStream with error', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -538,15 +538,15 @@ describe('v3.QueryServiceClient', () => {
       assert(
         (client.descriptors.page.queryTimeSeries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryTimeSeries without error', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -583,15 +583,15 @@ describe('v3.QueryServiceClient', () => {
       assert(
         (client.descriptors.page.queryTimeSeries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryTimeSeries with error', async () => {
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -625,9 +625,9 @@ describe('v3.QueryServiceClient', () => {
       assert(
         (client.descriptors.page.queryTimeSeries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -640,7 +640,7 @@ describe('v3.QueryServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v3.QueryServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v3.QueryServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v3.QueryServiceClient', () => {
         group: 'groupValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v3.QueryServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v3.QueryServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v3.QueryServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,7 +1092,7 @@ describe('v3.QueryServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1157,7 +1157,7 @@ describe('v3.QueryServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v3.QueryServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v3.QueryServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v3.QueryServiceClient', () => {
         group: 'groupValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v3.QueryServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v3.QueryServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1559,7 +1559,7 @@ describe('v3.QueryServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1645,7 +1645,7 @@ describe('v3.QueryServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v3.QueryServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1773,7 +1773,7 @@ describe('v3.QueryServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1850,7 +1850,7 @@ describe('v3.QueryServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v3.QueryServiceClient', () => {
         group: 'groupValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1964,7 @@ describe('v3.QueryServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v3.QueryServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v3.QueryServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2164,7 +2164,7 @@ describe('v3.QueryServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2229,7 +2229,7 @@ describe('v3.QueryServiceClient', () => {
         snooze: 'snoozeValue',
       };
       const client = new queryserviceModule.v3.QueryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

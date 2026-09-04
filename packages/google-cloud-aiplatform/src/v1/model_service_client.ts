@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class ModelServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -70,12 +70,12 @@ export class ModelServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  modelServiceStub?: Promise<{ [name: string]: Function }>;
+  modelServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ModelServiceClient.
@@ -151,7 +151,7 @@ export class ModelServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -442,12 +442,12 @@ export class ModelServiceClient {
         {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [{ get: '/v1/{name=projects/*/locations/*}' }],
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{ get: '/v1/{name=projects/*}/locations' }],
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -740,7 +740,7 @@ export class ModelServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
@@ -879,10 +879,8 @@ export class ModelServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -983,9 +981,7 @@ export class ModelServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1070,7 +1066,7 @@ export class ModelServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1155,9 +1151,7 @@ export class ModelServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1254,18 +1248,16 @@ export class ModelServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1287,9 +1279,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1317,7 +1307,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1342,7 +1332,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1358,7 +1348,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1371,9 +1361,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1404,10 +1392,8 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            {
-              get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1423,9 +1409,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
@@ -1447,7 +1431,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1469,7 +1453,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1497,7 +1481,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1510,9 +1494,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1540,16 +1522,16 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1565,16 +1547,12 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1584,19 +1562,15 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1621,7 +1595,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1634,7 +1608,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1650,7 +1624,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1681,8 +1655,8 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1/{name=projects/*/locations/*}/operations' },
-            { get: '/v1/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1698,7 +1672,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1708,19 +1682,15 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1742,7 +1712,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1761,7 +1731,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1777,13 +1747,11 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1811,7 +1779,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*}/operations' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*}/operations'},
           ],
         },
         {
@@ -1968,7 +1936,7 @@ export class ModelServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:wait' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -2196,7 +2164,7 @@ export class ModelServiceClient {
       'google.cloud.aiplatform.v1.ModelService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2236,7 +2204,7 @@ export class ModelServiceClient {
           (this._protos as any).google.cloud.aiplatform.v1.ModelService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2263,7 +2231,7 @@ export class ModelServiceClient {
     ];
     for (const methodName of modelServiceStubMethods) {
       const callPromise = this.modelServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2467,7 +2435,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getModel request %j', request);
@@ -2614,7 +2582,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'model.name': request.model!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateModel request %j', request);
@@ -2764,7 +2732,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('mergeVersionAliases request %j', request);
@@ -2910,7 +2878,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('importModelEvaluation request %j', request);
@@ -3057,7 +3025,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchImportModelEvaluationSlices request %j', request);
@@ -3210,7 +3178,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchImportEvaluatedAnnotations request %j', request);
@@ -3355,7 +3323,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getModelEvaluation request %j', request);
@@ -3500,7 +3468,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getModelEvaluationSlice request %j', request);
@@ -3670,7 +3638,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3727,7 +3695,7 @@ export class ModelServiceClient {
     this._log.info('uploadModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3842,7 +3810,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3899,7 +3867,7 @@ export class ModelServiceClient {
     this._log.info('updateExplanationDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4019,7 +3987,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4076,7 +4044,7 @@ export class ModelServiceClient {
     this._log.info('deleteModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4197,7 +4165,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4254,7 +4222,7 @@ export class ModelServiceClient {
     this._log.info('deleteModelVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4373,7 +4341,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4430,7 +4398,7 @@ export class ModelServiceClient {
     this._log.info('exportModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4576,7 +4544,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4633,7 +4601,7 @@ export class ModelServiceClient {
     this._log.info('copyModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4772,7 +4740,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4877,7 +4845,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModels stream %j', request);
@@ -4964,7 +4932,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModels iterate %j', request);
@@ -5096,7 +5064,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5191,7 +5159,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelVersions stream %j', request);
@@ -5268,7 +5236,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelVersions iterate %j', request);
@@ -5383,7 +5351,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5461,7 +5429,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelVersionCheckpoints stream %j', request);
@@ -5521,7 +5489,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelVersionCheckpoints iterate %j', request);
@@ -5635,7 +5603,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5712,7 +5680,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelEvaluations stream %j', request);
@@ -5771,7 +5739,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelEvaluations iterate %j', request);
@@ -5888,7 +5856,7 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5968,7 +5936,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluationSlices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelEvaluationSlices stream %j', request);
@@ -6030,7 +5998,7 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluationSlices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listModelEvaluationSlices iterate %j', request);
@@ -10242,14 +10210,14 @@ export class ModelServiceClient {
    */
   close(): Promise<void> {
     if (this.modelServiceStub && !this._terminated) {
-      return this.modelServiceStub.then((stub) => {
+      return this.modelServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

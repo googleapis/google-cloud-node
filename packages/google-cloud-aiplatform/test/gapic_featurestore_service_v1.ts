@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as featurestoreserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -205,7 +205,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
@@ -213,7 +213,7 @@ describe('v1.FeaturestoreServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
@@ -285,7 +285,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -294,14 +294,14 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(client.featurestoreServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.featurestoreServiceStub);
@@ -310,15 +310,15 @@ describe('v1.FeaturestoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -328,7 +328,7 @@ describe('v1.FeaturestoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -337,7 +337,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -351,7 +351,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -376,7 +376,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeaturestore without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -409,7 +409,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeaturestore without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -458,7 +458,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeaturestore with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -491,7 +491,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeaturestore with closed client', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -505,7 +505,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeaturestore(request), expectedError);
@@ -516,7 +516,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getEntityType without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -549,7 +549,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getEntityType without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -598,7 +598,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getEntityType with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -631,7 +631,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getEntityType with closed client', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -645,7 +645,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntityType(request), expectedError);
@@ -656,7 +656,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateEntityType without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -690,7 +690,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateEntityType without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -740,7 +740,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateEntityType with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -774,7 +774,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateEntityType with closed client', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -789,7 +789,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       );
       request.entityType.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEntityType(request), expectedError);
@@ -800,7 +800,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeature without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -833,7 +833,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeature without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -882,7 +882,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeature with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -915,7 +915,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getFeature with closed client', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -929,7 +929,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeature(request), expectedError);
@@ -940,7 +940,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeature without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -974,7 +974,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeature without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1024,7 +1024,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeature with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1058,7 +1058,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeature with closed client', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1073,7 +1073,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       );
       request.feature.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFeature(request), expectedError);
@@ -1084,7 +1084,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeaturestore without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1119,7 +1119,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeaturestore without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1175,7 +1175,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeaturestore with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1208,7 +1208,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeaturestore with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1243,7 +1243,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkCreateFeaturestoreProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1252,8 +1252,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFeaturestoreProgress(
@@ -1267,7 +1267,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkCreateFeaturestoreProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1290,7 +1290,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeaturestore without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1326,7 +1326,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeaturestore without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1383,7 +1383,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeaturestore with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1417,7 +1417,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes updateFeaturestore with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1453,7 +1453,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkUpdateFeaturestoreProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1462,8 +1462,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFeaturestoreProgress(
@@ -1477,7 +1477,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkUpdateFeaturestoreProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1500,7 +1500,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeaturestore without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1535,7 +1535,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeaturestore without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1591,7 +1591,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeaturestore with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1624,7 +1624,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeaturestore with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1659,7 +1659,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteFeaturestoreProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1668,8 +1668,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFeaturestoreProgress(
@@ -1683,7 +1683,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteFeaturestoreProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1706,7 +1706,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createEntityType without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1741,7 +1741,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createEntityType without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1797,7 +1797,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createEntityType with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1830,7 +1830,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createEntityType with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1865,7 +1865,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkCreateEntityTypeProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1874,8 +1874,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEntityTypeProgress(
@@ -1889,7 +1889,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkCreateEntityTypeProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1912,7 +1912,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteEntityType without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1947,7 +1947,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteEntityType without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2003,7 +2003,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteEntityType with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2036,7 +2036,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteEntityType with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2071,7 +2071,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteEntityTypeProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2080,8 +2080,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEntityTypeProgress(
@@ -2095,7 +2095,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteEntityTypeProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2118,7 +2118,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeature without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2153,7 +2153,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeature without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2209,7 +2209,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeature with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2242,7 +2242,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes createFeature with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2277,7 +2277,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkCreateFeatureProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2286,8 +2286,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFeatureProgress(
@@ -2301,7 +2301,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkCreateFeatureProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2324,7 +2324,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchCreateFeatures without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2359,7 +2359,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchCreateFeatures without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2415,7 +2415,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchCreateFeatures with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2448,7 +2448,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchCreateFeatures with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2483,7 +2483,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkBatchCreateFeaturesProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2492,8 +2492,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchCreateFeaturesProgress(
@@ -2507,7 +2507,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkBatchCreateFeaturesProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2530,7 +2530,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeature without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2565,7 +2565,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeature without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2621,7 +2621,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeature with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2654,7 +2654,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeature with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2689,7 +2689,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteFeatureProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2698,8 +2698,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFeatureProgress(
@@ -2713,7 +2713,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteFeatureProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2736,7 +2736,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes importFeatureValues without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2771,7 +2771,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes importFeatureValues without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2827,7 +2827,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes importFeatureValues with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2860,7 +2860,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes importFeatureValues with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2895,7 +2895,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkImportFeatureValuesProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2904,8 +2904,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportFeatureValuesProgress(
@@ -2919,7 +2919,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkImportFeatureValuesProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2942,7 +2942,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchReadFeatureValues without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2977,7 +2977,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchReadFeatureValues without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3033,7 +3033,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchReadFeatureValues with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3069,7 +3069,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes batchReadFeatureValues with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3104,7 +3104,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkBatchReadFeatureValuesProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3113,8 +3113,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchReadFeatureValuesProgress(
@@ -3128,7 +3128,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkBatchReadFeatureValuesProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3151,7 +3151,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes exportFeatureValues without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3186,7 +3186,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes exportFeatureValues without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3242,7 +3242,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes exportFeatureValues with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3275,7 +3275,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes exportFeatureValues with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3310,7 +3310,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkExportFeatureValuesProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3319,8 +3319,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportFeatureValuesProgress(
@@ -3334,7 +3334,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkExportFeatureValuesProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3357,7 +3357,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeatureValues without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3392,7 +3392,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeatureValues without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3448,7 +3448,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeatureValues with call error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3481,7 +3481,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteFeatureValues with LRO error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3516,7 +3516,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteFeatureValuesProgress without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3525,8 +3525,8 @@ describe('v1.FeaturestoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFeatureValuesProgress(
@@ -3540,7 +3540,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes checkDeleteFeatureValuesProgress with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3563,7 +3563,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeaturestores without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3604,7 +3604,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeaturestores without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3661,7 +3661,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeaturestores with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3694,7 +3694,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeaturestoresStream without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3747,16 +3747,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFeaturestoresStream with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3798,16 +3798,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeaturestores without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3849,16 +3849,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeaturestores with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3891,9 +3891,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3902,7 +3902,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listEntityTypes without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3943,7 +3943,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listEntityTypes without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4000,7 +4000,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listEntityTypes with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4033,7 +4033,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listEntityTypesStream without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4086,16 +4086,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntityTypesStream with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4137,16 +4137,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntityTypes without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4188,16 +4188,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntityTypes with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4230,9 +4230,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4241,7 +4241,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeatures without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4276,7 +4276,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeatures without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4327,7 +4327,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeatures with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4360,7 +4360,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes listFeaturesStream without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4407,16 +4407,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFeaturesStream with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4460,16 +4460,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatures without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4505,16 +4505,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatures with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4547,9 +4547,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4558,7 +4558,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes searchFeatures without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4593,7 +4593,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes searchFeatures without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4644,7 +4644,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes searchFeatures with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4677,7 +4677,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes searchFeaturesStream without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4724,16 +4724,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchFeaturesStream with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4775,16 +4775,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchFeatures without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4820,16 +4820,16 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchFeatures with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4862,9 +4862,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4872,7 +4872,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4904,7 +4904,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4943,7 +4943,7 @@ describe('v1.FeaturestoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4954,7 +4954,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4988,7 +4988,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5020,7 +5020,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5059,7 +5059,7 @@ describe('v1.FeaturestoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5070,7 +5070,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5104,7 +5104,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5139,7 +5139,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5178,7 +5178,7 @@ describe('v1.FeaturestoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5189,7 +5189,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5226,7 +5226,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5258,7 +5258,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5304,7 +5304,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5341,7 +5341,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5391,7 +5391,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5434,7 +5434,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5457,7 +5457,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5486,7 +5486,7 @@ describe('v1.FeaturestoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5497,7 +5497,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5523,7 +5523,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5547,7 +5547,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5576,7 +5576,7 @@ describe('v1.FeaturestoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5587,7 +5587,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5613,7 +5613,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5637,7 +5637,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5666,7 +5666,7 @@ describe('v1.FeaturestoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5677,7 +5677,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5703,7 +5703,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5740,7 +5740,7 @@ describe('v1.FeaturestoreServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5780,7 +5780,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5869,7 +5869,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5948,7 +5948,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6025,7 +6025,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6104,7 +6104,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6171,7 +6171,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6248,7 +6248,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6315,7 +6315,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6392,7 +6392,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6459,7 +6459,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6526,7 +6526,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6604,7 +6604,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6688,7 +6688,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6766,7 +6766,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6843,7 +6843,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6909,7 +6909,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6989,7 +6989,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7068,7 +7068,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7146,7 +7146,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7212,7 +7212,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7295,7 +7295,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7361,7 +7361,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7426,7 +7426,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7479,7 +7479,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7558,7 +7558,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7624,7 +7624,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7690,7 +7690,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7772,7 +7772,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7851,7 +7851,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7960,7 +7960,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8027,7 +8027,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8105,7 +8105,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8188,7 +8188,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8255,7 +8255,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8338,7 +8338,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8417,7 +8417,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8481,7 +8481,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8523,7 +8523,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8605,7 +8605,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8710,7 +8710,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8836,7 +8836,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8929,7 +8929,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8984,7 +8984,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9049,7 +9049,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9105,7 +9105,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9182,7 +9182,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9250,7 +9250,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9327,7 +9327,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9394,7 +9394,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9473,7 +9473,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9562,7 +9562,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9629,7 +9629,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9695,7 +9695,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9762,7 +9762,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9860,7 +9860,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9951,7 +9951,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10076,7 +10076,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10147,7 +10147,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10224,7 +10224,7 @@ describe('v1.FeaturestoreServiceClient', () => {
       };
       const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

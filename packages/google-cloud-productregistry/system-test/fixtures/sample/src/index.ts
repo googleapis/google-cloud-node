@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CloudProductRegistryReadServiceClient } from '@google-cloud/productregistry';
+import {CloudProductRegistryReadServiceClient} from '@google-cloud/productregistry';
 
 // check that the client class type name can be used
 function doStuffWithCloudProductRegistryReadServiceClient(

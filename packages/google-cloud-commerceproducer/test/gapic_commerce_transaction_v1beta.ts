@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as commercetransactionModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.commerceTransactionStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(client.commerceTransactionStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.commerceTransactionStub);
@@ -277,15 +277,15 @@ describe('v1beta.CommerceTransactionClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.commerceTransactionStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta.CommerceTransactionClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getService without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getService without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getService with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getService with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPrivateOffer(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes resolveAmendmentTarget without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -645,7 +645,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes resolveAmendmentTarget without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes resolveAmendmentTarget with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes resolveAmendmentTarget with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -755,7 +755,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -788,7 +788,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPrivateOffer(request), expectedError);
@@ -892,7 +892,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1008,7 +1008,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1022,7 +1022,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.privateOffer.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePrivateOffer(request), expectedError);
@@ -1033,7 +1033,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes publishPrivateOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1066,7 +1066,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes publishPrivateOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes publishPrivateOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes publishPrivateOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.publishPrivateOffer(request), expectedError);
@@ -1170,7 +1170,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes cancelPrivateOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1203,7 +1203,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes cancelPrivateOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes cancelPrivateOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes cancelPrivateOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1296,7 +1296,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelPrivateOffer(request), expectedError);
@@ -1307,7 +1307,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePrivateOffer(request), expectedError);
@@ -1444,7 +1444,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOfferDocument without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOfferDocument without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOfferDocument with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getPrivateOfferDocument with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1573,7 +1573,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1587,7 +1587,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOfferDocument without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOfferDocument without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOfferDocument with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1703,7 +1703,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes createPrivateOfferDocument with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1730,7 +1730,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOfferDocument without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1764,7 +1764,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOfferDocument without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOfferDocument with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1849,7 +1849,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes updatePrivateOfferDocument with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1863,7 +1863,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.privateOfferDocument.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1877,7 +1877,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOfferDocument without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOfferDocument without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1958,7 +1958,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOfferDocument with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1993,7 +1993,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes deletePrivateOfferDocument with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2006,7 +2006,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2020,7 +2020,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getStandardOffer without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2052,7 +2052,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getStandardOffer without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2100,7 +2100,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getStandardOffer with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2132,7 +2132,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getStandardOffer with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2145,7 +2145,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStandardOffer(request), expectedError);
@@ -2156,7 +2156,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSku without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSku without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2236,7 +2236,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSku with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2265,7 +2265,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSku with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2278,7 +2278,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSku(request), expectedError);
@@ -2289,7 +2289,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSkuGroup without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2321,7 +2321,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSkuGroup without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2369,7 +2369,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSkuGroup with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2401,7 +2401,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getSkuGroup with closed client', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2414,7 +2414,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSkuGroup(request), expectedError);
@@ -2425,7 +2425,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listServices without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2465,7 +2465,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listServices without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2497,8 +2497,7 @@ describe('v1beta.CommerceTransactionClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.commerceproducer.v1beta.IService[]
-              | null,
+              protos.google.cloud.commerceproducer.v1beta.IService[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2523,7 +2522,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listServices with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2555,7 +2554,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listServicesStream without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2608,16 +2607,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServicesStream with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2661,16 +2660,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2712,16 +2711,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2754,9 +2753,9 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2765,7 +2764,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOffers without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2805,7 +2804,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOffers without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2863,7 +2862,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOffers with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2895,7 +2894,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOffersStream without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2950,16 +2949,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listPrivateOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPrivateOffersStream with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3003,16 +3002,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listPrivateOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPrivateOffers without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3054,16 +3053,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listPrivateOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPrivateOffers with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3096,9 +3095,9 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listPrivateOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3107,7 +3106,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOfferDocuments without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3148,7 +3147,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOfferDocuments without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3206,7 +3205,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOfferDocuments with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3241,7 +3240,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOfferDocumentsStream without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3311,7 +3310,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listPrivateOfferDocumentsStream with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3370,7 +3369,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('uses async iteration with listPrivateOfferDocuments without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3425,7 +3424,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('uses async iteration with listPrivateOfferDocuments with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3473,7 +3472,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listStandardOffers without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3514,7 +3513,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listStandardOffers without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3572,7 +3571,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listStandardOffers with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3604,7 +3603,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listStandardOffersStream without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3659,16 +3658,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listStandardOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStandardOffersStream with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3712,16 +3711,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listStandardOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStandardOffers without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3763,16 +3762,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listStandardOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStandardOffers with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3805,9 +3804,9 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listStandardOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3816,7 +3815,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkus without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3856,7 +3855,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkus without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3912,7 +3911,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkus with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3941,7 +3940,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkusStream without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3993,16 +3992,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSkusStream with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4045,16 +4044,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkus without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4094,16 +4093,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkus with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4137,9 +4136,9 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4148,7 +4147,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkuGroups without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4188,7 +4187,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkuGroups without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4220,8 +4219,7 @@ describe('v1beta.CommerceTransactionClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.commerceproducer.v1beta.ISkuGroup[]
-              | null,
+              protos.google.cloud.commerceproducer.v1beta.ISkuGroup[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4246,7 +4244,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkuGroups with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4278,7 +4276,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes listSkuGroupsStream without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4331,16 +4329,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSkuGroupsStream with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4382,16 +4380,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkuGroups without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4433,16 +4431,16 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkuGroups with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4475,9 +4473,9 @@ describe('v1beta.CommerceTransactionClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4485,7 +4483,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4516,7 +4514,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4561,7 +4559,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4597,7 +4595,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4646,7 +4644,7 @@ describe('v1beta.CommerceTransactionClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4693,7 +4691,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4734,7 +4732,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4785,7 +4783,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4851,7 +4849,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4944,7 +4942,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4985,7 +4983,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5051,7 +5049,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5127,7 +5125,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5193,7 +5191,7 @@ describe('v1beta.CommerceTransactionClient', () => {
       };
       const client =
         new commercetransactionModule.v1beta.CommerceTransactionClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

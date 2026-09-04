@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -69,7 +69,7 @@ export class DataprocMetastoreFederationClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataproc-metastore');
@@ -82,12 +82,12 @@ export class DataprocMetastoreFederationClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataprocMetastoreFederationStub?: Promise<{ [name: string]: Function }>;
+  dataprocMetastoreFederationStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataprocMetastoreFederationClient.
@@ -164,7 +164,7 @@ export class DataprocMetastoreFederationClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -408,7 +408,7 @@ export class DataprocMetastoreFederationClient {
       'google.cloud.metastore.v1alpha.DataprocMetastoreFederation',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -449,7 +449,7 @@ export class DataprocMetastoreFederationClient {
             .DataprocMetastoreFederation,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -462,7 +462,7 @@ export class DataprocMetastoreFederationClient {
     ];
     for (const methodName of dataprocMetastoreFederationStubMethods) {
       const callPromise = this.dataprocMetastoreFederationStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -666,7 +666,7 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFederation request %j', request);
@@ -843,7 +843,7 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -900,7 +900,7 @@ export class DataprocMetastoreFederationClient {
     this._log.info('createFederation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1034,7 +1034,7 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         'federation.name': request.federation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1091,7 +1091,7 @@ export class DataprocMetastoreFederationClient {
     this._log.info('updateFederation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1219,7 +1219,7 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1276,7 +1276,7 @@ export class DataprocMetastoreFederationClient {
     this._log.info('deleteFederation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1401,7 +1401,7 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1486,7 +1486,7 @@ export class DataprocMetastoreFederationClient {
       });
     const defaultCallSettings = this._defaults['listFederations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFederations stream %j', request);
@@ -1553,7 +1553,7 @@ export class DataprocMetastoreFederationClient {
       });
     const defaultCallSettings = this._defaults['listFederations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFederations iterate %j', request);
@@ -2315,14 +2315,14 @@ export class DataprocMetastoreFederationClient {
    */
   close(): Promise<void> {
     if (this.dataprocMetastoreFederationStub && !this._terminated) {
-      return this.dataprocMetastoreFederationStub.then((stub) => {
+      return this.dataprocMetastoreFederationStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

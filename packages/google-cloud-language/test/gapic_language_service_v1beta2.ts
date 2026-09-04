@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as languageserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -178,7 +178,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.languageServiceStub, undefined);
@@ -186,12 +186,12 @@ describe('v1beta2.LanguageServiceClient', () => {
       assert(client.languageServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.languageServiceStub);
@@ -200,14 +200,14 @@ describe('v1beta2.LanguageServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.languageServiceStub, undefined);
@@ -216,7 +216,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -224,7 +224,7 @@ describe('v1beta2.LanguageServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -236,7 +236,7 @@ describe('v1beta2.LanguageServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -259,7 +259,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -276,7 +276,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeSentiment without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -309,7 +309,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeSentiment with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -326,7 +326,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeSentiment with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -334,7 +334,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.analyzeSentiment(request), expectedError);
@@ -344,7 +344,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('analyzeEntities', () => {
     it('invokes analyzeEntities without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -361,7 +361,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeEntities without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -394,7 +394,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeEntities with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -411,7 +411,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeEntities with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -419,7 +419,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.analyzeEntities(request), expectedError);
@@ -429,7 +429,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('analyzeEntitySentiment', () => {
     it('invokes analyzeEntitySentiment without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeEntitySentiment without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeEntitySentiment with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeEntitySentiment with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -521,7 +521,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('analyzeSyntax', () => {
     it('invokes analyzeSyntax without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeSyntax without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeSyntax with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes analyzeSyntax with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.analyzeSyntax(request), expectedError);
@@ -606,7 +606,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('classifyText', () => {
     it('invokes classifyText without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes classifyText without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes classifyText with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -673,7 +673,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes classifyText with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.classifyText(request), expectedError);
@@ -691,7 +691,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('moderateText', () => {
     it('invokes moderateText without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes moderateText without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes moderateText with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -758,7 +758,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes moderateText with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -766,7 +766,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.ModerateTextRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.moderateText(request), expectedError);
@@ -776,7 +776,7 @@ describe('v1beta2.LanguageServiceClient', () => {
   describe('annotateText', () => {
     it('invokes annotateText without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -793,7 +793,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes annotateText without error using callback', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes annotateText with error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1beta2.LanguageServiceClient', () => {
 
     it('invokes annotateText with closed client', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.annotateText(request), expectedError);

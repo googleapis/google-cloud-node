@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datatransferserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -292,7 +292,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataTransferServiceStub, undefined);
@@ -300,13 +300,13 @@ describe('v1beta.DataTransferServiceClient', () => {
       assert(client.dataTransferServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataTransferServiceStub);
@@ -315,15 +315,15 @@ describe('v1beta.DataTransferServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataTransferServiceStub, undefined);
@@ -332,7 +332,7 @@ describe('v1beta.DataTransferServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -341,7 +341,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -354,7 +354,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -378,7 +378,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferConfig without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -411,7 +411,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferConfig without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferConfig with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -494,7 +494,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferConfig with closed client', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -507,7 +507,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -521,7 +521,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getDestination without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -553,7 +553,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getDestination without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getDestination with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getDestination with closed client', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDestination(request), expectedError);
@@ -657,7 +657,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferSupportedService without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferSupportedService without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferSupportedService with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getMulticloudDataTransferSupportedService with closed client', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -805,7 +805,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createMulticloudDataTransferConfig without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createMulticloudDataTransferConfig without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createMulticloudDataTransferConfig with call error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createMulticloudDataTransferConfig with LRO error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkCreateMulticloudDataTransferConfigProgress without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -968,8 +968,8 @@ describe('v1beta.DataTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -984,7 +984,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkCreateMulticloudDataTransferConfigProgress with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateMulticloudDataTransferConfig without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateMulticloudDataTransferConfig without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateMulticloudDataTransferConfig with call error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateMulticloudDataTransferConfig with LRO error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1165,7 +1165,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkUpdateMulticloudDataTransferConfigProgress without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1173,8 +1173,8 @@ describe('v1beta.DataTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1189,7 +1189,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkUpdateMulticloudDataTransferConfigProgress with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteMulticloudDataTransferConfig without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1246,7 +1246,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteMulticloudDataTransferConfig without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1301,7 +1301,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteMulticloudDataTransferConfig with call error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1334,7 +1334,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteMulticloudDataTransferConfig with LRO error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkDeleteMulticloudDataTransferConfigProgress without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1374,8 +1374,8 @@ describe('v1beta.DataTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1390,7 +1390,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkDeleteMulticloudDataTransferConfigProgress with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1412,7 +1412,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createDestination without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createDestination without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1501,7 +1501,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createDestination with call error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes createDestination with LRO error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkCreateDestinationProgress without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1575,8 +1575,8 @@ describe('v1beta.DataTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDestinationProgress(
@@ -1590,7 +1590,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkCreateDestinationProgress with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1612,7 +1612,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateDestination without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1647,7 +1647,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateDestination without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1703,7 +1703,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateDestination with call error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1736,7 +1736,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes updateDestination with LRO error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkUpdateDestinationProgress without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1779,8 +1779,8 @@ describe('v1beta.DataTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDestinationProgress(
@@ -1794,7 +1794,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkUpdateDestinationProgress with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1816,7 +1816,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteDestination without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1850,7 +1850,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteDestination without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1905,7 +1905,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteDestination with call error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1937,7 +1937,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteDestination with LRO error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkDeleteDestinationProgress without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1979,8 +1979,8 @@ describe('v1beta.DataTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDestinationProgress(
@@ -1994,7 +1994,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes checkDeleteDestinationProgress with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferConfigs without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferConfigs without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2116,7 +2116,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferConfigs with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferConfigsStream without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2224,7 +2224,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferConfigsStream with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2286,7 +2286,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listMulticloudDataTransferConfigs without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2341,7 +2341,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listMulticloudDataTransferConfigs with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2389,7 +2389,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listDestinations without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2429,7 +2429,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listDestinations without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2487,7 +2487,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listDestinations with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2519,7 +2519,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listDestinationsStream without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2574,16 +2574,16 @@ describe('v1beta.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDestinations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDestinationsStream with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2627,16 +2627,16 @@ describe('v1beta.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDestinations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDestinations without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2678,16 +2678,16 @@ describe('v1beta.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDestinations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDestinations with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2720,9 +2720,9 @@ describe('v1beta.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDestinations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2731,7 +2731,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferSupportedServices without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2775,7 +2775,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferSupportedServices without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2835,7 +2835,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferSupportedServices with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2870,7 +2870,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferSupportedServicesStream without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2944,7 +2944,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes listMulticloudDataTransferSupportedServicesStream with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3007,7 +3007,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listMulticloudDataTransferSupportedServices without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3063,7 +3063,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listMulticloudDataTransferSupportedServices with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3111,7 +3111,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3142,7 +3142,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3180,7 +3180,7 @@ describe('v1beta.DataTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3191,7 +3191,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3224,7 +3224,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3255,7 +3255,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3293,7 +3293,7 @@ describe('v1beta.DataTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3304,7 +3304,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3337,7 +3337,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3409,7 +3409,7 @@ describe('v1beta.DataTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3420,7 +3420,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3456,7 +3456,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3487,7 +3487,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3532,7 +3532,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3568,7 +3568,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3617,7 +3617,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3659,7 +3659,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3681,7 +3681,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3709,7 +3709,7 @@ describe('v1beta.DataTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3720,7 +3720,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3745,7 +3745,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3768,7 +3768,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3796,7 +3796,7 @@ describe('v1beta.DataTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3807,7 +3807,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3832,7 +3832,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3855,7 +3855,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3883,7 +3883,7 @@ describe('v1beta.DataTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3894,7 +3894,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3919,7 +3919,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3955,7 +3955,7 @@ describe('v1beta.DataTransferServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3993,7 +3993,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4071,7 +4071,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4168,7 +4168,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4232,7 +4232,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4284,7 +4284,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4359,7 +4359,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4410,7 +4410,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4491,7 +4491,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4581,7 +4581,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4639,7 +4639,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4721,7 +4721,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4786,7 +4786,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4851,7 +4851,7 @@ describe('v1beta.DataTransferServiceClient', () => {
       };
       const client =
         new datatransferserviceModule.v1beta.DataTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

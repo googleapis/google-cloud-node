@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as creativesetserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.CreativeSetServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -262,12 +262,12 @@ describe('v1.CreativeSetServiceClient', () => {
       assert(client.creativeSetServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.creativeSetServiceStub);
@@ -276,12 +276,12 @@ describe('v1.CreativeSetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -292,7 +292,7 @@ describe('v1.CreativeSetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -457,7 +457,7 @@ describe('v1.CreativeSetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCreativeSet(request), expectedError);
@@ -589,7 +589,7 @@ describe('v1.CreativeSetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCreativeSet(request), expectedError);
@@ -725,7 +725,7 @@ describe('v1.CreativeSetServiceClient', () => {
       );
       request.creativeSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCreativeSet(request), expectedError);
@@ -735,7 +735,7 @@ describe('v1.CreativeSetServiceClient', () => {
   describe('listCreativeSets', () => {
     it('invokes listCreativeSets without error', async () => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v1.CreativeSetServiceClient', () => {
 
     it('invokes listCreativeSets without error using callback', async () => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -817,7 +817,7 @@ describe('v1.CreativeSetServiceClient', () => {
 
     it('invokes listCreativeSets with error', async () => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -848,7 +848,7 @@ describe('v1.CreativeSetServiceClient', () => {
 
     it('invokes listCreativeSetsStream without error', async () => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -894,15 +894,15 @@ describe('v1.CreativeSetServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCreativeSetsStream with error', async () => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -943,9 +943,9 @@ describe('v1.CreativeSetServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -986,15 +986,15 @@ describe('v1.CreativeSetServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCreativeSets with error', async () => {
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1026,9 +1026,9 @@ describe('v1.CreativeSetServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1042,7 +1042,7 @@ describe('v1.CreativeSetServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.CreativeSetServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.CreativeSetServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1224,7 +1224,7 @@ describe('v1.CreativeSetServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v1.CreativeSetServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.CreativeSetServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.CreativeSetServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1427,7 +1427,7 @@ describe('v1.CreativeSetServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v1.CreativeSetServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.CreativeSetServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,7 +1582,7 @@ describe('v1.CreativeSetServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.CreativeSetServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1.CreativeSetServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v1.CreativeSetServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1797,7 @@ describe('v1.CreativeSetServiceClient', () => {
         company: 'companyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,7 +1846,7 @@ describe('v1.CreativeSetServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.CreativeSetServiceClient', () => {
         content: 'contentValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1944,7 +1944,7 @@ describe('v1.CreativeSetServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.CreativeSetServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v1.CreativeSetServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1.CreativeSetServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2149,7 +2149,7 @@ describe('v1.CreativeSetServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v1.CreativeSetServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2259,7 +2259,7 @@ describe('v1.CreativeSetServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2311,7 @@ describe('v1.CreativeSetServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2374,7 +2374,7 @@ describe('v1.CreativeSetServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v1.CreativeSetServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1.CreativeSetServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1.CreativeSetServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2613,7 @@ describe('v1.CreativeSetServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2670,7 +2670,7 @@ describe('v1.CreativeSetServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2723,7 +2723,7 @@ describe('v1.CreativeSetServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2786,7 +2786,7 @@ describe('v1.CreativeSetServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2851,7 +2851,7 @@ describe('v1.CreativeSetServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2903,7 +2903,7 @@ describe('v1.CreativeSetServiceClient', () => {
         label: 'labelValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1.CreativeSetServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3001,7 +3001,7 @@ describe('v1.CreativeSetServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v1.CreativeSetServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3105,7 +3105,7 @@ describe('v1.CreativeSetServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3158,7 +3158,7 @@ describe('v1.CreativeSetServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3210,7 +3210,7 @@ describe('v1.CreativeSetServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3262,7 +3262,7 @@ describe('v1.CreativeSetServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3327,7 +3327,7 @@ describe('v1.CreativeSetServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3378,7 +3378,7 @@ describe('v1.CreativeSetServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3417,7 +3417,7 @@ describe('v1.CreativeSetServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3470,7 +3470,7 @@ describe('v1.CreativeSetServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3535,7 +3535,7 @@ describe('v1.CreativeSetServiceClient', () => {
         order: 'orderValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3584,7 +3584,7 @@ describe('v1.CreativeSetServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3633,7 +3633,7 @@ describe('v1.CreativeSetServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3685,7 +3685,7 @@ describe('v1.CreativeSetServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,7 +3738,7 @@ describe('v1.CreativeSetServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v1.CreativeSetServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3864,7 @@ describe('v1.CreativeSetServiceClient', () => {
         report: 'reportValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3913,7 +3913,7 @@ describe('v1.CreativeSetServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3976,7 +3976,7 @@ describe('v1.CreativeSetServiceClient', () => {
         role: 'roleValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4025,7 +4025,7 @@ describe('v1.CreativeSetServiceClient', () => {
         site: 'siteValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4074,7 +4074,7 @@ describe('v1.CreativeSetServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4123,7 +4123,7 @@ describe('v1.CreativeSetServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4176,7 +4176,7 @@ describe('v1.CreativeSetServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4229,7 +4229,7 @@ describe('v1.CreativeSetServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4286,7 +4286,7 @@ describe('v1.CreativeSetServiceClient', () => {
         team: 'teamValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4335,7 +4335,7 @@ describe('v1.CreativeSetServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4398,7 +4398,7 @@ describe('v1.CreativeSetServiceClient', () => {
         user: 'userValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4447,7 +4447,7 @@ describe('v1.CreativeSetServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4510,7 +4510,7 @@ describe('v1.CreativeSetServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new creativesetserviceModule.v1.CreativeSetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

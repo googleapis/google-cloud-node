@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class FlexTemplatesServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataflow');
@@ -62,8 +62,8 @@ export class FlexTemplatesServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  flexTemplatesServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  flexTemplatesServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of FlexTemplatesServiceClient.
@@ -139,7 +139,7 @@ export class FlexTemplatesServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -200,7 +200,7 @@ export class FlexTemplatesServiceClient {
       'google.dataflow.v1beta3.FlexTemplatesService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -240,14 +240,14 @@ export class FlexTemplatesServiceClient {
           (this._protos as any).google.dataflow.v1beta3.FlexTemplatesService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const flexTemplatesServiceStubMethods = ['launchFlexTemplate'];
     for (const methodName of flexTemplatesServiceStubMethods) {
       const callPromise = this.flexTemplatesServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -458,7 +458,7 @@ export class FlexTemplatesServiceClient {
         project_id: request.projectId?.toString() ?? '',
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('launchFlexTemplate request %j', request);
@@ -514,7 +514,7 @@ export class FlexTemplatesServiceClient {
    */
   close(): Promise<void> {
     if (this.flexTemplatesServiceStub && !this._terminated) {
-      return this.flexTemplatesServiceStub.then((stub) => {
+      return this.flexTemplatesServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

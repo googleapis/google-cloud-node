@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { TelcoAutomationClient } from '@google-cloud/telcoautomation';
+import {TelcoAutomationClient} from '@google-cloud/telcoautomation';
 
 // check that the client class type name can be used
 function doStuffWithTelcoAutomationClient(client: TelcoAutomationClient) {

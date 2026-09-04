@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vertexragdataserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -287,7 +287,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.vertexRagDataServiceStub, undefined);
@@ -295,13 +295,13 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(client.vertexRagDataServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vertexRagDataServiceStub);
@@ -310,15 +310,15 @@ describe('v1.VertexRagDataServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.vertexRagDataServiceStub, undefined);
@@ -327,7 +327,7 @@ describe('v1.VertexRagDataServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -336,7 +336,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -349,7 +349,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -373,7 +373,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagCorpus without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -405,7 +405,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagCorpus without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagCorpus with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagCorpus with closed client', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -498,7 +498,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRagCorpus(request), expectedError);
@@ -509,7 +509,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes uploadRagFile without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -541,7 +541,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes uploadRagFile without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes uploadRagFile with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -621,7 +621,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes uploadRagFile with closed client', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -634,7 +634,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.uploadRagFile(request), expectedError);
@@ -645,7 +645,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagFile without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagFile without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagFile with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -757,7 +757,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagFile with closed client', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -770,7 +770,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRagFile(request), expectedError);
@@ -781,7 +781,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagEngineConfig without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -814,7 +814,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagEngineConfig without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagEngineConfig with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getRagEngineConfig with closed client', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -907,7 +907,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRagEngineConfig(request), expectedError);
@@ -918,7 +918,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes createRagCorpus without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes createRagCorpus without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes createRagCorpus with call error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1039,7 +1039,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes createRagCorpus with LRO error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1073,7 +1073,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkCreateRagCorpusProgress without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1081,8 +1081,8 @@ describe('v1.VertexRagDataServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRagCorpusProgress(
@@ -1096,7 +1096,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkCreateRagCorpusProgress with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1118,7 +1118,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagCorpus without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagCorpus without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagCorpus with call error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagCorpus with LRO error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkUpdateRagCorpusProgress without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1285,8 +1285,8 @@ describe('v1.VertexRagDataServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRagCorpusProgress(
@@ -1300,7 +1300,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkUpdateRagCorpusProgress with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagCorpus without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1356,7 +1356,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagCorpus without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1411,7 +1411,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagCorpus with call error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagCorpus with LRO error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkDeleteRagCorpusProgress without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1485,8 +1485,8 @@ describe('v1.VertexRagDataServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRagCorpusProgress(
@@ -1500,7 +1500,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkDeleteRagCorpusProgress with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1522,7 +1522,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes importRagFiles without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1556,7 +1556,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes importRagFiles without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1611,7 +1611,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes importRagFiles with call error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1643,7 +1643,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes importRagFiles with LRO error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1677,7 +1677,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkImportRagFilesProgress without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1685,8 +1685,8 @@ describe('v1.VertexRagDataServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportRagFilesProgress(
@@ -1700,7 +1700,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkImportRagFilesProgress with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1722,7 +1722,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagFile without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1756,7 +1756,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagFile without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagFile with call error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteRagFile with LRO error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1877,7 +1877,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkDeleteRagFileProgress without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1885,8 +1885,8 @@ describe('v1.VertexRagDataServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRagFileProgress(
@@ -1900,7 +1900,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkDeleteRagFileProgress with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1922,7 +1922,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagEngineConfig without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1957,7 +1957,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagEngineConfig without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2013,7 +2013,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagEngineConfig with call error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes updateRagEngineConfig with LRO error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2084,7 +2084,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkUpdateRagEngineConfigProgress without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2092,8 +2092,8 @@ describe('v1.VertexRagDataServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRagEngineConfigProgress(
@@ -2107,7 +2107,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes checkUpdateRagEngineConfigProgress with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2129,7 +2129,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagCorpora without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2169,7 +2169,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagCorpora without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2225,7 +2225,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagCorpora with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2257,7 +2257,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagCorporaStream without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2309,16 +2309,16 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRagCorporaStream with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2359,16 +2359,16 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRagCorpora without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2409,16 +2409,16 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRagCorpora with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2450,9 +2450,9 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2461,7 +2461,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagFiles without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2495,7 +2495,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagFiles without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2545,7 +2545,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagFiles with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2577,7 +2577,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes listRagFilesStream without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2623,16 +2623,16 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRagFilesStream with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2675,16 +2675,16 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRagFiles without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2719,16 +2719,16 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRagFiles with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2760,9 +2760,9 @@ describe('v1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2770,7 +2770,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2801,7 +2801,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v1.VertexRagDataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2850,7 +2850,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2883,7 +2883,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2914,7 +2914,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1.VertexRagDataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2963,7 +2963,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2996,7 +2996,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3030,7 +3030,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3068,7 +3068,7 @@ describe('v1.VertexRagDataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3079,7 +3079,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3115,7 +3115,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3146,7 +3146,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3191,7 +3191,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3227,7 +3227,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3276,7 +3276,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3318,7 +3318,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3340,7 +3340,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3368,7 +3368,7 @@ describe('v1.VertexRagDataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3379,7 +3379,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3404,7 +3404,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3427,7 +3427,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3455,7 +3455,7 @@ describe('v1.VertexRagDataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3466,7 +3466,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3491,7 +3491,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3514,7 +3514,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3542,7 +3542,7 @@ describe('v1.VertexRagDataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3553,7 +3553,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3578,7 +3578,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3614,7 +3614,7 @@ describe('v1.VertexRagDataServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3653,7 +3653,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3741,7 +3741,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3819,7 +3819,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3895,7 +3895,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3973,7 +3973,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4039,7 +4039,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4115,7 +4115,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4181,7 +4181,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4257,7 +4257,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4323,7 +4323,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4389,7 +4389,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4466,7 +4466,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4549,7 +4549,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4626,7 +4626,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4702,7 +4702,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4767,7 +4767,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4846,7 +4846,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4924,7 +4924,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5001,7 +5001,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5066,7 +5066,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5148,7 +5148,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5213,7 +5213,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5277,7 +5277,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5329,7 +5329,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5407,7 +5407,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5472,7 +5472,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5537,7 +5537,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5618,7 +5618,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5696,7 +5696,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5804,7 +5804,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5870,7 +5870,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5947,7 +5947,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6029,7 +6029,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6095,7 +6095,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6177,7 +6177,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6255,7 +6255,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6320,7 +6320,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6401,7 +6401,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6505,7 +6505,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6630,7 +6630,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6722,7 +6722,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6776,7 +6776,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6840,7 +6840,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6895,7 +6895,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6971,7 +6971,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7038,7 +7038,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7114,7 +7114,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7180,7 +7180,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7258,7 +7258,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7346,7 +7346,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7412,7 +7412,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7477,7 +7477,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7543,7 +7543,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7640,7 +7640,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7730,7 +7730,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7854,7 +7854,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7924,7 +7924,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8000,7 +8000,7 @@ describe('v1.VertexRagDataServiceClient', () => {
       };
       const client =
         new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as firestoreadminModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.firestoreAdminStub, undefined);
@@ -284,12 +284,12 @@ describe('v1.FirestoreAdminClient', () => {
       assert(client.firestoreAdminStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.firestoreAdminStub);
@@ -298,14 +298,14 @@ describe('v1.FirestoreAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.firestoreAdminStub, undefined);
@@ -314,7 +314,7 @@ describe('v1.FirestoreAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1.FirestoreAdminClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1.FirestoreAdminClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getIndex', () => {
     it('invokes getIndex without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getIndex without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getIndex with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getIndex with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIndex(request), expectedError);
@@ -486,7 +486,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('deleteIndex', () => {
     it('invokes deleteIndex without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteIndex without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteIndex with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteIndex with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteIndex(request), expectedError);
@@ -618,7 +618,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getField', () => {
     it('invokes getField without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -649,7 +649,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getField without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getField with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getField with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getField(request), expectedError);
@@ -747,7 +747,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getDatabase', () => {
     it('invokes getDatabase without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getDatabase without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -825,7 +825,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getDatabase with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getDatabase with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDatabase(request), expectedError);
@@ -879,7 +879,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listDatabases', () => {
     it('invokes listDatabases without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listDatabases without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listDatabases with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listDatabases with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listDatabases(request), expectedError);
@@ -1011,7 +1011,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('createUserCreds', () => {
     it('invokes createUserCreds without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createUserCreds without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1089,7 +1089,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createUserCreds with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createUserCreds with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createUserCreds(request), expectedError);
@@ -1143,7 +1143,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getUserCreds', () => {
     it('invokes getUserCreds without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getUserCreds without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getUserCreds with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getUserCreds with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUserCreds(request), expectedError);
@@ -1275,7 +1275,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listUserCreds', () => {
     it('invokes listUserCreds without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listUserCreds without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1353,7 +1353,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listUserCreds with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1384,7 +1384,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listUserCreds with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listUserCreds(request), expectedError);
@@ -1407,7 +1407,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('enableUserCreds', () => {
     it('invokes enableUserCreds without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1438,7 +1438,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes enableUserCreds without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1485,7 +1485,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes enableUserCreds with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes enableUserCreds with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.enableUserCreds(request), expectedError);
@@ -1539,7 +1539,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('disableUserCreds', () => {
     it('invokes disableUserCreds without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1570,7 +1570,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes disableUserCreds without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1617,7 +1617,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes disableUserCreds with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes disableUserCreds with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.disableUserCreds(request), expectedError);
@@ -1671,7 +1671,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('resetUserPassword', () => {
     it('invokes resetUserPassword without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,7 +1702,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes resetUserPassword without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes resetUserPassword with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1780,7 +1780,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes resetUserPassword with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,7 +1793,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resetUserPassword(request), expectedError);
@@ -1803,7 +1803,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('deleteUserCreds', () => {
     it('invokes deleteUserCreds without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,7 +1834,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteUserCreds without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteUserCreds with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1912,7 +1912,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteUserCreds with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1925,7 +1925,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteUserCreds(request), expectedError);
@@ -1935,7 +1935,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1966,7 +1966,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2013,7 +2013,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2054,7 +2054,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -2064,7 +2064,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2173,7 +2173,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listBackups with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listBackups(request), expectedError);
@@ -2196,7 +2196,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2227,7 +2227,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,7 +2274,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteBackup with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2305,7 +2305,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteBackup with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2318,7 +2318,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBackup(request), expectedError);
@@ -2328,7 +2328,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('createBackupSchedule', () => {
     it('invokes createBackupSchedule without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2360,7 +2360,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createBackupSchedule without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2407,7 +2407,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createBackupSchedule with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createBackupSchedule with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBackupSchedule(request), expectedError);
@@ -2461,7 +2461,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getBackupSchedule', () => {
     it('invokes getBackupSchedule without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2492,7 +2492,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getBackupSchedule without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,7 +2539,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getBackupSchedule with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2570,7 +2570,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes getBackupSchedule with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupSchedule(request), expectedError);
@@ -2593,7 +2593,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listBackupSchedules', () => {
     it('invokes listBackupSchedules without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2625,7 +2625,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listBackupSchedules without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2672,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listBackupSchedules with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2703,7 +2703,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listBackupSchedules with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2716,7 +2716,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listBackupSchedules(request), expectedError);
@@ -2726,7 +2726,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('updateBackupSchedule', () => {
     it('invokes updateBackupSchedule without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2759,7 +2759,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateBackupSchedule without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2807,7 +2807,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateBackupSchedule with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateBackupSchedule with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2853,7 +2853,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.backupSchedule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBackupSchedule(request), expectedError);
@@ -2863,7 +2863,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('deleteBackupSchedule', () => {
     it('invokes deleteBackupSchedule without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2895,7 +2895,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteBackupSchedule without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2942,7 +2942,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteBackupSchedule with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteBackupSchedule with closed client', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2986,7 +2986,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBackupSchedule(request), expectedError);
@@ -2996,7 +2996,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('createIndex', () => {
     it('invokes createIndex without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3028,7 +3028,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createIndex without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3082,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createIndex with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3113,7 +3113,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createIndex with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3146,7 +3146,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkCreateIndexProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3154,8 +3154,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIndexProgress(
@@ -3168,7 +3168,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkCreateIndexProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3186,7 +3186,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('updateField', () => {
     it('invokes updateField without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3219,7 +3219,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateField without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,7 +3274,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateField with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3306,7 +3306,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateField with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3340,7 +3340,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkUpdateFieldProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3348,8 +3348,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFieldProgress(
@@ -3362,7 +3362,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkUpdateFieldProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3380,7 +3380,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('exportDocuments', () => {
     it('invokes exportDocuments without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3413,7 +3413,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes exportDocuments without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3467,7 +3467,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes exportDocuments with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3498,7 +3498,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes exportDocuments with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3531,7 +3531,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkExportDocumentsProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3539,8 +3539,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDocumentsProgress(
@@ -3553,7 +3553,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkExportDocumentsProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3574,7 +3574,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('importDocuments', () => {
     it('invokes importDocuments without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3607,7 +3607,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes importDocuments without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3661,7 +3661,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes importDocuments with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3692,7 +3692,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes importDocuments with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3725,7 +3725,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkImportDocumentsProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3733,8 +3733,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDocumentsProgress(
@@ -3747,7 +3747,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkImportDocumentsProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3768,7 +3768,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('bulkDeleteDocuments', () => {
     it('invokes bulkDeleteDocuments without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes bulkDeleteDocuments without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3855,7 +3855,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes bulkDeleteDocuments with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3886,7 +3886,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes bulkDeleteDocuments with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3919,7 +3919,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkBulkDeleteDocumentsProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3927,8 +3927,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBulkDeleteDocumentsProgress(
@@ -3941,7 +3941,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkBulkDeleteDocumentsProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3962,7 +3962,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('createDatabase', () => {
     it('invokes createDatabase without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3995,7 +3995,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createDatabase without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4049,7 +4049,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createDatabase with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4080,7 +4080,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes createDatabase with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4113,7 +4113,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkCreateDatabaseProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4121,8 +4121,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatabaseProgress(
@@ -4135,7 +4135,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkCreateDatabaseProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4156,7 +4156,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('updateDatabase', () => {
     it('invokes updateDatabase without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateDatabase without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4245,7 +4245,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateDatabase with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4277,7 +4277,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes updateDatabase with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4311,7 +4311,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkUpdateDatabaseProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4319,8 +4319,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDatabaseProgress(
@@ -4333,7 +4333,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkUpdateDatabaseProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4354,7 +4354,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('deleteDatabase', () => {
     it('invokes deleteDatabase without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4387,7 +4387,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteDatabase without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4441,7 +4441,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteDatabase with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4472,7 +4472,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes deleteDatabase with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4505,7 +4505,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkDeleteDatabaseProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4513,8 +4513,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatabaseProgress(
@@ -4527,7 +4527,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkDeleteDatabaseProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4548,7 +4548,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('restoreDatabase', () => {
     it('invokes restoreDatabase without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4581,7 +4581,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes restoreDatabase without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4635,7 +4635,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes restoreDatabase with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4666,7 +4666,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes restoreDatabase with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4699,7 +4699,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkRestoreDatabaseProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4707,8 +4707,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreDatabaseProgress(
@@ -4721,7 +4721,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkRestoreDatabaseProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4742,7 +4742,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('cloneDatabase', () => {
     it('invokes cloneDatabase without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes cloneDatabase without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4825,7 +4825,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes cloneDatabase with call error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4854,7 +4854,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes cloneDatabase with LRO error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4885,7 +4885,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkCloneDatabaseProgress without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4893,8 +4893,8 @@ describe('v1.FirestoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCloneDatabaseProgress(
@@ -4907,7 +4907,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes checkCloneDatabaseProgress with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4928,7 +4928,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listIndexes', () => {
     it('invokes listIndexes without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4961,7 +4961,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listIndexes without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5010,7 +5010,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listIndexes with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5041,7 +5041,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listIndexesStream without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5087,15 +5087,15 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIndexesStream with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5138,15 +5138,15 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5181,15 +5181,15 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5223,9 +5223,9 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5233,7 +5233,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listFields', () => {
     it('invokes listFields without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5266,7 +5266,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listFields without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5315,7 +5315,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listFields with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5346,7 +5346,7 @@ describe('v1.FirestoreAdminClient', () => {
 
     it('invokes listFieldsStream without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5392,15 +5392,15 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listFields.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFieldsStream with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5443,15 +5443,15 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listFields.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFields without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5486,15 +5486,15 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listFields.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFields with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5528,16 +5528,16 @@ describe('v1.FirestoreAdminClient', () => {
       assert(
         (client.descriptors.page.listFields.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5567,7 +5567,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5611,7 +5611,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5646,7 +5646,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5694,7 +5694,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5735,7 +5735,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5756,7 +5756,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5784,7 +5784,7 @@ describe('v1.FirestoreAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5794,7 +5794,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5818,7 +5818,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5840,7 +5840,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5868,7 +5868,7 @@ describe('v1.FirestoreAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5878,7 +5878,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5902,7 +5902,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5924,7 +5924,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5952,7 +5952,7 @@ describe('v1.FirestoreAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5962,7 +5962,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5986,7 +5986,7 @@ describe('v1.FirestoreAdminClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6021,7 +6021,7 @@ describe('v1.FirestoreAdminClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6057,7 +6057,7 @@ describe('v1.FirestoreAdminClient', () => {
         backup: 'backupValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6121,7 +6121,7 @@ describe('v1.FirestoreAdminClient', () => {
         backup_schedule: 'backupScheduleValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6186,7 +6186,7 @@ describe('v1.FirestoreAdminClient', () => {
         collection: 'collectionValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6249,7 +6249,7 @@ describe('v1.FirestoreAdminClient', () => {
         database: 'databaseValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6300,7 +6300,7 @@ describe('v1.FirestoreAdminClient', () => {
         field: 'fieldValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6376,7 +6376,7 @@ describe('v1.FirestoreAdminClient', () => {
         index: 'indexValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6450,7 +6450,7 @@ describe('v1.FirestoreAdminClient', () => {
         location: 'locationValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6498,7 +6498,7 @@ describe('v1.FirestoreAdminClient', () => {
         project: 'projectValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6538,7 +6538,7 @@ describe('v1.FirestoreAdminClient', () => {
         user_creds: 'userCredsValue',
       };
       const client = new firestoreadminModule.v1.FirestoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

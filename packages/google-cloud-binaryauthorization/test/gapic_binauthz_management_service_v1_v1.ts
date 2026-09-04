@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as binauthzmanagementservicev1Module from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -170,7 +170,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'binaryauthorization.example.com');
@@ -179,7 +179,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'binaryauthorization.example.com');
@@ -206,7 +206,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -224,7 +224,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -257,7 +257,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -266,15 +266,15 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(client.binauthzManagementServiceV1Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.binauthzManagementServiceV1Stub);
@@ -283,16 +283,16 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -302,7 +302,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -312,7 +312,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -327,7 +327,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -353,7 +353,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -387,7 +387,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -437,7 +437,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -468,7 +468,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -482,7 +482,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -494,7 +494,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -529,7 +529,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -580,7 +580,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -615,7 +615,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -630,7 +630,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePolicy(request), expectedError);
@@ -642,7 +642,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -676,7 +676,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -726,7 +726,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -760,7 +760,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -774,7 +774,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAttestor(request), expectedError);
@@ -786,7 +786,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -820,7 +820,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -870,7 +870,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -904,7 +904,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -918,7 +918,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAttestor(request), expectedError);
@@ -930,7 +930,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -965,7 +965,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1016,7 +1016,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1051,7 +1051,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1066,7 +1066,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.attestor.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAttestor(request), expectedError);
@@ -1078,7 +1078,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1112,7 +1112,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1162,7 +1162,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1196,7 +1196,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1210,7 +1210,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAttestor(request), expectedError);
@@ -1222,7 +1222,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1264,7 +1264,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1297,8 +1297,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.binaryauthorization.v1.IAttestor[]
-              | null,
+              protos.google.cloud.binaryauthorization.v1.IAttestor[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1324,7 +1323,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1358,7 +1357,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1412,9 +1411,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1422,7 +1421,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1465,9 +1464,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1475,7 +1474,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1518,9 +1517,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1528,7 +1527,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1562,9 +1561,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1573,7 +1572,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1606,7 +1605,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1645,7 +1644,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1657,7 +1656,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1692,7 +1691,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1725,7 +1724,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1764,7 +1763,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1776,7 +1775,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1811,7 +1810,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1847,7 +1846,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1886,7 +1885,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1898,7 +1897,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1942,7 +1941,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1993,7 +1992,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2034,7 +2033,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2075,7 +2074,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       const client =
         new binauthzmanagementservicev1Module.v1.BinauthzManagementServiceV1Client(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

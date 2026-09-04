@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DatastoreClient } from '@google-cloud/datastore-api';
+import {DatastoreClient} from '@google-cloud/datastore-api';
 
 // check that the client class type name can be used
 function doStuffWithDatastoreClient(client: DatastoreClient) {

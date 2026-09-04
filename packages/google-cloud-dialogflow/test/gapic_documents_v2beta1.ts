@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as documentsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentsStub, undefined);
@@ -282,12 +282,12 @@ describe('v2beta1.DocumentsClient', () => {
       assert(client.documentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.documentsStub);
@@ -296,14 +296,14 @@ describe('v2beta1.DocumentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentsStub, undefined);
@@ -312,7 +312,7 @@ describe('v2beta1.DocumentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v2beta1.DocumentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v2beta1.DocumentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('getDocument', () => {
     it('invokes getDocument without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes getDocument without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes getDocument with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes getDocument with closed client', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v2beta1.DocumentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDocument(request), expectedError);
@@ -487,7 +487,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('createDocument', () => {
     it('invokes createDocument without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes createDocument without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes createDocument with call error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes createDocument with LRO error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -638,7 +638,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkCreateDocumentProgress without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,8 +646,8 @@ describe('v2beta1.DocumentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDocumentProgress(
@@ -660,7 +660,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkCreateDocumentProgress with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('importDocuments', () => {
     it('invokes importDocuments without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes importDocuments without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes importDocuments with call error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes importDocuments with LRO error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkImportDocumentsProgress without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,8 +840,8 @@ describe('v2beta1.DocumentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDocumentsProgress(
@@ -854,7 +854,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkImportDocumentsProgress with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('deleteDocument', () => {
     it('invokes deleteDocument without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes deleteDocument without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes deleteDocument with call error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes deleteDocument with LRO error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1026,7 +1026,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkDeleteDocumentProgress without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1034,8 +1034,8 @@ describe('v2beta1.DocumentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDocumentProgress(
@@ -1048,7 +1048,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkDeleteDocumentProgress with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1069,7 +1069,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('updateDocument', () => {
     it('invokes updateDocument without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,7 +1103,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes updateDocument without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1158,7 +1158,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes updateDocument with call error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes updateDocument with LRO error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1224,7 +1224,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkUpdateDocumentProgress without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,8 +1232,8 @@ describe('v2beta1.DocumentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDocumentProgress(
@@ -1246,7 +1246,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkUpdateDocumentProgress with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('reloadDocument', () => {
     it('invokes reloadDocument without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1300,7 +1300,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes reloadDocument without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes reloadDocument with call error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1385,7 +1385,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes reloadDocument with LRO error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1418,7 +1418,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkReloadDocumentProgress without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1426,8 +1426,8 @@ describe('v2beta1.DocumentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkReloadDocumentProgress(
@@ -1440,7 +1440,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes checkReloadDocumentProgress with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1461,7 +1461,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('listDocuments', () => {
     it('invokes listDocuments without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes listDocuments without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1555,7 +1555,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes listDocuments with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1586,7 +1586,7 @@ describe('v2beta1.DocumentsClient', () => {
 
     it('invokes listDocumentsStream without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,15 +1638,15 @@ describe('v2beta1.DocumentsClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDocumentsStream with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,15 +1687,15 @@ describe('v2beta1.DocumentsClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocuments without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1736,15 +1736,15 @@ describe('v2beta1.DocumentsClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocuments with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1777,16 +1777,16 @@ describe('v2beta1.DocumentsClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1816,7 +1816,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1984,7 +1984,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2033,7 +2033,7 @@ describe('v2beta1.DocumentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2043,7 +2043,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2067,7 +2067,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2089,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2117,7 +2117,7 @@ describe('v2beta1.DocumentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2127,7 +2127,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2151,7 +2151,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2173,7 +2173,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2201,7 +2201,7 @@ describe('v2beta1.DocumentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2211,7 +2211,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2235,7 +2235,7 @@ describe('v2beta1.DocumentsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2270,7 +2270,7 @@ describe('v2beta1.DocumentsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2305,7 +2305,7 @@ describe('v2beta1.DocumentsClient', () => {
         location: 'locationValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2358,7 +2358,7 @@ describe('v2beta1.DocumentsClient', () => {
         generator: 'generatorValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2423,7 +2423,7 @@ describe('v2beta1.DocumentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2514,7 +2514,7 @@ describe('v2beta1.DocumentsClient', () => {
         project: 'projectValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v2beta1.DocumentsClient', () => {
         project: 'projectValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2591,7 +2591,7 @@ describe('v2beta1.DocumentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2654,7 @@ describe('v2beta1.DocumentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2721,7 +2721,7 @@ describe('v2beta1.DocumentsClient', () => {
         context: 'contextValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2847,7 +2847,7 @@ describe('v2beta1.DocumentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2968,7 +2968,7 @@ describe('v2beta1.DocumentsClient', () => {
         project: 'projectValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,7 +3014,7 @@ describe('v2beta1.DocumentsClient', () => {
         intent: 'intentValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3076,7 +3076,7 @@ describe('v2beta1.DocumentsClient', () => {
         context: 'contextValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3155,7 +3155,7 @@ describe('v2beta1.DocumentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3231,7 +3231,7 @@ describe('v2beta1.DocumentsClient', () => {
         version: 'versionValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3292,7 +3292,7 @@ describe('v2beta1.DocumentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3355,7 +3355,7 @@ describe('v2beta1.DocumentsClient', () => {
         message: 'messageValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3434,7 +3434,7 @@ describe('v2beta1.DocumentsClient', () => {
         participant: 'participantValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3514,7 +3514,7 @@ describe('v2beta1.DocumentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3579,7 +3579,7 @@ describe('v2beta1.DocumentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3642,7 +3642,7 @@ describe('v2beta1.DocumentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3706,7 +3706,7 @@ describe('v2beta1.DocumentsClient', () => {
         document: 'documentValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3784,7 +3784,7 @@ describe('v2beta1.DocumentsClient', () => {
         location: 'locationValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3848,7 +3848,7 @@ describe('v2beta1.DocumentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3927,7 +3927,7 @@ describe('v2beta1.DocumentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4010,7 +4010,7 @@ describe('v2beta1.DocumentsClient', () => {
         context: 'contextValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4156,7 +4156,7 @@ describe('v2beta1.DocumentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4297,7 +4297,7 @@ describe('v2beta1.DocumentsClient', () => {
         location: 'locationValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4359,7 +4359,7 @@ describe('v2beta1.DocumentsClient', () => {
         intent: 'intentValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4439,7 +4439,7 @@ describe('v2beta1.DocumentsClient', () => {
         context: 'contextValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4540,7 +4540,7 @@ describe('v2beta1.DocumentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4645,7 +4645,7 @@ describe('v2beta1.DocumentsClient', () => {
         version: 'versionValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4723,7 +4723,7 @@ describe('v2beta1.DocumentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4802,7 +4802,7 @@ describe('v2beta1.DocumentsClient', () => {
         message: 'messageValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4903,7 +4903,7 @@ describe('v2beta1.DocumentsClient', () => {
         participant: 'participantValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5008,7 +5008,7 @@ describe('v2beta1.DocumentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5091,7 +5091,7 @@ describe('v2beta1.DocumentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5170,7 +5170,7 @@ describe('v2beta1.DocumentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5250,7 +5250,7 @@ describe('v2beta1.DocumentsClient', () => {
         document: 'documentValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5355,7 +5355,7 @@ describe('v2beta1.DocumentsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5433,7 +5433,7 @@ describe('v2beta1.DocumentsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5496,7 +5496,7 @@ describe('v2beta1.DocumentsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5560,7 +5560,7 @@ describe('v2beta1.DocumentsClient', () => {
         tool: 'toolValue',
       };
       const client = new documentsModule.v2beta1.DocumentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as auditmanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.auditManagerStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.AuditManagerClient', () => {
       assert(client.auditManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.auditManagerStub);
@@ -301,14 +301,14 @@ describe('v1.AuditManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.auditManagerStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.AuditManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.AuditManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.AuditManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.AuditManagerClient', () => {
   describe('enrollResource', () => {
     it('invokes enrollResource without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes enrollResource without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes enrollResource with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes enrollResource with closed client', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.AuditManagerClient', () => {
       );
       request.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.enrollResource(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.AuditManagerClient', () => {
   describe('generateAuditScopeReport', () => {
     it('invokes generateAuditScopeReport without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes generateAuditScopeReport without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes generateAuditScopeReport with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes generateAuditScopeReport with closed client', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1.AuditManagerClient', () => {
       );
       request.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -631,7 +631,7 @@ describe('v1.AuditManagerClient', () => {
   describe('getAuditReport', () => {
     it('invokes getAuditReport without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes getAuditReport without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes getAuditReport with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes getAuditReport with closed client', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.AuditManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAuditReport(request), expectedError);
@@ -763,7 +763,7 @@ describe('v1.AuditManagerClient', () => {
   describe('getResourceEnrollmentStatus', () => {
     it('invokes getResourceEnrollmentStatus without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes getResourceEnrollmentStatus without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes getResourceEnrollmentStatus with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -876,7 +876,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes getResourceEnrollmentStatus with closed client', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v1.AuditManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -902,7 +902,7 @@ describe('v1.AuditManagerClient', () => {
   describe('generateAuditReport', () => {
     it('invokes generateAuditReport without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -935,7 +935,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes generateAuditReport without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes generateAuditReport with call error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes generateAuditReport with LRO error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1053,7 +1053,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes checkGenerateAuditReportProgress without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,8 +1061,8 @@ describe('v1.AuditManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGenerateAuditReportProgress(
@@ -1075,7 +1075,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes checkGenerateAuditReportProgress with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1.AuditManagerClient', () => {
   describe('listAuditReports', () => {
     it('invokes listAuditReports without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listAuditReports without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listAuditReports with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listAuditReportsStream without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,15 +1273,15 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listAuditReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAuditReportsStream with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,15 +1322,15 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listAuditReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuditReports without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,15 +1371,15 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listAuditReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuditReports with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1412,9 +1412,9 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listAuditReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1422,7 +1422,7 @@ describe('v1.AuditManagerClient', () => {
   describe('listResourceEnrollmentStatuses', () => {
     it('invokes listResourceEnrollmentStatuses without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listResourceEnrollmentStatuses without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1519,7 +1519,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listResourceEnrollmentStatuses with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1553,7 +1553,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listResourceEnrollmentStatusesStream without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,7 +1625,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listResourceEnrollmentStatusesStream with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('uses async iteration with listResourceEnrollmentStatuses without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('uses async iteration with listResourceEnrollmentStatuses with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1.AuditManagerClient', () => {
   describe('listControls', () => {
     it('invokes listControls without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1826,7 +1826,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listControls without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listControls with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1912,7 +1912,7 @@ describe('v1.AuditManagerClient', () => {
 
     it('invokes listControlsStream without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,15 +1964,15 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listControlsStream with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2015,15 +2015,15 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listControls without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2064,15 +2064,15 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listControls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listControls with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2104,16 +2104,16 @@ describe('v1.AuditManagerClient', () => {
       assert(
         (client.descriptors.page.listControls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2143,7 +2143,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2222,7 +2222,7 @@ describe('v1.AuditManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2311,7 @@ describe('v1.AuditManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,7 +2332,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2360,7 +2360,7 @@ describe('v1.AuditManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2370,7 +2370,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2394,7 +2394,7 @@ describe('v1.AuditManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2444,7 +2444,7 @@ describe('v1.AuditManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2454,7 +2454,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2478,7 +2478,7 @@ describe('v1.AuditManagerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2528,7 +2528,7 @@ describe('v1.AuditManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2538,7 +2538,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2562,7 +2562,7 @@ describe('v1.AuditManagerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2597,7 +2597,7 @@ describe('v1.AuditManagerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2632,7 +2632,7 @@ describe('v1.AuditManagerClient', () => {
         location: 'locationValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2685,7 +2685,7 @@ describe('v1.AuditManagerClient', () => {
         audit_report: 'auditReportValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2764,7 +2764,7 @@ describe('v1.AuditManagerClient', () => {
         audit_scope_report: 'auditScopeReportValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2843,7 +2843,7 @@ describe('v1.AuditManagerClient', () => {
         enrollment: 'enrollmentValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2923,7 +2923,7 @@ describe('v1.AuditManagerClient', () => {
         resource_enrollment_status: 'resourceEnrollmentStatusValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,7 +3010,7 @@ describe('v1.AuditManagerClient', () => {
         standard: 'standardValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3088,7 +3088,7 @@ describe('v1.AuditManagerClient', () => {
         location: 'locationValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3137,7 +3137,7 @@ describe('v1.AuditManagerClient', () => {
         location: 'locationValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3201,7 +3201,7 @@ describe('v1.AuditManagerClient', () => {
         audit_report: 'auditReportValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3284,7 +3284,7 @@ describe('v1.AuditManagerClient', () => {
         audit_scope_report: 'auditScopeReportValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v1.AuditManagerClient', () => {
         enrollment: 'enrollmentValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3453,7 +3453,7 @@ describe('v1.AuditManagerClient', () => {
         resource_enrollment_status: 'resourceEnrollmentStatusValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3541,7 +3541,7 @@ describe('v1.AuditManagerClient', () => {
         standard: 'standardValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3618,7 +3618,7 @@ describe('v1.AuditManagerClient', () => {
         project: 'projectValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,7 +3658,7 @@ describe('v1.AuditManagerClient', () => {
         audit_report: 'auditReportValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3736,7 +3736,7 @@ describe('v1.AuditManagerClient', () => {
         audit_scope_report: 'auditScopeReportValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3817,7 +3817,7 @@ describe('v1.AuditManagerClient', () => {
         enrollment: 'enrollmentValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3897,7 +3897,7 @@ describe('v1.AuditManagerClient', () => {
         resource_enrollment_status: 'resourceEnrollmentStatusValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3984,7 +3984,7 @@ describe('v1.AuditManagerClient', () => {
         standard: 'standardValue',
       };
       const client = new auditmanagerModule.v1.AuditManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

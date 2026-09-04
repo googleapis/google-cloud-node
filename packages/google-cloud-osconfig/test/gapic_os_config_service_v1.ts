@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as osconfigserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.osConfigServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.OsConfigServiceClient', () => {
       assert(client.osConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.osConfigServiceStub);
@@ -261,14 +261,14 @@ describe('v1.OsConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.osConfigServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.OsConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.OsConfigServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.OsConfigServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('executePatchJob', () => {
     it('invokes executePatchJob without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes executePatchJob without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes executePatchJob with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes executePatchJob with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executePatchJob(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('getPatchJob', () => {
     it('invokes getPatchJob without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes getPatchJob without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes getPatchJob with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes getPatchJob with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPatchJob(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('cancelPatchJob', () => {
     it('invokes cancelPatchJob without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes cancelPatchJob without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes cancelPatchJob with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes cancelPatchJob with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelPatchJob(request), expectedError);
@@ -716,7 +716,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('createPatchDeployment', () => {
     it('invokes createPatchDeployment without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes createPatchDeployment without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes createPatchDeployment with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes createPatchDeployment with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -855,7 +855,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('getPatchDeployment', () => {
     it('invokes getPatchDeployment without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes getPatchDeployment without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes getPatchDeployment with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes getPatchDeployment with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPatchDeployment(request), expectedError);
@@ -988,7 +988,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('deletePatchDeployment', () => {
     it('invokes deletePatchDeployment without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes deletePatchDeployment without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes deletePatchDeployment with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1101,7 +1101,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes deletePatchDeployment with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1127,7 +1127,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('updatePatchDeployment', () => {
     it('invokes updatePatchDeployment without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1160,7 +1160,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes updatePatchDeployment without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes updatePatchDeployment with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1243,7 +1243,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes updatePatchDeployment with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.patchDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1270,7 +1270,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('pausePatchDeployment', () => {
     it('invokes pausePatchDeployment without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes pausePatchDeployment without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1349,7 +1349,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes pausePatchDeployment with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,7 +1380,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes pausePatchDeployment with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pausePatchDeployment(request), expectedError);
@@ -1403,7 +1403,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('resumePatchDeployment', () => {
     it('invokes resumePatchDeployment without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes resumePatchDeployment without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes resumePatchDeployment with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes resumePatchDeployment with closed client', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1542,7 +1542,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('listPatchJobs', () => {
     it('invokes listPatchJobs without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,7 +1575,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobs without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobs with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobsStream without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,15 +1701,15 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPatchJobsStream with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1750,15 +1750,15 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPatchJobs without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,15 +1793,15 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPatchJobs with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,9 +1833,9 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1843,7 +1843,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('listPatchJobInstanceDetails', () => {
     it('invokes listPatchJobInstanceDetails without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1883,7 +1883,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobInstanceDetails without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,8 +1915,7 @@ describe('v1.OsConfigServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[]
-              | null,
+              protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1940,7 +1939,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobInstanceDetails with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1973,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobInstanceDetailsStream without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2046,7 +2045,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchJobInstanceDetailsStream with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2107,7 +2106,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('uses async iteration with listPatchJobInstanceDetails without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,7 +2160,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('uses async iteration with listPatchJobInstanceDetails with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2208,7 +2207,7 @@ describe('v1.OsConfigServiceClient', () => {
   describe('listPatchDeployments', () => {
     it('invokes listPatchDeployments without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2248,7 +2247,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchDeployments without error using callback', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2303,7 +2302,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchDeployments with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2334,7 +2333,7 @@ describe('v1.OsConfigServiceClient', () => {
 
     it('invokes listPatchDeploymentsStream without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2386,15 +2385,15 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPatchDeploymentsStream with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2435,15 +2434,15 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPatchDeployments without error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2484,15 +2483,15 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPatchDeployments with error', async () => {
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,9 +2524,9 @@ describe('v1.OsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2541,7 +2540,7 @@ describe('v1.OsConfigServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2605,7 +2604,7 @@ describe('v1.OsConfigServiceClient', () => {
         os_policy_assignment: 'osPolicyAssignmentValue',
       };
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2683,7 +2682,7 @@ describe('v1.OsConfigServiceClient', () => {
         assignment: 'assignmentValue',
       };
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2776,7 +2775,7 @@ describe('v1.OsConfigServiceClient', () => {
         patch_deployment: 'patchDeploymentValue',
       };
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2829,7 +2828,7 @@ describe('v1.OsConfigServiceClient', () => {
         patch_job: 'patchJobValue',
       };
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2879,7 +2878,7 @@ describe('v1.OsConfigServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
