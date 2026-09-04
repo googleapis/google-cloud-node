@@ -5,6 +5,51 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "0df2e55ff8c6f2b6f5d73459af079e8d77f5958d",
+          "message": "Add x-goog-gcs-idempotency-token header",
+          "issues": [
+            "8837"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "30c91c80701dd65da44fc29402b5463f7849c42d",
+          "message": "Add IpFilter support to bucket metadata",
+          "issues": [
+            "8623"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "953328f5bd42302785f55c15f1feed857a71e6a7",
+          "message": "Support copying CSEK-encrypted files to non-CSEK destinations",
+          "issues": [
+            "8771"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "cee5338a16e6c7063bc8fe9f6a853e39811df947",
+          "message": "Resolve strict linter and TypeScript errors",
+          "issues": [
+            "9198"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "ae9527a1-7d86-4e28-bd76-90ba73ae6f20",
+      "createTime": "2026-09-04T19:56:00.399Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6a606a123b34d8826e72b4d31abc1dae1f05d4f1",
           "message": "Add google-shopping-merchant-loyaltycustomers",
           "issues": [
@@ -90939,5 +90984,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-03T21:26:39.377Z"
+  "updateTime": "2026-09-04T19:56:00.399Z"
 }

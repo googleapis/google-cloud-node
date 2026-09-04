@@ -5,6 +5,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.0.1...storage-v8.1.0) (2026-09-04)
+
+
+### Features
+
+* **storage:** Add IpFilter support to bucket metadata ([#8623](https://github.com/googleapis/google-cloud-node/issues/8623)) ([30c91c8](https://github.com/googleapis/google-cloud-node/commit/30c91c80701dd65da44fc29402b5463f7849c42d))
+* **storage:** Add x-goog-gcs-idempotency-token header ([#8837](https://github.com/googleapis/google-cloud-node/issues/8837)) ([0df2e55](https://github.com/googleapis/google-cloud-node/commit/0df2e55ff8c6f2b6f5d73459af079e8d77f5958d))
+* **storage:** Support copying CSEK-encrypted files to non-CSEK destinations ([#8771](https://github.com/googleapis/google-cloud-node/issues/8771)) ([953328f](https://github.com/googleapis/google-cloud-node/commit/953328f5bd42302785f55c15f1feed857a71e6a7))
+
+
+### Bug Fixes
+
+* **storage:** Resolve strict linter and TypeScript errors ([#9198](https://github.com/googleapis/google-cloud-node/issues/9198)) ([cee5338](https://github.com/googleapis/google-cloud-node/commit/cee5338a16e6c7063bc8fe9f6a853e39811df947))
+
 ## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-v8.0.0...storage-v8.0.1) (2026-08-18)
 
 
