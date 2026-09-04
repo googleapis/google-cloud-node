@@ -195,6 +195,19 @@ describe('common/util', () => {
       assert.strictEqual(result.headers['X-Custom-Header'], 'custom-value');
     });
 
+    it('should preserve custom headers when passed a Headers instance', () => {
+      const headers = new Headers({
+        'Content-Type': 'application/json',
+        'X-Custom-Header': 'custom-value',
+      });
+      const result = decorateHeaders(headers);
+      assert.strictEqual(result.headers['content-type'], 'application/json');
+      assert.strictEqual(result.headers['x-custom-header'], 'custom-value');
+      assert.ok(result.headers['User-Agent']);
+      assert.ok(result.headers['x-goog-api-client']);
+      assert.ok(result.headers['x-goog-gcs-idempotency-token']);
+    });
+
     it('should not mutate the input headers object', () => {
       const inputHeaders = {
         'X-Goog-Gcs-Idempotency-Token': '',

@@ -1205,7 +1205,7 @@ export class Storage {
             'Content-Type': 'application/json',
           },
         },
-        (err, data, resp) => {
+        (err, data) => {
           if (err) {
             callback(err);
             return;
@@ -1213,7 +1213,7 @@ export class Storage {
           const bucket = this.bucket(name);
           bucket.metadata = data!;
 
-          callback(null, bucket, resp);
+          callback(null, bucket, data);
         },
       )
       .catch(err => callback!(err));
@@ -1331,7 +1331,7 @@ export class Storage {
           retry: false,
           responseType: 'json',
         },
-        (err, data, resp) => {
+        (err, data) => {
           if (err) {
             callback(err);
             return;
@@ -1347,7 +1347,7 @@ export class Storage {
             null,
             hmacKey,
             hmacKey.secret,
-            resp as unknown as HmacKeyResourceResponse,
+            data as HmacKeyResourceResponse,
           );
         },
       )
