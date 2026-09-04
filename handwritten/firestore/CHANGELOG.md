@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.0.1...firestore-v9.0.2) (2026-09-04)
+
+
+### Bug Fixes
+
+* **firestore:** Configure grpc.use_local_subchannel_pool to prevent stream queuing ([6540d48](https://github.com/googleapis/google-cloud-node/commit/6540d48099f44cbdfc75d170bf8cd16e1ef5e7b5))
+
 ## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.0.0...firestore-v9.0.1) (2026-09-01)
 
 

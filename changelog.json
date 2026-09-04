@@ -4,6 +4,22 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "6540d48099f44cbdfc75d170bf8cd16e1ef5e7b5",
+          "message": "Configure grpc.use_local_subchannel_pool to prevent stream queuing",
+          "issues": [],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "1323fa24-37e7-4735-b10e-7411cb58a950",
+      "createTime": "2026-09-04T19:55:59.948Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "6a606a123b34d8826e72b4d31abc1dae1f05d4f1",
           "message": "Add google-shopping-merchant-loyaltycustomers",
@@ -90939,5 +90955,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-03T21:26:39.377Z"
+  "updateTime": "2026-09-04T19:55:59.948Z"
 }
