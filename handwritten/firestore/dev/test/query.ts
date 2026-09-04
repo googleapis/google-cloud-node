@@ -1594,6 +1594,16 @@ describe('where() interface', () => {
     );
   });
 
+  it('allows array-contains with null or NaN', () => {
+    const query: Query = firestore.collection('collectionId');
+    expect(() => {
+      query.where('zip', 'array-contains', null);
+    }).to.not.throw();
+    expect(() => {
+      query.where('zip', 'array-contains', NaN);
+    }).to.not.throw();
+  });
+
   it('verifies field path', () => {
     let query: Query = firestore.collection('collectionId');
     expect(() => {

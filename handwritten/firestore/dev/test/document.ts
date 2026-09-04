@@ -34,6 +34,7 @@ import {
   MinKey,
   RegexValue,
 } from '../src';
+import {RESERVED_INT32_KEY} from '../src/map-type';
 import {
   ApiOverride,
   create,
@@ -876,6 +877,104 @@ describe('deserialize document', () => {
     expect(res.get('embedding')).to.deep.equal(
       FieldValue.vector([-41.0, 0, 42]),
     );
+  });
+
+  it('deserializes multi-key map containing BSON reserved keys as regular map', async () => {
+    const overrides: ApiOverride = {
+      batchGetDocuments: () => {
+        return stream(
+          found(
+            document('documentId', 'mapWithBsonKey', {
+              mapValue: {
+                fields: {
+                  other: {
+                    integerValue: 1,
+                  },
+                  [RESERVED_INT32_KEY]: {
+                    integerValue: 2,
+                  },
+                },
+              },
+            }),
+          ),
+        );
+      },
+    };
+
+    const firestore = await createInstance(overrides);
+    const res = await firestore.doc('collectionId/documentId').get();
+    expect(res.get('mapWithBsonKey')).to.deep.equal({
+      other: 1,
+      __int__: 2,
+    });
+    expect(res.get('mapWithBsonKey')).to.not.be.an.instanceOf(Int32Value);
+  });
+
+  it('deserializes single-key regular map as regular map', async () => {
+    const overrides: ApiOverride = {
+      batchGetDocuments: () => {
+        return stream(
+          found(
+            document('documentId', 'singleKeyMap', {
+              mapValue: {
+                fields: {
+                  name: {
+                    stringValue: 'Alice',
+                  },
+                },
+              },
+            }),
+          ),
+        );
+      },
+    };
+
+    const firestore = await createInstance(overrides);
+    const res = await firestore.doc('collectionId/documentId').get();
+    expect(res.get('singleKeyMap')).to.deep.equal({
+      name: 'Alice',
+    });
+  });
+
+  it('deserializes Int32Value with integer and string integerValue', async () => {
+    const overrides: ApiOverride = {
+      batchGetDocuments: () => {
+        return stream(
+          found(
+            document(
+              'documentId',
+              'intWithNumber',
+              {
+                mapValue: {
+                  fields: {
+                    [RESERVED_INT32_KEY]: {
+                      integerValue: 0,
+                    },
+                  },
+                },
+              },
+              'intWithString',
+              {
+                mapValue: {
+                  fields: {
+                    [RESERVED_INT32_KEY]: {
+                      integerValue: '0',
+                    },
+                  },
+                },
+              },
+            ),
+          ),
+        );
+      },
+    };
+
+    const firestore = await createInstance(overrides);
+    const res = await firestore.doc('collectionId/documentId').get();
+    expect(res.get('intWithNumber')).to.be.an.instanceOf(Int32Value);
+    expect(res.get('intWithNumber')).to.deep.equal(new Int32Value(0));
+    expect(res.get('intWithString')).to.be.an.instanceOf(Int32Value);
+    expect(res.get('intWithString')).to.deep.equal(new Int32Value(0));
   });
 
   it("doesn't deserialize unsupported types", async () => {

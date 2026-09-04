@@ -132,22 +132,27 @@ function detectMapRepresentation(
       fields[RESERVED_MAP_KEY].stringValue === RESERVED_MAP_KEY_VECTOR_VALUE
     ) {
       return 'vectorValue';
-    } else if (props.indexOf(RESERVED_MIN_KEY) !== -1) {
-      return 'minKeyValue';
-    } else if (props.indexOf(RESERVED_MAX_KEY) !== -1) {
-      return 'maxKeyValue';
-    } else if (props.indexOf(RESERVED_REGEX_KEY) !== -1) {
-      return 'regexValue';
-    } else if (props.indexOf(RESERVED_BSON_OBJECT_ID_KEY) !== -1) {
-      return 'bsonObjectIdValue';
-    } else if (props.indexOf(RESERVED_INT32_KEY) !== -1) {
-      return 'int32Value';
-    } else if (props.indexOf(RESERVED_DECIMAL128_KEY) !== -1) {
-      return 'decimal128Value';
-    } else if (props.indexOf(RESERVED_BSON_TIMESTAMP_KEY) !== -1) {
-      return 'bsonTimestampValue';
-    } else if (props.indexOf(RESERVED_BSON_BINARY_KEY) !== -1) {
-      return 'bsonBinaryValue';
+    } else if (props.length === 1) {
+      if (props[0] === RESERVED_MIN_KEY) {
+        return 'minKeyValue';
+      } else if (props[0] === RESERVED_MAX_KEY) {
+        return 'maxKeyValue';
+      } else if (props[0] === RESERVED_REGEX_KEY) {
+        return 'regexValue';
+      } else if (props[0] === RESERVED_BSON_OBJECT_ID_KEY) {
+        return 'bsonObjectIdValue';
+      } else if (
+        props[0] === RESERVED_INT32_KEY &&
+        fields[RESERVED_INT32_KEY]?.integerValue !== undefined
+      ) {
+        return 'int32Value';
+      } else if (props[0] === RESERVED_DECIMAL128_KEY) {
+        return 'decimal128Value';
+      } else if (props[0] === RESERVED_BSON_TIMESTAMP_KEY) {
+        return 'bsonTimestampValue';
+      } else if (props[0] === RESERVED_BSON_BINARY_KEY) {
+        return 'bsonBinaryValue';
+      }
     }
   }
 

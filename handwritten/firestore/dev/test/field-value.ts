@@ -561,7 +561,7 @@ describe('non-native types', () => {
     }
     expect(error1).to.not.be.null;
     expect(error1!.message!).to.equal(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     // Larger than 2^32-1 seconds
@@ -573,7 +573,7 @@ describe('non-native types', () => {
     }
     expect(error2).to.not.be.null;
     expect(error2!.message!).to.equal(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     // Negative increment
@@ -585,7 +585,7 @@ describe('non-native types', () => {
     }
     expect(error3).to.not.be.null;
     expect(error3!.message!).to.equal(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     // Larger than 2^32-1 increment
@@ -597,7 +597,23 @@ describe('non-native types', () => {
     }
     expect(error4).to.not.be.null;
     expect(error4!.message!).to.equal(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
+    );
+
+    // Non-integer and NaN seconds
+    expect(() => new BsonTimestamp(NaN, 1)).to.throw(
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
+    );
+    expect(() => new BsonTimestamp(1.5, 1)).to.throw(
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
+    );
+
+    // Non-integer and NaN increment
+    expect(() => new BsonTimestamp(1, NaN)).to.throw(
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
+    );
+    expect(() => new BsonTimestamp(1, 1.5)).to.throw(
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
   });
 
