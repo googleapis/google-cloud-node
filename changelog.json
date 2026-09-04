@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ee88e46133ec2eab9a658e849dfa3fa415a83ee6",
+          "message": "Add send and ack mutations Cloud Spanner Queues",
+          "issues": [
+            "9200"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "f1019f91-4ddc-4665-a6b3-febe00d522f0",
+      "createTime": "2026-09-04T19:56:00.202Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6a606a123b34d8826e72b4d31abc1dae1f05d4f1",
           "message": "Add google-shopping-merchant-loyaltycustomers",
           "issues": [
@@ -90939,5 +90957,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-03T21:26:39.377Z"
+  "updateTime": "2026-09-04T19:56:00.202Z"
 }
