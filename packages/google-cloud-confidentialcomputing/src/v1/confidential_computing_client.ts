@@ -886,6 +886,9 @@ export class ConfidentialComputingClient {
    *   provided Challenge will be consumed, and cannot be used again.
    * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} [request.options]
    *   Optional. A collection of fields that modify the token output.
+   * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.PlatformType} [request.platformType]
+   *   Optional. Optional platform security architecture hint for the verifier
+   *   engine. Defaults to `VIRTUALIZED_CVM` behavior if unspecified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

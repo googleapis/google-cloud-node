@@ -209,10 +209,7 @@
                         },
                         "nextPageToken": {
                           "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 2
                         }
                       }
                     },
@@ -271,6 +268,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -376,6 +380,13 @@
                       }
                     },
                     "DocumentChunk": {
+                      "oneofs": {
+                        "_relevanceScore": {
+                          "oneof": [
+                            "relevanceScore"
+                          ]
+                        }
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -404,6 +415,14 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "relevanceScore": {
+                          "type": "double",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }

@@ -19,7 +19,7 @@
 import * as v1 from './v1';
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 type VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
-export { v1, VideoIntelligenceServiceClient };
-export default { v1, VideoIntelligenceServiceClient };
+export {v1, VideoIntelligenceServiceClient};
+export default {v1, VideoIntelligenceServiceClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

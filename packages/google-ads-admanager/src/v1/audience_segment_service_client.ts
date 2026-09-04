@@ -293,6 +293,10 @@ export class AudienceSegmentServiceClient {
       daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
+      defaultThirdPartyDataDeclarationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'networks/{network_code}/defaultThirdPartyDataDeclaration',
+        ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
       ),
@@ -331,6 +335,9 @@ export class AudienceSegmentServiceClient {
       ),
       mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}',
+      ),
+      nativeStylePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/nativeStyles/{native_style}',
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}',
@@ -463,6 +470,11 @@ export class AudienceSegmentServiceClient {
     const audienceSegmentServiceStubMethods = [
       'getAudienceSegment',
       'listAudienceSegments',
+      'batchActivateAudienceSegments',
+      'batchDeactivateAudienceSegments',
+      'batchApproveAudienceSegments',
+      'batchRejectAudienceSegments',
+      'batchPopulateAudienceSegments',
     ];
     for (const methodName of audienceSegmentServiceStubMethods) {
       const callPromise = this.audienceSegmentServiceStub.then(
@@ -715,6 +727,742 @@ export class AudienceSegmentServiceClient {
         throw error;
       });
   }
+  /**
+   * Activates `AudienceSegment` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the AudienceSegments.
+   *   Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateAudienceSegmentsResponse|BatchActivateAudienceSegmentsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.batch_activate_audience_segments.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_BatchActivateAudienceSegments_async
+   */
+  batchActivateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchActivateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchActivateAudienceSegments request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchActivateAudienceSegments response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchActivateAudienceSegments(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchActivateAudienceSegments response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deactivates `AudienceSegment` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the AudienceSegments.
+   *   Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateAudienceSegmentsResponse|BatchDeactivateAudienceSegmentsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.batch_deactivate_audience_segments.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_BatchDeactivateAudienceSegments_async
+   */
+  batchDeactivateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchDeactivateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchDeactivateAudienceSegments request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchDeactivateAudienceSegments response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeactivateAudienceSegments(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchDeactivateAudienceSegments response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Approves `AudienceSegment` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the AudienceSegments.
+   *   Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchApproveAudienceSegmentsResponse|BatchApproveAudienceSegmentsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.batch_approve_audience_segments.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_BatchApproveAudienceSegments_async
+   */
+  batchApproveAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchApproveAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApproveAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchApproveAudienceSegments request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchApproveAudienceSegments response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchApproveAudienceSegments(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchApproveAudienceSegments response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Rejects `AudienceSegment` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the AudienceSegments.
+   *   Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchRejectAudienceSegmentsResponse|BatchRejectAudienceSegmentsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.batch_reject_audience_segments.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_BatchRejectAudienceSegments_async
+   */
+  batchRejectAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchRejectAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchRejectAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchRejectAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchRejectAudienceSegments request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchRejectAudienceSegments response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchRejectAudienceSegments(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchRejectAudienceSegments response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Populates `AudienceSegment` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the AudienceSegments.
+   *   Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchPopulateAudienceSegmentsResponse|BatchPopulateAudienceSegmentsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.batch_populate_audience_segments.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_BatchPopulateAudienceSegments_async
+   */
+  batchPopulateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchPopulateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchPopulateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchPopulateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchPopulateAudienceSegments request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchPopulateAudienceSegments response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchPopulateAudienceSegments(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchPopulateAudienceSegments response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Lists `AudienceSegment` objects.
@@ -742,7 +1490,21 @@ export class AudienceSegmentServiceClient {
    *
    *   **Filterable fields:**
    *
+   *   * `adIdSize`
+   *   * `categoryIds`
+   *   * `dataProviderDisplayName`
    *   * `displayName`
+   *   * `idfaSize`
+   *   * `mobileWebSize`
+   *   * `ppidSize`
+   *   * `segmentType`
+   *   * `sharedId`
+   *   * `size`
+   *   * `status`
+   *   * `thirdPartyAudienceSegment.approvalStatus`
+   *   * `thirdPartyAudienceSegment.cost`
+   *   * `thirdPartyAudienceSegment.endTime`
+   *   * `thirdPartyAudienceSegment.startTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -889,7 +1651,21 @@ export class AudienceSegmentServiceClient {
    *
    *   **Filterable fields:**
    *
+   *   * `adIdSize`
+   *   * `categoryIds`
+   *   * `dataProviderDisplayName`
    *   * `displayName`
+   *   * `idfaSize`
+   *   * `mobileWebSize`
+   *   * `ppidSize`
+   *   * `segmentType`
+   *   * `sharedId`
+   *   * `size`
+   *   * `status`
+   *   * `thirdPartyAudienceSegment.approvalStatus`
+   *   * `thirdPartyAudienceSegment.cost`
+   *   * `thirdPartyAudienceSegment.endTime`
+   *   * `thirdPartyAudienceSegment.startTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -959,7 +1735,21 @@ export class AudienceSegmentServiceClient {
    *
    *   **Filterable fields:**
    *
+   *   * `adIdSize`
+   *   * `categoryIds`
+   *   * `dataProviderDisplayName`
    *   * `displayName`
+   *   * `idfaSize`
+   *   * `mobileWebSize`
+   *   * `ppidSize`
+   *   * `segmentType`
+   *   * `sharedId`
+   *   * `size`
+   *   * `status`
+   *   * `thirdPartyAudienceSegment.approvalStatus`
+   *   * `thirdPartyAudienceSegment.cost`
+   *   * `thirdPartyAudienceSegment.endTime`
+   *   * `thirdPartyAudienceSegment.startTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -2129,6 +2919,35 @@ export class AudienceSegmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified defaultThirdPartyDataDeclaration resource name string.
+   *
+   * @param {string} network_code
+   * @returns {string} Resource name string.
+   */
+  defaultThirdPartyDataDeclarationPath(networkCode: string) {
+    return this.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render(
+      {
+        network_code: networkCode,
+      },
+    );
+  }
+
+  /**
+   * Parse the network_code from DefaultThirdPartyDataDeclaration resource.
+   *
+   * @param {string} defaultThirdPartyDataDeclarationName
+   *   A fully-qualified path representing DefaultThirdPartyDataDeclaration resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+    defaultThirdPartyDataDeclarationName: string,
+  ) {
+    return this.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match(
+      defaultThirdPartyDataDeclarationName,
+    ).network_code;
+  }
+
+  /**
    * Return a fully-qualified deviceCapability resource name string.
    *
    * @param {string} network_code
@@ -2640,6 +3459,44 @@ export class AudienceSegmentServiceClient {
     return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(
       mobileDeviceSubmodelName,
     ).mobile_device_submodel;
+  }
+
+  /**
+   * Return a fully-qualified nativeStyle resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} native_style
+   * @returns {string} Resource name string.
+   */
+  nativeStylePath(networkCode: string, nativeStyle: string) {
+    return this.pathTemplates.nativeStylePathTemplate.render({
+      network_code: networkCode,
+      native_style: nativeStyle,
+    });
+  }
+
+  /**
+   * Parse the network_code from NativeStyle resource.
+   *
+   * @param {string} nativeStyleName
+   *   A fully-qualified path representing NativeStyle resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromNativeStyleName(nativeStyleName: string) {
+    return this.pathTemplates.nativeStylePathTemplate.match(nativeStyleName)
+      .network_code;
+  }
+
+  /**
+   * Parse the native_style from NativeStyle resource.
+   *
+   * @param {string} nativeStyleName
+   *   A fully-qualified path representing NativeStyle resource.
+   * @returns {string} A string representing the native_style.
+   */
+  matchNativeStyleFromNativeStyleName(nativeStyleName: string) {
+    return this.pathTemplates.nativeStylePathTemplate.match(nativeStyleName)
+      .native_style;
   }
 
   /**

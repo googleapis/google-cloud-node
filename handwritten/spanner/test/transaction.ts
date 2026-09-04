@@ -2396,6 +2396,98 @@ describe('Transaction', () => {
       });
     });
 
+    describe('queueSend', () => {
+      it('should queue a "send" mutation', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+        const fakePayload = {foo: 'bar'};
+        const fakeDeliverTime = new Date('2023-01-01T00:00:00Z');
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueSend(fakeQueue, fakeKey, {
+          payload: fakePayload,
+          deliverTime: fakeDeliverTime,
+        });
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, payload, deliverTime} = reqOpts.mutations[0].send;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.deepStrictEqual(payload, {
+          stringValue: '{"foo":"bar"}',
+        });
+        assert.deepStrictEqual(deliverTime, {
+          seconds: 1672531200,
+          nanos: 0,
+        });
+      });
+
+      it('should queue a "send" mutation without optional parameters', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueSend(fakeQueue, fakeKey);
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, payload, deliverTime} = reqOpts.mutations[0].send;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.strictEqual(payload, undefined);
+        assert.strictEqual(deliverTime, undefined);
+      });
+    });
+
+    describe('queueAck', () => {
+      it('should queue an "ack" mutation', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueAck(fakeQueue, fakeKey, {ignoreNotFound: true});
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, ignoreNotFound} = reqOpts.mutations[0].ack;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.strictEqual(ignoreNotFound, true);
+      });
+
+      it('should queue an "ack" mutation without optional parameters', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueAck(fakeQueue, fakeKey);
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, ignoreNotFound} = reqOpts.mutations[0].ack;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.strictEqual(ignoreNotFound, undefined);
+      });
+    });
+
     describe('replace', () => {
       it('should queue a "replace" mutation', () => {
         const fakeTable = 'my-table-123';

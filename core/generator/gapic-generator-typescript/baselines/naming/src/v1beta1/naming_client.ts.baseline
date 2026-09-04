@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class NamingClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('naming');
@@ -66,10 +66,10 @@ export class NamingClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  namingStub?: Promise<{ [name: string]: Function }>;
+  namingStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of NamingClient.
@@ -145,7 +145,7 @@ export class NamingClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -256,7 +256,7 @@ export class NamingClient {
       'google.naming.v1beta1.Naming',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -296,7 +296,7 @@ export class NamingClient {
           (this._protos as any).google.naming.v1beta1.Naming,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -317,7 +317,7 @@ export class NamingClient {
     ];
     for (const methodName of namingStubMethods) {
       const callPromise = this.namingStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -503,7 +503,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('paginatedMethodStream request %j', request);
@@ -620,7 +620,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('paginatedMethodAsync request %j', request);
@@ -737,7 +737,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('checkLongRunningProgress request %j', request);
@@ -855,7 +855,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('initialize request %j', request);
@@ -972,7 +972,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('servicePath request %j', request);
@@ -1089,7 +1089,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('apiEndpoint request %j', request);
@@ -1206,7 +1206,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('port request %j', request);
@@ -1323,7 +1323,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('scopes request %j', request);
@@ -1440,7 +1440,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('getProjectId request %j', request);
@@ -1560,7 +1560,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('getReservedWord request %j', request);
@@ -1679,7 +1679,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('createABCDESomething request %j', request);
@@ -1803,7 +1803,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1857,7 +1857,7 @@ export class NamingClient {
     this._log.info('longRunning long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1952,7 +1952,7 @@ export class NamingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2012,7 +2012,7 @@ export class NamingClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['paginatedMethod'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('paginatedMethod stream %j', request);
@@ -2054,7 +2054,7 @@ export class NamingClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['paginatedMethod'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize1().catch((err) => {
+    this.initialize1().catch(err => {
       throw err;
     });
     this._log.info('paginatedMethod iterate %j', request);
@@ -2154,7 +2154,7 @@ export class NamingClient {
    */
   close(): Promise<void> {
     if (this.namingStub && !this._terminated) {
-      return this.namingStub.then((stub) => {
+      return this.namingStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
